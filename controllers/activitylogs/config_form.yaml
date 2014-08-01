@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: ActivityLog
+
+# Model Form Field configuration
+form: @/plugins/dma/friends/models/activitylog/fields.yaml
+
+# Model Class name
+modelClass: DMA\Friends\Models\ActivityLog
+
+# Default redirect location
+defaultRedirect: dma/friends/activitylogs
+
+# Create page
+create:
+    title: Create ActivityLogs
+    redirect: dma/friends/activitylogs/update/:id
+    redirectClose: dma/friends/activitylogs
+
+# Update page
+update:
+    title: Edit ActivityLogs
+    redirect: dma/friends/activitylogs
+    redirectClose: dma/friends/activitylogs
+
+# Preview page
+preview:
+    title: Preview ActivityLogs
