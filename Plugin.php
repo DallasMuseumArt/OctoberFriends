@@ -1,9 +1,10 @@
-<?php namespace Dma\Friends;
+<?php namespace DMA\Friends;
 
+use Backend;
 use System\Classes\PluginBase;
 
 /**
- * friends Plugin Information File
+ * Friends Plugin Information File
  */
 class Plugin extends PluginBase
 {
@@ -16,20 +17,39 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'          => 'DMA Friends',
-            'description'   => 'A platform for providing badges and rewards to institutional constituents',
-            'author'        => 'Dallas Museum of Art',
-            'icon'          => 'icon-users',
-        ];  
-    }   
+            'name'        => 'Friends',
+            'description' => 'A platform for users to earn badges and redeem rewards',
+            'author'      => 'Dallas Museum of Art',
+            'icon'        => 'icon-leaf'
+        ];
+    }
 
-    public function registerComponents()
+    public function registerPermissions()
     {
         return [
-            'DMA\Friends\Components\Badge'      => 'friendsBadge',
-            //'DMA\Friends\Components\Activity'   => 'friendsActivity',
-            //'DMA\Friends\Components\Reward'     => 'friendsReward',
-        ];  
-    }  
+            'dma.friends.access_admin'  => ['label' => 'Manage Friends'],
+        ];
+    }
+
+    public function registerNavigation()
+    {
+        return [
+            'friends' => [
+                'label'         => 'Friends',
+                'url'           => Backend::url('dma/friends/badges'),
+                'icon'          => 'icon-users',
+                'permissions'   => ['dma.friends.*'],
+                'order'         => 500,
+                'sideMenu'  => [
+                    'badges'    => [
+                        'label'     => 'Badges',
+                        'icon'      => 'icon-shield',
+                        'url'       => Backend::url('dma/friends/badges'),
+                        'permissions'   => ['dma.friends.access_admin'],
+                    ]
+                ]
+            ]
+        ];
+    }
 
 }

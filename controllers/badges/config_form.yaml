@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Badge
+
+# Model Form Field configuration
+form: @/plugins/dma/friends/models/badge/fields.yaml
+
+# Model Class name
+modelClass: DMA\Friends\Models\Badge
+
+# Default redirect location
+defaultRedirect: dma/friends/badges
+
+# Create page
+create:
+    title: Create Badges
+    redirect: dma/friends/badges/update/:id
+    redirectClose: dma/friends/badges
+
+# Update page
+update:
+    title: Edit Badges
+    redirect: dma/friends/badges
+    redirectClose: dma/friends/badges
+
+# Preview page
+preview:
+    title: Preview Badges
