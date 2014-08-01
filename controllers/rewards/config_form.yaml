@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Reward
+
+# Model Form Field configuration
+form: @/plugins/dma/friends/models/reward/fields.yaml
+
+# Model Class name
+modelClass: DMA\Friends\Models\Reward
+
+# Default redirect location
+defaultRedirect: dma/friends/rewards
+
+# Create page
+create:
+    title: Create Rewards
+    redirect: dma/friends/rewards/update/:id
+    redirectClose: dma/friends/rewards
+
+# Update page
+update:
+    title: Edit Rewards
+    redirect: dma/friends/rewards
+    redirectClose: dma/friends/rewards
+
+# Preview page
+preview:
+    title: Preview Rewards

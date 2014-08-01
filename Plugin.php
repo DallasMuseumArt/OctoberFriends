@@ -1,6 +1,7 @@
 <?php namespace DMA\Friends;
 
 use Backend;
+use Rainlab\User\Models\User as User;
 use System\Classes\PluginBase;
 
 /**
@@ -46,10 +47,33 @@ class Plugin extends PluginBase
                         'icon'      => 'icon-shield',
                         'url'       => Backend::url('dma/friends/badges'),
                         'permissions'   => ['dma.friends.access_admin'],
+                    ],
+                    'rewards'   => [
+                        'label'     => 'Rewards',
+                        'icon'      => 'icon-money',
+                        'url'       => Backend::url('dma/friends/rewards'),
+                    ],
+                    'activities'   => [
+                        'label'     => 'Activities',
+                        'icon'      => 'icon-child',
+                        'url'       => Backend::url('dma/friends/activities'),
+                    ],  
+                    'activitylogs'   => [
+                        'label'     => 'Activity Logs',
+                        'icon'      => 'icon-rocket',
+                        'url'       => Backend::url('dma/friends/activitylogs'),
                     ]
+                    
                 ]
             ]
         ];
+    }
+
+    public function boot()
+    {
+        User::extend(function($model) {
+            $model->hasOne['metadata'] = ['DMA\Friends\Models\Usermeta'];
+        });
     }
 
 }

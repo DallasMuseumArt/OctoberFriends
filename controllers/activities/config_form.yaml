@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Activity
+
+# Model Form Field configuration
+form: @/plugins/dma/friends/models/activity/fields.yaml
+
+# Model Class name
+modelClass: DMA\Friends\Models\Activity
+
+# Default redirect location
+defaultRedirect: dma/friends/activities
+
+# Create page
+create:
+    title: Create Activities
+    redirect: dma/friends/activities/update/:id
+    redirectClose: dma/friends/activities
+
+# Update page
+update:
+    title: Edit Activities
+    redirect: dma/friends/activities
+    redirectClose: dma/friends/activities
+
+# Preview page
+preview:
+    title: Preview Activities
