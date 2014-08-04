@@ -71,9 +71,15 @@ class Plugin extends PluginBase
 
     public function boot()
     {
+        // Extend the user model to support our custom metadata
         User::extend(function($model) {
             $model->hasOne['metadata'] = ['DMA\Friends\Models\Usermeta'];
         });
     }
+
+    public function register()
+    {
+        $this->registerConsoleCommand('friends.sync-friends-data', 'DMA\Friends\Console\SyncFriendsDataCommand');
+    } 
 
 }

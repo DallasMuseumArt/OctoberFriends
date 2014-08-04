@@ -17,7 +17,6 @@ class CreateRewardsTable extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->text('excerpt')->nullable();
-            $table->timestamps();
             $table->boolean('is_published')->default(false);
             $table->boolean('is_archived')->default(false);
             $table->integer('points')->default(0);
