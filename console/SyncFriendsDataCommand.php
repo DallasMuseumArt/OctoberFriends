@@ -9,6 +9,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use DMA\Friends\Models\Badge;
 use DMA\Friends\Models\Usermeta;
 use Rainlab\User\Models\User;
+use Rainlab\User\Models\Country;
+use Rainlab\User\Models\State;
 
 class SyncFriendsDataCommand extends Command
 {
@@ -140,8 +142,14 @@ class SyncFriendsDataCommand extends Command
             $user->phone            = $data['home_phone'];
             $user->street_addr      = $data['street_address'];
             $user->city             = $data['city'];
-            $user->state            = $data['state'];
             $user->zip              = $data['zip'];
+
+            // Populate state and country objects
+            if (!empty($data['state'])) {
+                $state = State::where('code', strtoupper($data['state']))->first();
+                $user->state()->associate($state);
+                $user->country()->associate(Country::find($state->country_id));
+            }
 
             $metadata                           = new Usermeta;
             $metadata->first_name               = $data['first_name'];
@@ -154,6 +162,9 @@ class SyncFriendsDataCommand extends Command
             try {
                 $user->forceSave();
                 $user->metadata()->save($metadata);
+
+                // Manually update the password hash as the model wants to rehash and validate it
+                User::where('id', $user->id)->update(['password' => $wuser->user_pass]);
             } catch(ValidateException $e) {
                 $this->output->writeln('account failed: ' . $user->email);
             }
