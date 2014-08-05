@@ -147,8 +147,14 @@ class SyncFriendsDataCommand extends Command
             // Populate state and country objects
             if (!empty($data['state'])) {
                 $state = State::where('code', strtoupper($data['state']))->first();
-                $user->state()->associate($state);
-                $user->country()->associate(Country::find($state->country_id));
+                if (!$state) {
+                    $state = State::where('name', $data['state'])->first();
+                }
+
+                if ($state) {
+                    $user->state()->associate($state);
+                    $user->country()->associate(Country::find($state->country_id));
+                }
             }
 
             $metadata                           = new Usermeta;
