@@ -51,36 +51,15 @@ class SyncFriendsDataCommand extends Command
     {
         $this->db = DB::connection('friends_wordpress');
 
-        $this->getUsers();
+        $this->sync();
 
-
-        // TODO get data from wordpress
         $this->output->writeln('Sync processed ' . $this->limit . ' records');
     }
 
-    /**
-     * Get the console command arguments.
-     * @return array
-     */
-    protected function getArguments()
+    protected function sync()
     {
-        return [
-        ];
-    }
-
-    /**
-     * Get the console command options.
-     * @return array
-     */
-    protected function getOptions()
-    {
-        return [
-        ];
-    }
-
-    protected function getUsers()
-    {
-        $id = (int)DB::table('users')->max('id');
+        $u = new User;
+        $id = (int)DB::table($u->table)->max('id');
 
         $wordpressUsers = $this->db
             ->table('wp_users')
