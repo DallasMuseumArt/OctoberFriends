@@ -1,6 +1,7 @@
 <?php namespace DMA\Friends;
 
 use Backend;
+use Illuminate\Support\Facades\Event;
 use Rainlab\User\Models\User as User;
 use System\Classes\PluginBase;
 
@@ -75,6 +76,40 @@ class Plugin extends PluginBase
         User::extend(function($model) {
             $model->hasOne['metadata'] = ['DMA\Friends\Models\Usermeta'];
         });
+
+        Event::listen('backend.form.extendFields', function($widget) {
+            if (!$widget->getController() instanceof \RainLab\User\Controllers\Users) return;
+            if ($widget->getContext() != 'update') return;
+
+            $widget->addFields([
+                'metadata[first_name]' => [
+                    'label' => 'First Name',
+                    'tab'   => 'Metadata',
+                ],  
+                'metadata[last_name]' => [
+                    'label' => 'Last Name',
+                    'tab'   => 'Metadata',
+                ], 
+                'metadata[points]' => [
+                    'label' => 'Points',
+                    'tab'   => 'Metadata',
+                ],
+                'metadata[email_optin]' => [
+                    'label' => 'Email Opt-in',
+                    'type'  => 'checkbox',
+                    'tab'   => 'Metadata',
+                ],
+                'metadata[current_member]' => [
+                    'label' => 'Current member?',
+                    'type'  => 'checkbox',
+                    'tab'   => 'Metadata',
+                ],
+                'metadata[current_member_number]' => [
+                    'label' => 'Current Member Number',
+                    'tab'   => 'Metadata',
+                ],
+            ], 'primary');
+        }); 
     }
 
     public function register()
