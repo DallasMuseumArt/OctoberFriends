@@ -110,6 +110,28 @@ class Plugin extends PluginBase
                 ],
             ], 'primary');
         }); 
+
+        Event::listen('backend.list.extendColumns', function($widget) {
+            if (!$widget->getController() instanceof \RainLab\User\Controllers\Users) return;
+
+            $widget->addColumns([
+                'first_name' => [
+                    'label' => 'First Name',
+                    'relation' => 'metadata',
+                    'select' => '@first_name',
+                ],  
+                'last_name' => [
+                    'label' => 'Last Name',
+                    'relation' => 'metadata',
+                    'select' => '@last_name',
+                ], 
+                'points' => [
+                    'label' => 'Points',
+                    'relation' => 'metadata',
+                    'select' => '@points',
+                ], 
+            ]); 
+        }); 
     }
 
     public function register()
