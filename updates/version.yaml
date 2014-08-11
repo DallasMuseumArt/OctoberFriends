@@ -5,6 +5,3 @@
     - create_badges_table.php
     - create_rewards_table.php
     - create_usermetas_table.php
-1.0.2:
-    - Add indexes to user meta and activity logs tables
-    - add_indexes.php

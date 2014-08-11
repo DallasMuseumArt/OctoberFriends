@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use DMA\Friends\Models\Badge;
+use DMA\Friends\Models\ActivityLog;
 use DMA\Friends\Models\Usermeta;
 use Rainlab\User\Models\User;
 use Rainlab\User\Models\Country;
@@ -51,13 +52,25 @@ class SyncFriendsDataCommand extends Command
     {
         $this->db = DB::connection('friends_wordpress');
 
-        $this->sync();
+        $type = $this->option('type');
+
+        // Sync users and metadata
+        if ($type == 'users' || !$type) {
+            $this->syncUsers();
+        }
+
+        // Sync activity logs
+        if ($type == 'activity-logs' || !$type) {
+            $this->syncActivityLogs();
+        }
 
         $this->output->writeln('Sync processed ' . $this->limit . ' records');
     }
 
-    protected function sync()
+    protected function syncUsers()
     {
+        $this->output->writeln('Syncronizing activity users');
+
         $u = new User;
         $id = (int)DB::table($u->table)->max('id');
 
@@ -72,13 +85,11 @@ class SyncFriendsDataCommand extends Command
 
             if (empty($wuser->user_email)) {
                 $this->output->writeln('invalid account');
-                var_dump($wuser);
                 continue;
             }
 
             if (count(User::where('email', $wuser->user_email)->get())) {
                 $this->output->writeln('duplicate account');
-                var_dump($wuser);
                 continue;
             }
 
@@ -88,11 +99,9 @@ class SyncFriendsDataCommand extends Command
             $user->name         = $wuser->user_nicename;
             $user->email        = $wuser->user_email;
 
-            // TODO figure out how to migrate password
-            //$user->password     = $wuser->user_pass;
+            // This gets changed to a real password later
             $user->password = 'temppassword';
             $user->password_confirmation = 'temppassword';
-
 
             $metadata = $this->db
                 ->table('wp_usermeta')
@@ -156,7 +165,62 @@ class SyncFriendsDataCommand extends Command
 
             $this->output->writeln('saved user: ' . $user->email);
         }
-
-        
     }
+
+    protected function syncActivityLogs()
+    {
+        $this->output->writeln('Syncronizing activity logs');
+        $a = new ActivityLog;
+        $id = (int)DB::table($a->table)->max('id');
+
+        $wordpressLogs = $this->db
+            ->table('wp_badgeos_logs')
+            ->where('id', '>', $id)
+            ->orderBy('id', 'asc')
+            ->limit($this->limit)
+            ->get();
+
+        foreach ($wordpressLogs as $wlog) {
+            $log                = new ActivityLog;
+            $log->id            = $wlog->id;
+            $log->site_id       = $wlog->site_id;
+            $log->user_id       = $wlog->user_id;
+            $log->action        = $wlog->action;
+            $log->message       = $wlog->message;
+            $log->points_earned = $wlog->points_earned;
+            $log->total_points  = $wlog->total_points;
+            $log->timestamp     = $wlog->timestamp;
+            $log->timezone      = $wlog->timezone;
+            
+            if ($wlog->action == 'artwork') {
+                $log->artwork_id = $wlog->object_id;
+            } else {
+                $log->object_id = $wlog->object_id;
+
+                $type = $this->db
+                    ->table('wp_posts')
+                    ->select('post_type')
+                    ->where('ID', $log->object_id)
+                    ->first();
+
+                if ($type) {
+                    $log->object_type = $type->post_type;
+                }
+            }
+
+            $log->save();
+        }
+
+    }
+
+    /** 
+     * Get the console command options.
+     * @return array
+     */
+    protected function getOptions()
+    {   
+        return [
+            ['type', null, InputOption::VALUE_OPTIONAL, 'Import specific type', null],
+        ];  
+    }  
 }
