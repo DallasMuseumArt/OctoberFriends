@@ -22,6 +22,8 @@ class CreateUsermetasTable extends Migration
             $table->boolean('email_optin');
             $table->smallInteger('current_member');
             $table->integer('current_member_number');
+
+            $table->index('user_id');
         });
     }
 

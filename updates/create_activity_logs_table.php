@@ -24,6 +24,9 @@ class CreateActivityLogsTable extends Migration
             $table->integer('total_points')->default(0)->nullable();
             $table->timestamp('timestamp');
             $table->string('timezone');
+
+            $table->index('user_id');
+            $table->index('object_id');
         });
     }
 
