@@ -75,15 +75,11 @@ class Post {
         '_dma_reward_start_date'                        => 'date_begin',
 
         /* Step */
-        // steps appear to be a different use case that is handled
-        // a slight bit differently then a typical object model
-        // For now these are not being imported and should be looked
-        // at more indepth when object relation models are developed 
-        '_badgeos_achievement_type'                     => null,
-        '_badgeos_count'                                => null,
-        '_badgeos_trigger_type'                         => null,
-        '_badgestack_step_unlock_options'               => null,
-        '_badgestack_trigger_badgestack_unlock_badge'   => null,
+        '_badgeos_achievement_type'                     => 'achievement_type',
+        '_badgeos_count'                                => 'count',
+        '_badgeos_trigger_type'                         => 'trigger_type',
+        '_badgestack_step_unlock_options'               => 'unlock_options',
+        '_badgestack_trigger_badgestack_unlock_badge'   => 'trigger_unlock_badge',
 
         /* none */
         '_badgeos_awarded_points'                       => null,

@@ -13,6 +13,7 @@ use DMA\Friends\Wordpress\ActivityLog as WordpressActivityLog;
 use DMA\Friends\Wordpress\Badge as WordpressBadge;
 use DMA\Friends\Wordpress\Location as WordpressLocation;
 use DMA\Friends\Wordpress\Reward as WordpressReward;
+use DMA\Friends\Wordpress\Step as WordpressStep;
 use DMA\Friends\Wordpress\User as WordpressUser;
 
 class SyncFriendsDataCommand extends Command
@@ -77,6 +78,9 @@ class SyncFriendsDataCommand extends Command
             case 'rewards':
                 $this->syncRewards();
                 break;
+            case 'steps':
+                $this->syncSteps();
+                break;
             default:
                 $this->syncUsers();
                 $this->syncActivities();
@@ -84,6 +88,7 @@ class SyncFriendsDataCommand extends Command
                 $this->syncBadges();
                 $this->syncLocations();
                 $this->syncRewards();
+                $this->syncSteps();
         }
 
         $this->output->writeln('Sync complete');
@@ -95,7 +100,7 @@ class SyncFriendsDataCommand extends Command
     protected function syncUsers()
     {
         $user = new WordpressUser;
-        $this->sync($user, 'user');
+        $this->sync($user, 'users');
     }
 
     /**
@@ -147,6 +152,16 @@ class SyncFriendsDataCommand extends Command
     {   
         $rewards = new WordpressReward;
         $this->sync($rewards, 'rewards');
+    }  
+
+    /** 
+     * Syncronize wordpress steps with laravel
+     * @return int
+     */
+    protected function syncSteps()
+    {   
+        $steps = new WordpressStep;
+        $this->sync($steps, 'steps');
     }  
 
     protected function sync($model, $textType)
