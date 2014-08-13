@@ -3,5 +3,6 @@
     - create_activities_table.php
     - create_activity_logs_table.php
     - create_badges_table.php
+    - create_locations_table.php 
     - create_rewards_table.php
     - create_usermetas_table.php
