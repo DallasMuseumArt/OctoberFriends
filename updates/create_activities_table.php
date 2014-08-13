@@ -23,6 +23,8 @@ class CreateActivitiesTable extends Migration
             $table->integer('image_id')->nullable();
             $table->string('activity_code')->nullable();
             $table->integer('activity_lockout')->nullable();
+            $table->tinyInteger('time_restriction')->default(0);
+            $table->text('time_restriction_data')->nullable();
             $table->timestamp('date_begin')->nullable();
             $table->timestamp('date_end')->nullable();
         });

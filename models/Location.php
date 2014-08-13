@@ -3,18 +3,15 @@
 use Model;
 
 /**
- * Activity Model
+ * Location Model
  */
-class Activity extends Model
+class Location extends Model
 {
-    const TIME_RESTRICT_NONE    = 0;
-    const TIME_RESTRICT_HOURS   = 1;
-    const TIME_RESTRICT_DAYS    = 2;
 
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'dma_friends_activities';
+    public $table = 'dma_friends_locations';
 
     /**
      * @var array Guarded fields

@@ -8,10 +8,12 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use DMA\Friends\Models\Badge;
 use DMA\Friends\Models\ActivityLog;
-use DMA\Friends\Models\Usermeta;
-use Rainlab\User\Models\User;
-use Rainlab\User\Models\Country;
-use Rainlab\User\Models\State;
+use DMA\Friends\Wordpress\Activity as WordpressActivity;
+use DMA\Friends\Wordpress\ActivityLog as WordpressActivityLog;
+use DMA\Friends\Wordpress\Badge as WordpressBadge;
+use DMA\Friends\Wordpress\Location as WordpressLocation;
+use DMA\Friends\Wordpress\Reward as WordpressReward;
+use DMA\Friends\Wordpress\User as WordpressUser;
 
 class SyncFriendsDataCommand extends Command
 {
@@ -41,6 +43,8 @@ class SyncFriendsDataCommand extends Command
      */
     public function __construct()
     {
+        $this->db = DB::connection('friends_wordpress');
+
         parent::__construct();
     }
 
@@ -50,167 +54,105 @@ class SyncFriendsDataCommand extends Command
      */
     public function fire()
     {
-        $this->db = DB::connection('friends_wordpress');
 
         $type = $this->option('type');
+        $this->limit = $this->option('limit');
 
-        // Sync users and metadata
-        if ($type == 'users' || !$type) {
-            $this->syncUsers();
+        switch($type) {
+            case 'users':
+                $this->syncUsers();
+                break;
+            case 'activities':
+                $this->syncActivities();
+                break;
+            case 'activity-logs':
+                $this->syncActivityLogs();
+                break;
+            case 'badges':
+                $this->syncBadges();
+                break;
+            case 'locations':
+                $this->syncLocations();
+                break;
+            case 'rewards':
+                $this->syncRewards();
+                break;
+            default:
+                $this->syncUsers();
+                $this->syncActivities();
+                $this->syncActivityLogs();
+                $this->syncBadges();
+                $this->syncLocations();
+                $this->syncRewards();
         }
 
-        // Sync activity logs
-        if ($type == 'activity-logs' || !$type) {
-            $this->syncActivityLogs();
-        }
-
-        $this->output->writeln('Sync processed ' . $this->limit . ' records');
+        $this->output->writeln('Sync complete');
     }
 
+    /**
+     * Syncronize wordpress user accounts with laravel
+     */
     protected function syncUsers()
     {
-        $this->output->writeln('Syncronizing activity users');
-
-        $u = new User;
-        $id = (int)DB::table($u->table)->max('id');
-
-        $wordpressUsers = $this->db
-            ->table('wp_users')
-            ->where('id', '>', $id)
-            ->orderBy('id', 'asc')
-            ->limit($this->limit)
-            ->get();
-
-        foreach($wordpressUsers as $wuser) {
-
-            if (empty($wuser->user_email)) {
-                $this->output->writeln('invalid account');
-                continue;
-            }
-
-            if (count(User::where('email', $wuser->user_email)->get())) {
-                $this->output->writeln('duplicate account');
-                continue;
-            }
-
-            $user               = new User;
-            $user->id           = $wuser->ID;
-            $user->created_at   = $wuser->user_registered;
-            $user->name         = $wuser->user_nicename;
-            $user->email        = $wuser->user_email;
-
-            // This gets changed to a real password later
-            $user->password = 'temppassword';
-            $user->password_confirmation = 'temppassword';
-
-            $metadata = $this->db
-                ->table('wp_usermeta')
-                ->where('user_id', $wuser->ID)
-                ->get();
-
-            // Organize the metadata for mapping to user fields
-            $data = [
-                'home_phone'            => '',
-                'street_address'        => '',
-                'city'                  => '',
-                'state'                 => '',
-                'zip'                   => '',
-                'first_name'            => '',
-                'last_name'             => '',
-                '_badgeos_points'       => '',
-                'email_optin'           => false,
-                'current_member'        => false,
-                'current_member_number' => '',
-            ];
-
-            foreach($metadata as $mdata) {
-                $data[$mdata->meta_key] = $mdata->meta_value;
-            }
-
-            $user->phone            = $data['home_phone'];
-            $user->street_addr      = $data['street_address'];
-            $user->city             = $data['city'];
-            $user->zip              = $data['zip'];
-
-            // Populate state and country objects
-            if (!empty($data['state'])) {
-                $state = State::where('code', strtoupper($data['state']))->first();
-                if (!$state) {
-                    $state = State::where('name', $data['state'])->first();
-                }
-
-                if ($state) {
-                    $user->state()->associate($state);
-                    $user->country()->associate(Country::find($state->country_id));
-                }
-            }
-
-            $metadata                           = new Usermeta;
-            $metadata->first_name               = $data['first_name'];
-            $metadata->last_name                = $data['last_name'];
-            $metadata->points                   = $data['_badgeos_points'];
-            $metadata->email_optin              = $data['email_optin'];
-            $metadata->current_member           = $data['current_member'];
-            $metadata->current_member_number    = $data['current_member_number'];
-            
-            try {
-                $user->forceSave();
-                $user->metadata()->save($metadata);
-
-                // Manually update the password hash as the model wants to rehash and validate it
-                User::where('id', $user->id)->update(['password' => $wuser->user_pass]);
-            } catch(ValidateException $e) {
-                $this->output->writeln('account failed: ' . $user->email);
-            }
-
-            $this->output->writeln('saved user: ' . $user->email);
-        }
+        $user = new WordpressUser;
+        $this->sync($user, 'user');
     }
 
+    /**
+     * Syncronize wordpress activities with laravel
+     * @return int
+     */
+    protected function syncActivities()
+    {
+        $activities = new WordpressActivity;
+        $this->sync($activities, 'activities');
+    }
+
+    /**
+     * Syncronize BadgeOS Activity Logs with laravel
+     * @return int
+     */
     protected function syncActivityLogs()
     {
-        $this->output->writeln('Syncronizing activity logs');
-        $a = new ActivityLog;
-        $id = (int)DB::table($a->table)->max('id');
+        $activityLogs = new WordpressActivityLog;
+        $this->sync($activityLogs, 'activity logs');
 
-        $wordpressLogs = $this->db
-            ->table('wp_badgeos_logs')
-            ->where('id', '>', $id)
-            ->orderBy('id', 'asc')
-            ->limit($this->limit)
-            ->get();
+    }
 
-        foreach ($wordpressLogs as $wlog) {
-            $log                = new ActivityLog;
-            $log->id            = $wlog->id;
-            $log->site_id       = $wlog->site_id;
-            $log->user_id       = $wlog->user_id;
-            $log->action        = $wlog->action;
-            $log->message       = $wlog->message;
-            $log->points_earned = $wlog->points_earned;
-            $log->total_points  = $wlog->total_points;
-            $log->timestamp     = $wlog->timestamp;
-            $log->timezone      = $wlog->timezone;
-            
-            if ($wlog->action == 'artwork') {
-                $log->artwork_id = $wlog->object_id;
-            } else {
-                $log->object_id = $wlog->object_id;
+    /**
+     * Syncronize wordpress badges with laravel
+     * @return int
+     */
+    protected function syncBadges()
+    {
+        $badges = new WordpressBadge;
+        $this->sync($badges, 'badges');
+    }
 
-                $type = $this->db
-                    ->table('wp_posts')
-                    ->select('post_type')
-                    ->where('ID', $log->object_id)
-                    ->first();
+    /** 
+     * Syncronize wordpress locations with laravel
+     * @return int
+     */
+    protected function syncLocations()
+    {   
+        $locations = new WordpressLocation;
+        $this->sync($locations, 'locations');
+    }  
 
-                if ($type) {
-                    $log->object_type = $type->post_type;
-                }
-            }
+    /** 
+     * Syncronize wordpress rewards with laravel
+     * @return int
+     */
+    protected function syncRewards()
+    {   
+        $rewards = new WordpressReward;
+        $this->sync($rewards, 'rewards');
+    }  
 
-            $log->save();
-        }
-
+    protected function sync($model, $textType)
+    {
+        $count = $model->import($this->limit);
+        $this->output->writeln('Processed ' . $count . ' ' . $textType);
     }
 
     /** 
@@ -221,6 +163,7 @@ class SyncFriendsDataCommand extends Command
     {   
         return [
             ['type', null, InputOption::VALUE_OPTIONAL, 'Import specific type', null],
+            ['limit', null, InputOption::VALUE_OPTIONAL, 'Number of records per type to import', $this->limit],
         ];  
     }  
 }
