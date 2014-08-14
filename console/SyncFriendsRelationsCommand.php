@@ -76,7 +76,6 @@ class SyncFriendsRelationsCommand extends Command
                     'created_at'    => $post->epochToTimestamp($d->date_earned),
                 ];
 
-var_dump($d);
                 // About half way thru the data the location key changes.
                 // so lets deal with that
                 if (isset($d->location)) {
