@@ -74,9 +74,10 @@ class Plugin extends PluginBase
     {
         // Extend the user model to support our custom metadata
         User::extend(function($model) {
-            $model->hasOne['metadata']  = ['DMA\Friends\Models\Usermeta'];
-            $model->hasMany['badges']   = ['DMA\Friends\Models\Badge', 'dma_friends_user_badges', 'user_id', 'badge_id'];
-            $model->hasMany['steps']    = ['DMA\Friends\Models\Step', 'dma_friends_user_steps', 'user_id', 'step_id'];
+            $model->hasOne['metadata']      = ['DMA\Friends\Models\Usermeta'];
+            $model->hasMany['badges']       = ['DMA\Friends\Models\Badge', 'dma_friends_user_badges', 'user_id', 'badge_id'];
+            $model->hasMany['steps']        = ['DMA\Friends\Models\Step', 'dma_friends_user_steps', 'user_id', 'step_id'];
+            $model->hasMany['activityLogs'] = ['DMA\Friends\Models\ActivityLog'];
         });
 
         Event::listen('backend.form.extendFields', function($widget) {
