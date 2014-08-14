@@ -7,3 +7,7 @@
     - create_rewards_table.php
     - create_steps_table.php
     - create_usermetas_table.php
+1.0.2:
+    - Create relations between content types
+    - create_user_badges_table.php
+    - create_user_steps_table.php

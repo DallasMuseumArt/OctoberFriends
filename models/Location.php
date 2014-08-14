@@ -36,4 +36,8 @@ class Location extends Model
     public $attachOne = [];
     public $attachMany = [];
 
+    public function scopefindWordpress($query, $id)
+    {   
+        $query->where('wordpress_id', $id);
+    }  
 }

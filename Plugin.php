@@ -74,7 +74,9 @@ class Plugin extends PluginBase
     {
         // Extend the user model to support our custom metadata
         User::extend(function($model) {
-            $model->hasOne['metadata'] = ['DMA\Friends\Models\Usermeta'];
+            $model->hasOne['metadata']  = ['DMA\Friends\Models\Usermeta'];
+            $model->hasMany['badges']   = ['DMA\Friends\Models\Badge', 'dma_friends_user_badges', 'user_id', 'badge_id'];
+            $model->hasMany['steps']    = ['DMA\Friends\Models\Step', 'dma_friends_user_steps', 'user_id', 'step_id'];
         });
 
         Event::listen('backend.form.extendFields', function($widget) {
@@ -137,6 +139,7 @@ class Plugin extends PluginBase
     public function register()
     {
         $this->registerConsoleCommand('friends.sync-friends-data', 'DMA\Friends\Console\SyncFriendsDataCommand');
+        $this->registerConsoleCommand('friends.sync-friends-relations', 'DMA\Friends\Console\SyncFriendsRelationsCommand');
     } 
 
 }
