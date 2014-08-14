@@ -235,7 +235,7 @@ class Post {
     /**
      * Convert an epoch value to the appropriate timestamp
      */
-    protected function epochToTimestamp($val)
+    public function epochToTimestamp($val)
     {
         return date('Y-m-d H:i:s', $val);
     }
