@@ -142,4 +142,14 @@ class Plugin extends PluginBase
         $this->registerConsoleCommand('friends.sync-friends-relations', 'DMA\Friends\Console\SyncFriendsRelationsCommand');
     } 
 
+    public function registerReportWidgets()
+    {   
+        return [
+            'DMA\Friends\ReportWidgets\FriendsToolbar'=>[
+                'label'   => 'Friends Toolbar',
+                'context' => 'dashboard'
+            ],  
+        ];  
+    } 
+
 }
