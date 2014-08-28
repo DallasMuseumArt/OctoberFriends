@@ -3,5 +3,11 @@
 # ===================================
 
 columns:
-    id:
-        label: ID
+    title:
+        label: Title
+        searchable: true
+    is_published:
+        label: Published 
+    created_at:
+        label: Created
+

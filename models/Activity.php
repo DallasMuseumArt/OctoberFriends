@@ -32,11 +32,17 @@ class Activity extends Model
     public $hasOne = [];
     public $hasMany = [];
     public $belongsTo = [];
-    public $belongsToMany = [];
+    public $belongsToMany = [
+        'Step'
+    ];
     public $morphTo = [];
     public $morphOne = [];
     public $morphMany = [];
     public $attachOne = [];
     public $attachMany = [];
 
+    public function scopefindWordpress($query, $id)
+    {   
+        $query->where('wordpress_id', $id);
+    }  
 }
