@@ -3,5 +3,18 @@
 # ===================================
 
 columns:
-    id:
-        label: ID
+    action:
+        label: Action
+        searchable: true
+    message:
+        label: Message
+        searchable: true
+    artwork_id:
+        label: Artwork ID
+        searchable: true
+    user_id:
+        label: User ID
+    points_earned:
+        label: Points Earned
+    timstamp:
+        label: Date

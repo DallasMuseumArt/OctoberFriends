@@ -27,7 +27,9 @@ class Step extends Model
      * @var array Relations
      */
     public $hasOne = [];
-    public $hasMany = [];
+    public $hasMany = [
+        'Activity',
+    ];
     public $belongsTo = [];
     public $belongsToMany = [];
     public $morphTo = [];

@@ -29,7 +29,9 @@ class ActivityLog extends Model
      */
     public $hasOne = [];
     public $hasMany = [];
-    public $belongsTo = [];
+    public $belongsTo = [
+        'User' => '\RainLab\User\Model\User'
+    ];
     public $belongsToMany = [];
     public $morphTo = [];
     public $morphOne = [];

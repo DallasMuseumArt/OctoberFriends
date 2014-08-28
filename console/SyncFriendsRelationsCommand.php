@@ -6,8 +6,10 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
+use Schema;
 use Rainlab\User\Models\User;
 use DMA\Friends\Wordpress\Post;
+use DMA\Friends\Models\Activity;
 use DMA\Friends\Models\Badge;
 use DMA\Friends\Models\Step;
 use DMA\Friends\Models\Location;
@@ -46,6 +48,75 @@ class SyncFriendsRelationsCommand extends Command
      */
     public function fire()
     {  
+
+        // p2p connections
+        $p2ps = $this->db->table('wp_p2p')
+            ->get();
+
+        foreach($p2ps as $p2p) {
+            list($from, $t, $to) = explode('-', $p2p->p2p_type);
+
+            switch($from) {
+                case 'activity':
+                    $from = Activity::findWordpress($p2p->p2p_from)->first();
+                    $from_table = 'activity';
+                    break;
+                case 'badge':
+                    $from = Badge::findWordpress($p2p->p2p_from)->first();
+                    $from_table = 'badge';
+                    break;
+                case 'dma-location':
+                    $from = Location::findWordpress($p2p->p2p_from)->first();
+                    $from_table = 'location';
+                    break;
+                case 'step':
+                    $from = Step::findWordpress($p2p->p2p_from)->first();
+                    $from_table = 'step';
+                    break;
+                default:
+                    $from = false;
+            }
+
+            switch($to) {
+                case 'activity':
+                    $to = Activity::findWordpress($p2p->p2p_to)->first();
+                    $to_table = 'activity';
+                    break;
+                case 'badge':
+                    $to = Badge::findWordpress($p2p->p2p_to)->first();
+                    $to_table = 'badge';
+                    break;
+                case 'dma-location':
+                    $to = Location::findWordpress($p2p->p2p_to)->first();
+                    $to_table = 'location';
+                    break;
+                case 'step':
+                    $to = Step::findWordpress($p2p->p2p_to)->first();
+                    $to_table = 'step'; 
+                    break;
+                default:
+                    $to = false;
+            }
+
+            if ($from && $to) {
+                $table = 'dma_friends_' . $from_table . '_' . $to_table;
+            
+                $values = [
+                    $from_table . '_id'   => $from->id,
+                    $to_table . '_id'     => $to->id
+                ];
+
+                if (Schema::hasTable($table)) {
+                    DB::table($table)->insert($values);
+                    echo 'from: ' . $from->title . ' ----- ' . $to->title ."\n";
+                } else {
+                    echo 'table doesnt exist';
+                } 
+            }
+        }
+
+
+        // User achievements
         $achievements = $this->db->table('wp_usermeta')
             ->where('meta_key', '_badgeos_achievements')
             ->get();
