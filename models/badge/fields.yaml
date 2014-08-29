@@ -3,6 +3,99 @@
 # ===================================
 
 fields:
-    id:
-        label: ID
-        disabled: true
+    title:
+        label: Title
+    image:
+        label: Image
+        type: fileupload
+        mode: image
+        imageHeight: 300
+        imageWidth: 300
+    description:
+        label: Description
+        type: richeditor
+        size: huge
+    excerpt:
+        label: Excerpt
+        description: a short amount of text about this badge.  This will be displayed in badge listings
+        type: richeditor
+        size: huge
+    congratulations_text:
+        label: Congratulations Text
+        description: Text to display to a user that has just been awarded this badge
+        type: richeditor
+        size: huge
+    maximum_earnings:
+        label: Maximum Earnings
+        description: The number of times an individual can earn this badge
+        type: number
+    points:
+        label: Points
+        description: Points earned when awarded this badge
+        type: number
+    earned_by:
+        label: Earned by
+        type: dropdown
+        options:
+            triggers: Completing Steps
+            points: Minimum Number of Points
+            submission: Submission (Reviewed)
+            submission_auto: Submission (Auto-accepted)
+            nomination: Nomination
+            admin: Admin-awarded Only
+            registered: Registered New Account
+            provided_email: Provided Email
+            connected_social: Connected Social Media Account
+            allowed_texting: Allowed SMS
+            completed_profile: Completed user profile
+    is_sequential:
+        label: Sequential Steps
+        description: If checked, steps must be created in sequentual order
+        type: checkbox
+    show_earners:
+        label: Show earners
+        description: If checked, people who have earned this badge will be displayed publicly
+        type: checkbox
+    is_hidden:
+        label: Hide
+        description: If checked, a user will not see that they have earned this badge in their listings
+        type: checkbox
+    time_between_steps_min:
+        label: Minimum Time Between Steps (minutes)
+        description: The minimum number of minutes that must pass before earning a step.
+        type: number
+    time_between_steps_max:
+        label: Maximum Time Between Steps (minutes)
+        description: The maximum number of minutes that must pass before failing the badge.
+        type: number
+    maximium_time:
+        label: Maximum Time to Complete Badge (days)
+        description: The maximum amount of time to complete all steps after the first has been awarded
+        type: number
+    date_begin:
+        label: Beginning Date
+        description: The first day this badge can be earned (if blank: no limit).
+        type: datepicker
+        mode: datetime
+    date_end:
+        label: Ending Date
+        description: The last day this badge may be earned (if blank: no limit).
+        type: datepicker
+        mode: datetime
+    special:
+        label: Special Badge:
+        type: dropdown
+        options:
+            featured: Featured
+            limited: Limited Edition
+    is_published:
+        label: Published
+        type: checkbox
+    is_archived:
+        label: Archive
+        type: checkbox
+    created_at:
+        label: Created on
+        type: datepicker
+        mode: datetime
+    
