@@ -4,6 +4,7 @@
 
 # Model List Column configuration
 list: @/plugins/dma/friends/models/badge/columns.yaml
+filter: @/plugins/dma/friends/models/badge/config_filter.yaml
 
 # Model Class name
 modelClass: DMA\Friends\Models\Badge
@@ -42,3 +43,4 @@ toolbar:
     # Search widget configuration
     search:
         prompt: backend::lang.list.search_prompt
+
