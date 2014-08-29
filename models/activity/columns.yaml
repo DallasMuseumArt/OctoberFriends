@@ -6,7 +6,19 @@ columns:
     title:
         label: Title
         searchable: true
-    is_published:
-        label: Published 
+    points:
+        label: Points Earned
+        type: number
     created_at:
         label: Created
+        type: datetime
+    date_begin:
+        label: Beginning Date
+    date_end:
+        label: Ending Date
+    is_published:
+        label: Published 
+        type: switch
+    is_archived:
+        label: Archived 
+        type: switch

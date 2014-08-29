@@ -38,7 +38,9 @@ class Activity extends Model
     public $morphTo = [];
     public $morphOne = [];
     public $morphMany = [];
-    public $attachOne = [];
+    public $attachOne = [
+        'image' => ['System\Models\File']
+    ];
     public $attachMany = [];
 
     public function scopefindWordpress($query, $id)
