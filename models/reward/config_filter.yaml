@@ -1,0 +1,9 @@
+scopes:
+    is_published:
+        label: Hide unpublished
+        type: checkbox
+        conditions: is_published = 1
+    is_archived:
+        label: Hide Archived
+        type: checkbox
+        conditions: is_archived <> 1
