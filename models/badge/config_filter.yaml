@@ -7,3 +7,4 @@ scopes:
         label: Hide Archived 
         type: checkbox
         conditions: is_archived <> 1 
+

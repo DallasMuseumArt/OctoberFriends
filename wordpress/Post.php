@@ -186,7 +186,7 @@ class Post {
                 break;
             case 'date_begin':
             case 'date_end':
-                if (!is_int($val)) {
+                if (!is_numeric($val)) {
                     $val = strtotime($val);
                 }
                 $val = $this->epochToTimestamp($val);
