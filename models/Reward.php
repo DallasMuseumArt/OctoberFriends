@@ -18,6 +18,8 @@ class Reward extends Model
      */
     protected $guarded = ['*'];
 
+    protected $dates = ['date_begin', 'date_end'];
+
     /**
      * @var array Fillable fields
      */

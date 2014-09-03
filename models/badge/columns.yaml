@@ -14,8 +14,10 @@ columns:
         type: datetime
     date_begin:
         label: Beginning Date
+        type: datetime
     date_end:
         label: Ending Date
+        type: datetime
     is_published:
         label: Published 
         type: switch
