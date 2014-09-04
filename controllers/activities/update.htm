@@ -1,27 +1,28 @@
 <?php Block::put('breadcrumb') ?>
     <ul>
-        <li><a href="<?= Backend::url('dma/friends/activities') ?>">Activities</a></li>
+        <li><a href="<?= Backend::url('dma/friends/badges') ?>">Badges</a></li>
         <li><?= e($this->pageTitle) ?></li>
     </ul>
 <?php Block::endPut() ?>
 
 <?php if (!$this->fatalError): ?>
 
+    <div class="layout fancy-layout">
     <?= Form::open(['class'=>'layout-item stretch layout-column']) ?>
 
         <?= $this->formRender() ?>
+
 
         <div class="form-buttons layout-item fix">
             <div class="loading-indicator-container">
                 <button
                     type="submit"
                     data-request="onSave"
-                    data-request-data="redirect:0"
                     data-hotkey="ctrl+s"
                     data-hotkey-mac="cmd+s"
-                    data-load-indicator="Saving Activity..."
+                    data-load-indicator="Creating Badge..."
                     class="btn btn-primary">
-                    <u>S</u>ave
+                    Create
                 </button>
                 <button
                     type="button"
@@ -29,28 +30,22 @@
                     data-request-data="close:1"
                     data-hotkey="ctrl+enter"
                     data-hotkey-mac="cmd+enter"
-                    data-load-indicator="Saving Activity..."
+                    data-load-indicator="Creating Badge..."
                     class="btn btn-default">
-                    Save and Close
-                </button>
-                <button
-                    type="button"
-                    class="oc-icon-trash-o btn-icon danger pull-right"
-                    data-request="onDelete"
-                    data-load-indicator="Deleting Activity..."
-                    data-request-confirm="Do you really want to delete this activity?">
+                    Create and Close
                 </button>
                 <span class="btn-text">
-                    or <a href="<?= Backend::url('dma/friends/activities') ?>">Cancel</a>
+                    or <a href="<?= Backend::url('dma/friends/badges') ?>">Cancel</a>
                 </span>
             </div>
         </div>
 
     <?= Form::close() ?>
+    </div>
 
 <?php else: ?>
 
     <p class="flash-message static error"><?= e($this->fatalError) ?></p>
-    <p><a href="<?= Backend::url('dma/friends/activities') ?>" class="btn btn-default">Return to activities list</a></p>
+    <p><a href="<?= Backend::url('dma/friends/badges') ?>" class="btn btn-default">Return to badges list</a></p>
 
 <?php endif ?>

@@ -86,12 +86,12 @@ class Plugin extends PluginBase
 
             $widget->addFields([
                 'metadata[first_name]' => [
-                    'label' => 'First Name',
-                    'tab'   => 'Metadata',
+                    'label'         => 'First Name',
+                    'tab'           => 'Metadata',
                 ],  
                 'metadata[last_name]' => [
-                    'label' => 'Last Name',
-                    'tab'   => 'Metadata',
+                    'label'         => 'Last Name',
+                    'tab'           => 'Metadata',
                 ], 
                 'metadata[points]' => [
                     'label' => 'Points',
@@ -118,23 +118,45 @@ class Plugin extends PluginBase
             if (!$widget->getController() instanceof \RainLab\User\Controllers\Users) return;
 
             $widget->addColumns([
+                'full_name' => [
+                    'label'         => 'Full Name',
+                    'relation'      => 'metadata',
+                    'sortable'   => false,
+                    'select'        => "concat(first_name, ' ', last_name)", 
+                    'searchable'    => true,
+                ],
                 'first_name' => [
-                    'label' => 'First Name',
-                    'relation' => 'metadata',
-                    'select' => '@first_name',
+                    'label'         => 'First Name',
+                    'relation'      => 'metadata',
+                    'select'        => '@first_name',
+                    'searchable'    => true,
                 ],  
                 'last_name' => [
-                    'label' => 'Last Name',
-                    'relation' => 'metadata',
-                    'select' => '@last_name',
+                    'label'         => 'Last Name',
+                    'relation'      => 'metadata',
+                    'select'        => '@last_name',
+                    'searchable'    => true,
                 ], 
                 'points' => [
-                    'label' => 'Points',
-                    'relation' => 'metadata',
-                    'select' => '@points',
+                    'label'     => 'Points',
+                    'relation'  => 'metadata',
+                    'select'    => '@points',
                 ], 
+                'zip' => [
+                    'label' => 'Zip',
+                ],
             ]); 
         }); 
+    }
+
+    public function registerFormWidgets()
+    {
+        return [
+            'DMA\Friends\FormWidgets\RequiredSteps' => [
+                'label' => 'Required Steps',
+                'alias' => 'requiredsteps',
+            ]
+        ];   
     }
 
     public function register()

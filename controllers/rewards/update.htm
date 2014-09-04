@@ -7,6 +7,7 @@
 
 <?php if (!$this->fatalError): ?>
 
+    <div class="layout fancy-layout">
     <?= Form::open(['class'=>'layout-item stretch layout-column']) ?>
 
         <?= $this->formRender() ?>
@@ -47,6 +48,7 @@
         </div>
 
     <?= Form::close() ?>
+    </div>
 
 <?php else: ?>
 

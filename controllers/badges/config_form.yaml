@@ -29,3 +29,5 @@ update:
 # Preview page
 preview:
     title: Preview Badges
+    redirect: dma/friends/badges/preview/:id
+    redirectClose: dma/friends/badges

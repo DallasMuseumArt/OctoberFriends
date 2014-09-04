@@ -13,6 +13,7 @@ class ActivityLog extends Model
      */
     public $table = 'dma_friends_activity_logs';
     public $timestamps = false;
+    protected $dates = ['timestamp'];
 
     /**
      * @var array Guarded fields
