@@ -5,68 +5,103 @@
 fields:
     title:
         label: Title
-    image:
-        label: Image
-        type: fileupload
-        mode: image
-        imageHeight: 300 
-        imageWidth: 300 
-    description:
-        label: Description
-        type: richeditor
-        size: huge
-    excerpt:
-        label: Excerpt
-        description: a short amount of text about this badge.  This will be displayed in badge listings
-        type: richeditor
-        size: huge
-    points:
-        label: Points to redeem
-        description: The number of points required to redeem this reward
-        type: number
-    barcode:
-        label: Barcode Value
-        description: The value of the barcode printed on the coupon.
-    date_begin:
-        label: Beginning Date
-        description: If set, Reward can only be redeemed after this date.
-        type: datepicker
-        mode: datetime
-    date_end:
-        label: Ending Date
-        description: If set, Reward can only be redeemed before this date.
-        type: datepicker
-        mode: datetime
-    days_valid:
-        label: Days Valid
-        description: If set, the maximum number of days this reward is valid.
-    inventory:
-        label: Inventory
-        description: Number of reward items in inventory
-        type: number
-    hidden:
-        label: Hide Reward
-        description: If checked hide this Reward from users until they meet the points requirement.
-        type: checkbox
-    fine_print: 
-        label: The Fine Print
-        description: This is displayed on the Reward detail view and on the printed coupon.
-        type: textarea
-    enable_email:
-        label: Email upon redemption
-        description: If checked send an email to the user if they redeem this reward
-        type: checkbox
-    redemption_email:
-        label: Redemption Email
-        description: If not blank, send an email to the recipient upon redemption with the specified text.
-        type: textarea
-    is_published:
-        label: Published
-        type: checkbox
-    is_archived:
-        label: Archive
-        type: checkbox
-    created_at:
-        label: Created on
-        type: datepicker
-        mode: datetime
+    toolbar:
+        type: partial
+        path: @/plugins/dma/friends/partials/_content_toolbar.htm
+        cssClass: collapse-visible
+
+secondaryTabs:
+    stretch: true
+    fields:
+        # ===================================
+        #  Content tab 
+        # ===================================
+        description:
+            label: Description
+            tab: Content
+            span: left 
+            type: richeditor
+            size: huge
+        image:
+            label: Image
+            type: fileupload
+            span: right
+            tab: Content
+            mode: image
+            imageHeight: 300 
+            imageWidth: 100%
+        excerpt:
+            label: Excerpt
+            description: a short amount of text about this badge.  This will be displayed in badge listings
+            tab: Content
+            type: richeditor
+            size: huge
+        fine_print: 
+            label: The Fine Print
+            description: This is displayed on the Reward detail view and on the printed coupon.
+            tab: Content
+            type: textarea
+
+        # ===================================
+        #  Configuration tab 
+        # ===================================
+        points:
+            label: Points to redeem
+            description: The number of points required to redeem this reward
+            tab: Configuration
+            type: number
+        barcode:
+            label: Barcode Value
+            description: The value of the barcode printed on the coupon.
+            tab: Configuration
+        inventory:
+            label: Inventory
+            description: Number of reward items in inventory
+            tab: Configuration
+            type: number
+        enable_email:
+            label: Email upon redemption
+            description: If checked send an email to the user if they redeem this reward
+            tab: Configuration
+            type: checkbox
+        redemption_email:
+            label: Redemption Email
+            description: If not blank, send an email to the recipient upon redemption with the specified text.
+            tab: Configuration
+            type: textarea
+        # ===================================
+        #  Publishing Options tab 
+        # ===================================
+        date_begin:
+            label: Beginning Date
+            description: If set, Reward can only be redeemed after this date.
+            span: left
+            tab: Publishing Options
+            type: datepicker
+            mode: datetime
+        date_end:
+            label: Ending Date
+            description: If set, Reward can only be redeemed before this date.
+            span: right
+            tab: Publishing Options
+            type: datepicker
+            mode: datetime
+        hidden:
+            label: Hide Reward
+            description: If checked hide this Reward from users until they meet the points requirement.
+            tab: Publishing Options
+            type: checkbox
+        is_published:
+            label: Published
+            type: checkbox
+            tab: Publishing Options
+        is_archived:
+            label: Archive
+            type: checkbox
+            tab: Publishing Options
+        created_at:
+            label: Created on
+            type: datepicker
+            mode: datetime
+            span: left
+            tab: Publishing Options

@@ -1,6 +1,7 @@
 <?php namespace DMA\Friends\Models;
 
 use Model;
+use DMA\Friends\Models\Step;
 
 /**
  * Badge Model
@@ -30,7 +31,7 @@ class Badge extends Model
      */
     public $hasOne = [];
     public $hasMany = [
-        'Step'
+        'DMA\Friends\Models\Step'
     ];
     public $belongsTo = [];
     public $belongsToMany = [];
@@ -46,4 +47,9 @@ class Badge extends Model
     {   
         $query->where('wordpress_id', $id);
     }  
+
+    public function steps()
+    {
+         return $this->hasMany('DMA\Friends\Models\Step');
+    }
 }

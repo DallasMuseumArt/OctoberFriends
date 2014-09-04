@@ -3,6 +3,9 @@
 # ===================================
 
 columns:
+    timestamp:
+        label: Date
+        type: datetime
     action:
         label: Action
         searchable: true
@@ -13,8 +16,6 @@ columns:
         label: Artwork ID
         searchable: true
     user_id:
-        label: User ID
+        label: User
     points_earned:
         label: Points Earned
-    timstamp:
-        label: Date
