@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Location
+
+# Model Form Field configuration
+form: @/plugins/dma/friends/models/location/fields.yaml
+
+# Model Class name
+modelClass: DMA\Friends\Models\Location
+
+# Default redirect location
+defaultRedirect: dma/friends/locations
+
+# Create page
+create:
+    title: Create Locations
+    redirect: dma/friends/locations/update/:id
+    redirectClose: dma/friends/locations
+
+# Update page
+update:
+    title: Edit Locations
+    redirect: dma/friends/locations
+    redirectClose: dma/friends/locations
+
+# Preview page
+preview:
+    title: Preview Locations

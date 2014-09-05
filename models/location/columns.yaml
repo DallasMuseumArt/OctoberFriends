@@ -3,5 +3,7 @@
 # ===================================
 
 columns:
-    id:
-        label: ID
+    title:
+        label: Title
+    description:
+        label: Description

@@ -63,7 +63,12 @@ class Plugin extends PluginBase
                         'label'     => 'Activity Logs',
                         'icon'      => 'icon-rocket',
                         'url'       => Backend::url('dma/friends/activitylogs'),
-                    ]
+                    ],
+                    'locations'   => [
+                        'label'     => 'Locations',
+                        'icon'      => 'icon-location-arrow',
+                        'url'       => Backend::url('dma/friends/locations'),
+                    ], 
                     
                 ]
             ]
