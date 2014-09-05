@@ -31,7 +31,7 @@ class Badge extends Model
      */
     public $hasOne = [];
     public $hasMany = [
-        'DMA\Friends\Models\Step'
+        'steps' => 'DMA\Friends\Models\Step'
     ];
     public $belongsTo = [];
     public $belongsToMany = [];

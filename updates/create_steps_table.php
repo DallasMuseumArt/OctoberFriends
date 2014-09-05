@@ -15,11 +15,14 @@ class CreateStepsTable extends Migration
             $table->timestamps();
             $table->string('title');
             $table->integer('wordpress_id');
+            $table->integer('badge_id');
             $table->string('achievement_type');
             $table->integer('count');
             $table->string('trigger_type');
             $table->string('unlock_options');
             $table->string('trigger_unlock_badge');
+
+            $table->index('badge_id');
         });
     }
 

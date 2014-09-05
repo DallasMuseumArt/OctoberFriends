@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Step
+
+# Model Form Field configuration
+form: @/plugins/dma/friends/models/step/fields.yaml
+
+# Model Class name
+modelClass: DMA\Friends\Models\Step
+
+# Default redirect location
+defaultRedirect: dma/friends/steps
+
+# Create page
+create:
+    title: Create Steps
+    redirect: dma/friends/steps/update/:id
+    redirectClose: dma/friends/steps
+
+# Update page
+update:
+    title: Edit Steps
+    redirect: dma/friends/steps
+    redirectClose: dma/friends/steps
+
+# Preview page
+preview:
+    title: Preview Steps

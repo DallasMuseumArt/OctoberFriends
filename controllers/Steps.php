@@ -4,24 +4,22 @@ use BackendMenu;
 use Backend\Classes\Controller;
 
 /**
- * Badges Back-end Controller
+ * Steps Back-end Controller
  */
-class Badges extends Controller
+class Steps extends Controller
 {
     public $implement = [
         'Backend.Behaviors.FormController',
-        'Backend.Behaviors.ListController',
-        'Backend.Behaviors.RelationController',
+        'Backend.Behaviors.ListController'
     ];
 
     public $formConfig = 'config_form.yaml';
     public $listConfig = 'config_list.yaml';
-    public $relationConfig = 'config_relations.yaml';
 
     public function __construct()
     {
         parent::__construct();
 
-        BackendMenu::setContext('DMA.Friends', 'friends', 'badges');
+        BackendMenu::setContext('DMA.Friends', 'friends', 'steps');
     }
 }

@@ -100,29 +100,38 @@ class SyncFriendsRelationsCommand extends Command
 
             if ($from && $to) {
                 $table = 'dma_friends_' . $from_table . '_' . $to_table;
-            
-                $values = [
-                    $from_table . '_id'   => $from->id,
-                    $to_table . '_id'     => $to->id
-                ];
 
-                if (Schema::hasTable($table)) {
-                    DB::table($table)->insert($values);
-                    echo 'from: ' . $from->title . ' ----- ' . $to->title ."\n";
-                } else {
-                    echo 'table doesnt exist';
-                } 
+                switch($table) {
+                    case 'dma_friends_step_badge':
+                        $to->steps()->save($from);
+                        echo 'from: ' . $from->title . ' --|-|-- ' . $to->title ."\n";
+
+                    default:
+
+                        $values = [
+                            $from_table . '_id'   => $from->id,
+                            $to_table . '_id'     => $to->id
+                        ];
+
+                        if (Schema::hasTable($table)) {
+                            DB::table($table)->insert($values);
+                            echo 'from: ' . $from->title . ' ----- ' . $to->title ."\n";
+                        } else {
+                            echo 'table doesnt exist';
+                        } 
+
+                }
             }
         }
-
 
         // User achievements
         $achievements = $this->db->table('wp_usermeta')
             ->where('meta_key', '_badgeos_achievements')
             ->get();
 
+        $post = new Post;
+
         foreach ($achievements as $achievement) {
-            $post = new Post;
             $user = User::find($achievement->user_id);
 
             if (!$user) continue;
