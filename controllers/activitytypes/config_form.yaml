@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Activity Type
+
+# Model Form Field configuration
+form: @/plugins/dma/friends/models/activitytype/fields.yaml
+
+# Model Class name
+modelClass: DMA\Friends\Models\ActivityType
+
+# Default redirect location
+defaultRedirect: dma/friends/activitytypes
+
+# Create page
+create:
+    title: Create Activity Types
+    redirect: dma/friends/activitytypes/update/:id
+    redirectClose: dma/friends/activitytypes
+
+# Update page
+update:
+    title: Edit Activity Types
+    redirect: dma/friends/activitytypes
+    redirectClose: dma/friends/activitytypes
+
+# Preview page
+preview:
+    title: Preview Activity Types

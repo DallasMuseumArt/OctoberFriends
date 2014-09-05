@@ -33,6 +33,28 @@ class Plugin extends PluginBase
         ];
     }
 
+    public function registerSettings()
+    {
+        return [
+            'activityTypes' => [
+                'label' => 'Activity Types',
+                'description'   => 'Manage the activity types that are available to steps',
+                'category'      => 'Friends',
+                'icon'          => 'icon-square',
+                'url'           => Backend::url('dma/friends/activitytypes'),
+                'order'         => 0,
+            ],
+            'activityTriggerTypes' => [
+                'label' => 'Activity Trigger Types',
+                'description'   => 'Manage the activity trigger types that are available to steps',
+                'category'      => 'Friends',
+                'icon'          => 'icon-square',
+                'url'           => Backend::url('dma/friends/activitytriggertypes'),
+                'order'         => 0,
+            ],
+        ];
+    }
+
     public function registerNavigation()
     {
         return [

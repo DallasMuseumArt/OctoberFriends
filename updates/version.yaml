@@ -14,3 +14,7 @@
 1.0.3:
     - Create pivot tables
     - create_pivot_tables.php
+1.0.4:
+    - Add activity taxonomies 
+    - create_activity_types_table.php
+    - create_activity_trigger_types_table.php
