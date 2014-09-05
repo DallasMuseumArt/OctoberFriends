@@ -20,6 +20,6 @@ class Locations extends Controller
     {
         parent::__construct();
 
-        BackendMenu::setContext('DMA.Friends', 'friends', 'locations');
+        BackendMenu::setContext('October.System', 'system', 'settings');
     }
 }

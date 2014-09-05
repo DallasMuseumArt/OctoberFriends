@@ -36,13 +36,21 @@ class Plugin extends PluginBase
     public function registerSettings()
     {
         return [
+            'locations' => [
+                'label' => 'Locations',
+                'description'   => 'Manage the kiosk locations',
+                'category'      => 'Friends',
+                'icon'          => 'icon-location-arrow',
+                'url'           => Backend::url('dma/friends/locations'),
+                'order'         => 0,
+            ],  
             'activityTypes' => [
                 'label' => 'Activity Types',
                 'description'   => 'Manage the activity types that are available to steps',
                 'category'      => 'Friends',
                 'icon'          => 'icon-square',
                 'url'           => Backend::url('dma/friends/activitytypes'),
-                'order'         => 0,
+                'order'         => 10,
             ],
             'activityTriggerTypes' => [
                 'label' => 'Activity Trigger Types',
@@ -50,7 +58,7 @@ class Plugin extends PluginBase
                 'category'      => 'Friends',
                 'icon'          => 'icon-square',
                 'url'           => Backend::url('dma/friends/activitytriggertypes'),
-                'order'         => 0,
+                'order'         => 20,
             ],
         ];
     }
@@ -86,11 +94,6 @@ class Plugin extends PluginBase
                         'icon'      => 'icon-rocket',
                         'url'       => Backend::url('dma/friends/activitylogs'),
                     ],
-                    'locations'   => [
-                        'label'     => 'Locations',
-                        'icon'      => 'icon-location-arrow',
-                        'url'       => Backend::url('dma/friends/locations'),
-                    ], 
                     
                 ]
             ]
