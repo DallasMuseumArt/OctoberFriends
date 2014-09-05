@@ -31,19 +31,14 @@ class Activity extends Model
     /**
      * @var array Relations
      */
-    public $hasOne = [];
-    public $hasMany = [];
-    public $belongsTo = [];
     public $belongsToMany = [
-        'Step'
+        'steps'         => ['DMA\Friends\Models\Step'],
+        'types'         => ['DMA\Friends\Models\ActivityType', 'table' => 'dma_friends_activity_activity_types'],
+        'triggerTypes'  => ['DMA\Friends\Models\ActivityTriggerType', 'table' => 'dma_friends_activity_activity_trigger_types'],
     ];
-    public $morphTo = [];
-    public $morphOne = [];
-    public $morphMany = [];
     public $attachOne = [
         'image' => ['System\Models\File']
     ];
-    public $attachMany = [];
 
     public function scopefindWordpress($query, $id)
     {   

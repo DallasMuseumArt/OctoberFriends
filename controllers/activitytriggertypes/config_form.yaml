@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Activity Trigger Type
+
+# Model Form Field configuration
+form: @/plugins/dma/friends/models/activitytriggertype/fields.yaml
+
+# Model Class name
+modelClass: DMA\Friends\Models\ActivityTriggerType
+
+# Default redirect location
+defaultRedirect: dma/friends/activitytriggertypes
+
+# Create page
+create:
+    title: Create Activity Trigger Types
+    redirect: dma/friends/activitytriggertypes/update/:id
+    redirectClose: dma/friends/activitytriggertypes
+
+# Update page
+update:
+    title: Edit Activity Trigger Types
+    redirect: dma/friends/activitytriggertypes
+    redirectClose: dma/friends/activitytriggertypes
+
+# Preview page
+preview:
+    title: Preview Activity Trigger Types

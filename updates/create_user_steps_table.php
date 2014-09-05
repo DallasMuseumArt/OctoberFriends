@@ -25,7 +25,7 @@ class CreateUserStepsTable extends Migration
 
     public function down()
     {   
-        Schema::dropIfExists('dma_friends_step_badges');
+        Schema::dropIfExists('dma_friends_user_steps');
     }   
 
 }

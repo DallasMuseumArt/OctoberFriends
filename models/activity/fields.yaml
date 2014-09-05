@@ -37,6 +37,17 @@ secondaryTabs:
             span: left
             type: richeditor
             size: huge
+        types:
+            label: Types
+            type: relation
+            tab: Content
+            span: left
+        triggerTypes:
+            label: Trigger Types
+            type: relation
+            tab: Content
+            span: right
+        
         # ===================================
         #  Configuration tab 
         # ===================================
