@@ -46,12 +46,16 @@ secondaryTabs:
             type: richeditor
             size: huge
         # ===================================
-        #  Configuration tab 
+        #  Steps tab 
         # ===================================
         steps:
-            label: Required Steps
-            tab: Configuration
-            type: requiredsteps
+            tab: Steps 
+            context: update
+            type: partial
+            path: @/plugins/dma/friends/controllers/badges/_form_steps.htm
+        # ===================================
+        #  Configuration tab 
+        # ===================================
         points:
             label: Points
             description: Points earned when awarded this badge
@@ -153,4 +157,3 @@ secondaryTabs:
             tab: Publishing Options
             type: datepicker
             mode: datetime
-    

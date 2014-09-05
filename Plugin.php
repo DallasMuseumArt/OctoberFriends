@@ -86,12 +86,12 @@ class Plugin extends PluginBase
 
             $widget->addFields([
                 'metadata[first_name]' => [
-                    'label'         => 'First Name',
-                    'tab'           => 'Metadata',
+                    'label' => 'First Name',
+                    'tab'   => 'Metadata',
                 ],  
                 'metadata[last_name]' => [
-                    'label'         => 'Last Name',
-                    'tab'           => 'Metadata',
+                    'label' => 'Last Name',
+                    'tab'   => 'Metadata',
                 ], 
                 'metadata[points]' => [
                     'label' => 'Points',

@@ -3,6 +3,16 @@
 # ===================================
 
 fields:
-    id:
-        label: ID
-        disabled: true
+    title:
+        label: Title
+    achievement_type:
+        label: Achievement Type
+    count:
+        label: Count
+        type: number
+    trigger_type:
+        label: Trigger Type
+    unlock_options:
+        label: Unlock Options
+    trigger_unlock_badge:
+        label: Trigger Unlock Badge
