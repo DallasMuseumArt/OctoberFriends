@@ -7,6 +7,7 @@ An OctoberCMS implementation of friends
 
 * Download and complete the installation for October CMS (http://octobercms.com)
 * Extract this repository into plugins/dma/friends
+* In plugins/dma/friends folder run `composer install`. 
 * edit apps/config/database.php and add the following
 <pre>
         'friends_wordpress' => array(

@@ -1,0 +1,16 @@
+{
+    "name": "dma/friends",
+    "description": "A platform for users to earn badges and redeem rewards",
+    "homepage": "http://www.dma.org",
+    "keywords": ["october", "cms", "friends", "fractal"],
+    "authors": [
+        {
+            "name": "Dallas Museum of Art",
+            "email": "dev@dma.org"
+        }
+    ],
+
+    "require": {
+    	"ellipsesynergie/api-response": "0.5.*"
+    }
+}

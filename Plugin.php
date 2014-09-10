@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Event;
 use Rainlab\User\Models\User as User;
 use System\Classes\PluginBase;
 
+use App;
+use Illuminate\Foundation\AliasLoader;
+
 /**
  * Friends Plugin Information File
  */
@@ -102,6 +105,9 @@ class Plugin extends PluginBase
 
     public function boot()
     {
+    	// Register ServiceProviders
+    	App::register('\EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider');
+    	
         // Extend the user model to support our custom metadata
         User::extend(function($model) {
             $model->hasOne['metadata']      = ['DMA\Friends\Models\Usermeta'];
@@ -176,7 +182,8 @@ class Plugin extends PluginBase
                     'label' => 'Zip',
                 ],
             ]); 
-        }); 
+        });
+
     }
 
     public function registerFormWidgets()
