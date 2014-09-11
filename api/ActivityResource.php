@@ -4,7 +4,7 @@ use Model;
 
 class ActivityResource extends BaseResource {
 
-	protected $pageSize    = 2;
+	#protected $pageSize    = 2;
 	protected $model 	   = '\DMA\Friends\Models\Activity';
 	protected $transformer = '\DMA\Friends\Api\ActivityTransformer';
 
