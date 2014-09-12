@@ -107,6 +107,7 @@ class Plugin extends PluginBase
     {
     	// Register ServiceProviders
     	App::register('\EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider');
+        App::register('DMA\Friends\FriendsServiceProvider');
     	
         // Extend the user model to support our custom metadata
         User::extend(function($model) {
