@@ -4,7 +4,7 @@ use Backend;
 use Illuminate\Support\Facades\Event;
 use Rainlab\User\Models\User as User;
 use System\Classes\PluginBase;
-
+use DMA\Friends\Classes\FriendsEventHandler;
 use App;
 use Illuminate\Foundation\AliasLoader;
 
@@ -108,6 +108,10 @@ class Plugin extends PluginBase
     	// Register ServiceProviders
     	App::register('\EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider');
         App::register('DMA\Friends\FriendsServiceProvider');
+
+        // Register Event Subscribers
+        $subscriber = new FriendsEventHandler;
+        Event::subscribe($subscriber);
     	
         // Extend the user model to support our custom metadata
         User::extend(function($model) {
