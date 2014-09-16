@@ -5,8 +5,12 @@
     "keywords": ["october", "cms", "friends", "fractal"],
     "authors": [
         {
-            "name": "Dallas Museum of Art",
-            "email": "dev@dma.org"
+            "name": "Kristen Arnold",
+            "email": "karnold@dma.org"
+        },
+        {
+            "name": "Carlos Arroyo",
+            "email": "Carlos.Arroyo@dma.org",
         }
     ],
 
