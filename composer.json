@@ -10,11 +10,12 @@
         },
         {
             "name": "Carlos Arroyo",
-            "email": "Carlos.Arroyo@dma.org",
+            "email": "Carlos.Arroyo@dma.org"
         }
     ],
 
     "require": {
-    	"ellipsesynergie/api-response": "0.5.*"
+        "ellipsesynergie/api-response": "0.5.*",
+        "league/factory-muffin": "~2.0"
     }
 }

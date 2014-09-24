@@ -25,19 +25,24 @@ class ActivityLog extends Model
      */
     protected $fillable = [];
 
+    public static $actionTypes = [
+        'activity',
+        'artwork',
+        'points',
+        'reward',
+        'unlocked',
+    ];
+
     /**
      * @var array Relations
      */
-    public $hasOne = [];
-    public $hasMany = [];
     public $belongsTo = [
         'User' => '\RainLab\User\Model\User'
     ];
-    public $belongsToMany = [];
-    public $morphTo = [];
-    public $morphOne = [];
-    public $morphMany = [];
-    public $attachOne = [];
-    public $attachMany = [];
+
+    // TODO: add morphing relationship to all object types that can be associated with a log entry
+    public $morphTo = [
+        'object',
+    ];
 
 }

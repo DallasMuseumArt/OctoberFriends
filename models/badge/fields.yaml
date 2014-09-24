@@ -6,6 +6,7 @@ fields:
     title:
         label: Title
         placeholder: Badge title
+        required: true
     toolbar:
         type: partial
         path: @/plugins/dma/friends/partials/_content_toolbar.htm

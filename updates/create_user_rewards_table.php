@@ -3,7 +3,7 @@
 use Schema;
 use October\Rain\Database\Updates\Migration;
 
-class CreateDmaFriendsStepUserTable extends Migration {
+class CreateDmaFriendsRewardUserTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,11 +12,11 @@ class CreateDmaFriendsStepUserTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('dma_friends_step_user', function($table)
+		Schema::create('dma_friends_reward_user', function($table)
 		{
 			$table->increments('id');
-			$table->integer('step_id')->unsigned()->index();
-			$table->foreign('step_id')->references('id')->on('dma_friends_steps')->onDelete('cascade');
+			$table->integer('reward_id')->unsigned()->index();
+			$table->foreign('reward_id')->references('id')->on('dma_friends_rewards')->onDelete('cascade');
 			$table->integer('user_id')->unsigned()->index();
 			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 			$table->timestamps();
@@ -31,7 +31,7 @@ class CreateDmaFriendsStepUserTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('dma_friends_step_user');
+		Schema::drop('dma_friends_reward_user');
 	}
 
 }

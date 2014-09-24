@@ -1,7 +1,8 @@
 <?php namespace DMA\Friends\Models;
 
 use Model;
-use DMA\Friends\Models\Step;
+//use DMA\Friends\Models\Step;
+//use RainLab\User\Models\User;
 
 /**
  * Badge Model
@@ -19,29 +20,29 @@ class Badge extends Model
      */
     protected $guarded = ['*'];
 
-    protected $dates = ['date_begin', 'date_end'];
-
     /**
      * @var array Fillable fields
      */
-    protected $fillable = [];
+    protected $fillable = ['touch'];
+
+    protected $dates = ['date_begin', 'date_end'];
+
+    public $rules = [ 
+        'title' => 'required',
+    ]; 
 
     /**
      * @var array Relations
      */
-    public $hasOne = [];
     public $hasMany = [
-        'steps' => 'DMA\Friends\Models\Step'
+        'steps' => ['DMA\Friends\Models\Step'],
     ];
-    public $belongsTo = [];
-    public $belongsToMany = [];
-    public $morphTo = [];
-    public $morphOne = [];
-    public $morphMany = [];
+    public $belongsToMany = [
+        'users' => ['RainLab\User\Models\User', 'dma_friends_badge_user'],
+    ];
     public $attachOne = [
         'image' => ['System\Models\File']
     ];
-    public $attachMany = [];
 
     public function scopefindWordpress($query, $id)
     {   

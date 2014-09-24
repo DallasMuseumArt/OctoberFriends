@@ -13,6 +13,7 @@ class CreateStepsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->timestamps();
+            $table->boolean('touch');
             $table->string('title');
             $table->integer('wordpress_id');
             $table->integer('badge_id');

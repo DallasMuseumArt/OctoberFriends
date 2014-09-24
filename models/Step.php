@@ -21,22 +21,18 @@ class Step extends Model
     /**
      * @var array Fillable fields
      */
-    protected $fillable = [];
+    protected $fillable = ['touch'];
 
     /**
      * @var array Relations
      */
-    public $hasOne = [];
     public $hasMany = [
         'Activity',
     ];
-    public $belongsTo = [];
-    public $belongsToMany = [];
-    public $morphTo = [];
-    public $morphOne = [];
-    public $morphMany = [];
-    public $attachOne = [];
-    public $attachMany = [];
+
+    public $belongsToMany = [
+        'users' => ['Rainlab\User\Models\User', 'dma_friends_step_user'],
+    ];
 
     public function scopefindWordpress($query, $id)
     {

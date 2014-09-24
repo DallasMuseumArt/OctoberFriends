@@ -1,20 +1,20 @@
 <?php namespace DMA\Friends\Models;
 
 use Model;
+use Str;
 
 /**
  * ActivityType Model
  */
 class ActivityType extends Model
 {
-    use \October\Rain\Database\Traits\Sluggable;
+    use \October\Rain\Database\Traits\Validation;
 
     /**
      * @var string The database table used by the model.
      */
     public $table = 'dma_friends_activity_types';
     public $timestamps = false;
-    public $slugs = ['slug' => 'name'];
 
     public $rules = [ 
         'name' => 'required',
@@ -31,19 +31,17 @@ class ActivityType extends Model
      */
     protected $fillable = [];
 
+    public function beforeValidate()
+    {   
+        // Generate a URL slug for this model
+        if (!$this->exists && !$this->slug)
+            $this->slug = Str::slug($this->name);
+    } 
+
     /**
      * @var array Relations
      */
-    public $hasOne = [];
     public $hasMany = [
         'activities'    => ['DMA\Friends\Models\Activity'],
     ];
-    public $belongsTo = [];
-    public $belongsToMany = [];
-    public $morphTo = [];
-    public $morphOne = [];
-    public $morphMany = [];
-    public $attachOne = [];
-    public $attachMany = [];
-
 }

@@ -21,12 +21,16 @@ class Activity extends Model
      */
     protected $guarded = ['*'];
 
-    protected $dates = ['date_begin', 'date_end'];
-
     /**
      * @var array Fillable fields
      */
     protected $fillable = [];
+
+    protected $dates = ['date_begin', 'date_end'];
+
+    public $rules = [ 
+        'title' => 'required',
+    ]; 
 
     /**
      * @var array Relations
@@ -34,7 +38,7 @@ class Activity extends Model
     public $belongsToMany = [
         'steps'         => ['DMA\Friends\Models\Step'],
         'types'         => ['DMA\Friends\Models\ActivityType', 'table' => 'dma_friends_activity_activity_types'],
-        'triggerTypes'  => ['DMA\Friends\Models\ActivityTriggerType', 'table' => 'dma_friends_activity_activity_trigger_types'],
+        'triggerTypes'  => ['DMA\Friends\Models\ActivityTriggerType', 'table' => 'dma_friends_activity_activity_trigger_type'],
     ];
     public $attachOne = [
         'image' => ['System\Models\File']
