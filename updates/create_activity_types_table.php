@@ -28,7 +28,7 @@ class CreateActivityTypesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('dma_friends_activity_types');
-        Schema::dropIfExists('dma_friends_activity_activity_type');
+        Schema::dropIfExists('dma_friends_activity_activity_types');
     }
 
 }

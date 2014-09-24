@@ -18,26 +18,25 @@ class Reward extends Model
      */
     protected $guarded = ['*'];
 
-    protected $dates = ['date_begin', 'date_end'];
-
     /**
      * @var array Fillable fields
      */
-    protected $fillable = [];
+    protected $fillable = ['touch'];
+
+    protected $dates = ['date_begin', 'date_end'];
+
+    public $rules = [ 
+        'title' => 'required',
+    ];  
 
     /**
      * @var array Relations
      */
-    public $hasOne = [];
-    public $hasMany = [];
-    public $belongsTo = [];
-    public $belongsToMany = [];
-    public $morphTo = [];
-    public $morphOne = [];
-    public $morphMany = [];
+    public $belongsToMany = [
+        'users' => ['Rainlab\User\Models\User', 'dma_friends_reward_user'],
+    ];
     public $attachOne = [
         'image' => ['System\Models\File']
     ];
-    public $attachMany = [];
 
 }

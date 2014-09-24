@@ -8,24 +8,24 @@ class CreateUserBadgesTable extends Migration
 
     public function up()
     {   
-        Schema::create('dma_friends_user_badges', function($table)
-        {   
-            $table->engine = 'InnoDB';
-            $table->increments('id');
-            $table->timestamps();
-            $table->integer('user_id');
-            $table->integer('badge_id');
-            $table->integer('location_id');
 
-            $table->index('user_id');
-            $table->index('badge_id');
-            $table->index('location_id');
+        Schema::create('dma_friends_badge_user', function($table)
+        {   
+            $table->increments('id');
+            $table->integer('badge_id')->unsigned()->index();
+            //$table->foreign('badge_id')->references('id')->on('dma_friends_badges')->onDelete('cascade');
+            $table->integer('user_id')->unsigned()->index();
+            //$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('location_id')->unsigned()->index();
+            $table->timestamps();
         }); 
+
     }   
 
     public function down()
     {   
-        Schema::dropIfExists('dma_friends_user_badges');
+ //       Schema::dropIfExists('dma_friends_user_badges');
+        Schema::dropIfExists('dma_friends_badge_user');
     }   
 
 }

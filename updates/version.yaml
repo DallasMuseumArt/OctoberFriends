@@ -11,6 +11,7 @@
     - Create relations between content types
     - create_user_badges_table.php
     - create_user_steps_table.php
+    - create_user_rewards_table.php 
 1.0.3:
     - Create pivot tables
     - create_pivot_tables.php

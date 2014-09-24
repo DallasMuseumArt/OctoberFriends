@@ -13,6 +13,7 @@ class CreateRewardsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->timestamps();
+            $table->boolean('touch');
             $table->integer('wordpress_id');
             $table->string('title');
             $table->text('description')->nullable();
