@@ -43,7 +43,7 @@ class Reward extends Model
     ];
 
     public $morphMany = [ 
-        'activityLogs'  => ['DMA\Friends\Models\ActivityLog', 'name' => 'reward'],
+        'activityLogs'  => ['DMA\Friends\Models\ActivityLog', 'name' => 'object'],
     ];
 
 }
