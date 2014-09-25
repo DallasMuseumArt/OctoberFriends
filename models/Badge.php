@@ -47,7 +47,7 @@ class Badge extends Model
     ];
 
     public $morphMany = [
-        'activityLogs'  => ['DMA\Friends\Models\ActivityLog', 'name' => 'badge'],
+        'activityLogs'  => ['DMA\Friends\Models\ActivityLog', 'name' => 'object'],
     ];
 
     public function scopefindWordpress($query, $id)

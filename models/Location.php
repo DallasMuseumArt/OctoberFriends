@@ -29,7 +29,7 @@ class Location extends Model
      * @var array Relations
      */
     public $morphMany = [ 
-        'activityLogs'  => ['DMA\Friends\Models\ActivityLog', 'name' => 'location'],
+        'activityLogs'  => ['DMA\Friends\Models\ActivityLog', 'name' => 'object'],
     ];
 
     public function scopefindWordpress($query, $id)

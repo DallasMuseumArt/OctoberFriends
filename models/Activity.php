@@ -49,7 +49,7 @@ class Activity extends Model
     ];
 
     public $morphMany = [ 
-        'activityLogs'  => ['DMA\Friends\Models\ActivityLog', 'name' => 'activity'],
+        'activityLogs'  => ['DMA\Friends\Models\ActivityLog', 'name' => 'object'],
     ];
 
     public function scopefindWordpress($query, $id)
