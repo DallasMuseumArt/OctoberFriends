@@ -7,6 +7,9 @@ use Model;
  */
 class Activity extends Model
 {
+
+    use \October\Rain\Database\Traits\Validation;
+
     const TIME_RESTRICT_NONE    = 0;
     const TIME_RESTRICT_HOURS   = 1;
     const TIME_RESTRICT_DAYS    = 2;
@@ -40,8 +43,13 @@ class Activity extends Model
         'types'         => ['DMA\Friends\Models\ActivityType', 'table' => 'dma_friends_activity_activity_types'],
         'triggerTypes'  => ['DMA\Friends\Models\ActivityTriggerType', 'table' => 'dma_friends_activity_activity_trigger_type'],
     ];
+
     public $attachOne = [
         'image' => ['System\Models\File']
+    ];
+
+    public $morphMany = [ 
+        'activityLogs'  => ['DMA\Friends\Models\ActivityLog'],
     ];
 
     public function scopefindWordpress($query, $id)
