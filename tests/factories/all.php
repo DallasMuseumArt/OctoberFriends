@@ -2,7 +2,7 @@
 
 use \Str as Str;
 use League\FactoryMuffin\Facade as FactoryMuffin;
-use DMA\Friends\Models\ActivityType as ActivityType;
+use DMA\Friends\Models\ActivityLog;
 use RainLab\User\Models\Country;
 use RainLab\User\Models\State;
 
@@ -25,17 +25,22 @@ FactoryMuffin::define('DMA\Friends\Models\Activity', [
 
 FactoryMuffin::define('DMA\Friends\Models\ActivityLog', [
     'user_id'           => 'factory|RainLab\User\Models\User',
+    //'action'            => 'in:activity,artwork,points,reward,unlocked',
     'action'            => function($object, $saved) {
-        $rand = rand(0, 3);
-        $types = ActivityType::actionTypes;
+        $activityLog = new ActivityLog();
+        $types = $activityLog->actionTypes;
+
+        $rand = rand(0, count($types)-1);
+
         return $types[$rand];
     },
-    'message'           => 'sentence',
+    'message'           => 'text',
     'object_type'       => 'optional:randomLetter|3',
     'object_id'         => 'optional:randomDigit',
     'points_earned'     => 'randomNumber',
     'total_points'      => 'randomNumber',
     'timestamp'         => 'dateTime|now',
+    'timezone'          => 'timezone',
 ]);
 
 FactoryMuffin::define('DMA\Friends\Models\ActivityTriggerType', [

@@ -10,6 +10,8 @@ use Model;
 class Badge extends Model
 {
 
+    use \October\Rain\Database\Traits\Validation;
+
     /**
      * @var string The database table used by the model.
      */
@@ -42,6 +44,10 @@ class Badge extends Model
     ];
     public $attachOne = [
         'image' => ['System\Models\File']
+    ];
+
+    public $morphMany = [
+        'activityLogs'  => ['DMA\Friends\Models\ActivityLog'],
     ];
 
     public function scopefindWordpress($query, $id)

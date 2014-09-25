@@ -16,7 +16,7 @@ class CreateActivityLogsTable extends Migration
             $table->string('site_id')->nullable();
             $table->string('action');
             $table->longText('message');
-            $table->string('object_type');
+            $table->string('object_type')->nullable();
             $table->integer('object_id')->nullable();
             $table->string('artwork_id')->nullable();
             $table->string('wordpress_object_id')->default('')->nullable();

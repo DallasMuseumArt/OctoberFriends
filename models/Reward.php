@@ -8,6 +8,8 @@ use Model;
 class Reward extends Model
 {
 
+    use \October\Rain\Database\Traits\Validation;
+
     /**
      * @var string The database table used by the model.
      */
@@ -35,8 +37,13 @@ class Reward extends Model
     public $belongsToMany = [
         'users' => ['Rainlab\User\Models\User', 'dma_friends_reward_user'],
     ];
+
     public $attachOne = [
         'image' => ['System\Models\File']
+    ];
+
+    public $morphMany = [ 
+        'activityLogs'  => ['DMA\Friends\Models\ActivityLog'],
     ];
 
 }

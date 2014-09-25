@@ -8,6 +8,8 @@ use Model;
 class Step extends Model
 {
 
+    use \October\Rain\Database\Traits\Validation;
+
     /**
      * @var string The database table used by the model.
      */
@@ -23,6 +25,10 @@ class Step extends Model
      */
     protected $fillable = ['touch'];
 
+    public $rules = [
+        'title' => 'required',
+    ];
+
     /**
      * @var array Relations
      */
@@ -32,6 +38,10 @@ class Step extends Model
 
     public $belongsToMany = [
         'users' => ['Rainlab\User\Models\User', 'dma_friends_step_user'],
+    ];
+
+    public $morphMany = [ 
+        'activityLogs'  => ['DMA\Friends\Models\ActivityLog'],
     ];
 
     public function scopefindWordpress($query, $id)

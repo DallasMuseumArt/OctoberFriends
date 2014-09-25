@@ -8,6 +8,8 @@ use Model;
 class ActivityLog extends Model
 {
 
+    use \October\Rain\Database\Traits\Validation;
+
     /**
      * @var string The database table used by the model.
      */
@@ -25,7 +27,20 @@ class ActivityLog extends Model
      */
     protected $fillable = [];
 
-    public static $actionTypes = [
+    protected $rules = [
+        'message'       => 'min:10',
+        'action'        => 'required|in:activity,artwork,points,reward,unlocked',
+        'user_id'       => 'required|numeric',  
+        'points_earned' => 'numeric',
+        'total_points'  => 'numeric',
+        'timestamp'     => 'required',
+        'timezone'      => 'required|timezone',
+    ];
+
+    /**
+     * The list of acceptable action types
+     */
+    public $actionTypes = [
         'activity',
         'artwork',
         'points',
@@ -40,7 +55,6 @@ class ActivityLog extends Model
         'User' => '\RainLab\User\Model\User'
     ];
 
-    // TODO: add morphing relationship to all object types that can be associated with a log entry
     public $morphTo = [
         'object',
     ];
