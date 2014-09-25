@@ -69,7 +69,6 @@ class ActivityLogModelTest extends MuffinCase
         foreach($object_types as $object) {
             $activityLog = FactoryMuffin::create('DMA\Friends\Models\ActivityLog');
             $object->activityLogs()->save($activityLog);
-var_dump($object->activityLogs);
         }
 
     }
