@@ -27,7 +27,13 @@ class ActivityLog extends Post
             ->limit($limit)
             ->get();
 
+        // Use dummy model to get action types
+        $l = new $this->model;
+
         foreach ($wordpressLogs as $wlog) {
+
+            if (!in_array($wlog->action, $l->actionTypes)) continue;
+
             $log                = new $this->model;
             $log->id            = $wlog->id;
             $log->site_id       = $wlog->site_id;
