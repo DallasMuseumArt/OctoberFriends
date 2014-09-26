@@ -1,0 +1,68 @@
+\hypertarget{classDMA_1_1Friends_1_1Updates_1_1CreateDmaFriendsRewardUserTable}{\section{D\-M\-A\textbackslash{}Friends\textbackslash{}Updates\textbackslash{}Create\-Dma\-Friends\-Reward\-User\-Table Class Reference}
+\label{classDMA_1_1Friends_1_1Updates_1_1CreateDmaFriendsRewardUserTable}\index{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Updates\textbackslash{}\-Create\-Dma\-Friends\-Reward\-User\-Table@{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Updates\textbackslash{}\-Create\-Dma\-Friends\-Reward\-User\-Table}}
+}
+Inheritance diagram for D\-M\-A\textbackslash{}Friends\textbackslash{}Updates\textbackslash{}Create\-Dma\-Friends\-Reward\-User\-Table\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{df/d5f/classDMA_1_1Friends_1_1Updates_1_1CreateDmaFriendsRewardUserTable}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Updates_1_1CreateDmaFriendsRewardUserTable_a96367069b6a28f3f45c830e3cf6071c8}{up} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Updates_1_1CreateDmaFriendsRewardUserTable_a61c56eee1750718dacc2735854749121}{down} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Updates_1_1CreateDmaFriendsRewardUserTable_a61c56eee1750718dacc2735854749121}{\index{D\-M\-A\-::\-Friends\-::\-Updates\-::\-Create\-Dma\-Friends\-Reward\-User\-Table@{D\-M\-A\-::\-Friends\-::\-Updates\-::\-Create\-Dma\-Friends\-Reward\-User\-Table}!down@{down}}
+\index{down@{down}!DMA::Friends::Updates::CreateDmaFriendsRewardUserTable@{D\-M\-A\-::\-Friends\-::\-Updates\-::\-Create\-Dma\-Friends\-Reward\-User\-Table}}
+\subsubsection[{down}]{\setlength{\rightskip}{0pt plus 5cm}D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Updates\textbackslash{}\-Create\-Dma\-Friends\-Reward\-User\-Table\-::down (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Updates_1_1CreateDmaFriendsRewardUserTable_a61c56eee1750718dacc2735854749121}
+Reverse the migrations.
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+33     \{
+34         Schema::drop(\textcolor{stringliteral}{'dma\_friends\_reward\_user'});
+35     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Updates_1_1CreateDmaFriendsRewardUserTable_a96367069b6a28f3f45c830e3cf6071c8}{\index{D\-M\-A\-::\-Friends\-::\-Updates\-::\-Create\-Dma\-Friends\-Reward\-User\-Table@{D\-M\-A\-::\-Friends\-::\-Updates\-::\-Create\-Dma\-Friends\-Reward\-User\-Table}!up@{up}}
+\index{up@{up}!DMA::Friends::Updates::CreateDmaFriendsRewardUserTable@{D\-M\-A\-::\-Friends\-::\-Updates\-::\-Create\-Dma\-Friends\-Reward\-User\-Table}}
+\subsubsection[{up}]{\setlength{\rightskip}{0pt plus 5cm}D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Updates\textbackslash{}\-Create\-Dma\-Friends\-Reward\-User\-Table\-::up (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Updates_1_1CreateDmaFriendsRewardUserTable_a96367069b6a28f3f45c830e3cf6071c8}
+Run the migrations.
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+14     \{
+15         Schema::create(\textcolor{stringliteral}{'dma\_friends\_reward\_user'}, \textcolor{keyword}{function}($table)
+16         \{
+17             $table->increments(\textcolor{stringliteral}{'id'});
+18             $table->integer(\textcolor{stringliteral}{'reward\_id'})->unsigned()->index();
+19             $table->foreign(\textcolor{stringliteral}{'reward\_id'})->references(\textcolor{stringliteral}{'id'})->on(\textcolor{stringliteral}{'dma\_friends\_rewards'})->onDelete(\textcolor{stringliteral}{'cascade'});
+20             $table->integer(\textcolor{stringliteral}{'user\_id'})->unsigned()->index();
+21             $table->foreign(\textcolor{stringliteral}{'user\_id'})->references(\textcolor{stringliteral}{'id'})->on(\textcolor{stringliteral}{'users'})->onDelete(\textcolor{stringliteral}{'cascade'});
+22             $table->timestamps();
+23         \});
+24     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+updates/create\-\_\-user\-\_\-rewards\-\_\-table.\-php\end{DoxyCompactItemize}

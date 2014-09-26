@@ -1,0 +1,209 @@
+\hypertarget{classDMA_1_1Friends_1_1Api_1_1BaseResource}{\section{D\-M\-A\textbackslash{}Friends\textbackslash{}Api\textbackslash{}Base\-Resource Class Reference}
+\label{classDMA_1_1Friends_1_1Api_1_1BaseResource}\index{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Api\textbackslash{}\-Base\-Resource@{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Api\textbackslash{}\-Base\-Resource}}
+}
+Inheritance diagram for D\-M\-A\textbackslash{}Friends\textbackslash{}Api\textbackslash{}Base\-Resource\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=10.000000cm]{d9/dda/classDMA_1_1Friends_1_1Api_1_1BaseResource}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Api_1_1BaseResource_add87ebd329590ef27490fe6b8ea6f418}{index} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Api_1_1BaseResource_a2e62ea3d73fab798a5319189b1d134e0}{create} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Api_1_1BaseResource_a20877c85a440ce26e121a29b8fb91510}{store} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Api_1_1BaseResource_a5ac5d4fb30ec5434fd685e044c357f97}{show} (\$id)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Api_1_1BaseResource_a9421c137919875aaf69b0192cec0737d}{edit} (\$id)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Api_1_1BaseResource_a67477f34c9c2d79ef575695c6c426b24}{update} (\$id)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Api_1_1BaseResource_a630d3565e6fbec6faff59d8ab79e1e75}{destroy} (\$id)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Api_1_1BaseResource_a2aa14e2ae1346c66fa1522287bd328fc}{{\bfseries \$model}}\label{classDMA_1_1Friends_1_1Api_1_1BaseResource_a2aa14e2ae1346c66fa1522287bd328fc}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Api_1_1BaseResource_a2634555f8e0ebf608e538b0d384e0ecd}{{\bfseries \$transformer} = '\hyperlink{classDMA_1_1Friends_1_1Api_1_1BaseTransformer}{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Api\textbackslash{}\-Base\-Transformer}'}\label{classDMA_1_1Friends_1_1Api_1_1BaseResource_a2634555f8e0ebf608e538b0d384e0ecd}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Api_1_1BaseResource_ac80a10cf9b84009e739d05a502cd3ac8}{{\bfseries \$page\-Size} = 50}\label{classDMA_1_1Friends_1_1Api_1_1BaseResource_ac80a10cf9b84009e739d05a502cd3ac8}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Api_1_1BaseResource_a2e62ea3d73fab798a5319189b1d134e0}{\index{D\-M\-A\-::\-Friends\-::\-Api\-::\-Base\-Resource@{D\-M\-A\-::\-Friends\-::\-Api\-::\-Base\-Resource}!create@{create}}
+\index{create@{create}!DMA::Friends::Api::BaseResource@{D\-M\-A\-::\-Friends\-::\-Api\-::\-Base\-Resource}}
+\subsubsection[{create}]{\setlength{\rightskip}{0pt plus 5cm}D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Api\textbackslash{}\-Base\-Resource\-::create (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Api_1_1BaseResource_a2e62ea3d73fab798a5319189b1d134e0}
+Show the form for creating a new item
+
+\begin{DoxyReturn}{Returns}
+Response 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+62     \{
+63         \textcolor{keywordflow}{return} $this->errorForbidden();
+64     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Api_1_1BaseResource_a630d3565e6fbec6faff59d8ab79e1e75}{\index{D\-M\-A\-::\-Friends\-::\-Api\-::\-Base\-Resource@{D\-M\-A\-::\-Friends\-::\-Api\-::\-Base\-Resource}!destroy@{destroy}}
+\index{destroy@{destroy}!DMA::Friends::Api::BaseResource@{D\-M\-A\-::\-Friends\-::\-Api\-::\-Base\-Resource}}
+\subsubsection[{destroy}]{\setlength{\rightskip}{0pt plus 5cm}D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Api\textbackslash{}\-Base\-Resource\-::destroy (
+\begin{DoxyParamCaption}
+\item[{}]{\$id}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Api_1_1BaseResource_a630d3565e6fbec6faff59d8ab79e1e75}
+Remove the specified item from storage.
+
+
+\begin{DoxyParams}[1]{Parameters}
+int & {\em \$id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Response 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+125     \{
+126         \textcolor{keywordflow}{return} Response::api()->errorForbidden();
+127 
+128     \}   
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Api_1_1BaseResource_a9421c137919875aaf69b0192cec0737d}{\index{D\-M\-A\-::\-Friends\-::\-Api\-::\-Base\-Resource@{D\-M\-A\-::\-Friends\-::\-Api\-::\-Base\-Resource}!edit@{edit}}
+\index{edit@{edit}!DMA::Friends::Api::BaseResource@{D\-M\-A\-::\-Friends\-::\-Api\-::\-Base\-Resource}}
+\subsubsection[{edit}]{\setlength{\rightskip}{0pt plus 5cm}D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Api\textbackslash{}\-Base\-Resource\-::edit (
+\begin{DoxyParamCaption}
+\item[{}]{\$id}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Api_1_1BaseResource_a9421c137919875aaf69b0192cec0737d}
+Show the form for editing the specified item.
+
+
+\begin{DoxyParams}[1]{Parameters}
+int & {\em \$id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Response 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+102     \{
+103         \textcolor{keywordflow}{return} Response::api()->errorForbidden();
+104     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Api_1_1BaseResource_add87ebd329590ef27490fe6b8ea6f418}{\index{D\-M\-A\-::\-Friends\-::\-Api\-::\-Base\-Resource@{D\-M\-A\-::\-Friends\-::\-Api\-::\-Base\-Resource}!index@{index}}
+\index{index@{index}!DMA::Friends::Api::BaseResource@{D\-M\-A\-::\-Friends\-::\-Api\-::\-Base\-Resource}}
+\subsubsection[{index}]{\setlength{\rightskip}{0pt plus 5cm}D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Api\textbackslash{}\-Base\-Resource\-::index (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Api_1_1BaseResource_add87ebd329590ef27490fe6b8ea6f418}
+Display a listing of items
+
+\begin{DoxyReturn}{Returns}
+Response 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+46     \{
+47         $model = $this->getModel();
+48         \textcolor{keywordflow}{if} ($this->pageSize > 0)\{
+49             $paginator = $model->paginate($this->pageSize);
+50             \textcolor{keywordflow}{return} Response::api()->withPaginator(\textcolor{keyword}{new} IlluminatePaginatorAdapter($paginator), \textcolor{keyword}{new} $this->
+      transformer);
+51         \}\textcolor{keywordflow}{else}\{
+52             \textcolor{keywordflow}{return} Response::api()->withCollection($model->all(), \textcolor{keyword}{new} $this->transformer);
+53         \}
+54     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Api_1_1BaseResource_a5ac5d4fb30ec5434fd685e044c357f97}{\index{D\-M\-A\-::\-Friends\-::\-Api\-::\-Base\-Resource@{D\-M\-A\-::\-Friends\-::\-Api\-::\-Base\-Resource}!show@{show}}
+\index{show@{show}!DMA::Friends::Api::BaseResource@{D\-M\-A\-::\-Friends\-::\-Api\-::\-Base\-Resource}}
+\subsubsection[{show}]{\setlength{\rightskip}{0pt plus 5cm}D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Api\textbackslash{}\-Base\-Resource\-::show (
+\begin{DoxyParamCaption}
+\item[{}]{\$id}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Api_1_1BaseResource_a5ac5d4fb30ec5434fd685e044c357f97}
+Display the specified item.
+
+
+\begin{DoxyParams}[1]{Parameters}
+int & {\em \$id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Response 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+83     \{
+84         \textcolor{keywordflow}{try} \{
+85             $model = $this->getModel();
+86             $instance = $model->findOrFail($id);    
+87             \textcolor{keywordflow}{return} Response::api()->withItem($instance, \textcolor{keyword}{new} $this->transformer);
+88         \}\textcolor{keywordflow}{catch}(ModelNotFoundException $e) \{
+89             \textcolor{keywordflow}{return} Response::api()->errorNotFound();
+90         \}\textcolor{keywordflow}{catch}(Exception $e)\{
+91             \textcolor{keywordflow}{return} Response::api()->errorInternalError();
+92         \}
+93     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Api_1_1BaseResource_a20877c85a440ce26e121a29b8fb91510}{\index{D\-M\-A\-::\-Friends\-::\-Api\-::\-Base\-Resource@{D\-M\-A\-::\-Friends\-::\-Api\-::\-Base\-Resource}!store@{store}}
+\index{store@{store}!DMA::Friends::Api::BaseResource@{D\-M\-A\-::\-Friends\-::\-Api\-::\-Base\-Resource}}
+\subsubsection[{store}]{\setlength{\rightskip}{0pt plus 5cm}D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Api\textbackslash{}\-Base\-Resource\-::store (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Api_1_1BaseResource_a20877c85a440ce26e121a29b8fb91510}
+Store a newly created item in storage.
+
+\begin{DoxyReturn}{Returns}
+Response 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+72     \{
+73         \textcolor{keywordflow}{return} $this->errorForbidden();
+74     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Api_1_1BaseResource_a67477f34c9c2d79ef575695c6c426b24}{\index{D\-M\-A\-::\-Friends\-::\-Api\-::\-Base\-Resource@{D\-M\-A\-::\-Friends\-::\-Api\-::\-Base\-Resource}!update@{update}}
+\index{update@{update}!DMA::Friends::Api::BaseResource@{D\-M\-A\-::\-Friends\-::\-Api\-::\-Base\-Resource}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Api\textbackslash{}\-Base\-Resource\-::update (
+\begin{DoxyParamCaption}
+\item[{}]{\$id}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Api_1_1BaseResource_a67477f34c9c2d79ef575695c6c426b24}
+Update the specified item in storage.
+
+
+\begin{DoxyParams}[1]{Parameters}
+int & {\em \$id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Response 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+113     \{
+114         \textcolor{keywordflow}{return} Response::api()->errorForbidden();
+115 
+116     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+api/Base\-Resource.\-php\end{DoxyCompactItemize}

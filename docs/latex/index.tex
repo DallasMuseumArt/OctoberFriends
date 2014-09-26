@@ -1,0 +1,35 @@
+An October\-C\-M\-S implementation of friends
+
+\section*{Installation}
+
+
+\begin{DoxyItemize}
+\item Install the Rainlab \char`\"{}\-User\char`\"{} Plugin
+\item Enable the \char`\"{}\-Friends\char`\"{} Plugin
+\end{DoxyItemize}
+
+\subsection*{Wordpress Migrations}
+
+If you are migrating from a wordpress installation of friends you will also need to provide database configuration in order to migrate your data
+
+
+\begin{DoxyItemize}
+\item Download and complete the installation for October C\-M\-S (\href{http://octobercms.com}{\tt http\-://octobercms.\-com})
+\item Extract this repository into plugins/dma/friends
+\item In plugins/dma/friends folder run {\ttfamily composer install}.
+\item edit apps/config/database.\-php and add the following 
+\begin{DoxyPre}
+        'friends\_wordpress' => array(
+            'driver'    => 'mysql',
+            'host'      => 'localhost',
+            'port'      => '', 
+            'database'  => 'WORDPRESS\_FRIENDS\_DB',
+            'username'  => 'WORDPRESS\_USER',
+            'password'  => 'WORDPRESS\_PASS',
+            'charset'   => 'utf8',
+            'collation' => 'utf8\_unicode\_ci',
+            'prefix'    => '', 
+        ), 
+\end{DoxyPre}
+ Substituting the appropriate database, user, and password 
+\end{DoxyItemize}

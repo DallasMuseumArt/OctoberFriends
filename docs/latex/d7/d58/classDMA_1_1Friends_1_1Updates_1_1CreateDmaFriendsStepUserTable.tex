@@ -1,0 +1,68 @@
+\hypertarget{classDMA_1_1Friends_1_1Updates_1_1CreateDmaFriendsStepUserTable}{\section{D\-M\-A\textbackslash{}Friends\textbackslash{}Updates\textbackslash{}Create\-Dma\-Friends\-Step\-User\-Table Class Reference}
+\label{classDMA_1_1Friends_1_1Updates_1_1CreateDmaFriendsStepUserTable}\index{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Updates\textbackslash{}\-Create\-Dma\-Friends\-Step\-User\-Table@{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Updates\textbackslash{}\-Create\-Dma\-Friends\-Step\-User\-Table}}
+}
+Inheritance diagram for D\-M\-A\textbackslash{}Friends\textbackslash{}Updates\textbackslash{}Create\-Dma\-Friends\-Step\-User\-Table\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d7/d58/classDMA_1_1Friends_1_1Updates_1_1CreateDmaFriendsStepUserTable}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Updates_1_1CreateDmaFriendsStepUserTable_a35f834f6a71b2c8b03eaed407f2ac180}{up} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Updates_1_1CreateDmaFriendsStepUserTable_af14ee3af19596d7822a0c29ee0f32f2b}{down} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Updates_1_1CreateDmaFriendsStepUserTable_af14ee3af19596d7822a0c29ee0f32f2b}{\index{D\-M\-A\-::\-Friends\-::\-Updates\-::\-Create\-Dma\-Friends\-Step\-User\-Table@{D\-M\-A\-::\-Friends\-::\-Updates\-::\-Create\-Dma\-Friends\-Step\-User\-Table}!down@{down}}
+\index{down@{down}!DMA::Friends::Updates::CreateDmaFriendsStepUserTable@{D\-M\-A\-::\-Friends\-::\-Updates\-::\-Create\-Dma\-Friends\-Step\-User\-Table}}
+\subsubsection[{down}]{\setlength{\rightskip}{0pt plus 5cm}D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Updates\textbackslash{}\-Create\-Dma\-Friends\-Step\-User\-Table\-::down (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Updates_1_1CreateDmaFriendsStepUserTable_af14ee3af19596d7822a0c29ee0f32f2b}
+Reverse the migrations.
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+33     \{
+34         Schema::drop(\textcolor{stringliteral}{'dma\_friends\_step\_user'});
+35     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Updates_1_1CreateDmaFriendsStepUserTable_a35f834f6a71b2c8b03eaed407f2ac180}{\index{D\-M\-A\-::\-Friends\-::\-Updates\-::\-Create\-Dma\-Friends\-Step\-User\-Table@{D\-M\-A\-::\-Friends\-::\-Updates\-::\-Create\-Dma\-Friends\-Step\-User\-Table}!up@{up}}
+\index{up@{up}!DMA::Friends::Updates::CreateDmaFriendsStepUserTable@{D\-M\-A\-::\-Friends\-::\-Updates\-::\-Create\-Dma\-Friends\-Step\-User\-Table}}
+\subsubsection[{up}]{\setlength{\rightskip}{0pt plus 5cm}D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Updates\textbackslash{}\-Create\-Dma\-Friends\-Step\-User\-Table\-::up (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Updates_1_1CreateDmaFriendsStepUserTable_a35f834f6a71b2c8b03eaed407f2ac180}
+Run the migrations.
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+14     \{
+15         Schema::create(\textcolor{stringliteral}{'dma\_friends\_step\_user'}, \textcolor{keyword}{function}($table)
+16         \{
+17             $table->increments(\textcolor{stringliteral}{'id'});
+18             $table->integer(\textcolor{stringliteral}{'step\_id'})->unsigned()->index();
+19             $table->foreign(\textcolor{stringliteral}{'step\_id'})->references(\textcolor{stringliteral}{'id'})->on(\textcolor{stringliteral}{'dma\_friends\_steps'})->onDelete(\textcolor{stringliteral}{'cascade'});
+20             $table->integer(\textcolor{stringliteral}{'user\_id'})->unsigned()->index();
+21             $table->foreign(\textcolor{stringliteral}{'user\_id'})->references(\textcolor{stringliteral}{'id'})->on(\textcolor{stringliteral}{'users'})->onDelete(\textcolor{stringliteral}{'cascade'});
+22             $table->timestamps();
+23         \});
+24     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+updates/create\-\_\-user\-\_\-steps\-\_\-table.\-php\end{DoxyCompactItemize}
