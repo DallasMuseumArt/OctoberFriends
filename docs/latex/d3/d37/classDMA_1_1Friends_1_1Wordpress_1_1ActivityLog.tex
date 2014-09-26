@@ -10,10 +10,82 @@ Inheritance diagram for D\-M\-A\textbackslash{}Friends\textbackslash{}Wordpress\
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classDMA_1_1Friends_1_1Wordpress_1_1ActivityLog_a51567d47aa076394d865e890747f9832}{{\bfseries import} (\$limit=0)}\label{classDMA_1_1Friends_1_1Wordpress_1_1ActivityLog_a51567d47aa076394d865e890747f9832}
-
+\hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1ActivityLog_a51567d47aa076394d865e890747f9832}{import} (\$limit=0)
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Wordpress_1_1ActivityLog_a51567d47aa076394d865e890747f9832}{\index{D\-M\-A\-::\-Friends\-::\-Wordpress\-::\-Activity\-Log@{D\-M\-A\-::\-Friends\-::\-Wordpress\-::\-Activity\-Log}!import@{import}}
+\index{import@{import}!DMA::Friends::Wordpress::ActivityLog@{D\-M\-A\-::\-Friends\-::\-Wordpress\-::\-Activity\-Log}}
+\subsubsection[{import}]{\setlength{\rightskip}{0pt plus 5cm}D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Wordpress\textbackslash{}\-Activity\-Log\-::import (
+\begin{DoxyParamCaption}
+\item[{}]{\$limit = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Wordpress_1_1ActivityLog_a51567d47aa076394d865e890747f9832}
+Import user accounts from wordpress
+
+
+\begin{DoxyParams}[1]{Parameters}
+int & {\em \$limit} & The amount of records to import at one time \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+24     \{
+25         $count  = 0;
+26         $table  = $this->model->table;
+27         $id     = (int)DB::table($table)->max(\textcolor{stringliteral}{'id'});
+28 
+29         $wordpressLogs = $this->db
+30             ->table(\textcolor{stringliteral}{'wp\_badgeos\_logs'})
+31             ->where(\textcolor{stringliteral}{'id'}, \textcolor{charliteral}{'>'}, $id)
+32             ->orderBy(\textcolor{stringliteral}{'id'}, \textcolor{stringliteral}{'asc'})
+33             ->limit($limit)
+34             ->get();
+35 
+36         \textcolor{comment}{// Use dummy model to get action types}
+37         $l = \textcolor{keyword}{new} \hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Post_a8a3df2e9db7f90d348d27ea9354176b1}{$this->model};
+38 
+39         \textcolor{keywordflow}{foreach} ($wordpressLogs as $wlog) \{
+40 
+41             \textcolor{keywordflow}{if} (!in\_array($wlog->action, $l->actionTypes)) \textcolor{keywordflow}{continue};
+42 
+43             $log                = \textcolor{keyword}{new} \hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Post_a8a3df2e9db7f90d348d27ea9354176b1}{$this->model};
+44             $log->id            = $wlog->id;
+45             $log->site\_id       = $wlog->site\_id;
+46             $log->user\_id       = $wlog->user\_id;
+47             $log->action        = $wlog->action;
+48             $log->message       = $wlog->message;
+49             $log->points\_earned = $wlog->points\_earned;
+50             $log->total\_points  = $wlog->total\_points;
+51             $log->timestamp     = $wlog->timestamp;
+52             $log->timezone      = $wlog->timezone;
+53     
+54             \textcolor{keywordflow}{if} ($wlog->action == \textcolor{stringliteral}{'artwork'}) \{
+55                 $log->artwork\_id = $wlog->object\_id;
+56             \} \textcolor{keywordflow}{else} \{
+57                 $log->object\_id = $wlog->object\_id;
+58 
+59                 $type = $this->db
+60                     ->table(\textcolor{stringliteral}{'wp\_posts'})
+61                     ->select(\textcolor{stringliteral}{'post\_type'})
+62                     ->where(\textcolor{stringliteral}{'ID'}, $log->object\_id)
+63                     ->first();
+64 
+65                 \textcolor{keywordflow}{if} ($type) \{
+66                     $log->object\_type = $type->post\_type;
+67                 \}   
+68             \}   
+69 
+70             \textcolor{keywordflow}{if} ($log->save()) \{
+71                 $count++;
+72             \} 
+73         \}  
+74 
+75         \textcolor{keywordflow}{return} $count;
+76     \}
+\end{DoxyCode}
 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}

@@ -14,6 +14,12 @@ class ActivityLog extends Post
         parent::__construct();
     }
 
+    /** 
+     * Import user accounts from wordpress
+     *
+     * @param int $limit
+     * The amount of records to import at one time
+     */
     public function import($limit = 0)
     {
         $count  = 0;
