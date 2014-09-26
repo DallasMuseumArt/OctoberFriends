@@ -3,18 +3,5 @@ var searchData=
   ['checkin',['checkin',['../d4/d33/classDMA_1_1Friends_1_1Classes_1_1FriendsLog.html#af177ff30b29bfca5f4f98346d3c2a1ef',1,'DMA::Friends::Classes::FriendsLog']]],
   ['converttimerestricteddata',['convertTimeRestrictedData',['../d2/de2/classDMA_1_1Friends_1_1Wordpress_1_1Post.html#a427b14dd99893217929ee8ee93977628',1,'DMA::Friends::Wordpress::Post']]],
   ['convertvalues',['convertValues',['../d2/de2/classDMA_1_1Friends_1_1Wordpress_1_1Post.html#a8969b8476b3ba0afc871532f6f936514',1,'DMA::Friends::Wordpress::Post']]],
-  ['create',['create',['../d9/dda/classDMA_1_1Friends_1_1Api_1_1BaseResource.html#a2e62ea3d73fab798a5319189b1d134e0',1,'DMA::Friends::Api::BaseResource']]],
-  ['createactivitiestable',['CreateActivitiesTable',['../d5/dd6/classDMA_1_1Friends_1_1Updates_1_1CreateActivitiesTable.html',1,'DMA::Friends::Updates']]],
-  ['createactivitylogstable',['CreateActivityLogsTable',['../d4/d43/classDMA_1_1Friends_1_1Updates_1_1CreateActivityLogsTable.html',1,'DMA::Friends::Updates']]],
-  ['createactivitytriggertypestable',['CreateActivityTriggerTypesTable',['../da/dc2/classDMA_1_1Friends_1_1Updates_1_1CreateActivityTriggerTypesTable.html',1,'DMA::Friends::Updates']]],
-  ['createactivitytypestable',['CreateActivityTypesTable',['../d7/dc7/classDMA_1_1Friends_1_1Updates_1_1CreateActivityTypesTable.html',1,'DMA::Friends::Updates']]],
-  ['createbadgestable',['CreateBadgesTable',['../da/d43/classDMA_1_1Friends_1_1Updates_1_1CreateBadgesTable.html',1,'DMA::Friends::Updates']]],
-  ['createdmafriendsrewardusertable',['CreateDmaFriendsRewardUserTable',['../df/d5f/classDMA_1_1Friends_1_1Updates_1_1CreateDmaFriendsRewardUserTable.html',1,'DMA::Friends::Updates']]],
-  ['createdmafriendsstepusertable',['CreateDmaFriendsStepUserTable',['../d7/d58/classDMA_1_1Friends_1_1Updates_1_1CreateDmaFriendsStepUserTable.html',1,'DMA::Friends::Updates']]],
-  ['createlocationstable',['CreateLocationsTable',['../d5/dd8/classDMA_1_1Friends_1_1Updates_1_1CreateLocationsTable.html',1,'DMA::Friends::Updates']]],
-  ['createpivottables',['CreatePivotTables',['../d4/d12/classDMA_1_1Friends_1_1Updates_1_1CreatePivotTables.html',1,'DMA::Friends::Updates']]],
-  ['createrewardstable',['CreateRewardsTable',['../d1/d09/classDMA_1_1Friends_1_1Updates_1_1CreateRewardsTable.html',1,'DMA::Friends::Updates']]],
-  ['createstepstable',['CreateStepsTable',['../df/d50/classDMA_1_1Friends_1_1Updates_1_1CreateStepsTable.html',1,'DMA::Friends::Updates']]],
-  ['createuserbadgestable',['CreateUserBadgesTable',['../d9/df1/classDMA_1_1Friends_1_1Updates_1_1CreateUserBadgesTable.html',1,'DMA::Friends::Updates']]],
-  ['createusermetastable',['CreateUsermetasTable',['../dc/d83/classDMA_1_1Friends_1_1Updates_1_1CreateUsermetasTable.html',1,'DMA::Friends::Updates']]]
+  ['create',['create',['../d9/dda/classDMA_1_1Friends_1_1Api_1_1BaseResource.html#a2e62ea3d73fab798a5319189b1d134e0',1,'DMA::Friends::Api::BaseResource']]]
 ];
