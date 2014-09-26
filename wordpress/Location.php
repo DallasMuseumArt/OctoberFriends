@@ -6,8 +6,14 @@ use DMA\Friends\Models\Location as OctoberLocation;
 
 class Location extends Post
 {
+    /** 
+     * Override the default post type
+     */
     public $postType  = 'dma-location';
 
+    /** 
+     * Exclude fields from import
+     */
     protected $excludeFields = [
         'post_excerpt',
         'is_published',

@@ -10,8 +10,9 @@ use DMA\Friends\Models\Activity;
  */
 
 class Post {
+
     /**
-     * @array The schema defines the mapping between wordpress and
+     * array The schema defines the mapping between wordpress and
      * laravel.  With the key being the wordpress key, and the value
      * being the Laravel key
      */
@@ -89,13 +90,18 @@ class Post {
 
     ];
 
-    // Handle special settings fields for restricted hours and dates
+    /**
+     * Handle special settings fields for restricted hours and dates
+     */
     protected $restrictedTimes = [
         '_badgeos_time_restriction_days',
         '_badgeos_time_restriction_hour_begin',
         '_badgeos_time_restriction_hour_end'
     ];
 
+    /**
+     * Exclude fields from being imported
+     */
     protected $excludeFields = [];
     
     /**
@@ -113,6 +119,15 @@ class Post {
         $this->db = DB::connection('friends_wordpress');
     }
 
+    /**
+     * Imports a wordpress post as an elequent model
+     *
+     * @param int $limit
+     * The number of records to import at once
+     *
+     * @return $count
+     * The number of records that have been imported
+     */ 
     public function import($limit = 0)
     {
         $count  = 0;
@@ -154,6 +169,9 @@ class Post {
 
     /**
      * Merge wordpress metadata with the original post
+     *
+     * @param $post
+     * A wordpress post object
      */
     public function mergeMetadata(&$post)
     {
@@ -172,6 +190,15 @@ class Post {
 
     }
 
+    /**
+     * Converts special fields to the appropriate value type
+     * 
+     * @param $key
+     * @param $val
+     *
+     * @return $val
+     * The converted value 
+     */
     protected function convertValues($key, $val)
     {
         // Fields that start with is_ are booleans
@@ -198,6 +225,10 @@ class Post {
 
     /**
      * convert wordpress' infinite possibility of boolean values into a real boolean value
+     *
+     * @param $val
+     *
+     * @return $val
      */
     protected function realBoolean($val) 
     {
@@ -219,6 +250,13 @@ class Post {
         return $val;
     }
 
+    /**
+     * Convert a time restriction into the appropriate constant
+     *
+     * @param $val
+     *
+     * @return $val
+     */
     protected function realTimeRestriction($val)
     {
         if ($val == 'hours') {
@@ -234,6 +272,10 @@ class Post {
 
     /**
      * Convert an epoch value to the appropriate timestamp
+     *
+     * @param $val
+     *
+     * @return $timestamp
      */
     public function epochToTimestamp($val)
     {
@@ -241,8 +283,13 @@ class Post {
     }
 
     /**
-     * converts "time restricted" data settings for activities
+     * Converts "time restricted" data settings for activities
      * into a serialized field of configuration settings
+     *
+     * @param array $data
+     *
+     * @return $data
+     * A serialized version of the processed data
      */
     protected function convertTimeRestrictedData($data)
     {

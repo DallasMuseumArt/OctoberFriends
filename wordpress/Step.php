@@ -6,8 +6,14 @@ use DMA\Friends\Models\Step as OctoberStep;
 
 class Step extends Post
 {
+    /**
+     * Override the default post type
+     */
     public $postType = 'step';
 
+    /**
+     * Exclude fields from import
+     */
     protected $excludeFields = [ 
         'post_excerpt',
         'post_content',
