@@ -143,7 +143,7 @@ class Post {
 
             }
 
-            if ($model->save()) {
+            if ($model->forceSave()) {
                 $count++;
             }
         }

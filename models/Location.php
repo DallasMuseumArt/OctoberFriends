@@ -25,6 +25,8 @@ class Location extends Model
      */
     protected $fillable = [];
 
+    public $rules = [];
+
     /**
      * @var array Relations
      */
