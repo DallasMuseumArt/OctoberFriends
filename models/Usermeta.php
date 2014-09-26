@@ -7,6 +7,9 @@ use Model;
  */
 class Usermeta extends Model
 {
+    const NON_MEMBER = 0;
+    const IS_MEMBER = 1;
+    const IS_STAFF = 2;
 
     /**
      * @var string The database table used by the model.
@@ -27,14 +30,18 @@ class Usermeta extends Model
     /**
      * @var array Relations
      */
-    public $hasOne = [];
-    public $hasMany = [];
-    public $belongsTo = [];
-    public $belongsToMany = [];
-    public $morphTo = [];
-    public $morphOne = [];
-    public $morphMany = [];
-    public $attachOne = [];
-    public $attachMany = [];
+    public $belongsTo = [
+        'user'  => 'RainLab\User\Model\User'
+    ];
+
+    public function scopeByPoints($query)
+    {
+        return $query->excludeStaff()->orderBy('points', 'desc');
+    }
+
+    public function scopeExcludeStaff($query)
+    {
+        return $query->where('current_member', '!=', self::IS_STAFF);
+    }
 
 }
