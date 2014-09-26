@@ -25,9 +25,7 @@ class Step extends Model
      */
     protected $fillable = ['touch'];
 
-    public $rules = [
-        'title' => 'required',
-    ];
+    public $rules = [];
 
     /**
      * @var array Relations

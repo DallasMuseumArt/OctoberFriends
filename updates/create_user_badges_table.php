@@ -24,7 +24,6 @@ class CreateUserBadgesTable extends Migration
 
     public function down()
     {   
- //       Schema::dropIfExists('dma_friends_user_badges');
         Schema::dropIfExists('dma_friends_badge_user');
     }   
 

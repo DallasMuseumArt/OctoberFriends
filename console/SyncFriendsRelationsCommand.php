@@ -141,7 +141,7 @@ class SyncFriendsRelationsCommand extends Command
                 ->where('user_id', $user->id)
                 ->delete();
 
-            DB::table('dma_friends_user_badges')
+            DB::table('dma_friends_badge_user')
                 ->where('user_id', $user->id)
                 ->delete();
 
@@ -181,7 +181,7 @@ class SyncFriendsRelationsCommand extends Command
 
                     $badge = Badge::findWordpress($d->ID)->first();
                     $link['badge_id'] = $badge->id;
-                    DB::table('dma_friends_user_badges')->insert($link);
+                    DB::table('dma_friends_badge_user')->insert($link);
 
                 }
         
