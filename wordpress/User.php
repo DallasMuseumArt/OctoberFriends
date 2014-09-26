@@ -131,6 +131,7 @@ class User extends Post
 
         try {
             $user->forceSave();
+            $user->metadata()->delete();
             $user->metadata()->save($metadata);
         } catch(Exception $e) {
 
