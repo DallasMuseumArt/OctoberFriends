@@ -5,6 +5,14 @@ An OctoberCMS implementation of friends
 
 # Installation
 
+* Install the Rainlab "User" Plugin
+* Enable the "Friends" Plugin
+
+## Wordpress Migrations
+
+If you are migrating from a wordpress installation of friends you will also
+need to provide database configuration in order to migrate your data
+
 * Download and complete the installation for October CMS (http://octobercms.com)
 * Extract this repository into plugins/dma/friends
 * In plugins/dma/friends folder run `composer install`. 
@@ -23,6 +31,3 @@ An OctoberCMS implementation of friends
         ), 
 </pre>
 Substituting the appropriate database, user, and password
-
-* Install the Rainlab "User" Plugin
-* Enable the "Friends" Plugin
