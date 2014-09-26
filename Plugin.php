@@ -211,10 +211,14 @@ class Plugin extends PluginBase
     public function registerReportWidgets()
     {   
         return [
-            'DMA\Friends\ReportWidgets\FriendsToolbar'=>[
-                'label'   => 'Friends Toolbar',
-                'context' => 'dashboard'
+            'DMA\Friends\ReportWidgets\FriendsToolbar' => [
+                'label'     => 'Friends Toolbar',
+                'context'   => 'dashboard'
             ],  
+            'DMA\Friends\ReportWidgets\FriendsLeaderboard' => [
+                'label'     => 'Friends Leaderboard',
+                'context'   => 'dashboard',
+            ],
         ];  
     } 
 
