@@ -100,6 +100,7 @@ class SyncFriendsDataCommand extends Command
     protected function syncUsers()
     {
         $user = new WordpressUser;
+        $user->updateExistingUsers();
         $this->sync($user, 'users');
     }
 
