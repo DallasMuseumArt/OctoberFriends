@@ -1,0 +1,52 @@
+\hypertarget{classUserModelTest}{\section{User\-Model\-Test Class Reference}
+\label{classUserModelTest}\index{User\-Model\-Test@{User\-Model\-Test}}
+}
+Inheritance diagram for User\-Model\-Test\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{de/d37/classUserModelTest}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classUserModelTest_ab2256ec17ca54d4a092ae435d90fe7cc}{{\bfseries test\-Create\-Model\-Instance} ()}\label{classUserModelTest_ab2256ec17ca54d4a092ae435d90fe7cc}
+
+\item 
+\hypertarget{classUserModelTest_a4d259411257cb4a9bc98147b91992f8a}{{\bfseries test\-Can\-Have\-Badges} ()}\label{classUserModelTest_a4d259411257cb4a9bc98147b91992f8a}
+
+\item 
+\hypertarget{classUserModelTest_a80b72eb4f7417e3554c84596fbe01656}{{\bfseries test\-Can\-Have\-Rewards} ()}\label{classUserModelTest_a80b72eb4f7417e3554c84596fbe01656}
+
+\item 
+\hyperlink{classUserModelTest_a855242098b8e5cb905942aada5b88b4b}{test\-Can\-Have\-Steps} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classUserModelTest_a855242098b8e5cb905942aada5b88b4b}{\index{User\-Model\-Test@{User\-Model\-Test}!test\-Can\-Have\-Steps@{test\-Can\-Have\-Steps}}
+\index{test\-Can\-Have\-Steps@{test\-Can\-Have\-Steps}!UserModelTest@{User\-Model\-Test}}
+\subsubsection[{test\-Can\-Have\-Steps}]{\setlength{\rightskip}{0pt plus 5cm}User\-Model\-Test\-::test\-Can\-Have\-Steps (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classUserModelTest_a855242098b8e5cb905942aada5b88b4b}
+T\-O\-D\-O\-: this will eventually need to be rewritten to accomodate updated step logic 
+\begin{DoxyCode}
+48     \{
+49         $user = FactoryMuffin::create(\textcolor{stringliteral}{'RainLab\(\backslash\)User\(\backslash\)Models\(\backslash\)User'});
+50 
+51         $step = FactoryMuffin::create(\textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Step'});
+52         $this->assertInstanceOf(\textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Step'}, $step);
+53 
+54         $user->steps()->save($step);
+55 
+56         $this->assertEquals($user->steps[0]->id, $step->id);
+57     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+tests/User\-Model\-Test.\-php\end{DoxyCompactItemize}
