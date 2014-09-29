@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: UserGroup
+
+# Model Form Field configuration
+form: @/plugins/dma/friends/models/usergroup/fields.yaml
+
+# Model Class name
+modelClass: DMA\Friends\Models\UserGroup
+
+# Default redirect location
+defaultRedirect: dma/friends/groups
+
+# Create page
+create:
+    title: Create Group
+    redirect: dma/friends/groups/update/:id
+    redirectClose: dma/friends/groups
+
+# Update page
+update:
+    title: Edit Group
+    redirect: dma/friends/groups
+    redirectClose: dma/friends/groups
+
+# Preview page
+preview:
+    title: Preview Groups

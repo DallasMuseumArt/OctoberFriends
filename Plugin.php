@@ -97,6 +97,11 @@ class Plugin extends PluginBase
                         'icon'      => 'icon-rocket',
                         'url'       => Backend::url('dma/friends/activitylogs'),
                     ],
+                    'groups'   => [
+	                    'label'     => 'Friends Groups',
+	                    'icon'      => 'icon-users',
+	                    'url'       => Backend::url('dma/friends/groups'),
+                    ],                    
                     
                 ]
             ]
@@ -119,6 +124,7 @@ class Plugin extends PluginBase
             $model->hasMany['badges']       = ['DMA\Friends\Models\Badge', 'dma_friends_user_badges', 'user_id', 'badge_id'];
             $model->hasMany['steps']        = ['DMA\Friends\Models\Step', 'dma_friends_user_steps', 'user_id', 'step_id'];
             $model->hasMany['activityLogs'] = ['DMA\Friends\Models\ActivityLog'];
+            $model->hasMany['groups'] 		= ['DMA\Friends\Models\UserGroup', 'dma_friends_user_groups', 'user_id', 'owner_id'];
         });
 
         Event::listen('backend.form.extendFields', function($widget) {
@@ -152,6 +158,10 @@ class Plugin extends PluginBase
                     'label' => 'Current Member Number',
                     'tab'   => 'Metadata',
                 ],
+            	'groups' => [
+            		'label' => 'Groups',
+            		'tab'   => 'Groups',
+            	],            		
             ], 'primary');
         }); 
 
@@ -185,7 +195,7 @@ class Plugin extends PluginBase
                 ], 
                 'zip' => [
                     'label' => 'Zip',
-                ],
+                ],    		
             ]); 
         });
 
