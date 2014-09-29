@@ -35,5 +35,16 @@ class FriendsServiceProvider extends ServiceProvider
         $this->app['FriendsLog'] = $this->app->share(function($app) {
             return new FriendsLog;
         });
+
+        $this->createAlias('FriendsLog', 'DMA\Friends\Classes\FriendsLog');
+    }
+
+    protected function createAlias($alias, $class)
+    {
+        $this->app->booting(function() use ($alias, $class)
+        {   
+            $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+            $loader->alias($alias, $class);
+        }); 
     }
 }

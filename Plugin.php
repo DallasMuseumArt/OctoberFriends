@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Event;
 use Rainlab\User\Models\User as User;
 use System\Classes\PluginBase;
 use DMA\Friends\Classes\FriendsEventHandler;
+use DMA\Friends\Classes\Modal;
 use App;
 use Illuminate\Foundation\AliasLoader;
 
@@ -100,6 +101,13 @@ class Plugin extends PluginBase
                     
                 ]
             ]
+        ];
+    }
+
+    public function registerComponents()
+    {
+        return [
+            'DMA\Friends\Components\Modal' => 'Modal'
         ];
     }
 
