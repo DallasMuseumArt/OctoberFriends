@@ -25,8 +25,8 @@ class Modal extends ComponentBase
             'title' => [
                 'title' => 'Modal Title',
             ],
-            'content' => [
-                'title'     => 'Content',
+            'linkTitle' => [
+                'title'     => 'Link Title',
                 'default'   => 'Click here',
             ],
             'partial' => [
@@ -38,7 +38,7 @@ class Modal extends ComponentBase
 
     public function onRender()
     {
-        $this->page['content'] = $this->property('content');
+        $this->page['linkTitle'] = $this->property('linkTitle');
     }
 
     public function onRun()
