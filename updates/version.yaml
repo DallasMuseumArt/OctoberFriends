@@ -19,3 +19,7 @@
     - Add activity taxonomies 
     - create_activity_types_table.php
     - create_activity_trigger_types_table.php
+1.0.5:
+    - Add user groups     
+    - create_user_group_table.php
+    - create_users_groups_table.php
