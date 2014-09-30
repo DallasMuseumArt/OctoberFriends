@@ -1,8 +1,7 @@
 <?php namespace DMA\Friends\Models;
 
 use Model;
-//use DMA\Friends\Models\Step;
-//use RainLab\User\Models\User;
+use RainLab\User\Models\User;
 
 /**
  * Badge Model
@@ -49,6 +48,13 @@ class Badge extends Model
     public $morphMany = [
         'activityLogs'  => ['DMA\Friends\Models\ActivityLog', 'name' => 'object'],
     ];
+
+    public function scopeNotCompleted($query, User $user)
+    {
+        return $query->join('dma_friends_badge_user', 'dma_friends_badges.id', '=', 'dma_friends_badge_user.badge_id')
+            ->where('dma_friends_badge_user.user_id', '!=', $user->id)
+            ->groupBy('dma_friends_badges.id');
+    }
 
     public function scopefindWordpress($query, $id)
     {   
