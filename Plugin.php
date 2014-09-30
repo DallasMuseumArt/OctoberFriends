@@ -108,7 +108,8 @@ class Plugin extends PluginBase
     {
         return [
             'DMA\Friends\Components\BadgeRecommend' => 'BadgeRecommend',
-            'DMA\Friends\Components\Modal'          => 'Modal'
+            'DMA\Friends\Components\Modal'          => 'Modal',
+            'DMA\Friends\Components\UserBadges'     => 'UserBadges',
         ];
     }
 
