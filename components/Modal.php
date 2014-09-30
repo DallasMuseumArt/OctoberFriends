@@ -22,16 +22,16 @@ class Modal extends ComponentBase
     public function defineProperties()
     {
         return [
-            'title' => [
-                'title' => 'Modal Title',
-            ],
             'linkTitle' => [
                 'title'     => 'Link Title',
                 'default'   => 'Click here',
             ],
+            'title' => [
+                'title' => 'Modal Title',
+            ],
             'partial' => [
-                'title'     => 'Partial',
-                'default'   => false,
+                'title'         => 'Partial',
+                'description'   => 'Name of the partial in your theme directory',
             ],
         ];
     }
