@@ -28,9 +28,11 @@ class BadgeRecommend extends ComponentBase
 
     public function onRun()
     {
-        $renderedBadges = [];
         $user = Auth::getUser();
 
+        if (!$user) return;
+
+        $renderedBadges = [];
         // TODO: this will need updated to accomodate recommendation engine
         $badges = Badge::notCompleted($user)
             ->take($this->property('limit'))
