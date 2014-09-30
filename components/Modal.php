@@ -26,6 +26,9 @@ class Modal extends ComponentBase
                 'title'     => 'Link Title',
                 'default'   => 'Click here',
             ],
+            'linkClasses' => [
+                'title' => 'Additional link classes',
+            ],
             'title' => [
                 'title' => 'Modal Title',
             ],
@@ -39,6 +42,7 @@ class Modal extends ComponentBase
     public function onRender()
     {
         $this->page['linkTitle'] = $this->property('linkTitle');
+        $this->page['classes'] = $this->property('linkClasses');
     }
 
     public function onRun()

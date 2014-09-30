@@ -49,10 +49,10 @@ string \$path
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-104     \{
-105         $theme = Theme::getActiveTheme();
-106         \textcolor{keywordflow}{return} $theme->getPath() . \textcolor{stringliteral}{'/partials/'};
-107     \}
+108     \{
+109         $theme = Theme::getActiveTheme();
+110         \textcolor{keywordflow}{return} $theme->getPath() . \textcolor{stringliteral}{'/partials/'};
+111     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Components_1_1Modal_a4e45e161a2624a34d59bf56294122ced}{\index{D\-M\-A\-::\-Friends\-::\-Components\-::\-Modal@{D\-M\-A\-::\-Friends\-::\-Components\-::\-Modal}!make\-Partial@{make\-Partial}}
 \index{make\-Partial@{make\-Partial}!DMA::Friends::Components::Modal@{D\-M\-A\-::\-Friends\-::\-Components\-::\-Modal}}
@@ -79,24 +79,24 @@ string \$content A rendered partial
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-80     \{   
-81         $partialsDir = self::getThemePartialsDir();
-82         $partialPath = $partialsDir . $partial . \textcolor{stringliteral}{'.htm'};
-83 
-84         \textcolor{keywordflow}{if} (!File::isFile($partialPath)) \{
-85             $partialPath = $this->getViewPath($partial) . \textcolor{stringliteral}{'.htm'};
-86         \}
+84     \{   
+85         $partialsDir = self::getThemePartialsDir();
+86         $partialPath = $partialsDir . $partial . \textcolor{stringliteral}{'.htm'};
 87 
 88         \textcolor{keywordflow}{if} (!File::isFile($partialPath)) \{
-89             \textcolor{keywordflow}{if} ($throwException)
-90                 \textcolor{keywordflow}{throw} \textcolor{keyword}{new} SystemException(Lang::get(\textcolor{stringliteral}{'backend::lang.partial.not\_found'}, [\textcolor{stringliteral}{'name'} => 
+89             $partialPath = $this->getViewPath($partial) . \textcolor{stringliteral}{'.htm'};
+90         \}
+91 
+92         \textcolor{keywordflow}{if} (!File::isFile($partialPath)) \{
+93             \textcolor{keywordflow}{if} ($throwException)
+94                 \textcolor{keywordflow}{throw} \textcolor{keyword}{new} SystemException(Lang::get(\textcolor{stringliteral}{'backend::lang.partial.not\_found'}, [\textcolor{stringliteral}{'name'} => 
       $partialPath]));
-91             \textcolor{keywordflow}{else}
-92                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-93         \}   
-94 
-95         \textcolor{keywordflow}{return} $this->makeFileContents($partialPath, $params);
-96     \}   
+95             \textcolor{keywordflow}{else}
+96                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+97         \}   
+98 
+99         \textcolor{keywordflow}{return} $this->makeFileContents($partialPath, $params);
+100     \}   
 \end{DoxyCode}
 
 
