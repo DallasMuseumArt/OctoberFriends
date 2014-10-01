@@ -3,6 +3,8 @@
 namespace DMA\Friends\Classes;
 
 use DMA\Friends\Models\ActivityLog;
+use DateTime;
+use DateTimeZone;
 
 class FriendsLog
 {
@@ -14,42 +16,32 @@ class FriendsLog
      * 
      * @param $params
      * An array of parameters about the log entry
-     * - 'user_id': The user ID to associate the log entry
+     * - 'user': The user object to associate the log entry
      * - 'message': A log message
      * - (optional) 'object': A database model to associate the log with
      * - (optional) 'points_earned': The number of points earned by the action
      * - (optional) 'artwork_id': The assession number of an artwork to associate the log entry
      */
-    public function write($action, $params)
+    public static function write($action, array $params)
     {
-        $log            = new ActivityLog;
-        $log->user_id   = $params['user_id'];
-        $log->site_id   = ''; //TODO implement settings and/or gethostname();
-        $log->action    = $action;
-        $log->message   = $params['message'];
-        $log->points_earned = $params['points_earned'];
-        
-        // Log date/time
-        $datetime = new DateTime;
-        $tzstring = date_default_timezone_get();
-        $timezone = new DateTimeZone($tzstring);
-        $datetime->setTimezone($timezone);
+        $log                = new ActivityLog;
+        $log->user          = $params['user'];
+        $log->site_id       = gethostname();
+        $log->action        = $action;
+        $log->message       = $params['message'];
+        $log->points_earned = isset($params['points_earned']) ? $params['points_earned'] : 0;
+        $log->timestamp     = new DateTime('now');
 
-        $log->timestamp = $datetime->format('c');
-        $log->timezone  = $datetime->getTimezone()->getName(); 
-
-        // Object type and id
-        // pass an object in $params['object'] and do some logic for that
-        if (isset($params['object']) && !empty($params['object'])) {
-            $log->object_type   = typeof($params['object']);
-            $log->object_id     = $params['object']->id;
-        }
-
-        if (isset($params['artwork_id']) {
+        if (isset($params['artwork_id'])) {
             $log->artwork_id = $params['artwork_id'];
         }
 
         $log->save();
+
+        // Associate an object if present
+        if (isset($params['object']) && !empty($params['object'])) {
+            $params['object']->activityLogs()->save($log);
+        }
 
     }
 
@@ -66,7 +58,7 @@ class FriendsLog
      *
      * @return void
      */
-    public function activity($params)
+    public static function activity($params)
     {
         self::write('activity', $params);
     }
@@ -80,7 +72,7 @@ class FriendsLog
      *
      * @return void
      */
-    public function artwork($params)
+    public static function artwork($params)
     {
         self::write('artwork', $params);
     }
@@ -94,7 +86,7 @@ class FriendsLog
      *
      * @return void
      */
-    public function checkin($params)
+    public static function checkin($params)
     {
         self::write('checkin', $params);
     }
@@ -108,7 +100,7 @@ class FriendsLog
      *
      * @return void
      */
-    public function points($params)
+    public static function points($params)
     {
         self::write('points', $params);
     }
@@ -122,7 +114,7 @@ class FriendsLog
      *
      * @return void
      */
-    public function reward($params)
+    public static function reward($params)
     {
         self::write('reward', $params);
     }
@@ -136,7 +128,7 @@ class FriendsLog
      *
      * @return void
      */
-    public function unlocked($params)
+    public static function unlocked($params)
     {
         self::write('unlocked', $params);
     }

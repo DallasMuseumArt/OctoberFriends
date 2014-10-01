@@ -28,7 +28,9 @@ class BadgeRecommend extends ComponentBase
 
     public function onRun()
     {
-        $user = Auth::getUser();
+        //$user = Auth::getUser();
+        // use for testing
+        $user = \RainLab\User\Models\User::find(1);
 
         if (!$user) return;
 

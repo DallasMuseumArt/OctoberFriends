@@ -1,0 +1,13 @@
+<div class="dma-code-input">
+    {{ form_ajax('onSubmit') }}
+        <input id="activity-code" type="text" name="activity_code" placeholder="Enter Activity Code">
+        <button class="secondary" type="submit">Go</button>
+    {{ form_close() }}
+
+    {% component 'Modal' 
+        linkTitle="What kinds of codes can I enter?" 
+        linkClasses="help small pop"
+        title="What kinds of codes can I enter?"
+        partial="whatkindofcodes" 
+    %}
+</div>
