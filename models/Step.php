@@ -44,7 +44,7 @@ class Step extends Model
 
     public function scopefindWordpress($query, $id)
     {
-        $query->where('wordpress_id', $id);
+        return $query->where('wordpress_id', $id);
     }
 
 }

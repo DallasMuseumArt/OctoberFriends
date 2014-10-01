@@ -86,17 +86,164 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="../../de/d7a/classDMA_1_1Friends_1_1Classes_1_1ActivityProcessor-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">DMA\Friends\Classes\ActivityProcessor Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="dynheader">
+Inheritance diagram for DMA\Friends\Classes\ActivityProcessor:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="../../db/d9c/classDMA_1_1Friends_1_1Classes_1_1ActivityProcessor.png" usemap="#DMA\Friends\Classes\ActivityProcessor_map" alt=""/>
+  <map id="DMA\Friends\Classes\ActivityProcessor_map" name="DMA\Friends\Classes\ActivityProcessor_map">
+<area href="../../d5/de2/interfaceDMA_1_1Friends_1_1Classes_1_1ActivityProcessorInterface.html" alt="DMA\Friends\Classes\ActivityProcessorInterface" shape="rect" coords="0,0,290,24"/>
+<area href="../../d0/dbd/classDMA_1_1Friends_1_1Classes_1_1ActivityCode.html" alt="DMA\Friends\Classes\ActivityCode" shape="rect" coords="0,112,290,136"/>
+</map>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:af892e6c3b63a5ef0002f97719839aa82"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d9c/classDMA_1_1Friends_1_1Classes_1_1ActivityProcessor.html#af892e6c3b63a5ef0002f97719839aa82">process</a> (User $user, $params)</td></tr>
+<tr class="separator:af892e6c3b63a5ef0002f97719839aa82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adaddbe728558689c09abe18010c005e7"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d9c/classDMA_1_1Friends_1_1Classes_1_1ActivityProcessor.html#adaddbe728558689c09abe18010c005e7">canComplete</a> (<a class="el" href="../../dc/d8c/classDMA_1_1Friends_1_1Models_1_1Activity.html">Activity</a> $activity)</td></tr>
+<tr class="separator:adaddbe728558689c09abe18010c005e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="adaddbe728558689c09abe18010c005e7"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static DMA\Friends\Classes\ActivityProcessor::canComplete </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dc/d8c/classDMA_1_1Friends_1_1Models_1_1Activity.html">Activity</a>&#160;</td>
+          <td class="paramname"><em>$activity</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Determine if an activity is capable of being completed</p>
+<dl class="section return"><dt>Returns</dt><dd>boolean returns true if an activity can be completed by the user </dd></dl>
+
+<p>Implements <a class="el" href="../../d5/de2/interfaceDMA_1_1Friends_1_1Classes_1_1ActivityProcessorInterface.html">DMA\Friends\Classes\ActivityProcessorInterface</a>.</p>
+<div class="fragment"><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    {   </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordflow">if</span> (!$activity-&gt;isActive()) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordflow">switch</span> ($activity-&gt;time_restriction) {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <span class="keywordflow">case</span> <a class="code" href="../../dc/d8c/classDMA_1_1Friends_1_1Models_1_1Activity.html#ab9dd8b18c4810beabdcf8e45039913c8">Activity::TIME_RESTRICT_NONE</a>:</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <span class="keywordflow">case</span> <a class="code" href="../../dc/d8c/classDMA_1_1Friends_1_1Models_1_1Activity.html#ac78040e8784e02c2d1bcce5221ac6cb8">Activity::TIME_RESTRICT_HOURS</a>:</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                <span class="keywordflow">if</span> ($activity-&gt;time_restriction_data) {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                    $now        = time();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                    $start_time = strtotime($activity-&gt;time_restriction_data[<span class="stringliteral">&#39;start_time&#39;</span>], $now);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                    $end_time   = strtotime($activity-&gt;time_restriction_data[<span class="stringliteral">&#39;end_time&#39;</span>], $now);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                    $day        = date(<span class="charliteral">&#39;w&#39;</span>);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                    <span class="keywordflow">if</span> ($activity-&gt;time_restriction_date[<span class="stringliteral">&#39;days&#39;</span>][$day] !== <span class="keyword">false</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                        &amp;&amp; $now &gt;= $start_time &amp;&amp; $now &lt;= $end_time) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                }</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            <span class="keywordflow">case</span> <a class="code" href="../../dc/d8c/classDMA_1_1Friends_1_1Models_1_1Activity.html#a71b85478f20cda144aeffe010364a0f7">Activity::TIME_RESTRICT_DAYS</a>: </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                $now = <span class="keyword">new</span> DateTime(<span class="stringliteral">&#39;now&#39;</span>);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                <span class="keywordflow">if</span> ($now &gt;= $activity-&gt;date_begin </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                    &amp;&amp; $now &lt;= $activity-&gt;date_end) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        } </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    } </div>
+<div class="ttc" id="classDMA_1_1Friends_1_1Models_1_1Activity_html_ac78040e8784e02c2d1bcce5221ac6cb8"><div class="ttname"><a href="../../dc/d8c/classDMA_1_1Friends_1_1Models_1_1Activity.html#ac78040e8784e02c2d1bcce5221ac6cb8">DMA\Friends\Models\Activity\TIME_RESTRICT_HOURS</a></div><div class="ttdeci">const TIME_RESTRICT_HOURS</div><div class="ttdef"><b>Definition:</b> Activity.php:21</div></div>
+<div class="ttc" id="classDMA_1_1Friends_1_1Models_1_1Activity_html_ab9dd8b18c4810beabdcf8e45039913c8"><div class="ttname"><a href="../../dc/d8c/classDMA_1_1Friends_1_1Models_1_1Activity.html#ab9dd8b18c4810beabdcf8e45039913c8">DMA\Friends\Models\Activity\TIME_RESTRICT_NONE</a></div><div class="ttdeci">const TIME_RESTRICT_NONE</div><div class="ttdef"><b>Definition:</b> Activity.php:17</div></div>
+<div class="ttc" id="classDMA_1_1Friends_1_1Models_1_1Activity_html_a71b85478f20cda144aeffe010364a0f7"><div class="ttname"><a href="../../dc/d8c/classDMA_1_1Friends_1_1Models_1_1Activity.html#a71b85478f20cda144aeffe010364a0f7">DMA\Friends\Models\Activity\TIME_RESTRICT_DAYS</a></div><div class="ttdeci">const TIME_RESTRICT_DAYS</div><div class="ttdef"><b>Definition:</b> Activity.php:25</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="af892e6c3b63a5ef0002f97719839aa82"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static DMA\Friends\Classes\ActivityProcessor::process </td>
+          <td>(</td>
+          <td class="paramtype">User&#160;</td>
+          <td class="paramname"><em>$user</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$params</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Process and determine if an award can be issued based on a provided activity code</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">object</td><td class="paramname">$user</td><td>A user model for which the activity should act upon</td></tr>
+    <tr><td class="paramtype">array</td><td class="paramname">$params</td><td>An array of parameters for validating activities</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>boolean returns true if the process was successful </dd></dl>
+
+<p>Implements <a class="el" href="../../d5/de2/interfaceDMA_1_1Friends_1_1Classes_1_1ActivityProcessorInterface.html">DMA\Friends\Classes\ActivityProcessorInterface</a>.</p>
+<div class="fragment"><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        $activity = $params[<span class="stringliteral">&#39;activity&#39;</span>];</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordflow">if</span> (self::canComplete($activity)) {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            Event::fire(<span class="stringliteral">&#39;friends.activityCompleted&#39;</span>, [ $user, $activity ]); </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <span class="comment">// log an entry to the activity log</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <a class="code" href="../../d4/d33/classDMA_1_1Friends_1_1Classes_1_1FriendsLog.html#a0b90db29da51f53991f2dcc1a55f14c7">FriendsLog::activity</a>([</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                <span class="stringliteral">&#39;user&#39;</span>          =&gt; $user,</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                <span class="stringliteral">&#39;message&#39;</span>       =&gt; Lang::get(<span class="stringliteral">&#39;dma.friends::lang.log.activity&#39;</span>, [<span class="stringliteral">&#39;name&#39;</span> =&gt; $user-&gt;name, <span class="stringliteral">&#39;title&#39;</span> =&gt; $activity-&gt;title]), </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                <span class="stringliteral">&#39;object&#39;</span>        =&gt; $activity,</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                <span class="stringliteral">&#39;points_earned&#39;</span> =&gt; $activity-&gt;points,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            ]); </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        }</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    }</div>
+<div class="ttc" id="classDMA_1_1Friends_1_1Classes_1_1FriendsLog_html_a0b90db29da51f53991f2dcc1a55f14c7"><div class="ttname"><a href="../../d4/d33/classDMA_1_1Friends_1_1Classes_1_1FriendsLog.html#a0b90db29da51f53991f2dcc1a55f14c7">DMA\Friends\Classes\FriendsLog\activity</a></div><div class="ttdeci">static activity($params)</div><div class="ttdef"><b>Definition:</b> FriendsLog.php:61</div></div>
+</div><!-- fragment -->
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>classes/ActivityProcessor.php</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Oct 1 2014 10:13:40 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Oct 1 2014 15:47:20 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

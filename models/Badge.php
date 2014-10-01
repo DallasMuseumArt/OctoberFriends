@@ -58,7 +58,7 @@ class Badge extends Model
 
     public function scopefindWordpress($query, $id)
     {   
-        $query->where('wordpress_id', $id);
+        return $query->where('wordpress_id', $id);
     }  
 
     public function steps()
