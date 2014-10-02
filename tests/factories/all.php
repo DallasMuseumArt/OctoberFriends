@@ -131,3 +131,23 @@ FactoryMuffin::define('DMA\Friends\Models\Usermeta', [
     'current_member'        => 'boolean',
     'current_member_number' => 'randomNumber',
 ]);
+
+/**
+ * Create and empty group
+ * @var DMA\Friends\Models\UserGroup
+ */
+FactoryMuffin::define('DMA\Friends\Models\UserGroup', [
+	'owner_id'      => 'factory|RainLab\User\Models\User',
+	'is_active'     => 'boolean',
+]);
+
+/**
+ * Create a group with  5 members for testing
+ * @var DMA\Friends\Models\UserGroup
+ */
+FactoryMuffin::define('filled:DMA\Friends\Models\UserGroup', [
+], function($object){
+	$members = FactoryMuffin::seed(5, 'RainLab\User\Models\User');
+	$members_ids = array_map(function($m) {return $m->id;}, $members);
+	$object->users()->attach($members_ids);
+});

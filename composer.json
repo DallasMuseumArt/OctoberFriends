@@ -16,6 +16,6 @@
 
     "require": {
         "ellipsesynergie/api-response": "0.5.*",
-        "league/factory-muffin": "~2.0"
+        "league/factory-muffin": "~2.1"
     }
 }

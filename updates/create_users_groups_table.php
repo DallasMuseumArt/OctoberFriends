@@ -14,11 +14,14 @@ class CreateUsersGroupsTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('group_id');
-            $table->integer('confirmed')->default(false);
+            $table->boolean('is_confirmed')->default(false);
+            $table->boolean('sent_invite')->default(false);
             $table->timestamps();
             
             $table->index('user_id');
-            $table->index('group_id');            
+            $table->index('group_id');     
+
+            $table->unique( array('user_id', 'group_id') );
         });
     }
 
