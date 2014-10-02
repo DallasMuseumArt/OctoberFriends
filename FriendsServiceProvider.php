@@ -3,33 +3,42 @@
 namespace DMA\Friends;
 
 use Illuminate\Support\ServiceProvider;
-use DMA\Friends\Classes\ActivityProcessor;
+use DMA\Friends\Classes\ActivityCode;
 use DMA\Friends\Classes\BadgeProcessor;
 use DMA\Friends\Classes\FriendsLog;
 
 class FriendsServiceProvider extends ServiceProvider
 {
+    /**
+     * Register the available services in this plugin
+     *
+     * @return void
+     */
     public function register()
     {
-        $this->registerActivityProcessor();
-        $this->registerBadgeProcessor();
+        $this->registerActivityCode();
         $this->registerFriendsLog();
     }
 
-    public function registerActivityProcessor()
+    /**
+     * Setup the ActivityCode service
+     *
+     * @return void
+     */
+    public function registerActivityCode()
     {
-        $this->app['ActivityProcessor'] = $this->app->share(function($app) {
-            return new ActivityProcessor;
+        $this->app['ActivityCode'] = $this->app->share(function($app) {
+            return new ActivityCode;
         });
+
+        $this->createAlias('ActivityCode', 'DMA\Friends\Classes\ActivityCode');
     }
 
-    public function registerBadgeProcessor()
-    {
-        $this->app['BadgeProcessor'] = $this->app->share(function($app) {
-            return new BadgeProcessor;
-        });
-    }
-
+    /**
+     * Setup the ActivityCode service
+     *
+     * @return void
+     */
     public function registerFriendsLog()
     {
         $this->app['FriendsLog'] = $this->app->share(function($app) {
@@ -39,6 +48,11 @@ class FriendsServiceProvider extends ServiceProvider
         $this->createAlias('FriendsLog', 'DMA\Friends\Classes\FriendsLog');
     }
 
+    /**
+     * Helper method to quickly setup class aliases for a service
+     * 
+     * @return void
+     */
     protected function createAlias($alias, $class)
     {
         $this->app->booting(function() use ($alias, $class)

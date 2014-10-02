@@ -1,6 +1,117 @@
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityProcessor}{\section{D\-M\-A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}Activity\-Processor Class Reference}
 \label{classDMA_1_1Friends_1_1Classes_1_1ActivityProcessor}\index{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Classes\textbackslash{}\-Activity\-Processor@{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Classes\textbackslash{}\-Activity\-Processor}}
 }
+Inheritance diagram for D\-M\-A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}Activity\-Processor\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{db/d9c/classDMA_1_1Friends_1_1Classes_1_1ActivityProcessor}
+\end{center}
+\end{figure}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityProcessor_af892e6c3b63a5ef0002f97719839aa82}{process} (User \$user, \$params)
+\item 
+static \hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityProcessor_adaddbe728558689c09abe18010c005e7}{can\-Complete} (\hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity}{Activity} \$activity)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityProcessor_adaddbe728558689c09abe18010c005e7}{\index{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Activity\-Processor@{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Activity\-Processor}!can\-Complete@{can\-Complete}}
+\index{can\-Complete@{can\-Complete}!DMA::Friends::Classes::ActivityProcessor@{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Activity\-Processor}}
+\subsubsection[{can\-Complete}]{\setlength{\rightskip}{0pt plus 5cm}static D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Classes\textbackslash{}\-Activity\-Processor\-::can\-Complete (
+\begin{DoxyParamCaption}
+\item[{{\bf Activity}}]{\$activity}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityProcessor_adaddbe728558689c09abe18010c005e7}
+Determine if an activity is capable of being completed
+
+\begin{DoxyReturn}{Returns}
+boolean returns true if an activity can be completed by the user 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityProcessorInterface}{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Classes\textbackslash{}\-Activity\-Processor\-Interface}.
+
+
+\begin{DoxyCode}
+61     \{   
+62         \textcolor{keywordflow}{if} (!$activity->isActive()) \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+63 
+64         \textcolor{keywordflow}{switch} ($activity->time\_restriction) \{
+65             \textcolor{keywordflow}{case} \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity_ab9dd8b18c4810beabdcf8e45039913c8}{Activity::TIME\_RESTRICT\_NONE}:
+66                 \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+67             \textcolor{keywordflow}{case} \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity_ac78040e8784e02c2d1bcce5221ac6cb8}{Activity::TIME\_RESTRICT\_HOURS}:
+68                 \textcolor{keywordflow}{if} ($activity->time\_restriction\_data) \{
+69                     $now        = time();
+70                     $start\_time = strtotime($activity->time\_restriction\_data[\textcolor{stringliteral}{'start\_time'}], $now);
+71                     $end\_time   = strtotime($activity->time\_restriction\_data[\textcolor{stringliteral}{'end\_time'}], $now);
+72                     $day        = date(\textcolor{charliteral}{'w'});
+73 
+74                     \textcolor{keywordflow}{if} ($activity->time\_restriction\_date[\textcolor{stringliteral}{'days'}][$day] !== \textcolor{keyword}{false}
+75                         && $now >= $start\_time && $now <= $end\_time) \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+76                 \}
+77 
+78                 \textcolor{keywordflow}{break};
+79             \textcolor{keywordflow}{case} \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity_a71b85478f20cda144aeffe010364a0f7}{Activity::TIME\_RESTRICT\_DAYS}: 
+80                 $now = \textcolor{keyword}{new} DateTime(\textcolor{stringliteral}{'now'});
+81                 \textcolor{keywordflow}{if} ($now >= $activity->date\_begin 
+82                     && $now <= $activity->date\_end) \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+83 
+84                 \textcolor{keywordflow}{break};
+85         \} 
+86 
+87         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+88     \} 
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityProcessor_af892e6c3b63a5ef0002f97719839aa82}{\index{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Activity\-Processor@{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Activity\-Processor}!process@{process}}
+\index{process@{process}!DMA::Friends::Classes::ActivityProcessor@{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Activity\-Processor}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}static D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Classes\textbackslash{}\-Activity\-Processor\-::process (
+\begin{DoxyParamCaption}
+\item[{User}]{\$user, }
+\item[{}]{\$params}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityProcessor_af892e6c3b63a5ef0002f97719839aa82}
+Process and determine if an award can be issued based on a provided activity code
+
+
+\begin{DoxyParams}[1]{Parameters}
+object & {\em \$user} & A user model for which the activity should act upon\\
+\hline
+array & {\em \$params} & An array of parameters for validating activities\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean returns true if the process was successful 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityProcessorInterface}{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Classes\textbackslash{}\-Activity\-Processor\-Interface}.
+
+
+\begin{DoxyCode}
+33     \{
+34         $activity = $params[\textcolor{stringliteral}{'activity'}];
+35 
+36         \textcolor{keywordflow}{if} (self::canComplete($activity)) \{
+37 
+38             Event::fire(\textcolor{stringliteral}{'friends.activityCompleted'}, [ $user, $activity ]); 
+39 
+40             \textcolor{comment}{// log an entry to the activity log}
+41             \hyperlink{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_a0b90db29da51f53991f2dcc1a55f14c7}{FriendsLog::activity}([
+42                 \textcolor{stringliteral}{'user'}          => $user,
+43                 \textcolor{stringliteral}{'message'}       => Lang::get(\textcolor{stringliteral}{'dma.friends::lang.log.activity'}, [\textcolor{stringliteral}{'name'} => $user->name, \textcolor{stringliteral}{'
+      title'} => $activity->title]), 
+44                 \textcolor{stringliteral}{'object'}        => $activity,
+45                 \textcolor{stringliteral}{'points\_earned'} => $activity->points,
+46             ]); 
+47 
+48             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+49         \}
+50 
+51         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+52     \}
+\end{DoxyCode}
 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}

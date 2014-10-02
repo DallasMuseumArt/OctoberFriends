@@ -22,16 +22,19 @@ class Modal extends ComponentBase
     public function defineProperties()
     {
         return [
-            'title' => [
-                'title' => 'Modal Title',
-            ],
             'linkTitle' => [
                 'title'     => 'Link Title',
                 'default'   => 'Click here',
             ],
+            'linkClasses' => [
+                'title' => 'Additional link classes',
+            ],
+            'title' => [
+                'title' => 'Modal Title',
+            ],
             'partial' => [
-                'title'     => 'Partial',
-                'default'   => false,
+                'title'         => 'Partial',
+                'description'   => 'Name of the partial in your theme directory',
             ],
         ];
     }
@@ -39,6 +42,7 @@ class Modal extends ComponentBase
     public function onRender()
     {
         $this->page['linkTitle'] = $this->property('linkTitle');
+        $this->page['classes'] = $this->property('linkClasses');
     }
 
     public function onRun()

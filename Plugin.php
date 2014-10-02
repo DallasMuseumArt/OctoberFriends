@@ -112,7 +112,10 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            'DMA\Friends\Components\Modal' => 'Modal'
+            'DMA\Friends\Components\ActivityCodeForm'   => 'ActivityCodeForm',
+            'DMA\Friends\Components\BadgeRecommend'     => 'BadgeRecommend',
+            'DMA\Friends\Components\Modal'              => 'Modal',
+            'DMA\Friends\Components\UserBadges'         => 'UserBadges',
         ];
     }
 

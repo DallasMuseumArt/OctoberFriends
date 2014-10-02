@@ -39,10 +39,10 @@ class FriendsEventHandler {
 
     public function subscribe($events)
     {   
-        $events->listen('friends.activityCompleted', 'FriendsEventHandler@onActivityCompleted');
-        $events->listen('friends.badgeEarned', 'FriendsEventHandler@onBadgeEarned');
-        $events->listen('friends.rewardRedeemed', 'FriendsEventHandler@onRewardRedeemed');
-        $events->listen('friends.stepCompleted', 'FriendsEventHandler@onStepCompleted');
-        $events->listen('auth.login', 'FriendsEventHandler@onAuthLogin');
+        $events->listen('friends.activityCompleted', 'DMA\Friends\Classes\FriendsEventHandler@onActivityCompleted');
+        $events->listen('friends.badgeEarned', 'DMA\Friends\Classes\FriendsEventHandler@onBadgeEarned');
+        $events->listen('friends.rewardRedeemed', 'DMA\Friends\Classes\FriendsEventHandler@onRewardRedeemed');
+        $events->listen('friends.stepCompleted', 'DMA\Friends\Classes\FriendsEventHandler@onStepCompleted');
+        $events->listen('auth.login', 'DMA\Friends\Classes\FriendsEventHandler@onAuthLogin');
     }   
 }

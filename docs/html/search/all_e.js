@@ -1,8 +1,11 @@
 var searchData=
 [
+  ['scopefindcode',['scopefindCode',['../dc/d8c/classDMA_1_1Friends_1_1Models_1_1Activity.html#a9bb36aab36ff22a29b2a594617dd591c',1,'DMA::Friends::Models::Activity']]],
+  ['scopeisactive',['scopeIsActive',['../dc/d8c/classDMA_1_1Friends_1_1Models_1_1Activity.html#acd3f12824d95be07b5221cdc9d64abf7',1,'DMA::Friends::Models::Activity']]],
+  ['settimerestrictiondataattribute',['setTimeRestrictionDataAttribute',['../dc/d8c/classDMA_1_1Friends_1_1Models_1_1Activity.html#ade0ffca24448c217def365d104e52866',1,'DMA::Friends::Models::Activity']]],
   ['show',['show',['../d9/dda/classDMA_1_1Friends_1_1Api_1_1BaseResource.html#a5ac5d4fb30ec5434fd685e044c357f97',1,'DMA::Friends::Api::BaseResource']]],
-  ['step',['Step',['../d0/d87/classDMA_1_1Friends_1_1Wordpress_1_1Step.html',1,'DMA::Friends::Wordpress']]],
   ['step',['Step',['../d9/d03/classDMA_1_1Friends_1_1Models_1_1Step.html',1,'DMA::Friends::Models']]],
+  ['step',['Step',['../d0/d87/classDMA_1_1Friends_1_1Wordpress_1_1Step.html',1,'DMA::Friends::Wordpress']]],
   ['stepresource',['StepResource',['../d8/da8/classDMA_1_1Friends_1_1Api_1_1StepResource.html',1,'DMA::Friends::Api']]],
   ['steps',['Steps',['../d0/d0f/classDMA_1_1Friends_1_1Controllers_1_1Steps.html',1,'DMA::Friends::Controllers']]],
   ['steptransformer',['StepTransformer',['../d0/dbc/classDMA_1_1Friends_1_1Api_1_1StepTransformer.html',1,'DMA::Friends::Api']]],

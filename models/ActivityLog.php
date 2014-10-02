@@ -29,12 +29,11 @@ class ActivityLog extends Model
 
     protected $rules = [
         'message'       => 'min:10',
+        'user_id'       => 'required|numeric',
         'action'        => 'required|in:activity,artwork,points,reward,unlocked',
-        'user_id'       => 'required|numeric',  
         'points_earned' => 'numeric',
         'total_points'  => 'numeric',
         'timestamp'     => 'required',
-        'timezone'      => 'required|timezone',
     ];
 
     /**
@@ -52,7 +51,7 @@ class ActivityLog extends Model
      * @var array Relations
      */
     public $belongsTo = [
-        'User' => '\RainLab\User\Model\User'
+        'user' => ['\RainLab\User\Models\User']
     ];
 
     public $morphTo = [

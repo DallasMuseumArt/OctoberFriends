@@ -10,24 +10,106 @@ Inheritance diagram for D\-M\-A\textbackslash{}Friends\textbackslash{}Friends\-S
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classDMA_1_1Friends_1_1FriendsServiceProvider_a6a90d2cdc4c6b153b45764ba66e154ae}{{\bfseries register} ()}\label{classDMA_1_1Friends_1_1FriendsServiceProvider_a6a90d2cdc4c6b153b45764ba66e154ae}
-
+\hyperlink{classDMA_1_1Friends_1_1FriendsServiceProvider_a6a90d2cdc4c6b153b45764ba66e154ae}{register} ()
 \item 
-\hypertarget{classDMA_1_1Friends_1_1FriendsServiceProvider_acac19246d5282897b8e0ce6265ed5ef3}{{\bfseries register\-Activity\-Processor} ()}\label{classDMA_1_1Friends_1_1FriendsServiceProvider_acac19246d5282897b8e0ce6265ed5ef3}
-
+\hyperlink{classDMA_1_1Friends_1_1FriendsServiceProvider_aa21a040ba3b9fd8ef5cabaa63ccc10f8}{register\-Activity\-Code} ()
 \item 
-\hypertarget{classDMA_1_1Friends_1_1FriendsServiceProvider_a8c3cfb466bb9300f3909797a6b58b634}{{\bfseries register\-Badge\-Processor} ()}\label{classDMA_1_1Friends_1_1FriendsServiceProvider_a8c3cfb466bb9300f3909797a6b58b634}
-
-\item 
-\hypertarget{classDMA_1_1Friends_1_1FriendsServiceProvider_a2d6ff7101ca6389c00e298f2d594a1df}{{\bfseries register\-Friends\-Log} ()}\label{classDMA_1_1Friends_1_1FriendsServiceProvider_a2d6ff7101ca6389c00e298f2d594a1df}
-
+\hyperlink{classDMA_1_1Friends_1_1FriendsServiceProvider_a2d6ff7101ca6389c00e298f2d594a1df}{register\-Friends\-Log} ()
 \end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classDMA_1_1Friends_1_1FriendsServiceProvider_acad52dc5020c640afed3c4fe82243051}{{\bfseries create\-Alias} (\$alias, \$class)}\label{classDMA_1_1Friends_1_1FriendsServiceProvider_acad52dc5020c640afed3c4fe82243051}
-
+\hyperlink{classDMA_1_1Friends_1_1FriendsServiceProvider_acad52dc5020c640afed3c4fe82243051}{create\-Alias} (\$alias, \$class)
 \end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1FriendsServiceProvider_acad52dc5020c640afed3c4fe82243051}{\index{D\-M\-A\-::\-Friends\-::\-Friends\-Service\-Provider@{D\-M\-A\-::\-Friends\-::\-Friends\-Service\-Provider}!create\-Alias@{create\-Alias}}
+\index{create\-Alias@{create\-Alias}!DMA::Friends::FriendsServiceProvider@{D\-M\-A\-::\-Friends\-::\-Friends\-Service\-Provider}}
+\subsubsection[{create\-Alias}]{\setlength{\rightskip}{0pt plus 5cm}D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Friends\-Service\-Provider\-::create\-Alias (
+\begin{DoxyParamCaption}
+\item[{}]{\$alias, }
+\item[{}]{\$class}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classDMA_1_1Friends_1_1FriendsServiceProvider_acad52dc5020c640afed3c4fe82243051}
+Helper method to quickly setup class aliases for a service
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+57     \{
+58         $this->app->booting(\textcolor{keyword}{function}() use ($alias, $class)
+59         \{   
+60             $loader = \(\backslash\)Illuminate\(\backslash\)Foundation\(\backslash\)AliasLoader::getInstance();
+61             $loader->alias($alias, $class);
+62         \}); 
+63     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1FriendsServiceProvider_a6a90d2cdc4c6b153b45764ba66e154ae}{\index{D\-M\-A\-::\-Friends\-::\-Friends\-Service\-Provider@{D\-M\-A\-::\-Friends\-::\-Friends\-Service\-Provider}!register@{register}}
+\index{register@{register}!DMA::Friends::FriendsServiceProvider@{D\-M\-A\-::\-Friends\-::\-Friends\-Service\-Provider}}
+\subsubsection[{register}]{\setlength{\rightskip}{0pt plus 5cm}D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Friends\-Service\-Provider\-::register (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1FriendsServiceProvider_a6a90d2cdc4c6b153b45764ba66e154ae}
+Register the available services in this plugin
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+18     \{
+19         $this->\hyperlink{classDMA_1_1Friends_1_1FriendsServiceProvider_aa21a040ba3b9fd8ef5cabaa63ccc10f8}{registerActivityCode}();
+20         $this->\hyperlink{classDMA_1_1Friends_1_1FriendsServiceProvider_a2d6ff7101ca6389c00e298f2d594a1df}{registerFriendsLog}();
+21     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1FriendsServiceProvider_aa21a040ba3b9fd8ef5cabaa63ccc10f8}{\index{D\-M\-A\-::\-Friends\-::\-Friends\-Service\-Provider@{D\-M\-A\-::\-Friends\-::\-Friends\-Service\-Provider}!register\-Activity\-Code@{register\-Activity\-Code}}
+\index{register\-Activity\-Code@{register\-Activity\-Code}!DMA::Friends::FriendsServiceProvider@{D\-M\-A\-::\-Friends\-::\-Friends\-Service\-Provider}}
+\subsubsection[{register\-Activity\-Code}]{\setlength{\rightskip}{0pt plus 5cm}D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Friends\-Service\-Provider\-::register\-Activity\-Code (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1FriendsServiceProvider_aa21a040ba3b9fd8ef5cabaa63ccc10f8}
+Setup the Activity\-Code service
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+29     \{
+30         $this->app[\textcolor{stringliteral}{'ActivityCode'}] = $this->app->share(\textcolor{keyword}{function}($app) \{
+31             \textcolor{keywordflow}{return} \textcolor{keyword}{new} ActivityCode;
+32         \});
+33 
+34         $this->\hyperlink{classDMA_1_1Friends_1_1FriendsServiceProvider_acad52dc5020c640afed3c4fe82243051}{createAlias}(\textcolor{stringliteral}{'ActivityCode'}, \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Classes\(\backslash\)ActivityCode'});
+35     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1FriendsServiceProvider_a2d6ff7101ca6389c00e298f2d594a1df}{\index{D\-M\-A\-::\-Friends\-::\-Friends\-Service\-Provider@{D\-M\-A\-::\-Friends\-::\-Friends\-Service\-Provider}!register\-Friends\-Log@{register\-Friends\-Log}}
+\index{register\-Friends\-Log@{register\-Friends\-Log}!DMA::Friends::FriendsServiceProvider@{D\-M\-A\-::\-Friends\-::\-Friends\-Service\-Provider}}
+\subsubsection[{register\-Friends\-Log}]{\setlength{\rightskip}{0pt plus 5cm}D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Friends\-Service\-Provider\-::register\-Friends\-Log (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1FriendsServiceProvider_a2d6ff7101ca6389c00e298f2d594a1df}
+Setup the Activity\-Code service
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+43     \{
+44         $this->app[\textcolor{stringliteral}{'FriendsLog'}] = $this->app->share(\textcolor{keyword}{function}($app) \{
+45             \textcolor{keywordflow}{return} \textcolor{keyword}{new} FriendsLog;
+46         \});
+47 
+48         $this->\hyperlink{classDMA_1_1Friends_1_1FriendsServiceProvider_acad52dc5020c640afed3c4fe82243051}{createAlias}(\textcolor{stringliteral}{'FriendsLog'}, \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Classes\(\backslash\)FriendsLog'});
+49     \}
+\end{DoxyCode}
 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
