@@ -1,0 +1,62 @@
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityCode}{\section{D\-M\-A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}Activity\-Code Class Reference}
+\label{classDMA_1_1Friends_1_1Classes_1_1ActivityCode}\index{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Classes\textbackslash{}\-Activity\-Code@{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Classes\textbackslash{}\-Activity\-Code}}
+}
+Inheritance diagram for D\-M\-A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}Activity\-Code\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{d0/dbd/classDMA_1_1Friends_1_1Classes_1_1ActivityCode}
+\end{center}
+\end{figure}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityCode_aac52c5b2721f592cb941fe2d3fb516bc}{process} (User \$user, \$params)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityCode_aac52c5b2721f592cb941fe2d3fb516bc}{\index{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Activity\-Code@{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Activity\-Code}!process@{process}}
+\index{process@{process}!DMA::Friends::Classes::ActivityCode@{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Activity\-Code}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}static D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Classes\textbackslash{}\-Activity\-Code\-::process (
+\begin{DoxyParamCaption}
+\item[{User}]{\$user, }
+\item[{}]{\$params}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityCode_aac52c5b2721f592cb941fe2d3fb516bc}
+\begin{DoxySeeAlso}{See Also}
+
+\end{DoxySeeAlso}
+Process and determine if an award can be issued based on a provided activity code
+
+
+\begin{DoxyParams}[1]{Parameters}
+object & {\em \$user} & A user model for which the activity should act upon\\
+\hline
+array & {\em \$params} & An array of parameters for validating activities\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean returns true if the process was successful 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityProcessorInterface}{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Classes\textbackslash{}\-Activity\-Processor\-Interface}.
+
+
+\begin{DoxyCode}
+27     \{
+28         \textcolor{keywordflow}{if} (!isset($params[\textcolor{stringliteral}{'code'}]) || empty($params[\textcolor{stringliteral}{'code'}])) \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+29 
+30         \textcolor{keywordflow}{if} ($activity = Activity::findCode($params[\textcolor{stringliteral}{'code'}])->first()) \{
+31             \textcolor{keywordflow}{return} parent::process($user, [\textcolor{stringliteral}{'activity'} => $activity]);
+32         \}
+33 
+34         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+35 
+36     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+classes/Activity\-Code.\-php\end{DoxyCompactItemize}

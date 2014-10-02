@@ -1,5 +1,8 @@
 var searchData=
 [
+  ['scopefindcode',['scopefindCode',['../dc/d8c/classDMA_1_1Friends_1_1Models_1_1Activity.html#a9bb36aab36ff22a29b2a594617dd591c',1,'DMA::Friends::Models::Activity']]],
+  ['scopeisactive',['scopeIsActive',['../dc/d8c/classDMA_1_1Friends_1_1Models_1_1Activity.html#acd3f12824d95be07b5221cdc9d64abf7',1,'DMA::Friends::Models::Activity']]],
+  ['settimerestrictiondataattribute',['setTimeRestrictionDataAttribute',['../dc/d8c/classDMA_1_1Friends_1_1Models_1_1Activity.html#ade0ffca24448c217def365d104e52866',1,'DMA::Friends::Models::Activity']]],
   ['show',['show',['../d9/dda/classDMA_1_1Friends_1_1Api_1_1BaseResource.html#a5ac5d4fb30ec5434fd685e044c357f97',1,'DMA::Friends::Api::BaseResource']]],
   ['store',['store',['../d9/dda/classDMA_1_1Friends_1_1Api_1_1BaseResource.html#a20877c85a440ce26e121a29b8fb91510',1,'DMA::Friends::Api::BaseResource']]],
   ['syncactivities',['syncActivities',['../d1/dfb/classDMA_1_1Friends_1_1Console_1_1SyncFriendsDataCommand.html#a6096678a576ae660cf9f77939d1a7a0a',1,'DMA::Friends::Console::SyncFriendsDataCommand']]],

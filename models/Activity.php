@@ -1,6 +1,7 @@
 <?php namespace DMA\Friends\Models;
 
 use Model;
+use DateTime;
 
 /**
  * Activity Model
@@ -10,8 +11,17 @@ class Activity extends Model
 
     use \October\Rain\Database\Traits\Validation;
 
+    /**
+     * @const No time restriction set
+     */
     const TIME_RESTRICT_NONE    = 0;
+    /**
+     * @const A time restriction is set by individual hours and days of the week
+     */
     const TIME_RESTRICT_HOURS   = 1;
+    /**
+     * @const A time restriction is set by a date range
+     */
     const TIME_RESTRICT_DAYS    = 2;
 
     /**
@@ -52,8 +62,67 @@ class Activity extends Model
         'activityLogs'  => ['DMA\Friends\Models\ActivityLog', 'name' => 'object'],
     ];
 
+    public function isActive()
+    {
+        return $this->is_published && !$this->is_archived;
+    }
+
+    /**
+     * Mutator to ensure time_restriction_data is serialized
+     */
+    public function setTimeRestrictionDataAttribute($value)
+    {
+        if (is_array($value)) {
+            return serialize($value);
+        }
+
+        return $value;
+    }
+
+    /**
+     * Accessor to unserialize time_restriction_data attribute
+     */
+    public function getTimeRestrictionDataAttribute($value)
+    {
+        return unserialize($value);
+    }
+
+    /**
+     * Always return date_begin as a DateTime object
+     */
+    public function getDateBeginAttribute($value)
+    {
+        return new DateTime($value);
+    }
+
+    /**
+     * Always return date_end as a DateTime object
+     */
+    public function getDateEndAttribute($value)
+    {
+        return new DateTime($value);
+    }
+
+    /**
+     * Return only activities that are active
+     */
+    public function scopeIsActive($query)
+    {
+        return $query->where('is_published', '=', 1)
+            ->where('is_archived', '<>', 1);
+    }
+
+    /**
+     * Find an activity by its activity code
+     */
+    public function scopefindCode($query, $code)
+    {
+        return $query->where('activity_code', $code)
+            ->isActive();
+    }
+
     public function scopefindWordpress($query, $id)
     {   
-        $query->where('wordpress_id', $id);
+        return $query->where('wordpress_id', $id);
     }  
 }
