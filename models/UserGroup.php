@@ -1,6 +1,7 @@
 <?php namespace DMA\Friends\Models;
 
 use October\Rain\Auth\Models\Group as GroupBase;
+use DMA\Friends\Models\Settings;
 
 /**
  * Friends User group model
@@ -42,6 +43,11 @@ class UserGroup extends GroupBase{
 	];
 	
 	/**
+	 * @var array Users of the group.
+	 */
+	protected $groupUsers;	
+	
+	/**
 	 * 
 	 */
 	public static function boot()
@@ -69,15 +75,21 @@ class UserGroup extends GroupBase{
 	 * @param RainLab\User\Models\User $user
 	 * @return bool
 	 */
-	public function addUser($user)
+	public function addUser(&$user)
 	{
-		if (!$this->inGroup($user)) {
-			$this->users()->attach($user);
-			$this->groupUsers = null;
-			$this->sendInvite($user);
-			return true;
+
+		if (count($this->getUsers()) < Settings::get('maximum_users_group')
+			&& $this->is_active ){
+			if (!$this->inGroup($user)) {
+				$this->users()->attach($user);
+				$this->groupUsers = null;
+				$this->sendInvite($user);
+				return true;
+			}
+		}else{
+			// TODO : Raise exceptions or fire events 
 		}
-	
+
 		return false;
 	}
 	
@@ -114,46 +126,78 @@ class UserGroup extends GroupBase{
 	
 
 	/**
+	 * User accept invite
+	 * @param RainLab\User\Models\User $user
+	 * @return bool
+	 */
+	public function acceptInvite(&$user)
+	{
+		// TODO : This logic might should be in the User Model
+		return $this->confirmInvite($user, true);
+	}
+
+	/**
+	 * User accept invite
+	 * @param RainLab\User\Models\User $user
+	 * @return bool
+	 */
+	public function rejectInvite(&$user)
+	{
+		// TODO : This logic might should be in the User Model
+		return $this->confirmInvite($user, false);
+	}	
+	
+	/**
 	 * See if the user is in the group.
 	 * @param RainLab\User\Models\User $user
 	 * @return bool
 	 */
-	public function acceptInvite($user)
+	private function confirmInvite(&$user, $bool)
 	{
-		UserGroup::with(array('users' => function($query)
-		{
-		    $query->where('primary', 1); 
-		}))->find(1);
-	
-		return false;
+		if ($this->inGroup($user)){
+			$user = $this->users()->where('user_id', $user->getKey())
+								  ->get()[0];
+			$user->pivot->is_confirmed = $bool;
+			$user->pivot->save();
+			return $bool;
+		}
 	}
+	
 	
 	
 	/**
 	 * Send invite to the given user to join the group. 
 	 * @return bool
 	 */
-	public function sendInvite($user){
+	public function sendInvite(&$user){
 		// TODO : Implement different channels (SMS, EMAIL, etc..)
-		if ($user->pivot->sent_invite) return false;
+		if (!$this->inGroup($user)) return false;
 		
-		$full_name = $user->first_name . ' ' . $user->last_name;
-			
+		// FIXME : Sometimes pivot is empty but I didn't find why it happens.
+		// I am suspecting that is an internal problem in the Eloquent model and how it gets updated
+		// after a new relationship is created.
+		// For now the solution is if the pivot is empty reload the model. 
+		if (is_null($user->pivot)){
+			$user = $this->users()->where('user_id', $user->getKey())->get()[0];
+		}
+		
+		if ($user->pivot->sent_invite) return false;
+
 		$data = [
-		'user' => $user,
-		'name' => $full_name,
-		'link' => \Backend::url('dma/friends/groups'),
+			'user'   => $user,
+			'owner'  => $this->owner,
+			'link'   => \Backend::url('dma/friends/groups'),
 		];
 		
         $mailTemplate = 'backend::mail.invite';
 		
-		if(\Mail::send($mailTemplate, $data, function($message)
+		if(\Mail::send($mailTemplate, $data, function($message) use ($user)
 		{
-			$message->to($user->email, $full_name);
+			$message->to($user->email, $user->name);
 		}) == 1){
 			// Email was sent
 			$user->pivot->sent_invite = true;
-			$user->save();
+			$user->pivot->save();
 			return true;
 		}	
 		return false;
@@ -166,7 +210,7 @@ class UserGroup extends GroupBase{
 	 */
 	public function sendUserInvitations()
 	{	
-		foreach ($this->users as $user){
+		foreach ($this->getUsers() as $user){
 			$this->sendInvite($user);
 		}
 	}	
