@@ -1,0 +1,18 @@
+# ===================================
+#  Field Definitions
+# ===================================
+
+tabs:
+    fields:
+
+        maximum_users_group:
+            type: number
+            span: auto
+            label: Maximum number of users per group
+            tab: groups
+
+        comunication_channel:
+            type: radio
+            span: auto
+            label: Communication channels
+            tab: groups

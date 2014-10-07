@@ -2,6 +2,7 @@
 
 use League\FactoryMuffin\Facade as FactoryMuffin;
 use DMA\Friends\Tests\MuffinCase;
+use DMA\Friends\Models\Settings;
 
 
 class UserGroupModelTest extends MuffinCase
@@ -76,18 +77,18 @@ class UserGroupModelTest extends MuffinCase
     public function testGroupInactiveCanNotHaveMembers()
     {
 
-    	$this->markTestIncomplete('Found in Laravel a best practice for handlering this case.');
+    	//$this->markTestIncomplete('Found in Laravel a best practice for handlering this case.');
  
      	$attrs = ['is_active' => false];
     	$group = FactoryMuffin::create('DMA\Friends\Models\UserGroup', $attrs);
     	 
     	// Create member instances
-    	$member = FactoryMuffin::instance('RainLab\User\Models\User');
+    	$user = FactoryMuffin::create('RainLab\User\Models\User');
     	 
-    	$group->users()->save($member);
+    	$group->addUser($user);
     	
     	// This should be zero
-    	$this->assertEquals(0, count($group->users));
+    	$this->assertEquals(0, count($group->getUsers()));
     	
     }
     
@@ -138,21 +139,78 @@ class UserGroupModelTest extends MuffinCase
     	return [$group, $user];
     }
        
+    /**
+     * Test Remove  user from a group.
+     * @depends testUserInGroup
+     */
+    public function testMemberAcceptRejectInvite(array $data)
+    {
+    	list($group, $user) = $data;
+
+    	
+    	// Test invite is pending
+    	$this->assertFalse((bool)$user->pivot->is_confirmed);
+    	
+    	// accept invite
+    	$group->acceptInvite($user);
+    
+    	// Test User accept invite
+    	$this->assertTrue((bool)$user->pivot->is_confirmed);
+    
+    	// reject invite
+    	$group->rejectInvite($user);
+    	
+    	// Test User accept invite
+    	$this->assertFalse((bool)$user->pivot->is_confirmed);
+
+    	
+    	return [$group, $user];
+    }
+    
     
     
     /**
      * Test Remove  user from a group.
-     * @depends testUserInGroup
+     * @depends testMemberAcceptRejectInvite
      */    
     public function testRemoveMemberFromGroup(array $data)
     {
     	list($group, $user) = $data;
     	
-    	$this->assertEquals(1, count($group->users));
+    	$this->assertEquals(1, count($group->getUsers()));
    		// Remove user
     	$group->removeUser($user);
     	
-    	$this->assertEquals(0, count($group->users));
+    	// Test cached relationship count
+    	$this->assertEquals(0, count($group->getUsers()));
+    	
+    	// Test Eloquent relationship count 
+    	$this->assertEquals(0, count($group->users()->get()));
+    }
+
+    
+
+    /**
+     * Test Limit group size.
+     */
+    public function testGroupLimitSize()
+    {
+    	// Create and pre-filled group
+    	$group = FactoryMuffin::create('filled:DMA\Friends\Models\UserGroup');
+    	
+    	// Group limit from settings
+    	$limit = Settings::get('maximum_users_group');
+    	
+    	$this->assertEquals($limit, count($group->getUsers()));
+    	
+    	// Add new user and expect an exception
+    	// Create member instances
+    	$user = FactoryMuffin::create('RainLab\User\Models\User');
+    	$this->assertFalse($group->addUser($user));
+    	
+    	// Test that the new user were not added
+    	$this->assertEquals($limit, count($group->getUsers()));
+
     }
     
     /***
@@ -165,11 +223,10 @@ class UserGroupModelTest extends MuffinCase
     	$group->sendUserInvitations();
     
     	// Test if all invites were sent
-    	foreach($group->users as $member){
-    		$this->assertTrue($member->pivot->sent_invite);
+    	foreach($group->getUsers() as $user){
+    		$this->assertTrue((bool)$user->pivot->sent_invite);
     	}
     
     }
-    
     
 }

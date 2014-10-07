@@ -64,6 +64,14 @@ class Plugin extends PluginBase
                 'url'           => Backend::url('dma/friends/activitytriggertypes'),
                 'order'         => 20,
             ],
+            'settings' => [
+	            'label'       	=> 'Friend Settings',
+	            'description' 	=> 'Manage friend settings.',
+	            'category'    	=> 'Friends',
+	            'icon'        	=> 'icon-cog',
+	            'class'       	=> 'DMA\Friends\Models\Settings',
+	            'order'       	=> 50,
+            ],            
         ];
     }
 

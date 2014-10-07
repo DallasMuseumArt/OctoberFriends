@@ -3,6 +3,7 @@
 use \Str as Str;
 use League\FactoryMuffin\Facade as FactoryMuffin;
 use DMA\Friends\Models\ActivityLog;
+use DMA\Friends\Models\Settings;
 use RainLab\User\Models\Country;
 use RainLab\User\Models\State;
 
@@ -100,9 +101,9 @@ FactoryMuffin::define('DMA\Friends\Models\Step', [
 ]);
 
 FactoryMuffin::define('RainLab\User\Models\User', [
-    'name'          => 'userName',
-    'login'         => 'userName',
-    'email'         => 'email',
+    'name'          => 'unique:userName',
+    'login'         => 'unique:userName',
+    'email'         => 'unique:email',
     'password'      => 'password',
     'password_confirmation' => 'password',
     'is_activated'  => 'boolean',
@@ -138,16 +139,22 @@ FactoryMuffin::define('DMA\Friends\Models\Usermeta', [
  */
 FactoryMuffin::define('DMA\Friends\Models\UserGroup', [
 	'owner_id'      => 'factory|RainLab\User\Models\User',
-	'is_active'     => 'boolean',
+	'is_active'     => 'boolean|100',
 ]);
 
 /**
- * Create a group with  5 members for testing
+ * Create a group with the maxium of members allow in a group.
+ * The limit is set in the settings of the plugin
  * @var DMA\Friends\Models\UserGroup
  */
 FactoryMuffin::define('filled:DMA\Friends\Models\UserGroup', [
 ], function($object){
-	$members = FactoryMuffin::seed(5, 'RainLab\User\Models\User');
+	$limit = Settings::get('maximum_users_group');
+	$members = FactoryMuffin::seed($limit, 'RainLab\User\Models\User');
 	$members_ids = array_map(function($m) {return $m->id;}, $members);
 	$object->users()->attach($members_ids);
+	/*
+	forEach($members as $user){
+		$object->addUser($user);	
+	}*/
 });
