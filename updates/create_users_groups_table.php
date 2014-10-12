@@ -1,6 +1,7 @@
 <?php namespace DMA\Friends\Updates;
 
 use Schema;
+use DMA\Friends\Models\UserGroup;
 use October\Rain\Database\Updates\Migration;
 
 class CreateUsersGroupsTable extends Migration
@@ -14,8 +15,12 @@ class CreateUsersGroupsTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('group_id');
-            $table->boolean('is_confirmed')->default(false);
-            $table->boolean('sent_invite')->default(false);
+            $table->enum('membership_status',  [
+            		UserGroup::MEMBERSHIP_PENDING,
+            		UserGroup::MEMBERSHIP_ACCEPTED,
+            		UserGroup::MEMBERSHIP_REJECTED,
+            		UserGroup::MEMBERSHIP_CANCELLED
+            ])->default(UserGroup::MEMBERSHIP_PENDING);
             $table->timestamps();
             
             $table->index('user_id');

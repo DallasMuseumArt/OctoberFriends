@@ -4,15 +4,49 @@
 
 tabs:
     fields:
-
-        maximum_users_group:
-            type: number
-            span: auto
-            label: Maximum number of users per group
-            tab: groups
-
+        
         comunication_channel:
             type: radio
             span: auto
             label: Communication channels
+            tab: groups     
+            
+        maximum_users_group:
+            type: number
+            span: right
+            size: tiny
+            label: Maximum number of users per group
+            required: true            
             tab: groups
+                                    
+        maximum_points_group:
+            type: number
+            span: right
+            size: tiny
+            required: true            
+            label: Maximum points per group
+            tab: groups            
+
+        reset_groups_every_day:
+            type: checkboxlist
+            span: right
+            label: Reset groups every 
+            required: true            
+            tab: groups
+
+        reset_groups_time:
+            type: text
+            span: right
+            placeholder: HH:MM
+            label: Reset groups at
+            required: true            
+            tab: groups
+
+        mail_group_invite_template:
+            type: dropdown
+            span: left  
+            label: Invite template
+            default: dma.friends::mail.invite
+            depends: comunication_channel
+            tab: groups 
+                     

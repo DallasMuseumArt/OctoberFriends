@@ -10,6 +10,7 @@ use DMA\Friends\Models\Settings;
  *
  */
 class UserGroup extends GroupBase{
+	
 	/**
 	 * @var string The database table used by the model.
 	 */
@@ -31,10 +32,10 @@ class UserGroup extends GroupBase{
 		'primaryKey' => 'group_id',
 		'foreignKey' => 'user_id',
 		'timestamps' => true,
-		'pivot' => ['is_confirmed', 'sent_invite']
+		'pivot' => ['membership_status']
 		]
 	];	
-	
+		
 	/**
 	 * @var array Relations
 	 */
@@ -47,6 +48,13 @@ class UserGroup extends GroupBase{
 	 */
 	protected $groupUsers;	
 	
+	// CONSTANTS
+	const MEMBERSHIP_PENDING   = 'PENDING';
+	const MEMBERSHIP_ACCEPTED  = 'ACCEPTED';
+	const MEMBERSHIP_REJECTED  = 'REJECTED';
+	const MEMBERSHIP_CANCELLED = 'CANCELLED';
+		
+
 	/**
 	 * 
 	 */
@@ -60,13 +68,18 @@ class UserGroup extends GroupBase{
 	
 	/**
 	 * Returns an array of users which the given group belongs to.
+	 * Only returns Pending and Active users
 	 * @return array
 	 */
 	public function getUsers()
 	{
 		if (!$this->groupUsers)
-			$this->groupUsers = $this->users()->get();
-	
+			//$this->groupUsers = $this->users()->get();
+			$this->groupUsers = self::find($this->getKey())->users->filter(function($user){
+				$status = $user->pivot->membership_status;
+				return $status == self::MEMBERSHIP_PENDING || $status == self::MEMBERSHIP_ACCEPTED;  
+			});
+			
 		return $this->groupUsers;
 	}
 	
@@ -83,7 +96,16 @@ class UserGroup extends GroupBase{
 			if (!$this->inGroup($user)) {
 				$this->users()->attach($user);
 				$this->groupUsers = null;
-				$this->sendInvite($user);
+				
+				// FIXME : Sometimes pivot is empty but I didn't find why it happens.
+				// I am suspecting that is an internal problem in the Eloquent model and how it gets updated
+				// after a new relationship is created.
+				// For now the solution is if the pivot is empty reload the model.
+				if (is_null($user->pivot)){
+					$user = $this->users()->where('user_id', $user->getKey())->get()[0];
+				}				
+				
+				$this->sendNotification($user, 'invite');
 				return true;
 			}
 		}else{
@@ -100,7 +122,7 @@ class UserGroup extends GroupBase{
 	 */
 	public function removeUser($user)
 	{
-		if ($this->inGroup($user)) {
+		if ($this->inGroup($user, $includeAll=true)) {
 			$this->users()->detach($user);
 			$this->groupUsers = null;
 			return true;
@@ -112,11 +134,16 @@ class UserGroup extends GroupBase{
 	/**
 	 * See if the user is in the group.
 	 * @param RainLab\User\Models\User $user
+	 * @params boolean if True check all users attach to the group regarless of the status.
+	 * 				   if True check only filtered users returned by getUsers method.
 	 * @return bool
 	 */
-	public function inGroup($user)
+	public function inGroup($user, $includeAll=false)
 	{
-		foreach ($this->getUsers() as $u) {
+		$users = $this->getUsers();
+		if ($includeAll) $users = $this->users()->get();
+		
+		foreach ($users as $u) {
 			if ($u->getKey() == $user->getKey())
 				return true;
 		}
@@ -124,16 +151,17 @@ class UserGroup extends GroupBase{
 		return false;
 	}	
 	
+	// TODO : Group acceptance maybe should be move to an extend 
+	// version of RainLab\User\Models\User version
 
 	/**
 	 * User accept invite
 	 * @param RainLab\User\Models\User $user
 	 * @return bool
 	 */
-	public function acceptInvite(&$user)
+	public function acceptMembership(&$user)
 	{
-		// TODO : This logic might should be in the User Model
-		return $this->confirmInvite($user, true);
+		return $this->setMembershipStatus($user, self::MEMBERSHIP_ACCEPTED);
 	}
 
 	/**
@@ -141,78 +169,131 @@ class UserGroup extends GroupBase{
 	 * @param RainLab\User\Models\User $user
 	 * @return bool
 	 */
-	public function rejectInvite(&$user)
+	public function rejectMembership(&$user)
 	{
-		// TODO : This logic might should be in the User Model
-		return $this->confirmInvite($user, false);
+		return $this->setMembershipStatus($user, self::MEMBERSHIP_REJECTED);
 	}	
+
+	/**
+	 * User accept invite
+	 * @param RainLab\User\Models\User $user
+	 * @return bool
+	 */
+	public function cancelMembership(&$user)
+	{	        
+		return $this->setMembershipStatus($user, self::MEMBERSHIP_CANCELLED);
+	}
 	
 	/**
 	 * See if the user is in the group.
 	 * @param RainLab\User\Models\User $user
+	 * @param string PENDING, ACCEPTED, REJECTED, CANCELLED
 	 * @return bool
 	 */
-	private function confirmInvite(&$user, $bool)
+	private function setMembershipStatus(&$user, $status)
 	{
 		if ($this->inGroup($user)){
-			$user = $this->users()->where('user_id', $user->getKey())
-								  ->get()[0];
-			$user->pivot->is_confirmed = $bool;
-			$user->pivot->save();
-			return $bool;
+						
+			if ($user->pivot->membership_status != $status){
+				$user->pivot->membership_status = $status;
+				$user->pivot->save();
+				
+				// Clean cache of groups
+				$this->groupUsers = null;
+				
+				// Send notification to group owners if the status
+				// is different to PENDING. That notification is send by addUser.
+				if ($status != self::MEMBERSHIP_PENDING){
+					$notificationName = strtolower($status);
+					$this->sendNotification($this->owner, $notificationName);
+				}
+			}else{
+				// Return current user status
+				return $user->pivot->membership_status; 
+			}
+			return $status;
 		}
+	}
+	/**
+	 * 
+	 * @param RainLab\User\Models\User $user $user
+	 * @param string $notificationName
+	 * @return boolean|Ambigous <boolean, void>
+	 */
+	public function sendNotification(&$user, $notificationName)
+	{
+		// Check if the user is part of the group or the owner.
+		if (!$this->inGroup($user)) 
+			if($this->owner->getKey() != $user->getKey()) 
+				return false;
+		
+		// TODO : implement other channels
+		$channel = 'mail';
+		if($channel == 'mail'){
+			if (!$mailTemplate = Settings::get('mail_group_'. strtolower($notificationName) . '_template'))				
+				return $this->sendEmailNotification($user, $mailTemplate);		
+		}elseif ($channel == 'text'){
+			//if (!$textTemplate = Settings::get('text_group_'. strtolower($notificationName) . '_template'))
+			//	return $this->sendTXTNotification($user, $textTemplate);			
+		}elseif ($channel == 'kiosk'){
+			$kiosk = null; // Get kioks from settings
+			//if (!$template = Settings::get('kiosk_group_'. strtolower($notificationName) . '_template'))
+			//	return $this->sendKioskNotification($user, $template, $kiosk);
+				
+		}
+		
+		return false;
 	}
 	
 	
-	
 	/**
-	 * Send invite to the given user to join the group. 
+	 * Send email notification to the given user.
+	 * @param RainLab\User\Models\User $user
+	 * @param string $mailTemplate view name of the email.
 	 * @return bool
 	 */
-	public function sendInvite(&$user){
-		// TODO : Implement different channels (SMS, EMAIL, etc..)
+	protected function sendEmailNotification(&$user, $mailTemplate){
 		if (!$this->inGroup($user)) return false;
-		
-		// FIXME : Sometimes pivot is empty but I didn't find why it happens.
-		// I am suspecting that is an internal problem in the Eloquent model and how it gets updated
-		// after a new relationship is created.
-		// For now the solution is if the pivot is empty reload the model. 
-		if (is_null($user->pivot)){
-			$user = $this->users()->where('user_id', $user->getKey())->get()[0];
-		}
-		
-		if ($user->pivot->sent_invite) return false;
-
+			
 		$data = [
-			'user'   => $user,
-			'owner'  => $this->owner,
-			'link'   => \Backend::url('dma/friends/groups'),
+			'user'   => $user->name,
+			'owner'  => $this->owner->name
 		];
-		
-        $mailTemplate = 'backend::mail.invite';
-		
+	
+		if (!$mailTemplate)
+			return;
+	
 		if(\Mail::send($mailTemplate, $data, function($message) use ($user)
 		{
 			$message->to($user->email, $user->name);
 		}) == 1){
-			// Email was sent
-			$user->pivot->sent_invite = true;
-			$user->pivot->save();
 			return true;
-		}	
+		}
+		return false;
+	}	
+
+
+	/**
+	 * Send text notification to the given user.
+	 * @param RainLab\User\Models\User $user
+	 * @param string $textTemplate view name of the email.
+	 * @return bool
+	 */
+	protected function sendTXTNotification(&$user, $textTemplate){
+		// TODO : Implmemented
 		return false;
 	}
 	
 	/**
-	 * Bulk send invites to users of the group.
-	 * sendUserInvitations will send only invites
-	 * to user where sent_invite is false 
+	 * Send notification to Kiosk to the given user.
+	 * @param RainLab\User\Models\User $user
+	 * @param string $template message template 
+	 * @param DMA\Friends\Models\Kiosk $kiosk 
+	 * @return bool
 	 */
-	public function sendUserInvitations()
-	{	
-		foreach ($this->getUsers() as $user){
-			$this->sendInvite($user);
-		}
+	protected function sendKioskNotification(&$user, $template, $kiosk){
+		// TODO : Implmemented
+		return false;
 	}	
 	
 
