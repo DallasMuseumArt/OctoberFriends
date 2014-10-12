@@ -3,6 +3,7 @@
 use League\FactoryMuffin\Facade as FactoryMuffin;
 use DMA\Friends\Tests\MuffinCase;
 use DMA\Friends\Models\Settings;
+use DMA\Friends\Models\UserGroup;
 
 
 class UserGroupModelTest extends MuffinCase
@@ -109,9 +110,6 @@ class UserGroupModelTest extends MuffinCase
 
     	$this->assertTrue($group->addUser($user));
     	
-    	// If sent_invite is set True the invite was sent succesfully.
-    	//$this->assertTrue($user->pivot->sent_invite);
-    	
     	// Validate if the members are the same
     	$this->assertEquals($group->users[0]->getKey(), $user->getKey());
     	
@@ -143,49 +141,97 @@ class UserGroupModelTest extends MuffinCase
      * Test Remove  user from a group.
      * @depends testUserInGroup
      */
-    public function testMemberAcceptRejectInvite(array $data)
+    public function testGroupAcceptance(array $data)
     {
     	list($group, $user) = $data;
 
     	
     	// Test invite is pending
-    	$this->assertFalse((bool)$user->pivot->is_confirmed);
+    	$this->assertEquals($user->pivot->membership_status, UserGroup::MEMBERSHIP_PENDING);
     	
     	// accept invite
-    	$group->acceptInvite($user);
+    	$group->acceptMembership($user);
     
     	// Test User accept invite
-    	$this->assertTrue((bool)$user->pivot->is_confirmed);
+    	$this->assertEquals($user->pivot->membership_status, UserGroup::MEMBERSHIP_ACCEPTED);
     
     	// reject invite
-    	$group->rejectInvite($user);
+    	$group->rejectMembership($user);
     	
-    	// Test User accept invite
-    	$this->assertFalse((bool)$user->pivot->is_confirmed);
+    	// Test User reject invite
+    	$this->assertEquals($user->pivot->membership_status, UserGroup::MEMBERSHIP_REJECTED);
+    	  	
+    	// reject invite
+    	// $group->cancelMembership($user);
+    	 
+    	// Test User reject invite
+    	// $this->assertEquals($user->pivot->membership_status, UserGroup::MEMBERSHIP_CANCELLED);    	
+    	
+    	return [$group, $user];
+    }
 
+    /**
+     * Test user cancel after accept join to a group.
+     * @depends testUserInGroup
+     */
+    public function testUserCancelMembership(array $data)
+    {
+    	list($group, $user) = $data;
+    
+    	 
+    	// Create member instances
+    	$user = FactoryMuffin::create('RainLab\User\Models\User');
+    	$this->assertTrue($group->addUser($user));
     	
+    	// Test invite is pending
+    	$this->assertEquals($user->pivot->membership_status, UserGroup::MEMBERSHIP_PENDING);
+    	 
+    	// accept invite
+    	$group->acceptMembership($user);
+    
+    	// Test User accept invite
+    	$this->assertEquals($user->pivot->membership_status, UserGroup::MEMBERSHIP_ACCEPTED);
+    
+    	// cancel membership
+    	$group->cancelMembership($user);
+    	 
+    	// Test User reject invite
+    	$this->assertEquals($user->pivot->membership_status, UserGroup::MEMBERSHIP_CANCELLED);
+
     	return [$group, $user];
     }
     
     
-    
     /**
      * Test Remove  user from a group.
-     * @depends testMemberAcceptRejectInvite
+     * @depends testUserCancelMembership
      */    
     public function testRemoveMemberFromGroup(array $data)
     {
     	list($group, $user) = $data;
     	
+    	// Remove cancelled user
+    	$group->removeUser($user);
+    	
+    	// Check Eloquent relationship count of the  group it should be zero
+    	$this->assertEquals(1, count($group->users()->get()));
+    	
+    	// Test that a pending user can be deleted
+    	// Create member instances
+    	$user = FactoryMuffin::create('RainLab\User\Models\User');
+    	$this->assertTrue($group->addUser($user));
+    	
+    	// Should be 1 because there is a rejected user
     	$this->assertEquals(1, count($group->getUsers()));
    		// Remove user
     	$group->removeUser($user);
     	
-    	// Test cached relationship count
+    	// Test count of valid users in the group
     	$this->assertEquals(0, count($group->getUsers()));
     	
-    	// Test Eloquent relationship count 
-    	$this->assertEquals(0, count($group->users()->get()));
+    	// Test Eloquent relationship count it should be 1 
+    	// Because there is a rejected user
+    	$this->assertEquals(1, count($group->users()->get()));
     }
 
     
@@ -210,23 +256,16 @@ class UserGroupModelTest extends MuffinCase
     	
     	// Test that the new user were not added
     	$this->assertEquals($limit, count($group->getUsers()));
+    	
+    	// Test an user reject invited so a new user can be invited
+    	$group->rejectMembership($group->users[0]);
 
+    	// Append new user
+    	$this->assertTrue($group->addUser($user));
+    	 
+    	// Test that the new user were not added
+    	$this->assertEquals($limit, count($group->getUsers()));
+    	 
     }
-    
-    /***
-     * Test bulk send invite to members of the group
-    */
-    public function testSentInviteToMembers()
-    {
-    	// Create a group with 5 members
-    	$group = FactoryMuffin::create('filled:DMA\Friends\Models\UserGroup');
-    	$group->sendUserInvitations();
-    
-    	// Test if all invites were sent
-    	foreach($group->getUsers() as $user){
-    		$this->assertTrue((bool)$user->pivot->sent_invite);
-    	}
-    
-    }
-    
+        
 }
