@@ -13,6 +13,12 @@ class UserGroupModelTest extends MuffinCase
     {
     }
 
+    public function testResetGroups()
+    {
+    	UserGroup::markInactiveGroups();
+    	$this->assertEquals(0, count(UserGroup::where('is_active', '=', true)->get()));
+    }
+    
     public function testCreateModelInstance()
     {
         $group = FactoryMuffin::create('DMA\Friends\Models\UserGroup');
@@ -267,5 +273,52 @@ class UserGroupModelTest extends MuffinCase
     	$this->assertEquals($limit, count($group->getUsers()));
     	 
     }
-        
+
+    
+    /**
+     * Test User can join multiple active groups
+     */
+    public function testUserCantJoinMultipleGroups()
+    {
+    	// Create two empty groups
+    	$group1 = FactoryMuffin::create('DMA\Friends\Models\UserGroup');
+    	$group2 = FactoryMuffin::create('DMA\Friends\Models\UserGroup');
+    	 
+    	// Create a new user 
+    	$user = FactoryMuffin::create('RainLab\User\Models\User');
+    	
+    	// Invite user to join both groups
+    	$this->assertTrue($group1->addUser($user));
+    	$this->assertTrue($group2->addUser($user));
+    	    	 
+    	// User accept to join to group1
+    	$this->assertTrue($group1->acceptMembership($user));
+    	
+    	// group2 do not accept user
+    	$this->assertFalse($group2->acceptMembership($user));
+    	
+    	// User1 cancel membership in group1 and join group2 using pending invite
+    	$this->assertTrue($group1->rejectMembership($user));
+    	$this->assertTrue($group2->acceptMembership($user));
+    	 
+    
+		// Test that a user with accepted membership can not be invited
+    	$user2 = FactoryMuffin::create('RainLab\User\Models\User');
+    	$this->assertTrue($group1->addUser($user2));    	
+
+    	// User2 accept to join to group1
+    	$this->assertTrue($group1->acceptMembership($user2));
+    	
+    	// Test that user2 can not join group2
+    	$this->assertFalse($group2->addUser($user2));    	
+
+    	// User2 cancel membership in group1
+    	$this->assertTrue($group1->cancelMembership($user2));    
+
+    	// Test that user2 can join group2
+    	$this->assertTrue($group2->addUser($user2));    	
+    	
+    	// User2 accept to join to group2
+    	$this->assertTrue($group2->acceptMembership($user2));    	
+    }    
 }

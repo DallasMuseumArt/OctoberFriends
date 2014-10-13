@@ -67,6 +67,15 @@ class UserGroup extends GroupBase{
 	}
 	
 	/**
+	 * Mark inactive all open groups
+	 * @param unknown $datetime
+	 */
+	public static function markInactiveGroups($datetime=null){
+		return self::where('is_active', '=', true)
+		->update(array('is_active' => false));
+	}
+	
+	/**
 	 * Returns an array of users which the given group belongs to.
 	 * Only returns Pending and Active users
 	 * @return array
@@ -94,6 +103,11 @@ class UserGroup extends GroupBase{
 		if (count($this->getUsers()) < Settings::get('maximum_users_group')
 			&& $this->is_active ){
 			if (!$this->inGroup($user)) {
+				
+				// Test this users is not part of an active group
+				if(self::hasActiveMemberships($user))
+					return false;
+				
 				$this->users()->attach($user);
 				$this->groupUsers = null;
 				
@@ -150,7 +164,7 @@ class UserGroup extends GroupBase{
 	
 		return false;
 	}	
-	
+		
 	// TODO : Group acceptance maybe should be move to an extend 
 	// version of RainLab\User\Models\User version
 
@@ -161,7 +175,11 @@ class UserGroup extends GroupBase{
 	 */
 	public function acceptMembership(&$user)
 	{
-		return $this->setMembershipStatus($user, self::MEMBERSHIP_ACCEPTED);
+		// Test this users is not part of an active group
+		if(self::hasActiveMemberships($user))
+			return false;		
+		$status = $this->setMembershipStatus($user, self::MEMBERSHIP_ACCEPTED);
+		return $status == self::MEMBERSHIP_ACCEPTED;
 	}
 
 	/**
@@ -171,7 +189,8 @@ class UserGroup extends GroupBase{
 	 */
 	public function rejectMembership(&$user)
 	{
-		return $this->setMembershipStatus($user, self::MEMBERSHIP_REJECTED);
+		$status = $this->setMembershipStatus($user, self::MEMBERSHIP_REJECTED);
+		return $status == self::MEMBERSHIP_REJECTED;
 	}	
 
 	/**
@@ -181,7 +200,8 @@ class UserGroup extends GroupBase{
 	 */
 	public function cancelMembership(&$user)
 	{	        
-		return $this->setMembershipStatus($user, self::MEMBERSHIP_CANCELLED);
+		$status = $this->setMembershipStatus($user, self::MEMBERSHIP_CANCELLED);
+		return $status == self::MEMBERSHIP_CANCELLED;		
 	}
 	
 	/**
@@ -214,6 +234,26 @@ class UserGroup extends GroupBase{
 			return $status;
 		}
 	}
+
+	/**
+	 * Test if user has active memberships
+	 * 
+	 * @param RainLab\User\Models\User $user
+	 * @return boolean
+	 */
+	public static function hasActiveMemberships($user){
+		$status = self::MEMBERSHIP_ACCEPTED;
+		$groups = self::where('is_active', true)
+					->with('users')
+					->whereHas('users', function($query) use ($user, $status){
+						$query->where('membership_status', $status)
+				  			  ->where('user_id', $user->getKey());
+					}
+		)->get();
+		
+		return count($groups) > 0;
+	}	
+	
 	/**
 	 * 
 	 * @param RainLab\User\Models\User $user $user
