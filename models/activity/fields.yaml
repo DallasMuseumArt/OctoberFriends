@@ -73,7 +73,7 @@ secondaryTabs:
         # ===================================
         time_restriction: 
             label: Time Restriction
-            tab: Configuration
+            tab: Publishing Options 
             span: left 
             type: dropdown
             options:
@@ -82,7 +82,7 @@ secondaryTabs:
         time_restriction_data:
             label: Restrictions
             type: timerestrictions
-            tab: Configuration
+            tab: Publishing Options
             span: left 
             depends: time_restriction:hours
         date_begin:

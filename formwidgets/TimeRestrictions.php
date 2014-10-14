@@ -17,8 +17,6 @@ class TimeRestrictions extends FormWidgetBase
     public function render()
     {
         $this->prepareVars();
-$d = \App::make('debugbar');
-$d->info($this->vars);
         return $this->makePartial('widget');
     }
 
@@ -27,6 +25,11 @@ $d->info($this->vars);
         $data = $this->getLoadData();
         $this->vars['start_time'] = $data['start_time'];
         $this->vars['end_time'] = $data['end_time'];
-        $this->vars['days'] = $data['days'];
+
+        if (isset($data['days'])) {
+            $this->vars['days'] = $data['days'];
+        } else {
+            $this->vars['days'] = [1, 2, 3, 4, 5, 6, 7];
+        }
     }
 }

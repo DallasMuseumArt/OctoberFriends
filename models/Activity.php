@@ -88,22 +88,6 @@ class Activity extends Model
     }
 
     /**
-     * Always return date_begin as a DateTime object
-     */
-    public function getDateBeginAttribute($value)
-    {
-        return new DateTime($value);
-    }
-
-    /**
-     * Always return date_end as a DateTime object
-     */
-    public function getDateEndAttribute($value)
-    {
-        return new DateTime($value);
-    }
-
-    /**
      * Return only activities that are active
      */
     public function scopeIsActive($query)
