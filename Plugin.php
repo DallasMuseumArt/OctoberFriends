@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Event;
 use Rainlab\User\Models\User as User;
 use System\Classes\PluginBase;
 use DMA\Friends\Classes\FriendsEventHandler;
-use DMA\Friends\Classes\Modal;
 use App;
 use Illuminate\Foundation\AliasLoader;
 
@@ -209,14 +208,18 @@ class Plugin extends PluginBase
             'DMA\Friends\FormWidgets\RequiredSteps' => [
                 'label' => 'Required Steps',
                 'alias' => 'requiredsteps',
-            ]
+            ],
+            'DMA\Friends\FormWidgets\TimeRestrictions' => [
+                'label' => 'Time Restrictions',
+                'alias' => 'timerestrictions',
+            ],
         ];   
     }
 
     public function register()
     {
-        $this->registerConsoleCommand('friends.sync-friends-data', 'DMA\Friends\Console\SyncFriendsDataCommand');
-        $this->registerConsoleCommand('friends.sync-friends-relations', 'DMA\Friends\Console\SyncFriendsRelationsCommand');
+        $this->registerConsoleCommand('friends.sync-data', 'DMA\Friends\Console\SyncFriendsDataCommand');
+        $this->registerConsoleCommand('friends.sync-relations', 'DMA\Friends\Console\SyncFriendsRelationsCommand');
     } 
 
     public function registerReportWidgets()
