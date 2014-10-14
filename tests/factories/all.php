@@ -101,7 +101,7 @@ FactoryMuffin::define('DMA\Friends\Models\Step', [
 
 FactoryMuffin::define('RainLab\User\Models\User', [
     'name'          => 'userName',
-    'login'         => 'userName',
+    'username'         => 'userName',
     'email'         => 'email',
     'password'      => 'password',
     'password_confirmation' => 'password',
