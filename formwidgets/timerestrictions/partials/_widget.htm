@@ -1,0 +1,13 @@
+<div class="time-restrictions">
+    <label for="start_time">Start Time:</label>
+    <input type="text" name="start_time" id="start-time" value="<?php print $start_time; ?>" />
+
+    <label for="end_time">End Time:</label>
+    <input type="text" name="end_time" id="end-time" value="<?php print $end_time; ?>" />
+
+    <div class="days">
+    <?php foreach($days as $day => $value) { ?>
+        <input name="days[<?= $day ?>]" id="days[<?= $day ?>]" type="checkbox" checked="<?php print $value ?>" /> <?= jddayofweek($day, 1) ?><br/>
+    <?php } ?>
+    </div>
+</div>

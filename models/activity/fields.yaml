@@ -68,21 +68,23 @@ secondaryTabs:
             tab: Configuration
             span: left
             type: number
+        # ===================================
+        #  Configuration tab 
+        # ===================================
         time_restriction: 
             label: Time Restriction
             tab: Configuration
-            span: right
+            span: left 
             type: dropdown
             options:
                 hours: Specific Days/Hours
                 dates: Specific Date Range
         time_restriction_data:
-            label: TODO: create widget to handle time restriction data
+            label: Restrictions
+            type: timerestrictions
             tab: Configuration
             span: left 
-        # ===================================
-        #  Configuration tab 
-        # ===================================
+            depends: time_restriction:hours
         date_begin:
             label: Beginning Date
             description: If set, Reward can only be redeemed after this date.
