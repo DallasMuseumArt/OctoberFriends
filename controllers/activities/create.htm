@@ -1,15 +1,15 @@
-><a href="<?= Backend::url('dma/friends/badges') ?>">Badges</a></li>
+<?php Block::put('breadcrumb') ?>
+    <ul>
+        <li><a href="<?= Backend::url('dma/friends/activities') ?>">Activities</a></li>
         <li><?= e($this->pageTitle) ?></li>
     </ul>
 <?php Block::endPut() ?>
 
 <?php if (!$this->fatalError): ?>
 
-    <div class="layout fancy-layout">
     <?= Form::open(['class'=>'layout-item stretch layout-column']) ?>
 
         <?= $this->formRender() ?>
-
 
         <div class="form-buttons layout-item fix">
             <div class="loading-indicator-container">
@@ -18,7 +18,7 @@
                     data-request="onSave"
                     data-hotkey="ctrl+s"
                     data-hotkey-mac="cmd+s"
-                    data-load-indicator="Creating Badge..."
+                    data-load-indicator="Creating Activity..."
                     class="btn btn-primary">
                     Create
                 </button>
@@ -28,22 +28,21 @@
                     data-request-data="close:1"
                     data-hotkey="ctrl+enter"
                     data-hotkey-mac="cmd+enter"
-                    data-load-indicator="Creating Badge..."
+                    data-load-indicator="Creating Activity..."
                     class="btn btn-default">
                     Create and Close
                 </button>
                 <span class="btn-text">
-                    or <a href="<?= Backend::url('dma/friends/badges') ?>">Cancel</a>
+                    or <a href="<?= Backend::url('dma/friends/activities') ?>">Cancel</a>
                 </span>
             </div>
         </div>
 
     <?= Form::close() ?>
-    </div>
 
 <?php else: ?>
 
     <p class="flash-message static error"><?= e($this->fatalError) ?></p>
-    <p><a href="<?= Backend::url('dma/friends/badges') ?>" class="btn btn-default">Return to badges list</a></p>
+    <p><a href="<?= Backend::url('dma/friends/activities') ?>" class="btn btn-default">Return to activities list</a></p>
 
 <?php endif ?>
