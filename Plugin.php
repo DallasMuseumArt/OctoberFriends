@@ -14,6 +14,13 @@ use Illuminate\Foundation\AliasLoader;
 class Plugin extends PluginBase
 {
 
+    /** 
+     * @var array Plugin dependencies
+     */
+    public $require = [
+        'RainLab.User'
+    ]; 
+
     /**
      * Returns information about this plugin.
      *
@@ -115,6 +122,7 @@ class Plugin extends PluginBase
 
     public function boot()
     {
+
     	// Register ServiceProviders
     	App::register('\EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider');
         App::register('DMA\Friends\FriendsServiceProvider');
