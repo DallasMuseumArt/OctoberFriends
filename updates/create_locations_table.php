@@ -18,6 +18,7 @@ class CreateLocationsTable extends Migration
             $table->text('description');
             $table->string('printer_reward');
             $table->string('printer_membership');
+            $table->string('mac_address');
         });
     }
 

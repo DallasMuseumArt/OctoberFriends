@@ -5,5 +5,7 @@
 columns:
     title:
         label: Title
+    mac_address:
+        label: Mac Address
     description:
         label: Description

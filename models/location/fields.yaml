@@ -5,9 +5,13 @@
 fields:
     title:
         label: Title
+        required: true;
     description:
         label: Description
         type: textarea
+    mac_address:
+        label: Mac Address
+        description: Identify a device by mac address
     printer_reward:
         label: Print rewards to:
     printer_membership:
