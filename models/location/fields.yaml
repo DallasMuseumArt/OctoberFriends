@@ -9,9 +9,6 @@ fields:
     description:
         label: Description
         type: textarea
-    mac_address:
-        label: Mac Address
-        description: Identify a device by mac address
     printer_reward:
         label: Print rewards to:
     printer_membership:
