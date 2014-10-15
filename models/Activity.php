@@ -5,6 +5,9 @@ use DateTime;
 
 /**
  * Activity Model
+ *
+ * NOTE: Time restrictions conform to the ISO-8601 numeric representation of the day of the week 
+ * where 1 (for Monday) through 7 (for Sunday) see <a href="http://php.net/manual/en/function.date.php">PHP's Date Manual</a>
  */
 class Activity extends Model
 {
@@ -73,10 +76,10 @@ class Activity extends Model
     public function setTimeRestrictionDataAttribute($value)
     {
         if (is_array($value)) {
-            return serialize($value);
+            $value = serialize($value);
         }
 
-        return $value;
+        $this->attributes['time_restriction_data'] = $value;
     }
 
     /**
@@ -109,4 +112,5 @@ class Activity extends Model
     {   
         return $query->where('wordpress_id', $id);
     }  
+
 }

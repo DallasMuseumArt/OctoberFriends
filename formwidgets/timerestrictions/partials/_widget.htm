@@ -1,13 +1,39 @@
-<div class="time-restrictions">
-    <label for="start_time">Start Time:</label>
-    <input type="text" name="start_time" id="start-time" value="<?php print $start_time; ?>" />
-
-    <label for="end_time">End Time:</label>
-    <input type="text" name="end_time" id="end-time" value="<?php print $end_time; ?>" />
-
-    <div class="days">
-    <?php foreach($days as $day => $value) { ?>
-        <input name="days[<?= $day ?>]" id="days[<?= $day ?>]" type="checkbox" checked="<?php print $value ?>" /> <?= jddayofweek($day, 1) ?><br/>
-    <?php } ?>
+<div id="<?= $this->getId() ?>" class="time-restrictions form-group span-left">
+    <div class="form-group span-left">
+        <label>Range of times that activity is available</label><br/>
+        <div class="times">
+            <label for="start_time">Start Time:</label>
+            <input type="text" 
+                class="form-control time-restriction" 
+                name="<?= $name ?>[start_time]" 
+                id="<?= $this->getId('input') ?>[start_time]" 
+                value="<?php print $start_time; ?>" 
+            />
+        </div>
+        <div class="times">
+            <label for="end_time">End Time:</label>
+            <input type="text" 
+                class="form-control time-restriction" 
+                name="<?= $name ?>[end_time]" 
+                id="<?= $this->getId('input') ?>[end-time]" 
+                value="<?php print $end_time; ?>" 
+            />
+        </div>
     </div>
+
+    <div class="form-group span-right">
+        <label>Days activity is available</label>
+        <div class="days">
+            <?php foreach($days as $day => $value) { ?>
+                <input name="<?= $name ?>[days][<?= $day ?>]" 
+                    id="<?= $this->getId('input') ?>[days][<?= $day ?>]" 
+                    type="checkbox"
+                    value="1"
+                    <?php if ($value) echo 'checked'; ?> 
+                /> 
+                <?= jddayofweek($day, 1) ?><br/>
+            <?php } ?>
+        </div>
+    </div>
+
 </div>

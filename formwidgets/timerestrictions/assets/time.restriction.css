@@ -1,0 +1,8 @@
+input.time-restriction {
+    width: 80px;
+}
+
+.time-restrictions .times {
+    float: left;
+    margin: 10px;
+}
