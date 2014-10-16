@@ -1,6 +1,6 @@
 <?php
 
-namespace DMA\Friends\Console;
+namespace DMA\Friends\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
