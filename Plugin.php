@@ -226,8 +226,8 @@ class Plugin extends PluginBase
 
     public function register()
     {
-        $this->registerConsoleCommand('friends.sync-data', 'DMA\Friends\Console\SyncFriendsDataCommand');
-        $this->registerConsoleCommand('friends.sync-relations', 'DMA\Friends\Console\SyncFriendsRelationsCommand');
+        $this->registerConsoleCommand('friends.sync-data', 'DMA\Friends\Commands\SyncFriendsDataCommand');
+        $this->registerConsoleCommand('friends.sync-relations', 'DMA\Friends\Commands\SyncFriendsRelationsCommand');
     } 
 
     public function registerReportWidgets()
