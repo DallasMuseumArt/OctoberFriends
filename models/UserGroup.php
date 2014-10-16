@@ -2,6 +2,7 @@
 
 use October\Rain\Auth\Models\Group as GroupBase;
 use DMA\Friends\Models\Settings;
+use Event;
 
 /**
  * Friends User group model
@@ -56,7 +57,7 @@ class UserGroup extends GroupBase{
 		
 
 	/**
-	 * 
+	 * @see \October\Rain\Database\Model::boot()
 	 */
 	public static function boot()
 	{
@@ -64,6 +65,37 @@ class UserGroup extends GroupBase{
 	
 		// Setup event bindings...
 		//UserGroup::observe(new UserGroupObserver);
+	}
+	
+	
+	/**
+	 * @see \October\Rain\Database\Model::save()
+	 */
+	/*
+	public function save(array $data = NULL, $sessionKey = NULL)
+	{
+		parent::save($data, $sessionKey);
+		
+		// Fire event group created
+		$this->fireGroupEvent('created', array($this));
+	}
+	*/
+	
+    /**
+     * Fire an event and call the listeners.
+     * @param string $event Event name
+     * @param array $params Event parameters
+     */
+	protected function fireGroupEvent($event, $params = [])
+	{
+		// TODO : This method could be converted in a Trait 
+		
+		// Add event namespace
+		$event = "dma.friends.group.$event";
+		// Fire local event calling October Trait fireEvent
+		//return $this->fireEvent($event, $params, $halt);
+		// Fire Global event 
+		Event::fire($event, $params);
 	}
 	
 	/**
@@ -120,6 +152,10 @@ class UserGroup extends GroupBase{
 				}				
 				
 				$this->sendNotification($user, 'invite');
+				
+				// Fire event 
+				$this->fireGroupEvent('user.added', array($this, $user));
+				
 				return true;
 			}
 		}else{
@@ -139,6 +175,10 @@ class UserGroup extends GroupBase{
 		if ($this->inGroup($user, $includeAll=true)) {
 			$this->users()->detach($user);
 			$this->groupUsers = null;
+			
+			// Fire event
+			$this->fireGroupEvent('user.removed', array($this, $user));
+			
 			return true;
 		}
 	
@@ -226,6 +266,10 @@ class UserGroup extends GroupBase{
 				if ($status != self::MEMBERSHIP_PENDING){
 					$notificationName = strtolower($status);
 					$this->sendNotification($this->owner, $notificationName);
+					
+					// Fire event
+					$event = strtolower($status);
+					$this->fireGroupEvent("invite.$event", array($this, $user));
 				}
 			}else{
 				// Return current user status

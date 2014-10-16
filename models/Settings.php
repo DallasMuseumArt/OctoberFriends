@@ -44,7 +44,7 @@ class Settings extends Model{
 		];
 	}
 
-	public function getInviteTemplateOptions()
+	public function getMailGroupInviteTemplateOptions()
 	{	
 		switch ($this->comunication_channel)
 		{
