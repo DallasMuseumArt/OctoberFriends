@@ -60,6 +60,11 @@ class FriendsLog
      */
     public static function activity($params)
     {
+        $params['message'] = Lang::get('dma.friends::lang.log.activity', [
+            'name'  => $params['user']->name, 
+            'title' => $params['object']->title
+        ]);
+
         self::write('activity', $params);
     }
 
@@ -74,6 +79,11 @@ class FriendsLog
      */
     public static function artwork($params)
     {
+        $params['message'] = Lang::get('dma.friends::lang.log.artwork', [
+            'name'          => $params['user']->name, 
+            'artwork_id'    => $params['artwork_id'],
+        ]); 
+
         self::write('artwork', $params);
     }
 
@@ -84,10 +94,15 @@ class FriendsLog
      * @array $params
      * An array of parameters to log
      *
-     * @return void
+    * @return void
      */
     public static function checkin($params)
     {
+        $params['message'] = Lang::get('dma.friends::lang.log.checkin', [
+            'name'  => $params['user']->name, 
+            'title' => $params['object']->title
+        ]); 
+
         self::write('checkin', $params);
     }
 
@@ -102,6 +117,12 @@ class FriendsLog
      */
     public static function points($params)
     {
+        $params['message'] = Lang::get('dma.friends::lang.log.points', [
+            'name'          => $params['user']->name, 
+            'points'        => $params['points_earned'],
+            'total_points'  => $params['user']->metadata->points,
+        ]); 
+
         self::write('points', $params);
     }
 
@@ -116,6 +137,11 @@ class FriendsLog
      */
     public static function reward($params)
     {
+        $params['message'] = Lang::get('dma.friends::lang.log.reward', [
+            'name'  => $params['user']->name, 
+            'title' => $params['object']->title
+        ]); 
+
         self::write('reward', $params);
     }
 
