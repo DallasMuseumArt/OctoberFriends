@@ -40,7 +40,6 @@ class ActivityProcessor implements ActivityProcessorInterface
             // log an entry to the activity log
             FriendsLog::activity([
                 'user'          => $user,
-                'message'       => Lang::get('dma.friends::lang.log.activity', ['name' => $user->name, 'title' => $activity->title]), 
                 'object'        => $activity,
                 'points_earned' => $activity->points,
             ]); 
