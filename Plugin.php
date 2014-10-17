@@ -3,6 +3,7 @@
 use Backend;
 use Illuminate\Support\Facades\Event;
 use Rainlab\User\Models\User as User;
+use DMA\Friends\Models\Usermeta as Metadata;
 use System\Classes\PluginBase;
 use DMA\Friends\Classes\FriendsEventHandler;
 use App;
@@ -143,6 +144,9 @@ class Plugin extends PluginBase
         Event::listen('backend.form.extendFields', function($widget) {
             if (!$widget->getController() instanceof \RainLab\User\Controllers\Users) return;
             if ($widget->getContext() != 'update') return;
+            
+            // Make sure the User metadata exists for this user.
+            if (!Metadata::getFromUser($widget->model)) return;
 
             $widget->addFields([
                 'metadata[first_name]' => [
