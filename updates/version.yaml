@@ -19,3 +19,6 @@
     - Add activity taxonomies 
     - create_activity_types_table.php
     - create_activity_trigger_types_table.php
+1.0.5:
+    - Create user table 
+    - create_users_table.php
