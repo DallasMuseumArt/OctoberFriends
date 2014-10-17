@@ -14,11 +14,3 @@ fields:
         nameFrom: name
         span: left
         placeholder: -- select owner --  
-
-#tabs:
-#    fields:
-#        members:
-#            label: Members
-#            type: related
-#            select: @id
-#            tab: details

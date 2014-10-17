@@ -2,4 +2,4 @@ scopes:
     is_active:
         label: Hide in active groups
         type: checkbox
-        conditions: is_active = 1
+        conditions: is_active = 1   
