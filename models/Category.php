@@ -1,47 +1,44 @@
 <?php namespace DMA\Friends\Models;
 
 use Model;
-use Str;
 
 /**
- * ActivityType Model
+ * Category Model
  */
-class ActivityType extends Model
+class Category extends Model
 {
-    use \October\Rain\Database\Traits\Validation;
 
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'dma_friends_activity_types';
+    public $table = 'dma_friends_categories';
     public $timestamps = false;
-
-    public $rules = [ 
-        'name' => 'required',
-        'slug' => ['required', 'regex:/^[a-z0-9\/\:_\-\*\[\]\+\?\|]*$/i'],
-    ];  
 
     /**
      * @var array Guarded fields
      */
     protected $guarded = ['*'];
 
-    /**
+    public $rules = [ 
+        'name' => 'required',
+    ];
+
+    /** 
      * @var array Fillable fields
      */
-    protected $fillable = [];
+    protected $fillable = ['touch'];
 
     public function beforeValidate()
     {   
         // Generate a URL slug for this model
         if (!$this->exists && !$this->slug)
             $this->slug = Str::slug($this->name);
-    } 
+    }  
 
-    /**
+    /** 
      * @var array Relations
      */
-    public $hasMany = [
-        'activities'    => ['DMA\Friends\Models\Activity'],
-    ];
+    public $morphMany = [ 
+        'object' => ['table' => 'dma_friends_object_categories'],
+    ]; 
 }

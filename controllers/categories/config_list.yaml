@@ -3,16 +3,16 @@
 # ===================================
 
 # Model List Column configuration
-list: @/plugins/dma/friends/models/activitytriggertype/columns.yaml
+list: $/dma/friends/models/category/columns.yaml
 
 # Model Class name
-modelClass: DMA\Friends\Models\ActivityTriggerType
+modelClass: DMA\Friends\Models\Category
 
 # List Title
-title: Manage ActivityTriggerTypes
+title: Manage Categories
 
 # Link URL for each record
-recordUrl: dma/friends/activitytriggertypes/update/:id
+recordUrl: dma/friends/categories/update/:id
 
 # Message to display if the list is empty
 noRecordsMessage: backend::lang.list.no_records

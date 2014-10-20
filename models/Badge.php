@@ -49,6 +49,10 @@ class Badge extends Model
         'activityLogs'  => ['DMA\Friends\Models\ActivityLog', 'name' => 'object'],
     ];
 
+    public $morphToMany = [
+        'categories'    => ['DMA\Friends\Models\Category', 'name' => 'object', 'table' => 'dma_friends_object_categories'],
+    ];
+
     public function scopeNotCompleted($query, User $user)
     {
         return $query->join('dma_friends_badge_user', 'dma_friends_badges.id', '=', 'dma_friends_badge_user.badge_id')

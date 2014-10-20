@@ -1,6 +1,6 @@
 <?php Block::put('breadcrumb') ?>
     <ul>
-        <li><a href="<?= Backend::url('dma/friends/activitytriggertypes') ?>">ActivityTriggerTypes</a></li>
+        <li><a href="<?= Backend::url('dma/friends/categories') ?>">Categories</a></li>
         <li><?= e($this->pageTitle) ?></li>
     </ul>
 <?php Block::endPut() ?>
@@ -17,9 +17,8 @@
                     type="submit"
                     data-request="onSave"
                     data-request-data="redirect:0"
-                    data-hotkey="ctrl+s"
-                    data-hotkey-mac="cmd+s"
-                    data-load-indicator="Saving ActivityTriggerType..."
+                    data-hotkey="ctrl+s, cmd+s"
+                    data-load-indicator="Saving Category..."
                     class="btn btn-primary">
                     <u>S</u>ave
                 </button>
@@ -27,9 +26,8 @@
                     type="button"
                     data-request="onSave"
                     data-request-data="close:1"
-                    data-hotkey="ctrl+enter"
-                    data-hotkey-mac="cmd+enter"
-                    data-load-indicator="Saving ActivityTriggerType..."
+                    data-hotkey="ctrl+enter, cmd+enter"
+                    data-load-indicator="Saving Category..."
                     class="btn btn-default">
                     Save and Close
                 </button>
@@ -37,11 +35,11 @@
                     type="button"
                     class="oc-icon-trash-o btn-icon danger pull-right"
                     data-request="onDelete"
-                    data-load-indicator="Deleting ActivityTriggerType..."
-                    data-request-confirm="Do you really want to delete this activitytriggertype?">
+                    data-load-indicator="Deleting Category..."
+                    data-request-confirm="Do you really want to delete this category?">
                 </button>
                 <span class="btn-text">
-                    or <a href="<?= Backend::url('dma/friends/activitytriggertypes') ?>">Cancel</a>
+                    or <a href="<?= Backend::url('dma/friends/categories') ?>">Cancel</a>
                 </span>
             </div>
         </div>
@@ -51,6 +49,6 @@
 <?php else: ?>
 
     <p class="flash-message static error"><?= e($this->fatalError) ?></p>
-    <p><a href="<?= Backend::url('dma/friends/activitytriggertypes') ?>" class="btn btn-default">Return to activitytriggertypes list</a></p>
+    <p><a href="<?= Backend::url('dma/friends/categories') ?>" class="btn btn-default">Return to categories list</a></p>
 
 <?php endif ?>

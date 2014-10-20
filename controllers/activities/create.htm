@@ -12,33 +12,6 @@
 
         <?= $this->formRender() ?>
 
-        <div class="form-buttons layout-item fix">
-            <div class="loading-indicator-container">
-                <button
-                    type="submit"
-                    data-request="onSave"
-                    data-hotkey="ctrl+s"
-                    data-hotkey-mac="cmd+s"
-                    data-load-indicator="Creating Activity..."
-                    class="btn btn-primary">
-                    Create
-                </button>
-                <button
-                    type="button"
-                    data-request="onSave"
-                    data-request-data="close:1"
-                    data-hotkey="ctrl+enter"
-                    data-hotkey-mac="cmd+enter"
-                    data-load-indicator="Creating Activity..."
-                    class="btn btn-default">
-                    Create and Close
-                </button>
-                <span class="btn-text">
-                    or <a href="<?= Backend::url('dma/friends/activities') ?>">Cancel</a>
-                </span>
-            </div>
-        </div>
-
     <?= Form::close() ?>
     </div>
 

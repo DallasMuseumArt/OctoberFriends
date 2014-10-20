@@ -12,14 +12,14 @@ class ActivityModelTest extends MuffinCase
         $this->assertInstanceOf('DMA\Friends\Models\Activity', $activity);
     }
 
-    public function testCanHaveTriggerTypes()
+    public function testCanHaveCategories()
     {
         $activity = FactoryMuffin::create('DMA\Friends\Models\Activity');
 
-        $triggerType = FactoryMuffin::create('DMA\Friends\Models\ActivityTriggerType');
-        $this->assertInstanceOf('DMA\Friends\Models\ActivityTriggerType', $triggerType);
+        $category = FactoryMuffin::create('DMA\Friends\Models\Category');
+        $this->assertInstanceOf('DMA\Friends\Models\Category', $category);
 
-        $activity->triggerTypes()->save($triggerType);
+        $activity->categories()->save($category);
     }
 
     public function testTimeRestrictionsAreSerialized()
