@@ -13,6 +13,5 @@ var searchData=
   ['activityprocessor',['ActivityProcessor',['../db/d9c/classDMA_1_1Friends_1_1Classes_1_1ActivityProcessor.html',1,'DMA::Friends::Classes']]],
   ['activityprocessorinterface',['ActivityProcessorInterface',['../d5/de2/interfaceDMA_1_1Friends_1_1Classes_1_1ActivityProcessorInterface.html',1,'DMA::Friends::Classes']]],
   ['activityresource',['ActivityResource',['../d7/d53/classDMA_1_1Friends_1_1Api_1_1ActivityResource.html',1,'DMA::Friends::Api']]],
-  ['activitytransformer',['ActivityTransformer',['../d8/d07/classDMA_1_1Friends_1_1Api_1_1ActivityTransformer.html',1,'DMA::Friends::Api']]],
-  ['auth',['Auth',['../d3/de2/classDMA_1_1Friends_1_1Wordpress_1_1Auth.html',1,'DMA::Friends::Wordpress']]]
+  ['activitytransformer',['ActivityTransformer',['../d8/d07/classDMA_1_1Friends_1_1Api_1_1ActivityTransformer.html',1,'DMA::Friends::Api']]]
 ];
