@@ -4,9 +4,9 @@ use BackendMenu;
 use Backend\Classes\Controller;
 
 /**
- * ActivityTypes Back-end Controller
+ * Categories Back-end Controller
  */
-class ActivityTypes extends Controller
+class Categories extends Controller
 {
     public $implement = [
         'Backend.Behaviors.FormController',

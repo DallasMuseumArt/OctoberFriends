@@ -53,8 +53,6 @@ class Activity extends Model
      */
     public $belongsToMany = [
         'steps'         => ['DMA\Friends\Models\Step'],
-        'types'         => ['DMA\Friends\Models\ActivityType', 'table' => 'dma_friends_activity_activity_types'],
-        'triggerTypes'  => ['DMA\Friends\Models\ActivityTriggerType', 'table' => 'dma_friends_activity_activity_trigger_type'],
     ];
 
     public $attachOne = [
@@ -63,6 +61,9 @@ class Activity extends Model
 
     public $morphMany = [ 
         'activityLogs'  => ['DMA\Friends\Models\ActivityLog', 'name' => 'object'],
+    ];
+    public $morphToMany = [
+        'categories'    => ['DMA\Friends\Models\Category', 'name' => 'object', 'table' => 'dma_friends_object_categories'],
     ];
 
     public function isActive()

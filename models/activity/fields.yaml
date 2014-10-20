@@ -38,17 +38,16 @@ secondaryTabs:
             span: left
             type: richeditor
             size: huge
-        types:
-            label: Types
+        # ===================================
+        #  Categories tab 
+        # ===================================
+        categories:
+            label: Select as many that apply
             type: relation
-            tab: Content
-            span: left
-        triggerTypes:
-            label: Trigger Types
-            type: relation
-            tab: Content
-            span: right
-        
+            mode: dropdown 
+            options:
+                nameColumn: name
+            tab: Categories 
         # ===================================
         #  Configuration tab 
         # ===================================

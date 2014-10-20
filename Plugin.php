@@ -55,21 +55,13 @@ class Plugin extends PluginBase
                 'url'           => Backend::url('dma/friends/locations'),
                 'order'         => 0,
             ],  
-            'activityTypes' => [
-                'label' => 'Activity Types',
-                'description'   => 'Manage the activity types that are available to steps',
+            'categories' => [
+                'label'         => 'Categories',
+                'description'   => 'Manage the Categories',
                 'category'      => 'Friends',
                 'icon'          => 'icon-square',
-                'url'           => Backend::url('dma/friends/activitytypes'),
+                'url'           => Backend::url('dma/friends/categories'),
                 'order'         => 10,
-            ],
-            'activityTriggerTypes' => [
-                'label' => 'Activity Trigger Types',
-                'description'   => 'Manage the activity trigger types that are available to steps',
-                'category'      => 'Friends',
-                'icon'          => 'icon-square',
-                'url'           => Backend::url('dma/friends/activitytriggertypes'),
-                'order'         => 20,
             ],
         ];
     }
