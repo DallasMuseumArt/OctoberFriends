@@ -64,12 +64,12 @@ class Plugin extends PluginBase
                 'order'         => 10,
             ],
              'settings' => [
-	            'label'       	=> 'Friend Settings',
-	            'description' 	=> 'Manage friend settings.',
-	            'category'    	=> 'Friends',
-	            'icon'        	=> 'icon-cog',
-	            'class'       	=> 'DMA\Friends\Models\Settings',
-	            'order'       	=> 50,
+                'label'           => 'Friend Settings',
+                'description'     => 'Manage friend settings.',
+                'category'        => 'Friends',
+                'icon'            => 'icon-cog',
+                'class'           => 'DMA\Friends\Models\Settings',
+                'order'           => 50,
             ],                       
         ];
     }
@@ -106,9 +106,9 @@ class Plugin extends PluginBase
                         'url'       => Backend::url('dma/friends/activitylogs'),
                     ],
                     'groups'   => [
-	                    'label'     => 'Friends Groups',
-	                    'icon'      => 'icon-users',
-	                    'url'       => Backend::url('dma/friends/groups'),
+                        'label'     => 'Friends Groups',
+                        'icon'      => 'icon-users',
+                        'url'       => Backend::url('dma/friends/groups'),
                     ],                    
                     
                 ]
@@ -129,22 +129,22 @@ class Plugin extends PluginBase
     public function boot()
     {
 
-    	// Register ServiceProviders
-    	App::register('\EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider');
+        // Register ServiceProviders
+        App::register('\EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider');
         App::register('DMA\Friends\FriendsServiceProvider');
 
         // Register Event Subscribers
         $subscriber = new FriendsEventHandler;
         Event::subscribe($subscriber);
-    	
+        
         // Extend the user model to support our custom metadata
         User::extend(function($model) {
             $model->hasOne['metadata']          = ['DMA\Friends\Models\Usermeta'];
             $model->hasMany['activityLogs']     = ['DMA\Friends\Models\ActivityLog'];
-            $model->hasMany['groups'] 			= ['DMA\Friends\Models\UserGroup', 	'table' => 'dma_friends_user_groups', 	'user_id', 'owner_id'];
-            $model->belongsToMany['steps']      = ['DMA\Friends\Models\Step',   	'table' => 'dma_friends_step_user',     'user_id', 'step_id'];
-            $model->belongsToMany['badges']     = ['DMA\Friends\Models\Badge',  	'table' => 'dma_friends_badge_user',    'user_id', 'badge_id'];
-            $model->belongsToMany['rewards']    = ['DMA\Friends\Models\Reward', 	'table' => 'dma_friends_reward_user',   'user_id', 'reward_id'];
+            $model->hasMany['groups']             = ['DMA\Friends\Models\UserGroup',     'table' => 'dma_friends_user_groups',     'user_id', 'owner_id'];
+            $model->belongsToMany['steps']      = ['DMA\Friends\Models\Step',       'table' => 'dma_friends_step_user',     'user_id', 'step_id'];
+            $model->belongsToMany['badges']     = ['DMA\Friends\Models\Badge',      'table' => 'dma_friends_badge_user',    'user_id', 'badge_id'];
+            $model->belongsToMany['rewards']    = ['DMA\Friends\Models\Reward',     'table' => 'dma_friends_reward_user',   'user_id', 'reward_id'];
 
         });
 
@@ -182,10 +182,10 @@ class Plugin extends PluginBase
                     'label' => 'Current Member Number',
                     'tab'   => 'Metadata',
                 ],
-            	'groups' => [
-            		'label' => 'Groups',
-            		'tab'   => 'Groups',
-            	],            		
+                'groups' => [
+                    'label' => 'Groups',
+                    'tab'   => 'Groups',
+                ],                    
             ], 'primary');
         }); 
 
@@ -219,7 +219,7 @@ class Plugin extends PluginBase
                 ], 
                 'zip' => [
                     'label' => 'Zip',
-                ],    		
+                ],            
             ]); 
         });
 
@@ -261,9 +261,9 @@ class Plugin extends PluginBase
     
     public function registerMailTemplates()
     {
-    	return [
-    			'dma.friends::mail.invite' => 'Invitation email to join a group sent when a user is added to a group.',
-    	];
+        return [
+                'dma.friends::mail.invite' => 'Invitation email to join a group sent when a user is added to a group.',
+        ];
     }    
 
 }

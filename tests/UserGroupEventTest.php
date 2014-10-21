@@ -7,22 +7,22 @@ use DMA\Friends\Tests\MuffinCase;
 class UserGroupEventTest extends MuffinCase
 {
 
-	 public function testUserGroupEvents()
-	 {
+     public function testUserGroupEvents()
+     {
 
-	 	// Create and empty group
-	 	//$group = FactoryMuffin::create('DMA\Friends\Models\UserGroup');
-	 	
-	 	// Create member instances
-	 	//$user = FactoryMuffin::create('RainLab\User\Models\User');	 	
-	 	
-	 	//Event::listen('dma.friends.group.user.added', 'GroupEventHandler');
-	 		 	
-    	// Add user to group
-    	//$this->assertTrue($group->addUser($user));
-		
-	 
-	 }
+         // Create and empty group
+         //$group = FactoryMuffin::create('DMA\Friends\Models\UserGroup');
+         
+         // Create member instances
+         //$user = FactoryMuffin::create('RainLab\User\Models\User');         
+         
+         //Event::listen('dma.friends.group.user.added', 'GroupEventHandler');
+                  
+        // Add user to group
+        //$this->assertTrue($group->addUser($user));
+        
+     
+     }
 
 
 }
