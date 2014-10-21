@@ -27,4 +27,14 @@ class BadgeModelTest extends MuffinCase
         $this->assertEquals($badge->steps[0]->id, $step->id);
 
     }
+
+    public function testCanHaveCategories()
+    {   
+        $badge = FactoryMuffin::create('DMA\Friends\Models\Badge');
+
+        $category = FactoryMuffin::create('DMA\Friends\Models\Category');
+        $this->assertInstanceOf('DMA\Friends\Models\Category', $category);
+
+        $badge->categories()->save($category);
+    }  
 }

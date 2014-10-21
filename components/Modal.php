@@ -9,7 +9,7 @@ use Lang;
 class Modal extends ComponentBase
 {
 
-    use \Backend\Traits\ViewMaker;
+    use \System\Traits\ViewMaker;
 
     public function componentDetails()
     {

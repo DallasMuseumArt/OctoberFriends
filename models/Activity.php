@@ -5,6 +5,9 @@ use DateTime;
 
 /**
  * Activity Model
+ *
+ * NOTE: Time restrictions conform to the ISO-8601 numeric representation of the day of the week 
+ * where 1 (for Monday) through 7 (for Sunday) see <a href="http://php.net/manual/en/function.date.php">PHP's Date Manual</a>
  */
 class Activity extends Model
 {
@@ -50,8 +53,6 @@ class Activity extends Model
      */
     public $belongsToMany = [
         'steps'         => ['DMA\Friends\Models\Step'],
-        'types'         => ['DMA\Friends\Models\ActivityType', 'table' => 'dma_friends_activity_activity_types'],
-        'triggerTypes'  => ['DMA\Friends\Models\ActivityTriggerType', 'table' => 'dma_friends_activity_activity_trigger_type'],
     ];
 
     public $attachOne = [
@@ -60,6 +61,9 @@ class Activity extends Model
 
     public $morphMany = [ 
         'activityLogs'  => ['DMA\Friends\Models\ActivityLog', 'name' => 'object'],
+    ];
+    public $morphToMany = [
+        'categories'    => ['DMA\Friends\Models\Category', 'name' => 'object', 'table' => 'dma_friends_object_categories'],
     ];
 
     public function isActive()
@@ -73,10 +77,10 @@ class Activity extends Model
     public function setTimeRestrictionDataAttribute($value)
     {
         if (is_array($value)) {
-            return serialize($value);
+            $value = serialize($value);
         }
 
-        return $value;
+        $this->attributes['time_restriction_data'] = $value;
     }
 
     /**
@@ -85,22 +89,6 @@ class Activity extends Model
     public function getTimeRestrictionDataAttribute($value)
     {
         return unserialize($value);
-    }
-
-    /**
-     * Always return date_begin as a DateTime object
-     */
-    public function getDateBeginAttribute($value)
-    {
-        return new DateTime($value);
-    }
-
-    /**
-     * Always return date_end as a DateTime object
-     */
-    public function getDateEndAttribute($value)
-    {
-        return new DateTime($value);
     }
 
     /**
@@ -125,4 +113,5 @@ class Activity extends Model
     {   
         return $query->where('wordpress_id', $id);
     }  
+
 }

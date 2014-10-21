@@ -3,9 +3,9 @@
 use Backend;
 use Illuminate\Support\Facades\Event;
 use Rainlab\User\Models\User as User;
+use DMA\Friends\Models\Usermeta as Metadata;
 use System\Classes\PluginBase;
 use DMA\Friends\Classes\FriendsEventHandler;
-use DMA\Friends\Classes\Modal;
 use App;
 use Illuminate\Foundation\AliasLoader;
 
@@ -14,6 +14,13 @@ use Illuminate\Foundation\AliasLoader;
  */
 class Plugin extends PluginBase
 {
+
+    /** 
+     * @var array Plugin dependencies
+     */
+    public $require = [
+        'RainLab.User'
+    ]; 
 
     /**
      * Returns information about this plugin.
@@ -48,30 +55,22 @@ class Plugin extends PluginBase
                 'url'           => Backend::url('dma/friends/locations'),
                 'order'         => 0,
             ],  
-            'activityTypes' => [
-                'label' => 'Activity Types',
-                'description'   => 'Manage the activity types that are available to steps',
+            'categories' => [
+                'label'         => 'Categories',
+                'description'   => 'Manage the Categories',
                 'category'      => 'Friends',
                 'icon'          => 'icon-square',
-                'url'           => Backend::url('dma/friends/activitytypes'),
+                'url'           => Backend::url('dma/friends/categories'),
                 'order'         => 10,
             ],
-            'activityTriggerTypes' => [
-                'label' => 'Activity Trigger Types',
-                'description'   => 'Manage the activity trigger types that are available to steps',
-                'category'      => 'Friends',
-                'icon'          => 'icon-square',
-                'url'           => Backend::url('dma/friends/activitytriggertypes'),
-                'order'         => 20,
-            ],
-            'settings' => [
+             'settings' => [
 	            'label'       	=> 'Friend Settings',
 	            'description' 	=> 'Manage friend settings.',
 	            'category'    	=> 'Friends',
 	            'icon'        	=> 'icon-cog',
 	            'class'       	=> 'DMA\Friends\Models\Settings',
 	            'order'       	=> 50,
-            ],            
+            ],                       
         ];
     }
 
@@ -129,6 +128,7 @@ class Plugin extends PluginBase
 
     public function boot()
     {
+
     	// Register ServiceProviders
     	App::register('\EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider');
         App::register('DMA\Friends\FriendsServiceProvider');
@@ -151,6 +151,9 @@ class Plugin extends PluginBase
         Event::listen('backend.form.extendFields', function($widget) {
             if (!$widget->getController() instanceof \RainLab\User\Controllers\Users) return;
             if ($widget->getContext() != 'update') return;
+            
+            // Make sure the User metadata exists for this user.
+            if (!Metadata::getFromUser($widget->model)) return;
 
             $widget->addFields([
                 'metadata[first_name]' => [
@@ -228,14 +231,18 @@ class Plugin extends PluginBase
             'DMA\Friends\FormWidgets\RequiredSteps' => [
                 'label' => 'Required Steps',
                 'alias' => 'requiredsteps',
-            ]
+            ],
+            'DMA\Friends\FormWidgets\TimeRestrictions' => [
+                'label' => 'Time Restrictions',
+                'alias' => 'timerestrictions',
+            ],
         ];   
     }
 
     public function register()
     {
-        $this->registerConsoleCommand('friends.sync-friends-data', 'DMA\Friends\Console\SyncFriendsDataCommand');
-        $this->registerConsoleCommand('friends.sync-friends-relations', 'DMA\Friends\Console\SyncFriendsRelationsCommand');
+        $this->registerConsoleCommand('friends.sync-data', 'DMA\Friends\Commands\SyncFriendsDataCommand');
+        $this->registerConsoleCommand('friends.sync-relations', 'DMA\Friends\Commands\SyncFriendsRelationsCommand');
     } 
 
     public function registerReportWidgets()

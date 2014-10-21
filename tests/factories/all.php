@@ -21,7 +21,7 @@ FactoryMuffin::define('DMA\Friends\Models\Activity', [
     'created_at'        => 'dateTime|now',
     'date_begin'        => 'optional:dateTime',
     'date_end'          => 'optional:dateTime',
-    'triggerTypes'      => 'factory|DMA\Friends\Models\ActivityTriggerType',
+    'categories'        => 'factory|DMA\Friends\Models\Category',
 ]);
 
 FactoryMuffin::define('DMA\Friends\Models\ActivityLog', [
@@ -44,14 +44,6 @@ FactoryMuffin::define('DMA\Friends\Models\ActivityLog', [
     'timezone'          => 'timezone',
 ]);
 
-FactoryMuffin::define('DMA\Friends\Models\ActivityTriggerType', [
-    'name'          => 'word',
-    'description'   => 'optional:text',
-    'slug'          => function($object, $saved) {
-        return Str::slug($object->title);
-    },
-]);
-
 FactoryMuffin::define('DMA\Friends\Models\Badge', [
     'title'                     => 'sentence',
     'description'               => 'optional:text',
@@ -71,6 +63,15 @@ FactoryMuffin::define('DMA\Friends\Models\Badge', [
     'is_published'              => 'boolean',
     'is_archived'               => 'boolean',
     'created_at'                => 'dateTime|now',
+    'categories'        => 'factory|DMA\Friends\Models\Category',
+]);
+
+FactoryMuffin::define('DMA\Friends\Models\Category', [
+    'name'          => 'word',
+    'description'   => 'optional:text',
+    'slug'          => function($object, $saved) {
+        return Str::slug($object->title);
+    },
 ]);
 
 FactoryMuffin::define('DMA\Friends\Models\Reward', [
@@ -101,10 +102,9 @@ FactoryMuffin::define('DMA\Friends\Models\Step', [
 ]);
 
 FactoryMuffin::define('RainLab\User\Models\User', [
-	'username'      => 'unique:userName',
-    'name'          => 'unique:userName',
-    #'login'         => 'unique:userName',
-    'email'         => 'unique:email',
+    'name'          => 'userName',
+    'username'         => 'userName',
+    'email'         => 'email',
     'password'      => 'password',
     'password_confirmation' => 'password',
     'is_activated'  => 'boolean',
