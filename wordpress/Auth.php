@@ -4,6 +4,11 @@ namespace DMA\Friends\Wordpress;
 use DMA\Friends\Wordpress\PasswordHash;
 use RainLab\User\Models\User;
 
+/**
+ * This class will attempt to check the password against
+ * the wordpress algorithm and rehash it with laravels Hash
+ */
+
 class Auth
 {
 
@@ -19,7 +24,6 @@ class Auth
         if (!$login)
             return false;
 
-        // Could also be
         if (!$user = User::whereEmail($login)->first()) {
             return;
         }
