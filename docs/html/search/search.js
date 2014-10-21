@@ -9,7 +9,7 @@ var indexSectionsWithContent =
 {
   0: "$_abcdefgilmprstuw",
   1: "abcfglmprstu",
-  2: "dp",
+  2: "d",
   3: "_acdefgilmprsuw",
   4: "$t",
   5: "e"
