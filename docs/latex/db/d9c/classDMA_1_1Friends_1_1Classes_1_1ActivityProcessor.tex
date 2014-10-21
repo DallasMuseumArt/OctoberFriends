@@ -1,7 +1,7 @@
-\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityProcessor}{\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}Activity\+Processor Class Reference}
-\label{classDMA_1_1Friends_1_1Classes_1_1ActivityProcessor}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Processor@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Processor}}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityProcessor}{\section{D\-M\-A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}Activity\-Processor Class Reference}
+\label{classDMA_1_1Friends_1_1Classes_1_1ActivityProcessor}\index{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Classes\textbackslash{}\-Activity\-Processor@{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Classes\textbackslash{}\-Activity\-Processor}}
 }
-Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}Activity\+Processor\+:\begin{figure}[H]
+Inheritance diagram for D\-M\-A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}Activity\-Processor\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.000000cm]{db/d9c/classDMA_1_1Friends_1_1Classes_1_1ActivityProcessor}
@@ -12,14 +12,14 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\te
 \item 
 static \hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityProcessor_af892e6c3b63a5ef0002f97719839aa82}{process} (User \$user, \$params)
 \item 
-static \hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityProcessor_adaddbe728558689c09abe18010c005e7}{can\+Complete} (\hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity}{Activity} \$activity)
+static \hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityProcessor_adaddbe728558689c09abe18010c005e7}{can\-Complete} (\hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity}{Activity} \$activity)
 \end{DoxyCompactItemize}
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityProcessor_adaddbe728558689c09abe18010c005e7}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Processor@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Processor}!can\+Complete@{can\+Complete}}
-\index{can\+Complete@{can\+Complete}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Processor@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Processor}}
-\subsubsection[{can\+Complete}]{\setlength{\rightskip}{0pt plus 5cm}static D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Processor\+::can\+Complete (
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityProcessor_adaddbe728558689c09abe18010c005e7}{\index{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Activity\-Processor@{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Activity\-Processor}!can\-Complete@{can\-Complete}}
+\index{can\-Complete@{can\-Complete}!DMA::Friends::Classes::ActivityProcessor@{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Activity\-Processor}}
+\subsubsection[{can\-Complete}]{\setlength{\rightskip}{0pt plus 5cm}static D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Classes\textbackslash{}\-Activity\-Processor\-::can\-Complete (
 \begin{DoxyParamCaption}
 \item[{{\bf Activity}}]{\$activity}
 \end{DoxyParamCaption}
@@ -31,7 +31,7 @@ boolean returns true if an activity can be completed by the user
 \end{DoxyReturn}
 
 
-Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityProcessorInterface}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Processor\+Interface}.
+Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityProcessorInterface}{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Classes\textbackslash{}\-Activity\-Processor\-Interface}.
 
 
 \begin{DoxyCode}
@@ -54,7 +54,7 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityProcessorInt
 76 
 77                 \textcolor{keywordflow}{break};
 78             \textcolor{keywordflow}{case} \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity_a71b85478f20cda144aeffe010364a0f7}{Activity::TIME\_RESTRICT\_DAYS}: 
-79                 $now = \textcolor{keyword}{new} \hyperlink{namespaceDateTime}{DateTime}(\textcolor{stringliteral}{'now'});
+79                 $now = \textcolor{keyword}{new} DateTime(\textcolor{stringliteral}{'now'});
 80                 \textcolor{keywordflow}{if} ($now >= $activity->date\_begin 
 81                     && $now <= $activity->date\_end) \textcolor{keywordflow}{return} \textcolor{keyword}{true};
 82 
@@ -64,9 +64,9 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityProcessorInt
 86         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
 87     \} 
 \end{DoxyCode}
-\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityProcessor_af892e6c3b63a5ef0002f97719839aa82}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Processor@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Processor}!process@{process}}
-\index{process@{process}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Processor@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Processor}}
-\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}static D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Processor\+::process (
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityProcessor_af892e6c3b63a5ef0002f97719839aa82}{\index{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Activity\-Processor@{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Activity\-Processor}!process@{process}}
+\index{process@{process}!DMA::Friends::Classes::ActivityProcessor@{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Activity\-Processor}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}static D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Classes\textbackslash{}\-Activity\-Processor\-::process (
 \begin{DoxyParamCaption}
 \item[{User}]{\$user, }
 \item[{}]{\$params}
@@ -86,7 +86,7 @@ boolean returns true if the process was successful
 \end{DoxyReturn}
 
 
-Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityProcessorInterface}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Processor\+Interface}.
+Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityProcessorInterface}{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Classes\textbackslash{}\-Activity\-Processor\-Interface}.
 
 
 \begin{DoxyCode}
@@ -112,6 +112,6 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityProcessorInt
 \end{DoxyCode}
 
 
-The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-classes/Activity\+Processor.\+php\end{DoxyCompactItemize}
+classes/Activity\-Processor.\-php\end{DoxyCompactItemize}
