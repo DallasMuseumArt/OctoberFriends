@@ -5,6 +5,7 @@
 fields:
     title:
         label: Title
+        required: true
     toolbar:
         type: partial
         path: @/plugins/dma/friends/partials/_content_toolbar.htm
@@ -37,26 +38,26 @@ secondaryTabs:
             span: left
             type: richeditor
             size: huge
-        types:
-            label: Types
+        # ===================================
+        #  Categories tab 
+        # ===================================
+        categories:
+            label: Select as many that apply
             type: relation
-            tab: Content
-            span: left
-        triggerTypes:
-            label: Trigger Types
-            type: relation
-            tab: Content
-            span: right
-        
+            mode: dropdown 
+            options:
+                nameColumn: name
+            tab: Categories 
         # ===================================
         #  Configuration tab 
         # ===================================
         points:
-            label: Points to redeem
-            description: The number of points required to redeem this reward
+            label: Points Awarded
+            description: The number of points awarded for completing the activity
             tab: Configuration
             span: left
             type: number
+            required: true
         activity_code:
             label: Activity Code
             description: The unique code for this activity.
@@ -68,21 +69,25 @@ secondaryTabs:
             tab: Configuration
             span: left
             type: number
+        # ===================================
+        #  Publish tab 
+        # ===================================
         time_restriction: 
             label: Time Restriction
-            tab: Configuration
-            span: right
+            tab: Publishing Options 
+            span: left 
             type: dropdown
             options:
-                hours: Specific Days/Hours
-                dates: Specific Date Range
+                0: None
+                1: Specific Days/Hours
+                2: Specific Date Range
         time_restriction_data:
-            label: TODO: create widget to handle time restriction data
-            tab: Configuration
-            span: left 
-        # ===================================
-        #  Configuration tab 
-        # ===================================
+            type: timerestrictions
+            tab: Publishing Options
+            containerAttributes:
+                data-trigger-type: display
+                data-trigger: 'select[name="Activity[time_restriction]"]'
+                data-trigger-condition: value[1]
         date_begin:
             label: Beginning Date
             description: If set, Reward can only be redeemed after this date.
@@ -90,6 +95,10 @@ secondaryTabs:
             span: left
             type: datepicker
             mode: datetime
+            containerAttributes:
+                data-trigger-type: display
+                data-trigger: 'select[name="Activity[time_restriction]"]'
+                data-trigger-condition: value[2]
         date_end:
             label: Ending Date
             description: If set, Reward can only be redeemed before this date.
@@ -97,11 +106,16 @@ secondaryTabs:
             span: right 
             type: datepicker
             mode: datetime
+            containerAttributes:
+                data-trigger-type: display
+                data-trigger: 'select[name="Activity[time_restriction]"]'
+                data-trigger-condition: value[2]
         is_published:
             label: Published
             tab: Publishing Options 
             span: left
             type: checkbox
+            default: true
         is_archived:
             label: Archive
             tab: Publishing Options 

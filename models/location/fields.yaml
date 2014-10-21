@@ -5,6 +5,7 @@
 fields:
     title:
         label: Title
+        required: true;
     description:
         label: Description
         type: textarea

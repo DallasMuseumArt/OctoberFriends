@@ -47,6 +47,16 @@ secondaryTabs:
             type: richeditor
             size: huge
         # ===================================
+        #  Categories tab 
+        # ===================================
+        categories:
+            label: Select as many that apply
+            type: relation
+            mode: dropdown 
+            options:
+                nameColumn: name
+            tab: Categories 
+        # ===================================
         #  Steps tab 
         # ===================================
         steps:

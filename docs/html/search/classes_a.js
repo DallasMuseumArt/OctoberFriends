@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['viewmaker',['ViewMaker',['../d7/d1b/classDMA_1_1Friends_1_1Components_1_1ViewMaker.html',1,'DMA::Friends::Components']]]
+  ['timerestrictions',['TimeRestrictions',['../dc/d09/classDMA_1_1Friends_1_1FormWidgets_1_1TimeRestrictions.html',1,'DMA::Friends::FormWidgets']]]
 ];

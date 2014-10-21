@@ -37,6 +37,7 @@ class User extends Post
             ->get();
 
         foreach($wordpressUsers as $wuser) {
+            echo '.';
 
             if (empty($wuser->user_email) || count($this->model->where('email', $wuser->user_email)->get())) {
                 continue;
