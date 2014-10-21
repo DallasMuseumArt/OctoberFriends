@@ -16,10 +16,10 @@ class CreateUsersGroupsTable extends Migration
             $table->integer('user_id');
             $table->integer('group_id');
             $table->enum('membership_status',  [
-            		UserGroup::MEMBERSHIP_PENDING,
-            		UserGroup::MEMBERSHIP_ACCEPTED,
-            		UserGroup::MEMBERSHIP_REJECTED,
-            		UserGroup::MEMBERSHIP_CANCELLED
+                    UserGroup::MEMBERSHIP_PENDING,
+                    UserGroup::MEMBERSHIP_ACCEPTED,
+                    UserGroup::MEMBERSHIP_REJECTED,
+                    UserGroup::MEMBERSHIP_CANCELLED
             ])->default(UserGroup::MEMBERSHIP_PENDING);
             $table->timestamps();
             
