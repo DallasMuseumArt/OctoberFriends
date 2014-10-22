@@ -28,5 +28,4 @@ class ActivityCodeForm extends ComponentBase
 
         ActivityCode::process($user, $params);
     }
-
 }
