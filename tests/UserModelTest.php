@@ -1,7 +1,7 @@
 <?php
 
 use League\FactoryMuffin\Facade as FactoryMuffin;
-use RainLab\User\Models\User;
+use DMA\Friends\Models\User;
 use DMA\Friends\Tests\MuffinCase;
 
 class UserModelTest extends MuffinCase
@@ -12,13 +12,13 @@ class UserModelTest extends MuffinCase
 
     public function testCreateModelInstance()
     {
-        $user = FactoryMuffin::create('RainLab\User\Models\User');
-        $this->assertInstanceOf('RainLab\User\Models\User', $user);
+        $user = FactoryMuffin::create('DMA\Friends\Models\User');
+        $this->assertInstanceOf('DMA\Friends\Models\User', $user);
     }
 
     public function testCanHaveBadges()
     {
-        $user = FactoryMuffin::create('RainLab\User\Models\User');
+        $user = FactoryMuffin::create('DMA\Friends\Models\User');
 
         $badge = FactoryMuffin::create('DMA\Friends\Models\Badge');
         $this->assertInstanceOf('DMA\Friends\Models\Badge', $badge);
@@ -30,7 +30,7 @@ class UserModelTest extends MuffinCase
 
     public function testCanHaveRewards()
     {
-        $user = FactoryMuffin::create('RainLab\User\Models\User');
+        $user = FactoryMuffin::create('DMA\Friends\Models\User');
 
         $reward = FactoryMuffin::create('DMA\Friends\Models\Reward');
         $this->assertInstanceOf('DMA\Friends\Models\Reward', $reward);
@@ -46,7 +46,7 @@ class UserModelTest extends MuffinCase
      */
     public function testCanHaveSteps()
     {
-        $user = FactoryMuffin::create('RainLab\User\Models\User');
+        $user = FactoryMuffin::create('DMA\Friends\Models\User');
 
         $step = FactoryMuffin::create('DMA\Friends\Models\Step');
         $this->assertInstanceOf('DMA\Friends\Models\Step', $step);

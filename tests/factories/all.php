@@ -24,8 +24,7 @@ FactoryMuffin::define('DMA\Friends\Models\Activity', [
 ]);
 
 FactoryMuffin::define('DMA\Friends\Models\ActivityLog', [
-    'user_id'           => 'factory|RainLab\User\Models\User',
-    //'action'            => 'in:activity,artwork,points,reward,unlocked',
+    'user_id'           => 'factory|DMA\Friends\Models\User',
     'action'            => function($object, $saved) {
         $activityLog = new ActivityLog();
         $types = $activityLog->actionTypes;
@@ -100,7 +99,7 @@ FactoryMuffin::define('DMA\Friends\Models\Step', [
     'updated_at'    => 'dateTime|now',
 ]);
 
-FactoryMuffin::define('RainLab\User\Models\User', [
+FactoryMuffin::define('DMA\Friends\Models\User', [
     'name'          => 'userName',
     'username'         => 'userName',
     'email'         => 'email',
