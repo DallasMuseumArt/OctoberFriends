@@ -2,7 +2,7 @@
 namespace DMA\Friends\Wordpress;
 
 use DMA\Friends\Wordpress\PasswordHash;
-use RainLab\User\Models\User;
+use DMA\Friends\Models\User;
 
 /**
  * This class will attempt to check the password against

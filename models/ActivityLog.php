@@ -51,7 +51,7 @@ class ActivityLog extends Model
      * @var array Relations
      */
     public $belongsTo = [
-        'user' => ['\RainLab\User\Models\User']
+        'user' => ['\DMA\Friends\Models\User']
     ];
 
     public $morphTo = [

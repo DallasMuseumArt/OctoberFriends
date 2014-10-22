@@ -1,5 +1,6 @@
 <?php namespace DMA\Friends\Components;
 
+use Auth;
 use Cms\Classes\ComponentBase;
 use ActivityCode;
 
@@ -23,7 +24,7 @@ class ActivityCodeForm extends ComponentBase
     {
         $params['code'] = post('activity_code');
         
-        $user = \RainLab\User\Models\User::find(1);
+        $user = Auth:getUser(); 
 
         ActivityCode::process($user, $params);
     }
