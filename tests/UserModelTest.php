@@ -56,4 +56,31 @@ class UserModelTest extends MuffinCase
         $this->assertEquals($user->steps[0]->id, $step->id);
     }
 
+    public function testCanHaveAndRemovePoints()
+    {
+        $incrementVal       = 10;
+        $user               = FactoryMuffin::create('DMA\Friends\Models\User');
+        $points             = $user->points;
+        $points_this_week   = $user->points_this_week;
+
+        // Add points
+        $user->addPoints($incrementVal);
+
+        $points += $incrementVal;
+        $points_this_week += $incrementVal;
+
+        $this->assertEquals($user->points, $points);
+        $this->assertEquals($user->points_this_week, $points_this_week);
+
+        // Remove Points
+        $user->removePoints($incrementVal);
+
+        $points -= $incrementVal;
+        $points_this_week -= $incrementVal;
+
+        $this->assertEquals($user->points, $points);
+        $this->assertEquals($user->points_this_week, $points_this_week);
+
+    }
+
 }

@@ -30,7 +30,7 @@ class ActivityLog extends Model
     protected $rules = [
         'message'       => 'min:10',
         'user_id'       => 'required|numeric',
-        'action'        => 'required|in:activity,artwork,points,reward,unlocked',
+        'action'        => 'required|in:activity,artwork,checkin,points,reward,unlocked',
         'points_earned' => 'numeric',
         'total_points'  => 'numeric',
         'timestamp'     => 'required',
@@ -42,6 +42,7 @@ class ActivityLog extends Model
     public $actionTypes = [
         'activity',
         'artwork',
+        'checkin',
         'points',
         'reward',
         'unlocked',

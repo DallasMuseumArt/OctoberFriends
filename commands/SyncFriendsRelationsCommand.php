@@ -201,5 +201,8 @@ class SyncFriendsRelationsCommand extends Command
         
             }
         }
+
+        $this->info('Sync complete');
+
     }
 }
