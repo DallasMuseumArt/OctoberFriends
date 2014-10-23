@@ -6,7 +6,7 @@
 	    id="add-users">
 	    <div class="panel panel-default">
 	        <div class="panel-heading">
-	            <h3 class="panel-title">Add members to group</h3>
+	            <h3 class="panel-title">{{ owner.name }} your can invite friends to join your group</h3>
 	        </div>
 	        <div class="panel-body" id="user-search">
 	            <div class="input-group">
@@ -17,7 +17,9 @@
 	                data-request-update="'{{ __SELF__ }}::autocomplete': '#autocomplete'"	    
 	                placeholder="Type username of a Friend you wish to invite"> 
 	                <span class="input-group-btn">
-	                    <button type="submit" class="btn btn btn-primary">Add</button>
+	                    <button type="submit" class="btn btn btn-primary {% if allowAdd == false %}disabled{% endif %}">
+	                    	Send invitation
+	                    </button>
 	                </span>
 	            </div>
 		        <ul class="list-group hidden" id="autocomplete">
