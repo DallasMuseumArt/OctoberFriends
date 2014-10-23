@@ -1,7 +1,7 @@
 <?php namespace DMA\Friends\Models;
 
 use Model;
-use DMA\Friends\Models\User;
+use RainLab\User\Models\User;
 
 /**
  * Badge Model
@@ -39,7 +39,7 @@ class Badge extends Model
         'steps' => ['DMA\Friends\Models\Step'],
     ];
     public $belongsToMany = [
-        'users' => ['DMA\Friends\Models\User', 'dma_friends_badge_user'],
+        'users' => ['RainLab\User\Models\User', 'dma_friends_badge_user'],
     ];
     public $attachOne = [
         'image' => ['System\Models\File']
