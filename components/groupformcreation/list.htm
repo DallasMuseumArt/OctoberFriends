@@ -1,0 +1,17 @@
+{% for user in users %}
+    <tr>
+    	<td>{{ user.email }}</td>
+		<td>{{ user.name }}</td>
+        <td>{{ user.pivot.membership_status }}</td>
+		<td>
+			<input type="hidden" name="users[]" value="{{ user.id }}" />
+	        <button type="button" 
+	            class="close pull-right" 
+	            aria-hidden="true" 
+	            class="" 
+	            data-request-data="removeUser: {{ user.id }}"
+	            data-request-success="$($el).closest('tr').remove()"
+	            data-request="onDelete" data-request-confirm="Are you sure?">&times;</button>
+	    </td>
+    </tr>
+{% endfor %}

@@ -28,7 +28,7 @@ class UserGroup extends GroupBase{
      * @var array Relations
      */
     public $belongsToMany = [
-        'users' => ['RainLab\User\Models\User', 
+        'users' => ['DMA\Friends\Models\User', 
         'table' => 'dma_friends_users_groups',
         'primaryKey' => 'group_id',
         'foreignKey' => 'user_id',
@@ -41,7 +41,7 @@ class UserGroup extends GroupBase{
      * @var array Relations
      */
     public $belongsTo = [
-        'owner' => ['RainLab\User\Models\User', 'foreignKey' => 'owner_id']    
+        'owner' => ['DMA\Friends\Models\User', 'foreignKey' => 'owner_id']    
     ];
     
     /**
@@ -296,7 +296,8 @@ class UserGroup extends GroupBase{
         )->get();
         
         return count($groups) > 0;
-    }    
+    }  
+
     
     /**
      * 

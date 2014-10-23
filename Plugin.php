@@ -2,7 +2,8 @@
 
 use Backend;
 use Illuminate\Support\Facades\Event;
-use Rainlab\User\Models\User as User;
+//use Rainlab\User\Models\User as User;
+use DMA\Friends\Models\User as User;
 use DMA\Friends\Models\Usermeta as Metadata;
 use System\Classes\PluginBase;
 use DMA\Friends\Classes\FriendsEventHandler;
@@ -123,6 +124,7 @@ class Plugin extends PluginBase
             'DMA\Friends\Components\BadgeRecommend'     => 'BadgeRecommend',
             'DMA\Friends\Components\Modal'              => 'Modal',
             'DMA\Friends\Components\UserBadges'         => 'UserBadges',
+            'DMA\Friends\Components\GroupFormCreation'  => 'GroupFormCreation',
         ];
     }
 
@@ -141,7 +143,7 @@ class Plugin extends PluginBase
         User::extend(function($model) {
             $model->hasOne['metadata']          = ['DMA\Friends\Models\Usermeta'];
             $model->hasMany['activityLogs']     = ['DMA\Friends\Models\ActivityLog'];
-            $model->hasMany['groups']             = ['DMA\Friends\Models\UserGroup',     'table' => 'dma_friends_user_groups',     'user_id', 'owner_id'];
+            $model->hasMany['groups']           = ['DMA\Friends\Models\UserGroup',  'table' => 'dma_friends_users_groups',  'user_id', 'group_id'];
             $model->belongsToMany['steps']      = ['DMA\Friends\Models\Step',       'table' => 'dma_friends_step_user',     'user_id', 'step_id'];
             $model->belongsToMany['badges']     = ['DMA\Friends\Models\Badge',      'table' => 'dma_friends_badge_user',    'user_id', 'badge_id'];
             $model->belongsToMany['rewards']    = ['DMA\Friends\Models\Reward',     'table' => 'dma_friends_reward_user',   'user_id', 'reward_id'];
