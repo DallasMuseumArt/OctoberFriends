@@ -24,7 +24,7 @@ class ActivityCodeForm extends ComponentBase
     {
         $params['code'] = post('activity_code');
         
-        $user = Auth:getUser(); 
+        $user = Auth::getUser(); 
 
         ActivityCode::process($user, $params);
     }
