@@ -1,5 +1,10 @@
 <?php
 
+Route::get('logout', function()
+{
+    Auth::logout();
+    return Redirect::to('/');
+});
 
 Route::group(['prefix' => 'friends/api', 'namespace' => 'DMA\Friends\Api'], function() {
 

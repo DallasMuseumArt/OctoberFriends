@@ -22,7 +22,7 @@ class FriendsLogTest extends MuffinCase
 
     public function testActivity()
     {
-        $user = FactoryMuffin::create('DMA\Friends\Models\User');
+        $user = FactoryMuffin::create('RainLab\User\Models\User');
         $activity = FactoryMuffin::create('DMA\Friends\Models\Activity');
 
         $params = [
@@ -43,7 +43,7 @@ class FriendsLogTest extends MuffinCase
 
     public function testArtwork()
     {
-        $user = FactoryMuffin::create('DMA\Friends\Models\User');
+        $user = FactoryMuffin::create('RainLab\User\Models\User');
         $params = [
             'user'          => $user,
             'artwork_id'    => '1998.12AD',
@@ -62,7 +62,7 @@ class FriendsLogTest extends MuffinCase
 
     public function testCheckin()
     {
-        $user = FactoryMuffin::create('DMA\Friends\Models\User');
+        $user = FactoryMuffin::create('RainLab\User\Models\User');
         $location = FactoryMuffin::create('DMA\Friends\Models\Location');
 
         $params = [
@@ -83,7 +83,7 @@ class FriendsLogTest extends MuffinCase
 
     public function testPoints()
     {
-        $user = FactoryMuffin::create('DMA\Friends\Models\User');
+        $user = FactoryMuffin::create('RainLab\User\Models\User');
 
         $params = [
             'user'          => $user,
@@ -103,7 +103,7 @@ class FriendsLogTest extends MuffinCase
 
     public function testReward()
     {
-        $user = FactoryMuffin::create('DMA\Friends\Models\User');
+        $user = FactoryMuffin::create('RainLab\User\Models\User');
         $reward = FactoryMuffin::create('DMA\Friends\Models\Reward');
 
         $params = [
@@ -124,7 +124,7 @@ class FriendsLogTest extends MuffinCase
 
     public function testUnlocked()
     {
-        $user = FactoryMuffin::create('DMA\Friends\Models\User');
+        $user = FactoryMuffin::create('RainLab\User\Models\User');
         $step = FactoryMuffin::create('DMA\Friends\Models\Step');
 
         $params = [
