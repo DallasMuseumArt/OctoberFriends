@@ -1,14 +1,23 @@
 <?php namespace DMA\Friends\Components;
 
 use Request;
+use Auth;
+use Redirect; 
 use Cms\Classes\ComponentBase;
+
+use System\Classes\ApplicationException;
 use DMA\Friends\Models\Settings;
 use DMA\Friends\Models\UserGroup;
 use DMA\Friends\Models\User;
-use System\Classes\ApplicationException;
+use RainLab\User\Models\Settings as UserSettings;
 
 class GroupFormCreation extends ComponentBase
 {
+    
+    /**
+     * @var string RainLab.User pluging username field
+     */
+    private $loginAttr;
     
     public function componentDetails()
     {
@@ -24,19 +33,57 @@ class GroupFormCreation extends ComponentBase
             'maxUserSuggestions' => [
                 'title'     => 'Limit list user autocomplete',
                 'default'   => 10,
-            ]
+            ],
+            'noUserRedirectTo' => [
+                'title'     => 'Redirect anonymous users to',
+                'type'      => 'dropdown',
+                'default'   => '/'
+            ]            
         ];
     }
     
     /**
      * @return DMA\Friends\Models\UserGroup
      */
-    protected function getGroup(){
-        // use for testing
-        return UserGroup::find(1);
+    protected function getGroup()
+    {
+        $user = Auth::getUser();
+        
+        if (!is_null($user)){
+            // use for testing
+            return UserGroup::where('owner_id', $user->getKey())
+                            ->first();
+        }
     }
     
-    //protected function refreshGroupUsers()
+    protected function getLoginAttr()
+    {
+        if (is_null($this->loginAttr)){
+            $this->loginAttr = UserSettings::get('login_attribute', UserSettings::LOGIN_EMAIL);
+        }
+        return $this->loginAttr;
+    }
+    
+    protected function prepareVars($group = null, $vars = [])
+    {
+        // Refresh group list
+        $this->page['users'] = (!is_null($group)) ? $group->getUsers()->toArray() : [];
+        
+        $this->page['owner'] = (!is_null($group)) ? $group->owner : [];
+        
+        // Allow to add more users
+        $this->page['allowAdd'] =  count($this->page['users']) < Settings::get('maximum_users_group');
+
+        // Get login attribute configured in RainLab.User plugin
+        $this->page['loginAttr'] = $this->getLoginAttr();
+        
+        foreach($vars as $key => $value){
+            // Append or refresh extra variables
+            $this->page[$key] = $value;
+        }
+
+                   
+    }
 
     public function onRun()
     {
@@ -44,11 +91,9 @@ class GroupFormCreation extends ComponentBase
         $this->addCss('components/groupformcreation/assets/css/group.creation.css');
         $this->addJs('components/groupformcreation/assets/js/group.creation.js');
         
-        // Populate users
+        // Populate users and other variables
     	$group = $this->getGroup();
-    	if ($group){
-    		$this->page['users'] = $group->getUsers()->toArray();
-    	}
+    	$this->prepareVars($group);
     
     }    
     
@@ -60,14 +105,16 @@ class GroupFormCreation extends ComponentBase
         $maxUsers = Settings::get('maximum_users_group');
         
         if (count($users) >= $maxUsers)
+            //trans('dma.friends::lang.group.invalid_activation_code')
         	throw new \Exception(sprintf('Sorry only %s members per group are allowed.', $maxUsers));
         
         
         // Add to group
         $group = $this->getGroup();
+
         
         if (($newUser = post('newUser')) != ''){
-            $user = User::where('email', '=', $newUser)->first();
+            $user = User::where($this->getLoginAttr(), '=', $newUser)->first();
             if ($user){
                 $group->addUser($user);
             }else{
@@ -75,8 +122,9 @@ class GroupFormCreation extends ComponentBase
             }
             
         }
-        // Updated list of users
-        $this->page['users'] = $group->getUsers()->toArray();
+        
+        // Updated list of users and other vars
+        $this->prepareVars($group);
     }
     
     /**
@@ -90,8 +138,8 @@ class GroupFormCreation extends ComponentBase
     			$group = $this->getGroup();
     			$group->removeUser($user);
     
-    			// Return updated list of users
-    			$this->page['users'] = $group->getUsers()->toArray();
+                // Updated list of users and other vars
+                $this->prepareVars($group);
     
     		}else{
     			throw new \Exception('User not found.');
@@ -102,17 +150,26 @@ class GroupFormCreation extends ComponentBase
     /**
      * Ajax handler for searching users
      */
-    public function onSearchUser(){
-        // Suggest usernames
+    public function onSearchUser(){        
+        // Suggest exsiting members
         if (($search = post('newUser')) != ''){
-            $users = User::where('email', 'LIKE', "$search%")
-                    ->orWhere('name', 'LIKE', "%$search%")
+            $users = User::where($this->getLoginAttr(), 'LIKE', "$search%")
+                    ->orWhere('name', 'LIKE', "$search%")
                     ->take($this->property('maxUserSuggestions'))
                     ->get();
-            
-            $this->page['users'] = $users->toArray();
+     
+            // Updated list of users and other vars
+            $this->prepareVars(null, ['search' => $search, 'users'=>$users]);            
         }
     }    
     
     
+    ###
+    # OPTIONS
+    ##
+    
+    public function getNoUserRedirectToOptions()
+    {
+    	return [''=>'- none -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
+    }    
 }

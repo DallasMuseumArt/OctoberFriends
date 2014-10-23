@@ -16,7 +16,7 @@ class User extends UserBase
      * @var array Relations
      */
     public $belongsToMany = [
-        'groups'    => ['DMA\Friends\Models\UserGroup', 'table' => 'users_groups', 'user_id', 'owner_id'],
+        'groups'    => ['DMA\Friends\Models\UserGroup', 'table' => 'users_groups', 'user_id', 'group_id'],
         'steps'     => ['DMA\Friends\Models\Step', 'table' => 'dma_friends_step_user', 'user_id', 'step_id'],
         'badges'    => ['DMA\Friends\Models\Badge',  'table' => 'dma_friends_badge_user',    'user_id', 'badge_id'],
         'rewards'   => ['DMA\Friends\Models\Reward', 'table' => 'dma_friends_reward_user',   'user_id', 'reward_id'],

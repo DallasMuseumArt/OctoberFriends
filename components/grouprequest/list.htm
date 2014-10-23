@@ -1,10 +1,10 @@
-{% for user in users %}
+{% for group in groups %}
     <tr>
-    	<td>{{ user[loginAttr] }}</td>
-		<td>{{ user.name }}</td>
-        <td>{{ user.pivot.membership_status }}</td>
+    	<td>{{ group.id }}</td>
+		<td>{{ group.owner.name }}</td>
+        <td></td>
 		<td>
-			<input type="hidden" name="users[]" value="{{ user.id }}" />
+			<input type="hidden" name="users[]" value="{{ group.id }}" />
 	        <button type="button" 
 	            class="close pull-right" 
 	            aria-hidden="true" 

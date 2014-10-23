@@ -1,3 +1,17 @@
 {% for user in users %}
-    <li class="list-group-item" data-username="{{ user.email }}">{{ user.email }} - {{ user.name }}</li>
+	{% spaceless %}
+    <li class="list-group-item" data-username="{{ user[loginAttr] }}">
+    	{% if search|lower == user[loginAttr][:search|length]|lower  %}
+    		<strong>{{ user[loginAttr][:search|length] }}</strong>{{ user[loginAttr][search|length:] }}
+    	{% else %}
+    		{{ user[loginAttr] }}
+    	{% endif %}
+    	 - 
+    	{% if search|lower == user.name[:search|length]|lower  %}
+    		<strong>{{ user.name[:search|length] }}</strong>{{ user.name[search|length:] }}
+    	{% else %}
+    		{{ user.name }}
+    	{% endif %}
+    </li>
+    {% endspaceless %}
 {% endfor %}
