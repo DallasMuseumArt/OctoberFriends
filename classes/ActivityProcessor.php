@@ -2,7 +2,7 @@
 namespace DMA\Friends\Classes;
 
 use DMA\Friends\Models\Activity;
-use DMA\Friends\Models\User;
+use RainLab\User\Models\User;
 use Event;
 use Lang;
 use FriendsLog;

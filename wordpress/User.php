@@ -4,7 +4,7 @@ namespace DMA\Friends\Wordpress;
 
 use Illuminate\Support\Facades\DB;
 use DMA\Friends\Models\Usermeta;
-use DMA\Friends\Models\User as OctoberUser;
+use RainLab\User\Models\User as OctoberUser;
 use Rainlab\User\Models\Country;
 use Rainlab\User\Models\State;
 
