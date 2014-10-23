@@ -76,6 +76,11 @@ class Plugin extends PluginBase
                 'permissions'   => ['dma.friends.*'],
                 'order'         => 500,
                 'sideMenu'  => [
+                    'activities'   => [
+                        'label'     => 'Activities',
+                        'icon'      => 'icon-child',
+                        'url'       => Backend::url('dma/friends/activities'),
+                    ],  
                     'badges'    => [
                         'label'     => 'Badges',
                         'icon'      => 'icon-shield',
@@ -87,11 +92,6 @@ class Plugin extends PluginBase
                         'icon'      => 'icon-money',
                         'url'       => Backend::url('dma/friends/rewards'),
                     ],
-                    'activities'   => [
-                        'label'     => 'Activities',
-                        'icon'      => 'icon-child',
-                        'url'       => Backend::url('dma/friends/activities'),
-                    ],  
                     'activitylogs'   => [
                         'label'     => 'Activity Logs',
                         'icon'      => 'icon-rocket',
