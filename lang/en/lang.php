@@ -10,5 +10,6 @@ return [
         'checkin'   => ':name checked in at location ":title"',
         'points'    => ':name earned :points for a new total of :total_points',
         'reward'    => ':name claimed the reward ":title"',
+        'unlocked'  => ':name unlocked the step ":title"',
     ]
 ];

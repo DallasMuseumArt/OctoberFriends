@@ -13,7 +13,6 @@ class CreateActivityLogsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('user_id');
-            $table->string('site_id')->nullable();
             $table->string('action');
             $table->longText('message');
             $table->string('object_type')->nullable();

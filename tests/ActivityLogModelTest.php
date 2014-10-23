@@ -72,4 +72,5 @@ class ActivityLogModelTest extends MuffinCase
         }
 
     }
+
 }

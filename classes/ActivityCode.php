@@ -1,7 +1,7 @@
 <?php
 namespace DMA\Friends\Classes;
 
-use RainLab\User\Models\User;
+use DMA\Friends\Models\User;
 use DMA\Friends\Models\Activity;
 use DMA\Friends\Classes\ActivityProcessor;
 

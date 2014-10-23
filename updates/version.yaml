@@ -26,6 +26,12 @@
     - Create categories table
     - create_categories_table.php
 1.0.7:
+    - Add location id to user_step table
+    - update_user_steps_table.php
+1.0.8:
+    - Move points to user table and migrate points out of metadata table
+    - extend_user_table.php
+1.0.9:
     - Add user groups     
     - create_user_group_table.php
     - create_users_groups_table.php

@@ -8,5 +8,3 @@ fields:
     description:
         label: Description
         type: textarea
-    slug:
-        label: Slug

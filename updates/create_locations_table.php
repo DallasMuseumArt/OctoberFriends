@@ -13,11 +13,11 @@ class CreateLocationsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->timestamps();
-            $table->integer('wordpress_id');
+            $table->integer('wordpress_id')->nullable();
             $table->string('title');
-            $table->text('description');
-            $table->string('printer_reward');
-            $table->string('printer_membership');
+            $table->text('description')->nullable();
+            $table->string('printer_reward')->nullable();
+            $table->string('printer_membership')->nullable();
         });
     }
 
