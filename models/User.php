@@ -2,7 +2,6 @@
 
 use Event;
 use DMA\Friends\Classes\FriendsLog;
-use RainLab\User\Models\User as UserBase;
 
 /**
  * Friends User model
@@ -10,24 +9,8 @@ use RainLab\User\Models\User as UserBase;
  * @see RainLab\User\Models\User
  * @author Carlos Arroyo
  */
-class User extends UserBase
+class User
 {
-    /**
-     * @var array Relations
-     */
-    public $belongsToMany = [
-        'groups'    => ['DMA\Friends\Models\UserGroup', 'table' => 'users_groups', 'user_id', 'group_id'],
-        'steps'     => ['DMA\Friends\Models\Step', 'table' => 'dma_friends_step_user', 'user_id', 'step_id'],
-        'badges'    => ['DMA\Friends\Models\Badge',  'table' => 'dma_friends_badge_user',    'user_id', 'badge_id'],
-        'rewards'   => ['DMA\Friends\Models\Reward', 'table' => 'dma_friends_reward_user',   'user_id', 'reward_id'],
-    ];
-    public $hasOne = [
-        'metadata' => ['DMA\Friends\Models\Usermeta'],
-    ];
-    public $hasMany = [
-        'activityLogs' => ['DMA\Friends\Models\ActivityLog'],
-    ];
-
     /**
      * Add points to a users account
      *
@@ -72,7 +55,8 @@ class User extends UserBase
         }
     }
     
-    public function getMembershipStatusOptions(){
+    public function getMembershipStatusOptions()
+    {
         return [
             UserGroup::MEMBERSHIP_PENDING   =>  UserGroup::MEMBERSHIP_PENDING,
             UserGroup::MEMBERSHIP_ACCEPTED  =>  UserGroup::MEMBERSHIP_ACCEPTED,
