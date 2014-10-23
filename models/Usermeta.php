@@ -1,7 +1,7 @@
 <?php namespace DMA\Friends\Models;
 
 use Model;
-use \RainLab\User\Models\User;
+use DMA\Friends\Models\User;
 
 /**
  * Usermeta Model
@@ -32,15 +32,15 @@ class Usermeta extends Model
      * @var array Relations
      */
     public $belongsTo = [
-        'user'  => 'RainLab\User\Models\User',
+        'user'  => 'DMA\Friends\Models\User',
         'primaryKey' => 'group_id',
         'foreignKey' => 'user_id',        
     ];
 
 	/**
-     * Automatically creates a metada entry for a user if not one already.
-     * @param  RainLab\User\Models\User $user
-     * @return Dma\Friends\Models\Usermeta
+     * Automatically creates a metadata entry for a user if not one already.
+     * @param  DMA\Friends\Models\User $user
+     * @return DMA\Friends\Models\Usermeta
      */
     public static function getFromUser($user = null)
     {

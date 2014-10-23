@@ -42,7 +42,6 @@ class ActivityLog extends Post
 
             $log                = new $this->model;
             $log->id            = $wlog->id;
-            $log->site_id       = $wlog->site_id;
             $log->user_id       = $wlog->user_id;
             $log->action        = $wlog->action;
             $log->message       = $wlog->message;

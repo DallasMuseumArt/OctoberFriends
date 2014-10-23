@@ -4,7 +4,7 @@ namespace DMA\Friends\Wordpress;
 
 use Illuminate\Support\Facades\DB;
 use DMA\Friends\Models\Usermeta;
-use Rainlab\User\Models\User as OctoberUser;
+use DMA\Friends\Models\User as OctoberUser;
 use Rainlab\User\Models\Country;
 use Rainlab\User\Models\State;
 
@@ -114,6 +114,7 @@ class User extends Post
         $user->street_addr      = $data['street_address'];
         $user->city             = $data['city'];
         $user->zip              = $data['zip'];
+        $user->points           = $data['_badgeos_points'];
 
         // Populate state and country objects
         if (!empty($data['state'])) {
@@ -131,7 +132,6 @@ class User extends Post
         $metadata                           = new Usermeta;
         $metadata->first_name               = $data['first_name'];
         $metadata->last_name                = $data['last_name'];
-        $metadata->points                   = $data['_badgeos_points'];
         $metadata->email_optin              = $data['email_optin'];
         $metadata->current_member           = $data['current_member'];
         $metadata->current_member_number    = $data['current_member_number'];

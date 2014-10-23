@@ -25,8 +25,7 @@ FactoryMuffin::define('DMA\Friends\Models\Activity', [
 ]);
 
 FactoryMuffin::define('DMA\Friends\Models\ActivityLog', [
-    'user_id'           => 'factory|RainLab\User\Models\User',
-    //'action'            => 'in:activity,artwork,points,reward,unlocked',
+    'user_id'           => 'factory|DMA\Friends\Models\User',
     'action'            => function($object, $saved) {
         $activityLog = new ActivityLog();
         $types = $activityLog->actionTypes;
@@ -63,7 +62,7 @@ FactoryMuffin::define('DMA\Friends\Models\Badge', [
     'is_published'              => 'boolean',
     'is_archived'               => 'boolean',
     'created_at'                => 'dateTime|now',
-    'categories'        => 'factory|DMA\Friends\Models\Category',
+    'categories'                => 'factory|DMA\Friends\Models\Category',
 ]);
 
 FactoryMuffin::define('DMA\Friends\Models\Category', [
@@ -72,6 +71,12 @@ FactoryMuffin::define('DMA\Friends\Models\Category', [
     'slug'          => function($object, $saved) {
         return Str::slug($object->title);
     },
+]);
+
+FactoryMuffin::define('DMA\Friends\Models\Location', [
+    'title'         => 'word',
+    'description'   => 'optional:text',
+    'created_at'    => 'dateTime|now',
 ]);
 
 FactoryMuffin::define('DMA\Friends\Models\Reward', [
@@ -101,7 +106,7 @@ FactoryMuffin::define('DMA\Friends\Models\Step', [
     'updated_at'    => 'dateTime|now',
 ]);
 
-FactoryMuffin::define('RainLab\User\Models\User', [
+FactoryMuffin::define('DMA\Friends\Models\User', [
     'name'          => 'userName',
     'username'         => 'userName',
     'email'         => 'email',
@@ -123,10 +128,10 @@ FactoryMuffin::define('RainLab\User\Models\User', [
     'street_addr'   => 'streetAddress',
     'city'          => 'city',
     'zip'           => 'postcode',
+    'points'        => 'randomNumber',
 ]);
 
 FactoryMuffin::define('DMA\Friends\Models\Usermeta', [
-    'points'                => 'randomNumber',
     'first_name'            => 'firstName',
     'last_name'             => 'lastName',
     'email_optin'           => 'boolean',

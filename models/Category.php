@@ -7,12 +7,22 @@ use Model;
  */
 class Category extends Model
 {
+    use \October\Rain\Database\Traits\Sluggable;
 
     /**
      * @var string The database table used by the model.
      */
     public $table = 'dma_friends_categories';
+
+    /**
+     * @var No timestamps needed here
+     */
     public $timestamps = false;
+
+    /**
+     * @var Sluggable fields
+     */
+    public $slugs = ['slug' => 'name'];
 
     /**
      * @var array Guarded fields
@@ -27,13 +37,6 @@ class Category extends Model
      * @var array Fillable fields
      */
     protected $fillable = ['touch'];
-
-    public function beforeValidate()
-    {   
-        // Generate a URL slug for this model
-        if (!$this->exists && !$this->slug)
-            $this->slug = Str::slug($this->name);
-    }  
 
     /** 
      * @var array Relations

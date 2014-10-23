@@ -31,6 +31,16 @@ class SyncFriendsRelationsCommand extends Command
      */
     protected $db = null;
 
+    /**
+     * @var The user/step pivot table
+     */
+    protected $userStepTable = 'dma_friends_step_user';
+
+    /**
+     * @var The user/badge pivot table
+     */
+    protected $userBadgeTable = 'dma_friends_badge_user';
+
     /** 
      * Create a new command instance.
      * @return void
@@ -104,7 +114,7 @@ class SyncFriendsRelationsCommand extends Command
                 switch($table) {
                     case 'dma_friends_step_badge':
                         $to->steps()->save($from);
-                        echo 'from: ' . $from->title . ' --|-|-- ' . $to->title ."\n";
+                        $this->info('from: ' . $from->title . ' --|-|-- ' . $to->title);
 
                     default:
 
@@ -115,9 +125,9 @@ class SyncFriendsRelationsCommand extends Command
 
                         if (Schema::hasTable($table)) {
                             DB::table($table)->insert($values);
-                            echo 'from: ' . $from->title . ' ----- ' . $to->title ."\n";
+                            $this->info('from: ' . $from->title . ' ----- ' . $to->title);
                         } else {
-                            echo 'table doesnt exist';
+                            $this->error('table doesnt exist');
                         } 
 
                 }
@@ -131,17 +141,21 @@ class SyncFriendsRelationsCommand extends Command
 
         $post = new Post;
 
+        $this->info('Sync Achievements');        
+
         foreach ($achievements as $achievement) {
             $user = User::find($achievement->user_id);
 
             if (!$user) continue;
+
+            $this->info('Importing achievements for ' . $user->email);
             
             // Flush existing records
-            DB::table('dma_friends_user_steps')
+            DB::table($this->userStepTable)
                 ->where('user_id', $user->id)
                 ->delete();
 
-            DB::table('dma_friends_badge_user')
+            DB::table($this->userBadgeTable)
                 ->where('user_id', $user->id)
                 ->delete();
 
@@ -175,17 +189,20 @@ class SyncFriendsRelationsCommand extends Command
 
                     $step = Step::findWordpress($d->ID)->first();
                     $link['step_id'] = $step->id;
-                    DB::table('dma_friends_user_steps')->insert($link);
+                    DB::table($this->userStepTable)->insert($link);
 
                 } elseif ($d->post_type == 'badge') {
 
                     $badge = Badge::findWordpress($d->ID)->first();
                     $link['badge_id'] = $badge->id;
-                    DB::table('dma_friends_badge_user')->insert($link);
+                    DB::table($this->userBadgeTable)->insert($link);
 
                 }
         
             }
         }
+
+        $this->info('Sync complete');
+
     }
 }

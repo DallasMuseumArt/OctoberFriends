@@ -55,6 +55,7 @@ class SyncFriendsDataCommand extends Command
      */
     public function fire()
     {
+        $this->info('Begin sync');
 
         $type = $this->option('type');
         $this->limit = $this->option('limit');
@@ -91,7 +92,7 @@ class SyncFriendsDataCommand extends Command
                 $this->syncSteps();
         }
 
-        $this->output->writeln('Sync complete');
+        $this->info('Sync complete');
     }
 
     /**
@@ -100,6 +101,7 @@ class SyncFriendsDataCommand extends Command
     protected function syncUsers()
     {
         $user = new WordpressUser;
+        $this->info('Updating existing users metadata');
         $user->updateExistingUsers();
         $this->sync($user, 'users');
     }
@@ -167,8 +169,9 @@ class SyncFriendsDataCommand extends Command
 
     protected function sync($model, $textType)
     {
+        $this->info('Begin sync of ' . $textType);
         $count = $model->import($this->limit);
-        $this->output->writeln('Processed ' . $count . ' ' . $textType);
+        $this->info('Processed ' . $count . ' ' . $textType);
     }
 
     /** 
