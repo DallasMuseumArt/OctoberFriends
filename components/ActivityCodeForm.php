@@ -1,6 +1,8 @@
 <?php namespace DMA\Friends\Components;
 
 use Auth;
+use Flash;
+use Lang;
 use Cms\Classes\ComponentBase;
 use ActivityCode;
 
@@ -26,6 +28,18 @@ class ActivityCodeForm extends ComponentBase
         
         $user = Auth::getUser(); 
 
-        ActivityCode::process($user, $params);
+        $activity = ActivityCode::process($user, $params);
+
+        if ($activity) {
+            Flash::info(Lang::get('dma.friends::lang.app.activityCodeSuccess', ['name' => $activity->title]));
+        } else {
+            Flash::error(Lang::get('dma.friends::lang.app.activityCodeError', ['code' => $params['code']]));
+        }
+
+        return [
+            '#flashMessages' => $this->renderPartial('@flashMessages')
+        ];
+
     }
+
 }
