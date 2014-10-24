@@ -28,20 +28,21 @@ class UserGroup extends GroupBase{
      * @var array Relations
      */
     public $belongsToMany = [
-        'users' => ['DMA\Friends\Models\User', 
+        'users' => ['Rainlab\User\Models\User', 
         'table' => 'dma_friends_users_groups',
         'primaryKey' => 'group_id',
         'foreignKey' => 'user_id',
         'timestamps' => true,
         'pivot' => ['membership_status']
         ]
-    ];    
+    ];   
+    
         
     /**
      * @var array Relations
      */
     public $belongsTo = [
-        'owner' => ['DMA\Friends\Models\User', 'foreignKey' => 'owner_id']    
+        'owner' => ['Rainlab\User\Models\User', 'foreignKey' => 'owner_id']    
     ];
     
     /**
@@ -250,7 +251,7 @@ class UserGroup extends GroupBase{
      * @param string PENDING, ACCEPTED, REJECTED, CANCELLED
      * @return bool
      */
-    private function setMembershipStatus(&$user, $status)
+    public function setMembershipStatus(&$user, $status)
     {
         if ($this->inGroup($user)){
                         

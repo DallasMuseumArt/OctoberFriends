@@ -2,6 +2,7 @@
 
 use Event;
 use DMA\Friends\Classes\FriendsLog;
+use RainLab\User\Models\User as UserBase;
 
 /**
  * Friends User model
@@ -9,7 +10,7 @@ use DMA\Friends\Classes\FriendsLog;
  * @see RainLab\User\Models\User
  * @author Carlos Arroyo
  */
-class User
+class User extends UserBase
 {
     /**
      * Add points to a users account

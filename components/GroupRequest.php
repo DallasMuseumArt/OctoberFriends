@@ -16,6 +16,8 @@ class GroupRequest extends ComponentBase
     
     private $user;
     
+    
+    
     public function componentDetails()
     {
         return [
@@ -35,11 +37,12 @@ class GroupRequest extends ComponentBase
         return $this->user;
     }
     
-    protected function getGroups()
+    protected function getGroupRequest()
     {
         $user = $this->getuser();
         if(!is_null($user)){
-            return $user->groups();
+            $groups = $user->groups()->get();
+            return $groups;
         }
         return [];
     }
@@ -47,7 +50,15 @@ class GroupRequest extends ComponentBase
     protected function prepareVars($vars = [])
     {
         // Refresh group list
-        $this->page['groups'] = $this->getGroups();
+        $this->page['groups'] = $this->getGroupRequest();
+        
+        // UI group options
+        $this->page['options'] = [ 
+            UserGroup::MEMBERSHIP_ACCEPTED => 'join',
+            UserGroup::MEMBERSHIP_REJECTED => 'ignore',
+            UserGroup::MEMBERSHIP_CANCELLED => 'leave'
+        ];
+        
 
         foreach($vars as $key => $value){
             // Append or refresh extra variables
@@ -71,10 +82,21 @@ class GroupRequest extends ComponentBase
     /**
      * Ajax handler for accept request
      */
-    public function onAccept(){
-
+    public function onChangeStatus(){
+                
+        if (($groupId = post('groupId')) != ''){
+            
+            $group = UserGroup::find($groupId)->get()->first();
+            
+            if (($status = post('status')) != ''){
+                $user = $this->getuser();
+                $group->setMembershipStatus($user, $status);   
+            }
+        }
+        
+        
         // Updated list of request and other vars
-        $this->prepareVars($group);
+        $this->prepareVars();
     }
   
 }
