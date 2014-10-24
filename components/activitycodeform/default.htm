@@ -1,5 +1,5 @@
 <div class="dma-code-input">
-    {{ form_ajax('onSubmit') }}
+    {{ form_ajax('onSubmit', { class: 'activity-code' } ) }}
         <input id="activity-code" type="text" name="activity_code" placeholder="Enter Activity Code">
         <button class="secondary" type="submit">Go</button>
     {{ form_close() }}

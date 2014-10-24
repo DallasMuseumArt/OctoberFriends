@@ -67,8 +67,9 @@ class FriendsLog
             throw new InvalidArgumentException('Invalid Parameters');
 
         $params['message'] = Lang::get('dma.friends::lang.log.activity', [
-            'name'  => $params['user']->name, 
-            'title' => $params['object']->title
+            'name'          => $params['user']->name, 
+            'title'         => $params['object']->title,
+            'points_earned' => $params['object']->points,
         ]);
 
         self::write('activity', $params);
