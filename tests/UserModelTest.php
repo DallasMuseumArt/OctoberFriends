@@ -1,7 +1,7 @@
 <?php
 
 use League\FactoryMuffin\Facade as FactoryMuffin;
-use RainLab\User\Models\User;
+use DMA\Friends\Classes\UserExtend;
 use DMA\Friends\Tests\MuffinCase;
 
 class UserModelTest extends MuffinCase
@@ -63,8 +63,10 @@ class UserModelTest extends MuffinCase
         $points             = $user->points;
         $points_this_week   = $user->points_this_week;
 
+        $userExtend = new UserExtend($user);
+
         // Add points
-        $user->addPoints($incrementVal);
+        $userExtend->addPoints($incrementVal);
 
         $points += $incrementVal;
         $points_this_week += $incrementVal;
@@ -73,7 +75,7 @@ class UserModelTest extends MuffinCase
         $this->assertEquals($user->points_this_week, $points_this_week);
 
         // Remove Points
-        $user->removePoints($incrementVal);
+        $userExtend->removePoints($incrementVal);
 
         $points -= $incrementVal;
         $points_this_week -= $incrementVal;
@@ -81,6 +83,14 @@ class UserModelTest extends MuffinCase
         $this->assertEquals($user->points, $points);
         $this->assertEquals($user->points_this_week, $points_this_week);
 
+    }
+
+    public function testCanUserExtendLoadNullUser()
+    {
+        $userExtend = new UserExtend;
+
+        $user = $userExtend->user->firstOrFail();
+        $this->assertInstanceOf('RainLab\User\Models\User', $user);
     }
 
 }
