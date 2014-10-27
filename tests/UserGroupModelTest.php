@@ -321,4 +321,31 @@ class UserGroupModelTest extends MuffinCase
         // User2 accept to join to group2
         $this->assertTrue($group2->acceptMembership($user2));        
     }    
+    
+    
+    /**
+     * Test User can join multiple active groups
+     */
+    public function testUserCantReJoinGroup()
+    {
+    	// Create two empty groups
+    	$group = FactoryMuffin::create('DMA\Friends\Models\UserGroup');
+    	 
+    	// Create a new user
+    	$user = FactoryMuffin::create('RainLab\User\Models\User');
+    
+    	// Invite user to join group
+    	$this->assertTrue($group->addUser($user));
+    	 
+    	// User reject invitation
+    	$this->assertTrue($group1->rejectMembership($user));
+    
+    	// Group owner re-invite user to join group
+    	$this->assertTrue($group->addUser($user));
+    
+    	// User accept join group
+    	$this->assertTrue($group1->acceptMembership($user));
+    	 
+   
+    }    
 }

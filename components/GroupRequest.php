@@ -8,7 +8,6 @@ use Cms\Classes\ComponentBase;
 use System\Classes\ApplicationException;
 use DMA\Friends\Models\Settings;
 use DMA\Friends\Models\UserGroup;
-use DMA\Friends\Models\User;
 use RainLab\User\Models\Settings as UserSettings;
 
 class GroupRequest extends ComponentBase
@@ -22,7 +21,7 @@ class GroupRequest extends ComponentBase
     {
         return [
             'name'        => 'User group request',
-            'description' => 'List all request to join a group'
+            'description' => 'List all active group request'
         ];
     }
     
@@ -41,9 +40,21 @@ class GroupRequest extends ComponentBase
     {
         $user = $this->getuser();
         if(!is_null($user)){
-            $groups = $user->groups()->get();
+            
+            // 27/010/2014  : I know this is kind of ugly $user::find instead of User::find but 
+            // at this stage I don't have idea what user model we are going to use RainLab\User or DMA\Friends
+            // TODO : this logic should go to in to User model
+            $groups = $user->groups()
+                           ->where('is_active', true)
+                           ->where(function($query) use ($user){
+                                $status = [ UserGroup::MEMBERSHIP_PENDING, 
+                                            UserGroup::MEMBERSHIP_ACCEPTED,
+                                            UserGroup::MEMBERSHIP_CANCELLED
+                                ];
+                                $query->whereIn('membership_status', $status);
+                           })->get();
             return $groups;
-        }
+        }        
         return [];
     }
     
@@ -78,6 +89,7 @@ class GroupRequest extends ComponentBase
     	$this->prepareVars();
     
     }    
+   
     
     /**
      * Ajax handler for accept request
@@ -86,11 +98,25 @@ class GroupRequest extends ComponentBase
                 
         if (($groupId = post('groupId')) != ''){
             
-            $group = UserGroup::find($groupId)->get()->first();
+            $group = UserGroup::findOrFail($groupId);
             
             if (($status = post('status')) != ''){
                 $user = $this->getuser();
-                $group->setMembershipStatus($user, $status);   
+                
+                switch ($status){
+                    case UserGroup::MEMBERSHIP_ACCEPTED:
+                        $group->acceptMembership($user);
+                        break;
+                        
+                    case UserGroup::MEMBERSHIP_REJECTED:
+                    	$group->rejectMembership($user);
+                    	break;
+                    	
+                	case UserGroup::MEMBERSHIP_CANCELLED:
+                		$group->cancelMembership($user);
+                		break;                        	                        
+                       
+                } 
             }
         }
         
@@ -98,5 +124,7 @@ class GroupRequest extends ComponentBase
         // Updated list of request and other vars
         $this->prepareVars();
     }
+  
+    
   
 }

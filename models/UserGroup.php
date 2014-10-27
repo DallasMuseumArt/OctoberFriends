@@ -1,8 +1,10 @@
 <?php namespace DMA\Friends\Models;
 
-use October\Rain\Auth\Models\Group as GroupBase;
-use DMA\Friends\Models\Settings;
 use Event;
+use DMA\Friends\Models\Settings;
+use Illuminate\Database\QueryException;
+use October\Rain\Auth\Models\Group as GroupBase;
+
 
 /**
  * Friends User group model
@@ -115,12 +117,14 @@ class UserGroup extends GroupBase{
      */
     public function getUsers()
     {
-        if (!$this->groupUsers)
-            //$this->groupUsers = $this->users()->get();
-            $this->groupUsers = self::find($this->getKey())->users->filter(function($user){
-                $status = $user->pivot->membership_status;
-                return $status == self::MEMBERSHIP_PENDING || $status == self::MEMBERSHIP_ACCEPTED;  
-            });
+        if (!$this->groupUsers){
+            $this->groupUsers = $this->users()->where(function($query){
+                   $status = [ UserGroup::MEMBERSHIP_PENDING,
+                               UserGroup::MEMBERSHIP_ACCEPTED
+                        	];
+                    $query->whereIn('membership_status', $status);
+            })->get();  
+        }          
             
         return $this->groupUsers;
     }
@@ -141,16 +145,19 @@ class UserGroup extends GroupBase{
                 if(self::hasActiveMemberships($user))
                     return false;
                 
-                $this->users()->attach($user);
-                $this->groupUsers = null;
-                
-                // FIXME : Sometimes pivot is empty but I didn't find why it happens.
-                // I am suspecting that is an internal problem in the Eloquent model and how it gets updated
-                // after a new relationship is created.
-                // For now the solution is if the pivot is empty reload the model.
-                if (is_null($user->pivot)){
-                    $user = $this->users()->where('user_id', $user->getKey())->get()[0];
-                }                
+                try{
+                    $this->users()->attach($user);
+                    $this->groupUsers = null;
+                    
+                }catch(QueryException $e){
+                    // SQL integrity user and group relation already exists.
+                    if ($e->getCode() == 23000){
+                        // User was part of the group but rejected or cancel
+                        // the membership. As the user is not part of other group
+                        // yet, the creator is able to re-invite user to join the group
+                        $this->setMembershipStatus($user, self::MEMBERSHIP_PENDING, $testUserInGroup=false);
+                    }
+                }
                 
                 $this->sendNotification($user, 'invite');
                 
@@ -244,17 +251,22 @@ class UserGroup extends GroupBase{
         $status = $this->setMembershipStatus($user, self::MEMBERSHIP_CANCELLED);
         return $status == self::MEMBERSHIP_CANCELLED;        
     }
-    
+        
     /**
-     * See if the user is in the group.
+     * Change membership status, send notification.  
      * @param RainLab\User\Models\User $user
-     * @param string PENDING, ACCEPTED, REJECTED, CANCELLED
-     * @return bool
+     * @param string $status PENDING, ACCEPTED, REJECTED, CANCELLED
+     * @param boolean $testUserInGroup If true only allow to change status to active or pending users. 
+     *                                 If false ignore this restriction. 
+     * @return string
      */
-    public function setMembershipStatus(&$user, $status)
+    protected function setMembershipStatus(&$user, $status, $testUserInGroup=true)
     {
-        if ($this->inGroup($user)){
-                        
+        if ($this->inGroup($user, $includeAll=!$testUserInGroup)){
+            
+            // FIXME : See comments in loadPivot method
+            $this->loadPivot($user);
+            
             if ($user->pivot->membership_status != $status){
                 $user->pivot->membership_status = $status;
                 $user->pivot->save();
@@ -292,7 +304,7 @@ class UserGroup extends GroupBase{
                     ->with('users')
                     ->whereHas('users', function($query) use ($user, $status){
                         $query->where('membership_status', $status)
-                                ->where('user_id', $user->getKey());
+                              ->where('user_id', $user->getKey());
                     }
         )->get();
         
@@ -312,7 +324,7 @@ class UserGroup extends GroupBase{
         if (!$this->inGroup($user)) 
             if($this->owner->getKey() != $user->getKey()) 
                 return false;
-        
+            
         // TODO : implement other channels
         $channel = 'mail';
         if($channel == 'mail'){
@@ -382,6 +394,19 @@ class UserGroup extends GroupBase{
         return false;
     }    
     
+    /**
+     * This method is for internal use as a temporal solution for empty pivot variables. 
+     */
+    private function loadPivot(&$user){
+        // FIXME : Sometimes pivot is empty but I didn't find why it happens.
+        // I am suspecting that is an internal problem in the Eloquent model and how it gets updated
+        // after a new relationship is created.
+        // For now the solution is if the pivot is empty reload the model.
+        if (is_null($user->pivot)){
+        	$user = $this->users()->where('user_id', $user->getKey())->get()[0];
+        }    
+        return $user;    
+    }
 
 }
 
