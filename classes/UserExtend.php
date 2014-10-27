@@ -1,17 +1,38 @@
-<?php namespace DMA\Friends\Models;
+<?php namespace DMA\Friends\Classes;
 
 use Event;
 use DMA\Friends\Classes\FriendsLog;
-use RainLab\User\Models\User as UserBase;
+use RainLab\User\Models\User;
 
 /**
  * Friends User model
- * @package DMA\Friends\Models
- * @see RainLab\User\Models\User
+ * @package DMA\Friends\Classes
  * @author Carlos Arroyo
  */
-class User extends UserBase
+class UserExtend
 {
+
+    /**
+     * @var The user object
+     */
+    public $user = null;
+
+    /**
+     * Extended functionality against user objects 
+     * This is a really ugly way to extend the functionality
+     * of the user object
+     * 
+     * @param \RainLab\User\Model\User (optional) If no user object
+     * is provided then a new user object will be instantiated
+     */
+    public function __construct(User $user = null)
+    {
+        if (!$user)
+            $user = new User;
+
+        $this->user = $user;
+    }
+
     /**
      * Add points to a users account
      *
@@ -23,15 +44,15 @@ class User extends UserBase
         if (!is_int($points))
             throw new Exception('Points must be an integer');
 
-        $this->points += $points;
-        $this->points_this_week += $points;
+        $this->user->points += $points;
+        $this->user->points_this_week += $points;
 
-        if ($this->forceSave()) {
+        if ($this->user->forceSave()) {
 
-            Event::fire('friends.user.pointsEarned', [$this, $points]);
+            Event::fire('friends.user.pointsEarned', [$this->user, $points]);
 
             $params = [
-                'user'          => $this,
+                'user'          => $this->user,
                 'points_earned' => $points,
             ];
             FriendsLog::points($params);
@@ -49,10 +70,10 @@ class User extends UserBase
         if (!is_int($points))
             throw new Exception('Points must be an integer');
 
-        $this->points -= $points;
-        $this->points_this_week -= $points;
-        if ($this->forceSave()) {
-            Event::fire('friends.user.pointsRemoved', [$this, $points]);
+        $this->user->points -= $points;
+        $this->user->points_this_week -= $points;
+        if ($this->user->forceSave()) {
+            Event::fire('friends.user.pointsRemoved', [$this->user, $points]);
         }
     }
     

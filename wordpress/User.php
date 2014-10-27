@@ -70,15 +70,19 @@ class User extends Post
      */
     public function updateExistingUsers()
     {
-        foreach(OctoberUser::all() as $user) {
-            $id = $this->db
-                ->table('wp_users')
-                ->select('ID')
-                ->where('user_email', $user->email)
-                ->first();
 
-            $this->updateMetadata($user, $id->ID);
-        }
+        OctoberUser::chunk(500, function($users) {
+        
+            foreach($users as $user) {
+                $id = $this->db
+                    ->table('wp_users')
+                    ->select('ID')
+                    ->where('user_email', $user->email)
+                    ->first();
+
+                $this->updateMetadata($user, $id->ID);
+            }
+        });
     }
 
     /**
