@@ -96,7 +96,6 @@ class ActivityType extends FormWidgetBase
     public function prepareFormFields($value)
     {
         $value = (object)$value;
-        \Debugbar::info($value);
         $form = new ActivityForm($this->manager, $value, $this->formField->getName());
         return $form->render();
     }
