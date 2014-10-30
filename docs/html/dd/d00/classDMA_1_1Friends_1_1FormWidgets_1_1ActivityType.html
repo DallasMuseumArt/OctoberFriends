@@ -153,11 +153,11 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>string The new value for this widget. </dd></dl>
-<div class="fragment"><div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    {</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        $this-&gt;manager-&gt;saveData($this-&gt;model, $value);</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <span class="keywordflow">return</span> $value[<span class="stringliteral">&#39;activity_type&#39;</span>];</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    {</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        $this-&gt;manager-&gt;saveData($this-&gt;model, $value);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <span class="keywordflow">return</span> $value[<span class="stringliteral">&#39;activity_type&#39;</span>];</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -176,16 +176,17 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Prepare any additional form fields that are configured </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">string</td><td>The activity name to prepare custom fields for </td></tr>
+    <tr><td class="paramname">string</td><td>The activity name to prepare custom fields for</td></tr>
   </table>
   </dd>
 </dl>
-<div class="fragment"><div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    {</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        $value = (object)$value;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        \Debugbar::info($value);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        $form = <span class="keyword">new</span> ActivityForm($this-&gt;manager, $value, $this-&gt;formField-&gt;getName());</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keywordflow">return</span> $form-&gt;render();</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    }</div>
+<dl class="section return"><dt>Returns</dt><dd>string Rendered HTML of the additional form fields </dd></dl>
+<div class="fragment"><div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    {</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        $value = (object)$value;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        \Debugbar::info($value);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        $form = <span class="keyword">new</span> ActivityForm($this-&gt;manager, $value, $this-&gt;formField-&gt;getName());</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="keywordflow">return</span> $form-&gt;render();</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -213,11 +214,12 @@ Public Attributes</h2></td></tr>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        }</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        $this-&gt;vars[<span class="stringliteral">&#39;defaultValue&#39;</span>]     = $this-&gt;getLoadData();</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        $this-&gt;vars[<span class="stringliteral">&#39;additionalFields&#39;</span>] = ($this-&gt;vars[<span class="stringliteral">&#39;defaultValue&#39;</span>]) ? $this-&gt;<a class="code" href="../../dd/d00/classDMA_1_1Friends_1_1FormWidgets_1_1ActivityType.html#ab8b5e6c785f85176a4884d3218b1b064">prepareFormFields</a>($this-&gt;vars[<span class="stringliteral">&#39;defaultValue&#39;</span>]) : null;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        $this-&gt;vars[<span class="stringliteral">&#39;additionalFields&#39;</span>] = ($this-&gt;vars[<span class="stringliteral">&#39;defaultValue&#39;</span>]) ? $this-&gt;<a class="code" href="../../dd/d00/classDMA_1_1Friends_1_1FormWidgets_1_1ActivityType.html#ab8b5e6c785f85176a4884d3218b1b064">prepareFormFields</a>($this-&gt;model) : null;</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        $this-&gt;vars[<span class="stringliteral">&#39;options&#39;</span>]          = $options;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        $this-&gt;vars[<span class="stringliteral">&#39;name&#39;</span>]             = $this-&gt;formField-&gt;getName();</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    }</div>
-<div class="ttc" id="classDMA_1_1Friends_1_1FormWidgets_1_1ActivityType_html_ab8b5e6c785f85176a4884d3218b1b064"><div class="ttname"><a href="../../dd/d00/classDMA_1_1Friends_1_1FormWidgets_1_1ActivityType.html#ab8b5e6c785f85176a4884d3218b1b064">DMA\Friends\FormWidgets\ActivityType\prepareFormFields</a></div><div class="ttdeci">prepareFormFields($value)</div><div class="ttdef"><b>Definition:</b> ActivityType.php:92</div></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        $this-&gt;vars[<span class="stringliteral">&#39;options&#39;</span>]          = $options;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        $this-&gt;vars[<span class="stringliteral">&#39;name&#39;</span>]             = $this-&gt;formField-&gt;getName();</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    }</div>
+<div class="ttc" id="classDMA_1_1Friends_1_1FormWidgets_1_1ActivityType_html_ab8b5e6c785f85176a4884d3218b1b064"><div class="ttname"><a href="../../dd/d00/classDMA_1_1Friends_1_1FormWidgets_1_1ActivityType.html#ab8b5e6c785f85176a4884d3218b1b064">DMA\Friends\FormWidgets\ActivityType\prepareFormFields</a></div><div class="ttdeci">prepareFormFields($value)</div><div class="ttdef"><b>Definition:</b> ActivityType.php:96</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -268,7 +270,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Oct 30 2014 14:37:57 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 30 2014 15:24:23 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

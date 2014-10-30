@@ -55,11 +55,11 @@ string The new value for this widget.
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-106     \{
-107         $this->manager->saveData($this->model, $value);
-108 
-109         \textcolor{keywordflow}{return} $value[\textcolor{stringliteral}{'activity\_type'}];
-110     \}
+110     \{
+111         $this->manager->saveData($this->model, $value);
+112 
+113         \textcolor{keywordflow}{return} $value[\textcolor{stringliteral}{'activity\_type'}];
+114     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1FormWidgets_1_1ActivityType_ab8b5e6c785f85176a4884d3218b1b064}{\index{D\+M\+A\+::\+Friends\+::\+Form\+Widgets\+::\+Activity\+Type@{D\+M\+A\+::\+Friends\+::\+Form\+Widgets\+::\+Activity\+Type}!prepare\+Form\+Fields@{prepare\+Form\+Fields}}
 \index{prepare\+Form\+Fields@{prepare\+Form\+Fields}!D\+M\+A\+::\+Friends\+::\+Form\+Widgets\+::\+Activity\+Type@{D\+M\+A\+::\+Friends\+::\+Form\+Widgets\+::\+Activity\+Type}}
@@ -70,17 +70,20 @@ string The new value for this widget.
 )}}\label{classDMA_1_1Friends_1_1FormWidgets_1_1ActivityType_ab8b5e6c785f85176a4884d3218b1b064}
 Prepare any additional form fields that are configured 
 \begin{DoxyParams}{Parameters}
-{\em string} & The activity name to prepare custom fields for \\
+{\em string} & The activity name to prepare custom fields for\\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string Rendered H\+T\+M\+L of the additional form fields 
+\end{DoxyReturn}
 
 \begin{DoxyCode}
-93     \{
-94         $value = (object)$value;
-95         \(\backslash\)Debugbar::info($value);
-96         $form = \textcolor{keyword}{new} ActivityForm($this->manager, $value, $this->formField->getName());
-97         \textcolor{keywordflow}{return} $form->render();
-98     \}
+97     \{
+98         $value = (object)$value;
+99         \(\backslash\)Debugbar::info($value);
+100         $form = \textcolor{keyword}{new} ActivityForm($this->manager, $value, $this->formField->getName());
+101         \textcolor{keywordflow}{return} $form->render();
+102     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1FormWidgets_1_1ActivityType_abb8585f86e795e2f9bfd6bea78a2f7ab}{\index{D\+M\+A\+::\+Friends\+::\+Form\+Widgets\+::\+Activity\+Type@{D\+M\+A\+::\+Friends\+::\+Form\+Widgets\+::\+Activity\+Type}!prepare\+Vars@{prepare\+Vars}}
 \index{prepare\+Vars@{prepare\+Vars}!D\+M\+A\+::\+Friends\+::\+Form\+Widgets\+::\+Activity\+Type@{D\+M\+A\+::\+Friends\+::\+Form\+Widgets\+::\+Activity\+Type}}
@@ -104,10 +107,11 @@ Prepare any additional form fields that are configured
 81 
 82         $this->vars[\textcolor{stringliteral}{'defaultValue'}]     = $this->getLoadData();
 83         $this->vars[\textcolor{stringliteral}{'additionalFields'}] = ($this->vars[\textcolor{stringliteral}{'defaultValue'}]) ? $this->
-      \hyperlink{classDMA_1_1Friends_1_1FormWidgets_1_1ActivityType_ab8b5e6c785f85176a4884d3218b1b064}{prepareFormFields}($this->vars[\textcolor{stringliteral}{'defaultValue'}]) : null;
+      \hyperlink{classDMA_1_1Friends_1_1FormWidgets_1_1ActivityType_ab8b5e6c785f85176a4884d3218b1b064}{prepareFormFields}($this->model) : null;
 84         $this->vars[\textcolor{stringliteral}{'options'}]          = $options;
-85         $this->vars[\textcolor{stringliteral}{'name'}]             = $this->formField->getName();
-86     \}
+85         $this->vars[\textcolor{stringliteral}{'options'}]          = $options;
+86         $this->vars[\textcolor{stringliteral}{'name'}]             = $this->formField->getName();
+87     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1FormWidgets_1_1ActivityType_a6d71571b9e99eb856f81a472f09f2279}{\index{D\+M\+A\+::\+Friends\+::\+Form\+Widgets\+::\+Activity\+Type@{D\+M\+A\+::\+Friends\+::\+Form\+Widgets\+::\+Activity\+Type}!render@{render}}
 \index{render@{render}!D\+M\+A\+::\+Friends\+::\+Form\+Widgets\+::\+Activity\+Type@{D\+M\+A\+::\+Friends\+::\+Form\+Widgets\+::\+Activity\+Type}}
