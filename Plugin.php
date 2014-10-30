@@ -4,6 +4,7 @@ use Backend;
 use Illuminate\Support\Facades\Event;
 use Rainlab\User\Models\User as User;
 use DMA\Friends\Models\Usermeta as Metadata;
+use DMA\Friends\Classes\ActivityManager;
 use System\Classes\PluginBase;
 use DMA\Friends\Classes\FriendsEventHandler;
 use App;
@@ -11,6 +12,8 @@ use Illuminate\Foundation\AliasLoader;
 
 /**
  * Friends Plugin Information File
+ *
+ * @authors Kristen Arnold, Carlos Arroyo
  */
 class Plugin extends PluginBase
 {
@@ -113,6 +116,16 @@ class Plugin extends PluginBase
         ];
     }
 
+    /**
+     * Register additional friends activity types
+     */
+    public function registerFriendsActivities()
+    {
+        return [
+            'DMA\Friends\Activities\ActivityCode'   => 'ActivityCode',
+        ];
+    }
+
     public function boot()
     {
 
@@ -210,9 +223,9 @@ class Plugin extends PluginBase
     public function registerFormWidgets()
     {
         return [
-            'DMA\Friends\FormWidgets\RequiredSteps' => [
-                'label' => 'Required Steps',
-                'alias' => 'requiredsteps',
+            'DMA\Friends\FormWidgets\ActivityType' => [
+                'label' => 'ActivityType',
+                'alias' => 'activitytype',
             ],
             'DMA\Friends\FormWidgets\TimeRestrictions' => [
                 'label' => 'Time Restrictions',

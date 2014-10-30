@@ -58,17 +58,16 @@ secondaryTabs:
             span: left
             type: number
             required: true
-        activity_code:
-            label: Activity Code
-            description: The unique code for this activity.
-            tab: Configuration
-            span: right
         activity_lockout:
             label: Check-in Lockout (minutes)
             description: Allow only check-in with same activity code once per X minutes.
             tab: Configuration
-            span: left
             type: number
+            span: right
+        activity_type:
+            label: Activity Type
+            tab: Configuration
+            type: activitytype
         # ===================================
         #  Publish tab 
         # ===================================

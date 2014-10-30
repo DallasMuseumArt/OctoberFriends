@@ -13,5 +13,9 @@ return [
         'points'    => ':name earned :points for a new total of :total_points',
         'reward'    => ':name claimed the reward ":title"',
         'unlocked'  => ':name unlocked the step ":title"',
-    ]
+    ],
+    'exceptions' => [
+        'missingActivityClass'      => 'Could not find the activity :class',
+        'activityTypeNotInitiated'  => 'An activity type must be instantiated before form fields can be used',
+    ],
 ];

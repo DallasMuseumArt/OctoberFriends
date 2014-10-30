@@ -1,0 +1,19 @@
+<div id="<?= $this->getId() ?>" class="activity-type form-group">
+    <div class="form-group span-left">
+        <div class="activity-types">
+            <select 
+                class="form-control time-restriction custom-select" 
+                name="<?= $name ?>[activity_type]" 
+                id="<?= $this->getId('input') ?>" 
+                data-request="onChange"
+            >
+            <option value=""></option>
+            <?php foreach ($options as $key => $val) { ?>
+                <option value="<?= $key ?>" <?php if ($defaultValue == $key) echo "selected='selected'"; ?>><?= $val ?></option>
+            <?php } ?>
+            </select>
+        </div>
+
+        <div class="additional-fields"><?php print $additionalFields ?></div>
+    </div>
+</div>
