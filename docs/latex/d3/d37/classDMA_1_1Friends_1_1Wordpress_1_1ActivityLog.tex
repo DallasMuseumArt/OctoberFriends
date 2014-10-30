@@ -1,7 +1,7 @@
-\hypertarget{classDMA_1_1Friends_1_1Wordpress_1_1ActivityLog}{\section{D\-M\-A\textbackslash{}Friends\textbackslash{}Wordpress\textbackslash{}Activity\-Log Class Reference}
-\label{classDMA_1_1Friends_1_1Wordpress_1_1ActivityLog}\index{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Wordpress\textbackslash{}\-Activity\-Log@{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Wordpress\textbackslash{}\-Activity\-Log}}
+\hypertarget{classDMA_1_1Friends_1_1Wordpress_1_1ActivityLog}{\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Wordpress\textbackslash{}Activity\+Log Class Reference}
+\label{classDMA_1_1Friends_1_1Wordpress_1_1ActivityLog}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Wordpress\textbackslash{}\+Activity\+Log@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Wordpress\textbackslash{}\+Activity\+Log}}
 }
-Inheritance diagram for D\-M\-A\textbackslash{}Friends\textbackslash{}Wordpress\textbackslash{}Activity\-Log\-:\begin{figure}[H]
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Wordpress\textbackslash{}Activity\+Log\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{d3/d37/classDMA_1_1Friends_1_1Wordpress_1_1ActivityLog}
@@ -16,9 +16,9 @@ Inheritance diagram for D\-M\-A\textbackslash{}Friends\textbackslash{}Wordpress\
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classDMA_1_1Friends_1_1Wordpress_1_1ActivityLog_a51567d47aa076394d865e890747f9832}{\index{D\-M\-A\-::\-Friends\-::\-Wordpress\-::\-Activity\-Log@{D\-M\-A\-::\-Friends\-::\-Wordpress\-::\-Activity\-Log}!import@{import}}
-\index{import@{import}!DMA::Friends::Wordpress::ActivityLog@{D\-M\-A\-::\-Friends\-::\-Wordpress\-::\-Activity\-Log}}
-\subsubsection[{import}]{\setlength{\rightskip}{0pt plus 5cm}D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Wordpress\textbackslash{}\-Activity\-Log\-::import (
+\hypertarget{classDMA_1_1Friends_1_1Wordpress_1_1ActivityLog_a51567d47aa076394d865e890747f9832}{\index{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Activity\+Log@{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Activity\+Log}!import@{import}}
+\index{import@{import}!D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Activity\+Log@{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Activity\+Log}}
+\subsubsection[{import}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Wordpress\textbackslash{}\+Activity\+Log\+::import (
 \begin{DoxyParamCaption}
 \item[{}]{\$limit = {\ttfamily 0}}
 \end{DoxyParamCaption}
@@ -53,41 +53,40 @@ int & {\em \$limit} & The amount of records to import at one time \\
 42 
 43             $log                = \textcolor{keyword}{new} \hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Post_a8a3df2e9db7f90d348d27ea9354176b1}{$this->model};
 44             $log->id            = $wlog->id;
-45             $log->site\_id       = $wlog->site\_id;
-46             $log->user\_id       = $wlog->user\_id;
-47             $log->action        = $wlog->action;
-48             $log->message       = $wlog->message;
-49             $log->points\_earned = $wlog->points\_earned;
-50             $log->total\_points  = $wlog->total\_points;
-51             $log->timestamp     = $wlog->timestamp;
-52             $log->timezone      = $wlog->timezone;
-53     
-54             \textcolor{keywordflow}{if} ($wlog->action == \textcolor{stringliteral}{'artwork'}) \{
-55                 $log->artwork\_id = $wlog->object\_id;
-56             \} \textcolor{keywordflow}{else} \{
-57                 $log->object\_id = $wlog->object\_id;
-58 
-59                 $type = $this->db
-60                     ->table(\textcolor{stringliteral}{'wp\_posts'})
-61                     ->select(\textcolor{stringliteral}{'post\_type'})
-62                     ->where(\textcolor{stringliteral}{'ID'}, $log->object\_id)
-63                     ->first();
-64 
-65                 \textcolor{keywordflow}{if} ($type) \{
-66                     $log->object\_type = $type->post\_type;
-67                 \}   
-68             \}   
-69 
-70             \textcolor{keywordflow}{if} ($log->save()) \{
-71                 $count++;
-72             \} 
-73         \}  
-74 
-75         \textcolor{keywordflow}{return} $count;
-76     \}
+45             $log->user\_id       = $wlog->user\_id;
+46             $log->action        = $wlog->action;
+47             $log->message       = $wlog->message;
+48             $log->points\_earned = $wlog->points\_earned;
+49             $log->total\_points  = $wlog->total\_points;
+50             $log->timestamp     = $wlog->timestamp;
+51             $log->timezone      = $wlog->timezone;
+52     
+53             \textcolor{keywordflow}{if} ($wlog->action == \textcolor{stringliteral}{'artwork'}) \{
+54                 $log->artwork\_id = $wlog->object\_id;
+55             \} \textcolor{keywordflow}{else} \{
+56                 $log->object\_id = $wlog->object\_id;
+57 
+58                 $type = $this->db
+59                     ->table(\textcolor{stringliteral}{'wp\_posts'})
+60                     ->select(\textcolor{stringliteral}{'post\_type'})
+61                     ->where(\textcolor{stringliteral}{'ID'}, $log->object\_id)
+62                     ->first();
+63 
+64                 \textcolor{keywordflow}{if} ($type) \{
+65                     $log->object\_type = $type->post\_type;
+66                 \}   
+67             \}   
+68 
+69             \textcolor{keywordflow}{if} ($log->save()) \{
+70                 $count++;
+71             \} 
+72         \}  
+73 
+74         \textcolor{keywordflow}{return} $count;
+75     \}
 \end{DoxyCode}
 
 
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-wordpress/Activity\-Log.\-php\end{DoxyCompactItemize}
+wordpress/Activity\+Log.\+php\end{DoxyCompactItemize}

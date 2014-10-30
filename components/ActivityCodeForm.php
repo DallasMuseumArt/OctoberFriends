@@ -4,7 +4,7 @@ use Auth;
 use Flash;
 use Lang;
 use Cms\Classes\ComponentBase;
-use ActivityCode;
+use DMA\Friends\Activities\ActivityCode;
 
 class ActivityCodeForm extends ComponentBase
 {

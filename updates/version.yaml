@@ -31,4 +31,6 @@
 1.0.8:
     - Move points to user table and migrate points out of metadata table
     - extend_user_table.php
-
+1.0.9:
+    - Add the activity_type column to activities
+    - extend_activity_table.php

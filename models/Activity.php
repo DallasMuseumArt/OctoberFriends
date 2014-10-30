@@ -66,6 +66,9 @@ class Activity extends Model
         'categories'    => ['DMA\Friends\Models\Category', 'name' => 'object', 'table' => 'dma_friends_object_categories'],
     ];
 
+    /**
+     * Scope to filter by active activities
+     */
     public function isActive()
     {
         return $this->is_published && !$this->is_archived;

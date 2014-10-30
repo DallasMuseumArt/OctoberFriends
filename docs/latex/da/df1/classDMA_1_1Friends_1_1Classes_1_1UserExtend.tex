@@ -1,0 +1,117 @@
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1UserExtend}{\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}User\+Extend Class Reference}
+\label{classDMA_1_1Friends_1_1Classes_1_1UserExtend}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+User\+Extend@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+User\+Extend}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1UserExtend_aa399d503ccb972cb46171bd7cc2fbadf}{\+\_\+\+\_\+construct} (User \$user=null)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1UserExtend_ae2d0cddf99425d8ffbe2ed2c74372024}{add\+Points} (\$points)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1UserExtend_a452030297bbe4f11bb8452e4d57396cd}{remove\+Points} (\$points)
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1UserExtend_ac1de8e9326eaa1466503bf34fa0a3748}{{\bfseries get\+Membership\+Status\+Options} ()}\label{classDMA_1_1Friends_1_1Classes_1_1UserExtend_ac1de8e9326eaa1466503bf34fa0a3748}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1UserExtend_ab5502f589b8c00f7a847a3ebece55281}{{\bfseries \$user} = null}\label{classDMA_1_1Friends_1_1Classes_1_1UserExtend_ab5502f589b8c00f7a847a3ebece55281}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1UserExtend_aa399d503ccb972cb46171bd7cc2fbadf}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+User\+Extend@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+User\+Extend}!\+\_\+\+\_\+construct@{\+\_\+\+\_\+construct}}
+\index{\+\_\+\+\_\+construct@{\+\_\+\+\_\+construct}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+User\+Extend@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+User\+Extend}}
+\subsubsection[{\+\_\+\+\_\+construct}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+User\+Extend\+::\+\_\+\+\_\+construct (
+\begin{DoxyParamCaption}
+\item[{User}]{\$user = {\ttfamily null}}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Classes_1_1UserExtend_aa399d503ccb972cb46171bd7cc2fbadf}
+Extended functionality against user objects This is a really ugly way to extend the functionality of the user object
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & Rain\+Lab (optional) If no user object is provided then a new user object will be instantiated \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+29     \{
+30         \textcolor{keywordflow}{if} (!$user)
+31             $user = \textcolor{keyword}{new} \hyperlink{namespaceRainlab_1_1User_1_1Models_1_1User}{User};
+32 
+33         $this->user = $user;
+34     \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1UserExtend_ae2d0cddf99425d8ffbe2ed2c74372024}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+User\+Extend@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+User\+Extend}!add\+Points@{add\+Points}}
+\index{add\+Points@{add\+Points}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+User\+Extend@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+User\+Extend}}
+\subsubsection[{add\+Points}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+User\+Extend\+::add\+Points (
+\begin{DoxyParamCaption}
+\item[{}]{\$points}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Classes_1_1UserExtend_ae2d0cddf99425d8ffbe2ed2c74372024}
+Add points to a users account
+
+
+\begin{DoxyParams}[1]{Parameters}
+integer & {\em \$points} & The amount of points to add to a user \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+43     \{
+44         \textcolor{keywordflow}{if} (!is\_int($points))
+45             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} Exception(\textcolor{stringliteral}{'Points must be an integer'});
+46 
+47         $this->user->points += $points;
+48         $this->user->points\_this\_week += $points;
+49 
+50         \textcolor{keywordflow}{if} ($this->user->forceSave()) \{
+51 
+52             Event::fire(\textcolor{stringliteral}{'friends.user.pointsEarned'}, [$this->user, $points]);
+53 
+54             $params = [
+55                 \textcolor{stringliteral}{'user'}          => $this->user,
+56                 \textcolor{stringliteral}{'points\_earned'} => $points,
+57             ];
+58             \hyperlink{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_a083fa01b3e143ca77bdbb1562db724de}{FriendsLog::points}($params);
+59         \}
+60     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1UserExtend_a452030297bbe4f11bb8452e4d57396cd}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+User\+Extend@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+User\+Extend}!remove\+Points@{remove\+Points}}
+\index{remove\+Points@{remove\+Points}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+User\+Extend@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+User\+Extend}}
+\subsubsection[{remove\+Points}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+User\+Extend\+::remove\+Points (
+\begin{DoxyParamCaption}
+\item[{}]{\$points}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Classes_1_1UserExtend_a452030297bbe4f11bb8452e4d57396cd}
+Remove points from a user account
+
+
+\begin{DoxyParams}[1]{Parameters}
+integer & {\em \$points} & The amount of points to remove from a user account \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+69     \{
+70         \textcolor{keywordflow}{if} (!is\_int($points))
+71             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} Exception(\textcolor{stringliteral}{'Points must be an integer'});
+72 
+73         $this->user->points -= $points;
+74         $this->user->points\_this\_week -= $points;
+75         \textcolor{keywordflow}{if} ($this->user->forceSave()) \{
+76             Event::fire(\textcolor{stringliteral}{'friends.user.pointsRemoved'}, [$this->user, $points]);
+77         \}
+78     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+classes/User\+Extend.\+php\end{DoxyCompactItemize}

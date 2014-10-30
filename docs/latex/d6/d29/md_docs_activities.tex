@@ -1,0 +1,10 @@
+\mbox{[}Activities\mbox{]}(activities) must be registered in the \href{#registration-file}{\tt Plugin registration file}. This tells the Friends Plugin about Available Activities and provides a {\bfseries short name} for using it. An example of registering a activity\+: \begin{DoxyVerb}public function registerComponents()
+{
+    return [
+        'DMA\Friends\Activities\ActivityCode' => 'activityCode'
+    ];
+}
+\end{DoxyVerb}
+
+
+See \hyperlink{namespaceDMA}{D\+M\+A} as an example class for building custom activities 
