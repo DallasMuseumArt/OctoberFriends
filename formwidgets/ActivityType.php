@@ -80,7 +80,8 @@ class ActivityType extends FormWidgetBase
         }
 
         $this->vars['defaultValue']     = $this->getLoadData();
-        $this->vars['additionalFields'] = ($this->vars['defaultValue']) ? $this->prepareFormFields($this->vars['defaultValue']) : null;
+        $this->vars['additionalFields'] = ($this->vars['defaultValue']) ? $this->prepareFormFields($this->model) : null;
+        $this->vars['options']          = $options;
         $this->vars['options']          = $options;
         $this->vars['name']             = $this->formField->getName();
     }
@@ -88,6 +89,9 @@ class ActivityType extends FormWidgetBase
     /**
      * Prepare any additional form fields that are configured
      * @param string The activity name to prepare custom fields for
+     *
+     * @return string
+     * Rendered HTML of the additional form fields
      */
     public function prepareFormFields($value)
     {
@@ -97,7 +101,7 @@ class ActivityType extends FormWidgetBase
         return $form->render();
     }
 
-        /**
+    /**
      * Process the postback data for this widget.
      * @param $value The existing value for this widget.
      * @return string The new value for this widget.
