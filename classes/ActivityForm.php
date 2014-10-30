@@ -48,8 +48,8 @@ class ActivityForm extends WidgetBase
     {
         $this->model        = $model;
         $this->manager      = $manager;
-        $fields             = $this->manager->getConfig($model->activity_type);
-        $this->fields       = $fields;
+        $config             = $this->manager->getConfig($model->activity_type);
+        $this->fields       = $config->fields;
         $this->data         = $this->manager->getFormDefaultValues($model);
         $this->fieldName    = $fieldName;
     }
@@ -178,7 +178,7 @@ class ActivityForm extends WidgetBase
         return $field;
     }
 
-       /**
+    /**
      * Looks up the column
      */
     public function getFieldValue($field)
@@ -205,27 +205,8 @@ class ActivityForm extends WidgetBase
         $lastField  = end($keyParts);
         $result     = $this->data;
 
-\Debugbar::info($result);
-        /*
-         * Loop the field key parts and build a value.
-         */
-        foreach ($keyParts as $key) {
-
-            if (is_array($result)) {
-                if (!array_key_exists($key, $result)) {
-                    return $defaultValue;
-                }
-                $result = $result[$key];
-            } else {
-                if (!isset($result->{$key})) {
-                    return $defaultValue;
-                }
-                $result = $result->{$key};
-            }
-
-        }
-
-        return $result;
+        // Sub fields are always the last field in the array
+        return $result[$lastField];
     }
 
     /**
