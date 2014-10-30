@@ -1,3 +1,4 @@
-activity_code:
-    label: Activity Code
-    description: The unique code for this activity.
+fields:
+    activity_code:
+        label: Activity Code
+        description: The unique code for this activity.
