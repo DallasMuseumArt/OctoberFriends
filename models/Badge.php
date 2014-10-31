@@ -64,9 +64,4 @@ class Badge extends Model
     {   
         return $query->where('wordpress_id', $id);
     }  
-
-    public function steps()
-    {
-         return $this->hasMany('DMA\Friends\Models\Step');
-    }
 }

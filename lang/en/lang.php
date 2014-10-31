@@ -5,6 +5,7 @@ return [
         'name'                  => 'Friends',
         'activityCodeSuccess'   => 'Congratulations, you have completed ":title"',
         'activityCodeError'     => 'Sorry the code :code could not be found',
+        'stepTitle'             => 'Complete activity ":title" :count times',
     ],
     'log' => [
         'activity'  => ':name just completed the activity of ":title"',
