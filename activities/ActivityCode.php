@@ -9,13 +9,7 @@ class ActivityCode extends ActivityTypeBase
 {
 
     /**
-     * Register details about your activity.
-     * 
-     * @return array 
-     * An array of options
-     * - name: The name of the activity type.  
-     *   This will be used in the form drop down when users configure an activity
-     * - description: (optional) An optional description of the activity type
+     * {@inheritDoc}
      */
     public function details()
     {
@@ -38,7 +32,7 @@ class ActivityCode extends ActivityTypeBase
     /**
      * @see \DMA\Friends\Classes\ActivityTypeBase
      *
-     * Process and determine if an award can be issued
+     * Process and determine if an award can be isued
      * based on a provided activity code
      *
      * @param User $user

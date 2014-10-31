@@ -3,6 +3,7 @@
 use Str;
 use Lang;
 use Config;
+use File;
 use Illuminate\Container\Container;
 use System\Classes\PluginManager;
 use System\Classes\SystemException;
@@ -166,10 +167,15 @@ class ActivityManager
     public function getConfig($alias)
     {
         $this->loadActivity($alias);
-        
-        $formConfig = $this->activityType->getConfig();
 
-        return $this->makeConfig($formConfig);
+        $formConfig = $this->activityType->getConfig();
+        $formConfig = $this->getConfigPath($formConfig);
+        
+        if (File::isFile($formConfig)) {
+            return $this->makeConfig($formConfig);
+        } else {
+            return false;
+        }
     }
 
     /**

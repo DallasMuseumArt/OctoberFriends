@@ -49,9 +49,12 @@ class ActivityForm extends WidgetBase
         $this->model        = $model;
         $this->manager      = $manager;
         $config             = $this->manager->getConfig($model->activity_type);
-        $this->fields       = $config->fields;
-        $this->data         = $this->manager->getFormDefaultValues($model);
-        $this->fieldName    = $fieldName;
+        
+        if ($config) {
+            $this->fields       = $config->fields;
+            $this->data         = $this->manager->getFormDefaultValues($model);
+            $this->fieldName    = $fieldName;
+        }
     }
 
     /**
@@ -59,6 +62,7 @@ class ActivityForm extends WidgetBase
      */
     public function render()
     {
+        $fields = [];
 
         foreach($this->fields as $name => $field) {
             $field = $this->makeFormField($name, $field);
