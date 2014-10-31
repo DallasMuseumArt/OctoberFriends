@@ -3,7 +3,7 @@
 return [
     'app' => [
         'name'                  => 'Friends',
-        'activityCodeSuccess'   => 'Congradulations, you have completed ":title"',
+        'activityCodeSuccess'   => 'Congratulations, you have completed ":title"',
         'activityCodeError'     => 'Sorry the code :code could not be found',
     ],
     'log' => [
