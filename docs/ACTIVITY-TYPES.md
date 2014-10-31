@@ -1,6 +1,6 @@
-## Activity registration
+## Activity Type registration
 
-Activities must be registered in the [Plugin registration file](#registration-file). 
+Activity Types must be registered in the [Plugin registration file](#registration-file). 
 This tells the Friends Plugin about Available Activities and provides a **short name** for using it. 
 An example of registering a activity:
 
