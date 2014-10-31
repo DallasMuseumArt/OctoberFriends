@@ -5,6 +5,7 @@ use Flash;
 use Lang;
 use Cms\Classes\ComponentBase;
 use DMA\Friends\Activities\ActivityCode;
+use DMA\Friends\Activities\LikeWorkOfArt;
 
 class ActivityCodeForm extends ComponentBase
 {
@@ -28,10 +29,17 @@ class ActivityCodeForm extends ComponentBase
         
         $user = Auth::getUser(); 
 
+        // Try to process activity codes first
         $activity = ActivityCode::process($user, $params);
 
+        // If still nothing see if its an assession id
+        if (!$activity) {
+            $activity = LikeWorkOfArt::process($user, $params);
+        }
+
         if ($activity) {
-            Flash::info(Lang::get('dma.friends::lang.app.activityCodeSuccess', ['name' => $activity->title]));
+            \Debugbar::info($activity);
+            Flash::info(Lang::get('dma.friends::lang.app.activityCodeSuccess', ['title' => $activity->title]));
         } else {
             Flash::error(Lang::get('dma.friends::lang.app.activityCodeError', ['code' => $params['code']]));
         }
