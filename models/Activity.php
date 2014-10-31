@@ -121,6 +121,9 @@ class Activity extends Model
             ->isActive();
     }
 
+    /**
+     * Find activities by a wordpress id if they where imported
+     */
     public function scopefindWordpress($query, $id)
     {   
         return $query->where('wordpress_id', $id);
