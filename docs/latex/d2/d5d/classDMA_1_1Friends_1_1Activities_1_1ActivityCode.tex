@@ -30,23 +30,18 @@ static \hyperlink{classDMA_1_1Friends_1_1Activities_1_1ActivityCode_a3de9ef14239
 {}
 \end{DoxyParamCaption}
 )}}\label{classDMA_1_1Friends_1_1Activities_1_1ActivityCode_a531ba09241d4bf7c0ad9d862422563c0}
-Register details about your activity.
 
-\begin{DoxyReturn}{Returns}
-array An array of options
-\begin{DoxyItemize}
-\item name\+: The name of the activity type. This will be used in the form drop down when users configure an activity
-\item description\+: (optional) An optional description of the activity type 
-\end{DoxyItemize}
-\end{DoxyReturn}
+
+Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInterface}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Type\+Base\+Interface}.
+
 
 \begin{DoxyCode}
-21     \{
-22         \textcolor{keywordflow}{return} [
-23             \textcolor{stringliteral}{'name'}          => \textcolor{stringliteral}{'Activity Code'},
-24             \textcolor{stringliteral}{'description'}   => \textcolor{stringliteral}{'Complete activities by entering in a code'},
-25         ];
-26     \}
+15     \{
+16         \textcolor{keywordflow}{return} [
+17             \textcolor{stringliteral}{'name'}          => \textcolor{stringliteral}{'Activity Code'},
+18             \textcolor{stringliteral}{'description'}   => \textcolor{stringliteral}{'Complete activities by entering in a code'},
+19         ];
+20     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Activities_1_1ActivityCode_a13eb870ac4e33b0b3d522f0e28444e7e}{\index{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Activity\+Code@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Activity\+Code}!get\+Form\+Default\+Values@{get\+Form\+Default\+Values}}
 \index{get\+Form\+Default\+Values@{get\+Form\+Default\+Values}!D\+M\+A\+::\+Friends\+::\+Activities\+::\+Activity\+Code@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Activity\+Code}}
@@ -61,11 +56,11 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInte
 
 
 \begin{DoxyCode}
-32     \{
-33         \textcolor{keywordflow}{return} [
-34             \textcolor{stringliteral}{'activity\_code'} => (isset($model->activity\_code)) ? $model->activity\_code : null,
-35         ];
-36     \}
+26     \{
+27         \textcolor{keywordflow}{return} [
+28             \textcolor{stringliteral}{'activity\_code'} => (isset($model->activity\_code)) ? $model->activity\_code : null,
+29         ];
+30     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Activities_1_1ActivityCode_a3de9ef142396ba94532566598b508d58}{\index{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Activity\+Code@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Activity\+Code}!process@{process}}
 \index{process@{process}!D\+M\+A\+::\+Friends\+::\+Activities\+::\+Activity\+Code@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Activity\+Code}}
@@ -78,7 +73,7 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInte
 \begin{DoxySeeAlso}{See also}
 
 \end{DoxySeeAlso}
-Process and determine if an award can be issued based on a provided activity code
+Process and determine if an award can be isued based on a provided activity code
 
 
 \begin{DoxyParams}[1]{Parameters}
@@ -96,16 +91,16 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInte
 
 
 \begin{DoxyCode}
-54     \{
-55         \textcolor{keywordflow}{if} (!isset($params[\textcolor{stringliteral}{'code'}]) || empty($params[\textcolor{stringliteral}{'code'}])) \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+48     \{
+49         \textcolor{keywordflow}{if} (!isset($params[\textcolor{stringliteral}{'code'}]) || empty($params[\textcolor{stringliteral}{'code'}])) \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+50 
+51         \textcolor{keywordflow}{if} ($activity = Activity::findCode($params[\textcolor{stringliteral}{'code'}])->first()) \{
+52             \textcolor{keywordflow}{return} parent::process($user, [\textcolor{stringliteral}{'activity'} => $activity]);
+53         \}
+54 
+55         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
 56 
-57         \textcolor{keywordflow}{if} ($activity = Activity::findCode($params[\textcolor{stringliteral}{'code'}])->first()) \{
-58             \textcolor{keywordflow}{return} parent::process($user, [\textcolor{stringliteral}{'activity'} => $activity]);
-59         \}
-60 
-61         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-62 
-63     \}
+57     \}
 \end{DoxyCode}
 
 

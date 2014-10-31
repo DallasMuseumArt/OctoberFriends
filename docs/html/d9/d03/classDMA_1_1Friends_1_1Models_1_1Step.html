@@ -1,3 +1,4 @@
+<!-- HTML header for doxygen 1.8.8-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -6,8 +7,12 @@
 <meta name="generator" content="Doxygen 1.8.8"/>
 <title>DMA Friends: DMA\Friends\Models\Step Class Reference</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="../../jquery.js"></script>
+<!--<script type="text/javascript" src="../../jquery.js"></script>-->
 <script type="text/javascript" src="../../dynsections.js"></script>
+<link href="bootstrap3/css/bootstrap.min.css" rel="stylesheet">
+<script src="bootstrap3/js/jquery-2.1.1.min.js"></script>
+<script src="bootstrap3/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="doxy-boot.js"></script>
 <link href="../../search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../search/search.js"></script>
 <script type="text/javascript">
@@ -119,8 +124,8 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a13476d5ca718080b85c9633270bf4942"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a13476d5ca718080b85c9633270bf4942"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>$rules</b> = []</td></tr>
 <tr class="separator:a13476d5ca718080b85c9633270bf4942"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a647b3d45c63c48faab1ad4b33b9be8a0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><b>$hasMany</b></td></tr>
-<tr class="separator:a647b3d45c63c48faab1ad4b33b9be8a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e83eefa3362e3a1ec89b5599823c22d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><b>$belongsTo</b></td></tr>
+<tr class="separator:a1e83eefa3362e3a1ec89b5599823c22d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0b25912a2d3c62aa72e15e443648d81"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><b>$belongsToMany</b></td></tr>
 <tr class="separator:ac0b25912a2d3c62aa72e15e443648d81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1aa1ff83758491327ea35861828b233"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><b>$morphMany</b></td></tr>
@@ -138,6 +143,20 @@ Protected Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>step Model </p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a1e83eefa3362e3a1ec89b5599823c22d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DMA\Friends\Models\Step::$belongsTo</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= [</div>
+<div class="line">        <span class="stringliteral">&#39;activity&#39;</span>  =&gt; [<span class="stringliteral">&#39;DMA\Friends\Models\Activity&#39;</span>]</div>
+</div><!-- fragment -->
+</div>
+</div>
 <a class="anchor" id="ac0b25912a2d3c62aa72e15e443648d81"></a>
 <div class="memitem">
 <div class="memproto">
@@ -149,21 +168,6 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= [</div>
 <div class="line">        <span class="stringliteral">&#39;users&#39;</span> =&gt; [<span class="stringliteral">&#39;Rainlab\User\Models\User&#39;</span>, <span class="stringliteral">&#39;dma_friends_step_user&#39;</span>]</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a class="anchor" id="a647b3d45c63c48faab1ad4b33b9be8a0"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">DMA\Friends\Models\Step::$hasMany</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= [</div>
-<div class="line">        <span class="stringliteral">&#39;Activity&#39;</span>,</div>
-<div class="line">    ]</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -186,9 +190,10 @@ Protected Attributes</h2></td></tr>
 <li>models/Step.php</li>
 </ul>
 </div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Oct 30 2014 15:24:24 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Oct 31 2014 14:51:23 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>
