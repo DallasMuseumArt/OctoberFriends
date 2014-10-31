@@ -9,7 +9,7 @@ use System\Classes\PluginManager;
 use System\Classes\SystemException;
 
 /**
- * activity manager
+ * Activity Manager
  *
  * @package dma\friends
  */

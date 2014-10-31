@@ -1,6 +1,7 @@
 <?php
 namespace DMA\Friends\Classes;
 
+use DMA\Friends\Classes\BadgeManager;
 use DMA\Friends\Models\Activity;
 use DMA\Friends\Classes\UserExtend;
 use RainLab\User\Models\User;
@@ -119,6 +120,9 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
                 'object'        => $activity,
             ]); 
 
+            // Hand everything off to the badges
+            BadgeManager::applyActivityToBadges($user, $activity);
+
             return $activity;
         }
 
@@ -137,6 +141,8 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
     public static function canComplete(Activity $activity)
     {   
         if (!$activity->isActive()) return false;
+
+        //TODO check lockout time as well
 
         switch ($activity->time_restriction) {
             case Activity::TIME_RESTRICT_NONE:
