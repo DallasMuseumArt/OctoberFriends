@@ -112,6 +112,15 @@ class Activity extends Model
             ->isActive();
     }
 
+    /**
+     * Find activities by activity type
+     */
+    public function scopeFindActivityType($query, $type)
+    {
+        return $query->where('activity_type', $type)
+            ->isActive();
+    }
+
     public function scopefindWordpress($query, $id)
     {   
         return $query->where('wordpress_id', $id);

@@ -12,6 +12,7 @@ use FriendsLog;
 use DateTime;
 
 interface ActivityTypeBaseInterface {
+    public function details();
     public function getConfig();
     public function getFormDefaultValues($model);
     public function saveData($model, $values);
@@ -36,6 +37,17 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
         $className = Str::normalizeClassName(get_called_class());
         $this->dirName = strtolower(str_replace('\\', '/', $className));
     }
+
+    /**
+     * Register details about your activity.
+     * 
+     * @return array 
+     * An array of options
+     * - name: The name of the activity type.  
+     *   This will be used in the form drop down when users configure an activity
+     * - description: (optional) An optional description of the activity type
+     */
+    public function details() {}
 
     /**
      * Return the path to the yaml configuration for additional form fields
