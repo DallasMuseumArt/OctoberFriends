@@ -1,3 +1,4 @@
+<!-- HTML header for doxygen 1.8.8-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -6,8 +7,12 @@
 <meta name="generator" content="Doxygen 1.8.8"/>
 <title>DMA Friends: DMA\Friends\Classes\UserExtend Class Reference</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="../../jquery.js"></script>
+<!--<script type="text/javascript" src="../../jquery.js"></script>-->
 <script type="text/javascript" src="../../dynsections.js"></script>
+<link href="bootstrap3/css/bootstrap.min.css" rel="stylesheet">
+<script src="bootstrap3/js/jquery-2.1.1.min.js"></script>
+<script src="bootstrap3/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="doxy-boot.js"></script>
 <link href="../../search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../search/search.js"></script>
 <script type="text/javascript">
@@ -135,12 +140,12 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<div class="fragment"><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordflow">if</span> (!$user)</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            $user = <span class="keyword">new</span> <a class="code" href="../../dd/d3d/namespaceRainlab_1_1User_1_1Models_1_1User.html">User</a>;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        $this-&gt;user = $user;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordflow">if</span> (!$user)</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            $user = <span class="keyword">new</span> <a class="code" href="../../dd/d3d/namespaceRainlab_1_1User_1_1Models_1_1User.html">User</a>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        $this-&gt;user = $user;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    }</div>
 <div class="ttc" id="namespaceRainlab_1_1User_1_1Models_1_1User_html"><div class="ttname"><a href="../../dd/d3d/namespaceRainlab_1_1User_1_1Models_1_1User.html">User</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -166,24 +171,24 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<div class="fragment"><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordflow">if</span> (!is_int($points))</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&#39;Points must be an integer&#39;</span>);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        $this-&gt;user-&gt;points += $points;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        $this-&gt;user-&gt;points_this_week += $points;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordflow">if</span> ($this-&gt;user-&gt;forceSave()) {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            Event::fire(<span class="stringliteral">&#39;friends.user.pointsEarned&#39;</span>, [$this-&gt;user, $points]);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            $params = [</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                <span class="stringliteral">&#39;user&#39;</span>          =&gt; $this-&gt;user,</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                <span class="stringliteral">&#39;points_earned&#39;</span> =&gt; $points,</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            ];</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <a class="code" href="../../d4/d33/classDMA_1_1Friends_1_1Classes_1_1FriendsLog.html#a083fa01b3e143ca77bdbb1562db724de">FriendsLog::points</a>($params);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordflow">if</span> (!is_numeric($points))</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <span class="keywordflow">throw</span> <span class="keyword">new</span> SystemException(<span class="stringliteral">&#39;Points must be an integer&#39;</span>);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        $this-&gt;user-&gt;points += $points;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        $this-&gt;user-&gt;points_this_week += $points;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordflow">if</span> ($this-&gt;user-&gt;forceSave()) {</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            Event::fire(<span class="stringliteral">&#39;friends.user.pointsEarned&#39;</span>, [$this-&gt;user, $points]);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            $params = [</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                <span class="stringliteral">&#39;user&#39;</span>          =&gt; $this-&gt;user,</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                <span class="stringliteral">&#39;points_earned&#39;</span> =&gt; $points,</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            ];</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <a class="code" href="../../d4/d33/classDMA_1_1Friends_1_1Classes_1_1FriendsLog.html#a083fa01b3e143ca77bdbb1562db724de">FriendsLog::points</a>($params);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        }</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    }</div>
 <div class="ttc" id="classDMA_1_1Friends_1_1Classes_1_1FriendsLog_html_a083fa01b3e143ca77bdbb1562db724de"><div class="ttname"><a href="../../d4/d33/classDMA_1_1Friends_1_1Classes_1_1FriendsLog.html#a083fa01b3e143ca77bdbb1562db724de">DMA\Friends\Classes\FriendsLog\points</a></div><div class="ttdeci">static points($params)</div><div class="ttdef"><b>Definition:</b> FriendsLog.php:131</div></div>
 </div><!-- fragment -->
 </div>
@@ -208,16 +213,16 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<div class="fragment"><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    {</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keywordflow">if</span> (!is_int($points))</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&#39;Points must be an integer&#39;</span>);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        $this-&gt;user-&gt;points -= $points;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        $this-&gt;user-&gt;points_this_week -= $points;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordflow">if</span> ($this-&gt;user-&gt;forceSave()) {</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            Event::fire(<span class="stringliteral">&#39;friends.user.pointsRemoved&#39;</span>, [$this-&gt;user, $points]);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        }</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    {</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keywordflow">if</span> (!is_numeric($points))</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            <span class="keywordflow">throw</span> <span class="keyword">new</span> SystemException(<span class="stringliteral">&#39;Points must be an integer&#39;</span>);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        $this-&gt;user-&gt;points -= $points;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        $this-&gt;user-&gt;points_this_week -= $points;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordflow">if</span> ($this-&gt;user-&gt;forceSave()) {</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            Event::fire(<span class="stringliteral">&#39;friends.user.pointsRemoved&#39;</span>, [$this-&gt;user, $points]);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -225,9 +230,10 @@ Public Attributes</h2></td></tr>
 <li>classes/UserExtend.php</li>
 </ul>
 </div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Oct 30 2014 15:24:23 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Oct 31 2014 14:51:23 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

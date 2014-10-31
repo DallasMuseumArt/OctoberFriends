@@ -20,8 +20,9 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Models\tex
 \item 
 \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity_a9bb36aab36ff22a29b2a594617dd591c}{scopefind\+Code} (\$query, \$code)
 \item 
-\hypertarget{classDMA_1_1Friends_1_1Models_1_1Activity_a5a533a3f638f99d1dd0a8e0550def49e}{{\bfseries scopefind\+Wordpress} (\$query, \$id)}\label{classDMA_1_1Friends_1_1Models_1_1Activity_a5a533a3f638f99d1dd0a8e0550def49e}
-
+\hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity_aa17825817b73d3073e37d5e2c0933003}{scope\+Find\+Activity\+Type} (\$query, \$type)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity_a5a533a3f638f99d1dd0a8e0550def49e}{scopefind\+Wordpress} (\$query, \$id)
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -91,6 +92,21 @@ Scope to filter by active activities
 74         \textcolor{keywordflow}{return} $this->is\_published && !$this->is\_archived;
 75     \}
 \end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1Activity_aa17825817b73d3073e37d5e2c0933003}{\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}!scope\+Find\+Activity\+Type@{scope\+Find\+Activity\+Type}}
+\index{scope\+Find\+Activity\+Type@{scope\+Find\+Activity\+Type}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}}
+\subsubsection[{scope\+Find\+Activity\+Type}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Models\textbackslash{}\+Activity\+::scope\+Find\+Activity\+Type (
+\begin{DoxyParamCaption}
+\item[{}]{\$query, }
+\item[{}]{\$type}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Models_1_1Activity_aa17825817b73d3073e37d5e2c0933003}
+Find activities by activity type 
+\begin{DoxyCode}
+119     \{
+120         \textcolor{keywordflow}{return} $query->where(\textcolor{stringliteral}{'activity\_type'}, $type)
+121             ->isActive();
+122     \}
+\end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Activity_a9bb36aab36ff22a29b2a594617dd591c}{\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}!scopefind\+Code@{scopefind\+Code}}
 \index{scopefind\+Code@{scopefind\+Code}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}}
 \subsubsection[{scopefind\+Code}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Models\textbackslash{}\+Activity\+::scopefind\+Code (
@@ -105,6 +121,20 @@ Find an activity by its activity code
 111         \textcolor{keywordflow}{return} $query->where(\textcolor{stringliteral}{'activity\_code'}, $code)
 112             ->isActive();
 113     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1Activity_a5a533a3f638f99d1dd0a8e0550def49e}{\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}!scopefind\+Wordpress@{scopefind\+Wordpress}}
+\index{scopefind\+Wordpress@{scopefind\+Wordpress}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}}
+\subsubsection[{scopefind\+Wordpress}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Models\textbackslash{}\+Activity\+::scopefind\+Wordpress (
+\begin{DoxyParamCaption}
+\item[{}]{\$query, }
+\item[{}]{\$id}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Models_1_1Activity_a5a533a3f638f99d1dd0a8e0550def49e}
+Find activities by a wordpress id if they where imported 
+\begin{DoxyCode}
+128     \{   
+129         \textcolor{keywordflow}{return} $query->where(\textcolor{stringliteral}{'wordpress\_id'}, $id);
+130     \}  
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Activity_acd3f12824d95be07b5221cdc9d64abf7}{\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}!scope\+Is\+Active@{scope\+Is\+Active}}
 \index{scope\+Is\+Active@{scope\+Is\+Active}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}}

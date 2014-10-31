@@ -1,3 +1,4 @@
+<!-- HTML header for doxygen 1.8.8-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -6,8 +7,12 @@
 <meta name="generator" content="Doxygen 1.8.8"/>
 <title>DMA Friends: DMA\Friends\Activities\ActivityCode Class Reference</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="../../jquery.js"></script>
+<!--<script type="text/javascript" src="../../jquery.js"></script>-->
 <script type="text/javascript" src="../../dynsections.js"></script>
+<link href="bootstrap3/css/bootstrap.min.css" rel="stylesheet">
+<script src="bootstrap3/js/jquery-2.1.1.min.js"></script>
+<script src="bootstrap3/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="doxy-boot.js"></script>
 <link href="../../search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../search/search.js"></script>
 <script type="text/javascript">
@@ -113,6 +118,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a13eb870ac4e33b0b3d522f0e28444e7e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d5d/classDMA_1_1Friends_1_1Activities_1_1ActivityCode.html#a13eb870ac4e33b0b3d522f0e28444e7e">getFormDefaultValues</a> ($model)</td></tr>
 <tr class="separator:a13eb870ac4e33b0b3d522f0e28444e7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase')"><img src="../../closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="../../d3/d35/classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase.html">DMA\Friends\Classes\ActivityTypeBase</a></td></tr>
+<tr class="memitem:a6d83ca41e1c971c65cbc360e6097ad79 inherit pub_methods_classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d35/classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase.html#a6d83ca41e1c971c65cbc360e6097ad79">details</a> ()</td></tr>
+<tr class="separator:a6d83ca41e1c971c65cbc360e6097ad79 inherit pub_methods_classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac540cd6b45fa5f41575523bbb300d18c inherit pub_methods_classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d35/classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase.html#ac540cd6b45fa5f41575523bbb300d18c">getConfig</a> ()</td></tr>
 <tr class="separator:ac540cd6b45fa5f41575523bbb300d18c inherit pub_methods_classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae46d0cc7e040eb4166e55a00d8d30dc8 inherit pub_methods_classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d35/classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase.html#ae46d0cc7e040eb4166e55a00d8d30dc8">getFormDefaultValues</a> ($model)</td></tr>
@@ -154,18 +161,14 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Register details about your activity.</p>
-<dl class="section return"><dt>Returns</dt><dd>array An array of options<ul>
-<li>name: The name of the activity type. This will be used in the form drop down when users configure an activity</li>
-<li>description: (optional) An optional description of the activity type </li>
-</ul>
-</dd></dl>
-<div class="fragment"><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    {</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keywordflow">return</span> [</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            <span class="stringliteral">&#39;name&#39;</span>          =&gt; <span class="stringliteral">&#39;Activity Code&#39;</span>,</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            <span class="stringliteral">&#39;description&#39;</span>   =&gt; <span class="stringliteral">&#39;Complete activities by entering in a code&#39;</span>,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        ];</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    }</div>
+
+<p>Implements <a class="el" href="../../db/d56/interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInterface.html">DMA\Friends\Classes\ActivityTypeBaseInterface</a>.</p>
+<div class="fragment"><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    {</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <span class="keywordflow">return</span> [</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            <span class="stringliteral">&#39;name&#39;</span>          =&gt; <span class="stringliteral">&#39;Activity Code&#39;</span>,</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            <span class="stringliteral">&#39;description&#39;</span>   =&gt; <span class="stringliteral">&#39;Complete activities by entering in a code&#39;</span>,</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        ];</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -184,11 +187,11 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Implements <a class="el" href="../../db/d56/interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInterface.html">DMA\Friends\Classes\ActivityTypeBaseInterface</a>.</p>
-<div class="fragment"><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    {</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordflow">return</span> [</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="stringliteral">&#39;activity_code&#39;</span> =&gt; (isset($model-&gt;activity_code)) ? $model-&gt;activity_code : null,</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        ];</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keywordflow">return</span> [</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            <span class="stringliteral">&#39;activity_code&#39;</span> =&gt; (isset($model-&gt;activity_code)) ? $model-&gt;activity_code : null,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        ];</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -224,7 +227,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <dl class="section see"><dt>See also</dt><dd></dd></dl>
-<p>Process and determine if an award can be issued based on a provided activity code</p>
+<p>Process and determine if an award can be isued based on a provided activity code</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramtype">User</td><td class="paramname">$user</td><td>A user model for which the activity should act upon</td></tr>
@@ -235,16 +238,16 @@ Additional Inherited Members</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>boolean returns true if the process was successful </dd></dl>
 
 <p>Implements <a class="el" href="../../db/d56/interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInterface.html">DMA\Friends\Classes\ActivityTypeBaseInterface</a>.</p>
-<div class="fragment"><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordflow">if</span> (!isset($params[<span class="stringliteral">&#39;code&#39;</span>]) || empty($params[<span class="stringliteral">&#39;code&#39;</span>])) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="fragment"><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordflow">if</span> (!isset($params[<span class="stringliteral">&#39;code&#39;</span>]) || empty($params[<span class="stringliteral">&#39;code&#39;</span>])) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordflow">if</span> ($activity = Activity::findCode($params[<span class="stringliteral">&#39;code&#39;</span>])-&gt;first()) {</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="keywordflow">return</span> parent::process($user, [<span class="stringliteral">&#39;activity&#39;</span> =&gt; $activity]);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        }</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordflow">if</span> ($activity = Activity::findCode($params[<span class="stringliteral">&#39;code&#39;</span>])-&gt;first()) {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keywordflow">return</span> parent::process($user, [<span class="stringliteral">&#39;activity&#39;</span> =&gt; $activity]);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    }</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -252,9 +255,10 @@ Additional Inherited Members</h2></td></tr>
 <li>activities/ActivityCode.php</li>
 </ul>
 </div><!-- contents -->
+<!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Oct 30 2014 15:24:21 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Oct 31 2014 14:51:22 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>
