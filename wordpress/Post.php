@@ -44,7 +44,7 @@ class Post {
         /* Badges */
         '_badgeos_active'                               => 'is_archived',
         '_badgeos_congratulations_text'                 => 'congratulations_text',
-        '_badgeos_earned_by'                            => 'earned_by',
+        //'_badgeos_earned_by'                            => 'earned_by',
         '_badgeos_hidden'                               => 'is_hidden',
         '_badgeos_maximum_earnings'                     => 'maximum_earnings',
         '_badgeos_maximum_time'                         => 'maximium_time',
@@ -76,11 +76,12 @@ class Post {
         '_dma_reward_start_date'                        => 'date_begin',
 
         /* Step */
-        '_badgeos_achievement_type'                     => 'achievement_type',
+        //TODO: rework step logic after implemented
+        //'_badgeos_achievement_type'                     => 'achievement_type',
         '_badgeos_count'                                => 'count',
-        '_badgeos_trigger_type'                         => 'trigger_type',
-        '_badgestack_step_unlock_options'               => 'unlock_options',
-        '_badgestack_trigger_badgestack_unlock_badge'   => 'trigger_unlock_badge',
+        //'_badgeos_trigger_type'                         => 'trigger_type',
+        //'_badgestack_step_unlock_options'               => 'unlock_options',
+        //'_badgestack_trigger_badgestack_unlock_badge'   => 'trigger_unlock_badge',
 
         /* none */
         '_badgeos_awarded_points'                       => null,
