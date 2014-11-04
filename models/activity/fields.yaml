@@ -68,6 +68,7 @@ secondaryTabs:
             label: Activity Type
             tab: Configuration
             type: activitytype
+            required: true
         # ===================================
         #  Publish tab 
         # ===================================
