@@ -130,8 +130,8 @@ class Plugin extends PluginBase
     public function boot()
     {
 
-    	// Register ServiceProviders
-    	App::register('\EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider');
+        // Register ServiceProviders
+        App::register('\EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider');
         App::register('DMA\Friends\FriendsServiceProvider');
 
         // Register Event Subscribers
@@ -147,7 +147,7 @@ class Plugin extends PluginBase
             $model->belongsToMany['groups']     = ['DMA\Friends\Models\UserGroup',  'table' => 'users_groups',              'user_id', 'group_id'];
             $model->belongsToMany['rewards']    = ['DMA\Friends\Models\Reward',     'table' => 'dma_friends_reward_user',   'user_id', 'reward_id'];       
         });
-    	
+        
         Event::listen('backend.form.extendFields', function($widget) {
             if (!$widget->getController() instanceof \RainLab\User\Controllers\Users) return;
             if ($widget->getContext() != 'update') return;
