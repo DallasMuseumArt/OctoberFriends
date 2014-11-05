@@ -156,7 +156,7 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
             $lastTime   = $user->activities()->first()->pivot->created_at;
             $lastTime->addMinutes($activity->activity_lockout);
 
-            if ($time->diffInMinutes($lastTime) <= $activity->activity_lockout) {
+            if ($time->diffInMinutes($lastTime) && $time->diffInMinutes($lastTime) < $activity->activity_lockout) {
                 $x = $time->diffInMinutes($lastTime);
                 Session::put('activityError', Lang::get('dma.friends::lang.activities.lockout', ['x' => $x]));
                 return false;
