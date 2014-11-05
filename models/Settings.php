@@ -16,10 +16,7 @@ class Settings extends Model{
     public $settingsCode = 'friends_settings';
     public $settingsFields = 'fields.yaml';    
     
-    const CHANNEL_TEXT  = 'text';
-    const CHANNEL_EMAIL = 'email';
-    const CHANNEL_KIOSK = 'kiosk';
-    
+ 
     private $days = array('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
     
     /**
@@ -29,20 +26,11 @@ class Settings extends Model{
     {
         $this->maximum_users_group  = 5;
         $this->maximum_points_group = 200;
-        $this->comunication_channel = self::CHANNEL_EMAIL;
-        $this->mail_group_invite_template = 'dma.friends::mail.invite'; 
+        //$this->mail_group_invite_template = 'dma.friends::mail.invite'; 
         $this->reset_groups_every_day = $this->days;
         $this->reset_groups_time = '00:00';
     }        
         
-
-    public function getComunicationChannelOptions(){
-        return [
-            self::CHANNEL_EMAIL => ['Email', 'TODO : Morbi tincidunt lorem sit amet.'],        
-            self::CHANNEL_TEXT  => ['Text', 'TODO : Morbi tincidunt lorem sit amet.'],
-            self::CHANNEL_KIOSK => ['Kiosk', 'TODO : Morbi tincidunt lorem sit amet.'],
-        ];
-    }
 
     public function getMailGroupInviteTemplateOptions()
     {    

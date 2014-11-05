@@ -1,4 +1,4 @@
-{% for group in groups %}
+	{% for group in groups %}
 	{% set status 	 = group.pivot.membership_status %}
 	{% set optStatus = (status|upper == 'PENDING') ? ['ACCEPTED', 'REJECTED'] : ['CANCELLED']  %}
 	{% set optStatus = (status|upper == 'CANCELLED') ? [] : optStatus  %}
@@ -7,17 +7,26 @@
 		<td>{{ status }}</td>
     	<td>
 			<div class="btn-group pull-right" data-toggle="buttons">
-			  {% for key, option in options %} 
+			  {% for key, option in options %} 	
 				  {% if key in optStatus %}
-				  <label class="btn btn-default">
-				    <input type="radio" 
-				    	name="options" 
-				    	id="option{{ loop.index }}"  
-				    	data-request-data="groupId: {{ group.id }}, status: '{{ key }}'"
-				    	data-request-update="'{{ __SELF__ }}::list': '#result'"	  
-				    	data-request="onChangeStatus"> 
-				    {{ option|capitalize }}
-				  </label>
+				  	{% set btnStatus = (hasActiveMemberships) ? 'disabled' : '' %}
+				  	{% set btnStatus = (status|upper == 'ACCEPTED') ? '' : btnStatus %}
+				  	
+					  <label class="btn btn-primary {{ btnStatus }} btn-{{ option }}">
+					    <input type="radio" 
+					    	name="options" 
+					    	id="option{{ loop.index }}"  
+					    	data-request-data="groupId: {{ group.id }}, status: '{{ key }}'"
+					    	data-request-update="'{{ __SELF__ }}::list': '#result'"	  
+					    	data-request="onChangeStatus"
+					    	
+					    	{% if key == 'CANCELLED' %}
+					    	data-request-confirm="Are you sure?"
+					    	{% endif %}
+					    	
+					    	> 
+					    {{ option|capitalize }}
+					  </label>
 				  {% endif %}
 			  {% endfor %}
 			</div>
