@@ -2,8 +2,25 @@
 #  Form Field Definitions
 # ===================================
 
-fields:
-    timezone:
-        label: Timezone
-        span: left
-        type: dropdown
+tabs:
+    fields:
+        timezone:
+            label: Timezone
+            span: left
+            type: dropdown
+            tab: General
+
+        active_notification_channels:
+            type: checkboxlist
+            span: auto
+            label: Notification channels
+            description: Enable or disable notification channels used by the platform.
+            tab: Notifications
+
+        active_listenable_channels:
+            type: checkboxlist
+            span: auto
+            label: Listenable channels
+            description: Enable or disable listen any incoming data of the channel.
+            tab: Listeners
+
