@@ -40,7 +40,7 @@ class Activity extends Model
     /**
      * @var array Fillable fields
      */
-    protected $fillable = [];
+    protected $fillable = ['touch'];
 
     protected $dates = ['date_begin', 'date_end'];
 
@@ -52,24 +52,24 @@ class Activity extends Model
      * @var array Relations
      */
     public $belongsToMany = [
-        'steps'         => ['DMA\Friends\Models\Step'],
+        'steps' => ['DMA\Friends\Models\Step'],
+    ];
+
+    public $hasMany = [
+        'users' => ['RainLab\User\Models\User', 'table' => 'dma_friends_activity_user'],
     ];
 
     public $attachOne = [
-        'image' => ['System\Models\File']
+        'image' => ['System\Models\File'],
     ];
 
     public $morphMany = [ 
         'activityLogs'  => ['DMA\Friends\Models\ActivityLog', 'name' => 'object'],
     ];
+    
     public $morphToMany = [
         'categories'    => ['DMA\Friends\Models\Category', 'name' => 'object', 'table' => 'dma_friends_object_categories'],
     ];
-
-    public function isActive()
-    {
-        return $this->is_published && !$this->is_archived;
-    }
 
     /**
      * Mutator to ensure time_restriction_data is serialized
@@ -109,6 +109,18 @@ class Activity extends Model
             ->isActive();
     }
 
+    /**
+     * Find activities by activity type
+     */
+    public function scopeFindActivityType($query, $type)
+    {
+        return $query->where('activity_type', $type)
+            ->isActive();
+    }
+
+    /**
+     * Find activities by a wordpress id if they where imported
+     */
     public function scopefindWordpress($query, $id)
     {   
         return $query->where('wordpress_id', $id);

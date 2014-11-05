@@ -1,0 +1,100 @@
+\hypertarget{classDMA_1_1Friends_1_1Activities_1_1LikeWorkOfArt}{\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Activities\textbackslash{}Like\+Work\+Of\+Art Class Reference}
+\label{classDMA_1_1Friends_1_1Activities_1_1LikeWorkOfArt}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Activities\textbackslash{}\+Like\+Work\+Of\+Art@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Activities\textbackslash{}\+Like\+Work\+Of\+Art}}
+}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Activities\textbackslash{}Like\+Work\+Of\+Art\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{d2/d05/classDMA_1_1Friends_1_1Activities_1_1LikeWorkOfArt}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Activities_1_1LikeWorkOfArt_ad8755c7d0fc4f34acfabc7716acfd52c}{details} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classDMA_1_1Friends_1_1Activities_1_1LikeWorkOfArt_a814a0bc1a22cc72f91dac635c871b43c}{process} (User \$user, \$params)
+\item 
+static \hyperlink{classDMA_1_1Friends_1_1Activities_1_1LikeWorkOfArt_ac18459839d22721c79df721a6f9b7f8b}{is\+Assession\+Number} (\$code)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Activities_1_1LikeWorkOfArt_ad8755c7d0fc4f34acfabc7716acfd52c}{\index{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art}!details@{details}}
+\index{details@{details}!D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art}}
+\subsubsection[{details}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Activities\textbackslash{}\+Like\+Work\+Of\+Art\+::details (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Activities_1_1LikeWorkOfArt_ad8755c7d0fc4f34acfabc7716acfd52c}
+
+
+Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInterface}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Type\+Base\+Interface}.
+
+
+\begin{DoxyCode}
+14     \{
+15         \textcolor{keywordflow}{return} [
+16             \textcolor{stringliteral}{'name'}          => \textcolor{stringliteral}{'Like a work of art'},
+17             \textcolor{stringliteral}{'description'}   => \textcolor{stringliteral}{'enter an assession id to like a work of art'},
+18         ];
+19     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Activities_1_1LikeWorkOfArt_ac18459839d22721c79df721a6f9b7f8b}{\index{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art}!is\+Assession\+Number@{is\+Assession\+Number}}
+\index{is\+Assession\+Number@{is\+Assession\+Number}!D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art}}
+\subsubsection[{is\+Assession\+Number}]{\setlength{\rightskip}{0pt plus 5cm}static D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Activities\textbackslash{}\+Like\+Work\+Of\+Art\+::is\+Assession\+Number (
+\begin{DoxyParamCaption}
+\item[{}]{\$code}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classDMA_1_1Friends_1_1Activities_1_1LikeWorkOfArt_ac18459839d22721c79df721a6f9b7f8b}
+Take a string of text and determine if it is an assession \# T\+O\+D\+O\+: This function will eventually be return to provide some sort of proper validation to ensure that we are actually pulling a valid assession number
+
+
+\begin{DoxyParams}{Parameters}
+{\em string} & A string of text to check\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean True if code is an assession \# 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+49     \{
+50         \textcolor{keywordflow}{return} preg\_match( \textcolor{stringliteral}{'/^[a-zA-Z0-9]\{2\}[a-zA-Z0-9]?[a-zA-Z0-9]?\(\backslash\)..+$/'}, $code );
+51     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Activities_1_1LikeWorkOfArt_a814a0bc1a22cc72f91dac635c871b43c}{\index{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art}!process@{process}}
+\index{process@{process}!D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}static D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Activities\textbackslash{}\+Like\+Work\+Of\+Art\+::process (
+\begin{DoxyParamCaption}
+\item[{User}]{\$user, }
+\item[{}]{\$params}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classDMA_1_1Friends_1_1Activities_1_1LikeWorkOfArt_a814a0bc1a22cc72f91dac635c871b43c}
+\{inherit\+Doc\} 
+
+Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInterface}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Type\+Base\+Interface}.
+
+
+\begin{DoxyCode}
+25     \{
+26         \textcolor{keywordflow}{if} (!isset($params[\textcolor{stringliteral}{'code'}]) || empty($params[\textcolor{stringliteral}{'code'}])) \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+27 
+28         \textcolor{keywordflow}{if} (!self::isAssessionNumber($params[\textcolor{stringliteral}{'code'}])) \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+29 
+30         \textcolor{keywordflow}{if} ($activity = Activity::findActivityType(\textcolor{stringliteral}{'LikeWorkOfArt'})->first()) \{
+31             \textcolor{keywordflow}{return} parent::process($user, [\textcolor{stringliteral}{'activity'} => $activity]);
+32         \}
+33 
+34         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+35 
+36     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+activities/Like\+Work\+Of\+Art.\+php\end{DoxyCompactItemize}

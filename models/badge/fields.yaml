@@ -79,23 +79,6 @@ secondaryTabs:
             span: right
             tab: Configuration
             type: number
-        earned_by:
-            label: Earned by
-            span: left
-            tab: Configuration
-            type: dropdown
-            options:
-                triggers: Completing Steps
-                points: Minimum Number of Points
-                submission: Submission (Reviewed)
-                submission_auto: Submission (Auto-accepted)
-                nomination: Nomination
-                admin: Admin-awarded Only
-                registered: Registered New Account
-                provided_email: Provided Email
-                connected_social: Connected Social Media Account
-                allowed_texting: Allowed SMS
-                completed_profile: Completed user profile
         special:
             label: Special Badge:
             span: right
@@ -159,6 +142,7 @@ secondaryTabs:
             label: Published
             tab: Publishing Options
             type: checkbox
+            default: true
         is_archived:
             label: Archive
             tab: Publishing Options

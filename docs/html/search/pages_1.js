@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['octoberfriends',['OctoberFriends',['../d0/d30/md_README.html',1,'']]]
+  ['events',['Events',['../df/d0e/md_docs_EVENTS.html',1,'']]]
 ];

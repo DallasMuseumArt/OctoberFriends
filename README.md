@@ -13,6 +13,10 @@ Currently, participants must enroll at kiosks in the Museum, but plans are under
 * Install the Rainlab "User" Plugin
 * Enable the "Friends" Plugin
 
+# API Docs
+
+PHP API Documentation is available at [http://developer.dma.org/friends/](http://developer.dma.org/friends/)
+
 ## Wordpress Migrations
 
 If you are migrating from a wordpress installation of friends you will also

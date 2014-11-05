@@ -1,6 +1,11 @@
 # ===================================
 #  Field Definitions
 # ===================================
+fields:
+    timezone:
+        label: Timezone
+        span: left
+        type: dropdown
 
 tabs:
     fields:
@@ -43,4 +48,4 @@ tabs:
 #            default: dma.friends::mail.invite
 #            depends: comunication_channel
 #            tab: groups 
-                     
+

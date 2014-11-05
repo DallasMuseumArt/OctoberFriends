@@ -24,12 +24,12 @@ class CreateBadgesTable extends Migration
             $table->integer('maximum_earnings')->nullable();
             $table->integer('points')->default(0);
             $table->integer('image_id')->nullable();
-            $table->string('earned_by')->nullable();
+            //$table->string('earned_by')->nullable();
             $table->boolean('is_sequential')->default(false);
             $table->boolean('show_earners')->default(true);
             $table->boolean('is_hidden')->default(false);
-            $table->integer('time_between_steps_min')->default(0);
-            $table->integer('time_between_steps_max')->default(0);
+            $table->integer('time_between_steps_min')->default(0)->nullable();
+            $table->integer('time_between_steps_max')->default(0)->nullable();
             $table->integer('maximium_time')->nullable();
             $table->timestamp('date_begin')->nullable();
             $table->timestamp('date_end')->nullable();

@@ -1,0 +1,251 @@
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase}{\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}Activity\+Type\+Base Class Reference}
+\label{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Type\+Base@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Type\+Base}}
+}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}Activity\+Type\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.837838cm]{d3/d35/classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase_a6d83ca41e1c971c65cbc360e6097ad79}{details} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase_ac540cd6b45fa5f41575523bbb300d18c}{get\+Config} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase_ae46d0cc7e040eb4166e55a00d8d30dc8}{get\+Form\+Default\+Values} (\$model)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase_a69d28814a4cc0c3798d1ab7a95e14ef3}{save\+Data} (\$model, \$values)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase_a772667f95a25c6aa44e31ce9c6903384}{process} (User \$user, \$params)
+\item 
+static \hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase_af5ddc6ea4b9d888873e6e499beaea396}{can\+Complete} (\hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity}{Activity} \$activity)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase_a6ead7996f0a00ff1109b45d6e6a7c10c}{{\bfseries \$field\+Config} = 'fields.\+yaml'}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase_a6ead7996f0a00ff1109b45d6e6a7c10c}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase_a3542383d50c238777642e2ec09c61bfb}{{\bfseries \$dir\+Name}}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase_a3542383d50c238777642e2ec09c61bfb}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase_af5ddc6ea4b9d888873e6e499beaea396}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base}!can\+Complete@{can\+Complete}}
+\index{can\+Complete@{can\+Complete}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base}}
+\subsubsection[{can\+Complete}]{\setlength{\rightskip}{0pt plus 5cm}static D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Type\+Base\+::can\+Complete (
+\begin{DoxyParamCaption}
+\item[{{\bf Activity}}]{\$activity}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase_af5ddc6ea4b9d888873e6e499beaea396}
+Determine if an activity is capable of being completed
+
+
+\begin{DoxyParams}{Parameters}
+{\em Activity} & An activity model\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean returns true if an activity can be completed by the user 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInterface}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Type\+Base\+Interface}.
+
+
+\begin{DoxyCode}
+142     \{   
+143         \textcolor{keywordflow}{if} (!$activity->isActive()) \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+144 
+145         \textcolor{comment}{//TODO check lockout time as well}
+146 
+147         \textcolor{keywordflow}{switch} ($activity->time\_restriction) \{
+148             \textcolor{keywordflow}{case} \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity_ab9dd8b18c4810beabdcf8e45039913c8}{Activity::TIME\_RESTRICT\_NONE}:
+149                 \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+150             \textcolor{keywordflow}{case} \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity_ac78040e8784e02c2d1bcce5221ac6cb8}{Activity::TIME\_RESTRICT\_HOURS}:
+151                 \textcolor{keywordflow}{if} ($activity->time\_restriction\_data) \{
+152                     $now        = time();
+153                     $start\_time = strtotime($activity->time\_restriction\_data[\textcolor{stringliteral}{'start\_time'}], $now);
+154                     $end\_time   = strtotime($activity->time\_restriction\_data[\textcolor{stringliteral}{'end\_time'}], $now);
+155                     $day        = date(\textcolor{charliteral}{'w'});
+156 
+157                     \textcolor{keywordflow}{if} ($activity->time\_restriction\_date[\textcolor{stringliteral}{'days'}][$day] !== \textcolor{keyword}{false}
+158                         && $now >= $start\_time && $now <= $end\_time) \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+159                 \}
+160 
+161                 \textcolor{keywordflow}{break};
+162             \textcolor{keywordflow}{case} \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity_a71b85478f20cda144aeffe010364a0f7}{Activity::TIME\_RESTRICT\_DAYS}: 
+163                 $now = \textcolor{keyword}{new} \hyperlink{namespaceDateTime}{DateTime}(\textcolor{stringliteral}{'now'});
+164                 \textcolor{keywordflow}{if} ($now >= $activity->date\_begin 
+165                     && $now <= $activity->date\_end) \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+166 
+167                 \textcolor{keywordflow}{break};
+168         \} 
+169 
+170         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+171     \} 
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase_a6d83ca41e1c971c65cbc360e6097ad79}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base}!details@{details}}
+\index{details@{details}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base}}
+\subsubsection[{details}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Type\+Base\+::details (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase_a6d83ca41e1c971c65cbc360e6097ad79}
+Register details about your activity.
+
+\begin{DoxyReturn}{Returns}
+array An array of options
+\begin{DoxyItemize}
+\item name\+: The name of the activity type. This will be used in the form drop down when users configure an activity
+\item description\+: (optional) An optional description of the activity type 
+\end{DoxyItemize}
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInterface}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Type\+Base\+Interface}.
+
+
+\begin{DoxyCode}
+51 \{\}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase_ac540cd6b45fa5f41575523bbb300d18c}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base}!get\+Config@{get\+Config}}
+\index{get\+Config@{get\+Config}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base}}
+\subsubsection[{get\+Config}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Type\+Base\+::get\+Config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase_ac540cd6b45fa5f41575523bbb300d18c}
+Return the path to the yaml configuration for additional form fields
+
+\begin{DoxyReturn}{Returns}
+string Y\+A\+M\+L config path 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInterface}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Type\+Base\+Interface}.
+
+
+\begin{DoxyCode}
+60     \{
+61         \textcolor{keywordflow}{return} $this->dirName . \textcolor{charliteral}{'/'} . $this->fieldConfig;
+62     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase_ae46d0cc7e040eb4166e55a00d8d30dc8}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base}!get\+Form\+Default\+Values@{get\+Form\+Default\+Values}}
+\index{get\+Form\+Default\+Values@{get\+Form\+Default\+Values}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base}}
+\subsubsection[{get\+Form\+Default\+Values}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Type\+Base\+::get\+Form\+Default\+Values (
+\begin{DoxyParamCaption}
+\item[{}]{\$model}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase_ae46d0cc7e040eb4166e55a00d8d30dc8}
+If additional fields are configured then implement to tell the form how to get the default values
+
+
+\begin{DoxyParams}[1]{Parameters}
+object & {\em \$model} & The activity model\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array An array with matching key/value pairs for a set of custom fields 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInterface}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Type\+Base\+Interface}.
+
+
+\begin{DoxyCode}
+75 \{\}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase_a772667f95a25c6aa44e31ce9c6903384}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base}!process@{process}}
+\index{process@{process}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}static D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Type\+Base\+::process (
+\begin{DoxyParamCaption}
+\item[{User}]{\$user, }
+\item[{}]{\$params}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase_a772667f95a25c6aa44e31ce9c6903384}
+Process and determine if an award can be issued based on a provided activity code
+
+
+\begin{DoxyParams}[1]{Parameters}
+object & {\em \$user} & A user model for which the activity should act upon\\
+\hline
+array & {\em \$params} & An array of parameters for validating activities\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean returns true if the process was successful 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInterface}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Type\+Base\+Interface}.
+
+
+\begin{DoxyCode}
+108     \{
+109         $activity = $params[\textcolor{stringliteral}{'activity'}];
+110 
+111         \textcolor{keywordflow}{if} (self::canComplete($activity)) \{
+112             $userExtend = \textcolor{keyword}{new} UserExtend($user);
+113             $userExtend->addPoints($activity->points);
+114 
+115             Event::fire(\textcolor{stringliteral}{'friends.activityCompleted'}, [ $user, $activity ]); 
+116 
+117             \textcolor{comment}{// log an entry to the activity log}
+118             \hyperlink{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_a0b90db29da51f53991f2dcc1a55f14c7}{FriendsLog::activity}([
+119                 \textcolor{stringliteral}{'user'}          => $user,
+120                 \textcolor{stringliteral}{'object'}        => $activity,
+121             ]); 
+122 
+123             \textcolor{comment}{// Hand everything off to the badges}
+124             BadgeManager::applyActivityToBadges($user, $activity);
+125 
+126             \textcolor{keywordflow}{return} $activity;
+127         \}
+128 
+129         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+130     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase_a69d28814a4cc0c3798d1ab7a95e14ef3}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base}!save\+Data@{save\+Data}}
+\index{save\+Data@{save\+Data}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base}}
+\subsubsection[{save\+Data}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Type\+Base\+::save\+Data (
+\begin{DoxyParamCaption}
+\item[{}]{\$model, }
+\item[{}]{\$values}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase_a69d28814a4cc0c3798d1ab7a95e14ef3}
+Save additional data for an activity type. By default attempt to save any additional field directly to model attributes
+
+
+\begin{DoxyParams}[1]{Parameters}
+object & {\em \$model} & An activity model\\
+\hline
+array & {\em \$values} & an array of values \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInterface}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Type\+Base\+Interface}.
+
+
+\begin{DoxyCode}
+88                                               \{
+89         \textcolor{keywordflow}{foreach} ($values as $key => $val) \{
+90             $model->\{$key\} = $val;
+91         \}
+92     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+classes/Activity\+Type\+Base.\+php\end{DoxyCompactItemize}
