@@ -25,6 +25,7 @@ class ActivityCodeForm extends ComponentBase
 
     public function onSubmit()
     {
+
         $params['code'] = post('activity_code');
         
         $user = Auth::getUser(); 
