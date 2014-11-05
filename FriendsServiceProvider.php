@@ -16,22 +16,7 @@ class FriendsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerActivityCode();
         $this->registerFriendsLog();
-    }
-
-    /**
-     * Setup the ActivityCode service
-     *
-     * @return void
-     */
-    public function registerActivityCode()
-    {
-        $this->app['ActivityCode'] = $this->app->share(function($app) {
-            return new ActivityCode;
-        });
-
-        $this->createAlias('ActivityCode', 'DMA\Friends\Classes\ActivityCode');
     }
 
     /**
