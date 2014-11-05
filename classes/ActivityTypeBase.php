@@ -12,6 +12,7 @@ use Str;
 use Config;
 use FriendsLog;
 use DateTime;
+use Session;
 use Carbon\Carbon;
 
 interface ActivityTypeBaseInterface {
@@ -127,6 +128,8 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
                 // Hand everything off to the badges
                 BadgeManager::applyActivityToBadges($user, $activity);
 
+                Session::put('activityMessage', Lang::get('dma.friends::lang.activities.codeSuccess', ['title' => $activity->title]));
+
                 return $activity;
             }
         }
@@ -147,12 +150,17 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
     {   
         if (!$activity->isActive()) return false;
 
+        // Check activity lockout
         if ($activity->activity_lockout && $user->activities()->first()) {
             $time       = Carbon::now();
             $lastTime   = $user->activities()->first()->pivot->created_at;
             $lastTime->addMinutes($activity->activity_lockout);
 
-            if ($lastTime->gt($time)) return false;
+            if ($time->diffInMinutes($lastTime) <= $activity->activity_lockout) {
+                $x = $time->diffInMinutes($lastTime);
+                Session::put('activityError', Lang::get('dma.friends::lang.activities.lockout', ['x' => $x]));
+                return false;
+            }
         }
 
         //TODO: need a better way to return errors on why the activity couldnt complete
@@ -177,14 +185,20 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
                         && $now->gte($start_time) && $now->lte($end_time)) {
 
                         return true;
-                    } 
+                    } else {
+                        Session::put('activityError', Lang::get('dma.friends::lang.activities.notAvailable'));
+                    }
                 }
 
                 break;
             case Activity::TIME_RESTRICT_DAYS: 
                 $now = new DateTime('now');
                 if ($now >= $activity->date_begin 
-                    && $now <= $activity->date_end) return true;
+                    && $now <= $activity->date_end) {
+                    return true;
+                } else {
+                    Session::put('activityError', Lang::get('dma.friends::lang.activities.notAvailable'));
+                }
 
                 break;
         } 
