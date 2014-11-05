@@ -38,14 +38,14 @@ class ActivityCodeForm extends ComponentBase
         }
 
         if ($activity) {
-            \Debugbar::info($activity);
             Flash::info(Lang::get('dma.friends::lang.app.activityCodeSuccess', ['title' => $activity->title]));
         } else {
             Flash::error(Lang::get('dma.friends::lang.app.activityCodeError', ['code' => $params['code']]));
         }
 
         return [
-            '#flashMessages' => $this->renderPartial('@flashMessages')
+            '#flashMessages'    => $this->renderPartial('@flashMessages'),
+            'span.points'       => $user->points,
         ];
 
     }
