@@ -8,7 +8,7 @@ use Cms\Classes\ComponentBase;
 use System\Classes\ApplicationException;
 use DMA\Friends\Models\Settings;
 use DMA\Friends\Models\UserGroup;
-use DMA\Friends\Models\User;
+use Rainlab\User\Models\User;
 use RainLab\User\Models\Settings as UserSettings;
 
 class GroupFormCreation extends ComponentBase
@@ -50,9 +50,13 @@ class GroupFormCreation extends ComponentBase
         $user = Auth::getUser();
         
         if (!is_null($user)){
-            // use for testing
-            return UserGroup::where('owner_id', $user->getKey())
+            //if (!UserGroup::hasActiveMemberships($user)){
+                //1. If user don't have an active membership create a group for it
+                $group = UserGroup::where('owner_id', $user->getKey())
+                            ->where('is_active', true)
                             ->first();
+                return $group;
+            //}
         }
     }
     
@@ -69,7 +73,7 @@ class GroupFormCreation extends ComponentBase
         // Refresh group list
         $this->page['users'] = (!is_null($group)) ? $group->getUsers()->toArray() : [];
         
-        $this->page['owner'] = (!is_null($group)) ? $group->owner : [];
+        $this->page['owner'] = (!is_null($group)) ? $group->owner : Null;
         
         // Allow to add more users
         $this->page['allowAdd'] =  count($this->page['users']) < Settings::get('maximum_users_group');
@@ -153,11 +157,22 @@ class GroupFormCreation extends ComponentBase
     public function onSearchUser(){        
         // Suggest exsiting members
         if (($search = post('newUser')) != ''){
+   
             $users = User::where($this->getLoginAttr(), 'LIKE', "$search%")
                     ->orWhere('name', 'LIKE', "$search%")
                     ->take($this->property('maxUserSuggestions'))
                     ->get();
-     
+             
+            /*
+            $users = User::groups()
+                    ->wherePivot('membership_status', '<>', UserGroup::MEMBERSHIP_ACCEPTED )
+                    ->with('groups')
+                    ->whereHas('groups', function($query){
+                        $query->where('is_active', true);
+                    })
+                   
+                    ->get();
+            */
             // Updated list of users and other vars
             $this->prepareVars(null, ['search' => $search, 'users'=>$users]);            
         }

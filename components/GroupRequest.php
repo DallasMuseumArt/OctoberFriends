@@ -62,6 +62,7 @@ class GroupRequest extends ComponentBase
     {
         // Refresh group list
         $this->page['groups'] = $this->getGroupRequest();
+        $this->page['hasActiveMemberships'] = UserGroup::hasActiveMemberships($this->getuser());
         
         // UI group options
         $this->page['options'] = [ 

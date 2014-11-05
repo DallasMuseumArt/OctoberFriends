@@ -47,6 +47,11 @@ class UserGroup extends GroupBase{
         'owner' => ['Rainlab\User\Models\User', 'foreignKey' => 'owner_id']    
     ];
     
+    public $morphMany = [
+        'notifications'  => ['DMA\Notification\Models\Notification', 'name' => 'object'],
+    ];
+    
+    
     /**
      * @var array Users of the group.
      */
@@ -325,75 +330,19 @@ class UserGroup extends GroupBase{
             if($this->owner->getKey() != $user->getKey()) 
                 return false;
             
-        // TODO : implement other channels
-        $channel = 'mail';
-        if($channel == 'mail'){
-            if (!$mailTemplate = Settings::get('mail_group_'. strtolower($notificationName) . '_template'))                
-                return $this->sendEmailNotification($user, $mailTemplate);        
-        }elseif ($channel == 'text'){
-            //if (!$textTemplate = Settings::get('text_group_'. strtolower($notificationName) . '_template'))
-            //    return $this->sendTXTNotification($user, $textTemplate);            
-        }elseif ($channel == 'kiosk'){
-            $kiosk = null; // Get kioks from settings
-            //if (!$template = Settings::get('kiosk_group_'. strtolower($notificationName) . '_template'))
-            //    return $this->sendKioskNotification($user, $template, $kiosk);
-                
-        }
+        $group      = $this;
+        $fromUser   = $this->owner;
+        \Postman::send('group-request', function($notification) use ($user, $fromUser, $group){
+        	$notification->to($user, $user->name);
+        	$notification->from($fromUser);
+        	$notification->subject('Group request');
+        	$notification->attachObject($group);
+        });
         
         return false;
     }
     
-    
-    /**
-     * Send email notification to the given user.
-     * @param RainLab\User\Models\User $user
-     * @param string $mailTemplate view name of the email.
-     * @return bool
-     */
-    protected function sendEmailNotification(&$user, $mailTemplate){
-        if (!$this->inGroup($user)) return false;
-            
-        $data = [
-            'user'   => $user->name,
-            'owner'  => $this->owner->name
-        ];
-    
-        if (!$mailTemplate)
-            return;
-    
-        if(\Mail::send($mailTemplate, $data, function($message) use ($user)
-        {
-            $message->to($user->email, $user->name);
-        }) == 1){
-            return true;
-        }
-        return false;
-    }    
-
-
-    /**
-     * Send text notification to the given user.
-     * @param RainLab\User\Models\User $user
-     * @param string $textTemplate view name of the email.
-     * @return bool
-     */
-    protected function sendTXTNotification(&$user, $textTemplate){
-        // TODO : Implmemented
-        return false;
-    }
-    
-    /**
-     * Send notification to Kiosk to the given user.
-     * @param RainLab\User\Models\User $user
-     * @param string $template message template 
-     * @param DMA\Friends\Models\Kiosk $kiosk 
-     * @return bool
-     */
-    protected function sendKioskNotification(&$user, $template, $kiosk){
-        // TODO : Implmemented
-        return false;
-    }    
-    
+       
     /**
      * This method is for internal use as a temporal solution for empty pivot variables. 
      */
