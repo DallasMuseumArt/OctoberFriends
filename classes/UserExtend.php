@@ -3,6 +3,7 @@
 use Event;
 use DMA\Friends\Classes\FriendsLog;
 use RainLab\User\Models\User;
+use System\Classes\SystemException;
 
 /**
  * Friends User model
@@ -41,8 +42,8 @@ class UserExtend
      */
     public function addPoints($points)
     {
-        if (!is_int($points))
-            throw new Exception('Points must be an integer');
+        if (!is_numeric($points))
+            throw new SystemException('Points must be an integer');
 
         $this->user->points += $points;
         $this->user->points_this_week += $points;
@@ -67,8 +68,8 @@ class UserExtend
      */
     public function removePoints($points)
     {
-        if (!is_int($points))
-            throw new Exception('Points must be an integer');
+        if (!is_numeric($points))
+            throw new SystemException('Points must be an integer');
 
         $this->user->points -= $points;
         $this->user->points_this_week -= $points;

@@ -4,13 +4,18 @@ use Backend;
 use Illuminate\Support\Facades\Event;
 use Rainlab\User\Models\User as User;
 use DMA\Friends\Models\Usermeta as Metadata;
+use DMA\Friends\Models\Settings;
+use DMA\Friends\Classes\ActivityManager;
 use System\Classes\PluginBase;
 use DMA\Friends\Classes\FriendsEventHandler;
 use App;
+use Config;
 use Illuminate\Foundation\AliasLoader;
 
 /**
  * Friends Plugin Information File
+ *
+ * @authors Kristen Arnold, Carlos Arroyo
  */
 class Plugin extends PluginBase
 {
@@ -47,6 +52,15 @@ class Plugin extends PluginBase
     public function registerSettings()
     {
         return [
+            'settings' => [
+                'label'       => 'Friends Settings',
+                'description' => 'Manage user based settings.',
+                'category'    => 'Friends',
+                'icon'        => 'icon-cog',
+                'class'       => 'DMA\Friends\Models\Settings',
+                'order'       => 500,
+                'keywords'    => 'friends system settings'
+            ],
             'locations' => [
                 'label' => 'Locations',
                 'description'   => 'Manage the kiosk locations',
@@ -128,8 +142,21 @@ class Plugin extends PluginBase
         ];
     }
 
+    /**
+     * Register additional friends activity types
+     */
+    public function registerFriendsActivities()
+    {
+        return [
+            'DMA\Friends\Activities\ActivityCode'   => 'ActivityCode',
+            'DMA\Friends\Activities\LikeWorkOfArt'  => 'LikeWorkOfArt',
+        ];
+    }
+
     public function boot()
     {
+        // Register timezone settings
+        date_default_timezone_set( Settings::get('timezone', Config::get('app.timezone')) );
 
         // Register ServiceProviders
         App::register('\EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider');
@@ -140,13 +167,14 @@ class Plugin extends PluginBase
         Event::subscribe($subscriber);
 
         // Extend the user model to support our custom metadata        
-        User::extend(function($model) {        
+        User::extend(function($model) {   
             $model->hasOne['metadata']          = ['DMA\Friends\Models\Usermeta'];     
-            $model->hasMany['activityLogs']     = ['DMA\Friends\Models\ActivityLog'];      
-            $model->belongsToMany['groups']     = ['DMA\Friends\Models\UserGroup',  'table' => 'dma_friends_users_groups',  'primaryKey' => 'user_id', 'foreignKey' => 'group_id', 'pivot' => ['membership_status']];
+            $model->hasMany['activityLogs']     = ['DMA\Friends\Models\ActivityLog'];
+            $model->belongsToMany['activities'] = ['DMA\Friends\Models\Activity',   'table' => 'dma_friends_activity_user', 'user_id', 'activity_id', 'timestamps' => true, 'order' => 'created_at desc',];     
             $model->belongsToMany['steps']      = ['DMA\Friends\Models\Step',       'table' => 'dma_friends_step_user',     'user_id', 'step_id'];     
             $model->belongsToMany['badges']     = ['DMA\Friends\Models\Badge',      'table' => 'dma_friends_badge_user',    'user_id', 'badge_id'];        
-            $model->belongsToMany['rewards']    = ['DMA\Friends\Models\Reward',     'table' => 'dma_friends_reward_user',   'user_id', 'reward_id'];       
+            $model->belongsToMany['groups']     = ['DMA\Friends\Models\UserGroup',  'table' => 'dma_friends_users_groups',  'primaryKey' => 'user_id', 'foreignKey' => 'group_id', 'pivot' => ['membership_status']];
+            $model->belongsToMany['rewards']    = ['DMA\Friends\Models\Reward',     'table' => 'dma_friends_reward_user',   'user_id', 'reward_id'];                     
         });
 
         Event::listen('backend.form.extendFields', function($widget) {
@@ -230,9 +258,9 @@ class Plugin extends PluginBase
     public function registerFormWidgets()
     {
         return [
-            'DMA\Friends\FormWidgets\RequiredSteps' => [
-                'label' => 'Required Steps',
-                'alias' => 'requiredsteps',
+            'DMA\Friends\FormWidgets\ActivityType' => [
+                'label' => 'ActivityType',
+                'alias' => 'activitytype',
             ],
             'DMA\Friends\FormWidgets\TimeRestrictions' => [
                 'label' => 'Time Restrictions',

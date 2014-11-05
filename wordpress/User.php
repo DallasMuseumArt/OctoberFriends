@@ -80,6 +80,8 @@ class User extends Post
                     ->where('user_email', $user->email)
                     ->first();
 
+                if (!$id) continue;
+                
                 $this->updateMetadata($user, $id->ID);
             }
         });

@@ -1,0 +1,153 @@
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityBase}{\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}Activity\+Base Class Reference}
+\label{classDMA_1_1Friends_1_1Classes_1_1ActivityBase}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Base@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Base}}
+}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}Activity\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{d4/dfe/classDMA_1_1Friends_1_1Classes_1_1ActivityBase}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityBase_a93c34ca9ef2f3c2467b3e103e3ab1589}{get\+Config} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityBase_a0aaec135ec1f7d5fda3ff579acfc5b22}{process} (User \$user, \$params)
+\item 
+static \hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityBase_a01771f49733d9f827915653beccf461b}{can\+Complete} (\hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity}{Activity} \$activity)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityBase_a455b6cee79fab199d7f95eb0075bde8a}{{\bfseries \$field\+Config} = 'fields.\+yaml'}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityBase_a455b6cee79fab199d7f95eb0075bde8a}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityBase_ad8014a7edaf379a079f610af156a80bb}{{\bfseries \$dir\+Name}}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityBase_ad8014a7edaf379a079f610af156a80bb}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityBase_a01771f49733d9f827915653beccf461b}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Base}!can\+Complete@{can\+Complete}}
+\index{can\+Complete@{can\+Complete}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Base}}
+\subsubsection[{can\+Complete}]{\setlength{\rightskip}{0pt plus 5cm}static D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Base\+::can\+Complete (
+\begin{DoxyParamCaption}
+\item[{{\bf Activity}}]{\$activity}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityBase_a01771f49733d9f827915653beccf461b}
+Determine if an activity is capable of being completed
+
+\begin{DoxyReturn}{Returns}
+boolean returns true if an activity can be completed by the user 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityBaseInterface}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Base\+Interface}.
+
+
+\begin{DoxyCode}
+89     \{   
+90         \textcolor{keywordflow}{if} (!$activity->isActive()) \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+91 
+92         \textcolor{keywordflow}{switch} ($activity->time\_restriction) \{
+93             \textcolor{keywordflow}{case} \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity_ab9dd8b18c4810beabdcf8e45039913c8}{Activity::TIME\_RESTRICT\_NONE}:
+94                 \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+95             \textcolor{keywordflow}{case} \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity_ac78040e8784e02c2d1bcce5221ac6cb8}{Activity::TIME\_RESTRICT\_HOURS}:
+96                 \textcolor{keywordflow}{if} ($activity->time\_restriction\_data) \{
+97                     $now        = time();
+98                     $start\_time = strtotime($activity->time\_restriction\_data[\textcolor{stringliteral}{'start\_time'}], $now);
+99                     $end\_time   = strtotime($activity->time\_restriction\_data[\textcolor{stringliteral}{'end\_time'}], $now);
+100                     $day        = date(\textcolor{charliteral}{'w'});
+101 
+102                     \textcolor{keywordflow}{if} ($activity->time\_restriction\_date[\textcolor{stringliteral}{'days'}][$day] !== \textcolor{keyword}{false}
+103                         && $now >= $start\_time && $now <= $end\_time) \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+104                 \}
+105 
+106                 \textcolor{keywordflow}{break};
+107             \textcolor{keywordflow}{case} \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity_a71b85478f20cda144aeffe010364a0f7}{Activity::TIME\_RESTRICT\_DAYS}: 
+108                 $now = \textcolor{keyword}{new} \hyperlink{namespaceDateTime}{DateTime}(\textcolor{stringliteral}{'now'});
+109                 \textcolor{keywordflow}{if} ($now >= $activity->date\_begin 
+110                     && $now <= $activity->date\_end) \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+111 
+112                 \textcolor{keywordflow}{break};
+113         \} 
+114 
+115         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+116     \} 
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityBase_a93c34ca9ef2f3c2467b3e103e3ab1589}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Base}!get\+Config@{get\+Config}}
+\index{get\+Config@{get\+Config}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Base}}
+\subsubsection[{get\+Config}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Base\+::get\+Config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityBase_a93c34ca9ef2f3c2467b3e103e3ab1589}
+Return the path to the yaml configuration for additional form fields
+
+\begin{DoxyReturn}{Returns}
+string Y\+A\+M\+L config path 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+43     \{
+44         \textcolor{keywordflow}{return} $this->dirName . \textcolor{charliteral}{'/'} . $this->fieldConfig;
+45     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityBase_a0aaec135ec1f7d5fda3ff579acfc5b22}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Base}!process@{process}}
+\index{process@{process}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Base}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}static D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Base\+::process (
+\begin{DoxyParamCaption}
+\item[{User}]{\$user, }
+\item[{}]{\$params}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityBase_a0aaec135ec1f7d5fda3ff579acfc5b22}
+Process and determine if an award can be issued based on a provided activity code
+
+
+\begin{DoxyParams}[1]{Parameters}
+object & {\em \$user} & A user model for which the activity should act upon\\
+\hline
+array & {\em \$params} & An array of parameters for validating activities\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean returns true if the process was successful 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityBaseInterface}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Base\+Interface}.
+
+
+\begin{DoxyCode}
+61     \{
+62         $activity = $params[\textcolor{stringliteral}{'activity'}];
+63 
+64         \textcolor{keywordflow}{if} (self::canComplete($activity)) \{
+65             $userExtend = \textcolor{keyword}{new} UserExtend($user);
+66             $userExtend->addPoints($activity->points);
+67 
+68             Event::fire(\textcolor{stringliteral}{'friends.activityCompleted'}, [ $user, $activity ]); 
+69 
+70             \textcolor{comment}{// log an entry to the activity log}
+71             \hyperlink{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_a0b90db29da51f53991f2dcc1a55f14c7}{FriendsLog::activity}([
+72                 \textcolor{stringliteral}{'user'}          => $user,
+73                 \textcolor{stringliteral}{'object'}        => $activity,
+74             ]); 
+75 
+76             \textcolor{keywordflow}{return} $activity;
+77         \}
+78 
+79         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+80     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+classes/Activity\+Base.\+php\end{DoxyCompactItemize}

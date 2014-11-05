@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['events',['Events',['../df/d0e/md_docs_EVENTS.html',1,'']]]
+  ['activity_20type_20registration',['Activity Type registration',['../df/d06/md_docs_ACTIVITY-TYPES.html',1,'']]]
 ];

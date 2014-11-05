@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['cancomplete',['canComplete',['../db/d9c/classDMA_1_1Friends_1_1Classes_1_1ActivityProcessor.html#adaddbe728558689c09abe18010c005e7',1,'DMA::Friends::Classes::ActivityProcessor']]],
+  ['cancomplete',['canComplete',['../d3/d35/classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase.html#af5ddc6ea4b9d888873e6e499beaea396',1,'DMA::Friends::Classes::ActivityTypeBase']]],
   ['categories',['Categories',['../d9/daa/classDMA_1_1Friends_1_1Controllers_1_1Categories.html',1,'DMA::Friends::Controllers']]],
   ['category',['Category',['../de/d78/classDMA_1_1Friends_1_1Models_1_1Category.html',1,'DMA::Friends::Models']]],
   ['categoryresource',['CategoryResource',['../d6/d3b/classDMA_1_1Friends_1_1Api_1_1CategoryResource.html',1,'DMA::Friends::Api']]],

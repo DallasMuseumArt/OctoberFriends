@@ -5,7 +5,7 @@ var searchData=
   ['updateexistingusers',['updateExistingUsers',['../dd/d73/classDMA_1_1Friends_1_1Wordpress_1_1User.html#a9664b94f73cb6ed82746b94d9bdac91b',1,'DMA::Friends::Wordpress::User']]],
   ['updatemetadata',['updateMetadata',['../dd/d73/classDMA_1_1Friends_1_1Wordpress_1_1User.html#aa2d2c2c9b82db76a0eab7af41629e011',1,'DMA::Friends::Wordpress::User']]],
   ['user',['User',['../dd/d73/classDMA_1_1Friends_1_1Wordpress_1_1User.html',1,'DMA::Friends::Wordpress']]],
-  ['user',['User',['../da/dbf/classDMA_1_1Friends_1_1Models_1_1User.html',1,'DMA::Friends::Models']]],
   ['userbadges',['UserBadges',['../d8/d01/classDMA_1_1Friends_1_1Components_1_1UserBadges.html',1,'DMA::Friends::Components']]],
+  ['userextend',['UserExtend',['../da/df1/classDMA_1_1Friends_1_1Classes_1_1UserExtend.html',1,'DMA::Friends::Classes']]],
   ['usermeta',['Usermeta',['../d6/d87/classDMA_1_1Friends_1_1Models_1_1Usermeta.html',1,'DMA::Friends::Models']]]
 ];

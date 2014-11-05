@@ -3,16 +3,11 @@
 # ===================================
 
 fields:
-    title:
-        label: Title
-    achievement_type:
-        label: Achievement Type
     count:
-        label: Count
+        label: Must complete X amount of times
         type: number
-    trigger_type:
-        label: Trigger Type
-    unlock_options:
-        label: Unlock Options
-    trigger_unlock_badge:
-        label: Trigger Unlock Badge
+    activity:
+        label: Activity
+        type: relation
+        options:
+            nameColumn: title

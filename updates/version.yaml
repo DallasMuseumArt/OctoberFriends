@@ -32,6 +32,12 @@
     - Move points to user table and migrate points out of metadata table
     - extend_user_table.php
 1.0.9:
+    - Add the activity_type column to activities
+    - extend_activity_table.php
+1.0.10:
+    - Add touch column to activities
+    - update_activities_table.php
+1.0.11:
     - Add user groups     
     - create_user_group_table.php
     - create_users_groups_table.php

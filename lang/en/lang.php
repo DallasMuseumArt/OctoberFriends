@@ -3,8 +3,9 @@
 return [
     'app' => [
         'name'                  => 'Friends',
-        'activityCodeSuccess'   => 'Congradulations, you have completed ":title"',
+        'activityCodeSuccess'   => 'Congratulations, you have completed ":title"',
         'activityCodeError'     => 'Sorry the code :code could not be found',
+        'stepTitle'             => 'Complete activity ":title" :count times',
     ],
     'log' => [
         'activity'  => ':name just completed the activity of ":title"',
@@ -17,4 +18,8 @@ return [
     'group' => [
         ''  => '',
     ]
+    'exceptions' => [
+        'missingActivityClass'      => 'Could not find the activity :class',
+        'activityTypeNotInitiated'  => 'An activity type must be instantiated before form fields can be used',
+    ],
 ];
