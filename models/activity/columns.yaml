@@ -6,6 +6,9 @@ columns:
     title:
         label: Title
         searchable: true
+    activity_code:
+        label: Activity Code 
+        searchable: true
     points:
         label: Points Earned
         type: number

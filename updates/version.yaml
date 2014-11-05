@@ -34,3 +34,6 @@
 1.0.9:
     - Add the activity_type column to activities
     - extend_activity_table.php
+1.0.10:
+    - Add touch column to activities
+    - update_activities_table.php
