@@ -39,14 +39,13 @@ class ActivityCodeForm extends ComponentBase
             $activity = LikeWorkOfArt::process($user, $params);
         }
 
-        $message = Session::get('activityMessage');
+        $message = Session::pull('activityMessage');
 
         if ($message && $activity) {
             //TODO replace with advanced notification system when ready
             Flash::info($message);
-            Session::put('activityMessage', false);
         } else {
-            Flash::error(Session::get('activityError'));
+            Flash::error(Session::pull('activityError'));
         }
 
         return [
