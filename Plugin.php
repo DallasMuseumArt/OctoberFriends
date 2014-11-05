@@ -4,10 +4,12 @@ use Backend;
 use Illuminate\Support\Facades\Event;
 use Rainlab\User\Models\User as User;
 use DMA\Friends\Models\Usermeta as Metadata;
+use DMA\Friends\Models\Settings;
 use DMA\Friends\Classes\ActivityManager;
 use System\Classes\PluginBase;
 use DMA\Friends\Classes\FriendsEventHandler;
 use App;
+use Config;
 use Illuminate\Foundation\AliasLoader;
 
 /**
@@ -138,6 +140,8 @@ class Plugin extends PluginBase
 
     public function boot()
     {
+        // Register timezone settings
+        date_default_timezone_set( Settings::get('timezone', Config::get('app.timezone')) );
 
         // Register ServiceProviders
         App::register('\EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider');
@@ -151,7 +155,7 @@ class Plugin extends PluginBase
         User::extend(function($model) {        
             $model->hasOne['metadata']          = ['DMA\Friends\Models\Usermeta'];     
             $model->hasMany['activityLogs']     = ['DMA\Friends\Models\ActivityLog'];
-            $model->belongsToMany['activities'] = ['DMA\Friends\Models\Activity',   'table' => 'dma_friends_activity_user', 'user_id', 'activity_id', 'timestamps' => true, 'order' => 'created_at asc',];     
+            $model->belongsToMany['activities'] = ['DMA\Friends\Models\Activity',   'table' => 'dma_friends_activity_user', 'user_id', 'activity_id', 'timestamps' => true, 'order' => 'created_at desc',];     
             $model->belongsToMany['steps']      = ['DMA\Friends\Models\Step',       'table' => 'dma_friends_step_user',     'user_id', 'step_id'];     
             $model->belongsToMany['badges']     = ['DMA\Friends\Models\Badge',      'table' => 'dma_friends_badge_user',    'user_id', 'badge_id'];        
             $model->belongsToMany['groups']     = ['DMA\Friends\Models\UserGroup',  'table' => 'users_groups',              'user_id', 'group_id'];

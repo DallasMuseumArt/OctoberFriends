@@ -147,7 +147,7 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
     {   
         if (!$activity->isActive()) return false;
 
-        if ($activity->activity_lockout) {
+        if ($activity->activity_lockout && $user->activities()->first()) {
             $time       = Carbon::now();
             $lastTime   = $user->activities()->first()->pivot->created_at;
             $lastTime->addMinutes($activity->activity_lockout);
@@ -163,13 +163,13 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
             case Activity::TIME_RESTRICT_HOURS:
                 if ($activity->time_restriction_data) {
 
-                    $now    = Carbon::now()->setTimezone(Settings::get('timezone'));
+                    $now    = Carbon::now();
                     $start  = self::convertTime($activity->time_restriction_data['start_time']);
                     $end    = self::convertTime($activity->time_restriction_data['end_time']);
 
-                    $start_time = Carbon::now()->setTimezone(Settings::get('timezone'));
+                    $start_time = Carbon::now();
                     $start_time->setTime($start['hour'], $start['minutes']);
-                    $end_time   = Carbon::now()->setTimezone(Settings::get('timezone'));
+                    $end_time   = Carbon::now();
                     $end_time->setTime($end['hour'], $start['minutes']);
                     $day        = date('w');
 
