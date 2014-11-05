@@ -3,6 +3,7 @@
 use Auth;
 use Flash;
 use Lang;
+use Session;
 use Cms\Classes\ComponentBase;
 use DMA\Friends\Activities\ActivityCode;
 use DMA\Friends\Activities\LikeWorkOfArt;
@@ -38,10 +39,14 @@ class ActivityCodeForm extends ComponentBase
             $activity = LikeWorkOfArt::process($user, $params);
         }
 
-        if ($activity) {
-            Flash::info(Lang::get('dma.friends::lang.app.activityCodeSuccess', ['title' => $activity->title]));
+        $message = Session::get('activityMessage');
+
+        if ($message && $activity) {
+            //TODO replace with advanced notification system when ready
+            Flash::info($message);
+            Session::put('activityMessage', false);
         } else {
-            Flash::error(Lang::get('dma.friends::lang.app.activityCodeError', ['code' => $params['code']]));
+            Flash::error(Session::get('activityError'));
         }
 
         return [

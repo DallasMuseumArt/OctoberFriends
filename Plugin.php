@@ -155,7 +155,7 @@ class Plugin extends PluginBase
         User::extend(function($model) {        
             $model->hasOne['metadata']          = ['DMA\Friends\Models\Usermeta'];     
             $model->hasMany['activityLogs']     = ['DMA\Friends\Models\ActivityLog'];
-            $model->belongsToMany['activities'] = ['DMA\Friends\Models\Activity',   'table' => 'dma_friends_activity_user', 'user_id', 'activity_id', 'timestamps' => true, 'order' => 'created_at desc',];     
+            $model->belongsToMany['activities'] = ['DMA\Friends\Models\Activity',   'table' => 'dma_friends_activity_user', 'user_id', 'activity_id', 'timestamps' => true, 'order' => 'pivot_created_at desc',];     
             $model->belongsToMany['steps']      = ['DMA\Friends\Models\Step',       'table' => 'dma_friends_step_user',     'user_id', 'step_id'];     
             $model->belongsToMany['badges']     = ['DMA\Friends\Models\Badge',      'table' => 'dma_friends_badge_user',    'user_id', 'badge_id'];        
             $model->belongsToMany['groups']     = ['DMA\Friends\Models\UserGroup',  'table' => 'users_groups',              'user_id', 'group_id'];

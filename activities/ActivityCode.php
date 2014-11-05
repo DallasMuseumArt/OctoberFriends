@@ -4,6 +4,8 @@ namespace DMA\Friends\Activities;
 use RainLab\User\Models\User;
 use DMA\Friends\Models\Activity;
 use DMA\Friends\Classes\ActivityTypeBase;
+use Session;
+use Lang;
 
 class ActivityCode extends ActivityTypeBase
 {
@@ -52,6 +54,8 @@ class ActivityCode extends ActivityTypeBase
             return parent::process($user, ['activity' => $activity]);
         }
 
+        Session::put('activityError', Lang::get('dma.friends::lang.activities.codeError', ['code' => $params['code']]));
+        
         return false;
 
     }
