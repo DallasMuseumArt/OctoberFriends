@@ -9,9 +9,9 @@ use RainLab\User\Models\User;
 /**
  * This class handles badging logic
  *
- * @package dma\friends\classes
+ * @package DMA\Friends\Classes
  */
-class BadgeManager()
+class BadgeManager
 {
 
     /**
@@ -19,13 +19,13 @@ class BadgeManager()
      *
      * @param Activity an activity model
      */
-    public static applyActivityToBadges(User $user, Activity $activity)
+    public static function applyActivityToBadges(User $user, Activity $activity)
     {
         //TODO look up all steps that use this activity
 
-        $steps = Step->activities()->find($activity->id);
+        //$steps = Step->activities()->find($activity->id);
 
-\Debugbar::info($steps);
+
         // if we have steps complete the step for a user
 
     }
