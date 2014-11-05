@@ -112,8 +112,6 @@ Inheritance diagram for DMA\Friends\Models\Activity:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa5a4543ce44bd5b87fee0651c2102daf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d8c/classDMA_1_1Friends_1_1Models_1_1Activity.html#aa5a4543ce44bd5b87fee0651c2102daf">isActive</a> ()</td></tr>
-<tr class="separator:aa5a4543ce44bd5b87fee0651c2102daf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade0ffca24448c217def365d104e52866"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d8c/classDMA_1_1Friends_1_1Models_1_1Activity.html#ade0ffca24448c217def365d104e52866">setTimeRestrictionDataAttribute</a> ($value)</td></tr>
 <tr class="separator:ade0ffca24448c217def365d104e52866"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98a904c739aca30f2a26152a481164b6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d8c/classDMA_1_1Friends_1_1Models_1_1Activity.html#a98a904c739aca30f2a26152a481164b6">getTimeRestrictionDataAttribute</a> ($value)</td></tr>
@@ -142,6 +140,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a0b92e75aa8d92e2d3c9b24f54cd813bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5245e6eb74228cd54d8ae77e5a9bb38"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><b>$belongsToMany</b></td></tr>
 <tr class="separator:ae5245e6eb74228cd54d8ae77e5a9bb38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b255e9889df95f8c702b72ed49ace25"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><b>$hasMany</b></td></tr>
+<tr class="separator:a8b255e9889df95f8c702b72ed49ace25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9911cb733cbc863cc1bdccde254404b5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><b>$attachOne</b></td></tr>
 <tr class="separator:a9911cb733cbc863cc1bdccde254404b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a192fdaacf609961b7a436d2b967dfd60"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><b>$morphMany</b></td></tr>
@@ -155,7 +155,7 @@ Protected Attributes</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>$guarded</b> = ['*']</td></tr>
 <tr class="separator:ac82a10f722788b5c1c7a5295e1ac10c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2a7401215dff9dfd8b600247b12454a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab2a7401215dff9dfd8b600247b12454a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>$fillable</b> = []</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>$fillable</b> = ['touch']</td></tr>
 <tr class="separator:ab2a7401215dff9dfd8b600247b12454a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe94503fbf177345e4bf0b1625dee499"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afe94503fbf177345e4bf0b1625dee499"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>$dates</b> = ['date_begin', 'date_end']</td></tr>
@@ -179,28 +179,9 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Accessor to unserialize time_restriction_data attribute </p>
-<div class="fragment"><div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    {</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keywordflow">return</span> unserialize($value);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    }</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a class="anchor" id="aa5a4543ce44bd5b87fee0651c2102daf"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">DMA\Friends\Models\Activity::isActive </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Scope to filter by active activities </p>
-<div class="fragment"><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">return</span> $this-&gt;is_published &amp;&amp; !$this-&gt;is_archived;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    {</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keywordflow">return</span> unserialize($value);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -228,10 +209,10 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Find activities by activity type </p>
-<div class="fragment"><div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    {</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keywordflow">return</span> $query-&gt;where(<span class="stringliteral">&#39;activity_type&#39;</span>, $type)</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            -&gt;isActive();</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    {</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="keywordflow">return</span> $query-&gt;where(<span class="stringliteral">&#39;activity_type&#39;</span>, $type)</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            -&gt;isActive();</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -259,10 +240,10 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Find an activity by its activity code </p>
-<div class="fragment"><div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    {</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keywordflow">return</span> $query-&gt;where(<span class="stringliteral">&#39;activity_code&#39;</span>, $code)</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            -&gt;isActive();</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    {</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="keywordflow">return</span> $query-&gt;where(<span class="stringliteral">&#39;activity_code&#39;</span>, $code)</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            -&gt;isActive();</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -290,9 +271,9 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Find activities by a wordpress id if they where imported </p>
-<div class="fragment"><div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    {   </div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <span class="keywordflow">return</span> $query-&gt;where(<span class="stringliteral">&#39;wordpress_id&#39;</span>, $id);</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    }  </div>
+<div class="fragment"><div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    {   </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="keywordflow">return</span> $query-&gt;where(<span class="stringliteral">&#39;wordpress_id&#39;</span>, $id);</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    }  </div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -310,10 +291,10 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Return only activities that are active </p>
-<div class="fragment"><div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    {</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keywordflow">return</span> $query-&gt;where(<span class="stringliteral">&#39;is_published&#39;</span>, <span class="charliteral">&#39;=&#39;</span>, 1)</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            -&gt;where(<span class="stringliteral">&#39;is_archived&#39;</span>, <span class="stringliteral">&#39;&lt;&gt;&#39;</span>, 1);</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    {</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="keywordflow">return</span> $query-&gt;where(<span class="stringliteral">&#39;is_published&#39;</span>, <span class="charliteral">&#39;=&#39;</span>, 1)</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            -&gt;where(<span class="stringliteral">&#39;is_archived&#39;</span>, <span class="stringliteral">&#39;&lt;&gt;&#39;</span>, 1);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -331,13 +312,13 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Mutator to ensure time_restriction_data is serialized </p>
-<div class="fragment"><div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    {</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keywordflow">if</span> (is_array($value)) {</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            $value = serialize($value);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        }</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        $this-&gt;attributes[<span class="stringliteral">&#39;time_restriction_data&#39;</span>] = $value;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    {</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">if</span> (is_array($value)) {</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            $value = serialize($value);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        $this-&gt;attributes[<span class="stringliteral">&#39;time_restriction_data&#39;</span>] = $value;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -353,7 +334,6 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= [</div>
 <div class="line">        <span class="stringliteral">&#39;image&#39;</span> =&gt; [<span class="stringliteral">&#39;System\Models\File&#39;</span>]</div>
-<div class="line">    ]</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -367,7 +347,22 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= [</div>
-<div class="line">        <span class="stringliteral">&#39;steps&#39;</span>         =&gt; [<span class="stringliteral">&#39;DMA\Friends\Models\Step&#39;</span>]</div>
+<div class="line">        <span class="stringliteral">&#39;steps&#39;</span> =&gt; [<span class="stringliteral">&#39;DMA\Friends\Models\Step&#39;</span>]</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a8b255e9889df95f8c702b72ed49ace25"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DMA\Friends\Models\Activity::$hasMany</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= [</div>
+<div class="line">        <span class="stringliteral">&#39;users&#39;</span> =&gt; [<span class="stringliteral">&#39;RainLab\User\Models\User&#39;</span>, <span class="stringliteral">&#39;table&#39;</span> =&gt; <span class="stringliteral">&#39;dma_friends_activity_user&#39;</span>],</div>
+<div class="line">    ]</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -460,7 +455,7 @@ Protected Attributes</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 3 2014 11:51:14 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Nov 5 2014 13:24:44 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>
