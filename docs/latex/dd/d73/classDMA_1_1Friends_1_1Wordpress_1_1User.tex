@@ -98,10 +98,12 @@ Updates the metadata from wordpress on existing users
 80                     ->where(\textcolor{stringliteral}{'user\_email'}, $user->email)
 81                     ->first();
 82 
-83                 $this->\hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1User_aa2d2c2c9b82db76a0eab7af41629e011}{updateMetadata}($user, $id->ID);
-84             \}
-85         \});
-86     \}
+83                 \textcolor{keywordflow}{if} (!$id) \textcolor{keywordflow}{continue};
+84                 
+85                 $this->\hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1User_aa2d2c2c9b82db76a0eab7af41629e011}{updateMetadata}($user, $id->ID);
+86             \}
+87         \});
+88     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Wordpress_1_1User_aa2d2c2c9b82db76a0eab7af41629e011}{\index{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+User@{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+User}!update\+Metadata@{update\+Metadata}}
 \index{update\+Metadata@{update\+Metadata}!D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+User@{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+User}}
@@ -113,65 +115,65 @@ Updates the metadata from wordpress on existing users
 )}}\label{classDMA_1_1Friends_1_1Wordpress_1_1User_aa2d2c2c9b82db76a0eab7af41629e011}
 Updates and save the metadata for a user object 
 \begin{DoxyCode}
-92     \{
-93         $metadata = $this->db
-94             ->table(\textcolor{stringliteral}{'wp\_usermeta'})
-95             ->where(\textcolor{stringliteral}{'user\_id'}, $wordpressId)
-96             ->get();
-97 
-98         \textcolor{comment}{// Organize the metadata for mapping to user fields}
-99         $data = [
-100             \textcolor{stringliteral}{'home\_phone'}            => \textcolor{stringliteral}{''},
-101             \textcolor{stringliteral}{'street\_address'}        => \textcolor{stringliteral}{''},
-102             \textcolor{stringliteral}{'city'}                  => \textcolor{stringliteral}{''},
-103             \textcolor{stringliteral}{'state'}                 => \textcolor{stringliteral}{''},
-104             \textcolor{stringliteral}{'zip'}                   => \textcolor{stringliteral}{''},
-105             \textcolor{stringliteral}{'first\_name'}            => \textcolor{stringliteral}{''},
-106             \textcolor{stringliteral}{'last\_name'}             => \textcolor{stringliteral}{''},
-107             \textcolor{stringliteral}{'\_badgeos\_points'}       => \textcolor{stringliteral}{''},
-108             \textcolor{stringliteral}{'email\_optin'}           => \textcolor{keyword}{false},
-109             \textcolor{stringliteral}{'current\_member'}        => \textcolor{keyword}{false},
-110             \textcolor{stringliteral}{'current\_member\_number'} => \textcolor{stringliteral}{''},
-111         ];
-112 
-113         \textcolor{keywordflow}{foreach}($metadata as $mdata) \{
-114             $data[$mdata->meta\_key] = $mdata->meta\_value;
-115         \}
-116 
-117         $user->phone            = $data[\textcolor{stringliteral}{'home\_phone'}];
-118         $user->street\_addr      = $data[\textcolor{stringliteral}{'street\_address'}];
-119         $user->city             = $data[\textcolor{stringliteral}{'city'}];
-120         $user->zip              = $data[\textcolor{stringliteral}{'zip'}];
-121         $user->points           = $data[\textcolor{stringliteral}{'\_badgeos\_points'}];
-122 
-123         \textcolor{comment}{// Populate state and country objects}
-124         \textcolor{keywordflow}{if} (!empty($data[\textcolor{stringliteral}{'state'}])) \{
-125             $state = State::where(\textcolor{stringliteral}{'code'}, strtoupper($data[\textcolor{stringliteral}{'state'}]))->first();
-126             \textcolor{keywordflow}{if} (!$state) \{
-127                 $state = State::where(\textcolor{stringliteral}{'name'}, $data[\textcolor{stringliteral}{'state'}])->first();
-128             \}
-129 
-130             \textcolor{keywordflow}{if} ($state) \{
-131                 $user->state()->associate($state);
-132                 $user->country()->associate(Country::find($state->country\_id));
-133             \}
-134         \}
-135 
-136         $metadata                           = \textcolor{keyword}{new} Usermeta;
-137         $metadata->first\_name               = $data[\textcolor{stringliteral}{'first\_name'}];
-138         $metadata->last\_name                = $data[\textcolor{stringliteral}{'last\_name'}];
-139         $metadata->email\_optin              = $data[\textcolor{stringliteral}{'email\_optin'}];
-140         $metadata->current\_member           = $data[\textcolor{stringliteral}{'current\_member'}];
-141         $metadata->current\_member\_number    = $data[\textcolor{stringliteral}{'current\_member\_number'}];
-142 
-143         \textcolor{keywordflow}{try} \{
-144             $user->forceSave();
-145             $user->metadata()->delete();
-146             $user->metadata()->save($metadata);
-147         \} \textcolor{keywordflow}{catch}(Exception $e) \{
-148 
-149         \}
-150     \}
+94     \{
+95         $metadata = $this->db
+96             ->table(\textcolor{stringliteral}{'wp\_usermeta'})
+97             ->where(\textcolor{stringliteral}{'user\_id'}, $wordpressId)
+98             ->get();
+99 
+100         \textcolor{comment}{// Organize the metadata for mapping to user fields}
+101         $data = [
+102             \textcolor{stringliteral}{'home\_phone'}            => \textcolor{stringliteral}{''},
+103             \textcolor{stringliteral}{'street\_address'}        => \textcolor{stringliteral}{''},
+104             \textcolor{stringliteral}{'city'}                  => \textcolor{stringliteral}{''},
+105             \textcolor{stringliteral}{'state'}                 => \textcolor{stringliteral}{''},
+106             \textcolor{stringliteral}{'zip'}                   => \textcolor{stringliteral}{''},
+107             \textcolor{stringliteral}{'first\_name'}            => \textcolor{stringliteral}{''},
+108             \textcolor{stringliteral}{'last\_name'}             => \textcolor{stringliteral}{''},
+109             \textcolor{stringliteral}{'\_badgeos\_points'}       => \textcolor{stringliteral}{''},
+110             \textcolor{stringliteral}{'email\_optin'}           => \textcolor{keyword}{false},
+111             \textcolor{stringliteral}{'current\_member'}        => \textcolor{keyword}{false},
+112             \textcolor{stringliteral}{'current\_member\_number'} => \textcolor{stringliteral}{''},
+113         ];
+114 
+115         \textcolor{keywordflow}{foreach}($metadata as $mdata) \{
+116             $data[$mdata->meta\_key] = $mdata->meta\_value;
+117         \}
+118 
+119         $user->phone            = $data[\textcolor{stringliteral}{'home\_phone'}];
+120         $user->street\_addr      = $data[\textcolor{stringliteral}{'street\_address'}];
+121         $user->city             = $data[\textcolor{stringliteral}{'city'}];
+122         $user->zip              = $data[\textcolor{stringliteral}{'zip'}];
+123         $user->points           = $data[\textcolor{stringliteral}{'\_badgeos\_points'}];
+124 
+125         \textcolor{comment}{// Populate state and country objects}
+126         \textcolor{keywordflow}{if} (!empty($data[\textcolor{stringliteral}{'state'}])) \{
+127             $state = State::where(\textcolor{stringliteral}{'code'}, strtoupper($data[\textcolor{stringliteral}{'state'}]))->first();
+128             \textcolor{keywordflow}{if} (!$state) \{
+129                 $state = State::where(\textcolor{stringliteral}{'name'}, $data[\textcolor{stringliteral}{'state'}])->first();
+130             \}
+131 
+132             \textcolor{keywordflow}{if} ($state) \{
+133                 $user->state()->associate($state);
+134                 $user->country()->associate(Country::find($state->country\_id));
+135             \}
+136         \}
+137 
+138         $metadata                           = \textcolor{keyword}{new} Usermeta;
+139         $metadata->first\_name               = $data[\textcolor{stringliteral}{'first\_name'}];
+140         $metadata->last\_name                = $data[\textcolor{stringliteral}{'last\_name'}];
+141         $metadata->email\_optin              = $data[\textcolor{stringliteral}{'email\_optin'}];
+142         $metadata->current\_member           = $data[\textcolor{stringliteral}{'current\_member'}];
+143         $metadata->current\_member\_number    = $data[\textcolor{stringliteral}{'current\_member\_number'}];
+144 
+145         \textcolor{keywordflow}{try} \{
+146             $user->forceSave();
+147             $user->metadata()->delete();
+148             $user->metadata()->save($metadata);
+149         \} \textcolor{keywordflow}{catch}(Exception $e) \{
+150 
+151         \}
+152     \}
 \end{DoxyCode}
 
 
