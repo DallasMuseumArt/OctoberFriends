@@ -4,7 +4,6 @@ var searchData=
   ['realtimerestriction',['realTimeRestriction',['../d2/de2/classDMA_1_1Friends_1_1Wordpress_1_1Post.html#a5fbf4b003c2136d8497ddd7d726ad671',1,'DMA::Friends::Wordpress::Post']]],
   ['register',['register',['../df/d6d/classDMA_1_1Friends_1_1FriendsServiceProvider.html#a6a90d2cdc4c6b153b45764ba66e154ae',1,'DMA::Friends::FriendsServiceProvider']]],
   ['registeractivity',['registerActivity',['../d0/d48/classDMA_1_1Friends_1_1Classes_1_1ActivityManager.html#a59854358f0903314c27c9add5d151221',1,'DMA::Friends::Classes::ActivityManager']]],
-  ['registeractivitycode',['registerActivityCode',['../df/d6d/classDMA_1_1Friends_1_1FriendsServiceProvider.html#aa21a040ba3b9fd8ef5cabaa63ccc10f8',1,'DMA::Friends::FriendsServiceProvider']]],
   ['registerfriendsactivities',['registerFriendsActivities',['../db/d85/classDMA_1_1Friends_1_1Plugin.html#aee1fcfd6978df90e396e75223e24080a',1,'DMA::Friends::Plugin']]],
   ['registerfriendslog',['registerFriendsLog',['../df/d6d/classDMA_1_1Friends_1_1FriendsServiceProvider.html#a2d6ff7101ca6389c00e298f2d594a1df',1,'DMA::Friends::FriendsServiceProvider']]],
   ['removepoints',['removePoints',['../da/df1/classDMA_1_1Friends_1_1Classes_1_1UserExtend.html#a452030297bbe4f11bb8452e4d57396cd',1,'DMA::Friends::Classes::UserExtend']]],

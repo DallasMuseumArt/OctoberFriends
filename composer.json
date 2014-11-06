@@ -17,5 +17,7 @@
     "require": {
         "ellipsesynergie/api-response": "0.5.*",
         "league/factory-muffin": "~2.1"
+        "twilio/sdk": "3.12.6",
+        "j7mbo/twitter-api-php": "dev-master"
     }
 }

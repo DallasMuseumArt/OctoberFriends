@@ -3,9 +3,13 @@
 return [
     'app' => [
         'name'                  => 'Friends',
-        'activityCodeSuccess'   => 'Congratulations, you have completed ":title"',
-        'activityCodeError'     => 'Sorry the code :code could not be found',
         'stepTitle'             => 'Complete activity ":title" :count times',
+    ],
+    'activities' => [
+        'codeSuccess'   => 'Congratulations, you have completed ":title"',
+        'codeError'     => 'Sorry the code :code could not be found',
+        'lockout'       => 'You cannot use this code for :x minutes',
+        'notAvailable'  => 'Sorry this activity is currently not available',
     ],
     'log' => [
         'activity'  => ':name just completed the activity of ":title"',

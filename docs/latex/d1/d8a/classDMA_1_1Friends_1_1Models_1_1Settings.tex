@@ -1,0 +1,56 @@
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1Settings}{\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Models\textbackslash{}Settings Class Reference}
+\label{classDMA_1_1Friends_1_1Models_1_1Settings}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Models\textbackslash{}\+Settings@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Models\textbackslash{}\+Settings}}
+}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Models\textbackslash{}Settings\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d1/d8a/classDMA_1_1Friends_1_1Models_1_1Settings}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Models_1_1Settings_a347eae65e8aeb114767d5e4fc8542fea}{get\+Timezone\+Options} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1Settings_a22513833a79c36e7a2d180e6b34e48d7}{{\bfseries \$implement} = \mbox{[}'System.\+Behaviors.\+Settings\+Model'\mbox{]}}\label{classDMA_1_1Friends_1_1Models_1_1Settings_a22513833a79c36e7a2d180e6b34e48d7}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1Settings_a8cd76479c7b825b039fecd635c250f03}{{\bfseries \$settings\+Code} = 'dma\+\_\+friends\+\_\+settings'}\label{classDMA_1_1Friends_1_1Models_1_1Settings_a8cd76479c7b825b039fecd635c250f03}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1Settings_a72c7148fc3dfb951eaffa85b210fcafd}{{\bfseries \$settings\+Fields} = 'fields.\+yaml'}\label{classDMA_1_1Friends_1_1Models_1_1Settings_a72c7148fc3dfb951eaffa85b210fcafd}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classDMA_1_1Friends_1_1Models_1_1Settings}{Settings} Model 
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1Settings_a347eae65e8aeb114767d5e4fc8542fea}{\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Settings@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Settings}!get\+Timezone\+Options@{get\+Timezone\+Options}}
+\index{get\+Timezone\+Options@{get\+Timezone\+Options}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Settings@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Settings}}
+\subsubsection[{get\+Timezone\+Options}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Models\textbackslash{}\+Settings\+::get\+Timezone\+Options (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Models_1_1Settings_a347eae65e8aeb114767d5e4fc8542fea}
+Returns available timezones \begin{DoxyReturn}{Returns}
+array 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+24     \{
+25         $timezones = timezone\_identifiers\_list();
+26         $timezones = array\_combine($timezones, $timezones);
+27 
+28         \textcolor{keywordflow}{return} $timezones;
+29     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+models/Settings.\+php\end{DoxyCompactItemize}

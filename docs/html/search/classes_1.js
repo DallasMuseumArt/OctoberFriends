@@ -2,6 +2,7 @@ var searchData=
 [
   ['badge',['Badge',['../df/d98/classDMA_1_1Friends_1_1Models_1_1Badge.html',1,'DMA::Friends::Models']]],
   ['badge',['Badge',['../d8/d3a/classDMA_1_1Friends_1_1Wordpress_1_1Badge.html',1,'DMA::Friends::Wordpress']]],
+  ['badgemanager',['BadgeManager',['../df/d1f/classDMA_1_1Friends_1_1Classes_1_1BadgeManager.html',1,'DMA::Friends::Classes']]],
   ['badgerecommend',['BadgeRecommend',['../d2/dbd/classDMA_1_1Friends_1_1Components_1_1BadgeRecommend.html',1,'DMA::Friends::Components']]],
   ['badgeresource',['BadgeResource',['../d4/d95/classDMA_1_1Friends_1_1Api_1_1BadgeResource.html',1,'DMA::Friends::Api']]],
   ['badges',['Badges',['../d2/d27/classDMA_1_1Friends_1_1Controllers_1_1Badges.html',1,'DMA::Friends::Controllers']]],

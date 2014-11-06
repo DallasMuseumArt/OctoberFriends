@@ -1,0 +1,11 @@
+{% for notification in notifications %}
+	<div class="alert alert-warning alert-dismissible" role="alert">
+		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		{% if notification.subject %}
+		<h4>{{ notification.subject }}</h4>
+		{% endif %}
+		<p>{{ notification.message|raw }}</p>
+		<!--  <p>send : {{ notification.created_at }}<br></p> -->
+
+	</div>	
+{% endfor %}
