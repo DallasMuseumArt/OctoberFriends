@@ -2,6 +2,8 @@
 
 use Model;
 use System\Models\MailTemplate;
+use Postman;
+
 
 /**
  * Friends Settings model
@@ -34,7 +36,7 @@ class Settings extends Model{
         $this->reset_groups_time = '00:00';
     }        
         
-
+        
     /**
      * Returns available timezones
      * @return array
@@ -74,4 +76,45 @@ class Settings extends Model{
         }
         return $opts;
     }    
+
+    /**
+     * Return al available channels in the platform
+     * 
+     * @param boolean $onlyListenable
+     * Only return channels that implement Listenable interface
+     *  
+     * @param boolean $description   
+     * Include channel description 
+     * 
+     * @return array
+     */
+    private function getChannelOptions($onlyListenable=false, $description=true){
+    	$options = [];
+    	foreach(Postman::getRegisterChannels($onlyListenable) as $ch){
+    		$info = $ch->info;
+    		$options[$ch->getKey()] = [@$info['name'], ($description) ? @$info['description'] : ''];
+    	}
+    	return $options;
+    }
+    
+    
+    /**
+     * Return Active channels for notification.
+     * 
+     * @return array
+     */
+    public function getActiveNotificationChannelsOptions(){
+    	return $this->getChannelOptions();
+    }
+    
+    /**
+     * Return Active channels that can trigger actions in 
+     * the platform.
+     * 
+     * @return array
+     */
+    public function getActiveListenableChannelsOptions(){
+    	return $this->getChannelOptions(true, $description=false); 
+    }   
+
 }

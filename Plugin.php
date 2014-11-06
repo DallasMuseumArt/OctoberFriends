@@ -133,12 +133,14 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            'DMA\Friends\Components\ActivityCodeForm'   => 'ActivityCodeForm',
-            'DMA\Friends\Components\BadgeRecommend'     => 'BadgeRecommend',
-            'DMA\Friends\Components\Modal'              => 'Modal',
-            'DMA\Friends\Components\UserBadges'         => 'UserBadges',
-            'DMA\Friends\Components\GroupFormCreation'  => 'GroupFormCreation',
-            'DMA\Friends\Components\GroupRequest'       => 'GroupRequest',
+            'DMA\Friends\Components\ActivityCodeForm'   		=> 'ActivityCodeForm',
+            'DMA\Friends\Components\BadgeRecommend'     		=> 'BadgeRecommend',
+            'DMA\Friends\Components\Modal'              		=> 'Modal',
+            'DMA\Friends\Components\UserBadges'         		=> 'UserBadges',
+            'DMA\Friends\Components\GroupFormCreation'  		=> 'GroupFormCreation',
+            'DMA\Friends\Components\GroupRequest'       		=> 'GroupRequest',
+            'DMA\Friends\Components\NotificationCounter'        => 'NotificationCounter',
+            'DMA\Friends\Components\NotificationList'           => 'NotificationList',  
         ];
     }
 
@@ -161,7 +163,7 @@ class Plugin extends PluginBase
         // Register ServiceProviders
         App::register('\EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider');
         App::register('DMA\Friends\FriendsServiceProvider');
-
+        
         // Register Event Subscribers
         $subscriber = new FriendsEventHandler;
         Event::subscribe($subscriber);
@@ -170,53 +172,19 @@ class Plugin extends PluginBase
         User::extend(function($model) {   
             $model->hasOne['metadata']          = ['DMA\Friends\Models\Usermeta'];     
             $model->hasMany['activityLogs']     = ['DMA\Friends\Models\ActivityLog'];
+            $model->hasMany['notifications']    = ['DMA\Friends\Models\Notification'];
             $model->belongsToMany['activities'] = ['DMA\Friends\Models\Activity',   'table' => 'dma_friends_activity_user', 'user_id', 'activity_id', 'timestamps' => true, 'order' => 'created_at desc',];     
             $model->belongsToMany['steps']      = ['DMA\Friends\Models\Step',       'table' => 'dma_friends_step_user',     'user_id', 'step_id'];     
             $model->belongsToMany['badges']     = ['DMA\Friends\Models\Badge',      'table' => 'dma_friends_badge_user',    'user_id', 'badge_id'];        
             $model->belongsToMany['groups']     = ['DMA\Friends\Models\UserGroup',  'table' => 'dma_friends_users_groups',  'primaryKey' => 'user_id', 'foreignKey' => 'group_id', 'pivot' => ['membership_status']];
             $model->belongsToMany['rewards']    = ['DMA\Friends\Models\Reward',     'table' => 'dma_friends_reward_user',   'user_id', 'reward_id'];                     
         });
-
-        Event::listen('backend.form.extendFields', function($widget) {
-            if (!$widget->getController() instanceof \RainLab\User\Controllers\Users) return;
-            if ($widget->getContext() != 'update') return;
-            
-            // Make sure the User metadata exists for this user.
-            if (!Metadata::getFromUser($widget->model)) return;
-
-            $widget->addFields([
-                'metadata[first_name]' => [
-                    'label' => 'First Name',
-                    'tab'   => 'Metadata',
-                ],  
-                'metadata[last_name]' => [
-                    'label' => 'Last Name',
-                    'tab'   => 'Metadata',
-                ], 
-                'metadata[points]' => [
-                    'label' => 'Points',
-                    'tab'   => 'Metadata',
-                ],
-                'metadata[email_optin]' => [
-                    'label' => 'Email Opt-in',
-                    'type'  => 'checkbox',
-                    'tab'   => 'Metadata',
-                ],
-                'metadata[current_member]' => [
-                    'label' => 'Current member?',
-                    'type'  => 'checkbox',
-                    'tab'   => 'Metadata',
-                ],
-                'metadata[current_member_number]' => [
-                    'label' => 'Current Member Number',
-                    'tab'   => 'Metadata',
-                ],
-                /*
-                'groups' => [
-                    'label' => 'Groups',
-                    'tab'   => 'Groups',
-                ],*/                    
-            ], 'primary');
+        
+        // Extend User fields
+        $context = $this;
+        Event::listen('backend.form.extendFields', function($widget)  use ($context){
+            $context->extendedUserFields($widget);
+            $context->extendedSettingFields($widget);
         }); 
 
         Event::listen('backend.list.extendColumns', function($widget) {
@@ -243,9 +211,7 @@ class Plugin extends PluginBase
                     'searchable'    => true,
                 ], 
                 'points' => [
-                    'label'     => 'Points',
-                    'relation'  => 'metadata',
-                    'select'    => '@points',
+                    'label'     => 'Points'
                 ], 
                 'zip' => [
                     'label' => 'Zip',
@@ -254,7 +220,62 @@ class Plugin extends PluginBase
         });
 
     }
-
+    
+    /**
+     * Extend User fields in Rainlab.User plugin
+     * @param mixed $widget
+     */
+    private function extendedUserFields($widget)
+    {
+        if (!$widget->getController() instanceof \RainLab\User\Controllers\Users) return;
+        if ($widget->getContext() != 'update') return;
+        
+        // Make sure the User metadata exists for this user.
+        if (!Metadata::getFromUser($widget->model)) return;
+        
+        $widget->addFields([
+        	'metadata[first_name]' => [
+        		'label' => 'First Name',
+        		'tab'   => 'Metadata',
+        	],
+        		'metadata[last_name]' => [
+        		'label' => 'Last Name',
+        		'tab'   => 'Metadata',
+        	],
+        		'metadata[points]' => [
+        		'label' => 'Points',
+        		'tab'   => 'Metadata',
+        	],
+        		'metadata[email_optin]' => [
+        		'label' => 'Email Opt-in',
+        		'type'  => 'checkbox',
+        		'tab'   => 'Metadata',
+        	],
+        		'metadata[current_member]' => [
+        		'label' => 'Current member?',
+        		'type'  => 'checkbox',
+        		'tab'   => 'Metadata',
+        	],
+        		'metadata[current_member_number]' => [
+        		'label' => 'Current Member Number',
+        		'tab'   => 'Metadata',
+        	],
+        ], 'primary');        
+    }
+    
+    /**
+     * Add settings fields of all available channels.
+     * @param mixed $form
+     */
+    private function extendedSettingFields($form)
+    {
+        if (!$form->model instanceof \DMA\Friends\Models\Settings) return;
+        if ($form->getContext() != 'update') return;
+        
+        $form->addFields(\Postman::getChannelSettingFields(), 'primary');        
+    }
+    
+    
     public function registerFormWidgets()
     {
         return [

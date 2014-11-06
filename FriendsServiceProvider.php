@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use DMA\Friends\Classes\ActivityCode;
 use DMA\Friends\Classes\BadgeProcessor;
 use DMA\Friends\Classes\FriendsLog;
+use DMA\Friends\Classes\Notifications\ChannelManager;
 
 class FriendsServiceProvider extends ServiceProvider
 {
@@ -16,22 +17,8 @@ class FriendsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerActivityCode();
         $this->registerFriendsLog();
-    }
-
-    /**
-     * Setup the ActivityCode service
-     *
-     * @return void
-     */
-    public function registerActivityCode()
-    {
-        $this->app['ActivityCode'] = $this->app->share(function($app) {
-            return new ActivityCode;
-        });
-
-        $this->createAlias('ActivityCode', 'DMA\Friends\Classes\ActivityCode');
+        $this->registerNotifications();
     }
 
     /**
@@ -48,6 +35,53 @@ class FriendsServiceProvider extends ServiceProvider
         $this->createAlias('FriendsLog', 'DMA\Friends\Classes\FriendsLog');
     }
 
+    
+    public function registerNotifications()
+    {
+        // Register notification system
+        $this->app['postman'] = $this->app->share(function($app)
+        {
+        	$channelManager = new ChannelManager;
+        	$channelManager->registerChannels([
+        		'\DMA\Friends\Classes\Notifications\Channels\ChannelDummy' => [
+        			'name' => 'Dummy',
+        			'description' => 'Channel useful for testing and debuging. All notifications are send to OctoberCMS log system.'
+        		],
+        		'\DMA\Friends\Classes\Notifications\Channels\ChannelKiosk' => [
+        			'name' => 'Kiosk',
+        			'description' => 'Store notification in the database. So they can be read in a Kiosk or a Web interface.'
+        		],
+        		'\DMA\Friends\Classes\Notifications\Channels\ChannelEmail' => [
+        			'name' => 'Email',
+        			'description' => 'Send notifications using OctoberCMS Mail implementation'
+        		],
+        		'\DMA\Friends\Classes\Notifications\Channels\ChannelSMS' => [
+        			'name' => 'SMS',
+        			'description' => 'Send notifications by SMS using Twilio.'
+        		],
+        		//'\DMA\Friends\Classes\Notifications\Channels\ChannelTwitter' => [
+        	         //'name' => 'Twitter',
+        	         //'description' => 'Send notifications via Twitter.'
+        	    //],
+            ]);
+        
+        	// Register input validators
+        	$channelManager->registerInputValidators([
+        			'\DMA\Friends\Classes\Notifications\Inputs\InputRegex',
+        			'\DMA\Friends\Classes\Notifications\Inputs\InputContains',
+        			'\DMA\Friends\Classes\Notifications\Inputs\InputEquals',
+        			'\DMA\Friends\Classes\Notifications\Inputs\InputStartsWith',
+        			'\DMA\Friends\Classes\Notifications\Inputs\InputEndsWith'
+        			]);
+        	 
+        	return $channelManager;
+        });
+        
+        // Create alias Facade to the Notification manager
+        $this->createAlias('Postman', 'DMA\Friends\Facades\Postman');        
+    }
+    
+    
     /**
      * Helper method to quickly setup class aliases for a service
      * 

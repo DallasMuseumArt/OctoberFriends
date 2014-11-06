@@ -38,6 +38,9 @@
     - Add touch column to activities
     - update_activities_table.php
 1.0.11:
+    - First version of Notifications
+    - create_notifications_table.php    
+1.0.12:
     - Add user groups     
     - create_user_group_table.php
     - create_users_groups_table.php

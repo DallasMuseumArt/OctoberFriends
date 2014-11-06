@@ -68,40 +68,40 @@ array & {\em \$data} & \\
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-295     \{
-296         $d = [
-297             \textcolor{stringliteral}{'start\_time'}    => null,
-298             \textcolor{stringliteral}{'end\_time'}      => null,
-299             \textcolor{stringliteral}{'days'}          => [
-300                 1   => \textcolor{keyword}{false},
-301                 2   => \textcolor{keyword}{false},
-302                 3   => \textcolor{keyword}{false},
-303                 4   => \textcolor{keyword}{false},
-304                 5   => \textcolor{keyword}{false},
-305                 6   => \textcolor{keyword}{false},
-306                 7   => \textcolor{keyword}{false},
-307             ]
-308         ];
-309 
-310         \textcolor{keywordflow}{foreach}($data as $val) \{
-311             list($k, $v) = explode(\textcolor{charliteral}{'|'}, $val);
-312             
-313             \textcolor{keywordflow}{switch}($k) \{
-314                 \textcolor{keywordflow}{case} \textcolor{stringliteral}{'\_badgeos\_time\_restriction\_hour\_begin'}:
-315                     $d[\textcolor{stringliteral}{'start\_time'}] = $v;
-316                     \textcolor{keywordflow}{break}; 
-317                 \textcolor{keywordflow}{case} \textcolor{stringliteral}{'\_badgeos\_time\_restriction\_hour\_end'}:
-318                     $d[\textcolor{stringliteral}{'end\_time'}] = $v;
-319                     \textcolor{keywordflow}{break}; 
-320                 \textcolor{keywordflow}{case} \textcolor{stringliteral}{'\_badgeos\_time\_restriction\_days'}:
-321                     $d[\textcolor{stringliteral}{'days'}][date(\textcolor{charliteral}{'N'}, strtotime($v))] = \textcolor{keyword}{true};
-322                     \textcolor{keywordflow}{break};
-323             \}    
-324         \}
-325 
-326         \textcolor{keywordflow}{return} serialize($d);
-327 
-328     \}
+296     \{
+297         $d = [
+298             \textcolor{stringliteral}{'start\_time'}    => null,
+299             \textcolor{stringliteral}{'end\_time'}      => null,
+300             \textcolor{stringliteral}{'days'}          => [
+301                 1   => \textcolor{keyword}{false},
+302                 2   => \textcolor{keyword}{false},
+303                 3   => \textcolor{keyword}{false},
+304                 4   => \textcolor{keyword}{false},
+305                 5   => \textcolor{keyword}{false},
+306                 6   => \textcolor{keyword}{false},
+307                 7   => \textcolor{keyword}{false},
+308             ]
+309         ];
+310 
+311         \textcolor{keywordflow}{foreach}($data as $val) \{
+312             list($k, $v) = explode(\textcolor{charliteral}{'|'}, $val);
+313             
+314             \textcolor{keywordflow}{switch}($k) \{
+315                 \textcolor{keywordflow}{case} \textcolor{stringliteral}{'\_badgeos\_time\_restriction\_hour\_begin'}:
+316                     $d[\textcolor{stringliteral}{'start\_time'}] = $v;
+317                     \textcolor{keywordflow}{break}; 
+318                 \textcolor{keywordflow}{case} \textcolor{stringliteral}{'\_badgeos\_time\_restriction\_hour\_end'}:
+319                     $d[\textcolor{stringliteral}{'end\_time'}] = $v;
+320                     \textcolor{keywordflow}{break}; 
+321                 \textcolor{keywordflow}{case} \textcolor{stringliteral}{'\_badgeos\_time\_restriction\_days'}:
+322                     $d[\textcolor{stringliteral}{'days'}][date(\textcolor{charliteral}{'N'}, strtotime($v))] = \textcolor{keyword}{true};
+323                     \textcolor{keywordflow}{break};
+324             \}    
+325         \}
+326 
+327         \textcolor{keywordflow}{return} serialize($d);
+328 
+329     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Wordpress_1_1Post_a8969b8476b3ba0afc871532f6f936514}{\index{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Post@{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Post}!convert\+Values@{convert\+Values}}
 \index{convert\+Values@{convert\+Values}!D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Post@{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Post}}
@@ -125,28 +125,28 @@ Converts special fields to the appropriate value type
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-203     \{
-204         \textcolor{comment}{// Fields that start with is\_ are booleans}
-205         \textcolor{comment}{// And need to be reformated to a real boolean field}
-206         \textcolor{keywordflow}{if} (substr($key, 0, 3) == \textcolor{stringliteral}{'is\_'}) \{
-207             $val = $this->\hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Post_a37fb0931dadba67a39a637b336787663}{realBoolean}($val);
-208         \}   
-209 
-210         \textcolor{keywordflow}{switch}($key) \{
-211             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'time\_restriction'}:
-212                 $val = $this->\hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Post_a5fbf4b003c2136d8497ddd7d726ad671}{realTimeRestriction}($val);
-213                 \textcolor{keywordflow}{break};
-214             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'date\_begin'}:
-215             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'date\_end'}:
-216                 \textcolor{keywordflow}{if} (!is\_numeric($val)) \{
-217                     $val = strtotime($val);
-218                 \}
-219                 $val = $this->\hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Post_af6960d9c63c4224f6f481c88d2b5d076}{epochToTimestamp}($val);
-220                 \textcolor{keywordflow}{break};
-221         \}
-222 
-223         \textcolor{keywordflow}{return} $val;
-224     \}
+204     \{
+205         \textcolor{comment}{// Fields that start with is\_ are booleans}
+206         \textcolor{comment}{// And need to be reformated to a real boolean field}
+207         \textcolor{keywordflow}{if} (substr($key, 0, 3) == \textcolor{stringliteral}{'is\_'}) \{
+208             $val = $this->\hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Post_a37fb0931dadba67a39a637b336787663}{realBoolean}($val);
+209         \}   
+210 
+211         \textcolor{keywordflow}{switch}($key) \{
+212             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'time\_restriction'}:
+213                 $val = $this->\hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Post_a5fbf4b003c2136d8497ddd7d726ad671}{realTimeRestriction}($val);
+214                 \textcolor{keywordflow}{break};
+215             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'date\_begin'}:
+216             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'date\_end'}:
+217                 \textcolor{keywordflow}{if} (!is\_numeric($val)) \{
+218                     $val = strtotime($val);
+219                 \}
+220                 $val = $this->\hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Post_af6960d9c63c4224f6f481c88d2b5d076}{epochToTimestamp}($val);
+221                 \textcolor{keywordflow}{break};
+222         \}
+223 
+224         \textcolor{keywordflow}{return} $val;
+225     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Wordpress_1_1Post_af6960d9c63c4224f6f481c88d2b5d076}{\index{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Post@{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Post}!epoch\+To\+Timestamp@{epoch\+To\+Timestamp}}
 \index{epoch\+To\+Timestamp@{epoch\+To\+Timestamp}!D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Post@{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Post}}
@@ -167,9 +167,9 @@ Convert an epoch value to the appropriate timestamp
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-281     \{
-282         \textcolor{keywordflow}{return} date(\textcolor{stringliteral}{'Y-m-d H:i:s'}, $val);
-283     \}
+282     \{
+283         \textcolor{keywordflow}{return} date(\textcolor{stringliteral}{'Y-m-d H:i:s'}, $val);
+284     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Wordpress_1_1Post_a4eb2c6b3e89a43b3221e9e2564059510}{\index{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Post@{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Post}!import@{import}}
 \index{import@{import}!D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Post@{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Post}}
@@ -190,44 +190,44 @@ int & {\em \$limit} & The number of records to import at once\\
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-132     \{
-133         $count  = 0;
-134         $id     = (int)DB::table($this->model->table)->max(\textcolor{stringliteral}{'wordpress\_id'});
-135 
-136         $posts = $this->db->table(\textcolor{stringliteral}{'wp\_posts'})
-137             ->where(\textcolor{stringliteral}{'ID'}, \textcolor{charliteral}{'>'}, $id)
-138             ->where(\textcolor{stringliteral}{'post\_type'}, $this->postType)
-139             ->get();
-140 
-141         \textcolor{keywordflow}{foreach}($posts as $post) \{
-142             $this->\hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Post_adb1c6652d06b360d1f81d14dde95b5b1}{mergeMetadata}($post);
-143 
-144             \hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Post_a8a3df2e9db7f90d348d27ea9354176b1}{$model} = \textcolor{keyword}{new} \hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Post_a8a3df2e9db7f90d348d27ea9354176b1}{$this->model};
-145 
-146             \textcolor{keywordflow}{foreach}((array)$post as $key => $val) \{
-147                 \textcolor{keywordflow}{if} (in\_array($key, $this->excludeFields)) \textcolor{keywordflow}{continue};
-148 
-149                 \textcolor{keywordflow}{if} (isset($this->schema[$key])) \{
-150                     $val = $this->\hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Post_a8969b8476b3ba0afc871532f6f936514}{convertValues}($this->schema[$key], $val);
-151 
-152                     \textcolor{keywordflow}{if} (!in\_array($this->schema[$key], $this->restrictedTimes)) \{
-153                         \hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Post_a8a3df2e9db7f90d348d27ea9354176b1}{$model}->\{$this->schema[$key]\} = $val;
-154                     \}
-155                 \} elseif ($key == \textcolor{stringliteral}{'time\_restriction\_data'}) \{
-156                     \hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Post_a8a3df2e9db7f90d348d27ea9354176b1}{$model}->time\_restriction\_data = $this->
+133     \{
+134         $count  = 0;
+135         $id     = (int)DB::table($this->model->table)->max(\textcolor{stringliteral}{'wordpress\_id'});
+136 
+137         $posts = $this->db->table(\textcolor{stringliteral}{'wp\_posts'})
+138             ->where(\textcolor{stringliteral}{'ID'}, \textcolor{charliteral}{'>'}, $id)
+139             ->where(\textcolor{stringliteral}{'post\_type'}, $this->postType)
+140             ->get();
+141 
+142         \textcolor{keywordflow}{foreach}($posts as $post) \{
+143             $this->\hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Post_adb1c6652d06b360d1f81d14dde95b5b1}{mergeMetadata}($post);
+144 
+145             \hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Post_a8a3df2e9db7f90d348d27ea9354176b1}{$model} = \textcolor{keyword}{new} \hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Post_a8a3df2e9db7f90d348d27ea9354176b1}{$this->model};
+146 
+147             \textcolor{keywordflow}{foreach}((array)$post as $key => $val) \{
+148                 \textcolor{keywordflow}{if} (in\_array($key, $this->excludeFields)) \textcolor{keywordflow}{continue};
+149 
+150                 \textcolor{keywordflow}{if} (isset($this->schema[$key])) \{
+151                     $val = $this->\hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Post_a8969b8476b3ba0afc871532f6f936514}{convertValues}($this->schema[$key], $val);
+152 
+153                     \textcolor{keywordflow}{if} (!in\_array($this->schema[$key], $this->restrictedTimes)) \{
+154                         \hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Post_a8a3df2e9db7f90d348d27ea9354176b1}{$model}->\{$this->schema[$key]\} = $val;
+155                     \}
+156                 \} elseif ($key == \textcolor{stringliteral}{'time\_restriction\_data'}) \{
+157                     \hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Post_a8a3df2e9db7f90d348d27ea9354176b1}{$model}->time\_restriction\_data = $this->
       \hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Post_a427b14dd99893217929ee8ee93977628}{convertTimeRestrictedData}($post->\{$key\});
-157                 \}
-158 
-159             \}
-160 
-161             \textcolor{keywordflow}{if} (\hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Post_a8a3df2e9db7f90d348d27ea9354176b1}{$model}->forceSave()) \{
-162                 $count++;
-163             \}
-164         \}
-165 
-166         \textcolor{keywordflow}{return} $count;
-167 
-168     \}
+158                 \}
+159 
+160             \}
+161 
+162             \textcolor{keywordflow}{if} (\hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Post_a8a3df2e9db7f90d348d27ea9354176b1}{$model}->forceSave()) \{
+163                 $count++;
+164             \}
+165         \}
+166 
+167         \textcolor{keywordflow}{return} $count;
+168 
+169     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Wordpress_1_1Post_adb1c6652d06b360d1f81d14dde95b5b1}{\index{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Post@{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Post}!merge\+Metadata@{merge\+Metadata}}
 \index{merge\+Metadata@{merge\+Metadata}!D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Post@{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Post}}
@@ -245,21 +245,21 @@ Merge wordpress metadata with the original post
 \end{DoxyParams}
 
 \begin{DoxyCode}
-177     \{
-178         $metadata = $this->db->table(\textcolor{stringliteral}{'wp\_postmeta'})
-179             ->where(\textcolor{stringliteral}{'post\_id'}, $post->ID)
-180             ->get();
-181 
-182         \textcolor{keywordflow}{foreach}($metadata as $meta) \{
-183             \textcolor{keywordflow}{if} (in\_array($meta->meta\_key, $this->restrictedTimes)) \{
-184                 \textcolor{comment}{// For now we will save as a meta:key combo.  The data will be sorted later in processing}
-185                 $post->time\_restriction\_data[] = $meta->meta\_key . \textcolor{charliteral}{'|'} . $meta->meta\_value;
-186             \} \textcolor{keywordflow}{else} \{
-187                 $post->\{$meta->meta\_key\} = $meta->meta\_value;
-188             \}
-189         \}
-190 
-191     \}
+178     \{
+179         $metadata = $this->db->table(\textcolor{stringliteral}{'wp\_postmeta'})
+180             ->where(\textcolor{stringliteral}{'post\_id'}, $post->ID)
+181             ->get();
+182 
+183         \textcolor{keywordflow}{foreach}($metadata as $meta) \{
+184             \textcolor{keywordflow}{if} (in\_array($meta->meta\_key, $this->restrictedTimes)) \{
+185                 \textcolor{comment}{// For now we will save as a meta:key combo.  The data will be sorted later in processing}
+186                 $post->time\_restriction\_data[] = $meta->meta\_key . \textcolor{charliteral}{'|'} . $meta->meta\_value;
+187             \} \textcolor{keywordflow}{else} \{
+188                 $post->\{$meta->meta\_key\} = $meta->meta\_value;
+189             \}
+190         \}
+191 
+192     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Wordpress_1_1Post_a37fb0931dadba67a39a637b336787663}{\index{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Post@{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Post}!real\+Boolean@{real\+Boolean}}
 \index{real\+Boolean@{real\+Boolean}!D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Post@{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Post}}
@@ -280,24 +280,24 @@ convert wordpress' infinite possibility of boolean values into a real boolean va
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-234     \{
-235         $val = strtolower($val);
-236 
-237         \textcolor{keywordflow}{switch}($val) \{
-238             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'yes'}:
-239             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'hidden'}:
-240             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'publish'}:
-241                 $val = \textcolor{keyword}{true};
-242                 \textcolor{keywordflow}{break};
-243             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'no'}:
-244             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'show'}:
-245             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'draft'}:
-246                 $val = \textcolor{keyword}{false};
-247                 \textcolor{keywordflow}{break};
-248         \}
-249 
-250         \textcolor{keywordflow}{return} $val;
-251     \}
+235     \{
+236         $val = strtolower($val);
+237 
+238         \textcolor{keywordflow}{switch}($val) \{
+239             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'yes'}:
+240             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'hidden'}:
+241             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'publish'}:
+242                 $val = \textcolor{keyword}{true};
+243                 \textcolor{keywordflow}{break};
+244             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'no'}:
+245             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'show'}:
+246             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'draft'}:
+247                 $val = \textcolor{keyword}{false};
+248                 \textcolor{keywordflow}{break};
+249         \}
+250 
+251         \textcolor{keywordflow}{return} $val;
+252     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Wordpress_1_1Post_a5fbf4b003c2136d8497ddd7d726ad671}{\index{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Post@{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Post}!real\+Time\+Restriction@{real\+Time\+Restriction}}
 \index{real\+Time\+Restriction@{real\+Time\+Restriction}!D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Post@{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Post}}
@@ -318,17 +318,17 @@ Convert a time restriction into the appropriate constant
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-261     \{
-262         \textcolor{keywordflow}{if} ($val == \textcolor{stringliteral}{'hours'}) \{
-263             $val = \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity_ac78040e8784e02c2d1bcce5221ac6cb8}{Activity::TIME\_RESTRICT\_HOURS};
-264         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ($val == \textcolor{stringliteral}{'days'}) \{
-265             $val = \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity_a71b85478f20cda144aeffe010364a0f7}{Activity::TIME\_RESTRICT\_DAYS};
-266         \} \textcolor{keywordflow}{else} \{
-267             $val = \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity_ab9dd8b18c4810beabdcf8e45039913c8}{Activity::TIME\_RESTRICT\_NONE};
-268         \}
-269 
-270         \textcolor{keywordflow}{return} $val;
-271     \}
+262     \{
+263         \textcolor{keywordflow}{if} ($val == \textcolor{stringliteral}{'hours'}) \{
+264             $val = \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity_ac78040e8784e02c2d1bcce5221ac6cb8}{Activity::TIME\_RESTRICT\_HOURS};
+265         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ($val == \textcolor{stringliteral}{'days'}) \{
+266             $val = \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity_a71b85478f20cda144aeffe010364a0f7}{Activity::TIME\_RESTRICT\_DAYS};
+267         \} \textcolor{keywordflow}{else} \{
+268             $val = \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity_ab9dd8b18c4810beabdcf8e45039913c8}{Activity::TIME\_RESTRICT\_NONE};
+269         \}
+270 
+271         \textcolor{keywordflow}{return} $val;
+272     \}
 \end{DoxyCode}
 
 

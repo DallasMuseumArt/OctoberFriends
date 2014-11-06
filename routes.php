@@ -6,6 +6,18 @@ Route::get('logout', function()
     return Redirect::to('/');
 });
 
+Route::group(['prefix'=>'webhooks'], function(){
+	// Implement here each individual webhook
+	Route::post('twilio/sms', function()
+	{
+		$request = Input::all();
+		$ch = Postman::getChannelInstance('sms');
+		return $ch->webhook($request);
+	});
+});
+
+
+
 Route::group(['prefix' => 'friends/api', 'namespace' => 'DMA\Friends\Api'], function() {
 
 	Route::resource('activity', 				'ActivityResource');
