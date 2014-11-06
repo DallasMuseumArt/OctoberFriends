@@ -10,6 +10,30 @@ tabs:
             type: dropdown
             tab: General
 
+        # Groups
+        maximum_users_group:
+            span: auto
+            label: Limit of users
+            description: Limit of users that can be join or invite to a group.
+            tab: Groups
+
+        maximum_points_group:
+            span: auto
+            label: Limit of point
+            description: Limit of point and user can earn by the group.
+            tab: Groups
+            
+        reset_groups_every_day:
+            type: checkboxlist
+            span: auto
+            label: Day to reset group
+            tab: Groups
+            
+        reset_groups_time:            
+            span: auto
+            label: Reset groups at:
+            tab: Groups
+            
         active_notification_channels:
             type: checkboxlist
             span: auto
