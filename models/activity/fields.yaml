@@ -47,7 +47,17 @@ secondaryTabs:
             mode: dropdown 
             options:
                 nameColumn: name
-            tab: Categories 
+            tab: Categories
+        priority:
+            label: Priority
+            type: dropdown
+            options:
+                1: Low
+                5: Medium
+                10: High
+            default: 5
+            tab: Categories
+            span: left
         # ===================================
         #  Configuration tab 
         # ===================================

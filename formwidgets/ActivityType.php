@@ -107,7 +107,8 @@ class ActivityType extends FormWidgetBase
      */
     public function getSaveData($value)
     {
-        $this->manager->saveData($this->model, $value);
+        if ($value['activity_type'])
+            $this->manager->saveData($this->model, $value);
 
         return $value['activity_type'];
     }
