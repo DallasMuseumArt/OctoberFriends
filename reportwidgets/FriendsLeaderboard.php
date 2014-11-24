@@ -35,8 +35,9 @@ class FriendsLeaderboard extends ReportWidgetBase
     {   
         $limit = $this->property('limit');
 
-        $users = Usermeta::byPoints()->take($limit)->get();
-        $this->vars['users'] = $users;
+        // TODO update to support new points
+        //$users = Usermeta::byPoints()->take($limit)->get();
+        //$this->vars['users'] = $users;
 
         return $this->makePartial('widget');
     }   
