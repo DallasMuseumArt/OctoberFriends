@@ -42,6 +42,6 @@ class Category extends Model
      * @var array Relations
      */
     public $morphMany = [ 
-        'object' => ['table' => 'dma_friends_object_categories'],
+        'objects' => ['table' => 'dma_friends_object_categories'],
     ]; 
 }

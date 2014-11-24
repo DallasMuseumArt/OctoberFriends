@@ -11,6 +11,7 @@ use Rainlab\User\Models\User;
 use DMA\Friends\Wordpress\Post;
 use DMA\Friends\Models\Activity;
 use DMA\Friends\Models\Badge;
+use DMA\Friends\Models\Category;
 use DMA\Friends\Models\Step;
 use DMA\Friends\Models\Location;
 
@@ -58,6 +59,20 @@ class SyncFriendsRelationsCommand extends Command
      */
     public function fire()
     {  
+
+        // Taxonomy terms
+        $termRelations = $this->db->table('wp_term_relationships')->get();
+
+        foreach($termRelations as $relation) {
+            $activity = Activity::findWordpress($relation->object_id)->first();
+            
+            if ($activity) {
+                if (!$activity->categories->contains($relation->term_taxonomy_id)) {
+                    $category = Category::find($relation->term_taxonomy_id);
+                    $activity->categories()->save($category);
+                }
+            }
+        }
 
         // p2p connections
         $p2ps = $this->db->table('wp_p2p')
