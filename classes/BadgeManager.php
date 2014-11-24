@@ -23,7 +23,8 @@ class BadgeManager
     {
         //TODO look up all steps that use this activity
 
-        //$steps = Step->activities()->find($activity->id);
+        $steps = Step->activities()->find($activity->id);
+        \Debugbar::info($steps);
 
 
         // if we have steps complete the step for a user
