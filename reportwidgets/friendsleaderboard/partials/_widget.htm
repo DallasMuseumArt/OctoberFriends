@@ -3,7 +3,7 @@
     <table class="table data">
     <?php foreach($users as $user) { ?>
         <tr>
-            <td><?php print $user->first_name ?> <?php print $user->last_name ?></td>
+            <td><?php print $user->metadata->first_name ?> <?php print $user->metadata->last_name ?></td>
             <td><?php print number_format($user->points) ?></td>
         </tr>
     <?php } ?>
