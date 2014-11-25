@@ -12,7 +12,6 @@
             <?php foreach($badges as $badge) { ?>
                 <tr class="list-tree-level-0  rowlink">
                     <td class="list-cell-index-1 list-cell-name-title list-cell-type-text">
-                        <? Debugbar::info($badge); ?>
                         <a href="/backend/dma/friends/badges/update/<?= $badge->badge_id ?>"><?= $badge->title; ?></a>
                     </td>
                 </tr>
