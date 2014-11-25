@@ -85,7 +85,7 @@ class Plugin extends PluginBase
         return [
             'friends' => [
                 'label'         => 'Friends',
-                'url'           => Backend::url('dma/friends/badges'),
+                'url'           => Backend::url('dma/friends/activities'),
                 'icon'          => 'icon-users',
                 'permissions'   => ['dma.friends.*'],
                 'order'         => 500,
