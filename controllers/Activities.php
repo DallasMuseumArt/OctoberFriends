@@ -26,17 +26,17 @@ class Activities extends Controller
         BackendMenu::setContext('DMA.Friends', 'friends', 'activities');
     }
 
+    /**
+     * Return an array of badges associated with the controller model
+     * @return array
+     * An array of badge models
+     */
     public function getBadges()
     {
         $activity = $this->widget->formDescription->model;
-
-        $badges = Badge::with(['steps' => function($q) use ($activity) {
-            \Debugbar::info($q);
-            $q->join('dma_friends_step_badge', 'dma_friends_steps.id', '=', 'dma_friends_step_badge.step_id');
-            $q->join('dma_friends_activity_step', 'dma_friends_step_badge.step_id', '=', 'dma_friends_activity_step.step_id');
-            $q->where('dma_friends_activity_step.activity_id', $activity->id);
-        }])->get();
-\Debugbar::info($badges);
+        $badges = Badge::join('dma_friends_step_badge', 'dma_friends_badges.id', '=', 'dma_friends_step_badge.badge_id')
+            ->join('dma_friends_activity_step', 'dma_friends_step_badge.step_id', '=', 'dma_friends_activity_step.step_id')
+            ->where('dma_friends_activity_step.activity_id', $activity->id)->get();
         return $badges;
     }
 }

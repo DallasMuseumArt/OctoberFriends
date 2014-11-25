@@ -141,7 +141,6 @@ secondaryTabs:
         #  Badges tab 
         # ===================================
         badges:
-            label: Badges using this activity
             tab: Badges
             type: partial
             path: @/plugins/dma/friends/models/activity/badges.htm
