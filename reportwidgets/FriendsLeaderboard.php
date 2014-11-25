@@ -5,7 +5,8 @@ namespace DMA\Friends\ReportWidgets;
 use App;
 use Backend\Classes\ReportWidgetBase;
 use Rainlab\User\Models\User;
-use DMA\Friends\Models\Usermeta;
+use DMA\Friends\Classes\UserExtend;
+//use DMA\Friends\Models\Usermeta;
 
 class FriendsLeaderboard extends ReportWidgetBase
 {
@@ -35,9 +36,8 @@ class FriendsLeaderboard extends ReportWidgetBase
     {   
         $limit = $this->property('limit');
 
-        // TODO update to support new points
-        //$users = Usermeta::byPoints()->take($limit)->get();
-        //$this->vars['users'] = $users;
+        $users = User::orderBy('points', 'DESC')->take($limit)->get();
+        $this->vars['users'] = $users;
 
         return $this->makePartial('widget');
     }   
