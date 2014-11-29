@@ -36,12 +36,12 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInte
 
 
 \begin{DoxyCode}
-15     \{
-16         \textcolor{keywordflow}{return} [
-17             \textcolor{stringliteral}{'name'}          => \textcolor{stringliteral}{'Activity Code'},
-18             \textcolor{stringliteral}{'description'}   => \textcolor{stringliteral}{'Complete activities by entering in a code'},
-19         ];
-20     \}
+17     \{
+18         \textcolor{keywordflow}{return} [
+19             \textcolor{stringliteral}{'name'}          => \textcolor{stringliteral}{'Activity Code'},
+20             \textcolor{stringliteral}{'description'}   => \textcolor{stringliteral}{'Complete activities by entering in a code'},
+21         ];
+22     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Activities_1_1ActivityCode_a13eb870ac4e33b0b3d522f0e28444e7e}{\index{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Activity\+Code@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Activity\+Code}!get\+Form\+Default\+Values@{get\+Form\+Default\+Values}}
 \index{get\+Form\+Default\+Values@{get\+Form\+Default\+Values}!D\+M\+A\+::\+Friends\+::\+Activities\+::\+Activity\+Code@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Activity\+Code}}
@@ -56,11 +56,11 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInte
 
 
 \begin{DoxyCode}
-26     \{
-27         \textcolor{keywordflow}{return} [
-28             \textcolor{stringliteral}{'activity\_code'} => (isset($model->activity\_code)) ? $model->activity\_code : null,
-29         ];
-30     \}
+28     \{
+29         \textcolor{keywordflow}{return} [
+30             \textcolor{stringliteral}{'activity\_code'} => (isset($model->activity\_code)) ? $model->activity\_code : null,
+31         ];
+32     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Activities_1_1ActivityCode_a3de9ef142396ba94532566598b508d58}{\index{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Activity\+Code@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Activity\+Code}!process@{process}}
 \index{process@{process}!D\+M\+A\+::\+Friends\+::\+Activities\+::\+Activity\+Code@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Activity\+Code}}
@@ -91,16 +91,19 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInte
 
 
 \begin{DoxyCode}
-48     \{
-49         \textcolor{keywordflow}{if} (!isset($params[\textcolor{stringliteral}{'code'}]) || empty($params[\textcolor{stringliteral}{'code'}])) \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-50 
-51         \textcolor{keywordflow}{if} ($activity = Activity::findCode($params[\textcolor{stringliteral}{'code'}])->first()) \{
-52             \textcolor{keywordflow}{return} parent::process($user, [\textcolor{stringliteral}{'activity'} => $activity]);
-53         \}
-54 
-55         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+50     \{
+51         \textcolor{keywordflow}{if} (!isset($params[\textcolor{stringliteral}{'code'}]) || empty($params[\textcolor{stringliteral}{'code'}])) \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+52 
+53         \textcolor{keywordflow}{if} ($activity = Activity::findCode($params[\textcolor{stringliteral}{'code'}])->first()) \{
+54             \textcolor{keywordflow}{return} parent::process($user, [\textcolor{stringliteral}{'activity'} => $activity]);
+55         \}
 56 
-57     \}
+57         Session::put(\textcolor{stringliteral}{'activityError'}, Lang::get(\textcolor{stringliteral}{'dma.friends::lang.activities.codeError'}, [\textcolor{stringliteral}{'code'} => 
+      $params[\textcolor{stringliteral}{'code'}]]));
+58         
+59         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+60 
+61     \}
 \end{DoxyCode}
 
 

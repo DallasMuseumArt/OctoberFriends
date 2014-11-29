@@ -41,18 +41,18 @@ void
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-65     \{
-66         \textcolor{keywordflow}{if} (empty($params[\textcolor{stringliteral}{'user'}]) || empty($params[\textcolor{stringliteral}{'object'}]))
-67             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceInvalidArgumentException}{InvalidArgumentException}(\textcolor{stringliteral}{'Invalid Parameters'});
-68 
-69         $params[\textcolor{stringliteral}{'message'}] = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.log.activity'}, [
-70             \textcolor{stringliteral}{'name'}          => $params[\textcolor{stringliteral}{'user'}]->name, 
-71             \textcolor{stringliteral}{'title'}         => $params[\textcolor{stringliteral}{'object'}]->title,
-72             \textcolor{stringliteral}{'points\_earned'} => $params[\textcolor{stringliteral}{'object'}]->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_a083fa01b3e143ca77bdbb1562db724de}{points},
-73         ]);
+71     \{
+72         \textcolor{keywordflow}{if} (empty($params[\textcolor{stringliteral}{'user'}]) || empty($params[\textcolor{stringliteral}{'object'}]))
+73             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceInvalidArgumentException}{InvalidArgumentException}(\textcolor{stringliteral}{'Invalid Parameters'});
 74 
-75         self::write(\textcolor{stringliteral}{'activity'}, $params);
-76     \}
+75         $params[\textcolor{stringliteral}{'message'}] = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.log.activity'}, [
+76             \textcolor{stringliteral}{'name'}          => $params[\textcolor{stringliteral}{'user'}]->name, 
+77             \textcolor{stringliteral}{'title'}         => $params[\textcolor{stringliteral}{'object'}]->title,
+78             \textcolor{stringliteral}{'points\_earned'} => $params[\textcolor{stringliteral}{'object'}]->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_a083fa01b3e143ca77bdbb1562db724de}{points},
+79         ]);
+80 
+81         self::write(\textcolor{stringliteral}{'activity'}, $params);
+82     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_aa3c63d0a5b1ffcd9f58c03e443a2dc8f}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log}!artwork@{artwork}}
 \index{artwork@{artwork}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log}}
@@ -70,17 +70,17 @@ void
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-88     \{
-89         \textcolor{keywordflow}{if} (empty($params[\textcolor{stringliteral}{'user'}]) || empty($params[\textcolor{stringliteral}{'artwork\_id'}]))
-90             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceInvalidArgumentException}{InvalidArgumentException}(\textcolor{stringliteral}{'Invalid Parameters'});
-91 
-92         $params[\textcolor{stringliteral}{'message'}] = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.log.artwork'}, [
-93             \textcolor{stringliteral}{'name'}          => $params[\textcolor{stringliteral}{'user'}]->name, 
-94             \textcolor{stringliteral}{'artwork\_id'}    => $params[\textcolor{stringliteral}{'artwork\_id'}],
-95         ]); 
-96 
-97         self::write(\textcolor{stringliteral}{'artwork'}, $params);
-98     \}
+94     \{
+95         \textcolor{keywordflow}{if} (empty($params[\textcolor{stringliteral}{'user'}]) || empty($params[\textcolor{stringliteral}{'artwork\_id'}]))
+96             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceInvalidArgumentException}{InvalidArgumentException}(\textcolor{stringliteral}{'Invalid Parameters'});
+97 
+98         $params[\textcolor{stringliteral}{'message'}] = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.log.artwork'}, [
+99             \textcolor{stringliteral}{'name'}          => $params[\textcolor{stringliteral}{'user'}]->name, 
+100             \textcolor{stringliteral}{'artwork\_id'}    => $params[\textcolor{stringliteral}{'artwork\_id'}],
+101         ]); 
+102 
+103         self::write(\textcolor{stringliteral}{'artwork'}, $params);
+104     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_ae6c33847a3d3f094a3bd27ac2dbbfa72}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log}!checkin@{checkin}}
 \index{checkin@{checkin}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log}}
@@ -98,17 +98,17 @@ void
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-110     \{
-111         \textcolor{keywordflow}{if} (empty($params[\textcolor{stringliteral}{'user'}]) || empty($params[\textcolor{stringliteral}{'object'}]))
-112             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceInvalidArgumentException}{InvalidArgumentException}(\textcolor{stringliteral}{'Invalid Parameters'});
-113 
-114         $params[\textcolor{stringliteral}{'message'}] = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.log.checkin'}, [
-115             \textcolor{stringliteral}{'name'}  => $params[\textcolor{stringliteral}{'user'}]->name, 
-116             \textcolor{stringliteral}{'title'} => $params[\textcolor{stringliteral}{'object'}]->title
-117         ]); 
-118 
-119         self::write(\textcolor{stringliteral}{'checkin'}, $params);
-120     \}
+116     \{
+117         \textcolor{keywordflow}{if} (empty($params[\textcolor{stringliteral}{'user'}]) || empty($params[\textcolor{stringliteral}{'object'}]))
+118             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceInvalidArgumentException}{InvalidArgumentException}(\textcolor{stringliteral}{'Invalid Parameters'});
+119 
+120         $params[\textcolor{stringliteral}{'message'}] = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.log.checkin'}, [
+121             \textcolor{stringliteral}{'name'}  => $params[\textcolor{stringliteral}{'user'}]->name, 
+122             \textcolor{stringliteral}{'title'} => $params[\textcolor{stringliteral}{'object'}]->title
+123         ]); 
+124 
+125         self::write(\textcolor{stringliteral}{'checkin'}, $params);
+126     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_a083fa01b3e143ca77bdbb1562db724de}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log}!points@{points}}
 \index{points@{points}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log}}
@@ -126,18 +126,18 @@ void
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-132     \{
-133         \textcolor{keywordflow}{if} (empty($params[\textcolor{stringliteral}{'user'}]) || empty($params[\textcolor{stringliteral}{'points\_earned'}]))
-134             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceInvalidArgumentException}{InvalidArgumentException}(\textcolor{stringliteral}{'Invalid Parameters'});
-135 
-136         $params[\textcolor{stringliteral}{'message'}] = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.log.points'}, [
-137             \textcolor{stringliteral}{'name'}          => $params[\textcolor{stringliteral}{'user'}]->name, 
-138             \textcolor{stringliteral}{'points'}        => $params[\textcolor{stringliteral}{'points\_earned'}],
-139             \textcolor{stringliteral}{'total\_points'}  => $params[\textcolor{stringliteral}{'user'}]->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_a083fa01b3e143ca77bdbb1562db724de}{points},
-140         ]); 
+138     \{
+139         \textcolor{keywordflow}{if} (empty($params[\textcolor{stringliteral}{'user'}]) || empty($params[\textcolor{stringliteral}{'points\_earned'}]))
+140             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceInvalidArgumentException}{InvalidArgumentException}(\textcolor{stringliteral}{'Invalid Parameters'});
 141 
-142         self::write(\textcolor{stringliteral}{'points'}, $params);
-143     \}
+142         $params[\textcolor{stringliteral}{'message'}] = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.log.points'}, [
+143             \textcolor{stringliteral}{'name'}          => $params[\textcolor{stringliteral}{'user'}]->name, 
+144             \textcolor{stringliteral}{'points'}        => $params[\textcolor{stringliteral}{'points\_earned'}],
+145             \textcolor{stringliteral}{'total\_points'}  => $params[\textcolor{stringliteral}{'user'}]->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_a083fa01b3e143ca77bdbb1562db724de}{points},
+146         ]); 
+147 
+148         self::write(\textcolor{stringliteral}{'points'}, $params);
+149     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_a9f38b9c2e3b1c9d36bc7a1247b2571eb}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log}!reward@{reward}}
 \index{reward@{reward}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log}}
@@ -155,17 +155,17 @@ void
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-155     \{
-156         \textcolor{keywordflow}{if} (empty($params[\textcolor{stringliteral}{'user'}]) || empty($params[\textcolor{stringliteral}{'object'}]))
-157             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceInvalidArgumentException}{InvalidArgumentException}(\textcolor{stringliteral}{'Invalid Parameters'});
-158 
-159         $params[\textcolor{stringliteral}{'message'}] = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.log.reward'}, [
-160             \textcolor{stringliteral}{'name'}  => $params[\textcolor{stringliteral}{'user'}]->name, 
-161             \textcolor{stringliteral}{'title'} => $params[\textcolor{stringliteral}{'object'}]->title
-162         ]); 
-163 
-164         self::write(\textcolor{stringliteral}{'reward'}, $params);
-165     \}
+161     \{
+162         \textcolor{keywordflow}{if} (empty($params[\textcolor{stringliteral}{'user'}]) || empty($params[\textcolor{stringliteral}{'object'}]))
+163             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceInvalidArgumentException}{InvalidArgumentException}(\textcolor{stringliteral}{'Invalid Parameters'});
+164 
+165         $params[\textcolor{stringliteral}{'message'}] = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.log.reward'}, [
+166             \textcolor{stringliteral}{'name'}  => $params[\textcolor{stringliteral}{'user'}]->name, 
+167             \textcolor{stringliteral}{'title'} => $params[\textcolor{stringliteral}{'object'}]->title
+168         ]); 
+169 
+170         self::write(\textcolor{stringliteral}{'reward'}, $params);
+171     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_ac7705d4873f6b3156efde3e049a21ca6}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log}!unlocked@{unlocked}}
 \index{unlocked@{unlocked}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log}}
@@ -183,17 +183,17 @@ void
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-177     \{
-178         \textcolor{keywordflow}{if} (empty($params[\textcolor{stringliteral}{'user'}]) || empty($params[\textcolor{stringliteral}{'object'}]))
-179             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceInvalidArgumentException}{InvalidArgumentException}(\textcolor{stringliteral}{'Invalid Parameters'});
-180 
-181         $params[\textcolor{stringliteral}{'message'}] = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.log.unlocked'}, [
-182             \textcolor{stringliteral}{'name'}  => $params[\textcolor{stringliteral}{'user'}]->name, 
-183             \textcolor{stringliteral}{'title'} => $params[\textcolor{stringliteral}{'object'}]->title
-184         ]);  
-185 
-186         self::write(\textcolor{stringliteral}{'unlocked'}, $params);
-187     \}
+183     \{
+184         \textcolor{keywordflow}{if} (empty($params[\textcolor{stringliteral}{'user'}]) || empty($params[\textcolor{stringliteral}{'object'}]))
+185             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceInvalidArgumentException}{InvalidArgumentException}(\textcolor{stringliteral}{'Invalid Parameters'});
+186 
+187         $params[\textcolor{stringliteral}{'message'}] = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.log.unlocked'}, [
+188             \textcolor{stringliteral}{'name'}  => $params[\textcolor{stringliteral}{'user'}]->name, 
+189             \textcolor{stringliteral}{'title'} => $params[\textcolor{stringliteral}{'object'}]->title
+190         ]);  
+191 
+192         self::write(\textcolor{stringliteral}{'unlocked'}, $params);
+193     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_a99a5a2ee4bc69aab07f58308d9cee669}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log}!write@{write}}
 \index{write@{write}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log}}
@@ -221,26 +221,26 @@ Write a log entry to the activity log
 \end{DoxyParams}
 
 \begin{DoxyCode}
-28     \{
-29         $log                = \textcolor{keyword}{new} ActivityLog;
-30         $log->user          = $params[\textcolor{stringliteral}{'user'}];
-31         $log->action        = $action;
-32         $log->message       = $params[\textcolor{stringliteral}{'message'}];
-33         $log->points\_earned = isset($params[\textcolor{stringliteral}{'points\_earned'}]) ? $params[\textcolor{stringliteral}{'points\_earned'}] : 0;
-34         $log->timestamp     = \textcolor{keyword}{new} \hyperlink{namespaceDateTime}{DateTime}(\textcolor{stringliteral}{'now'});
-35 
-36         \textcolor{keywordflow}{if} (isset($params[\textcolor{stringliteral}{'artwork\_id'}])) \{
-37             $log->artwork\_id = $params[\textcolor{stringliteral}{'artwork\_id'}];
-38         \}
-39 
-40         $log->save();
+34     \{
+35         $log                = \textcolor{keyword}{new} ActivityLog;
+36         $log->user          = $params[\textcolor{stringliteral}{'user'}];
+37         $log->action        = $action;
+38         $log->message       = $params[\textcolor{stringliteral}{'message'}];
+39         $log->points\_earned = isset($params[\textcolor{stringliteral}{'points\_earned'}]) ? $params[\textcolor{stringliteral}{'points\_earned'}] : 0;
+40         $log->timestamp     = \textcolor{keyword}{new} \hyperlink{namespaceDateTime}{DateTime}(\textcolor{stringliteral}{'now'});
 41 
-42         \textcolor{comment}{// Associate an object if present}
-43         \textcolor{keywordflow}{if} (isset($params[\textcolor{stringliteral}{'object'}]) && !empty($params[\textcolor{stringliteral}{'object'}])) \{
-44             $params[\textcolor{stringliteral}{'object'}]->activityLogs()->save($log);
-45         \}
-46 
-47     \}
+42         \textcolor{keywordflow}{if} (isset($params[\textcolor{stringliteral}{'artwork\_id'}])) \{
+43             $log->artwork\_id = $params[\textcolor{stringliteral}{'artwork\_id'}];
+44         \}
+45 
+46         $log->save();
+47 
+48         \textcolor{comment}{// Associate an object if present}
+49         \textcolor{keywordflow}{if} (isset($params[\textcolor{stringliteral}{'object'}]) && !empty($params[\textcolor{stringliteral}{'object'}])) \{
+50             $params[\textcolor{stringliteral}{'object'}]->activityLogs()->save($log);
+51         \}
+52 
+53     \}
 \end{DoxyCode}
 
 
