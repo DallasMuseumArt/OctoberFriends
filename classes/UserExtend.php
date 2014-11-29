@@ -6,7 +6,8 @@ use RainLab\User\Models\User;
 use System\Classes\SystemException;
 
 /**
- * Friends User model
+ * Custom class to add additional functionality based on the Rainlab User model
+ * 
  * @package DMA\Friends\Classes
  * @author Carlos Arroyo
  */

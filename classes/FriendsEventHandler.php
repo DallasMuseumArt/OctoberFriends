@@ -2,6 +2,12 @@
 
 namespace DMA\Friends\Classes;
 
+/**
+ * Manage custom events in the friends platform
+ *
+ * @package DMA\Friends\Classes
+ * @author Kristen Arnold, Carlos Arroyo
+ */
 class FriendsEventHandler {
 
     public function onActivityCompleted($event)

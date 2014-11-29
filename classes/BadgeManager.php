@@ -10,6 +10,7 @@ use RainLab\User\Models\User;
  * This class handles badging logic
  *
  * @package DMA\Friends\Classes
+ * @author Kristen Arnold, Carlos Arroyo
  */
 class BadgeManager
 {
@@ -23,8 +24,14 @@ class BadgeManager
     {
         //TODO look up all steps that use this activity
 
-        $steps = Step->activities()->find($activity->id);
+        $steps = $activity->steps()->get();
         \Debugbar::info($steps);
+
+        foreach ($steps as $step) {
+
+        }
+        //$steps = Step::activity()->find($activity->id);
+        //\Debugbar::info($steps);
 
 
         // if we have steps complete the step for a user

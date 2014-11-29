@@ -15,6 +15,12 @@ use DMA\Friends\Wordpress\Step as WordpressStep;
 use DMA\Friends\Wordpress\Taxonomy as WordpressTaxonomy;
 use DMA\Friends\Wordpress\User as WordpressUser;
 
+/**
+ * Syncronize the data from wordpress into october
+ *
+ * @package DMA\Classes\Commands
+ * @author Kristen Arnold, Carlos Arroyo
+ */
 class SyncFriendsDataCommand extends Command
 {
     /**

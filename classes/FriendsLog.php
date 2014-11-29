@@ -8,6 +8,12 @@ use Lang;
 use DateTime;
 use DateTimeZone;
 
+/**
+ * Class to log events in the friends platform
+ *
+ * @package DMA\Friends\Classes
+ * @author Kristen Arnold, Carlos Arroyo
+ */
 class FriendsLog
 {
     /**
