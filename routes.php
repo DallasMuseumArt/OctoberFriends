@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Provide custom routes outside of what october provides
+ *
+ * @package DMA\Friends
+ * @author Kristen Arnold, Carlos Arroyo
+ */
 Route::get('logout', function()
 {
     Auth::logout();
