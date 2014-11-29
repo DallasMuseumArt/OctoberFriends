@@ -93,6 +93,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="../../db/db8/classDMA_1_1Friends_1_1Controllers_1_1Activities-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -108,6 +109,11 @@ Inheritance diagram for DMA\Friends\Controllers\Activities:</div>
 </map>
  </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a948fafcbcdac79c1851667216cee1e66"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d37/classDMA_1_1Friends_1_1Controllers_1_1Activities.html#a948fafcbcdac79c1851667216cee1e66">getBadges</a> ()</td></tr>
+<tr class="separator:a948fafcbcdac79c1851667216cee1e66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:aff57941f0ab53e417ce578994badc87f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><b>$implement</b></td></tr>
@@ -124,7 +130,31 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="../../d4/d37/classDMA_1_1Friends_1_1Controllers_1_1Activities.html">Activities</a> Back-end Controller </p>
-</div><h2 class="groupheader">Member Data Documentation</h2>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a948fafcbcdac79c1851667216cee1e66"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DMA\Friends\Controllers\Activities::getBadges </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Return an array of badges associated with the controller model </p><dl class="section return"><dt>Returns</dt><dd>array An array of badge models </dd></dl>
+<div class="fragment"><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    {</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        $activity = $this-&gt;widget-&gt;formDescription-&gt;model;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        $badges = Badge::join(<span class="stringliteral">&#39;dma_friends_step_badge&#39;</span>, <span class="stringliteral">&#39;dma_friends_badges.id&#39;</span>, <span class="charliteral">&#39;=&#39;</span>, <span class="stringliteral">&#39;dma_friends_step_badge.badge_id&#39;</span>)</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            -&gt;join(<span class="stringliteral">&#39;dma_friends_activity_step&#39;</span>, <span class="stringliteral">&#39;dma_friends_step_badge.step_id&#39;</span>, <span class="charliteral">&#39;=&#39;</span>, <span class="stringliteral">&#39;dma_friends_activity_step.step_id&#39;</span>)</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            -&gt;where(<span class="stringliteral">&#39;dma_friends_activity_step.activity_id&#39;</span>, $activity-&gt;id)-&gt;get();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordflow">return</span> $badges;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
 <a class="anchor" id="aff57941f0ab53e417ce578994badc87f"></a>
 <div class="memitem">
 <div class="memproto">
@@ -149,7 +179,7 @@ Public Attributes</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 5 2014 13:24:44 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 28 2014 18:12:52 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

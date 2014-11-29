@@ -166,12 +166,12 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Implements <a class="el" href="../../db/d56/interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInterface.html">DMA\Friends\Classes\ActivityTypeBaseInterface</a>.</p>
-<div class="fragment"><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    {</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <span class="keywordflow">return</span> [</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            <span class="stringliteral">&#39;name&#39;</span>          =&gt; <span class="stringliteral">&#39;Activity Code&#39;</span>,</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            <span class="stringliteral">&#39;description&#39;</span>   =&gt; <span class="stringliteral">&#39;Complete activities by entering in a code&#39;</span>,</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        ];</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keywordflow">return</span> [</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            <span class="stringliteral">&#39;name&#39;</span>          =&gt; <span class="stringliteral">&#39;Activity Code&#39;</span>,</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            <span class="stringliteral">&#39;description&#39;</span>   =&gt; <span class="stringliteral">&#39;Complete activities by entering in a code&#39;</span>,</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        ];</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -190,11 +190,11 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Implements <a class="el" href="../../db/d56/interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInterface.html">DMA\Friends\Classes\ActivityTypeBaseInterface</a>.</p>
-<div class="fragment"><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keywordflow">return</span> [</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            <span class="stringliteral">&#39;activity_code&#39;</span> =&gt; (isset($model-&gt;activity_code)) ? $model-&gt;activity_code : null,</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        ];</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordflow">return</span> [</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <span class="stringliteral">&#39;activity_code&#39;</span> =&gt; (isset($model-&gt;activity_code)) ? $model-&gt;activity_code : null,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        ];</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -241,16 +241,18 @@ Additional Inherited Members</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>boolean returns true if the process was successful </dd></dl>
 
 <p>Implements <a class="el" href="../../db/d56/interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInterface.html">DMA\Friends\Classes\ActivityTypeBaseInterface</a>.</p>
-<div class="fragment"><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordflow">if</span> (!isset($params[<span class="stringliteral">&#39;code&#39;</span>]) || empty($params[<span class="stringliteral">&#39;code&#39;</span>])) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordflow">if</span> ($activity = Activity::findCode($params[<span class="stringliteral">&#39;code&#39;</span>])-&gt;first()) {</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="keywordflow">return</span> parent::process($user, [<span class="stringliteral">&#39;activity&#39;</span> =&gt; $activity]);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        }</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="fragment"><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordflow">if</span> (!isset($params[<span class="stringliteral">&#39;code&#39;</span>]) || empty($params[<span class="stringliteral">&#39;code&#39;</span>])) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordflow">if</span> ($activity = Activity::findCode($params[<span class="stringliteral">&#39;code&#39;</span>])-&gt;first()) {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keywordflow">return</span> parent::process($user, [<span class="stringliteral">&#39;activity&#39;</span> =&gt; $activity]);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        }</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        Session::put(<span class="stringliteral">&#39;activityError&#39;</span>, Lang::get(<span class="stringliteral">&#39;dma.friends::lang.activities.codeError&#39;</span>, [<span class="stringliteral">&#39;code&#39;</span> =&gt; $params[<span class="stringliteral">&#39;code&#39;</span>]]));</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -261,7 +263,7 @@ Additional Inherited Members</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 5 2014 13:24:43 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 28 2014 18:12:50 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

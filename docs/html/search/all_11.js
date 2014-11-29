@@ -1,5 +1,11 @@
 var searchData=
 [
-  ['widgetdetails',['widgetDetails',['../dd/d00/classDMA_1_1Friends_1_1FormWidgets_1_1ActivityType.html#a30e532c2b0ba9f84a828d3dd3df547c5',1,'DMA\Friends\FormWidgets\ActivityType\widgetDetails()'],['../dc/d09/classDMA_1_1Friends_1_1FormWidgets_1_1TimeRestrictions.html#a74be261bb83b3287ff8ea66f1f148f89',1,'DMA\Friends\FormWidgets\TimeRestrictions\widgetDetails()']]],
-  ['write',['write',['../d4/d33/classDMA_1_1Friends_1_1Classes_1_1FriendsLog.html#a99a5a2ee4bc69aab07f58308d9cee669',1,'DMA::Friends::Classes::FriendsLog']]]
+  ['unlocked',['unlocked',['../d4/d33/classDMA_1_1Friends_1_1Classes_1_1FriendsLog.html#ac7705d4873f6b3156efde3e049a21ca6',1,'DMA::Friends::Classes::FriendsLog']]],
+  ['update',['update',['../d9/dda/classDMA_1_1Friends_1_1Api_1_1BaseResource.html#a67477f34c9c2d79ef575695c6c426b24',1,'DMA::Friends::Api::BaseResource']]],
+  ['updateexistingusers',['updateExistingUsers',['../dd/d73/classDMA_1_1Friends_1_1Wordpress_1_1User.html#a9664b94f73cb6ed82746b94d9bdac91b',1,'DMA::Friends::Wordpress::User']]],
+  ['updatemetadata',['updateMetadata',['../dd/d73/classDMA_1_1Friends_1_1Wordpress_1_1User.html#aa2d2c2c9b82db76a0eab7af41629e011',1,'DMA::Friends::Wordpress::User']]],
+  ['user',['User',['../dd/d73/classDMA_1_1Friends_1_1Wordpress_1_1User.html',1,'DMA::Friends::Wordpress']]],
+  ['userbadges',['UserBadges',['../d8/d01/classDMA_1_1Friends_1_1Components_1_1UserBadges.html',1,'DMA::Friends::Components']]],
+  ['userextend',['UserExtend',['../da/df1/classDMA_1_1Friends_1_1Classes_1_1UserExtend.html',1,'DMA::Friends::Classes']]],
+  ['usermeta',['Usermeta',['../d6/d87/classDMA_1_1Friends_1_1Models_1_1Usermeta.html',1,'DMA::Friends::Models']]]
 ];

@@ -26,15 +26,22 @@ Take an activity and apply it to any badges and steps that apply
 \end{DoxyParams}
 
 \begin{DoxyCode}
-23     \{
-24         \textcolor{comment}{//TODO look up all steps that use this activity}
-25 
-26         \textcolor{comment}{//$steps = Step->activities()->find($activity->id);}
-27 
-28 
-29         \textcolor{comment}{// if we have steps complete the step for a user}
-30 
-31     \}
+24     \{
+25         \textcolor{comment}{//TODO look up all steps that use this activity}
+26 
+27         $steps = $activity->steps()->get();
+28         \(\backslash\)Debugbar::info($steps);
+29 
+30         \textcolor{keywordflow}{foreach} ($steps as $step) \{
+31 
+32         \}
+33         \textcolor{comment}{//$steps = Step::activity()->find($activity->id);}
+34         \textcolor{comment}{//\(\backslash\)Debugbar::info($steps);}
+35 
+36 
+37         \textcolor{comment}{// if we have steps complete the step for a user}
+38 
+39     \}
 \end{DoxyCode}
 
 

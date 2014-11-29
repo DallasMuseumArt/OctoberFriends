@@ -1,0 +1,74 @@
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Inputs_1_1InputEndsWith}{\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}Notifications\textbackslash{}Inputs\textbackslash{}Input\+Ends\+With Class Reference}
+\label{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Inputs_1_1InputEndsWith}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Notifications\textbackslash{}\+Inputs\textbackslash{}\+Input\+Ends\+With@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Notifications\textbackslash{}\+Inputs\textbackslash{}\+Input\+Ends\+With}}
+}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}Notifications\textbackslash{}Inputs\textbackslash{}Input\+Ends\+With\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{d8/ded/classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Inputs_1_1InputEndsWith}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Inputs_1_1InputEndsWith_aa2deee774097cacdbfc8cb0995fc6196}{get\+Pattern} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Inputs_1_1InputEndsWith_a8d3a9f95457598334db3b03cda409b2d}{get\+Code} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Simple Input that validates if a string contains the given string \begin{DoxyAuthor}{Author}
+carroyo 
+\end{DoxyAuthor}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Inputs_1_1InputEndsWith_a8d3a9f95457598334db3b03cda409b2d}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Inputs\+::\+Input\+Ends\+With@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Inputs\+::\+Input\+Ends\+With}!get\+Code@{get\+Code}}
+\index{get\+Code@{get\+Code}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Inputs\+::\+Input\+Ends\+With@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Inputs\+::\+Input\+Ends\+With}}
+\subsubsection[{get\+Code}]{\setlength{\rightskip}{0pt plus 5cm}static D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Notifications\textbackslash{}\+Inputs\textbackslash{}\+Input\+Ends\+With\+::get\+Code (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Inputs_1_1InputEndsWith_a8d3a9f95457598334db3b03cda409b2d}
+Returns unique indentifier for this parser. \begin{DoxyReturn}{Returns}
+string
+\end{DoxyReturn}
+ \begin{DoxySeeAlso}{See also}
+\+::get\+Code() 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Inputs_1_1InputParser_adaefcdcdfd7a28cad4f7418112243cd2}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Notifications\textbackslash{}\+Inputs\textbackslash{}\+Input\+Parser}.
+
+
+\begin{DoxyCode}
+18     \{
+19         \textcolor{keywordflow}{return} \textcolor{stringliteral}{'endswith'};
+20     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Inputs_1_1InputEndsWith_aa2deee774097cacdbfc8cb0995fc6196}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Inputs\+::\+Input\+Ends\+With@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Inputs\+::\+Input\+Ends\+With}!get\+Pattern@{get\+Pattern}}
+\index{get\+Pattern@{get\+Pattern}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Inputs\+::\+Input\+Ends\+With@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Inputs\+::\+Input\+Ends\+With}}
+\subsubsection[{get\+Pattern}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Notifications\textbackslash{}\+Inputs\textbackslash{}\+Input\+Ends\+With\+::get\+Pattern (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Inputs_1_1InputEndsWith_aa2deee774097cacdbfc8cb0995fc6196}
+\begin{DoxySeeAlso}{See also}
+\+::get\+Pattern() 
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+28     \{
+29         $this->pattern = sprintf(\textcolor{stringliteral}{'/%s$/%sm'}, $this->search, $this->options);
+30         \textcolor{keywordflow}{return} $this->pattern;
+31     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+classes/notifications/inputs/Input\+Ends\+With.\+php\end{DoxyCompactItemize}
