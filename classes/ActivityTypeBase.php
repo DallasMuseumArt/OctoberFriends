@@ -24,6 +24,14 @@ interface ActivityTypeBaseInterface {
     public static function canComplete(Activity $activity, User $user);
 }
 
+/**
+ * Base class for implementing Activity Types
+ * Extend this class to provide custom logic for how
+ * an activity can be completed
+ *
+ * @package DMA\Friends\Classes
+ * @author Kristen Arnold, Carlos Arroyo
+ */
 class ActivityTypeBase implements ActivityTypeBaseInterface
 { 
     /**

@@ -52,7 +52,7 @@ class Activity extends Model
      * @var array Relations
      */
     public $belongsToMany = [
-        'steps' => ['DMA\Friends\Models\Step'],
+        'steps' => ['DMA\Friends\Models\Step', 'table' => 'dma_friends_activity_step'],
     ];
 
     public $hasMany = [

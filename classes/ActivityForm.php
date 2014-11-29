@@ -7,6 +7,12 @@ use Str;
 use File;
 use DMA\Friends\Classes\ActivityManager;
 
+/**
+ * Class to handle form configuration for activity types
+ *
+ * @package DMA\Friends\Classes
+ * @author Kristen Arnold, Carlos Arroyo
+ */
 class ActivityForm extends WidgetBase
 {
 

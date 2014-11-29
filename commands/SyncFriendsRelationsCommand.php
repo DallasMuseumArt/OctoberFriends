@@ -15,6 +15,12 @@ use DMA\Friends\Models\Category;
 use DMA\Friends\Models\Step;
 use DMA\Friends\Models\Location;
 
+/**
+ * Syncronize the relationships between various models from wordpress into october
+ *
+ * @package DMA\Friends\Commands
+ * @author Kristen Arnold, Carlos Arroyo
+ */
 class SyncFriendsRelationsCommand extends Command
 {
     /** 
