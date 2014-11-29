@@ -15,7 +15,8 @@ use Illuminate\Foundation\AliasLoader;
 /**
  * Friends Plugin Information File
  *
- * @authors Kristen Arnold, Carlos Arroyo
+ * @package DMA\Friends
+ * @author Kristen Arnold, Carlos Arroyo
  */
 class Plugin extends PluginBase
 {

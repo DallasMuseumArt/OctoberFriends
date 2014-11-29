@@ -8,6 +8,12 @@ use DMA\Friends\Classes\BadgeProcessor;
 use DMA\Friends\Classes\FriendsLog;
 use DMA\Friends\Classes\Notifications\ChannelManager;
 
+/**
+ * Register service providers for Friends
+ *
+ * @package DMA\Friends
+ * @author Kristen Arnold, Carlos Arroyo
+ */
 class FriendsServiceProvider extends ServiceProvider
 {
     /**
