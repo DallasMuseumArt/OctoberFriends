@@ -93,12 +93,12 @@ class SyncFriendsDataCommand extends Command
             default:
                 $this->syncUsers();
                 $this->syncActivities();
-                $this->syncActivityLogs();
                 $this->syncBadges();
                 $this->syncLocations();
                 $this->syncRewards();
                 $this->syncSteps();
                 $this->syncTaxonomy();
+                $this->syncActivityLogs();
         }
 
         $this->info('Sync complete');
