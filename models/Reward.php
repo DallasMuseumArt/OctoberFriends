@@ -46,4 +46,9 @@ class Reward extends Model
         'activityLogs'  => ['DMA\Friends\Models\ActivityLog', 'name' => 'object'],
     ];
 
+    public function scopefindWordpress($query, $id)
+    {   
+        return $query->where('wordpress_id', $id);
+    }  
+
 }
