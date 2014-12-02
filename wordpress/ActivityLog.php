@@ -3,11 +3,11 @@
 namespace DMA\Friends\Wordpress;
 
 use DMA\Friends\Models\ActivityLog as OctoberActivityLog;
-use DMA\Friends\Models\Activity;
-use DMA\Friends\Models\Badge;
-use DMA\Friends\Models\Location;
-use DMA\Friends\Models\Reward;
-use DMA\Friends\Models\Step;
+use DMA\Friends\Models\Activity as OctoberActivity;
+use DMA\Friends\Models\Badge as OctoberBadge;
+use DMA\Friends\Models\Location as OctoberLocation;
+use DMA\Friends\Models\Reward as OctoberReward;
+use DMA\Friends\Models\Step as OctoberStep;
 use Illuminate\Support\Facades\DB;
 
 class ActivityLog extends Post
@@ -59,7 +59,7 @@ class ActivityLog extends Post
     
             if ($wlog->action == 'artwork') {
                 $log->artwork_id = $wlog->object_id;
-                $object = Activity::where('activity_type', '=', 'LikeWorkOfArt')->first();
+                $object = OctoberActivity::where('activity_type', '=', 'LikeWorkOfArt')->first();
             } else {
 
                 // Get the wordpress post type
@@ -73,19 +73,19 @@ class ActivityLog extends Post
                     // Convert the post type to a usable object model
                     switch($post_type->post_type) {
                         case 'activity':
-                            $object = Activity::findWordpress($wlog->object_id);
+                            $object = OctoberActivity::findWordpress($wlog->object_id);
                             break;
                         case 'badge':
-                            $object = Badge::findWordpress($wlog->object_id);
+                            $object = OctoberBadge::findWordpress($wlog->object_id);
                             break;
                         case 'badgeos-rewards':
-                            $object = Reward::findWordpress($wlog->object_id);
+                            $object = OctoberReward::findWordpress($wlog->object_id);
                             break;
                         case 'dma-location':
-                            $object = Location::findWordpress($wlog->object_id);
+                            $object = OctoberLocation::findWordpress($wlog->object_id);
                             break;
                         case 'step':
-                            $object = Step::findWordpress($wlog->object_id);
+                            $object = OctoberStep::findWordpress($wlog->object_id);
                             break;
                     }
                 }
