@@ -10,6 +10,7 @@ use Schema;
 use Rainlab\User\Models\User;
 use DMA\Friends\Wordpress\Post;
 use DMA\Friends\Models\Activity;
+use DMA\Friends\Models\ActivityLog;
 use DMA\Friends\Models\Badge;
 use DMA\Friends\Models\Category;
 use DMA\Friends\Models\Step;
@@ -191,7 +192,7 @@ class SyncFriendsRelationsCommand extends Command
                     'created_at'    => $post->epochToTimestamp($d->date_earned),
                 ];
 
-                // About half way thru the data the location key changes.
+                // About half way thru the data for the location key changes.
                 // so lets deal with that
                 if (isset($d->location)) {
                     $location_id = $d->location;
@@ -222,6 +223,31 @@ class SyncFriendsRelationsCommand extends Command
         
             }
         }
+
+        // Syncronize activities and users
+
+        $this->info('Importing Activity/User relations');
+        
+        $table = 'dma_friends_activity_user';
+
+        DB::table($table)->delete();
+
+        ActivityLog::where('action', '=', 'activity')->chunk(100, function($activityLogs) use ($table) {
+            foreach ($activityLogs as $activityLog) {
+
+                if ($activityLog->object_id) {
+
+                    $pivotTable = [
+                        'user_id'       => $activityLog->user_id,
+                        'activity_id'   => $activityLog->object_id,
+                        'created_at'    => $activityLog->timestamp,
+                        'updated_at'    => $activityLog->timestamp,
+                    ];
+
+                    DB::table($table)->insert($pivotTable);
+                }
+            }
+        });
 
         $this->info('Sync complete');
 
