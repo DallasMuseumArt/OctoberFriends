@@ -51,12 +51,12 @@ class Activity extends Model
     /**
      * @var array Relations
      */
-    public $belongsToMany = [
+    public $hasMany = [
         'steps' => ['DMA\Friends\Models\Step', 'table' => 'dma_friends_activity_step'],
     ];
 
-    public $hasMany = [
-        'users' => ['RainLab\User\Models\User', 'table' => 'dma_friends_activity_user'],
+    public $belongsToMany = [
+        'users' => ['RainLab\User\Models\User', 'table' => 'dma_friends_activity_user', 'timestamps' => true],
     ];
 
     public $attachOne = [

@@ -60,7 +60,7 @@ class SyncFriendsDataCommand extends Command
      */
     public function fire()
     {
-        $this->info('Begin sync');
+        $this->info('Initializing Syncronization');
 
         $type = $this->option('type');
         $this->limit = $this->option('limit');

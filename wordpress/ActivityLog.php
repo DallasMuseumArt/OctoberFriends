@@ -92,15 +92,20 @@ class ActivityLog extends Post
  
             }   
 
-            if ($log->save()) {
+            try {
+                if ($log->save()) {
 
-                // If the log is related to an object, save that relation
-                if ($object) {
-                    $object = $object->first();
-                    $object->activityLogs()->save($log);
-                }
-                $count++;
-            } 
+                    // If the log is related to an object, save that relation
+                    if ($object) {
+                        $object = $object->first();
+                        $object->activityLogs()->save($log);
+                    }
+                    $count++;
+                } 
+            } catch(Exception $e) {
+                echo "Failed to import log entry id: " . $log->id . "\n";
+                echo $e->getMessage() . "\n";
+            }
         }  
 
         return $count;
