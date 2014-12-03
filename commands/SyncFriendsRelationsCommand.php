@@ -237,6 +237,8 @@ class SyncFriendsRelationsCommand extends Command
 
                 if ($activityLog->object_id) {
 
+                    echo '.';
+
                     $pivotTable = [
                         'user_id'       => $activityLog->user_id,
                         'activity_id'   => $activityLog->object_id,
