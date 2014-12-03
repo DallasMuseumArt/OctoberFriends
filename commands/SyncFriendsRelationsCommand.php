@@ -153,7 +153,7 @@ class SyncFriendsRelationsCommand extends Command
                             DB::table($table)->insert($values);
                             $this->info('from: ' . $from->title . ' ----- ' . $to->title);
                         } else {
-                            $this->error('table doesnt exist');
+                            $this->error('table doesnt exist: ' . $table);
                         } 
 
                 }
