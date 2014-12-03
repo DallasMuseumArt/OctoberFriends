@@ -13,8 +13,9 @@
     - create_user_steps_table.php
     - create_user_rewards_table.php 
 1.0.3:
-    - Create pivot tables
-    - create_pivot_tables.php
+    - NA
+1.0.4:
+    - NA
 1.0.5:
     - Create user table 
     - create_users_table.php
