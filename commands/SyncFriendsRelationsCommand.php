@@ -134,10 +134,14 @@ class SyncFriendsRelationsCommand extends Command
                 $table = 'dma_friends_' . $from_table . '_' . $to_table;
 
                 switch($table) {
+                    case 'dma_friends_activity_step':
+                        $from->steps()->save($to);
+                        $this->info('activity: ' . $from->title . ' --> step: ' . $to->title);
+                        break;
                     case 'dma_friends_step_badge':
                         $to->steps()->save($from);
-                        $this->info('from: ' . $from->title . ' --|-|-- ' . $to->title);
-
+                        $this->info('step: ' . $from->title . ' --> badge: ' . $to->title);
+                        break;
                     default:
 
                         $values = [
