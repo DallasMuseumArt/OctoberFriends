@@ -10,7 +10,7 @@ var indexSectionsWithContent =
   0: "$_abcdefgilmnprstuvw",
   1: "abcfgilmnprstuw",
   2: "dp",
-  3: "_acdefgilmnprstuvw",
+  3: "_abcdefgilmnprstuvw",
   4: "$t",
   5: "ae"
 };

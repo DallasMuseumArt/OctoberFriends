@@ -49,6 +49,9 @@ class Step extends Model
         return $query->where('wordpress_id', $id);
     }
 
+    /**
+     * Automatically create a title based on the count and activity associated with this step
+     */
     public function beforeSave()
     {
         $this->title = Lang::get('dma.friends::lang.app.stepTitle', [
