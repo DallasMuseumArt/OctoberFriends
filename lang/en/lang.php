@@ -11,6 +11,9 @@ return [
         'lockout'       => 'You cannot use this code for :x minutes',
         'notAvailable'  => 'Sorry this activity is currently not available',
     ],
+    'badges' => [
+        'award'         => 'Congratulations, you have been awarded the badge ":title"',
+    ],
     'log' => [
         'activity'  => ':name just completed the activity of ":title"',
         'artwork'   => ':name liked the work of art :artwork_id',

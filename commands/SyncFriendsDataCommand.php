@@ -110,8 +110,12 @@ class SyncFriendsDataCommand extends Command
     protected function syncUsers()
     {
         $user = new WordpressUser;
-        $this->info('Updating existing users metadata');
-        $user->updateExistingUsers();
+
+        if (!$this->option('exclude-meta-update')) {
+            $this->info('Updating existing users metadata');
+            $user->updateExistingUsers();
+        }
+
         $this->sync($user, 'users');
     }
 
@@ -201,6 +205,7 @@ class SyncFriendsDataCommand extends Command
         return [
             ['type', null, InputOption::VALUE_OPTIONAL, 'Import specific type', null],
             ['limit', null, InputOption::VALUE_OPTIONAL, 'Number of records per type to import', $this->limit],
+            ['exclude-meta-update', null, InputOption::VALUE_NONE, 'Exclude update of user metadata', null],
         ];  
     }  
 }

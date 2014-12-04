@@ -37,7 +37,7 @@ class Step extends Model
     ];
 
     public $belongsToMany = [
-        'users' => ['Rainlab\User\Models\User', 'dma_friends_step_user'],
+        'users' => ['Rainlab\User\Models\User', 'table' => 'dma_friends_step_user'],
     ];
 
     public $morphMany = [ 
