@@ -9,6 +9,9 @@ class FriendsToolbar extends ReportWidgetBase
 {
     public $defaultAlias = 'friendsToolbar';
 
+    /**
+     * {@inheritDoc}
+     */
     public function widgetDetails()
     {
         return [
@@ -17,6 +20,9 @@ class FriendsToolbar extends ReportWidgetBase
         ];
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function render()
     {
         $today = date('Y-m-d');

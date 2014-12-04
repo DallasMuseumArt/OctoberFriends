@@ -158,13 +158,13 @@ Protected Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Helper method to quickly setup class aliases for a service</p>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<div class="fragment"><div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    {</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        $this-&gt;app-&gt;booting(<span class="keyword">function</span>() use ($alias, $class)</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        {   </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            $loader = \Illuminate\Foundation\AliasLoader::getInstance();</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            $loader-&gt;alias($alias, $class);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        }); </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    {</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        $this-&gt;app-&gt;booting(<span class="keyword">function</span>() use ($alias, $class)</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        {   </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            $loader = \Illuminate\Foundation\AliasLoader::getInstance();</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            $loader-&gt;alias($alias, $class);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        }); </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -182,11 +182,11 @@ Protected Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Register the available services in this plugin</p>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<div class="fragment"><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        $this-&gt;<a class="code" href="../../df/d6d/classDMA_1_1Friends_1_1FriendsServiceProvider.html#a2d6ff7101ca6389c00e298f2d594a1df">registerFriendsLog</a>();</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        $this-&gt;registerNotifications();</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    }</div>
-<div class="ttc" id="classDMA_1_1Friends_1_1FriendsServiceProvider_html_a2d6ff7101ca6389c00e298f2d594a1df"><div class="ttname"><a href="../../df/d6d/classDMA_1_1Friends_1_1FriendsServiceProvider.html#a2d6ff7101ca6389c00e298f2d594a1df">DMA\Friends\FriendsServiceProvider\registerFriendsLog</a></div><div class="ttdeci">registerFriendsLog()</div><div class="ttdef"><b>Definition:</b> FriendsServiceProvider.php:29</div></div>
+<div class="fragment"><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        $this-&gt;<a class="code" href="../../df/d6d/classDMA_1_1Friends_1_1FriendsServiceProvider.html#a2d6ff7101ca6389c00e298f2d594a1df">registerFriendsLog</a>();</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        $this-&gt;registerNotifications();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    }</div>
+<div class="ttc" id="classDMA_1_1Friends_1_1FriendsServiceProvider_html_a2d6ff7101ca6389c00e298f2d594a1df"><div class="ttname"><a href="../../df/d6d/classDMA_1_1Friends_1_1FriendsServiceProvider.html#a2d6ff7101ca6389c00e298f2d594a1df">DMA\Friends\FriendsServiceProvider\registerFriendsLog</a></div><div class="ttdeci">registerFriendsLog()</div><div class="ttdef"><b>Definition:</b> FriendsServiceProvider.php:35</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -204,14 +204,14 @@ Protected Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Setup the ActivityCode service</p>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<div class="fragment"><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    {</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        $this-&gt;app[<span class="stringliteral">&#39;FriendsLog&#39;</span>] = $this-&gt;app-&gt;share(<span class="keyword">function</span>($app) {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="../../df/d06/namespaceFriendsLog.html">FriendsLog</a>;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        });</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        $this-&gt;<a class="code" href="../../df/d6d/classDMA_1_1Friends_1_1FriendsServiceProvider.html#acad52dc5020c640afed3c4fe82243051">createAlias</a>(<span class="stringliteral">&#39;FriendsLog&#39;</span>, <span class="stringliteral">&#39;DMA\Friends\Classes\FriendsLog&#39;</span>);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div>
-<div class="ttc" id="classDMA_1_1Friends_1_1FriendsServiceProvider_html_acad52dc5020c640afed3c4fe82243051"><div class="ttname"><a href="../../df/d6d/classDMA_1_1Friends_1_1FriendsServiceProvider.html#acad52dc5020c640afed3c4fe82243051">DMA\Friends\FriendsServiceProvider\createAlias</a></div><div class="ttdeci">createAlias($alias, $class)</div><div class="ttdef"><b>Definition:</b> FriendsServiceProvider.php:90</div></div>
+<div class="fragment"><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        $this-&gt;app[<span class="stringliteral">&#39;FriendsLog&#39;</span>] = $this-&gt;app-&gt;share(<span class="keyword">function</span>($app) {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="../../df/d06/namespaceFriendsLog.html">FriendsLog</a>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        });</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        $this-&gt;<a class="code" href="../../df/d6d/classDMA_1_1Friends_1_1FriendsServiceProvider.html#acad52dc5020c640afed3c4fe82243051">createAlias</a>(<span class="stringliteral">&#39;FriendsLog&#39;</span>, <span class="stringliteral">&#39;DMA\Friends\Classes\FriendsLog&#39;</span>);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    }</div>
+<div class="ttc" id="classDMA_1_1Friends_1_1FriendsServiceProvider_html_acad52dc5020c640afed3c4fe82243051"><div class="ttname"><a href="../../df/d6d/classDMA_1_1Friends_1_1FriendsServiceProvider.html#acad52dc5020c640afed3c4fe82243051">DMA\Friends\FriendsServiceProvider\createAlias</a></div><div class="ttdeci">createAlias($alias, $class)</div><div class="ttdef"><b>Definition:</b> FriendsServiceProvider.php:96</div></div>
 <div class="ttc" id="namespaceFriendsLog_html"><div class="ttname"><a href="../../df/d06/namespaceFriendsLog.html">FriendsLog</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -223,7 +223,7 @@ Protected Member Functions</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Nov 28 2014 18:12:50 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Dec 4 2014 10:36:11 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

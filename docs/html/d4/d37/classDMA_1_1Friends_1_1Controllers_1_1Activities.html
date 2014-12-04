@@ -146,9 +146,9 @@ Public Attributes</h2></td></tr>
 <p>Return an array of badges associated with the controller model </p><dl class="section return"><dt>Returns</dt><dd>array An array of badge models </dd></dl>
 <div class="fragment"><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    {</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        $activity = $this-&gt;widget-&gt;formDescription-&gt;model;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        $badges = Badge::join(<span class="stringliteral">&#39;dma_friends_step_badge&#39;</span>, <span class="stringliteral">&#39;dma_friends_badges.id&#39;</span>, <span class="charliteral">&#39;=&#39;</span>, <span class="stringliteral">&#39;dma_friends_step_badge.badge_id&#39;</span>)</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            -&gt;join(<span class="stringliteral">&#39;dma_friends_activity_step&#39;</span>, <span class="stringliteral">&#39;dma_friends_step_badge.step_id&#39;</span>, <span class="charliteral">&#39;=&#39;</span>, <span class="stringliteral">&#39;dma_friends_activity_step.step_id&#39;</span>)</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            -&gt;where(<span class="stringliteral">&#39;dma_friends_activity_step.activity_id&#39;</span>, $activity-&gt;id)-&gt;get();</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        $badges = Badge::join(<span class="stringliteral">&#39;dma_friends_steps&#39;</span>, <span class="stringliteral">&#39;dma_friends_badges.id&#39;</span>, <span class="charliteral">&#39;=&#39;</span>, <span class="stringliteral">&#39;dma_friends_steps.badge_id&#39;</span>)</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            -&gt;where(<span class="stringliteral">&#39;dma_friends_steps.activity_id&#39;</span>, $activity-&gt;id)-&gt;get();</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordflow">return</span> $badges;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    }</div>
 </div><!-- fragment -->
@@ -179,7 +179,7 @@ Public Attributes</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Nov 28 2014 18:12:52 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Dec 4 2014 10:36:13 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

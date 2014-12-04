@@ -80,6 +80,14 @@ class BadgeManager
         return ($count->count == $step->count);
     }
 
+    /**
+     * Complete the step and proceed to complete a badge if it can be completed
+     *
+     * @param Step $step
+     * A step model
+     * @param User $user
+     * A user model
+     */
     private static function completeBadge(Step $step, User $user)
     {
         $badge = $step->badge;
@@ -91,7 +99,7 @@ class BadgeManager
         foreach($badge->steps as $step) {
             if (!$user->steps->contains($step->id)) {
                 //user did not complete a step in badge so we cannot complete the badge
-                return false;
+                return;
             }
         }
 
