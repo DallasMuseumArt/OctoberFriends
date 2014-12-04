@@ -24,7 +24,7 @@ class Step extends Model
     /**
      * @var array Fillable fields
      */
-    protected $fillable = ['touch'];
+    protected $fillable = ['touch', 'count', 'activity'];
 
     public $rules = [];
 
@@ -49,13 +49,12 @@ class Step extends Model
         return $query->where('wordpress_id', $id);
     }
 
-    // public function beforeSave()
-    // {
-    //     \Debugbar::info($this);
-    //     $this->title = Lang::get('dma.friends::lang.app.stepTitle', [
-    //         'count' => $this->count, 
-    //         'title' => $this->activity()->title
-    //     ]);
-    // }
+    public function beforeSave()
+    {
+        $this->title = Lang::get('dma.friends::lang.app.stepTitle', [
+            'count' => $this->count, 
+            'title' => $this->activity->title
+        ]);
+    }
 
 }
