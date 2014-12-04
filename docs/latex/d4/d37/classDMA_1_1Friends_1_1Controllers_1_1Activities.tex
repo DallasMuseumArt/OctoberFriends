@@ -46,11 +46,10 @@ array An array of badge models
 \begin{DoxyCode}
 35     \{
 36         $activity = $this->widget->formDescription->model;
-37         $badges = Badge::join(\textcolor{stringliteral}{'dma\_friends\_step\_badge'}, \textcolor{stringliteral}{'dma\_friends\_badges.id'}, \textcolor{charliteral}{'='}, \textcolor{stringliteral}{'
-      dma\_friends\_step\_badge.badge\_id'})
-38             ->join(\textcolor{stringliteral}{'dma\_friends\_activity\_step'}, \textcolor{stringliteral}{'dma\_friends\_step\_badge.step\_id'}, \textcolor{charliteral}{'='}, \textcolor{stringliteral}{'
-      dma\_friends\_activity\_step.step\_id'})
-39             ->where(\textcolor{stringliteral}{'dma\_friends\_activity\_step.activity\_id'}, $activity->id)->get();
+37 
+38         $badges = Badge::join(\textcolor{stringliteral}{'dma\_friends\_steps'}, \textcolor{stringliteral}{'dma\_friends\_badges.id'}, \textcolor{charliteral}{'='}, \textcolor{stringliteral}{'
+      dma\_friends\_steps.badge\_id'})
+39             ->where(\textcolor{stringliteral}{'dma\_friends\_steps.activity\_id'}, $activity->id)->get();
 40         \textcolor{keywordflow}{return} $badges;
 41     \}
 \end{DoxyCode}

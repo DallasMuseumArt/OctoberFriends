@@ -10,11 +10,9 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Report\+Wi
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a56951946e166c46353910da4a5c399a1}{{\bfseries widget\+Details} ()}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a56951946e166c46353910da4a5c399a1}
-
+\hyperlink{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a56951946e166c46353910da4a5c399a1}{widget\+Details} ()
 \item 
-\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a5fb3de1ff5dd5186e068dcf8c5e8d154}{{\bfseries render} ()}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a5fb3de1ff5dd5186e068dcf8c5e8d154}
-
+\hyperlink{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a5fb3de1ff5dd5186e068dcf8c5e8d154}{render} ()
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -22,6 +20,47 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Report\+Wi
 \hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_aabef17c5a99fc5f66554a91dd2cde59d}{{\bfseries \$default\+Alias} = 'friends\+Toolbar'}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_aabef17c5a99fc5f66554a91dd2cde59d}
 
 \end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a5fb3de1ff5dd5186e068dcf8c5e8d154}{\index{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Toolbar@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Toolbar}!render@{render}}
+\index{render@{render}!D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Toolbar@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Toolbar}}
+\subsubsection[{render}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Friends\+Toolbar\+::render (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a5fb3de1ff5dd5186e068dcf8c5e8d154}
+
+\begin{DoxyCode}
+27     \{
+28         $today = date(\textcolor{stringliteral}{'Y-m-d'});
+29         $thisWeek = date(\textcolor{stringliteral}{'Y-m-d'}, strtotime(\textcolor{stringliteral}{'last monday'}));
+30 
+31         $this->addCss(\textcolor{stringliteral}{'css/friendstoolbar.css'});
+32 
+33         $this->vars[\textcolor{stringliteral}{'numFriends'}] = number\_format(User::count());
+34         $this->vars[\textcolor{stringliteral}{'todayFriends'}] = number\_format(User::where(\textcolor{stringliteral}{'created\_at'}, \textcolor{stringliteral}{'>='}, $today)->count());
+35         $this->vars[\textcolor{stringliteral}{'weekFriends'}] = number\_format(User::where(\textcolor{stringliteral}{'created\_at'}, \textcolor{stringliteral}{'>='}, $thisWeek)->count());
+36 
+37         \textcolor{keywordflow}{return} $this->makePartial(\textcolor{stringliteral}{'widget'});
+38     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a56951946e166c46353910da4a5c399a1}{\index{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Toolbar@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Toolbar}!widget\+Details@{widget\+Details}}
+\index{widget\+Details@{widget\+Details}!D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Toolbar@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Toolbar}}
+\subsubsection[{widget\+Details}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Friends\+Toolbar\+::widget\+Details (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a56951946e166c46353910da4a5c399a1}
+
+\begin{DoxyCode}
+16     \{
+17         \textcolor{keywordflow}{return} [
+18             \textcolor{stringliteral}{'name'}        => \textcolor{stringliteral}{'Friends Toolbar'},
+19             \textcolor{stringliteral}{'description'} => \textcolor{stringliteral}{'Show some basic statistics on friends'}
+20         ];
+21     \}
+\end{DoxyCode}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

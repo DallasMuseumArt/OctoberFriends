@@ -12,6 +12,9 @@ class FriendsLeaderboard extends ReportWidgetBase
 {
     public $defaultAlias = 'friendsLeaderboard';
 
+    /**
+     * {@inheritDoc}
+     */
     public function widgetDetails()
     {   
         return [
@@ -20,6 +23,9 @@ class FriendsLeaderboard extends ReportWidgetBase
         ];  
     }   
 
+    /**
+     * {@inheritDoc}
+     */
     public function defineProperties()
     {
         return [
@@ -32,6 +38,9 @@ class FriendsLeaderboard extends ReportWidgetBase
         ];
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function render()
     {   
         $limit = $this->property('limit');

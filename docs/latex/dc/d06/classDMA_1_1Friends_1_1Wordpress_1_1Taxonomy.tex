@@ -10,10 +10,56 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Wordpress\
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classDMA_1_1Friends_1_1Wordpress_1_1Taxonomy_a20c1d17d7b55872d090f6a1693a33337}{{\bfseries import} (\$limit=0)}\label{classDMA_1_1Friends_1_1Wordpress_1_1Taxonomy_a20c1d17d7b55872d090f6a1693a33337}
-
+\hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Taxonomy_a20c1d17d7b55872d090f6a1693a33337}{import} (\$limit=0)
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Wordpress_1_1Taxonomy_a20c1d17d7b55872d090f6a1693a33337}{\index{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Taxonomy@{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Taxonomy}!import@{import}}
+\index{import@{import}!D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Taxonomy@{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+Taxonomy}}
+\subsubsection[{import}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Wordpress\textbackslash{}\+Taxonomy\+::import (
+\begin{DoxyParamCaption}
+\item[{}]{\$limit = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Wordpress_1_1Taxonomy_a20c1d17d7b55872d090f6a1693a33337}
+Import taxonomy terms from wordpress
+
+
+\begin{DoxyParams}[1]{Parameters}
+int & {\em \$limit} & The amount of records to import at one time\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int \$count number of records imported 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+20     \{
+21         $count = 0;
+22 
+23         $terms = $this->db->table(\textcolor{stringliteral}{'wp\_terms'})
+24             ->join(\textcolor{stringliteral}{'wp\_term\_taxonomy'}, \textcolor{stringliteral}{'wp\_terms.term\_id'}, \textcolor{charliteral}{'='}, \textcolor{stringliteral}{'wp\_term\_taxonomy.term\_id'})
+25             ->select(\textcolor{stringliteral}{'wp\_terms.term\_id'}, \textcolor{stringliteral}{'wp\_terms.name'}, \textcolor{stringliteral}{'wp\_term\_taxonomy.taxonomy'}, \textcolor{stringliteral}{'
+      wp\_term\_taxonomy.description'})
+26             ->where(\textcolor{stringliteral}{'wp\_term\_taxonomy.taxonomy'}, \textcolor{stringliteral}{'LIKE'}, \textcolor{stringliteral}{'activity%'})
+27             ->get();
+28 
+29         \textcolor{keywordflow}{foreach}($terms as $term) \{
+30             $newTerm = Category::where(\textcolor{stringliteral}{'name'}, \textcolor{charliteral}{'='}, $term->name)->first();
+31             \textcolor{keywordflow}{if} (!$newTerm) \{
+32                 $category               = \textcolor{keyword}{new} Category;
+33                 $category->id           = $term->term\_id;
+34                 $category->name         = $term->name;
+35                 $category->description  = $term->description;
+36                 $category->save();
+37                 $count++;
+38             \}
+39         \}
+40 
+41         \textcolor{keywordflow}{return} $count;
+42     \}
+\end{DoxyCode}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

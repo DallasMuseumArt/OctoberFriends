@@ -20,28 +20,33 @@ static \hyperlink{classDMA_1_1Friends_1_1Classes_1_1BadgeManager_aecab9f0ae063c6
 Take an activity and apply it to any badges and steps that apply
 
 
-\begin{DoxyParams}{Parameters}
-{\em Activity} & an activity model \\
+\begin{DoxyParams}[1]{Parameters}
+User & {\em \$user} & A user model \\
+\hline
+Activity & {\em \$activity} & An activity model \\
 \hline
 \end{DoxyParams}
 
 \begin{DoxyCode}
-24     \{
-25         \textcolor{comment}{//TODO look up all steps that use this activity}
-26 
-27         $steps = $activity->steps()->get();
-28         \(\backslash\)Debugbar::info($steps);
-29 
-30         \textcolor{keywordflow}{foreach} ($steps as $step) \{
-31 
-32         \}
-33         \textcolor{comment}{//$steps = Step::activity()->find($activity->id);}
-34         \textcolor{comment}{//\(\backslash\)Debugbar::info($steps);}
-35 
-36 
-37         \textcolor{comment}{// if we have steps complete the step for a user}
-38 
-39     \}
+29     \{
+30 
+31         $steps = $activity->steps()->get();
+32 
+33         \textcolor{keywordflow}{foreach} ($steps as $step) \{
+34 
+35             \textcolor{comment}{// see if step is associated with user}
+36             \textcolor{keywordflow}{if} (!$step->users->contains($user->id)) \{
+37                 \textcolor{comment}{// user has not completed the step}
+38                 $isStepCompletable = self::checkUserActivities($user, $activity, $step);
+39 
+40                 \textcolor{keywordflow}{if} ($isStepCompletable) \{
+41                     \textcolor{comment}{// Find badge associated with steps}
+42                     self::completeBadge($step, $user);
+43                 \}
+44             \}
+45         \}
+46 
+47     \}
 \end{DoxyCode}
 
 

@@ -10,14 +10,11 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Report\+Wi
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsLeaderboard_ac5fc1d8631aca255dee64a37ddeed5f6}{{\bfseries widget\+Details} ()}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsLeaderboard_ac5fc1d8631aca255dee64a37ddeed5f6}
-
+\hyperlink{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsLeaderboard_ac5fc1d8631aca255dee64a37ddeed5f6}{widget\+Details} ()
 \item 
-\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsLeaderboard_a8a2b873a91fc33c558834423e35da4bc}{{\bfseries define\+Properties} ()}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsLeaderboard_a8a2b873a91fc33c558834423e35da4bc}
-
+\hyperlink{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsLeaderboard_a8a2b873a91fc33c558834423e35da4bc}{define\+Properties} ()
 \item 
-\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsLeaderboard_acc5889523847a95eb855e6041c5ef92f}{{\bfseries render} ()}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsLeaderboard_acc5889523847a95eb855e6041c5ef92f}
-
+\hyperlink{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsLeaderboard_acc5889523847a95eb855e6041c5ef92f}{render} ()
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -25,6 +22,63 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Report\+Wi
 \hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsLeaderboard_ab1f836744d59c96df00f1fad2cddb01f}{{\bfseries \$default\+Alias} = 'friends\+Leaderboard'}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsLeaderboard_ab1f836744d59c96df00f1fad2cddb01f}
 
 \end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsLeaderboard_a8a2b873a91fc33c558834423e35da4bc}{\index{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Leaderboard@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Leaderboard}!define\+Properties@{define\+Properties}}
+\index{define\+Properties@{define\+Properties}!D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Leaderboard@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Leaderboard}}
+\subsubsection[{define\+Properties}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Friends\+Leaderboard\+::define\+Properties (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsLeaderboard_a8a2b873a91fc33c558834423e35da4bc}
+
+\begin{DoxyCode}
+30     \{
+31         \textcolor{keywordflow}{return} [
+32             \textcolor{stringliteral}{'limit'} => [
+33                 \textcolor{stringliteral}{'title'}             => \textcolor{stringliteral}{'Number of results'},
+34                 \textcolor{stringliteral}{'defualt'}           => 10,
+35                 \textcolor{stringliteral}{'type'}              => \textcolor{stringliteral}{'string'},
+36                 \textcolor{stringliteral}{'validationPattern'} => \textcolor{stringliteral}{'^[0-9]+$'}
+37             ],
+38         ];
+39     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsLeaderboard_acc5889523847a95eb855e6041c5ef92f}{\index{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Leaderboard@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Leaderboard}!render@{render}}
+\index{render@{render}!D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Leaderboard@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Leaderboard}}
+\subsubsection[{render}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Friends\+Leaderboard\+::render (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsLeaderboard_acc5889523847a95eb855e6041c5ef92f}
+
+\begin{DoxyCode}
+45     \{   
+46         $limit = $this->property(\textcolor{stringliteral}{'limit'});
+47 
+48         $users = User::orderBy(\textcolor{stringliteral}{'points'}, \textcolor{stringliteral}{'DESC'})->take($limit)->get();
+49         $this->vars[\textcolor{stringliteral}{'users'}] = $users;
+50 
+51         \textcolor{keywordflow}{return} $this->makePartial(\textcolor{stringliteral}{'widget'});
+52     \}   
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsLeaderboard_ac5fc1d8631aca255dee64a37ddeed5f6}{\index{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Leaderboard@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Leaderboard}!widget\+Details@{widget\+Details}}
+\index{widget\+Details@{widget\+Details}!D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Leaderboard@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Leaderboard}}
+\subsubsection[{widget\+Details}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Friends\+Leaderboard\+::widget\+Details (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsLeaderboard_ac5fc1d8631aca255dee64a37ddeed5f6}
+
+\begin{DoxyCode}
+19     \{   
+20         \textcolor{keywordflow}{return} [
+21             \textcolor{stringliteral}{'name'}        => \textcolor{stringliteral}{'Friends Leaderboard'},
+22             \textcolor{stringliteral}{'description'} => \textcolor{stringliteral}{'Show highest ranking friends members by points'}
+23         ];  
+24     \}   
+\end{DoxyCode}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

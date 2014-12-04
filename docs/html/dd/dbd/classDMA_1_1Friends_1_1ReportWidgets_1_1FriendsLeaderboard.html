@@ -111,14 +111,11 @@ Inheritance diagram for DMA\Friends\ReportWidgets\FriendsLeaderboard:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac5fc1d8631aca255dee64a37ddeed5f6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac5fc1d8631aca255dee64a37ddeed5f6"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>widgetDetails</b> ()</td></tr>
+<tr class="memitem:ac5fc1d8631aca255dee64a37ddeed5f6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/dbd/classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsLeaderboard.html#ac5fc1d8631aca255dee64a37ddeed5f6">widgetDetails</a> ()</td></tr>
 <tr class="separator:ac5fc1d8631aca255dee64a37ddeed5f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a2b873a91fc33c558834423e35da4bc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8a2b873a91fc33c558834423e35da4bc"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>defineProperties</b> ()</td></tr>
+<tr class="memitem:a8a2b873a91fc33c558834423e35da4bc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/dbd/classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsLeaderboard.html#a8a2b873a91fc33c558834423e35da4bc">defineProperties</a> ()</td></tr>
 <tr class="separator:a8a2b873a91fc33c558834423e35da4bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc5889523847a95eb855e6041c5ef92f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acc5889523847a95eb855e6041c5ef92f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>render</b> ()</td></tr>
+<tr class="memitem:acc5889523847a95eb855e6041c5ef92f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/dbd/classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsLeaderboard.html#acc5889523847a95eb855e6041c5ef92f">render</a> ()</td></tr>
 <tr class="separator:acc5889523847a95eb855e6041c5ef92f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -127,6 +124,76 @@ Public Attributes</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>$defaultAlias</b> = 'friendsLeaderboard'</td></tr>
 <tr class="separator:ab1f836744d59c96df00f1fad2cddb01f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a8a2b873a91fc33c558834423e35da4bc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DMA\Friends\ReportWidgets\FriendsLeaderboard::defineProperties </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="fragment"><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordflow">return</span> [</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            <span class="stringliteral">&#39;limit&#39;</span> =&gt; [</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                <span class="stringliteral">&#39;title&#39;</span>             =&gt; <span class="stringliteral">&#39;Number of results&#39;</span>,</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                <span class="stringliteral">&#39;defualt&#39;</span>           =&gt; 10,</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                <span class="stringliteral">&#39;type&#39;</span>              =&gt; <span class="stringliteral">&#39;string&#39;</span>,</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                <span class="stringliteral">&#39;validationPattern&#39;</span> =&gt; <span class="stringliteral">&#39;^[0-9]+$&#39;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            ],</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        ];</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="acc5889523847a95eb855e6041c5ef92f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DMA\Friends\ReportWidgets\FriendsLeaderboard::render </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="fragment"><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    {   </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        $limit = $this-&gt;property(<span class="stringliteral">&#39;limit&#39;</span>);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        $users = User::orderBy(<span class="stringliteral">&#39;points&#39;</span>, <span class="stringliteral">&#39;DESC&#39;</span>)-&gt;take($limit)-&gt;get();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        $this-&gt;vars[<span class="stringliteral">&#39;users&#39;</span>] = $users;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordflow">return</span> $this-&gt;makePartial(<span class="stringliteral">&#39;widget&#39;</span>);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    }   </div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="ac5fc1d8631aca255dee64a37ddeed5f6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DMA\Friends\ReportWidgets\FriendsLeaderboard::widgetDetails </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="fragment"><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    {   </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keywordflow">return</span> [</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            <span class="stringliteral">&#39;name&#39;</span>        =&gt; <span class="stringliteral">&#39;Friends Leaderboard&#39;</span>,</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            <span class="stringliteral">&#39;description&#39;</span> =&gt; <span class="stringliteral">&#39;Show highest ranking friends members by points&#39;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        ];  </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    }   </div>
+</div><!-- fragment -->
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>reportwidgets/FriendsLeaderboard.php</li>
 </ul>
@@ -134,7 +201,7 @@ Public Attributes</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Nov 28 2014 18:12:53 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Dec 4 2014 10:36:14 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

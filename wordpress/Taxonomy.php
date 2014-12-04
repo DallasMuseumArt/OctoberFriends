@@ -6,6 +6,16 @@ use DMA\Friends\Wordpress\Post;
 use DMA\Friends\Models\Category;
 
 class Taxonomy extends Post {
+
+    /**
+     * Import taxonomy terms from wordpress
+     *
+     * @param int $limit
+     * The amount of records to import at one time
+     *
+     * @return int $count
+     * number of records imported
+     */
     public function import($limit = 0)
     {
         $count = 0;
