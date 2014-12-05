@@ -7,6 +7,8 @@ use RainLab\User\Models\User;
 use DB;
 use Flash;
 use Lang;
+use Exception;
+use Event;
 
 /**
  * This class handles badging logic
@@ -93,7 +95,12 @@ class BadgeManager
         $badge = $step->badge;
 
         // Complete step
-        $user->steps()->save($step);
+        try {
+            $user->steps()->save($step);
+            Event::fire('dma.friends.step.completed', [ $step, $user ]);
+        } catch(Exception $e) {
+            throw new Exception(Lang::get('dma.friends::lang.exceptions.stepFailed'));
+        }
 
         // See if the user has completed all steps for a badge
         foreach($badge->steps as $step) {
@@ -103,9 +110,13 @@ class BadgeManager
             }
         }
 
-        // If loop completes with out returning false the user has completed all steps
-        if ($user->badges()->save($badge)) {
-            Flash::info(Lang::get('dma.friends::lang.badges.award', ['title' => $badge->title]));
+        try {
+            // If loop completes with out returning false the user has completed all steps
+            $user->badges()->save($badge);
+            Event::fire('dma.friends.badge.completed', [ $badge, $user ]);
+            Flash::info(Lang::get('dma.friends::lang.badges.completed', ['title' => $badge->title]));
+        } catch(Exception $e) {
+            throw new Exception(Lang::get('dma.friends::lang.exceptions.badgeFailed'));
         }
     }
 }

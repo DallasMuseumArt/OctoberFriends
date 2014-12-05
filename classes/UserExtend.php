@@ -51,7 +51,7 @@ class UserExtend
 
         if ($this->user->forceSave()) {
 
-            Event::fire('friends.user.pointsEarned', [$this->user, $points]);
+            Event::fire('dma.friends.user.pointsEarned', [$this->user, $points]);
 
             $params = [
                 'user'          => $this->user,
@@ -75,7 +75,7 @@ class UserExtend
         $this->user->points -= $points;
         $this->user->points_this_week -= $points;
         if ($this->user->forceSave()) {
-            Event::fire('friends.user.pointsRemoved', [$this->user, $points]);
+            Event::fire('dma.friends.user.pointsRemoved', [$this->user, $points]);
         }
     }
     
