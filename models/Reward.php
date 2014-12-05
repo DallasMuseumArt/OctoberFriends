@@ -51,4 +51,10 @@ class Reward extends Model
         return $query->where('wordpress_id', $id);
     }  
 
+    public function scopeIsActive($query)
+    {
+        return $query->where('is_published', '=', 1)
+            ->where('is_archived', '<>', 1);
+    }
+
 }
