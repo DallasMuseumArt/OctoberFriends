@@ -13,6 +13,7 @@ return [
     ],
     'badges' => [
         'completed'     => 'Congratulations, you have been awarded the badge ":title"',
+        'noBadges'      => 'You have no badges',
     ],
     'log' => [
         'activity'  => ':name just completed the activity of ":title"',

@@ -13,11 +13,17 @@
             "email": "Carlos.Arroyo@dma.org"
         }
     ],
-
+    "repositories": [
+        {
+            "url": "https://github.com/smirik/php-datetime-ago.git",
+            "type": "git"
+        }
+    ],
     "require": {
         "ellipsesynergie/api-response": "0.5.*",
         "league/factory-muffin": "~2.0",
         "twilio/sdk": "3.12.6",
-        "j7mbo/twitter-api-php": "dev-master"        
+        "j7mbo/twitter-api-php": "dev-master",
+        "smirik/php-datetime-ago": "~1.0"        
     }
 }

@@ -126,6 +126,7 @@ class Plugin extends PluginBase
             'DMA\Friends\Components\GetRewards'                 => 'GetRewards',
             'DMA\Friends\Components\Modal'                      => 'Modal',
             'DMA\Friends\Components\UserBadges'                 => 'UserBadges',
+            'DMA\Friends\Components\UserMostRecentBadge'        => 'UserMostRecentBadge',
             'DMA\Friends\Components\NotificationCounter'        => 'NotificationCounter',
             'DMA\Friends\Components\NotificationList'           => 'NotificationList',            
         ];
@@ -160,11 +161,11 @@ class Plugin extends PluginBase
             $model->hasOne['metadata']          = ['DMA\Friends\Models\Usermeta'];     
             $model->hasMany['activityLogs']     = ['DMA\Friends\Models\ActivityLog'];
             $model->hasMany['notifications']    = ['DMA\Friends\Models\Notification'];
-            $model->belongsToMany['activities'] = ['DMA\Friends\Models\Activity',   'table' => 'dma_friends_activity_user', 'user_id', 'activity_id', 'timestamps' => true, 'order' => 'created_at desc',];     
-            $model->belongsToMany['steps']      = ['DMA\Friends\Models\Step',       'table' => 'dma_friends_step_user',     'user_id', 'step_id'];     
-            $model->belongsToMany['badges']     = ['DMA\Friends\Models\Badge',      'table' => 'dma_friends_badge_user',    'user_id', 'badge_id'];        
-            $model->belongsToMany['groups']     = ['DMA\Friends\Models\UserGroup',  'table' => 'users_groups',              'user_id', 'group_id'];
-            $model->belongsToMany['rewards']    = ['DMA\Friends\Models\Reward',     'table' => 'dma_friends_reward_user',   'user_id', 'reward_id'];       
+            $model->belongsToMany['activities'] = ['DMA\Friends\Models\Activity',   'table' => 'dma_friends_activity_user', 'user_id', 'activity_id',   'timestamps' => true, 'order' => 'created_at desc'];     
+            $model->belongsToMany['steps']      = ['DMA\Friends\Models\Step',       'table' => 'dma_friends_step_user',     'user_id', 'step_id',       'timestamps' => true, 'order' => 'created_at desc'];     
+            $model->belongsToMany['badges']     = ['DMA\Friends\Models\Badge',      'table' => 'dma_friends_badge_user',    'user_id', 'badge_id',      'timestamps' => true, 'order' => 'created_at desc'];        
+            $model->belongsToMany['rewards']    = ['DMA\Friends\Models\Reward',     'table' => 'dma_friends_reward_user',   'user_id', 'reward_id',     'timestamps' => true, 'order' => 'created_at desc'];       
+            $model->belongsToMany['groups']     = ['DMA\Friends\Models\UserGroup',  'table' => 'users_groups',              'user_id', 'group_id'];        
         });
         
         // Extend User fields

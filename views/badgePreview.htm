@@ -1,9 +1,16 @@
-<div class="col-md-3 col-sm-4">
+<div
+    {% if class %}
+        class="{{ class }}"
+    {% endif %}
+>
     <div class="friends-badge preview">
         <h4>{{ badge.title }}</h4>
 
         <div class="description">
             {{ badge.excerpt }}
+        </div>
+        <div class="earned">
+            {{ badge.timeAgo }}
         </div>
     </div>
 </div>
