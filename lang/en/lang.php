@@ -15,6 +15,9 @@ return [
         'completed'     => 'Congratulations, you have been awarded the badge ":title"',
         'noBadges'      => 'You have no badges',
     ],
+    'rewards' => [
+        'redeemed'      => 'Congratulations, you have redeemed the reward ":title"',
+    ],
     'log' => [
         'activity'  => ':name just completed the activity of ":title"',
         'artwork'   => ':name liked the work of art :artwork_id',
@@ -25,6 +28,8 @@ return [
     ],
     'exceptions' => [
         'missingActivityClass'      => 'Could not find the activity :class',
+        'missingReward'             => 'Could not find reward ":id"',
+        'rewardFailed'              => 'Failed to redeem reward',
         'activityTypeNotInitiated'  => 'An activity type must be instantiated before form fields can be used',
         'stepFailed'                => 'Failed to complete step',
         'badgeFailed'               => 'Failed to complete badge',
