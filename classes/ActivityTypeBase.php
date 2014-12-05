@@ -125,7 +125,7 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
 
             if ($user->activities()->save($activity)) {
 
-                Event::fire('friends.activityCompleted', [ $user, $activity ]); 
+                Event::fire('dma.friends.activity.completed', [ $activity, $user ]); 
 
                 // log an entry to the activity log
                 FriendsLog::activity([

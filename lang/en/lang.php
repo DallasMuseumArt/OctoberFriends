@@ -12,7 +12,7 @@ return [
         'notAvailable'  => 'Sorry this activity is currently not available',
     ],
     'badges' => [
-        'award'         => 'Congratulations, you have been awarded the badge ":title"',
+        'completed'     => 'Congratulations, you have been awarded the badge ":title"',
     ],
     'log' => [
         'activity'  => ':name just completed the activity of ":title"',
@@ -25,5 +25,7 @@ return [
     'exceptions' => [
         'missingActivityClass'      => 'Could not find the activity :class',
         'activityTypeNotInitiated'  => 'An activity type must be instantiated before form fields can be used',
+        'stepFailed'                => 'Failed to complete step',
+        'badgeFailed'               => 'Failed to complete badge',
     ],
 ];
