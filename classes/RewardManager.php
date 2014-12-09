@@ -28,21 +28,26 @@ class RewardManager
         }
 
         try {
-            $user->rewards()->save($reward);
             $userExtend = new UserExtend($user);
-            $userExtend->removePoints($reward->points);
 
-            Event::fire('dma.friends.reward.redeemed', [$reward, $user]);
+            if ($userExtend->removePoints($reward->points)) {
+                
+                $user->rewards()->save($reward);
+                
+                Event::fire('dma.friends.reward.redeemed', [$reward, $user]);
 
-            $params = [
-                'user'      => $user,
-                'object'    => $reward,
-            ];
+                $params = [
+                    'user'      => $user,
+                    'object'    => $reward,
+                ];
 
-            FriendsLog::reward($params);
-            // TODO handle printing of reward coupon
+                FriendsLog::reward($params);
+                // TODO handle printing of reward coupon
 
-            Session::put('rewardMessage', Lang::get('dma.friends::lang.rewards.redeemed', ['title' => $reward->title]));
+                Session::put('rewardMessage', Lang::get('dma.friends::lang.rewards.redeemed', ['title' => $reward->title]));
+            } else {
+                Session::put('rewardError', Lang::get('dma.friends::lang.rewards.noPoints'));
+            }
         } catch (Exception $e) {
             throw Exception(Lang::get('dma.friends.exceptions.rewardFailed'));
         }
