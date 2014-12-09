@@ -19,38 +19,37 @@ class ActivityStream extends ComponentBase
 
     public function onRun()
     {
+        $results = $this->getResults();
+
+        $this->page['results'] = $results;
+        $this->page['links'] = $results->links();
+    }
+
+    public function onUpdate()
+    {
+        $filter = post('filter');
+        \Debugbar::info($filter);
+        $results = $this->getResults($filter);
+        $this->page['results'] = $results;
+        $this->page['links'] = $results->links();
+
+        return [
+            '#activity-stream' => $this->renderPartial('@default'),
+        ];
+    }
+
+    private function getResults($filter = null)
+    {
         $user = Auth::getUser();
 
         if (!$user) return;
+        
+        $results = ActivityStreamModel::user($user->id)->remember(1);
 
-        $results = ActivityStreamModel::user($user->id)->get();
+        if ($filter && $filter != 'all') {
+            $results = $results->where('object_type', $filter);
+        }
 
-        \Debugbar::info($results);
-
-        // $results = DB::query('dma_friends_badge_user')
-        //     ->join('dma_friends_reward_user', 'dma_friends_reward_user.user_id', '=', 'dma_friends_badge_user.user_id')
-        //     ->join('dma_friends_activity_user', 'dma_friends_activity_user.user_id', '=', 'dma_friends_badge_user.user_id')
-        //     ->join('dma_friends_step_user', 'dma_friends_step_user.user_id', '=', 'dma_friends_badge_user.user_id')
-
-        // $feed = new DataFeed;
-        // // $feed->add('activity', $user->activities);
-        // // $feed->add('badge', $user->badges);
-        // // $feed->add('reward', $user->rewards);
-        // $feed->add('activity', function() use ($user) {
-        //     $activity = new \DMA\Friends\Models\Activity;
-        //     return $activity->with('users', function($query) use ($user) {
-        //         return $query->where('pivot_user_id', '=', $user->id);
-        //     });
-        // });
-
-        // $feed->add('badge', function() use ($user) {
-        //     $badge = new \DMA\Friends\Models\Badge;
-        //     return $badge->users()->where('user_id', $user->id);
-        // });
-    
-
-        $this->page['results'] = [];
-        //$this->page['links'] = $feed->links();
-    \Debugbar::info($this->page['results']);
+        return $results->paginate(10);
     }
 }
