@@ -1,5 +1,6 @@
 <?php namespace DMA\Friends\Activities;
 
+use Httpful\Request;
 use RainLab\User\Models\User;
 use DMA\Friends\Models\Activity;
 use DMA\Friends\Classes\ActivityTypeBase;
@@ -47,6 +48,26 @@ class LikeWorkOfArt extends ActivityTypeBase
      */
     public static function isAssessionNumber($code)
     {
-        return preg_match( '/^[a-zA-Z0-9]{2}[a-zA-Z0-9]?[a-zA-Z0-9]?\..+$/', $code );
+        // Brain API request template URL
+        $template = 'http://brain.dma.org/api/v1/collection/object/?fields=id,number&format=json&number=%s';
+        
+        // Clean code from spaces in case user miss type it
+        $code     = str_replace(' ', '', $code);
+        
+        // Get URL
+        $url      = sprintf($template, urlencode($code));
+        
+        // Call Brain
+        $response = Request::get($url)                   
+                            ->send();
+        
+        if($obj = @$response->body->results[0]){
+            $objectId = $obj->id;
+            $number   = $obj->number;
+            return true;
+        }
+        
+        return false;
+        
     }
 }
