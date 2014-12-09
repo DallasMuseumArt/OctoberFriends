@@ -17,6 +17,7 @@ return [
     ],
     'rewards' => [
         'redeemed'      => 'Congratulations, you have redeemed the reward ":title"',
+        'noPoints'      => 'Sorry you do not have enough points to redeem this reward',
     ],
     'log' => [
         'activity'  => ':name just completed the activity of ":title"',
