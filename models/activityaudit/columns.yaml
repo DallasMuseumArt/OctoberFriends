@@ -1,0 +1,13 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    activity_id:
+        label: Activity
+    user_id:
+        label: User
+    key:
+        label: Key
+    value:
+        label: Value
