@@ -39,4 +39,4 @@
     - create_notifications_table.php    
 1.0.12:
     - Add priority field to badges/activities
-    - add_priority.php    
+    - add_priority.php
