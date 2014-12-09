@@ -1,7 +1,9 @@
 <?php namespace DMA\Friends\Activities;
 
+use Httpful\Request;
 use RainLab\User\Models\User;
 use DMA\Friends\Models\Activity;
+use DMA\Friends\Models\ActivityAudit;
 use DMA\Friends\Classes\ActivityTypeBase;
 
 class LikeWorkOfArt extends ActivityTypeBase
@@ -25,10 +27,14 @@ class LikeWorkOfArt extends ActivityTypeBase
     {
         if (!isset($params['code']) || empty($params['code'])) return false;
 
-        if (!self::isAssessionNumber($params['code'])) return false;
+        if (!$data = self::isAssessionNumber($params['code'])) return false;
 
-        if ($activity = Activity::findActivityType('LikeWorkOfArt')->first()) {
-            return parent::process($user, ['activity' => $activity]);
+        if ($activity = Activity::findActivityType('LikeWorkOfArt')->first()) {          
+            if($ret = parent::process($user, ['activity' => $activity])){
+                ActivityAudit::addUserActivity($user, $activity, $data);
+            }
+            return $ret;
+            
         }
 
         return false;
@@ -43,10 +49,35 @@ class LikeWorkOfArt extends ActivityTypeBase
      *
      * @param string A string of text to check 
      *
-     * @return boolean True if code is an assession #
+     * @return mixed boolean, array
+     * boolean False if code is an assession number
+     * array if code is an assession number
      */
     public static function isAssessionNumber($code)
     {
-        return preg_match( '/^[a-zA-Z0-9]{2}[a-zA-Z0-9]?[a-zA-Z0-9]?\..+$/', $code );
+        // Brain API request template URL
+        $template = 'http://brain.dma.org/api/v1/collection/object/?fields=id,number&format=json&number=%s';
+        
+        // Clean code from spaces in case user miss type it
+        $code     = str_replace(' ', '', $code);
+        
+        // Get URL
+        $url      = sprintf($template, urlencode($code));
+        
+        // Call Brain
+        $response = Request::get($url)                   
+                            ->send();
+        
+        if($obj = @$response->body->results[0]){
+            $data = [
+                'object_id'     => $obj->id,
+                'object_number' => $obj->number
+            ];
+            
+            return $data;
+           
+        }
+        return false;
+        
     }
 }
