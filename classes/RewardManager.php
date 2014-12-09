@@ -8,6 +8,7 @@ use Exception;
 use Lang;
 use Event;
 use Session;
+use FriendsLog;
 
 class RewardManager
 {
@@ -32,6 +33,13 @@ class RewardManager
             $userExtend->removePoints($reward->points);
 
             Event::fire('dma.friends.reward.redeemed', [$reward, $user]);
+
+            $params = [
+                'user'      => $user,
+                'object'    => $reward,
+            ];
+
+            FriendsLog::reward($params);
             // TODO handle printing of reward coupon
 
             Session::put('rewardMessage', Lang::get('dma.friends::lang.rewards.redeemed', ['title' => $reward->title]));
