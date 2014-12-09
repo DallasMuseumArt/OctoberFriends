@@ -28,25 +28,25 @@ Activity & {\em \$activity} & An activity model \\
 \end{DoxyParams}
 
 \begin{DoxyCode}
-29     \{
-30 
-31         $steps = $activity->steps()->get();
+31     \{
 32 
-33         \textcolor{keywordflow}{foreach} ($steps as $step) \{
+33         $steps = $activity->steps()->get();
 34 
-35             \textcolor{comment}{// see if step is associated with user}
-36             \textcolor{keywordflow}{if} (!$step->users->contains($user->id)) \{
-37                 \textcolor{comment}{// user has not completed the step}
-38                 $isStepCompletable = self::checkUserActivities($user, $activity, $step);
-39 
-40                 \textcolor{keywordflow}{if} ($isStepCompletable) \{
-41                     \textcolor{comment}{// Find badge associated with steps}
-42                     self::completeBadge($step, $user);
-43                 \}
-44             \}
-45         \}
-46 
-47     \}
+35         \textcolor{keywordflow}{foreach} ($steps as $step) \{
+36 
+37             \textcolor{comment}{// see if step is associated with user}
+38             \textcolor{keywordflow}{if} (!$step->users->contains($user->id)) \{
+39                 \textcolor{comment}{// user has not completed the step}
+40                 $isStepCompletable = self::checkUserActivities($user, $activity, $step);
+41 
+42                 \textcolor{keywordflow}{if} ($isStepCompletable) \{
+43                     \textcolor{comment}{// Find badge associated with steps}
+44                     self::completeBadge($step, $user);
+45                 \}
+46             \}
+47         \}
+48 
+49     \}
 \end{DoxyCode}
 
 

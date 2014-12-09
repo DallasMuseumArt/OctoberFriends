@@ -215,7 +215,7 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Cha
 110             Event::fire($event, [$msg]);
 111             Log::info(\textcolor{stringliteral}{'Processed Twilio incoming SMS'}, $msg->getData());
 112         \}
-113         \textcolor{keywordflow}{catch}(\(\backslash\)Exception $e)
+113         \textcolor{keywordflow}{catch}(\(\backslash\)\hyperlink{namespaceException}{Exception} $e)
 114         \{
 115             Log::error(\textcolor{stringliteral}{'Processing Twilio webhook request'}, $request);
 116             Log::error(sprintf(\textcolor{stringliteral}{'Processing Twilio webhook:  %s'}, $e));

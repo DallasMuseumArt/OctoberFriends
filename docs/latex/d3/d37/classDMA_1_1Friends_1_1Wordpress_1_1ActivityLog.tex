@@ -108,7 +108,7 @@ int & {\em \$limit} & The amount of records to import at one time \\
 102                     \}
 103                     $count++;
 104                 \} 
-105             \} \textcolor{keywordflow}{catch}(Exception $e) \{
+105             \} \textcolor{keywordflow}{catch}(\hyperlink{namespaceException}{Exception} $e) \{
 106                 echo \textcolor{stringliteral}{"Failed to import log entry id: "} . $log->id . \textcolor{stringliteral}{"\(\backslash\)n"};
 107                 echo $e->getMessage() . \textcolor{stringliteral}{"\(\backslash\)n"};
 108             \}

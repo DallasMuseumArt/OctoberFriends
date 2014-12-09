@@ -180,7 +180,7 @@ Public Attributes</h2></td></tr>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordflow">if</span> ($this-&gt;user-&gt;forceSave()) {</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            Event::fire(<span class="stringliteral">&#39;friends.user.pointsEarned&#39;</span>, [$this-&gt;user, $points]);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            Event::fire(<span class="stringliteral">&#39;dma.friends.user.pointsEarned&#39;</span>, [$this-&gt;user, $points]);</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            $params = [</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                <span class="stringliteral">&#39;user&#39;</span>          =&gt; $this-&gt;user,</div>
@@ -220,7 +220,7 @@ Public Attributes</h2></td></tr>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        $this-&gt;user-&gt;points -= $points;</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        $this-&gt;user-&gt;points_this_week -= $points;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordflow">if</span> ($this-&gt;user-&gt;forceSave()) {</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            Event::fire(<span class="stringliteral">&#39;friends.user.pointsRemoved&#39;</span>, [$this-&gt;user, $points]);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            Event::fire(<span class="stringliteral">&#39;dma.friends.user.pointsRemoved&#39;</span>, [$this-&gt;user, $points]);</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        }</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
 </div><!-- fragment -->
@@ -233,7 +233,7 @@ Public Attributes</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 4 2014 14:14:27 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 9 2014 14:30:01 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

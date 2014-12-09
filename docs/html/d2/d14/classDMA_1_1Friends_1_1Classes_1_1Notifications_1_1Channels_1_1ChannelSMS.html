@@ -306,7 +306,7 @@ Public Member Functions</h2></td></tr>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            Event::fire($event, [$msg]);</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            Log::info(<span class="stringliteral">&#39;Processed Twilio incoming SMS&#39;</span>, $msg-&gt;getData());</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        }</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <span class="keywordflow">catch</span>(\Exception $e)</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <span class="keywordflow">catch</span>(\<a class="code" href="../../d6/d65/namespaceException.html">Exception</a> $e)</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        {</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            Log::error(<span class="stringliteral">&#39;Processing Twilio webhook request&#39;</span>, $request);</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            Log::error(sprintf(<span class="stringliteral">&#39;Processing Twilio webhook:  %s&#39;</span>, $e));</div>
@@ -318,6 +318,7 @@ Public Member Functions</h2></td></tr>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        return \Response::make(<span class="stringliteral">&#39;&lt;Response&gt;&lt;/Response&gt;&#39;</span>, $httpCode);</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    }</div>
 <div class="ttc" id="classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_html_af645c26a2c6baf2e5106a464d7d74d7e"><div class="ttname"><a href="../../d2/d14/classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS.html#af645c26a2c6baf2e5106a464d7d74d7e">DMA\Friends\Classes\Notifications\Channels\ChannelSMS\getKey</a></div><div class="ttdeci">getKey()</div><div class="ttdef"><b>Definition:</b> ChannelSMS.php:24</div></div>
+<div class="ttc" id="namespaceException_html"><div class="ttname"><a href="../../d6/d65/namespaceException.html">Exception</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -328,7 +329,7 @@ Public Member Functions</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 4 2014 14:14:27 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 9 2014 14:30:01 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

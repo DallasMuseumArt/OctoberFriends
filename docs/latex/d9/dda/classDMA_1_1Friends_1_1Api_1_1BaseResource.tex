@@ -155,7 +155,7 @@ Response
 87             \textcolor{keywordflow}{return} Response::api()->withItem($instance, \textcolor{keyword}{new} $this->transformer);
 88         \}\textcolor{keywordflow}{catch}(ModelNotFoundException $e) \{
 89             \textcolor{keywordflow}{return} Response::api()->errorNotFound();
-90         \}\textcolor{keywordflow}{catch}(Exception $e)\{
+90         \}\textcolor{keywordflow}{catch}(\hyperlink{namespaceException}{Exception} $e)\{
 91             \textcolor{keywordflow}{return} Response::api()->errorInternalError();
 92         \}
 93     \}

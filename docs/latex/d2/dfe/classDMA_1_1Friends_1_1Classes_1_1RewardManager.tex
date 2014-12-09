@@ -1,0 +1,62 @@
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1RewardManager}{\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}Reward\+Manager Class Reference}
+\label{classDMA_1_1Friends_1_1Classes_1_1RewardManager}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Reward\+Manager@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Reward\+Manager}}
+}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classDMA_1_1Friends_1_1Classes_1_1RewardManager_a2a1ce1d86e60454954229210c334e2bd}{redeem} (\$id, \$user)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1RewardManager_a2a1ce1d86e60454954229210c334e2bd}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Reward\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Reward\+Manager}!redeem@{redeem}}
+\index{redeem@{redeem}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Reward\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Reward\+Manager}}
+\subsubsection[{redeem}]{\setlength{\rightskip}{0pt plus 5cm}static D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Reward\+Manager\+::redeem (
+\begin{DoxyParamCaption}
+\item[{}]{\$id, }
+\item[{}]{\$user}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classDMA_1_1Friends_1_1Classes_1_1RewardManager_a2a1ce1d86e60454954229210c334e2bd}
+Redeem a reward for a user 
+\begin{DoxyParams}[1]{Parameters}
+int & {\em \$id} & The id of the reward to redeem \\
+\hline
+User & {\em \$user} & The user model to redeem the reward for \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+23     \{
+24         $reward = Reward::find($id);
+25 
+26         \textcolor{keywordflow}{if} (!$reward) \{
+27             \textcolor{keywordflow}{throw} \hyperlink{namespaceException}{Exception}(Lang::get(\textcolor{stringliteral}{'dma.friends.exceptions.missingReward'}, [\textcolor{stringliteral}{'id'} => $id]));
+28         \}
+29 
+30         \textcolor{keywordflow}{try} \{
+31             $user->rewards()->save($reward);
+32             $userExtend = \textcolor{keyword}{new} UserExtend($user);
+33             $userExtend->removePoints($reward->points);
+34 
+35             Event::fire(\textcolor{stringliteral}{'dma.friends.reward.redeemed'}, [$reward, $user]);
+36 
+37             $params = [
+38                 \textcolor{stringliteral}{'user'}      => $user,
+39                 \textcolor{stringliteral}{'object'}    => $reward,
+40             ];
+41 
+42             \hyperlink{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_a9f38b9c2e3b1c9d36bc7a1247b2571eb}{FriendsLog::reward}($params);
+43             \textcolor{comment}{// TODO handle printing of reward coupon}
+44 
+45             Session::put(\textcolor{stringliteral}{'rewardMessage'}, Lang::get(\textcolor{stringliteral}{'dma.friends::lang.rewards.redeemed'}, [\textcolor{stringliteral}{'title'} => 
+      $reward->title]));
+46         \} \textcolor{keywordflow}{catch} (\hyperlink{namespaceException}{Exception} $e) \{
+47             \textcolor{keywordflow}{throw} \hyperlink{namespaceException}{Exception}(Lang::get(\textcolor{stringliteral}{'dma.friends.exceptions.rewardFailed'}));
+48         \}
+49     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+classes/Reward\+Manager.\+php\end{DoxyCompactItemize}

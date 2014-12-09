@@ -73,7 +73,7 @@ integer & {\em \$points} & The amount of points to add to a user \\
 51 
 52         \textcolor{keywordflow}{if} ($this->user->forceSave()) \{
 53 
-54             Event::fire(\textcolor{stringliteral}{'friends.user.pointsEarned'}, [$this->user, $points]);
+54             Event::fire(\textcolor{stringliteral}{'dma.friends.user.pointsEarned'}, [$this->user, $points]);
 55 
 56             $params = [
 57                 \textcolor{stringliteral}{'user'}          => $this->user,
@@ -106,7 +106,7 @@ integer & {\em \$points} & The amount of points to remove from a user account \\
 75         $this->user->points -= $points;
 76         $this->user->points\_this\_week -= $points;
 77         \textcolor{keywordflow}{if} ($this->user->forceSave()) \{
-78             Event::fire(\textcolor{stringliteral}{'friends.user.pointsRemoved'}, [$this->user, $points]);
+78             Event::fire(\textcolor{stringliteral}{'dma.friends.user.pointsRemoved'}, [$this->user, $points]);
 79         \}
 80     \}
 \end{DoxyCode}
