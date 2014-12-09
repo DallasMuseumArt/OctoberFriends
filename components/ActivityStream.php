@@ -19,6 +19,7 @@ class ActivityStream extends ComponentBase
 
     public function onRun()
     {
+
         $results = $this->getResults();
 
         $this->page['results'] = $results;
@@ -33,7 +34,7 @@ class ActivityStream extends ComponentBase
         $this->page['links'] = $results->links();
 
         return [
-            '#activity-stream' => $this->renderPartial('@default'),
+            '#activity-stream'  => $this->renderPartial('@default'),
         ];
     }
 

@@ -272,7 +272,7 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInte
 125 
 126             \textcolor{keywordflow}{if} ($user->activities()->save($activity)) \{
 127 
-128                 Event::fire(\textcolor{stringliteral}{'friends.activityCompleted'}, [ $user, $activity ]); 
+128                 Event::fire(\textcolor{stringliteral}{'dma.friends.activity.completed'}, [ $activity, $user ]); 
 129 
 130                 \textcolor{comment}{// log an entry to the activity log}
 131                 \hyperlink{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_a0b90db29da51f53991f2dcc1a55f14c7}{FriendsLog::activity}([

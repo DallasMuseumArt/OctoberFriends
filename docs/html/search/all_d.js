@@ -1,13 +1,7 @@
 var searchData=
 [
-  ['passwordhash',['PasswordHash',['../d8/d56/classDMA_1_1Friends_1_1Wordpress_1_1PasswordHash.html',1,'DMA::Friends::Wordpress']]],
-  ['phpass',['phpass',['../dd/d4e/namespacephpass.html',1,'']]],
-  ['plugin',['Plugin',['../db/d85/classDMA_1_1Friends_1_1Plugin.html',1,'DMA::Friends']]],
-  ['plugindetails',['pluginDetails',['../db/d85/classDMA_1_1Friends_1_1Plugin.html#abcae4983c18bdb7b266c6aaa7a081d68',1,'DMA::Friends::Plugin']]],
-  ['points',['points',['../d4/d33/classDMA_1_1Friends_1_1Classes_1_1FriendsLog.html#a083fa01b3e143ca77bdbb1562db724de',1,'DMA::Friends::Classes::FriendsLog']]],
-  ['post',['Post',['../d2/de2/classDMA_1_1Friends_1_1Wordpress_1_1Post.html',1,'DMA::Friends::Wordpress']]],
-  ['postman',['Postman',['../d9/dbf/classDMA_1_1Friends_1_1Facades_1_1Postman.html',1,'DMA::Friends::Facades']]],
-  ['prepareformfields',['prepareFormFields',['../dd/d00/classDMA_1_1Friends_1_1FormWidgets_1_1ActivityType.html#ab8b5e6c785f85176a4884d3218b1b064',1,'DMA::Friends::FormWidgets::ActivityType']]],
-  ['preparevars',['prepareVars',['../dd/d00/classDMA_1_1Friends_1_1FormWidgets_1_1ActivityType.html#abb8585f86e795e2f9bfd6bea78a2f7ab',1,'DMA::Friends::FormWidgets::ActivityType']]],
-  ['process',['process',['../d2/d5d/classDMA_1_1Friends_1_1Activities_1_1ActivityCode.html#a3de9ef142396ba94532566598b508d58',1,'DMA\Friends\Activities\ActivityCode\process()'],['../d2/d05/classDMA_1_1Friends_1_1Activities_1_1LikeWorkOfArt.html#a814a0bc1a22cc72f91dac635c871b43c',1,'DMA\Friends\Activities\LikeWorkOfArt\process()'],['../d3/d35/classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase.html#a772667f95a25c6aa44e31ce9c6903384',1,'DMA\Friends\Classes\ActivityTypeBase\process()']]]
+  ['onactivitycompleted',['onActivityCompleted',['../d1/d89/classDMA_1_1Friends_1_1Classes_1_1FriendsEventHandler.html#a6467365017b9d494122c8ded41a9a406',1,'DMA::Friends::Classes::FriendsEventHandler']]],
+  ['onbadgecompleted',['onBadgeCompleted',['../d1/d89/classDMA_1_1Friends_1_1Classes_1_1FriendsEventHandler.html#aa13c2568369d06c2a0ca1c96f099ff09',1,'DMA::Friends::Classes::FriendsEventHandler']]],
+  ['onrewardredeemed',['onRewardRedeemed',['../d1/d89/classDMA_1_1Friends_1_1Classes_1_1FriendsEventHandler.html#aeb8499a09334c87311a7f5840c43685a',1,'DMA::Friends::Classes::FriendsEventHandler']]],
+  ['onstepcompleted',['onStepCompleted',['../d1/d89/classDMA_1_1Friends_1_1Classes_1_1FriendsEventHandler.html#a3a99cae5eaa37efa395ef4fe8eb30c11',1,'DMA::Friends::Classes::FriendsEventHandler']]]
 ];

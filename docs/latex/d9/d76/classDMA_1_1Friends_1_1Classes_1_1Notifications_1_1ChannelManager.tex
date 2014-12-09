@@ -181,7 +181,7 @@ Implements internal polling for channels that are listenable
 209                     \}
 210                 \}
 211 
-212             \}\textcolor{keywordflow}{catch}(\(\backslash\)Exception $e)\{
+212             \}\textcolor{keywordflow}{catch}(\(\backslash\)\hyperlink{namespaceException}{Exception} $e)\{
 213                 \(\backslash\)Log::error($e);
 214             \}
 215         \}
@@ -303,7 +303,7 @@ array & {\em \$sent\+By} & \\
 172 
 173                 \textcolor{comment}{// Send notification}
 174                 $channel->send($notification);
-175             \}\textcolor{keywordflow}{catch}(\(\backslash\)Exception $e)\{
+175             \}\textcolor{keywordflow}{catch}(\(\backslash\)\hyperlink{namespaceException}{Exception} $e)\{
 176                 \(\backslash\)Log::error($e);
 177                 \textcolor{comment}{//throw $e;}
 178             \}
