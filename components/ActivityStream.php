@@ -28,7 +28,6 @@ class ActivityStream extends ComponentBase
     public function onUpdate()
     {
         $filter = post('filter');
-        \Debugbar::info($filter);
         $results = $this->getResults($filter);
         $this->page['results'] = $results;
         $this->page['links'] = $results->links();
