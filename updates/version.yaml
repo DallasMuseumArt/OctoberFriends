@@ -40,3 +40,6 @@
 1.0.12:
     - Add priority field to badges/activities
     - add_priority.php    
+1.0.13:
+    - Create Activity Audit table
+    - create_activity_audit_table.php
