@@ -5,3 +5,11 @@
             <div class="btn btn-{{ type }} alert alert-{{ type }}">{{ message }}</div>
         {% endif %}
     {% endflash %}
+    <script type="text/javascript">
+        setTimeout(function() {
+            $('.alert').fadeOut(500, function() {
+                $('.alert').remove();
+            });
+            
+        }, 5000);
+    </script>
