@@ -99,9 +99,9 @@ secondaryTabs:
             label: Archive
             type: checkbox
             tab: Publishing Options
-        created_at:
-            label: Created on
-            type: datepicker
-            mode: datetime
-            span: left
-            tab: Publishing Options
+        # created_at:
+        #     label: Created on
+        #     type: datepicker
+        #     mode: datetime
+        #     span: left
+        #     tab: Publishing Options

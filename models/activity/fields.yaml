@@ -131,12 +131,12 @@ secondaryTabs:
             tab: Publishing Options 
             span: left
             type: checkbox
-        created_at:
-            label: Created on
-            tab: Publishing Options 
-            span: left
-            type: datepicker
-            mode: datetime
+        # created_at:
+        #     label: Created on
+        #     tab: Publishing Options 
+        #     span: left
+        #     type: datepicker
+        #     mode: datetime
         # ===================================
         #  Badges tab 
         # ===================================

@@ -67,14 +67,6 @@ secondaryTabs:
             tab: Categories
             span: left
         # ===================================
-        #  Steps tab 
-        # ===================================
-        steps:
-            tab: Steps 
-            context: update
-            type: partial
-            path: @/plugins/dma/friends/controllers/badges/_form_steps.htm
-        # ===================================
         #  Configuration tab 
         # ===================================
         points:
@@ -157,8 +149,17 @@ secondaryTabs:
             label: Archive
             tab: Publishing Options
             type: checkbox
-        created_at:
-            label: Created on
-            tab: Publishing Options
-            type: datepicker
-            mode: datetime
+        # created_at:
+        #     label: Created on
+        #     tab: Publishing Options
+        #     type: datepicker
+        #     mode: datetime
+
+        # ===================================
+        #  Steps tab 
+        # ===================================
+        steps:
+            tab: Steps 
+            context: update
+            type: partial
+            path: @/plugins/dma/friends/controllers/badges/_form_steps.htm
