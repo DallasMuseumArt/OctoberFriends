@@ -1,0 +1,22 @@
+<div class="row group">
+<h4>{{ user.name|title }} you have invited to join</h4>	
+<form
+	    id="group-request">
+
+	        <table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Group created by</th>
+		        		<th></th>
+		        		<th></th>
+		        	</tr>
+	        	</thead>
+	        	
+	        	<tbody id="result">
+					{% partial __SELF__~"::list" %}
+				</tbody>
+	        </table>
+	    </div>
+	</form>
+
+</div>

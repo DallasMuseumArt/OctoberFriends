@@ -33,7 +33,7 @@ class Usermeta extends Model
      */
     public $belongsTo = [
         'user'          => ['RainLab\User\Models\User',
-            'primaryKey'    => 'group_id',
+            'primaryKey'    => 'id',
             'foreignKey'    => 'user_id',        
         ],
     ];

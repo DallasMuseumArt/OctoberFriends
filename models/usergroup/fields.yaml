@@ -1,0 +1,16 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    is_active:
+        label: Group is active
+        type: checkbox
+        default: True
+        
+    owner:
+        label: Owner / Creator of the group
+        type: relation
+        nameFrom: name
+        span: left
+        placeholder: -- select owner --  

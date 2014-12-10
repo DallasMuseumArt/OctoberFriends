@@ -3,12 +3,12 @@
 use Schema;
 use October\Rain\Database\Updates\Migration;
 
-class CreateActivityAuditTable extends Migration
+class CreateActivityMetadataTable extends Migration
 {
 
     public function up()
     {
-        Schema::create('dma_friends_activity_audit', function($table)
+        Schema::create('dma_friends_activity_metadata', function($table)
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
@@ -25,7 +25,7 @@ class CreateActivityAuditTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('dma_friends_activity_audit');
+        Schema::dropIfExists('dma_friends_activity_metadata');
     }
 
 }

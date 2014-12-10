@@ -63,7 +63,7 @@ class Plugin extends PluginBase
                 'keywords'    => 'friends system settings'
             ],
             'locations' => [
-                'label' => 'Locations',
+                'label'         => 'Locations',
                 'description'   => 'Manage the kiosk locations',
                 'category'      => 'Friends',
                 'icon'          => 'icon-location-arrow',
@@ -112,6 +112,11 @@ class Plugin extends PluginBase
                         'icon'      => 'icon-rocket',
                         'url'       => Backend::url('dma/friends/activitylogs'),
                     ],
+                    'groups'   => [
+                        'label'     => 'Friends Groups',
+                        'icon'      => 'icon-users',
+                        'url'       => Backend::url('dma/friends/groups'),
+                    ],                    
                     
                 ]
             ]
@@ -129,7 +134,9 @@ class Plugin extends PluginBase
             'DMA\Friends\Components\UserBadges'                 => 'UserBadges',
             'DMA\Friends\Components\UserMostRecentBadge'        => 'UserMostRecentBadge',
             'DMA\Friends\Components\NotificationCounter'        => 'NotificationCounter',
-            'DMA\Friends\Components\NotificationList'           => 'NotificationList',            
+            'DMA\Friends\Components\NotificationList'           => 'NotificationList',
+            'DMA\Friends\Components\GroupFormCreation'  		=> 'GroupFormCreation',
+            'DMA\Friends\Components\GroupRequest'       		=> 'GroupRequest',                        
         ];
     }
 
@@ -162,11 +169,11 @@ class Plugin extends PluginBase
             $model->hasOne['metadata']          = ['DMA\Friends\Models\Usermeta'];     
             $model->hasMany['activityLogs']     = ['DMA\Friends\Models\ActivityLog'];
             $model->hasMany['notifications']    = ['DMA\Friends\Models\Notification'];
-            $model->belongsToMany['activities'] = ['DMA\Friends\Models\Activity',   'table' => 'dma_friends_activity_user', 'user_id', 'activity_id',   'timestamps' => true, 'order' => 'created_at desc'];     
-            $model->belongsToMany['steps']      = ['DMA\Friends\Models\Step',       'table' => 'dma_friends_step_user',     'user_id', 'step_id',       'timestamps' => true, 'order' => 'created_at desc'];     
-            $model->belongsToMany['badges']     = ['DMA\Friends\Models\Badge',      'table' => 'dma_friends_badge_user',    'user_id', 'badge_id',      'timestamps' => true, 'order' => 'created_at desc'];        
-            $model->belongsToMany['rewards']    = ['DMA\Friends\Models\Reward',     'table' => 'dma_friends_reward_user',   'user_id', 'reward_id',     'timestamps' => true, 'order' => 'created_at desc'];       
-            $model->belongsToMany['groups']     = ['DMA\Friends\Models\UserGroup',  'table' => 'users_groups',              'user_id', 'group_id'];        
+            $model->belongsToMany['activities'] = ['DMA\Friends\Models\Activity',   'table' => 'dma_friends_activity_user', 'user_id', 'activity_id',   'timestamps' => true, 'order' => 'dma_friends_activity_user.created_at desc'];     
+            $model->belongsToMany['steps']      = ['DMA\Friends\Models\Step',       'table' => 'dma_friends_step_user',     'user_id', 'step_id',       'timestamps' => true, 'order' => 'dma_friends_step_user.created_at desc'];     
+            $model->belongsToMany['badges']     = ['DMA\Friends\Models\Badge',      'table' => 'dma_friends_badge_user',    'user_id', 'badge_id',      'timestamps' => true, 'order' => 'dma_friends_badge_user.created_at desc'];        
+            $model->belongsToMany['rewards']    = ['DMA\Friends\Models\Reward',     'table' => 'dma_friends_reward_user',   'user_id', 'reward_id',     'timestamps' => true, 'order' => 'dma_friends_reward_user.created_at desc'];       
+            $model->belongsToMany['groups']     = ['DMA\Friends\Models\UserGroup',  'table' => 'dma_friends_users_groups',  'primaryKey' => 'user_id',  'foreignKey' => 'group_id', 'pivot' => ['membership_status']];        
         });
         
         // Extend User fields
@@ -204,7 +211,7 @@ class Plugin extends PluginBase
                 ], 
                 'zip' => [
                     'label' => 'Zip',
-                ],
+                ],            
             ]); 
         });
 
@@ -298,6 +305,13 @@ class Plugin extends PluginBase
             ],
         ];  
     } 
+    
+    public function registerMailTemplates()
+    {
+        return [
+                'dma.friends::mail.invite' => 'Invitation email to join a group sent when a user is added to a group.',
+        ];
+    }    
 
 }
 
