@@ -1,7 +1,6 @@
 <div class="row rewards">
     {% for reward in rewards %}
         {{ reward.rendered|raw }}
-        <button data-request="onRedeem" data-request-data="id: {{ reward.id }}">Redeem</a>
     {% endfor %}
 
     <div class="links">

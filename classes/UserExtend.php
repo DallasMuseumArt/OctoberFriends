@@ -66,6 +66,9 @@ class UserExtend
      *
      * @param integer $points
      * The amount of points to remove from a user account
+     *
+     * @return boolean
+     * returns true if points where removed
      */
     public function removePoints($points)
     {

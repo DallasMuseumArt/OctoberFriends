@@ -57,4 +57,9 @@ class Reward extends Model
             ->where('is_archived', '<>', 1);
     }
 
+    public function getPointsFormatted()
+    {
+        return number_format($this->points);
+    }
+
 }
