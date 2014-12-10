@@ -32,58 +32,90 @@ int & {\em \$limit} & The amount of records to import at one time \\
 \end{DoxyParams}
 
 \begin{DoxyCode}
-24     \{
-25         $count  = 0;
-26         $table  = $this->model->table;
-27         $id     = (int)DB::table($table)->max(\textcolor{stringliteral}{'id'});
-28 
-29         $wordpressLogs = $this->db
-30             ->table(\textcolor{stringliteral}{'wp\_badgeos\_logs'})
-31             ->where(\textcolor{stringliteral}{'id'}, \textcolor{charliteral}{'>'}, $id)
-32             ->orderBy(\textcolor{stringliteral}{'id'}, \textcolor{stringliteral}{'asc'})
-33             ->limit($limit)
-34             ->get();
-35 
-36         \textcolor{comment}{// Use dummy model to get action types}
-37         $l = \textcolor{keyword}{new} \hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Post_a8a3df2e9db7f90d348d27ea9354176b1}{$this->model};
-38 
-39         \textcolor{keywordflow}{foreach} ($wordpressLogs as $wlog) \{
+29     \{
+30         $count  = 0;
+31         $table  = $this->model->table;
+32         $id     = (int)DB::table($table)->max(\textcolor{stringliteral}{'id'});
+33 
+34         $wordpressLogs = $this->db
+35             ->table(\textcolor{stringliteral}{'wp\_badgeos\_logs'})
+36             ->where(\textcolor{stringliteral}{'id'}, \textcolor{charliteral}{'>'}, $id)
+37             ->orderBy(\textcolor{stringliteral}{'id'}, \textcolor{stringliteral}{'asc'})
+38             ->limit($limit)
+39             ->get();
 40 
-41             \textcolor{keywordflow}{if} (!in\_array($wlog->action, $l->actionTypes)) \textcolor{keywordflow}{continue};
-42 
-43             $log                = \textcolor{keyword}{new} \hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Post_a8a3df2e9db7f90d348d27ea9354176b1}{$this->model};
-44             $log->id            = $wlog->id;
-45             $log->user\_id       = $wlog->user\_id;
-46             $log->action        = $wlog->action;
-47             $log->message       = $wlog->message;
-48             $log->points\_earned = $wlog->points\_earned;
-49             $log->total\_points  = $wlog->total\_points;
-50             $log->timestamp     = $wlog->timestamp;
-51             $log->timezone      = $wlog->timezone;
-52     
-53             \textcolor{keywordflow}{if} ($wlog->action == \textcolor{stringliteral}{'artwork'}) \{
-54                 $log->artwork\_id = $wlog->object\_id;
-55             \} \textcolor{keywordflow}{else} \{
-56                 $log->object\_id = $wlog->object\_id;
-57 
-58                 $type = $this->db
-59                     ->table(\textcolor{stringliteral}{'wp\_posts'})
-60                     ->select(\textcolor{stringliteral}{'post\_type'})
-61                     ->where(\textcolor{stringliteral}{'ID'}, $log->object\_id)
-62                     ->first();
-63 
-64                 \textcolor{keywordflow}{if} ($type) \{
-65                     $log->object\_type = $type->post\_type;
-66                 \}   
-67             \}   
-68 
-69             \textcolor{keywordflow}{if} ($log->save()) \{
-70                 $count++;
-71             \} 
-72         \}  
-73 
-74         \textcolor{keywordflow}{return} $count;
-75     \}
+41         \textcolor{comment}{// Use dummy model to get action types}
+42         $l = \textcolor{keyword}{new} \hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Post_a8a3df2e9db7f90d348d27ea9354176b1}{$this->model};
+43 
+44         \textcolor{keywordflow}{foreach} ($wordpressLogs as $wlog) \{
+45 
+46             \textcolor{keywordflow}{if} (!in\_array($wlog->action, $l->actionTypes)) \textcolor{keywordflow}{continue};
+47 
+48             $object = \textcolor{keyword}{false};
+49 
+50             $log                = \textcolor{keyword}{new} \hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1Post_a8a3df2e9db7f90d348d27ea9354176b1}{$this->model};
+51             $log->id            = $wlog->id;
+52             $log->user\_id       = $wlog->user\_id;
+53             $log->action        = $wlog->action;
+54             $log->message       = $wlog->message;
+55             $log->points\_earned = $wlog->points\_earned;
+56             $log->total\_points  = $wlog->total\_points;
+57             $log->timestamp     = $wlog->timestamp;
+58             $log->timezone      = $wlog->timezone;
+59     
+60             \textcolor{keywordflow}{if} ($wlog->action == \textcolor{stringliteral}{'artwork'}) \{
+61                 $log->artwork\_id = $wlog->object\_id;
+62                 $object = OctoberActivity::where(\textcolor{stringliteral}{'activity\_type'}, \textcolor{charliteral}{'='}, \textcolor{stringliteral}{'LikeWorkOfArt'})->first();
+63             \} \textcolor{keywordflow}{else} \{
+64 
+65                 \textcolor{comment}{// Get the wordpress post type}
+66                 $post\_type = $this->db
+67                     ->table(\textcolor{stringliteral}{'wp\_posts'})
+68                     ->select(\textcolor{stringliteral}{'post\_type'})
+69                     ->where(\textcolor{stringliteral}{'ID'}, $wlog->object\_id)
+70                     ->first();
+71 
+72                 \textcolor{keywordflow}{if} (isset($post\_type->post\_type)) \{
+73                     \textcolor{comment}{// Convert the post type to a usable object model}
+74                     \textcolor{keywordflow}{switch}($post\_type->post\_type) \{
+75                         \textcolor{keywordflow}{case} \textcolor{stringliteral}{'activity'}:
+76                             $object = OctoberActivity::findWordpress($wlog->object\_id);
+77                             \textcolor{keywordflow}{break};
+78                         \textcolor{keywordflow}{case} \textcolor{stringliteral}{'badge'}:
+79                             $object = OctoberBadge::findWordpress($wlog->object\_id);
+80                             \textcolor{keywordflow}{break};
+81                         \textcolor{keywordflow}{case} \textcolor{stringliteral}{'badgeos-rewards'}:
+82                             $object = OctoberReward::findWordpress($wlog->object\_id);
+83                             \textcolor{keywordflow}{break};
+84                         \textcolor{keywordflow}{case} \textcolor{stringliteral}{'dma-location'}:
+85                             $object = OctoberLocation::findWordpress($wlog->object\_id);
+86                             \textcolor{keywordflow}{break};
+87                         \textcolor{keywordflow}{case} \textcolor{stringliteral}{'step'}:
+88                             $object = OctoberStep::findWordpress($wlog->object\_id);
+89                             \textcolor{keywordflow}{break};
+90                     \}
+91                 \}
+92  
+93             \}   
+94 
+95             \textcolor{keywordflow}{try} \{
+96                 \textcolor{keywordflow}{if} ($log->save()) \{
+97 
+98                     \textcolor{comment}{// If the log is related to an object, save that relation}
+99                     \textcolor{keywordflow}{if} ($object) \{
+100                         $object = $object->first();
+101                         $object->activityLogs()->save($log);
+102                     \}
+103                     $count++;
+104                 \} 
+105             \} \textcolor{keywordflow}{catch}(\hyperlink{namespaceException}{Exception} $e) \{
+106                 echo \textcolor{stringliteral}{"Failed to import log entry id: "} . $log->id . \textcolor{stringliteral}{"\(\backslash\)n"};
+107                 echo $e->getMessage() . \textcolor{stringliteral}{"\(\backslash\)n"};
+108             \}
+109         \}  
+110 
+111         \textcolor{keywordflow}{return} $count;
+112     \}
 \end{DoxyCode}
 
 

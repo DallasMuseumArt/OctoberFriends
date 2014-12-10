@@ -1,0 +1,39 @@
+<div class="activity-stream row">
+    <div class="col-md-8 col-xs-6">
+        <ul class="items list-group">
+            {% for result in results %}
+                <li class="list-group-item">
+                    <span class="time-ago">{{ result.timeAgo }}</span>
+                    {% if result.object_type == "Reward" %}
+                    You redeemed the reward
+                    {% elseif result.object_type == "Badge" %}
+                    You earned the badge 
+                    {% else %}
+                    You completed the {{ result.object_type }}
+                    {% endif %}
+                    <div>{{ result.title }}</div>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="links">{{ links|raw }}</div>
+    </div>
+    <div class="col-md-4 col-xs-6">
+        <ul class="filter-buttons-wrap button-group buttons">
+            <li class="first">
+                <a class="filter-all button large current" href="#" data-request="onUpdate" data-request-data="filter: 'all'">View All</a>
+            </li>
+            <li>
+                <a class="filter-stream-badge button large icon-cd" href="#" data-request="onUpdate" data-request-data="filter: 'Badge'">Badges</a>
+            </li>
+            <li>
+                <a class="filter-stream-reward button large icon-trophy" href="#" data-request="onUpdate" data-request-data="filter: 'Reward'">Rewards</a>
+            </li>
+            <li>
+                <a class="filter-stream-activity button large icon-check" href="#" data-request="onUpdate" data-request-data="filter: 'Activity'">Activities</a>
+            </li>
+            <li>
+                <a class="filter-stream-step button large icon-dma" href="#" data-request="onUpdate" data-request-data="filter: 'Step'">Steps</a>
+            </li>
+        </ul>
+    </div>
+</div>

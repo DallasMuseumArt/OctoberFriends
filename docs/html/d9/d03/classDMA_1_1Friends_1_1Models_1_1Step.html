@@ -115,6 +115,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a58a71b1c9b39249ac24484bbd2307db2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a58a71b1c9b39249ac24484bbd2307db2"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>scopefindWordpress</b> ($query, $id)</td></tr>
 <tr class="separator:a58a71b1c9b39249ac24484bbd2307db2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abed223d05f52e5e39b0991929695cee9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d03/classDMA_1_1Friends_1_1Models_1_1Step.html#abed223d05f52e5e39b0991929695cee9">beforeSave</a> ()</td></tr>
+<tr class="separator:abed223d05f52e5e39b0991929695cee9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -137,12 +139,35 @@ Protected Attributes</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>$guarded</b> = ['*']</td></tr>
 <tr class="separator:af8869edae9bea05ac3bc966d9b7debfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21b083b38af6692f21ae0827eea458a0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a21b083b38af6692f21ae0827eea458a0"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>$fillable</b> = ['touch']</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>$fillable</b> = ['touch', 'count', 'activity']</td></tr>
 <tr class="separator:a21b083b38af6692f21ae0827eea458a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>step Model </p>
-</div><h2 class="groupheader">Member Data Documentation</h2>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="abed223d05f52e5e39b0991929695cee9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DMA\Friends\Models\Step::beforeSave </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Automatically create a title based on the count and activity associated with this step </p>
+<div class="fragment"><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        $this-&gt;title = Lang::get(<span class="stringliteral">&#39;dma.friends::lang.app.stepTitle&#39;</span>, [</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="stringliteral">&#39;count&#39;</span> =&gt; $this-&gt;count, </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="stringliteral">&#39;title&#39;</span> =&gt; $this-&gt;activity-&gt;title</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        ]);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
 <a class="anchor" id="a1e83eefa3362e3a1ec89b5599823c22d"></a>
 <div class="memitem">
 <div class="memproto">
@@ -167,7 +192,8 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= [</div>
-<div class="line">        <span class="stringliteral">&#39;users&#39;</span> =&gt; [<span class="stringliteral">&#39;Rainlab\User\Models\User&#39;</span>, <span class="stringliteral">&#39;dma_friends_step_user&#39;</span>]</div>
+<div class="line">        <span class="stringliteral">&#39;users&#39;</span> =&gt; [<span class="stringliteral">&#39;Rainlab\User\Models\User&#39;</span>, <span class="stringliteral">&#39;table&#39;</span> =&gt; <span class="stringliteral">&#39;dma_friends_step_user&#39;</span>],</div>
+<div class="line">    ]</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -193,7 +219,7 @@ Protected Attributes</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 5 2014 13:24:44 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 9 2014 14:30:03 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

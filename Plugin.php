@@ -15,7 +15,8 @@ use Illuminate\Foundation\AliasLoader;
 /**
  * Friends Plugin Information File
  *
- * @authors Kristen Arnold, Carlos Arroyo
+ * @package DMA\Friends
+ * @author Kristen Arnold, Carlos Arroyo
  */
 class Plugin extends PluginBase
 {
@@ -62,7 +63,7 @@ class Plugin extends PluginBase
                 'keywords'    => 'friends system settings'
             ],
             'locations' => [
-                'label' => 'Locations',
+                'label'         => 'Locations',
                 'description'   => 'Manage the kiosk locations',
                 'category'      => 'Friends',
                 'icon'          => 'icon-location-arrow',
@@ -77,14 +78,6 @@ class Plugin extends PluginBase
                 'url'           => Backend::url('dma/friends/categories'),
                 'order'         => 10,
             ],
-             'settings' => [
-                'label'           => 'Friend Settings',
-                'description'     => 'Manage friend settings.',
-                'category'        => 'Friends',
-                'icon'            => 'icon-cog',
-                'class'           => 'DMA\Friends\Models\Settings',
-                'order'           => 50,
-            ],                       
         ];
     }
 
@@ -93,7 +86,7 @@ class Plugin extends PluginBase
         return [
             'friends' => [
                 'label'         => 'Friends',
-                'url'           => Backend::url('dma/friends/badges'),
+                'url'           => Backend::url('dma/friends/activities'),
                 'icon'          => 'icon-users',
                 'permissions'   => ['dma.friends.*'],
                 'order'         => 500,
@@ -133,14 +126,17 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            'DMA\Friends\Components\ActivityCodeForm'   		=> 'ActivityCodeForm',
-            'DMA\Friends\Components\BadgeRecommend'     		=> 'BadgeRecommend',
-            'DMA\Friends\Components\Modal'              		=> 'Modal',
-            'DMA\Friends\Components\UserBadges'         		=> 'UserBadges',
-            'DMA\Friends\Components\GroupFormCreation'  		=> 'GroupFormCreation',
-            'DMA\Friends\Components\GroupRequest'       		=> 'GroupRequest',
+            'DMA\Friends\Components\ActivityCodeForm'           => 'ActivityCodeForm',
+            'DMA\Friends\Components\ActivityStream'             => 'ActivityStream',
+            'DMA\Friends\Components\BadgeRecommend'             => 'BadgeRecommend',
+            'DMA\Friends\Components\GetRewards'                 => 'GetRewards',
+            'DMA\Friends\Components\Modal'                      => 'Modal',
+            'DMA\Friends\Components\UserBadges'                 => 'UserBadges',
+            'DMA\Friends\Components\UserMostRecentBadge'        => 'UserMostRecentBadge',
             'DMA\Friends\Components\NotificationCounter'        => 'NotificationCounter',
-            'DMA\Friends\Components\NotificationList'           => 'NotificationList',  
+            'DMA\Friends\Components\NotificationList'           => 'NotificationList',
+            'DMA\Friends\Components\GroupFormCreation'  		=> 'GroupFormCreation',
+            'DMA\Friends\Components\GroupRequest'       		=> 'GroupRequest',                        
         ];
     }
 
@@ -169,15 +165,15 @@ class Plugin extends PluginBase
         Event::subscribe($subscriber);
 
         // Extend the user model to support our custom metadata        
-        User::extend(function($model) {   
+        User::extend(function($model) {        
             $model->hasOne['metadata']          = ['DMA\Friends\Models\Usermeta'];     
             $model->hasMany['activityLogs']     = ['DMA\Friends\Models\ActivityLog'];
             $model->hasMany['notifications']    = ['DMA\Friends\Models\Notification'];
-            $model->belongsToMany['activities'] = ['DMA\Friends\Models\Activity',   'table' => 'dma_friends_activity_user', 'user_id', 'activity_id', 'timestamps' => true, 'order' => 'created_at desc',];     
-            $model->belongsToMany['steps']      = ['DMA\Friends\Models\Step',       'table' => 'dma_friends_step_user',     'user_id', 'step_id'];     
-            $model->belongsToMany['badges']     = ['DMA\Friends\Models\Badge',      'table' => 'dma_friends_badge_user',    'user_id', 'badge_id'];        
-            $model->belongsToMany['groups']     = ['DMA\Friends\Models\UserGroup',  'table' => 'dma_friends_users_groups',  'primaryKey' => 'user_id', 'foreignKey' => 'group_id', 'pivot' => ['membership_status']];
-            $model->belongsToMany['rewards']    = ['DMA\Friends\Models\Reward',     'table' => 'dma_friends_reward_user',   'user_id', 'reward_id'];                     
+            $model->belongsToMany['activities'] = ['DMA\Friends\Models\Activity',   'table' => 'dma_friends_activity_user', 'user_id', 'activity_id',   'timestamps' => true, 'order' => 'dma_friends_activity_user.created_at desc'];     
+            $model->belongsToMany['steps']      = ['DMA\Friends\Models\Step',       'table' => 'dma_friends_step_user',     'user_id', 'step_id',       'timestamps' => true, 'order' => 'dma_friends_step_user.created_at desc'];     
+            $model->belongsToMany['badges']     = ['DMA\Friends\Models\Badge',      'table' => 'dma_friends_badge_user',    'user_id', 'badge_id',      'timestamps' => true, 'order' => 'dma_friends_badge_user.created_at desc'];        
+            $model->belongsToMany['rewards']    = ['DMA\Friends\Models\Reward',     'table' => 'dma_friends_reward_user',   'user_id', 'reward_id',     'timestamps' => true, 'order' => 'dma_friends_reward_user.created_at desc'];       
+            $model->belongsToMany['groups']     = ['DMA\Friends\Models\UserGroup',  'table' => 'dma_friends_users_groups',  'primaryKey' => 'user_id',  'foreignKey' => 'group_id', 'pivot' => ['membership_status']];        
         });
         
         // Extend User fields

@@ -10,10 +10,18 @@ use Schema;
 use Rainlab\User\Models\User;
 use DMA\Friends\Wordpress\Post;
 use DMA\Friends\Models\Activity;
+use DMA\Friends\Models\ActivityLog;
 use DMA\Friends\Models\Badge;
+use DMA\Friends\Models\Category;
 use DMA\Friends\Models\Step;
 use DMA\Friends\Models\Location;
 
+/**
+ * Syncronize the relationships between various models from wordpress into october
+ *
+ * @package DMA\Friends\Commands
+ * @author Kristen Arnold, Carlos Arroyo
+ */
 class SyncFriendsRelationsCommand extends Command
 {
     /** 
@@ -58,6 +66,20 @@ class SyncFriendsRelationsCommand extends Command
      */
     public function fire()
     {  
+
+        // Taxonomy terms
+        $termRelations = $this->db->table('wp_term_relationships')->get();
+
+        foreach($termRelations as $relation) {
+            $activity = Activity::findWordpress($relation->object_id)->first();
+            
+            if ($activity) {
+                if (!$activity->categories->contains($relation->term_taxonomy_id)) {
+                    $category = Category::find($relation->term_taxonomy_id);
+                    $activity->categories()->save($category);
+                }
+            }
+        }
 
         // p2p connections
         $p2ps = $this->db->table('wp_p2p')
@@ -112,10 +134,14 @@ class SyncFriendsRelationsCommand extends Command
                 $table = 'dma_friends_' . $from_table . '_' . $to_table;
 
                 switch($table) {
+                    case 'dma_friends_activity_step':
+                        $from->steps()->save($to);
+                        $this->info('activity: ' . $from->title . ' --> step: ' . $to->title);
+                        break;
                     case 'dma_friends_step_badge':
                         $to->steps()->save($from);
-                        $this->info('from: ' . $from->title . ' --|-|-- ' . $to->title);
-
+                        $this->info('step: ' . $from->title . ' --> badge: ' . $to->title);
+                        break;
                     default:
 
                         $values = [
@@ -127,7 +153,7 @@ class SyncFriendsRelationsCommand extends Command
                             DB::table($table)->insert($values);
                             $this->info('from: ' . $from->title . ' ----- ' . $to->title);
                         } else {
-                            $this->error('table doesnt exist');
+                            $this->error('table doesnt exist: ' . $table);
                         } 
 
                 }
@@ -170,7 +196,7 @@ class SyncFriendsRelationsCommand extends Command
                     'created_at'    => $post->epochToTimestamp($d->date_earned),
                 ];
 
-                // About half way thru the data the location key changes.
+                // About half way thru the data for the location key changes.
                 // so lets deal with that
                 if (isset($d->location)) {
                     $location_id = $d->location;
@@ -201,6 +227,33 @@ class SyncFriendsRelationsCommand extends Command
         
             }
         }
+
+        // Syncronize activities and users
+
+        $this->info('Importing Activity/User relations');
+        
+        $table = 'dma_friends_activity_user';
+
+        DB::table($table)->delete();
+
+        ActivityLog::where('action', '=', 'activity')->chunk(100, function($activityLogs) use ($table) {
+            foreach ($activityLogs as $activityLog) {
+
+                if ($activityLog->object_id) {
+
+                    echo '.';
+
+                    $pivotTable = [
+                        'user_id'       => $activityLog->user_id,
+                        'activity_id'   => $activityLog->object_id,
+                        'created_at'    => $activityLog->timestamp,
+                        'updated_at'    => $activityLog->timestamp,
+                    ];
+
+                    DB::table($table)->insert($pivotTable);
+                }
+            }
+        });
 
         $this->info('Sync complete');
 

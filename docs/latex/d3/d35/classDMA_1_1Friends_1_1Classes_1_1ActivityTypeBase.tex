@@ -69,53 +69,67 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInte
 
 
 \begin{DoxyCode}
-147     \{   
-148         \textcolor{keywordflow}{if} (!$activity->isActive()) \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-149 
-150         \textcolor{keywordflow}{if} ($activity->activity\_lockout && $user->activities()->first()) \{
-151             $time       = Carbon::now();
-152             $lastTime   = $user->activities()->first()->pivot->created\_at;
-153             $lastTime->addMinutes($activity->activity\_lockout);
-154 
-155             \textcolor{keywordflow}{if} ($lastTime->gt($time)) \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-156         \}
-157 
-158         \textcolor{comment}{//TODO: need a better way to return errors on why the activity couldnt complete}
-159 
-160         \textcolor{keywordflow}{switch} ($activity->time\_restriction) \{
-161             \textcolor{keywordflow}{case} \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity_ab9dd8b18c4810beabdcf8e45039913c8}{Activity::TIME\_RESTRICT\_NONE}:
-162                 \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-163             \textcolor{keywordflow}{case} \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity_ac78040e8784e02c2d1bcce5221ac6cb8}{Activity::TIME\_RESTRICT\_HOURS}:
-164                 \textcolor{keywordflow}{if} ($activity->time\_restriction\_data) \{
-165 
-166                     $now    = Carbon::now();
-167                     $start  = self::convertTime($activity->time\_restriction\_data[\textcolor{stringliteral}{'start\_time'}]);
-168                     $end    = self::convertTime($activity->time\_restriction\_data[\textcolor{stringliteral}{'end\_time'}]);
-169 
-170                     $start\_time = Carbon::now();
-171                     $start\_time->setTime($start[\textcolor{stringliteral}{'hour'}], $start[\textcolor{stringliteral}{'minutes'}]);
-172                     $end\_time   = Carbon::now();
-173                     $end\_time->setTime($end[\textcolor{stringliteral}{'hour'}], $start[\textcolor{stringliteral}{'minutes'}]);
-174                     $day        = date(\textcolor{charliteral}{'w'});
+158     \{   
+159         \textcolor{keywordflow}{if} (!$activity->isActive()) \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+160 
+161         \textcolor{comment}{// Check activity lockout}
+162         \textcolor{keywordflow}{if} ($activity->activity\_lockout && $user->activities()->first()) \{
+163             $time       = Carbon::now();
+164             $lastTime   = $user->activities()->first()->pivot->created\_at;
+165             $lastTime->addMinutes($activity->activity\_lockout);
+166 
+167             \textcolor{keywordflow}{if} ($time->diffInMinutes($lastTime) && $time->diffInMinutes($lastTime) < $activity->
+      activity\_lockout) \{
+168                 $x = $time->diffInMinutes($lastTime);
+169                 Session::put(\textcolor{stringliteral}{'activityError'}, Lang::get(\textcolor{stringliteral}{'dma.friends::lang.activities.lockout'}, [\textcolor{charliteral}{'x'} => $x]
+      ));
+170                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+171             \}
+172         \}
+173 
+174         \textcolor{comment}{//TODO: need a better way to return errors on why the activity couldnt complete}
 175 
-176                     \textcolor{keywordflow}{if} ($activity->time\_restriction\_date[\textcolor{stringliteral}{'days'}][$day] !== \textcolor{keyword}{false}
-177                         && $now->gte($start\_time) && $now->lte($end\_time)) \{
-178 
-179                         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-180                     \} 
-181                 \}
-182 
-183                 \textcolor{keywordflow}{break};
-184             \textcolor{keywordflow}{case} \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity_a71b85478f20cda144aeffe010364a0f7}{Activity::TIME\_RESTRICT\_DAYS}: 
-185                 $now = \textcolor{keyword}{new} \hyperlink{namespaceDateTime}{DateTime}(\textcolor{stringliteral}{'now'});
-186                 \textcolor{keywordflow}{if} ($now >= $activity->date\_begin 
-187                     && $now <= $activity->date\_end) \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-188 
-189                 \textcolor{keywordflow}{break};
-190         \} 
+176         \textcolor{keywordflow}{switch} ($activity->time\_restriction) \{
+177             \textcolor{keywordflow}{case} \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity_ab9dd8b18c4810beabdcf8e45039913c8}{Activity::TIME\_RESTRICT\_NONE}:
+178                 \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+179             \textcolor{keywordflow}{case} \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity_ac78040e8784e02c2d1bcce5221ac6cb8}{Activity::TIME\_RESTRICT\_HOURS}:
+180                 \textcolor{keywordflow}{if} ($activity->time\_restriction\_data) \{
+181 
+182                     $now    = Carbon::now();
+183                     $start  = self::convertTime($activity->time\_restriction\_data[\textcolor{stringliteral}{'start\_time'}]);
+184                     $end    = self::convertTime($activity->time\_restriction\_data[\textcolor{stringliteral}{'end\_time'}]);
+185 
+186                     $start\_time = Carbon::now();
+187                     $start\_time->setTime($start[\textcolor{stringliteral}{'hour'}], $start[\textcolor{stringliteral}{'minutes'}]);
+188                     $end\_time   = Carbon::now();
+189                     $end\_time->setTime($end[\textcolor{stringliteral}{'hour'}], $start[\textcolor{stringliteral}{'minutes'}]);
+190                     $day        = date(\textcolor{charliteral}{'w'});
 191 
-192         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-193     \} 
+192                     \textcolor{keywordflow}{if} ($activity->time\_restriction\_date[\textcolor{stringliteral}{'days'}][$day] !== \textcolor{keyword}{false}
+193                         && $now->gte($start\_time) && $now->lte($end\_time)) \{
+194 
+195                         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+196                     \} \textcolor{keywordflow}{else} \{
+197                         Session::put(\textcolor{stringliteral}{'activityError'}, Lang::get(\textcolor{stringliteral}{'dma.friends::lang.activities.notAvailable'}
+      ));
+198                     \}
+199                 \}
+200 
+201                 \textcolor{keywordflow}{break};
+202             \textcolor{keywordflow}{case} \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity_a71b85478f20cda144aeffe010364a0f7}{Activity::TIME\_RESTRICT\_DAYS}: 
+203                 $now = \textcolor{keyword}{new} \hyperlink{namespaceDateTime}{DateTime}(\textcolor{stringliteral}{'now'});
+204                 \textcolor{keywordflow}{if} ($now >= $activity->date\_begin 
+205                     && $now <= $activity->date\_end) \{
+206                     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+207                 \} \textcolor{keywordflow}{else} \{
+208                     Session::put(\textcolor{stringliteral}{'activityError'}, Lang::get(\textcolor{stringliteral}{'dma.friends::lang.activities.notAvailable'}));
+209                 \}
+210 
+211                 \textcolor{keywordflow}{break};
+212         \} 
+213 
+214         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+215     \} 
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase_adb196a8d338da688f10f4a8da6480fd0}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base}!convert\+Time@{convert\+Time}}
 \index{convert\+Time@{convert\+Time}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base}}
@@ -136,21 +150,21 @@ array an array of the hour and minutes in military time
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-205     \{
-206         list($hour, $minutes) = explode(\textcolor{stringliteral}{":"}, $timeString);
-207         $meridiem = substr($minutes, 2, 3);
-208         $minutes = substr($minutes, 0, 1);
-209 
-210 
-211         \textcolor{keywordflow}{if} (strtolower($meridiem) == \textcolor{stringliteral}{'pm'} || ($hour == \textcolor{stringliteral}{'12'} && strtolower($meridiem) == \textcolor{stringliteral}{'am'})) \{
-212             $hour += 12;
-213         \}
-214 
-215         \textcolor{keywordflow}{return} [
-216             \textcolor{stringliteral}{'hour'}      => $hour,
-217             \textcolor{stringliteral}{'minutes'}   => $minutes,
-218         ];
-219     \}
+227     \{
+228         list($hour, $minutes) = explode(\textcolor{stringliteral}{":"}, $timeString);
+229         $meridiem = substr($minutes, 2, 3);
+230         $minutes = substr($minutes, 0, 1);
+231 
+232 
+233         \textcolor{keywordflow}{if} (strtolower($meridiem) == \textcolor{stringliteral}{'pm'} || ($hour == \textcolor{stringliteral}{'12'} && strtolower($meridiem) == \textcolor{stringliteral}{'am'})) \{
+234             $hour += 12;
+235         \}
+236 
+237         \textcolor{keywordflow}{return} [
+238             \textcolor{stringliteral}{'hour'}      => $hour,
+239             \textcolor{stringliteral}{'minutes'}   => $minutes,
+240         ];
+241     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase_a6d83ca41e1c971c65cbc360e6097ad79}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base}!details@{details}}
 \index{details@{details}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base}}
@@ -174,7 +188,7 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInte
 
 
 \begin{DoxyCode}
-53 \{\}
+62 \{\}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase_ac540cd6b45fa5f41575523bbb300d18c}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base}!get\+Config@{get\+Config}}
 \index{get\+Config@{get\+Config}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base}}
@@ -194,9 +208,9 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInte
 
 
 \begin{DoxyCode}
-62     \{
-63         \textcolor{keywordflow}{return} $this->dirName . \textcolor{charliteral}{'/'} . $this->fieldConfig;
-64     \}
+71     \{
+72         \textcolor{keywordflow}{return} $this->dirName . \textcolor{charliteral}{'/'} . $this->fieldConfig;
+73     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase_ae46d0cc7e040eb4166e55a00d8d30dc8}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base}!get\+Form\+Default\+Values@{get\+Form\+Default\+Values}}
 \index{get\+Form\+Default\+Values@{get\+Form\+Default\+Values}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base}}
@@ -221,7 +235,7 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInte
 
 
 \begin{DoxyCode}
-77 \{\}
+86 \{\}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase_a772667f95a25c6aa44e31ce9c6903384}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base}!process@{process}}
 \index{process@{process}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base}}
@@ -249,32 +263,35 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInte
 
 
 \begin{DoxyCode}
-110     \{
-111         $activity = $params[\textcolor{stringliteral}{'activity'}];
-112 
-113         \textcolor{keywordflow}{if} (self::canComplete($activity, $user)) \{
-114             $userExtend = \textcolor{keyword}{new} UserExtend($user);
-115             $userExtend->addPoints($activity->points);
-116 
-117             \textcolor{keywordflow}{if} ($user->activities()->save($activity)) \{
-118 
-119                 Event::fire(\textcolor{stringliteral}{'friends.activityCompleted'}, [ $user, $activity ]); 
-120 
-121                 \textcolor{comment}{// log an entry to the activity log}
-122                 \hyperlink{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_a0b90db29da51f53991f2dcc1a55f14c7}{FriendsLog::activity}([
-123                     \textcolor{stringliteral}{'user'}          => $user,
-124                     \textcolor{stringliteral}{'object'}        => $activity,
-125                 ]); 
-126 
-127                 \textcolor{comment}{// Hand everything off to the badges}
-128                 \hyperlink{classDMA_1_1Friends_1_1Classes_1_1BadgeManager_aecab9f0ae063c6bd484857abda4252bd}{BadgeManager::applyActivityToBadges}($user, $activity);
+119     \{
+120         $activity = $params[\textcolor{stringliteral}{'activity'}];
+121 
+122         \textcolor{keywordflow}{if} (self::canComplete($activity, $user)) \{
+123             $userExtend = \textcolor{keyword}{new} UserExtend($user);
+124             $userExtend->addPoints($activity->points);
+125 
+126             \textcolor{keywordflow}{if} ($user->activities()->save($activity)) \{
+127 
+128                 Event::fire(\textcolor{stringliteral}{'dma.friends.activity.completed'}, [ $activity, $user ]); 
 129 
-130                 \textcolor{keywordflow}{return} $activity;
-131             \}
-132         \}
-133 
-134         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-135     \}
+130                 \textcolor{comment}{// log an entry to the activity log}
+131                 \hyperlink{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_a0b90db29da51f53991f2dcc1a55f14c7}{FriendsLog::activity}([
+132                     \textcolor{stringliteral}{'user'}          => $user,
+133                     \textcolor{stringliteral}{'object'}        => $activity,
+134                 ]); 
+135 
+136                 \textcolor{comment}{// Hand everything off to the badges}
+137                 \hyperlink{classDMA_1_1Friends_1_1Classes_1_1BadgeManager_aecab9f0ae063c6bd484857abda4252bd}{BadgeManager::applyActivityToBadges}($user, $activity);
+138 
+139                 Session::put(\textcolor{stringliteral}{'activityMessage'}, Lang::get(\textcolor{stringliteral}{'dma.friends::lang.activities.codeSuccess'}, [\textcolor{stringliteral}{'
+      title'} => $activity->title]));
+140 
+141                 \textcolor{keywordflow}{return} $activity;
+142             \}
+143         \}
+144 
+145         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+146     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase_a69d28814a4cc0c3798d1ab7a95e14ef3}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base}!save\+Data@{save\+Data}}
 \index{save\+Data@{save\+Data}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Type\+Base}}
@@ -299,11 +316,11 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInte
 
 
 \begin{DoxyCode}
-90                                               \{
-91         \textcolor{keywordflow}{foreach} ($values as $key => $val) \{
-92             $model->\{$key\} = $val;
-93         \}
-94     \}
+99                                               \{
+100         \textcolor{keywordflow}{foreach} ($values as $key => $val) \{
+101             $model->\{$key\} = $val;
+102         \}
+103     \}
 \end{DoxyCode}
 
 

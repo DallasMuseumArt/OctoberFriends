@@ -7,6 +7,11 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Controller
 \includegraphics[height=2.000000cm]{d4/d37/classDMA_1_1Friends_1_1Controllers_1_1Activities}
 \end{center}
 \end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Controllers_1_1Activities_a948fafcbcdac79c1851667216cee1e66}{get\+Badges} ()
+\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -25,6 +30,30 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Controller
 
 \subsection{Detailed Description}
 \hyperlink{classDMA_1_1Friends_1_1Controllers_1_1Activities}{Activities} Back-\/end Controller 
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Controllers_1_1Activities_a948fafcbcdac79c1851667216cee1e66}{\index{D\+M\+A\+::\+Friends\+::\+Controllers\+::\+Activities@{D\+M\+A\+::\+Friends\+::\+Controllers\+::\+Activities}!get\+Badges@{get\+Badges}}
+\index{get\+Badges@{get\+Badges}!D\+M\+A\+::\+Friends\+::\+Controllers\+::\+Activities@{D\+M\+A\+::\+Friends\+::\+Controllers\+::\+Activities}}
+\subsubsection[{get\+Badges}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Controllers\textbackslash{}\+Activities\+::get\+Badges (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Controllers_1_1Activities_a948fafcbcdac79c1851667216cee1e66}
+Return an array of badges associated with the controller model \begin{DoxyReturn}{Returns}
+array An array of badge models 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+35     \{
+36         $activity = $this->widget->formDescription->model;
+37 
+38         $badges = Badge::join(\textcolor{stringliteral}{'dma\_friends\_steps'}, \textcolor{stringliteral}{'dma\_friends\_badges.id'}, \textcolor{charliteral}{'='}, \textcolor{stringliteral}{'
+      dma\_friends\_steps.badge\_id'})
+39             ->where(\textcolor{stringliteral}{'dma\_friends\_steps.activity\_id'}, $activity->id)->get();
+40         \textcolor{keywordflow}{return} $badges;
+41     \}
+\end{DoxyCode}
+
 
 \subsection{Member Data Documentation}
 \hypertarget{classDMA_1_1Friends_1_1Controllers_1_1Activities_aff57941f0ab53e417ce578994badc87f}{\index{D\+M\+A\+::\+Friends\+::\+Controllers\+::\+Activities@{D\+M\+A\+::\+Friends\+::\+Controllers\+::\+Activities}!\$implement@{\$implement}}

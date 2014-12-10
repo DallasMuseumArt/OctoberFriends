@@ -166,59 +166,92 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
-<div class="fragment"><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    {</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        $count  = 0;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        $table  = $this-&gt;model-&gt;table;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        $id     = (int)DB::table($table)-&gt;max(<span class="stringliteral">&#39;id&#39;</span>);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        $wordpressLogs = $this-&gt;db</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            -&gt;table(<span class="stringliteral">&#39;wp_badgeos_logs&#39;</span>)</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            -&gt;where(<span class="stringliteral">&#39;id&#39;</span>, <span class="charliteral">&#39;&gt;&#39;</span>, $id)</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            -&gt;orderBy(<span class="stringliteral">&#39;id&#39;</span>, <span class="stringliteral">&#39;asc&#39;</span>)</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            -&gt;limit($limit)</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            -&gt;get();</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="comment">// Use dummy model to get action types</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        $l = <span class="keyword">new</span> <a class="code" href="../../d2/de2/classDMA_1_1Friends_1_1Wordpress_1_1Post.html#a8a3df2e9db7f90d348d27ea9354176b1">$this-&gt;model</a>;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordflow">foreach</span> ($wordpressLogs as $wlog) {</div>
+<div class="fragment"><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        $count  = 0;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        $table  = $this-&gt;model-&gt;table;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        $id     = (int)DB::table($table)-&gt;max(<span class="stringliteral">&#39;id&#39;</span>);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        $wordpressLogs = $this-&gt;db</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            -&gt;table(<span class="stringliteral">&#39;wp_badgeos_logs&#39;</span>)</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            -&gt;where(<span class="stringliteral">&#39;id&#39;</span>, <span class="charliteral">&#39;&gt;&#39;</span>, $id)</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            -&gt;orderBy(<span class="stringliteral">&#39;id&#39;</span>, <span class="stringliteral">&#39;asc&#39;</span>)</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            -&gt;limit($limit)</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            -&gt;get();</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <span class="keywordflow">if</span> (!in_array($wlog-&gt;action, $l-&gt;actionTypes)) <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            $log                = <span class="keyword">new</span> <a class="code" href="../../d2/de2/classDMA_1_1Friends_1_1Wordpress_1_1Post.html#a8a3df2e9db7f90d348d27ea9354176b1">$this-&gt;model</a>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            $log-&gt;id            = $wlog-&gt;id;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            $log-&gt;user_id       = $wlog-&gt;user_id;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            $log-&gt;action        = $wlog-&gt;action;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            $log-&gt;message       = $wlog-&gt;message;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            $log-&gt;points_earned = $wlog-&gt;points_earned;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            $log-&gt;total_points  = $wlog-&gt;total_points;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            $log-&gt;timestamp     = $wlog-&gt;timestamp;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            $log-&gt;timezone      = $wlog-&gt;timezone;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <span class="keywordflow">if</span> ($wlog-&gt;action == <span class="stringliteral">&#39;artwork&#39;</span>) {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                $log-&gt;artwork_id = $wlog-&gt;object_id;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                $log-&gt;object_id = $wlog-&gt;object_id;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                $type = $this-&gt;db</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                    -&gt;table(<span class="stringliteral">&#39;wp_posts&#39;</span>)</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                    -&gt;select(<span class="stringliteral">&#39;post_type&#39;</span>)</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                    -&gt;where(<span class="stringliteral">&#39;ID&#39;</span>, $log-&gt;object_id)</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                    -&gt;first();</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                <span class="keywordflow">if</span> ($type) {</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                    $log-&gt;object_type = $type-&gt;post_type;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                }   </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            }   </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <span class="keywordflow">if</span> ($log-&gt;save()) {</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                $count++;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            } </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        }  </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">return</span> $count;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    }</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="comment">// Use dummy model to get action types</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        $l = <span class="keyword">new</span> <a class="code" href="../../d2/de2/classDMA_1_1Friends_1_1Wordpress_1_1Post.html#a8a3df2e9db7f90d348d27ea9354176b1">$this-&gt;model</a>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordflow">foreach</span> ($wordpressLogs as $wlog) {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <span class="keywordflow">if</span> (!in_array($wlog-&gt;action, $l-&gt;actionTypes)) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            $object = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            $log                = <span class="keyword">new</span> <a class="code" href="../../d2/de2/classDMA_1_1Friends_1_1Wordpress_1_1Post.html#a8a3df2e9db7f90d348d27ea9354176b1">$this-&gt;model</a>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            $log-&gt;id            = $wlog-&gt;id;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            $log-&gt;user_id       = $wlog-&gt;user_id;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            $log-&gt;action        = $wlog-&gt;action;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            $log-&gt;message       = $wlog-&gt;message;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            $log-&gt;points_earned = $wlog-&gt;points_earned;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            $log-&gt;total_points  = $wlog-&gt;total_points;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            $log-&gt;timestamp     = $wlog-&gt;timestamp;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            $log-&gt;timezone      = $wlog-&gt;timezone;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <span class="keywordflow">if</span> ($wlog-&gt;action == <span class="stringliteral">&#39;artwork&#39;</span>) {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                $log-&gt;artwork_id = $wlog-&gt;object_id;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                $object = OctoberActivity::where(<span class="stringliteral">&#39;activity_type&#39;</span>, <span class="charliteral">&#39;=&#39;</span>, <span class="stringliteral">&#39;LikeWorkOfArt&#39;</span>)-&gt;first();</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                <span class="comment">// Get the wordpress post type</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                $post_type = $this-&gt;db</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                    -&gt;table(<span class="stringliteral">&#39;wp_posts&#39;</span>)</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                    -&gt;select(<span class="stringliteral">&#39;post_type&#39;</span>)</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                    -&gt;where(<span class="stringliteral">&#39;ID&#39;</span>, $wlog-&gt;object_id)</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                    -&gt;first();</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                <span class="keywordflow">if</span> (isset($post_type-&gt;post_type)) {</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                    <span class="comment">// Convert the post type to a usable object model</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                    <span class="keywordflow">switch</span>($post_type-&gt;post_type) {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                        <span class="keywordflow">case</span> <span class="stringliteral">&#39;activity&#39;</span>:</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                            $object = OctoberActivity::findWordpress($wlog-&gt;object_id);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                        <span class="keywordflow">case</span> <span class="stringliteral">&#39;badge&#39;</span>:</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                            $object = OctoberBadge::findWordpress($wlog-&gt;object_id);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                        <span class="keywordflow">case</span> <span class="stringliteral">&#39;badgeos-rewards&#39;</span>:</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                            $object = OctoberReward::findWordpress($wlog-&gt;object_id);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                        <span class="keywordflow">case</span> <span class="stringliteral">&#39;dma-location&#39;</span>:</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                            $object = OctoberLocation::findWordpress($wlog-&gt;object_id);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                        <span class="keywordflow">case</span> <span class="stringliteral">&#39;step&#39;</span>:</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                            $object = OctoberStep::findWordpress($wlog-&gt;object_id);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                    }</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                }</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            }   </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            <span class="keywordflow">try</span> {</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                <span class="keywordflow">if</span> ($log-&gt;save()) {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                    <span class="comment">// If the log is related to an object, save that relation</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                    <span class="keywordflow">if</span> ($object) {</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                        $object = $object-&gt;first();</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                        $object-&gt;activityLogs()-&gt;save($log);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                    }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                    $count++;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                } </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            } <span class="keywordflow">catch</span>(<a class="code" href="../../d6/d65/namespaceException.html">Exception</a> $e) {</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                echo <span class="stringliteral">&quot;Failed to import log entry id: &quot;</span> . $log-&gt;id . <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                echo $e-&gt;getMessage() . <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            }</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        }  </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keywordflow">return</span> $count;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    }</div>
 <div class="ttc" id="classDMA_1_1Friends_1_1Wordpress_1_1Post_html_a8a3df2e9db7f90d348d27ea9354176b1"><div class="ttname"><a href="../../d2/de2/classDMA_1_1Friends_1_1Wordpress_1_1Post.html#a8a3df2e9db7f90d348d27ea9354176b1">DMA\Friends\Wordpress\Post\$model</a></div><div class="ttdeci">$model</div><div class="ttdef"><b>Definition:</b> Post.php:116</div></div>
+<div class="ttc" id="namespaceException_html"><div class="ttname"><a href="../../d6/d65/namespaceException.html">Exception</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -229,7 +262,7 @@ Additional Inherited Members</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 5 2014 13:24:44 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 9 2014 14:30:03 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

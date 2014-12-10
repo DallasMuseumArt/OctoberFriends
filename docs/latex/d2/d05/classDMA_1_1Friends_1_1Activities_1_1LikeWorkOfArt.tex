@@ -36,12 +36,12 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInte
 
 
 \begin{DoxyCode}
-14     \{
-15         \textcolor{keywordflow}{return} [
-16             \textcolor{stringliteral}{'name'}          => \textcolor{stringliteral}{'Like a work of art'},
-17             \textcolor{stringliteral}{'description'}   => \textcolor{stringliteral}{'enter an assession id to like a work of art'},
-18         ];
-19     \}
+16     \{
+17         \textcolor{keywordflow}{return} [
+18             \textcolor{stringliteral}{'name'}          => \textcolor{stringliteral}{'Like a work of art'},
+19             \textcolor{stringliteral}{'description'}   => \textcolor{stringliteral}{'enter an assession id to like a work of art'},
+20         ];
+21     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Activities_1_1LikeWorkOfArt_ac18459839d22721c79df721a6f9b7f8b}{\index{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art}!is\+Assession\+Number@{is\+Assession\+Number}}
 \index{is\+Assession\+Number@{is\+Assession\+Number}!D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art}}
@@ -58,13 +58,37 @@ Take a string of text and determine if it is an assession \# T\+O\+D\+O\+: This 
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-boolean True if code is an assession \# 
+mixed boolean, array boolean False if code is an assession number array if code is an assession number 
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-49     \{
-50         \textcolor{keywordflow}{return} preg\_match( \textcolor{stringliteral}{'/^[a-zA-Z0-9]\{2\}[a-zA-Z0-9]?[a-zA-Z0-9]?\(\backslash\)..+$/'}, $code );
-51     \}
+57     \{
+58         \textcolor{comment}{// Brain API request template URL}
+59         $template = \textcolor{stringliteral}{'http://brain.dma.org/api/v1/collection/object/?fields=id,number&format=json&number=%s'}
+      ;
+60         
+61         \textcolor{comment}{// Clean code from spaces in case user miss type it}
+62         $code     = str\_replace(\textcolor{charliteral}{' '}, \textcolor{stringliteral}{''}, $code);
+63         
+64         \textcolor{comment}{// Get URL}
+65         $url      = sprintf($template, urlencode($code));
+66         
+67         \textcolor{comment}{// Call Brain}
+68         $response = Request::get($url)                   
+69                             ->send();
+70         
+71         \textcolor{keywordflow}{if}($obj = @$response->body->results[0])\{
+72             $data = [
+73                 \textcolor{stringliteral}{'object\_id'}     => $obj->id,
+74                 \textcolor{stringliteral}{'object\_number'} => $obj->number
+75             ];
+76             
+77             \textcolor{keywordflow}{return} $data;
+78            
+79         \}
+80         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+81         
+82     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Activities_1_1LikeWorkOfArt_a814a0bc1a22cc72f91dac635c871b43c}{\index{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art}!process@{process}}
 \index{process@{process}!D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art}}
@@ -80,18 +104,22 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInte
 
 
 \begin{DoxyCode}
-25     \{
-26         \textcolor{keywordflow}{if} (!isset($params[\textcolor{stringliteral}{'code'}]) || empty($params[\textcolor{stringliteral}{'code'}])) \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-27 
-28         \textcolor{keywordflow}{if} (!self::isAssessionNumber($params[\textcolor{stringliteral}{'code'}])) \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+27     \{
+28         \textcolor{keywordflow}{if} (!isset($params[\textcolor{stringliteral}{'code'}]) || empty($params[\textcolor{stringliteral}{'code'}])) \textcolor{keywordflow}{return} \textcolor{keyword}{false};
 29 
-30         \textcolor{keywordflow}{if} ($activity = Activity::findActivityType(\textcolor{stringliteral}{'LikeWorkOfArt'})->first()) \{
-31             \textcolor{keywordflow}{return} parent::process($user, [\textcolor{stringliteral}{'activity'} => $activity]);
-32         \}
-33 
-34         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-35 
-36     \}
+30         \textcolor{keywordflow}{if} (!$data = self::isAssessionNumber($params[\textcolor{stringliteral}{'code'}])) \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+31 
+32         \textcolor{keywordflow}{if} ($activity = Activity::findActivityType(\textcolor{stringliteral}{'LikeWorkOfArt'})->first()) \{          
+33             \textcolor{keywordflow}{if}($ret = parent::process($user, [\textcolor{stringliteral}{'activity'} => $activity]))\{
+34                 ActivityAudit::addUserActivity($user, $activity, $data);
+35             \}
+36             \textcolor{keywordflow}{return} $ret;
+37             
+38         \}
+39 
+40         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+41 
+42     \}
 \end{DoxyCode}
 
 

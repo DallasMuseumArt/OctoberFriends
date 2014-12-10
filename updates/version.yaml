@@ -13,12 +13,9 @@
     - create_user_steps_table.php
     - create_user_rewards_table.php 
 1.0.3:
-    - Create pivot tables
-    - create_pivot_tables.php
+    - NA
 1.0.4:
-    - Add activity taxonomies 
-    - create_activity_types_table.php
-    - create_activity_trigger_types_table.php
+    - NA
 1.0.5:
     - Create user table 
     - create_users_table.php
@@ -41,6 +38,15 @@
     - First version of Notifications
     - create_notifications_table.php    
 1.0.12:
+    - Add priority field to badges/activities
+    - add_priority.php    
+1.0.13:
+    - Create Activity Metadata table
+    - create_activity_metadata_table.php
+1.0.14:
+    - Add view for the activity stream
+    - create_activity_view.php 
+1.0.15:
     - Add user groups     
     - create_user_group_table.php
     - create_users_groups_table.php

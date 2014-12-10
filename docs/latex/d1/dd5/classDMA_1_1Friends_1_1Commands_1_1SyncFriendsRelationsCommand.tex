@@ -47,11 +47,11 @@ void
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-49     \{   
-50         $this->db = DB::connection(\textcolor{stringliteral}{'friends\_wordpress'});
-51 
-52         parent::\_\_construct();
-53     \}   
+57     \{   
+58         $this->db = DB::connection(\textcolor{stringliteral}{'friends\_wordpress'});
+59 
+60         parent::\_\_construct();
+61     \}   
 \end{DoxyCode}
 
 
@@ -68,154 +68,199 @@ void
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-60     \{  
-61 
-62         \textcolor{comment}{// p2p connections}
-63         $p2ps = $this->db->table(\textcolor{stringliteral}{'wp\_p2p'})
-64             ->get();
-65 
-66         \textcolor{keywordflow}{foreach}($p2ps as $p2p) \{
-67             list($from, $t, $to) = explode(\textcolor{charliteral}{'-'}, $p2p->p2p\_type);
-68 
-69             \textcolor{keywordflow}{switch}($from) \{
-70                 \textcolor{keywordflow}{case} \textcolor{stringliteral}{'activity'}:
-71                     $from = Activity::findWordpress($p2p->p2p\_from)->first();
-72                     $from\_table = \textcolor{stringliteral}{'activity'};
-73                     \textcolor{keywordflow}{break};
-74                 \textcolor{keywordflow}{case} \textcolor{stringliteral}{'badge'}:
-75                     $from = Badge::findWordpress($p2p->p2p\_from)->first();
-76                     $from\_table = \textcolor{stringliteral}{'badge'};
-77                     \textcolor{keywordflow}{break};
-78                 \textcolor{keywordflow}{case} \textcolor{stringliteral}{'dma-location'}:
-79                     $from = Location::findWordpress($p2p->p2p\_from)->first();
-80                     $from\_table = \textcolor{stringliteral}{'location'};
-81                     \textcolor{keywordflow}{break};
-82                 \textcolor{keywordflow}{case} \textcolor{stringliteral}{'step'}:
-83                     $from = Step::findWordpress($p2p->p2p\_from)->first();
-84                     $from\_table = \textcolor{stringliteral}{'step'};
-85                     \textcolor{keywordflow}{break};
-86                 \textcolor{keywordflow}{default}:
-87                     $from = \textcolor{keyword}{false};
-88             \}
-89 
-90             \textcolor{keywordflow}{switch}($to) \{
-91                 \textcolor{keywordflow}{case} \textcolor{stringliteral}{'activity'}:
-92                     $to = Activity::findWordpress($p2p->p2p\_to)->first();
-93                     $to\_table = \textcolor{stringliteral}{'activity'};
-94                     \textcolor{keywordflow}{break};
-95                 \textcolor{keywordflow}{case} \textcolor{stringliteral}{'badge'}:
-96                     $to = Badge::findWordpress($p2p->p2p\_to)->first();
-97                     $to\_table = \textcolor{stringliteral}{'badge'};
-98                     \textcolor{keywordflow}{break};
-99                 \textcolor{keywordflow}{case} \textcolor{stringliteral}{'dma-location'}:
-100                     $to = Location::findWordpress($p2p->p2p\_to)->first();
-101                     $to\_table = \textcolor{stringliteral}{'location'};
-102                     \textcolor{keywordflow}{break};
-103                 \textcolor{keywordflow}{case} \textcolor{stringliteral}{'step'}:
-104                     $to = Step::findWordpress($p2p->p2p\_to)->first();
-105                     $to\_table = \textcolor{stringliteral}{'step'}; 
-106                     \textcolor{keywordflow}{break};
-107                 \textcolor{keywordflow}{default}:
-108                     $to = \textcolor{keyword}{false};
-109             \}
-110 
-111             \textcolor{keywordflow}{if} ($from && $to) \{
-112                 $table = \textcolor{stringliteral}{'dma\_friends\_'} . $from\_table . \textcolor{charliteral}{'\_'} . $to\_table;
-113 
-114                 \textcolor{keywordflow}{switch}($table) \{
-115                     \textcolor{keywordflow}{case} \textcolor{stringliteral}{'dma\_friends\_step\_badge'}:
-116                         $to->steps()->save($from);
-117                         $this->info(\textcolor{stringliteral}{'from: '} . $from->title . \textcolor{stringliteral}{' --|-|-- '} . $to->title);
-118 
-119                     \textcolor{keywordflow}{default}:
-120 
-121                         $values = [
-122                             $from\_table . \textcolor{stringliteral}{'\_id'}   => $from->id,
-123                             $to\_table . \textcolor{stringliteral}{'\_id'}     => $to->id
-124                         ];
-125 
-126                         \textcolor{keywordflow}{if} (Schema::hasTable($table)) \{
-127                             DB::table($table)->insert($values);
-128                             $this->info(\textcolor{stringliteral}{'from: '} . $from->title . \textcolor{stringliteral}{' ----- '} . $to->title);
-129                         \} \textcolor{keywordflow}{else} \{
-130                             $this->error(\textcolor{stringliteral}{'table doesnt exist'});
-131                         \} 
+68     \{  
+69 
+70         \textcolor{comment}{// Taxonomy terms}
+71         $termRelations = $this->db->table(\textcolor{stringliteral}{'wp\_term\_relationships'})->get();
+72 
+73         \textcolor{keywordflow}{foreach}($termRelations as $relation) \{
+74             $activity = Activity::findWordpress($relation->object\_id)->first();
+75             
+76             \textcolor{keywordflow}{if} ($activity) \{
+77                 \textcolor{keywordflow}{if} (!$activity->categories->contains($relation->term\_taxonomy\_id)) \{
+78                     $category = Category::find($relation->term\_taxonomy\_id);
+79                     $activity->categories()->save($category);
+80                 \}
+81             \}
+82         \}
+83 
+84         \textcolor{comment}{// p2p connections}
+85         $p2ps = $this->db->table(\textcolor{stringliteral}{'wp\_p2p'})
+86             ->get();
+87 
+88         \textcolor{keywordflow}{foreach}($p2ps as $p2p) \{
+89             list($from, $t, $to) = explode(\textcolor{charliteral}{'-'}, $p2p->p2p\_type);
+90 
+91             \textcolor{keywordflow}{switch}($from) \{
+92                 \textcolor{keywordflow}{case} \textcolor{stringliteral}{'activity'}:
+93                     $from = Activity::findWordpress($p2p->p2p\_from)->first();
+94                     $from\_table = \textcolor{stringliteral}{'activity'};
+95                     \textcolor{keywordflow}{break};
+96                 \textcolor{keywordflow}{case} \textcolor{stringliteral}{'badge'}:
+97                     $from = Badge::findWordpress($p2p->p2p\_from)->first();
+98                     $from\_table = \textcolor{stringliteral}{'badge'};
+99                     \textcolor{keywordflow}{break};
+100                 \textcolor{keywordflow}{case} \textcolor{stringliteral}{'dma-location'}:
+101                     $from = Location::findWordpress($p2p->p2p\_from)->first();
+102                     $from\_table = \textcolor{stringliteral}{'location'};
+103                     \textcolor{keywordflow}{break};
+104                 \textcolor{keywordflow}{case} \textcolor{stringliteral}{'step'}:
+105                     $from = Step::findWordpress($p2p->p2p\_from)->first();
+106                     $from\_table = \textcolor{stringliteral}{'step'};
+107                     \textcolor{keywordflow}{break};
+108                 \textcolor{keywordflow}{default}:
+109                     $from = \textcolor{keyword}{false};
+110             \}
+111 
+112             \textcolor{keywordflow}{switch}($to) \{
+113                 \textcolor{keywordflow}{case} \textcolor{stringliteral}{'activity'}:
+114                     $to = Activity::findWordpress($p2p->p2p\_to)->first();
+115                     $to\_table = \textcolor{stringliteral}{'activity'};
+116                     \textcolor{keywordflow}{break};
+117                 \textcolor{keywordflow}{case} \textcolor{stringliteral}{'badge'}:
+118                     $to = Badge::findWordpress($p2p->p2p\_to)->first();
+119                     $to\_table = \textcolor{stringliteral}{'badge'};
+120                     \textcolor{keywordflow}{break};
+121                 \textcolor{keywordflow}{case} \textcolor{stringliteral}{'dma-location'}:
+122                     $to = Location::findWordpress($p2p->p2p\_to)->first();
+123                     $to\_table = \textcolor{stringliteral}{'location'};
+124                     \textcolor{keywordflow}{break};
+125                 \textcolor{keywordflow}{case} \textcolor{stringliteral}{'step'}:
+126                     $to = Step::findWordpress($p2p->p2p\_to)->first();
+127                     $to\_table = \textcolor{stringliteral}{'step'}; 
+128                     \textcolor{keywordflow}{break};
+129                 \textcolor{keywordflow}{default}:
+130                     $to = \textcolor{keyword}{false};
+131             \}
 132 
-133                 \}
-134             \}
-135         \}
-136 
-137         \textcolor{comment}{// User achievements}
-138         $achievements = $this->db->table(\textcolor{stringliteral}{'wp\_usermeta'})
-139             ->where(\textcolor{stringliteral}{'meta\_key'}, \textcolor{stringliteral}{'\_badgeos\_achievements'})
-140             ->get();
-141 
-142         $post = \textcolor{keyword}{new} Post;
-143 
-144         $this->info(\textcolor{stringliteral}{'Sync Achievements'});        
-145 
-146         \textcolor{keywordflow}{foreach} ($achievements as $achievement) \{
-147             $user = User::find($achievement->user\_id);
-148 
-149             \textcolor{keywordflow}{if} (!$user) \textcolor{keywordflow}{continue};
-150 
-151             $this->info(\textcolor{stringliteral}{'Importing achievements for '} . $user->email);
-152             
-153             \textcolor{comment}{// Flush existing records}
-154             DB::table($this->userStepTable)
-155                 ->where(\textcolor{stringliteral}{'user\_id'}, $user->id)
-156                 ->delete();
-157 
-158             DB::table($this->userBadgeTable)
-159                 ->where(\textcolor{stringliteral}{'user\_id'}, $user->id)
-160                 ->delete();
-161 
-162             $data = unserialize($achievement->meta\_value);
-163 
-164             \textcolor{keywordflow}{foreach}($data as $d) \{
-165                 \textcolor{comment}{// wtf we don't need arrays in our arrays if we want to array}
-166                 $d = array\_pop($d);
+133             \textcolor{keywordflow}{if} ($from && $to) \{
+134                 $table = \textcolor{stringliteral}{'dma\_friends\_'} . $from\_table . \textcolor{charliteral}{'\_'} . $to\_table;
+135 
+136                 \textcolor{keywordflow}{switch}($table) \{
+137                     \textcolor{keywordflow}{case} \textcolor{stringliteral}{'dma\_friends\_activity\_step'}:
+138                         $from->steps()->save($to);
+139                         $this->info(\textcolor{stringliteral}{'activity: '} . $from->title . \textcolor{stringliteral}{' --> step: '} . $to->title);
+140                         \textcolor{keywordflow}{break};
+141                     \textcolor{keywordflow}{case} \textcolor{stringliteral}{'dma\_friends\_step\_badge'}:
+142                         $to->steps()->save($from);
+143                         $this->info(\textcolor{stringliteral}{'step: '} . $from->title . \textcolor{stringliteral}{' --> badge: '} . $to->title);
+144                         \textcolor{keywordflow}{break};
+145                     \textcolor{keywordflow}{default}:
+146 
+147                         $values = [
+148                             $from\_table . \textcolor{stringliteral}{'\_id'}   => $from->id,
+149                             $to\_table . \textcolor{stringliteral}{'\_id'}     => $to->id
+150                         ];
+151 
+152                         \textcolor{keywordflow}{if} (Schema::hasTable($table)) \{
+153                             DB::table($table)->insert($values);
+154                             $this->info(\textcolor{stringliteral}{'from: '} . $from->title . \textcolor{stringliteral}{' ----- '} . $to->title);
+155                         \} \textcolor{keywordflow}{else} \{
+156                             $this->error(\textcolor{stringliteral}{'table doesnt exist: '} . $table);
+157                         \} 
+158 
+159                 \}
+160             \}
+161         \}
+162 
+163         \textcolor{comment}{// User achievements}
+164         $achievements = $this->db->table(\textcolor{stringliteral}{'wp\_usermeta'})
+165             ->where(\textcolor{stringliteral}{'meta\_key'}, \textcolor{stringliteral}{'\_badgeos\_achievements'})
+166             ->get();
 167 
-168                 $link = [
-169                     \textcolor{stringliteral}{'user\_id'}       => $user->id,
-170                     \textcolor{stringliteral}{'created\_at'}    => $post->epochToTimestamp($d->date\_earned),
-171                 ];
-172 
-173                 \textcolor{comment}{// About half way thru the data the location key changes.}
-174                 \textcolor{comment}{// so lets deal with that}
-175                 \textcolor{keywordflow}{if} (isset($d->location)) \{
-176                     $location\_id = $d->location;
-177                 \} elseif (isset($d->location\_earned)) \{
-178                     $location\_id = $d->location\_earned;
-179                 \} \textcolor{keywordflow}{else} \{
-180                     $location\_id = null;
-181                 \}
-182 
-183                 $location = Location::findWordpress($location\_id)->first();
-184                 \textcolor{keywordflow}{if} (isset($location->id)) \{
-185                     $link[\textcolor{stringliteral}{'location\_id'}] = $location->id;
-186                 \}
+168         $post = \textcolor{keyword}{new} Post;
+169 
+170         $this->info(\textcolor{stringliteral}{'Sync Achievements'});        
+171 
+172         \textcolor{keywordflow}{foreach} ($achievements as $achievement) \{
+173             $user = User::find($achievement->user\_id);
+174 
+175             \textcolor{keywordflow}{if} (!$user) \textcolor{keywordflow}{continue};
+176 
+177             $this->info(\textcolor{stringliteral}{'Importing achievements for '} . $user->email);
+178             
+179             \textcolor{comment}{// Flush existing records}
+180             DB::table($this->userStepTable)
+181                 ->where(\textcolor{stringliteral}{'user\_id'}, $user->id)
+182                 ->delete();
+183 
+184             DB::table($this->userBadgeTable)
+185                 ->where(\textcolor{stringliteral}{'user\_id'}, $user->id)
+186                 ->delete();
 187 
-188                 \textcolor{keywordflow}{if} ($d->post\_type == \textcolor{stringliteral}{'step'}) \{
+188             $data = unserialize($achievement->meta\_value);
 189 
-190                     $step = Step::findWordpress($d->ID)->first();
-191                     $link[\textcolor{stringliteral}{'step\_id'}] = $step->id;
-192                     DB::table($this->userStepTable)->insert($link);
+190             \textcolor{keywordflow}{foreach}($data as $d) \{
+191                 \textcolor{comment}{// wtf we don't need arrays in our arrays if we want to array}
+192                 $d = array\_pop($d);
 193 
-194                 \} elseif ($d->post\_type == \textcolor{stringliteral}{'badge'}) \{
-195 
-196                     $badge = Badge::findWordpress($d->ID)->first();
-197                     $link[\textcolor{stringliteral}{'badge\_id'}] = $badge->id;
-198                     DB::table($this->userBadgeTable)->insert($link);
-199 
-200                 \}
-201         
-202             \}
-203         \}
-204 
-205         $this->info(\textcolor{stringliteral}{'Sync complete'});
-206 
-207     \}
+194                 $link = [
+195                     \textcolor{stringliteral}{'user\_id'}       => $user->id,
+196                     \textcolor{stringliteral}{'created\_at'}    => $post->epochToTimestamp($d->date\_earned),
+197                 ];
+198 
+199                 \textcolor{comment}{// About half way thru the data for the location key changes.}
+200                 \textcolor{comment}{// so lets deal with that}
+201                 \textcolor{keywordflow}{if} (isset($d->location)) \{
+202                     $location\_id = $d->location;
+203                 \} elseif (isset($d->location\_earned)) \{
+204                     $location\_id = $d->location\_earned;
+205                 \} \textcolor{keywordflow}{else} \{
+206                     $location\_id = null;
+207                 \}
+208 
+209                 $location = Location::findWordpress($location\_id)->first();
+210                 \textcolor{keywordflow}{if} (isset($location->id)) \{
+211                     $link[\textcolor{stringliteral}{'location\_id'}] = $location->id;
+212                 \}
+213 
+214                 \textcolor{keywordflow}{if} ($d->post\_type == \textcolor{stringliteral}{'step'}) \{
+215 
+216                     $step = Step::findWordpress($d->ID)->first();
+217                     $link[\textcolor{stringliteral}{'step\_id'}] = $step->id;
+218                     DB::table($this->userStepTable)->insert($link);
+219 
+220                 \} elseif ($d->post\_type == \textcolor{stringliteral}{'badge'}) \{
+221 
+222                     $badge = Badge::findWordpress($d->ID)->first();
+223                     $link[\textcolor{stringliteral}{'badge\_id'}] = $badge->id;
+224                     DB::table($this->userBadgeTable)->insert($link);
+225 
+226                 \}
+227         
+228             \}
+229         \}
+230 
+231         \textcolor{comment}{// Syncronize activities and users}
+232 
+233         $this->info(\textcolor{stringliteral}{'Importing Activity/User relations'});
+234         
+235         $table = \textcolor{stringliteral}{'dma\_friends\_activity\_user'};
+236 
+237         DB::table($table)->delete();
+238 
+239         ActivityLog::where(\textcolor{stringliteral}{'action'}, \textcolor{charliteral}{'='}, \textcolor{stringliteral}{'activity'})->chunk(100, \textcolor{keyword}{function}($activityLogs) use ($table) \{
+240             \textcolor{keywordflow}{foreach} ($activityLogs as $activityLog) \{
+241 
+242                 \textcolor{keywordflow}{if} ($activityLog->object\_id) \{
+243 
+244                     echo \textcolor{stringliteral}{'.'};
+245 
+246                     $pivotTable = [
+247                         \textcolor{stringliteral}{'user\_id'}       => $activityLog->user\_id,
+248                         \textcolor{stringliteral}{'activity\_id'}   => $activityLog->object\_id,
+249                         \textcolor{stringliteral}{'created\_at'}    => $activityLog->timestamp,
+250                         \textcolor{stringliteral}{'updated\_at'}    => $activityLog->timestamp,
+251                     ];
+252 
+253                     DB::table($table)->insert($pivotTable);
+254                 \}
+255             \}
+256         \});
+257 
+258         $this->info(\textcolor{stringliteral}{'Sync complete'});
+259 
+260     \}
 \end{DoxyCode}
 
 
