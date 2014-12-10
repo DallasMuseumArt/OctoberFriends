@@ -36,6 +36,7 @@ class Activities extends Controller
         $activity = $this->widget->formDescription->model;
 
         $badges = Badge::join('dma_friends_steps', 'dma_friends_badges.id', '=', 'dma_friends_steps.badge_id')
+            ->select('dma_friends_badges.title', 'dma_friends_badges.id')
             ->where('dma_friends_steps.activity_id', $activity->id)->get();
         return $badges;
     }
