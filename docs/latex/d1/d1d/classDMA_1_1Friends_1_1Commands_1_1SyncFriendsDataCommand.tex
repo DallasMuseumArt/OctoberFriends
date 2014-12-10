@@ -31,6 +31,8 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Commands\t
 \item 
 \hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_af58323945e0c8312d74aa70c8c40882a}{sync\+Steps} ()
 \item 
+\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_ace374da6bd25c4783d4763af685bdf39}{sync\+Taxonomy} ()
+\item 
 \hypertarget{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_abf9d939a6112bc5def1f83c237bdbd7e}{{\bfseries sync} (\$model, \$text\+Type)}\label{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_abf9d939a6112bc5def1f83c237bdbd7e}
 
 \item 
@@ -66,11 +68,11 @@ void
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-46     \{
-47         $this->db = DB::connection(\textcolor{stringliteral}{'friends\_wordpress'});
-48 
-49         parent::\_\_construct();
-50     \}
+51     \{
+52         $this->db = DB::connection(\textcolor{stringliteral}{'friends\_wordpress'});
+53 
+54         parent::\_\_construct();
+55     \}
 \end{DoxyCode}
 
 
@@ -87,46 +89,50 @@ void
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-57     \{
-58         $this->info(\textcolor{stringliteral}{'Begin sync'});
-59 
-60         $type = $this->option(\textcolor{stringliteral}{'type'});
-61         $this->limit = $this->option(\textcolor{stringliteral}{'limit'});
-62 
-63         \textcolor{keywordflow}{switch}($type) \{
-64             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'users'}:
-65                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_aa1741c1d9185d3f4a0ec97cf9e48c203}{syncUsers}();
-66                 \textcolor{keywordflow}{break};
-67             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'activities'}:
-68                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_ab23b08985e311acb3500051cff40695c}{syncActivities}();
-69                 \textcolor{keywordflow}{break};
-70             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'activity-logs'}:
-71                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_a5254b5f02a6205032e5d3e4eff5014ff}{syncActivityLogs}();
-72                 \textcolor{keywordflow}{break};
-73             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'badges'}:
-74                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_adb9ff20bd7896c45837a2bb3875b7341}{syncBadges}();
-75                 \textcolor{keywordflow}{break};
-76             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'locations'}:
-77                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_a7d77ccaab1c7ef8e5aae89025406a2b3}{syncLocations}();
-78                 \textcolor{keywordflow}{break};
-79             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'rewards'}:
-80                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_a512183378589b9608c10601dd23e4579}{syncRewards}();
-81                 \textcolor{keywordflow}{break};
-82             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'steps'}:
-83                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_af58323945e0c8312d74aa70c8c40882a}{syncSteps}();
-84                 \textcolor{keywordflow}{break};
-85             \textcolor{keywordflow}{default}:
-86                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_aa1741c1d9185d3f4a0ec97cf9e48c203}{syncUsers}();
-87                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_ab23b08985e311acb3500051cff40695c}{syncActivities}();
-88                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_a5254b5f02a6205032e5d3e4eff5014ff}{syncActivityLogs}();
-89                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_adb9ff20bd7896c45837a2bb3875b7341}{syncBadges}();
-90                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_a7d77ccaab1c7ef8e5aae89025406a2b3}{syncLocations}();
-91                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_a512183378589b9608c10601dd23e4579}{syncRewards}();
-92                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_af58323945e0c8312d74aa70c8c40882a}{syncSteps}();
-93         \}
-94 
-95         $this->info(\textcolor{stringliteral}{'Sync complete'});
-96     \}
+62     \{
+63         $this->info(\textcolor{stringliteral}{'Initializing Syncronization'});
+64 
+65         $type = $this->option(\textcolor{stringliteral}{'type'});
+66         $this->limit = $this->option(\textcolor{stringliteral}{'limit'});
+67 
+68         \textcolor{keywordflow}{switch}($type) \{
+69             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'users'}:
+70                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_aa1741c1d9185d3f4a0ec97cf9e48c203}{syncUsers}();
+71                 \textcolor{keywordflow}{break};
+72             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'activities'}:
+73                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_ab23b08985e311acb3500051cff40695c}{syncActivities}();
+74                 \textcolor{keywordflow}{break};
+75             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'activity-logs'}:
+76                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_a5254b5f02a6205032e5d3e4eff5014ff}{syncActivityLogs}();
+77                 \textcolor{keywordflow}{break};
+78             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'badges'}:
+79                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_adb9ff20bd7896c45837a2bb3875b7341}{syncBadges}();
+80                 \textcolor{keywordflow}{break};
+81             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'locations'}:
+82                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_a7d77ccaab1c7ef8e5aae89025406a2b3}{syncLocations}();
+83                 \textcolor{keywordflow}{break};
+84             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'rewards'}:
+85                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_a512183378589b9608c10601dd23e4579}{syncRewards}();
+86                 \textcolor{keywordflow}{break};
+87             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'steps'}:
+88                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_af58323945e0c8312d74aa70c8c40882a}{syncSteps}();
+89                 \textcolor{keywordflow}{break};
+90             \textcolor{keywordflow}{case} \textcolor{stringliteral}{'taxonomy'}:
+91                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_ace374da6bd25c4783d4763af685bdf39}{syncTaxonomy}();
+92                 \textcolor{keywordflow}{break};
+93             \textcolor{keywordflow}{default}:
+94                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_aa1741c1d9185d3f4a0ec97cf9e48c203}{syncUsers}();
+95                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_ab23b08985e311acb3500051cff40695c}{syncActivities}();
+96                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_adb9ff20bd7896c45837a2bb3875b7341}{syncBadges}();
+97                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_a7d77ccaab1c7ef8e5aae89025406a2b3}{syncLocations}();
+98                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_a512183378589b9608c10601dd23e4579}{syncRewards}();
+99                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_af58323945e0c8312d74aa70c8c40882a}{syncSteps}();
+100                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_ace374da6bd25c4783d4763af685bdf39}{syncTaxonomy}();
+101                 $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_a5254b5f02a6205032e5d3e4eff5014ff}{syncActivityLogs}();
+102         \}
+103 
+104         $this->info(\textcolor{stringliteral}{'Sync complete'});
+105     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_ab7474389993f9a38026170d5520194fa}{\index{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command}!get\+Options@{get\+Options}}
 \index{get\+Options@{get\+Options}!D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command}}
@@ -140,13 +146,15 @@ array
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-182     \{   
-183         \textcolor{keywordflow}{return} [
-184             [\textcolor{stringliteral}{'type'}, null, InputOption::VALUE\_OPTIONAL, \textcolor{stringliteral}{'Import specific type'}, null],
-185             [\textcolor{stringliteral}{'limit'}, null, InputOption::VALUE\_OPTIONAL, \textcolor{stringliteral}{'Number of records per type to import'}, 
+204     \{   
+205         \textcolor{keywordflow}{return} [
+206             [\textcolor{stringliteral}{'type'}, null, InputOption::VALUE\_OPTIONAL, \textcolor{stringliteral}{'Import specific type'}, null],
+207             [\textcolor{stringliteral}{'limit'}, null, InputOption::VALUE\_OPTIONAL, \textcolor{stringliteral}{'Number of records per type to import'}, 
       $this->limit],
-186         ];  
-187     \}  
+208             [\textcolor{stringliteral}{'exclude-meta-update'}, null, InputOption::VALUE\_NONE, \textcolor{stringliteral}{'Exclude update of user metadata'}, null]
+      ,
+209         ];  
+210     \}  
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_ab23b08985e311acb3500051cff40695c}{\index{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command}!sync\+Activities@{sync\+Activities}}
 \index{sync\+Activities@{sync\+Activities}!D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command}}
@@ -160,10 +168,10 @@ int
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-114     \{
-115         $activities = \textcolor{keyword}{new} WordpressActivity;
-116         $this->sync($activities, \textcolor{stringliteral}{'activities'});
-117     \}
+127     \{
+128         $activities = \textcolor{keyword}{new} WordpressActivity;
+129         $this->sync($activities, \textcolor{stringliteral}{'activities'});
+130     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_a5254b5f02a6205032e5d3e4eff5014ff}{\index{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command}!sync\+Activity\+Logs@{sync\+Activity\+Logs}}
 \index{sync\+Activity\+Logs@{sync\+Activity\+Logs}!D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command}}
@@ -177,11 +185,11 @@ int
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-124     \{
-125         $activityLogs = \textcolor{keyword}{new} WordpressActivityLog;
-126         $this->sync($activityLogs, \textcolor{stringliteral}{'activity logs'});
-127 
-128     \}
+137     \{
+138         $activityLogs = \textcolor{keyword}{new} WordpressActivityLog;
+139         $this->sync($activityLogs, \textcolor{stringliteral}{'activity logs'});
+140 
+141     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_adb9ff20bd7896c45837a2bb3875b7341}{\index{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command}!sync\+Badges@{sync\+Badges}}
 \index{sync\+Badges@{sync\+Badges}!D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command}}
@@ -195,10 +203,10 @@ int
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-135     \{
-136         $badges = \textcolor{keyword}{new} WordpressBadge;
-137         $this->sync($badges, \textcolor{stringliteral}{'badges'});
-138     \}
+148     \{
+149         $badges = \textcolor{keyword}{new} WordpressBadge;
+150         $this->sync($badges, \textcolor{stringliteral}{'badges'});
+151     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_a7d77ccaab1c7ef8e5aae89025406a2b3}{\index{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command}!sync\+Locations@{sync\+Locations}}
 \index{sync\+Locations@{sync\+Locations}!D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command}}
@@ -212,10 +220,10 @@ int
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-145     \{   
-146         $locations = \textcolor{keyword}{new} WordpressLocation;
-147         $this->sync($locations, \textcolor{stringliteral}{'locations'});
-148     \}  
+158     \{   
+159         $locations = \textcolor{keyword}{new} WordpressLocation;
+160         $this->sync($locations, \textcolor{stringliteral}{'locations'});
+161     \}  
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_a512183378589b9608c10601dd23e4579}{\index{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command}!sync\+Rewards@{sync\+Rewards}}
 \index{sync\+Rewards@{sync\+Rewards}!D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command}}
@@ -229,10 +237,10 @@ int
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-155     \{   
-156         $rewards = \textcolor{keyword}{new} WordpressReward;
-157         $this->sync($rewards, \textcolor{stringliteral}{'rewards'});
-158     \}  
+168     \{   
+169         $rewards = \textcolor{keyword}{new} WordpressReward;
+170         $this->sync($rewards, \textcolor{stringliteral}{'rewards'});
+171     \}  
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_af58323945e0c8312d74aa70c8c40882a}{\index{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command}!sync\+Steps@{sync\+Steps}}
 \index{sync\+Steps@{sync\+Steps}!D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command}}
@@ -246,10 +254,24 @@ int
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-165     \{   
-166         $steps = \textcolor{keyword}{new} WordpressStep;
-167         $this->sync($steps, \textcolor{stringliteral}{'steps'});
-168     \}  
+178     \{   
+179         $steps = \textcolor{keyword}{new} WordpressStep;
+180         $this->sync($steps, \textcolor{stringliteral}{'steps'});
+181     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_ace374da6bd25c4783d4763af685bdf39}{\index{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command}!sync\+Taxonomy@{sync\+Taxonomy}}
+\index{sync\+Taxonomy@{sync\+Taxonomy}!D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command}}
+\subsubsection[{sync\+Taxonomy}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Commands\textbackslash{}\+Sync\+Friends\+Data\+Command\+::sync\+Taxonomy (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_ace374da6bd25c4783d4763af685bdf39}
+Syncronize wordpress taxonomy terms with laravel 
+\begin{DoxyCode}
+187     \{
+188         $taxonomy = \textcolor{keyword}{new} WordpressTaxonomy;
+189         $this->sync($taxonomy, \textcolor{stringliteral}{'taxonomy'});
+190     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_aa1741c1d9185d3f4a0ec97cf9e48c203}{\index{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command}!sync\+Users@{sync\+Users}}
 \index{sync\+Users@{sync\+Users}!D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Data\+Command}}
@@ -260,12 +282,16 @@ int
 )\hspace{0.3cm}{\ttfamily [protected]}}}\label{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand_aa1741c1d9185d3f4a0ec97cf9e48c203}
 Syncronize wordpress user accounts with laravel 
 \begin{DoxyCode}
-102     \{
-103         $user = \textcolor{keyword}{new} WordpressUser;
-104         $this->info(\textcolor{stringliteral}{'Updating existing users metadata'});
-105         $user->updateExistingUsers();
-106         $this->sync($user, \textcolor{stringliteral}{'users'});
-107     \}
+111     \{
+112         $user = \textcolor{keyword}{new} WordpressUser;
+113 
+114         \textcolor{keywordflow}{if} (!$this->option(\textcolor{stringliteral}{'exclude-meta-update'})) \{
+115             $this->info(\textcolor{stringliteral}{'Updating existing users metadata'});
+116             $user->updateExistingUsers();
+117         \}
+118 
+119         $this->sync($user, \textcolor{stringliteral}{'users'});
+120     \}
 \end{DoxyCode}
 
 

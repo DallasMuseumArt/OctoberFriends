@@ -6,7 +6,8 @@ use RainLab\User\Models\User;
 use System\Classes\SystemException;
 
 /**
- * Friends User model
+ * Custom class to add additional functionality based on the Rainlab User model
+ * 
  * @package DMA\Friends\Classes
  * @author Carlos Arroyo
  */
@@ -50,7 +51,7 @@ class UserExtend
 
         if ($this->user->forceSave()) {
 
-            Event::fire('friends.user.pointsEarned', [$this->user, $points]);
+            Event::fire('dma.friends.user.pointsEarned', [$this->user, $points]);
 
             $params = [
                 'user'          => $this->user,
@@ -71,11 +72,17 @@ class UserExtend
         if (!is_numeric($points))
             throw new SystemException('Points must be an integer');
 
+        if ($this->user->points < $points) {
+            return false;
+        }
+
         $this->user->points -= $points;
         $this->user->points_this_week -= $points;
         if ($this->user->forceSave()) {
-            Event::fire('friends.user.pointsRemoved', [$this->user, $points]);
+            Event::fire('dma.friends.user.pointsRemoved', [$this->user, $points]);
         }
+
+        return true;
     }
     
     public function getMembershipStatusOptions()

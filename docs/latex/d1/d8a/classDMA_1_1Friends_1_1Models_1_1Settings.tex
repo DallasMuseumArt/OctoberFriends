@@ -11,6 +11,10 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Models\tex
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{classDMA_1_1Friends_1_1Models_1_1Settings_a347eae65e8aeb114767d5e4fc8542fea}{get\+Timezone\+Options} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Models_1_1Settings_a8c2bad0fb18f5e501d3318eba7379609}{get\+Active\+Notification\+Channels\+Options} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Models_1_1Settings_a140721a33440c666426139d6317bd357}{get\+Active\+Listenable\+Channels\+Options} ()
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -26,10 +30,43 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Models\tex
 \end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
-\hyperlink{classDMA_1_1Friends_1_1Models_1_1Settings}{Settings} Model 
-
 \subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1Settings_a140721a33440c666426139d6317bd357}{\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Settings@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Settings}!get\+Active\+Listenable\+Channels\+Options@{get\+Active\+Listenable\+Channels\+Options}}
+\index{get\+Active\+Listenable\+Channels\+Options@{get\+Active\+Listenable\+Channels\+Options}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Settings@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Settings}}
+\subsubsection[{get\+Active\+Listenable\+Channels\+Options}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Models\textbackslash{}\+Settings\+::get\+Active\+Listenable\+Channels\+Options (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Models_1_1Settings_a140721a33440c666426139d6317bd357}
+Return Active channels that can trigger actions in the platform.
+
+\begin{DoxyReturn}{Returns}
+array 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+71                                                         \{
+72         \textcolor{keywordflow}{return} $this->getChannelOptions(\textcolor{keyword}{true}, $description=\textcolor{keyword}{false}); 
+73     \}   
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1Settings_a8c2bad0fb18f5e501d3318eba7379609}{\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Settings@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Settings}!get\+Active\+Notification\+Channels\+Options@{get\+Active\+Notification\+Channels\+Options}}
+\index{get\+Active\+Notification\+Channels\+Options@{get\+Active\+Notification\+Channels\+Options}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Settings@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Settings}}
+\subsubsection[{get\+Active\+Notification\+Channels\+Options}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Models\textbackslash{}\+Settings\+::get\+Active\+Notification\+Channels\+Options (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Models_1_1Settings_a8c2bad0fb18f5e501d3318eba7379609}
+Return Active channels for notification.
+
+\begin{DoxyReturn}{Returns}
+array 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+61                                                           \{
+62         \textcolor{keywordflow}{return} $this->getChannelOptions();
+63     \}
+\end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Settings_a347eae65e8aeb114767d5e4fc8542fea}{\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Settings@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Settings}!get\+Timezone\+Options@{get\+Timezone\+Options}}
 \index{get\+Timezone\+Options@{get\+Timezone\+Options}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Settings@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Settings}}
 \subsubsection[{get\+Timezone\+Options}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Models\textbackslash{}\+Settings\+::get\+Timezone\+Options (
@@ -42,12 +79,12 @@ array
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-24     \{
-25         $timezones = timezone\_identifiers\_list();
-26         $timezones = array\_combine($timezones, $timezones);
-27 
-28         \textcolor{keywordflow}{return} $timezones;
-29     \}
+28     \{
+29         $timezones = timezone\_identifiers\_list();
+30         $timezones = array\_combine($timezones, $timezones);
+31 
+32         \textcolor{keywordflow}{return} $timezones;
+33     \}
 \end{DoxyCode}
 
 

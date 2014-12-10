@@ -3,6 +3,11 @@
 namespace DMA\Friends\Wordpress;
 
 use DMA\Friends\Models\ActivityLog as OctoberActivityLog;
+use DMA\Friends\Models\Activity as OctoberActivity;
+use DMA\Friends\Models\Badge as OctoberBadge;
+use DMA\Friends\Models\Location as OctoberLocation;
+use DMA\Friends\Models\Reward as OctoberReward;
+use DMA\Friends\Models\Step as OctoberStep;
 use Illuminate\Support\Facades\DB;
 
 class ActivityLog extends Post
@@ -40,6 +45,8 @@ class ActivityLog extends Post
 
             if (!in_array($wlog->action, $l->actionTypes)) continue;
 
+            $object = false;
+
             $log                = new $this->model;
             $log->id            = $wlog->id;
             $log->user_id       = $wlog->user_id;
@@ -52,23 +59,53 @@ class ActivityLog extends Post
     
             if ($wlog->action == 'artwork') {
                 $log->artwork_id = $wlog->object_id;
+                $object = OctoberActivity::where('activity_type', '=', 'LikeWorkOfArt')->first();
             } else {
-                $log->object_id = $wlog->object_id;
 
-                $type = $this->db
+                // Get the wordpress post type
+                $post_type = $this->db
                     ->table('wp_posts')
                     ->select('post_type')
-                    ->where('ID', $log->object_id)
+                    ->where('ID', $wlog->object_id)
                     ->first();
 
-                if ($type) {
-                    $log->object_type = $type->post_type;
-                }   
+                if (isset($post_type->post_type)) {
+                    // Convert the post type to a usable object model
+                    switch($post_type->post_type) {
+                        case 'activity':
+                            $object = OctoberActivity::findWordpress($wlog->object_id);
+                            break;
+                        case 'badge':
+                            $object = OctoberBadge::findWordpress($wlog->object_id);
+                            break;
+                        case 'badgeos-rewards':
+                            $object = OctoberReward::findWordpress($wlog->object_id);
+                            break;
+                        case 'dma-location':
+                            $object = OctoberLocation::findWordpress($wlog->object_id);
+                            break;
+                        case 'step':
+                            $object = OctoberStep::findWordpress($wlog->object_id);
+                            break;
+                    }
+                }
+ 
             }   
 
-            if ($log->save()) {
-                $count++;
-            } 
+            try {
+                if ($log->save()) {
+
+                    // If the log is related to an object, save that relation
+                    if ($object) {
+                        $object = $object->first();
+                        $object->activityLogs()->save($log);
+                    }
+                    $count++;
+                } 
+            } catch(Exception $e) {
+                echo "Failed to import log entry id: " . $log->id . "\n";
+                echo $e->getMessage() . "\n";
+            }
         }  
 
         return $count;

@@ -1,11 +1,7 @@
 var searchData=
 [
-  ['settings',['Settings',['../d1/d8a/classDMA_1_1Friends_1_1Models_1_1Settings.html',1,'DMA::Friends::Models']]],
-  ['step',['Step',['../d9/d03/classDMA_1_1Friends_1_1Models_1_1Step.html',1,'DMA::Friends::Models']]],
-  ['step',['Step',['../d0/d87/classDMA_1_1Friends_1_1Wordpress_1_1Step.html',1,'DMA::Friends::Wordpress']]],
-  ['stepresource',['StepResource',['../d8/da8/classDMA_1_1Friends_1_1Api_1_1StepResource.html',1,'DMA::Friends::Api']]],
-  ['steps',['Steps',['../d0/d0f/classDMA_1_1Friends_1_1Controllers_1_1Steps.html',1,'DMA::Friends::Controllers']]],
-  ['steptransformer',['StepTransformer',['../d0/dbc/classDMA_1_1Friends_1_1Api_1_1StepTransformer.html',1,'DMA::Friends::Api']]],
-  ['syncfriendsdatacommand',['SyncFriendsDataCommand',['../d1/d1d/classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand.html',1,'DMA::Friends::Commands']]],
-  ['syncfriendsrelationscommand',['SyncFriendsRelationsCommand',['../d1/dd5/classDMA_1_1Friends_1_1Commands_1_1SyncFriendsRelationsCommand.html',1,'DMA::Friends::Commands']]]
+  ['passwordhash',['PasswordHash',['../d8/d56/classDMA_1_1Friends_1_1Wordpress_1_1PasswordHash.html',1,'DMA::Friends::Wordpress']]],
+  ['plugin',['Plugin',['../db/d85/classDMA_1_1Friends_1_1Plugin.html',1,'DMA::Friends']]],
+  ['post',['Post',['../d2/de2/classDMA_1_1Friends_1_1Wordpress_1_1Post.html',1,'DMA::Friends::Wordpress']]],
+  ['postman',['Postman',['../d9/dbf/classDMA_1_1Friends_1_1Facades_1_1Postman.html',1,'DMA::Friends::Facades']]]
 ];

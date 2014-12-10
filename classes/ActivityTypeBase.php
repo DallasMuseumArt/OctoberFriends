@@ -24,6 +24,14 @@ interface ActivityTypeBaseInterface {
     public static function canComplete(Activity $activity, User $user);
 }
 
+/**
+ * Base class for implementing Activity Types
+ * Extend this class to provide custom logic for how
+ * an activity can be completed
+ *
+ * @package DMA\Friends\Classes
+ * @author Kristen Arnold, Carlos Arroyo
+ */
 class ActivityTypeBase implements ActivityTypeBaseInterface
 { 
     /**
@@ -117,7 +125,7 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
 
             if ($user->activities()->save($activity)) {
 
-                Event::fire('friends.activityCompleted', [ $user, $activity ]); 
+                Event::fire('dma.friends.activity.completed', [ $activity, $user ]); 
 
                 // log an entry to the activity log
                 FriendsLog::activity([

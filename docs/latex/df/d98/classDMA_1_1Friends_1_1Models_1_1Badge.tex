@@ -15,6 +15,8 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Models\tex
 \item 
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Badge_a5ebdc91135362ca2b0225fdb0c965127}{{\bfseries scopefind\+Wordpress} (\$query, \$id)}\label{classDMA_1_1Friends_1_1Models_1_1Badge_a5ebdc91135362ca2b0225fdb0c965127}
 
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Models_1_1Badge_a628b0da2969e586837ad98fecf12ee71}{get\+Time\+Ago\+Attribute} (\$value)
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -50,6 +52,28 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Models\tex
 
 \subsection{Detailed Description}
 \hyperlink{classDMA_1_1Friends_1_1Models_1_1Badge}{Badge} Model 
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1Badge_a628b0da2969e586837ad98fecf12ee71}{\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Badge@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Badge}!get\+Time\+Ago\+Attribute@{get\+Time\+Ago\+Attribute}}
+\index{get\+Time\+Ago\+Attribute@{get\+Time\+Ago\+Attribute}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Badge@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Badge}}
+\subsubsection[{get\+Time\+Ago\+Attribute}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Models\textbackslash{}\+Badge\+::get\+Time\+Ago\+Attribute (
+\begin{DoxyParamCaption}
+\item[{}]{\$value}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Models_1_1Badge_a628b0da2969e586837ad98fecf12ee71}
+Mutator function to return the pivot timestamp as time ago \begin{DoxyReturn}{Returns}
+string The time since the badge was earned 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+74     \{
+75         \textcolor{keywordflow}{if} (!isset($this->pivot->created\_at)) \textcolor{keywordflow}{return} null;
+76 
+77         $timeAgo = \textcolor{keyword}{new} TimeAgo;
+78         \textcolor{keywordflow}{return} $timeAgo->get($this->pivot->created\_at);
+79     \}
+\end{DoxyCode}
+
 
 \subsection{Member Data Documentation}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Badge_abd4795b249f74dd23651f51479fbe5fb}{\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Badge@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Badge}!\$attach\+One@{\$attach\+One}}

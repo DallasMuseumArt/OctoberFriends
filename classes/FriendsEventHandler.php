@@ -2,34 +2,77 @@
 
 namespace DMA\Friends\Classes;
 
+use Mail;
+
+/**
+ * Manage custom events in the friends platform
+ *
+ * @package DMA\Friends\Classes
+ * @author Kristen Arnold, Carlos Arroyo
+ */
 class FriendsEventHandler {
 
-    public function onActivityCompleted($event)
+    /**
+     * Handle the dma.friends.activity.completed event
+     * @param Activity $activity
+     * The activity model that has just been completed
+     * @param User $user
+     * The user that completed the activity
+     */
+    public function onActivityCompleted($activity, $user)
     {   
     }
 
-    public function onBadgeEarned($event)
+    /**
+     * Handle the dma.friends.badge.completed event
+     * @param Badge $badge
+     * The badge model that has just been completed
+     * @param User $user
+     * The user that completed the badge
+     */
+    public function onBadgeCompleted($badge, $user)
     {
-        //TODO verify
+        $data = [
+            'badge' => $badge,
+            'user'  => $user,
+        ];
+
         Mail::send('dma.friends::mail.badge', $data, function($message) use ($user)
         {
+            \Debugbar::info('badge trigger fired');
             $message->to($user->email, $user->full_name);
         });
     }
 
-    public function onRewardRedeemed($event)
+    /**
+     * Handle the dma.friends.reward.redeemed event
+     * @param Reward $reward
+     * The reward model that has just been redeemed
+     * @param User $user
+     * The user that redeemed the reward
+     */
+    public function onRewardRedeemed($reward, $user)
     {   
-        // TODO
-        // Send email to user and admin if required
+        $data = [
+            'reward'    => $reward,
+            'user'      => $user,
+        ];
+
         Mail::send('dma.friends::mail.reward', $data, function($message) use ($user)
         {
             $message->to($user->email, $user->full_name);
         });
     }   
 
-    public function onStepCompleted($event)
+    /**
+     * Handle the dma.friends.step.completed event
+     * @param Step $step
+     * The step model that has just been completed
+     * @param User $user
+     * The user that completed the step
+     */
+    public function onStepCompleted($step, $user)
     {   
-        // TODO: load badges with step and see if badge has been completed
     }   
 
     public function onAuthLogin($event)
@@ -39,10 +82,10 @@ class FriendsEventHandler {
 
     public function subscribe($events)
     {   
-        $events->listen('friends.activityCompleted', 'DMA\Friends\Classes\FriendsEventHandler@onActivityCompleted');
-        $events->listen('friends.badgeEarned', 'DMA\Friends\Classes\FriendsEventHandler@onBadgeEarned');
-        $events->listen('friends.rewardRedeemed', 'DMA\Friends\Classes\FriendsEventHandler@onRewardRedeemed');
-        $events->listen('friends.stepCompleted', 'DMA\Friends\Classes\FriendsEventHandler@onStepCompleted');
+        $events->listen('dma.friends.activity.completed', 'DMA\Friends\Classes\FriendsEventHandler@onActivityCompleted');
+        $events->listen('dma.friends.badge.completed', 'DMA\Friends\Classes\FriendsEventHandler@onBadgeCompleted');
+        $events->listen('dma.friends.reward.redeemed', 'DMA\Friends\Classes\FriendsEventHandler@onRewardRedeemed');
+        $events->listen('dma.friends.step.completed', 'DMA\Friends\Classes\FriendsEventHandler@onStepCompleted');
         $events->listen('auth.login', 'DMA\Friends\Classes\FriendsEventHandler@onAuthLogin');
     }   
 }

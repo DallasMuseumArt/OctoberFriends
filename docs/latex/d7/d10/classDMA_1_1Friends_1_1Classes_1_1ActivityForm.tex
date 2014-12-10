@@ -79,15 +79,15 @@ string
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-240     \{
-241         \textcolor{keywordflow}{if} (!$field->depends) \{
-242             \textcolor{keywordflow}{return};
-243         \}
-244 
-245         $depends = is\_array($field->depends) ? $field->depends : [$field->depends];
-246         $depends = htmlspecialchars(json\_encode($depends), ENT\_QUOTES, \textcolor{stringliteral}{'UTF-8'});
-247         \textcolor{keywordflow}{return} $depends;
-248     \}
+246     \{
+247         \textcolor{keywordflow}{if} (!$field->depends) \{
+248             \textcolor{keywordflow}{return};
+249         \}
+250 
+251         $depends = is\_array($field->depends) ? $field->depends : [$field->depends];
+252         $depends = htmlspecialchars(json\_encode($depends), ENT\_QUOTES, \textcolor{stringliteral}{'UTF-8'});
+253         \textcolor{keywordflow}{return} $depends;
+254     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_a105d514226be33dec93db56dbfe61ff1}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form}!get\+Field\+Name@{get\+Field\+Name}}
 \index{get\+Field\+Name@{get\+Field\+Name}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form}}
@@ -106,15 +106,15 @@ array \mbox{[}column\+Name, context\mbox{]}
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-223     \{
-224         $field = $this->fieldName . \textcolor{charliteral}{'['} . $field . \textcolor{charliteral}{']'};
-225 
-226         \textcolor{keywordflow}{if} (strpos($field, \textcolor{charliteral}{'@'}) === \textcolor{keyword}{false}) \{
-227             \textcolor{keywordflow}{return} [$field, null];
-228         \}
-229 
-230         \textcolor{keywordflow}{return} explode(\textcolor{charliteral}{'@'}, $field);
-231     \}
+229     \{
+230         $field = $this->fieldName . \textcolor{charliteral}{'['} . $field . \textcolor{charliteral}{']'};
+231 
+232         \textcolor{keywordflow}{if} (strpos($field, \textcolor{charliteral}{'@'}) === \textcolor{keyword}{false}) \{
+233             \textcolor{keywordflow}{return} [$field, null];
+234         \}
+235 
+236         \textcolor{keywordflow}{return} explode(\textcolor{charliteral}{'@'}, $field);
+237     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_ab7d19395c670391b052793e77fd364f2}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form}!get\+Field\+Value@{get\+Field\+Value}}
 \index{get\+Field\+Value@{get\+Field\+Value}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form}}
@@ -125,32 +125,32 @@ array \mbox{[}column\+Name, context\mbox{]}
 )}}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_ab7d19395c670391b052793e77fd364f2}
 Looks up the column 
 \begin{DoxyCode}
-190     \{
-191         \textcolor{keywordflow}{if} (is\_string($field)) \{
-192             \textcolor{keywordflow}{if} (!isset($this->fields[$field])) \{
-193                 \textcolor{keywordflow}{throw} \textcolor{keyword}{new} ApplicationException(Lang::get(
-194                     \textcolor{stringliteral}{'backend::lang.form.missing\_definition'},
-195                     compact(\textcolor{stringliteral}{'field'})
-196                 ));
-197             \}
-198 
-199             $field = $this->fields[$field];
-200         \}
-201 
-202         $fieldName = $field->fieldName;
-203 
-204         $defaultValue = strlen($field->defaults) ? $field->defaults : null;
-205 
-206         \textcolor{comment}{/*}
-207 \textcolor{comment}{         * Array field name, eg: field[key][key2][key3]}
-208 \textcolor{comment}{         */}
-209         $keyParts   = Str::evalHtmlArray($fieldName);
-210         $lastField  = end($keyParts);
-211         $result     = $this->data;
-212 
-213         \textcolor{comment}{// Sub fields are always the last field in the array}
-214         \textcolor{keywordflow}{return} $result[$lastField];
-215     \}
+196     \{
+197         \textcolor{keywordflow}{if} (is\_string($field)) \{
+198             \textcolor{keywordflow}{if} (!isset($this->fields[$field])) \{
+199                 \textcolor{keywordflow}{throw} \textcolor{keyword}{new} ApplicationException(Lang::get(
+200                     \textcolor{stringliteral}{'backend::lang.form.missing\_definition'},
+201                     compact(\textcolor{stringliteral}{'field'})
+202                 ));
+203             \}
+204 
+205             $field = $this->fields[$field];
+206         \}
+207 
+208         $fieldName = $field->fieldName;
+209 
+210         $defaultValue = strlen($field->defaults) ? $field->defaults : null;
+211 
+212         \textcolor{comment}{/*}
+213 \textcolor{comment}{         * Array field name, eg: field[key][key2][key3]}
+214 \textcolor{comment}{         */}
+215         $keyParts   = Str::evalHtmlArray($fieldName);
+216         $lastField  = end($keyParts);
+217         $result     = $this->data;
+218 
+219         \textcolor{comment}{// Sub fields are always the last field in the array}
+220         \textcolor{keywordflow}{return} $result[$lastField];
+221     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_a67f1c67ad0885f8ade7cc055db01d36a}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form}!get\+View\+Path@{get\+View\+Path}}
 \index{get\+View\+Path@{get\+View\+Path}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form}}
@@ -172,18 +172,18 @@ string Full path to the view file.
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-86     \{
-87 
-88         $fileName = File::symbolizePath($fileName, $fileName);
-89 
-90         \textcolor{keywordflow}{if} (File::isLocalPath($fileName) || realpath($fileName) !== \textcolor{keyword}{false}) \{
-91             \textcolor{keywordflow}{return} $fileName;
-92         \} \textcolor{keywordflow}{else} \{
-93             $path = $this->partialsDir . $fileName;
-94             \textcolor{keywordflow}{return} File::symbolizePath($path, $path);
-95         \}
-96 
-97     \}
+92     \{
+93 
+94         $fileName = File::symbolizePath($fileName, $fileName);
+95 
+96         \textcolor{keywordflow}{if} (File::isLocalPath($fileName) || realpath($fileName) !== \textcolor{keyword}{false}) \{
+97             \textcolor{keywordflow}{return} $fileName;
+98         \} \textcolor{keywordflow}{else} \{
+99             $path = $this->partialsDir . $fileName;
+100             \textcolor{keywordflow}{return} File::symbolizePath($path, $path);
+101         \}
+102 
+103     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_a8e64eb3aac3a88edbbc67700f40f7f61}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form}!make\+Form\+Field@{make\+Form\+Field}}
 \index{make\+Form\+Field@{make\+Form\+Field}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form}}
@@ -195,61 +195,61 @@ string Full path to the view file.
 )\hspace{0.3cm}{\ttfamily [protected]}}}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_a8e64eb3aac3a88edbbc67700f40f7f61}
 Creates a form field object from name and configuration. 
 \begin{DoxyCode}
-130     \{
-131         $label = (isset($config[\textcolor{stringliteral}{'label'}])) ? $config[\textcolor{stringliteral}{'label'}] : null;
-132         list($fieldName, $fieldContext) = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_a105d514226be33dec93db56dbfe61ff1}{getFieldName}($name);
-133 
-134         $field = \textcolor{keyword}{new} FormField($fieldName, $label);
-135         \textcolor{keywordflow}{if} ($fieldContext) \{
-136             $field->context = $fieldContext;
-137         \}
-138         $field->idPrefix = $this->getId();
+136     \{
+137         $label = (isset($config[\textcolor{stringliteral}{'label'}])) ? $config[\textcolor{stringliteral}{'label'}] : null;
+138         list($fieldName, $fieldContext) = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_a105d514226be33dec93db56dbfe61ff1}{getFieldName}($name);
 139 
-140         \textcolor{comment}{/*}
-141 \textcolor{comment}{         * Simple field type}
-142 \textcolor{comment}{         */}
-143         \textcolor{keywordflow}{if} (is\_string($config)) \{
-144             $field->displayAs($config);
-145         \textcolor{comment}{/*}
-146 \textcolor{comment}{         * Defined field type}
-147 \textcolor{comment}{         */}
-148         \} \textcolor{keywordflow}{else} \{
-149 
-150             $fieldType = isset($config[\textcolor{stringliteral}{'type'}]) ? $config[\textcolor{stringliteral}{'type'}] : null;
-151             \textcolor{keywordflow}{if} (!is\_string($fieldType) && !is\_null($fieldType)) \{
-152                 \textcolor{keywordflow}{throw} \textcolor{keyword}{new} ApplicationException(Lang::get(
-153                     \textcolor{stringliteral}{'backend::lang.field.invalid\_type'},
-154                     [\textcolor{stringliteral}{'type'}=>gettype($fieldType)]
-155                 ));
-156             \}
-157 
-158             $field->displayAs($fieldType, $config);
-159 
-160         \}
-161 
-162         \textcolor{comment}{/*}
-163 \textcolor{comment}{         * Set field value}
-164 \textcolor{comment}{         */}
-165         $field->value = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_ab7d19395c670391b052793e77fd364f2}{getFieldValue}($field);
-166 
-167         \textcolor{comment}{/*}
-168 \textcolor{comment}{         * Get field options from model}
-169 \textcolor{comment}{         */}
-170         $optionModelTypes = [\textcolor{stringliteral}{'dropdown'}, \textcolor{stringliteral}{'radio'}, \textcolor{stringliteral}{'checkboxlist'}, \textcolor{stringliteral}{'balloon-selector'}];
-171         \textcolor{keywordflow}{if} (in\_array($field->type, $optionModelTypes)) \{
+140         $field = \textcolor{keyword}{new} FormField($fieldName, $label);
+141         \textcolor{keywordflow}{if} ($fieldContext) \{
+142             $field->context = $fieldContext;
+143         \}
+144         $field->idPrefix = $this->getId();
+145 
+146         \textcolor{comment}{/*}
+147 \textcolor{comment}{         * Simple field type}
+148 \textcolor{comment}{         */}
+149         \textcolor{keywordflow}{if} (is\_string($config)) \{
+150             $field->displayAs($config);
+151         \textcolor{comment}{/*}
+152 \textcolor{comment}{         * Defined field type}
+153 \textcolor{comment}{         */}
+154         \} \textcolor{keywordflow}{else} \{
+155 
+156             $fieldType = isset($config[\textcolor{stringliteral}{'type'}]) ? $config[\textcolor{stringliteral}{'type'}] : null;
+157             \textcolor{keywordflow}{if} (!is\_string($fieldType) && !is\_null($fieldType)) \{
+158                 \textcolor{keywordflow}{throw} \textcolor{keyword}{new} ApplicationException(Lang::get(
+159                     \textcolor{stringliteral}{'backend::lang.field.invalid\_type'},
+160                     [\textcolor{stringliteral}{'type'}=>gettype($fieldType)]
+161                 ));
+162             \}
+163 
+164             $field->displayAs($fieldType, $config);
+165 
+166         \}
+167 
+168         \textcolor{comment}{/*}
+169 \textcolor{comment}{         * Set field value}
+170 \textcolor{comment}{         */}
+171         $field->value = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_ab7d19395c670391b052793e77fd364f2}{getFieldValue}($field);
 172 
-173             \textcolor{comment}{/*}
-174 \textcolor{comment}{             * Defer the execution of option data collection}
-175 \textcolor{comment}{             */}
-176             $field->options(\textcolor{keyword}{function} () use ($field, $config) \{
-177                 $fieldOptions = (isset($config[\textcolor{stringliteral}{'options'}])) ? $config[\textcolor{stringliteral}{'options'}] : null;
-178                 $fieldOptions = $this->getOptionsFromModel($field, $fieldOptions);
-179                 \textcolor{keywordflow}{return} $fieldOptions;
-180             \});
-181         \}
-182 
-183         \textcolor{keywordflow}{return} $field;
-184     \}
+173         \textcolor{comment}{/*}
+174 \textcolor{comment}{         * Get field options from model}
+175 \textcolor{comment}{         */}
+176         $optionModelTypes = [\textcolor{stringliteral}{'dropdown'}, \textcolor{stringliteral}{'radio'}, \textcolor{stringliteral}{'checkboxlist'}, \textcolor{stringliteral}{'balloon-selector'}];
+177         \textcolor{keywordflow}{if} (in\_array($field->type, $optionModelTypes)) \{
+178 
+179             \textcolor{comment}{/*}
+180 \textcolor{comment}{             * Defer the execution of option data collection}
+181 \textcolor{comment}{             */}
+182             $field->options(\textcolor{keyword}{function} () use ($field, $config) \{
+183                 $fieldOptions = (isset($config[\textcolor{stringliteral}{'options'}])) ? $config[\textcolor{stringliteral}{'options'}] : null;
+184                 $fieldOptions = $this->getOptionsFromModel($field, $fieldOptions);
+185                 \textcolor{keywordflow}{return} $fieldOptions;
+186             \});
+187         \}
+188 
+189         \textcolor{keywordflow}{return} $field;
+190     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_afac6868b7400de0a27bd9940db9bb43d}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form}!render@{render}}
 \index{render@{render}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form}}
@@ -260,17 +260,17 @@ Creates a form field object from name and configuration.
 )}}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_afac6868b7400de0a27bd9940db9bb43d}
 Render a group of form elements 
 \begin{DoxyCode}
-65     \{
-66         $fields = [];
-67 
-68         \textcolor{keywordflow}{foreach}($this->fields as $name => $field) \{
-69             $field = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_a8e64eb3aac3a88edbbc67700f40f7f61}{makeFormField}($name, $field);
-70 
-71             $fields[] = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_a903a1043ee05a6f169d5aea07ef0bb79}{renderField}($field);
-72         \}
+71     \{
+72         $fields = [];
 73 
-74         \textcolor{keywordflow}{return} implode(\textcolor{stringliteral}{"<br/>"}, $fields);
-75     \}
+74         \textcolor{keywordflow}{foreach}($this->fields as $name => $field) \{
+75             $field = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_a8e64eb3aac3a88edbbc67700f40f7f61}{makeFormField}($name, $field);
+76 
+77             $fields[] = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_a903a1043ee05a6f169d5aea07ef0bb79}{renderField}($field);
+78         \}
+79 
+80         \textcolor{keywordflow}{return} implode(\textcolor{stringliteral}{"<br/>"}, $fields);
+81     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_a903a1043ee05a6f169d5aea07ef0bb79}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form}!render\+Field@{render\+Field}}
 \index{render\+Field@{render\+Field}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form}}
@@ -289,26 +289,26 @@ Renders a single form field
 \end{DoxyParams}
 
 \begin{DoxyCode}
-105     \{
-106         \textcolor{keywordflow}{if} (is\_string($field)) \{
-107             \textcolor{keywordflow}{if} (!isset($this->fields[$field])) \{
-108                 \textcolor{keywordflow}{throw} \textcolor{keyword}{new} ApplicationException(Lang::get(
-109                     \textcolor{stringliteral}{'backend::lang.form.missing\_definition'},
-110                     compact(\textcolor{stringliteral}{'field'})
-111                 ));
-112             \}
-113 
-114             $field = $this->fields[$field];
-115         \}
-116 
-117         \textcolor{keywordflow}{if} (!isset($options[\textcolor{stringliteral}{'useContainer'}])) \{
-118             $options[\textcolor{stringliteral}{'useContainer'}] = \textcolor{keyword}{true};
-119         \}
-120         $targetPartial = $options[\textcolor{stringliteral}{'useContainer'}] ? \textcolor{stringliteral}{'\_field-container.htm'} : \textcolor{stringliteral}{'\_field.htm'};
-121         $targetPartial = $this->partialsDir . $targetPartial;
+111     \{
+112         \textcolor{keywordflow}{if} (is\_string($field)) \{
+113             \textcolor{keywordflow}{if} (!isset($this->fields[$field])) \{
+114                 \textcolor{keywordflow}{throw} \textcolor{keyword}{new} ApplicationException(Lang::get(
+115                     \textcolor{stringliteral}{'backend::lang.form.missing\_definition'},
+116                     compact(\textcolor{stringliteral}{'field'})
+117                 ));
+118             \}
+119 
+120             $field = $this->fields[$field];
+121         \}
 122 
-123         \textcolor{keywordflow}{return} $this->makePartial($targetPartial, [\textcolor{stringliteral}{'field'} => $field]);
-124     \}
+123         \textcolor{keywordflow}{if} (!isset($options[\textcolor{stringliteral}{'useContainer'}])) \{
+124             $options[\textcolor{stringliteral}{'useContainer'}] = \textcolor{keyword}{true};
+125         \}
+126         $targetPartial = $options[\textcolor{stringliteral}{'useContainer'}] ? \textcolor{stringliteral}{'\_field-container.htm'} : \textcolor{stringliteral}{'\_field.htm'};
+127         $targetPartial = $this->partialsDir . $targetPartial;
+128 
+129         \textcolor{keywordflow}{return} $this->makePartial($targetPartial, [\textcolor{stringliteral}{'field'} => $field]);
+130     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_a5a5fbcb361a17abaa69b260df1a4a94b}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form}!render\+Field\+Element@{render\+Field\+Element}}
 \index{render\+Field\+Element@{render\+Field\+Element}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form}}
@@ -319,9 +319,9 @@ Renders a single form field
 )}}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_a5a5fbcb361a17abaa69b260df1a4a94b}
 Renders the H\+T\+M\+L element for a field 
 \begin{DoxyCode}
-254     \{
-255         \textcolor{keywordflow}{return} $this->makePartial(\textcolor{stringliteral}{'field\_'}.$field->type, [\textcolor{stringliteral}{'field'} => $field]);
-256     \}
+260     \{
+261         \textcolor{keywordflow}{return} $this->makePartial(\textcolor{stringliteral}{'field\_'}.$field->type, [\textcolor{stringliteral}{'field'} => $field]);
+262     \}
 \end{DoxyCode}
 
 

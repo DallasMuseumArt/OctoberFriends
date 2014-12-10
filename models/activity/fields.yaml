@@ -47,7 +47,17 @@ secondaryTabs:
             mode: dropdown 
             options:
                 nameColumn: name
-            tab: Categories 
+            tab: Categories
+        priority:
+            label: Priority
+            type: dropdown
+            options:
+                1: Low
+                5: Medium
+                10: High
+            default: 5
+            tab: Categories
+            span: left
         # ===================================
         #  Configuration tab 
         # ===================================
@@ -127,3 +137,11 @@ secondaryTabs:
             span: left
             type: datepicker
             mode: datetime
+        # ===================================
+        #  Badges tab 
+        # ===================================
+        badges:
+            tab: Badges
+            type: partial
+            path: @/plugins/dma/friends/models/activity/badges.htm
+

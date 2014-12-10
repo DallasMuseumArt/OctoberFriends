@@ -5,12 +5,16 @@ namespace DMA\Friends\ReportWidgets;
 use App;
 use Backend\Classes\ReportWidgetBase;
 use Rainlab\User\Models\User;
-use DMA\Friends\Models\Usermeta;
+use DMA\Friends\Classes\UserExtend;
+//use DMA\Friends\Models\Usermeta;
 
 class FriendsLeaderboard extends ReportWidgetBase
 {
     public $defaultAlias = 'friendsLeaderboard';
 
+    /**
+     * {@inheritDoc}
+     */
     public function widgetDetails()
     {   
         return [
@@ -19,6 +23,9 @@ class FriendsLeaderboard extends ReportWidgetBase
         ];  
     }   
 
+    /**
+     * {@inheritDoc}
+     */
     public function defineProperties()
     {
         return [
@@ -31,11 +38,14 @@ class FriendsLeaderboard extends ReportWidgetBase
         ];
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function render()
     {   
         $limit = $this->property('limit');
 
-        $users = Usermeta::byPoints()->take($limit)->get();
+        $users = User::orderBy('points', 'DESC')->take($limit)->get();
         $this->vars['users'] = $users;
 
         return $this->makePartial('widget');

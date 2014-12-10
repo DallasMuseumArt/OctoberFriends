@@ -12,6 +12,8 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Models\tex
 \item 
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Step_a58a71b1c9b39249ac24484bbd2307db2}{{\bfseries scopefind\+Wordpress} (\$query, \$id)}\label{classDMA_1_1Friends_1_1Models_1_1Step_a58a71b1c9b39249ac24484bbd2307db2}
 
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Models_1_1Step_abed223d05f52e5e39b0991929695cee9}{before\+Save} ()
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -34,13 +36,32 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Models\tex
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Step_af8869edae9bea05ac3bc966d9b7debfe}{{\bfseries \$guarded} = \mbox{[}'$\ast$'\mbox{]}}\label{classDMA_1_1Friends_1_1Models_1_1Step_af8869edae9bea05ac3bc966d9b7debfe}
 
 \item 
-\hypertarget{classDMA_1_1Friends_1_1Models_1_1Step_a21b083b38af6692f21ae0827eea458a0}{{\bfseries \$fillable} = \mbox{[}'touch'\mbox{]}}\label{classDMA_1_1Friends_1_1Models_1_1Step_a21b083b38af6692f21ae0827eea458a0}
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1Step_a21b083b38af6692f21ae0827eea458a0}{{\bfseries \$fillable} = \mbox{[}'touch', 'count', 'activity'\mbox{]}}\label{classDMA_1_1Friends_1_1Models_1_1Step_a21b083b38af6692f21ae0827eea458a0}
 
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 step Model 
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1Step_abed223d05f52e5e39b0991929695cee9}{\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Step@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Step}!before\+Save@{before\+Save}}
+\index{before\+Save@{before\+Save}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Step@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Step}}
+\subsubsection[{before\+Save}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Models\textbackslash{}\+Step\+::before\+Save (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Models_1_1Step_abed223d05f52e5e39b0991929695cee9}
+Automatically create a title based on the count and activity associated with this step 
+\begin{DoxyCode}
+56     \{
+57         $this->title = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.app.stepTitle'}, [
+58             \textcolor{stringliteral}{'count'} => $this->count, 
+59             \textcolor{stringliteral}{'title'} => $this->activity->title
+60         ]);
+61     \}
+\end{DoxyCode}
+
 
 \subsection{Member Data Documentation}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Step_a1e83eefa3362e3a1ec89b5599823c22d}{\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Step@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Step}!\$belongs\+To@{\$belongs\+To}}
@@ -57,7 +78,8 @@ step Model
 {\bfseries Initial value\+:}
 \begin{DoxyCode}
 = [
-        \textcolor{stringliteral}{'users'} => [\textcolor{stringliteral}{'Rainlab\(\backslash\)User\(\backslash\)Models\(\backslash\)User'}, \textcolor{stringliteral}{'dma\_friends\_step\_user'}]
+        \textcolor{stringliteral}{'users'} => [\textcolor{stringliteral}{'Rainlab\(\backslash\)User\(\backslash\)Models\(\backslash\)User'}, \textcolor{stringliteral}{'table'} => \textcolor{stringliteral}{'dma\_friends\_step\_user'}],
+    ]
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Step_ae1aa1ff83758491327ea35861828b233}{\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Step@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Step}!\$morph\+Many@{\$morph\+Many}}
 \index{\$morph\+Many@{\$morph\+Many}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Step@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Step}}

@@ -6,16 +6,21 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
-use DMA\Friends\Models\Badge;
-use DMA\Friends\Models\ActivityLog;
 use DMA\Friends\Wordpress\Activity as WordpressActivity;
 use DMA\Friends\Wordpress\ActivityLog as WordpressActivityLog;
 use DMA\Friends\Wordpress\Badge as WordpressBadge;
 use DMA\Friends\Wordpress\Location as WordpressLocation;
 use DMA\Friends\Wordpress\Reward as WordpressReward;
 use DMA\Friends\Wordpress\Step as WordpressStep;
+use DMA\Friends\Wordpress\Taxonomy as WordpressTaxonomy;
 use DMA\Friends\Wordpress\User as WordpressUser;
 
+/**
+ * Syncronize the data from wordpress into october
+ *
+ * @package DMA\Classes\Commands
+ * @author Kristen Arnold, Carlos Arroyo
+ */
 class SyncFriendsDataCommand extends Command
 {
     /**
@@ -55,7 +60,7 @@ class SyncFriendsDataCommand extends Command
      */
     public function fire()
     {
-        $this->info('Begin sync');
+        $this->info('Initializing Syncronization');
 
         $type = $this->option('type');
         $this->limit = $this->option('limit');
@@ -82,14 +87,18 @@ class SyncFriendsDataCommand extends Command
             case 'steps':
                 $this->syncSteps();
                 break;
+            case 'taxonomy':
+                $this->syncTaxonomy();
+                break;
             default:
                 $this->syncUsers();
                 $this->syncActivities();
-                $this->syncActivityLogs();
                 $this->syncBadges();
                 $this->syncLocations();
                 $this->syncRewards();
                 $this->syncSteps();
+                $this->syncTaxonomy();
+                $this->syncActivityLogs();
         }
 
         $this->info('Sync complete');
@@ -101,8 +110,12 @@ class SyncFriendsDataCommand extends Command
     protected function syncUsers()
     {
         $user = new WordpressUser;
-        $this->info('Updating existing users metadata');
-        $user->updateExistingUsers();
+
+        if (!$this->option('exclude-meta-update')) {
+            $this->info('Updating existing users metadata');
+            $user->updateExistingUsers();
+        }
+
         $this->sync($user, 'users');
     }
 
@@ -165,7 +178,16 @@ class SyncFriendsDataCommand extends Command
     {   
         $steps = new WordpressStep;
         $this->sync($steps, 'steps');
-    }  
+    }
+
+    /**
+     * Syncronize wordpress taxonomy terms with laravel
+     */
+    protected function syncTaxonomy()
+    {
+        $taxonomy = new WordpressTaxonomy;
+        $this->sync($taxonomy, 'taxonomy');
+    }
 
     protected function sync($model, $textType)
     {
@@ -183,6 +205,7 @@ class SyncFriendsDataCommand extends Command
         return [
             ['type', null, InputOption::VALUE_OPTIONAL, 'Import specific type', null],
             ['limit', null, InputOption::VALUE_OPTIONAL, 'Number of records per type to import', $this->limit],
+            ['exclude-meta-update', null, InputOption::VALUE_NONE, 'Exclude update of user metadata', null],
         ];  
     }  
 }

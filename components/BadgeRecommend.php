@@ -39,7 +39,7 @@ class BadgeRecommend extends ComponentBase
             ->get();
 
         foreach($badges as $badge) {
-            $renderedBadges[] = View::make('dma.friends::badgePreview', ['badge' => $badge])->render();
+            $renderedBadges[] = View::make('dma.friends::badgePreview', ['badge' => $badge, 'class' => 'col-md-3 col-sm-4'])->render();
         }
 
         $this->page['badges'] = $renderedBadges;

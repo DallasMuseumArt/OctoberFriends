@@ -1,0 +1,22 @@
+<?php $badges = $this->getBadges(); ?>
+
+<div class="badges list-widget " id="Lists-relationStepsViewList">
+    <div class="control-list" data-control="listwidget">
+        <table class="table data" data-control="rowlink">
+            <thead>
+                <th class="sort-desc active list-cell-name-title">
+                    <a>Badges with this activity</a>
+                </th>
+            </thead>
+            <tbody>
+            <?php foreach($badges as $badge) { ?>
+                <tr class="list-tree-level-0  rowlink">
+                    <td class="list-cell-index-1 list-cell-name-title list-cell-type-text">
+                        <a href="/backend/dma/friends/badges/update/<?= $badge->badge_id ?>"><?= $badge->title; ?></a>
+                    </td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+    </div>
+</div>

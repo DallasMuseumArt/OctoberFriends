@@ -56,10 +56,11 @@ string The new value for this widget.
 
 \begin{DoxyCode}
 109     \{
-110         $this->manager->saveData($this->model, $value);
-111 
-112         \textcolor{keywordflow}{return} $value[\textcolor{stringliteral}{'activity\_type'}];
-113     \}
+110         \textcolor{keywordflow}{if} ($value[\textcolor{stringliteral}{'activity\_type'}])
+111             $this->manager->saveData($this->model, $value);
+112 
+113         \textcolor{keywordflow}{return} $value[\textcolor{stringliteral}{'activity\_type'}];
+114     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1FormWidgets_1_1ActivityType_ab8b5e6c785f85176a4884d3218b1b064}{\index{D\+M\+A\+::\+Friends\+::\+Form\+Widgets\+::\+Activity\+Type@{D\+M\+A\+::\+Friends\+::\+Form\+Widgets\+::\+Activity\+Type}!prepare\+Form\+Fields@{prepare\+Form\+Fields}}
 \index{prepare\+Form\+Fields@{prepare\+Form\+Fields}!D\+M\+A\+::\+Friends\+::\+Form\+Widgets\+::\+Activity\+Type@{D\+M\+A\+::\+Friends\+::\+Form\+Widgets\+::\+Activity\+Type}}

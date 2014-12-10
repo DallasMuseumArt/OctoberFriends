@@ -2,6 +2,7 @@
 
 use BackendMenu;
 use Backend\Classes\Controller;
+use DMA\Friends\Models\Badge;
 
 /**
  * Activities Back-end Controller
@@ -23,5 +24,19 @@ class Activities extends Controller
         parent::__construct();
 
         BackendMenu::setContext('DMA.Friends', 'friends', 'activities');
+    }
+
+    /**
+     * Return an array of badges associated with the controller model
+     * @return array
+     * An array of badge models
+     */
+    public function getBadges()
+    {
+        $activity = $this->widget->formDescription->model;
+
+        $badges = Badge::join('dma_friends_steps', 'dma_friends_badges.id', '=', 'dma_friends_steps.badge_id')
+            ->where('dma_friends_steps.activity_id', $activity->id)->get();
+        return $badges;
     }
 }
