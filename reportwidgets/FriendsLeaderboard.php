@@ -31,7 +31,7 @@ class FriendsLeaderboard extends ReportWidgetBase
         return [
             'limit' => [
                 'title'             => 'Number of results',
-                'defualt'           => 10,
+                'default'           => 10,
                 'type'              => 'string',
                 'validationPattern' => '^[0-9]+$'
             ],

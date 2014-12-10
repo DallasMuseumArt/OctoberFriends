@@ -51,7 +51,7 @@ class UserExtend
         $this->user->points_today += $points;
 
         if ($this->user->forceSave()) {
-
+            
             Event::fire('dma.friends.user.pointsEarned', [$this->user, $points]);
 
             $params = [
