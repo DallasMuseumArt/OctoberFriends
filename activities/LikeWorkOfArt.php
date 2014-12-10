@@ -3,7 +3,7 @@
 use Httpful\Request;
 use RainLab\User\Models\User;
 use DMA\Friends\Models\Activity;
-use DMA\Friends\Models\ActivityAudit;
+use DMA\Friends\Models\ActivityMetadata;
 use DMA\Friends\Classes\ActivityTypeBase;
 
 class LikeWorkOfArt extends ActivityTypeBase
@@ -31,7 +31,7 @@ class LikeWorkOfArt extends ActivityTypeBase
 
         if ($activity = Activity::findActivityType('LikeWorkOfArt')->first()) {          
             if($ret = parent::process($user, ['activity' => $activity])){
-                ActivityAudit::addUserActivity($user, $activity, $data);
+                ActivityMetadata::addUserActivity($user, $activity, $data);
             }
             return $ret;
             

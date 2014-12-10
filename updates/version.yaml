@@ -41,8 +41,8 @@
     - Add priority field to badges/activities
     - add_priority.php    
 1.0.13:
-    - Create Activity Audit table
-    - create_activity_audit_table.php
+    - Create Activity Metadata table
+    - create_activity_metadata_table.php
 1.0.14:
     - Add view for the activity stream
     - create_activity_view.php 
