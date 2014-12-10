@@ -27,9 +27,9 @@ return [
         'reward'    => ':name claimed the reward ":title"',
         'unlocked'  => ':name unlocked the step ":title"',
     ],
-    'group' => [
-        ''  => '',
-    ]
+    // 'group' => [
+    //     ''  => '',
+    // ]
     'exceptions' => [
         'missingActivityClass'      => 'Could not find the activity :class',
         'missingReward'             => 'Could not find reward ":id"',
