@@ -54,7 +54,10 @@ class Reward extends Model
     public function scopeIsActive($query)
     {
         return $query->where('is_published', '=', 1)
-            ->where('is_archived', '<>', 1);
+            ->where('is_archived', '=', 0)
+            ->where('hidden', '=', 0)
+            ->whereNull('inventory')
+            ->orWhere('inventory', '>', 0);
     }
 
     public function getPointsFormatted()
