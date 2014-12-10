@@ -45,7 +45,7 @@ class FriendsLeaderboard extends ReportWidgetBase
     {   
         $limit = $this->property('limit');
 
-        $users = User::orderBy('points', 'DESC')->take($limit)->get();
+        $users = User::orderBy('points_today', 'DESC')->take($limit)->get();
         $this->vars['users'] = $users;
 
         return $this->makePartial('widget');

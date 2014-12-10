@@ -288,8 +288,14 @@ class Plugin extends PluginBase
 
     public function register()
     {
+        // Commands for syncing wordpress data
         $this->registerConsoleCommand('friends.sync-data', 'DMA\Friends\Commands\SyncFriendsDataCommand');
         $this->registerConsoleCommand('friends.sync-relations', 'DMA\Friends\Commands\SyncFriendsRelationsCommand');
+
+        // Crontasks
+        $this->registerConsoleCommand('friends.points-weekly', 'DMA\Friends\Commands\WeeklyPoints');
+        $this->registerConsoleCommand('friends.points-daily', 'DMA\Friends\Commands\DailyPoints');
+
     } 
 
     public function registerReportWidgets()

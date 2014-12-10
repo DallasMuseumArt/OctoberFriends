@@ -48,6 +48,7 @@ class UserExtend
 
         $this->user->points += $points;
         $this->user->points_this_week += $points;
+        $this->user->points_today += $points;
 
         if ($this->user->forceSave()) {
 
@@ -79,8 +80,10 @@ class UserExtend
             return false;
         }
 
-        $this->user->points -= $points;
+        $this->user->points -= $points;        
         $this->user->points_this_week -= $points;
+        $this->user->points_today -= $points;
+        
         if ($this->user->forceSave()) {
             Event::fire('dma.friends.user.pointsRemoved', [$this->user, $points]);
         }
