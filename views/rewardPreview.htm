@@ -1,10 +1,14 @@
-<div class="col-md-3 col-sm-4">
+<div class="col-md-6 col-sm-4">
     <div class="friends-reward preview">
-        <h4>{{ reward.title }}</h4>
-
-        <div class="description">
+        <div class="description col-md-8">
+            <h4>{{ reward.title }}</h4>
             {{ reward.excerpt }}
-            <p>Points: {{ reward.points }}</p>
+            
+        </div>
+
+        <div class="claim col-md-4">
+            <p>Claim for</p>
+            <button data-request="onRedeem" data-request-data="id: {{ reward.id }}">{{ reward.pointsFormatted }} points</a>
         </div>
 
     </div>
