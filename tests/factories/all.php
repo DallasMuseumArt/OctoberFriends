@@ -3,6 +3,7 @@
 use \Str as Str;
 use League\FactoryMuffin\Facade as FactoryMuffin;
 use DMA\Friends\Models\ActivityLog;
+use DMA\Friends\Models\Settings;
 use RainLab\User\Models\Country;
 use RainLab\User\Models\State;
 
@@ -137,3 +138,29 @@ FactoryMuffin::define('DMA\Friends\Models\Usermeta', [
     'current_member'        => 'boolean',
     'current_member_number' => 'randomNumber',
 ]);
+
+/**
+ * Create and empty group
+ * @var DMA\Friends\Models\UserGroup
+ */
+FactoryMuffin::define('DMA\Friends\Models\UserGroup', [
+    'owner_id'      => 'factory|RainLab\User\Models\User',
+    'is_active'     => 'boolean|100',
+]);
+
+/**
+ * Create a group with the maxium of members allow in a group.
+ * The limit is set in the settings of the plugin
+ * @var DMA\Friends\Models\UserGroup
+ */
+FactoryMuffin::define('filled:DMA\Friends\Models\UserGroup', [
+], function($object){
+    $limit = Settings::get('maximum_users_group');
+    $members = FactoryMuffin::seed($limit, 'RainLab\User\Models\User');
+    $members_ids = array_map(function($m) {return $m->id;}, $members);
+    $object->users()->attach($members_ids);
+    /*
+    forEach($members as $user){
+        $object->addUser($user);    
+    }*/
+});

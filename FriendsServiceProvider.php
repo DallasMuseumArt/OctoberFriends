@@ -65,10 +65,10 @@ class FriendsServiceProvider extends ServiceProvider
         			'name' => 'SMS',
         			'description' => 'Send notifications by SMS using Twilio.'
         		],
-        		//'\DMA\Friends\Classes\Notifications\Channels\ChannelTwitter' => [
-        	         //'name' => 'Twitter',
-        	         //'description' => 'Send notifications via Twitter.'
-        	    //],
+        		'\DMA\Friends\Classes\Notifications\Channels\ChannelTwitter' => [
+        	         'name' => 'Twitter',
+        	         'description' => 'Send notifications via Twitter.'
+        	    ],
             ]);
         
         	// Register input validators

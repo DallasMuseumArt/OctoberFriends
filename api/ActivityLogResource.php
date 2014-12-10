@@ -4,19 +4,19 @@ use Model;
 
 class ActivityLogResource extends BaseResource {
 
-	protected $model 	   = '\DMA\Friends\Models\ActivityLog';
-	//protected $transformer = '\DMA\Friends\Api\ActivityLogTransformer';
+    protected $model        = '\DMA\Friends\Models\ActivityLog';
+    //protected $transformer = '\DMA\Friends\Api\ActivityLogTransformer';
 
 }
 
 class ActivityLogTransformer extends BaseTransformer {
-	/*
-	public function transform(Model $instance)
-	{
-		return [
-		'id'   => (int) $instance->id,
-		'title' => $instance->title,
-		];
-	}
-	*/
+    /*
+    public function transform(Model $instance)
+    {
+        return [
+        'id'   => (int) $instance->id,
+        'title' => $instance->title,
+        ];
+    }
+    */
 }
