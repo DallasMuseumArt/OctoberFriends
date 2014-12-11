@@ -1,0 +1,25 @@
+<?php $badges = $this->widget->formAvatar->model->badges; ?>
+
+<div class="user-badges list-widget " id="Lists-relationStepsViewList">
+    <div class="control-list" data-control="listwidget">
+        <table class="table data" data-control="rowlink">
+            <thead>
+                <th class="active list-cell-name-title">
+                    <a>User has completed the following badges</a>
+                </th>
+            </thead>
+            <tbody>
+            <?php foreach($badges as $badge) { ?>
+                <tr class="list-tree-level-0  rowlink">
+                    <td class="list-cell-index-1 list-cell-name-title list-cell-type-text">
+                        <a href="/backend/dma/friends/badges/update/<?= $badge->id ?>"><?= $badge->title; ?></a>
+                    </td>
+                    <td class="list-cell-index-2 list-cell-name-date list-cell-type-text">
+                        <?= $badge->timeAgo; ?>
+                    </td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+    </div>
+</div>

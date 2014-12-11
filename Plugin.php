@@ -234,28 +234,38 @@ class Plugin extends PluginBase
         		'label' => 'First Name',
         		'tab'   => 'Metadata',
         	],
-        		'metadata[last_name]' => [
+        	'metadata[last_name]' => [
         		'label' => 'Last Name',
         		'tab'   => 'Metadata',
         	],
-        		'metadata[points]' => [
+        	'metadata[points]' => [
         		'label' => 'Points',
         		'tab'   => 'Metadata',
         	],
-        		'metadata[email_optin]' => [
+        	'metadata[email_optin]' => [
         		'label' => 'Email Opt-in',
         		'type'  => 'checkbox',
         		'tab'   => 'Metadata',
         	],
-        		'metadata[current_member]' => [
+        	'metadata[current_member]' => [
         		'label' => 'Current member?',
         		'type'  => 'checkbox',
         		'tab'   => 'Metadata',
         	],
-        		'metadata[current_member_number]' => [
+        	'metadata[current_member_number]' => [
         		'label' => 'Current Member Number',
         		'tab'   => 'Metadata',
         	],
+            'activities[activities]' => [
+                'tab'   => 'Activities',
+                'type'  => 'partial',
+                'path'  => '@/plugins/dma/friends/models/activity/users.htm',
+            ],
+            'badges[badges]' => [
+                'tab'   => 'Badges',
+                'type'  => 'partial',
+                'path'  => '@/plugins/dma/friends/models/badge/users.htm',
+            ],
         ], 'primary');        
     }
     
