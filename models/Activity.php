@@ -2,6 +2,8 @@
 
 use Model;
 use DateTime;
+use Smirik\PHPDateTimeAgo\DateTimeAgo as TimeAgo;
+
 
 /**
  * Activity Model
@@ -125,5 +127,17 @@ class Activity extends Model
     {   
         return $query->where('wordpress_id', $id);
     }  
+
+        /**
+     * Mutator function to return the pivot timestamp as time ago
+     * @return string The time since the badge was earned
+     */
+    public function getTimeAgoAttribute($value)
+    {
+        if (!isset($this->pivot->created_at)) return null;
+
+        $timeAgo = new TimeAgo;
+        return $timeAgo->get($this->pivot->created_at);
+    }
 
 }
