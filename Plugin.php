@@ -243,10 +243,6 @@ class Plugin extends PluginBase
         		'label' => 'Last Name',
         		'tab'   => 'Metadata',
         	],
-        	'metadata[points]' => [
-        		'label' => 'Points',
-        		'tab'   => 'Metadata',
-        	],
         	'metadata[email_optin]' => [
         		'label' => 'Email Opt-in',
         		'type'  => 'checkbox',
@@ -261,6 +257,11 @@ class Plugin extends PluginBase
         		'label' => 'Current Member Number',
         		'tab'   => 'Metadata',
         	],
+            'points' => [
+                'tab'   => 'Points',
+                'type'  => 'partial',
+                'path'  => '@/plugins/dma/friends/models/usermeta/points.htm',
+            ],
             'activities[activities]' => [
                 'tab'   => 'Activities',
                 'type'  => 'partial',
