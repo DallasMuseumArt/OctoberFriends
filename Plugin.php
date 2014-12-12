@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Event;
 use Rainlab\User\Models\User as User;
 use DMA\Friends\Models\Usermeta as Metadata;
 use DMA\Friends\Models\Settings;
+use DMA\Friends\Classes\LocationManager;
 use DMA\Friends\Classes\ActivityManager;
 use System\Classes\PluginBase;
 use DMA\Friends\Classes\FriendsEventHandler;
@@ -153,6 +154,10 @@ class Plugin extends PluginBase
 
     public function boot()
     {
+
+        // Handle locations upon login
+        $this->registerLocation();
+
         // Register timezone settings
         date_default_timezone_set( Settings::get('timezone', Config::get('app.timezone')) );
 
@@ -178,7 +183,7 @@ class Plugin extends PluginBase
         
         // Extend User fields
         $context = $this;
-        Event::listen('backend.form.extendFields', function($widget)  use ($context){
+        Event::listen('backend.form.extendFields', function($widget) use ($context){
             $context->extendedUserFields($widget);
             $context->extendedSettingFields($widget);
         }); 
@@ -328,6 +333,18 @@ class Plugin extends PluginBase
                 'dma.friends::mail.invite' => 'Invitation email to join a group sent when a user is added to a group.',
         ];
     }    
+
+    /**
+     * register the location of a kiosk with the browser session
+     */
+    public function registerLocation()
+    {
+        if (!isset($_SERVER['HTTP_X_DEVICE_UUID'])) return;
+
+        $uuid = $_SERVER['HTTP_X_DEVICE_UUID'];
+
+        $manager = new LocationManager($uuid);
+    }
 
 }
 
