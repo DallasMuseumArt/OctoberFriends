@@ -54,6 +54,8 @@ class Step extends Model
      */
     public function beforeSave()
     {
+        if (!$this->activity) return;
+
         $this->title = Lang::get('dma.friends::lang.app.stepTitle', [
             'count' => $this->count, 
             'title' => $this->activity->title

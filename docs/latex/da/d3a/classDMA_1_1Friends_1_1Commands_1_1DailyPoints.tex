@@ -1,0 +1,69 @@
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1DailyPoints}{\section{D\-M\-A\textbackslash{}Friends\textbackslash{}Commands\textbackslash{}Daily\-Points Class Reference}
+\label{classDMA_1_1Friends_1_1Commands_1_1DailyPoints}\index{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Commands\textbackslash{}\-Daily\-Points@{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Commands\textbackslash{}\-Daily\-Points}}
+}
+Inheritance diagram for D\-M\-A\textbackslash{}Friends\textbackslash{}Commands\textbackslash{}Daily\-Points\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{da/d3a/classDMA_1_1Friends_1_1Commands_1_1DailyPoints}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Commands_1_1DailyPoints_a9b86a3c5fd799e43cf001ae955501c0c}{schedule} (Schedulable \$scheduler)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Commands_1_1DailyPoints_a744a2cce8db836d1e2ae4db904361b1e}{fire} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1DailyPoints_affe8b91e4538363d05401b06b59ec6b0}{{\bfseries \$name} = 'friends\-:points-\/daily'}\label{classDMA_1_1Friends_1_1Commands_1_1DailyPoints_affe8b91e4538363d05401b06b59ec6b0}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1DailyPoints_a744a2cce8db836d1e2ae4db904361b1e}{\index{D\-M\-A\-::\-Friends\-::\-Commands\-::\-Daily\-Points@{D\-M\-A\-::\-Friends\-::\-Commands\-::\-Daily\-Points}!fire@{fire}}
+\index{fire@{fire}!DMA::Friends::Commands::DailyPoints@{D\-M\-A\-::\-Friends\-::\-Commands\-::\-Daily\-Points}}
+\subsubsection[{fire}]{\setlength{\rightskip}{0pt plus 5cm}D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Commands\textbackslash{}\-Daily\-Points\-::fire (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Commands_1_1DailyPoints_a744a2cce8db836d1e2ae4db904361b1e}
+Set the number of points set per week back to zero on sunday morning \begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+39     \{
+40         DB::table(\textcolor{stringliteral}{'users'})
+41             ->update([\textcolor{stringliteral}{'points\_today'} => 0]);
+42     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1DailyPoints_a9b86a3c5fd799e43cf001ae955501c0c}{\index{D\-M\-A\-::\-Friends\-::\-Commands\-::\-Daily\-Points@{D\-M\-A\-::\-Friends\-::\-Commands\-::\-Daily\-Points}!schedule@{schedule}}
+\index{schedule@{schedule}!DMA::Friends::Commands::DailyPoints@{D\-M\-A\-::\-Friends\-::\-Commands\-::\-Daily\-Points}}
+\subsubsection[{schedule}]{\setlength{\rightskip}{0pt plus 5cm}D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Commands\textbackslash{}\-Daily\-Points\-::schedule (
+\begin{DoxyParamCaption}
+\item[{Schedulable}]{\$scheduler}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Commands_1_1DailyPoints_a9b86a3c5fd799e43cf001ae955501c0c}
+When a command should run 
+\begin{DoxyParams}[1]{Parameters}
+Scheduler & {\em \$scheduler} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+29     \{
+30         \textcolor{comment}{// Run every 5 minutes}
+31         \textcolor{keywordflow}{return} $scheduler->daily();
+32     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+commands/Daily\-Points.\-php\end{DoxyCompactItemize}

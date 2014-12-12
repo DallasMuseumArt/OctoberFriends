@@ -1,21 +1,21 @@
-Activity Types must be registered in the \href{#registration-file}{\tt Plugin registration file}. This tells the Friends Plugin about Available Activities and provides a {\bfseries short name} for using it. An example of registering a activity\+:
+Activity Types must be registered in the \href{#registration-file}{\tt Plugin registration file}. This tells the Friends Plugin about Available Activities and provides a {\bfseries short name} for using it. An example of registering a activity\-:
 
-``` public function register\+Components() \{ return \mbox{[} '\hyperlink{namespaceDMA}{D\+M\+A}' =$>$ 'activity\+Code' \mbox{]}; \} ```
+``` public function register\-Components() \{ return \mbox{[} '\hyperlink{namespaceDMA}{D\-M\-A}' =$>$ 'activity\-Code' \mbox{]}; \} ```
 
 Define the details(). This will report some basic information about your plugin.
 
 ``` public function details() \{ return \mbox{[} 'name' =$>$ 'Activity Code', 'description' =$>$ 'Complete activities by entering in a code', \mbox{]}; \} ```
 
-If your activity requires additional configuration options create the file field.\+yaml in a corresponding folder named after the class. The file should be named fields.\+yaml see \href{https://octobercms.com/docs/backend/forms#field-types}{\tt documentation} for details.
+If your activity requires additional configuration options create the file field.\-yaml in a corresponding folder named after the class. The file should be named fields.\-yaml see \href{https://octobercms.com/docs/backend/forms#field-types}{\tt documentation} for details.
 
 Example
 
-``` fields\+: activity\+\_\+code\+: label\+: Activity Code description\+: The unique code for this activity. ```
+``` fields\-: activity\-\_\-code\-: label\-: Activity Code description\-: The unique code for this activity. ```
 
-When implementing custom fields you must also define the {\bfseries get\+Form\+Default\+Values()} method to provide default values
+When implementing custom fields you must also define the {\bfseries get\-Form\-Default\-Values()} method to provide default values
 
-``` public function get\+Form\+Default\+Values(\$model) \{ return \mbox{[} 'activity\+\_\+code' =$>$ (isset(\$model-\/$>$activity\+\_\+code)) ? \$model-\/$>$activity\+\_\+code \+: null, \mbox{]}; \} ```
+``` public function get\-Form\-Default\-Values(\$model) \{ return \mbox{[} 'activity\-\_\-code' =$>$ (isset(\$model-\/$>$activity\-\_\-code)) ? \$model-\/$>$activity\-\_\-code \-: null, \mbox{]}; \} ```
 
-When saving an activity with a custom activity type, the class will attempt to map the fields to attributes on the model. If you need to further extend this functionality you can implement {\bfseries save\+Data()} to customize the behavior when an activity form is saved.
+When saving an activity with a custom activity type, the class will attempt to map the fields to attributes on the model. If you need to further extend this functionality you can implement {\bfseries save\-Data()} to customize the behavior when an activity form is saved.
 
-See classes in \href{https://github.com/DallasMuseumArt/OctoberFriends/tree/master/activities}{\tt D\+M\+A} as example class for building custom activities 
+See classes in \href{https://github.com/DallasMuseumArt/OctoberFriends/tree/master/activities}{\tt D\-M\-A} as example class for building custom activities 

@@ -1,6 +1,7 @@
 var searchData=
 [
   ['callnotificationbuilder',['callNotificationBuilder',['../d9/d76/classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1ChannelManager.html#a3c76a0e6b0be8af57f08616c80efac7f',1,'DMA::Friends::Classes::Notifications::ChannelManager']]],
+  ['cancelmembership',['cancelMembership',['../d2/daf/classDMA_1_1Friends_1_1Models_1_1UserGroup.html#a0e21f8d83c3a53b9119fff9395da55a4',1,'DMA::Friends::Models::UserGroup']]],
   ['cancomplete',['canComplete',['../d3/d35/classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase.html#acc0d37915d9170364f381945fd01f7c2',1,'DMA::Friends::Classes::ActivityTypeBase']]],
   ['categories',['Categories',['../d9/daa/classDMA_1_1Friends_1_1Controllers_1_1Categories.html',1,'DMA::Friends::Controllers']]],
   ['category',['Category',['../de/d78/classDMA_1_1Friends_1_1Models_1_1Category.html',1,'DMA::Friends::Models']]],

@@ -1,0 +1,170 @@
+\hypertarget{classDMA_1_1Friends_1_1Components_1_1GroupFormCreation}{\section{D\-M\-A\textbackslash{}Friends\textbackslash{}Components\textbackslash{}Group\-Form\-Creation Class Reference}
+\label{classDMA_1_1Friends_1_1Components_1_1GroupFormCreation}\index{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Components\textbackslash{}\-Group\-Form\-Creation@{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Components\textbackslash{}\-Group\-Form\-Creation}}
+}
+Inheritance diagram for D\-M\-A\textbackslash{}Friends\textbackslash{}Components\textbackslash{}Group\-Form\-Creation\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{de/dd1/classDMA_1_1Friends_1_1Components_1_1GroupFormCreation}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Components_1_1GroupFormCreation_aff169c7950266d239c20fb1c42cbd95a}{{\bfseries component\-Details} ()}\label{classDMA_1_1Friends_1_1Components_1_1GroupFormCreation_aff169c7950266d239c20fb1c42cbd95a}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Components_1_1GroupFormCreation_a9cac8a6091971e1e88d5ca104986cc31}{{\bfseries define\-Properties} ()}\label{classDMA_1_1Friends_1_1Components_1_1GroupFormCreation_a9cac8a6091971e1e88d5ca104986cc31}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Components_1_1GroupFormCreation_a0bee9cf0dc3a8923818d402fa3532477}{{\bfseries on\-Run} ()}\label{classDMA_1_1Friends_1_1Components_1_1GroupFormCreation_a0bee9cf0dc3a8923818d402fa3532477}
+
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Components_1_1GroupFormCreation_a9dd18b90b440803a9026ac790275f804}{on\-Add} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Components_1_1GroupFormCreation_a7f4ddea881f2d0205ec7837c698e9490}{on\-Delete} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Components_1_1GroupFormCreation_a8cc5c8e020c44811c6ccdd75c7375940}{on\-Search\-User} ()
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Components_1_1GroupFormCreation_a9c69342fdb9b56087dfd6ab7165e5f74}{{\bfseries get\-No\-User\-Redirect\-To\-Options} ()}\label{classDMA_1_1Friends_1_1Components_1_1GroupFormCreation_a9c69342fdb9b56087dfd6ab7165e5f74}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Components_1_1GroupFormCreation_afcc25a77b90e60e9f2f4e0deacaa2225}{get\-Group} ()
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Components_1_1GroupFormCreation_a50c69e38289872cd98ca9a2c56c5dbaa}{{\bfseries get\-Login\-Attr} ()}\label{classDMA_1_1Friends_1_1Components_1_1GroupFormCreation_a50c69e38289872cd98ca9a2c56c5dbaa}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Components_1_1GroupFormCreation_a163b4d9b15b9cb6a269bc97e25fe1b0f}{{\bfseries prepare\-Vars} (\$group=null, \$vars=\mbox{[}$\,$\mbox{]})}\label{classDMA_1_1Friends_1_1Components_1_1GroupFormCreation_a163b4d9b15b9cb6a269bc97e25fe1b0f}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Components_1_1GroupFormCreation_afcc25a77b90e60e9f2f4e0deacaa2225}{\index{D\-M\-A\-::\-Friends\-::\-Components\-::\-Group\-Form\-Creation@{D\-M\-A\-::\-Friends\-::\-Components\-::\-Group\-Form\-Creation}!get\-Group@{get\-Group}}
+\index{get\-Group@{get\-Group}!DMA::Friends::Components::GroupFormCreation@{D\-M\-A\-::\-Friends\-::\-Components\-::\-Group\-Form\-Creation}}
+\subsubsection[{get\-Group}]{\setlength{\rightskip}{0pt plus 5cm}D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Components\textbackslash{}\-Group\-Form\-Creation\-::get\-Group (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classDMA_1_1Friends_1_1Components_1_1GroupFormCreation_afcc25a77b90e60e9f2f4e0deacaa2225}
+\begin{DoxyReturn}{Returns}
+\hyperlink{namespaceDMA}{D\-M\-A} 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+49     \{
+50         $user = Auth::getUser();
+51         
+52         \textcolor{keywordflow}{if} (!is\_null($user))\{
+53             \textcolor{comment}{//if (!UserGroup::hasActiveMemberships($user))\{}
+54                 \textcolor{comment}{//1. If user don't have an active membership create a group for it}
+55                 $group = UserGroup::where(\textcolor{stringliteral}{'owner\_id'}, $user->getKey())
+56                             ->where(\textcolor{stringliteral}{'is\_active'}, \textcolor{keyword}{true})
+57                             ->first();
+58                 \textcolor{keywordflow}{return} $group;
+59             \textcolor{comment}{//\}}
+60         \}
+61     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Components_1_1GroupFormCreation_a9dd18b90b440803a9026ac790275f804}{\index{D\-M\-A\-::\-Friends\-::\-Components\-::\-Group\-Form\-Creation@{D\-M\-A\-::\-Friends\-::\-Components\-::\-Group\-Form\-Creation}!on\-Add@{on\-Add}}
+\index{on\-Add@{on\-Add}!DMA::Friends::Components::GroupFormCreation@{D\-M\-A\-::\-Friends\-::\-Components\-::\-Group\-Form\-Creation}}
+\subsubsection[{on\-Add}]{\setlength{\rightskip}{0pt plus 5cm}D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Components\textbackslash{}\-Group\-Form\-Creation\-::on\-Add (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Components_1_1GroupFormCreation_a9dd18b90b440803a9026ac790275f804}
+Ajax handler for adding members 
+\begin{DoxyCode}
+107                            \{
+108         $users = post(\textcolor{stringliteral}{'users'}, []);
+109         $maxUsers = Settings::get(\textcolor{stringliteral}{'maximum\_users\_group'});
+110         
+111         \textcolor{keywordflow}{if} (count($users) >= $maxUsers)
+112             \textcolor{comment}{//trans('dma.friends::lang.group.invalid\_activation\_code')}
+113             \textcolor{keywordflow}{throw} new \(\backslash\)Exception(sprintf(\textcolor{stringliteral}{'Sorry only %s members per group are allowed.'}, $maxUsers));
+114         
+115         
+116         \textcolor{comment}{// Add to group}
+117         $group = $this->\hyperlink{classDMA_1_1Friends_1_1Components_1_1GroupFormCreation_afcc25a77b90e60e9f2f4e0deacaa2225}{getGroup}();
+118 
+119         
+120         \textcolor{keywordflow}{if} (($newUser = post(\textcolor{stringliteral}{'newUser'})) != \textcolor{stringliteral}{''})\{
+121             $user = User::where($this->getLoginAttr(), \textcolor{charliteral}{'='}, $newUser)->first();
+122             \textcolor{keywordflow}{if} ($user)\{
+123                 $group->addUser($user);
+124             \}\textcolor{keywordflow}{else}\{
+125                 \textcolor{keywordflow}{throw} new \(\backslash\)Exception(\textcolor{stringliteral}{'User not found.'});
+126             \}
+127             
+128         \}
+129         
+130         \textcolor{comment}{// Updated list of users and other vars}
+131         $this->prepareVars($group);
+132     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Components_1_1GroupFormCreation_a7f4ddea881f2d0205ec7837c698e9490}{\index{D\-M\-A\-::\-Friends\-::\-Components\-::\-Group\-Form\-Creation@{D\-M\-A\-::\-Friends\-::\-Components\-::\-Group\-Form\-Creation}!on\-Delete@{on\-Delete}}
+\index{on\-Delete@{on\-Delete}!DMA::Friends::Components::GroupFormCreation@{D\-M\-A\-::\-Friends\-::\-Components\-::\-Group\-Form\-Creation}}
+\subsubsection[{on\-Delete}]{\setlength{\rightskip}{0pt plus 5cm}D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Components\textbackslash{}\-Group\-Form\-Creation\-::on\-Delete (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Components_1_1GroupFormCreation_a7f4ddea881f2d0205ec7837c698e9490}
+Ajax handler for adding members 
+\begin{DoxyCode}
+137                               \{
+138         \textcolor{keywordflow}{if} (($removeUser = post(\textcolor{stringliteral}{'removeUser'})) != \textcolor{stringliteral}{''})\{
+139             $user = User::find($removeUser);
+140             \textcolor{keywordflow}{if} ($user)\{
+141                 \textcolor{comment}{// remove from group}
+142                 $group = $this->\hyperlink{classDMA_1_1Friends_1_1Components_1_1GroupFormCreation_afcc25a77b90e60e9f2f4e0deacaa2225}{getGroup}();
+143                 $group->removeUser($user);
+144     
+145                 \textcolor{comment}{// Updated list of users and other vars}
+146                 $this->prepareVars($group);
+147     
+148             \}\textcolor{keywordflow}{else}\{
+149                 \textcolor{keywordflow}{throw} new \(\backslash\)Exception(\textcolor{stringliteral}{'User not found.'});
+150             \}
+151         \}
+152     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Components_1_1GroupFormCreation_a8cc5c8e020c44811c6ccdd75c7375940}{\index{D\-M\-A\-::\-Friends\-::\-Components\-::\-Group\-Form\-Creation@{D\-M\-A\-::\-Friends\-::\-Components\-::\-Group\-Form\-Creation}!on\-Search\-User@{on\-Search\-User}}
+\index{on\-Search\-User@{on\-Search\-User}!DMA::Friends::Components::GroupFormCreation@{D\-M\-A\-::\-Friends\-::\-Components\-::\-Group\-Form\-Creation}}
+\subsubsection[{on\-Search\-User}]{\setlength{\rightskip}{0pt plus 5cm}D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Components\textbackslash{}\-Group\-Form\-Creation\-::on\-Search\-User (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Components_1_1GroupFormCreation_a8cc5c8e020c44811c6ccdd75c7375940}
+Ajax handler for searching users 
+\begin{DoxyCode}
+157                                   \{        
+158         \textcolor{comment}{// Suggest exsiting members}
+159         \textcolor{keywordflow}{if} (($search = post(\textcolor{stringliteral}{'newUser'})) != \textcolor{stringliteral}{''})\{
+160    
+161             $users = User::where($this->getLoginAttr(), \textcolor{stringliteral}{'LIKE'}, \textcolor{stringliteral}{"$search%"})
+162                     ->orWhere(\textcolor{stringliteral}{'name'}, \textcolor{stringliteral}{'LIKE'}, \textcolor{stringliteral}{"$search%"})
+163                     ->take($this->property(\textcolor{stringliteral}{'maxUserSuggestions'}))
+164                     ->get();
+165              
+166             \textcolor{comment}{/*}
+167 \textcolor{comment}{            $users = User::groups()}
+168 \textcolor{comment}{                    ->wherePivot('membership\_status', '<>', UserGroup::MEMBERSHIP\_ACCEPTED )}
+169 \textcolor{comment}{                    ->with('groups')}
+170 \textcolor{comment}{                    ->whereHas('groups', function($query)\{}
+171 \textcolor{comment}{                        $query->where('is\_active', true);}
+172 \textcolor{comment}{                    \})}
+173 \textcolor{comment}{                   }
+174 \textcolor{comment}{                    ->get();}
+175 \textcolor{comment}{            */}
+176             \textcolor{comment}{// Updated list of users and other vars}
+177             $this->prepareVars(null, [\textcolor{stringliteral}{'search'} => $search, \textcolor{stringliteral}{'users'}=>$users]);            
+178         \}
+179     \}    
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+components/Group\-Form\-Creation.\-php\end{DoxyCompactItemize}
