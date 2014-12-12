@@ -272,6 +272,11 @@ class Plugin extends PluginBase
                 'type'  => 'partial',
                 'path'  => '@/plugins/dma/friends/models/badge/users.htm',
             ],
+            'rewards[rewards]' => [
+                'tab'   => 'Rewards',
+                'type'  => 'partial',
+                'path'  => '@/plugins/dma/friends/models/reward/users.htm',
+            ],
         ], 'primary');        
     }
     

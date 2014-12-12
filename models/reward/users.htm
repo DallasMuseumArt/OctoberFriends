@@ -1,21 +1,22 @@
-<?php $activities = $this->widget->formAvatar->model->activities; ?>
+<?php $rewards = $this->widget->formAvatar->model->rewards; ?>
 
-<div class="user-activities list-widget " id="Lists-relationStepsViewList">
+<div class="user-rewards list-widget " id="Lists-relationStepsViewList">
     <div class="control-list" data-control="listwidget">
         <table class="table data" data-control="rowlink">
             <thead>
                 <th colspan=2 class="active list-cell-name-title">
-                    <a>User has completed the following activities</a>
+                    <a>User has redeemed the following rewards</a>
                 </th>
+                <th>
             </thead>
             <tbody>
-            <?php foreach($activities as $activity) { ?>
+            <?php foreach($rewards as $reward) { ?>
                 <tr class="list-tree-level-0  rowlink">
                     <td class="list-cell-index-1 list-cell-name-title list-cell-type-text">
-                        <a href="/backend/dma/friends/activities/update/<?= $activity->id ?>"><?= $activity->title; ?></a>
+                        <a href="/backend/dma/friends/reward/update/<?= $reward->id ?>"><?= $reward->title; ?></a>
                     </td>
                     <td class="list-cell-index-2 list-cell-name-date list-cell-type-text">
-                        <?= $activity->timeAgo; ?>
+                        <?= $reward->timeAgo; ?>
                     </td>
                 </tr>
             <?php } ?>
