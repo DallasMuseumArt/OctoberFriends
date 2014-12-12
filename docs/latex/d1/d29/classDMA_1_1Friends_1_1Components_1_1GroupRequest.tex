@@ -1,0 +1,83 @@
+\hypertarget{classDMA_1_1Friends_1_1Components_1_1GroupRequest}{\section{D\-M\-A\textbackslash{}Friends\textbackslash{}Components\textbackslash{}Group\-Request Class Reference}
+\label{classDMA_1_1Friends_1_1Components_1_1GroupRequest}\index{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Components\textbackslash{}\-Group\-Request@{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Components\textbackslash{}\-Group\-Request}}
+}
+Inheritance diagram for D\-M\-A\textbackslash{}Friends\textbackslash{}Components\textbackslash{}Group\-Request\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d1/d29/classDMA_1_1Friends_1_1Components_1_1GroupRequest}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Components_1_1GroupRequest_afb7e37d55f101ec2dfea2af57f09b88d}{{\bfseries component\-Details} ()}\label{classDMA_1_1Friends_1_1Components_1_1GroupRequest_afb7e37d55f101ec2dfea2af57f09b88d}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Components_1_1GroupRequest_aa4deec2b8fa31ca4580b1eaf4ff40a4c}{{\bfseries define\-Properties} ()}\label{classDMA_1_1Friends_1_1Components_1_1GroupRequest_aa4deec2b8fa31ca4580b1eaf4ff40a4c}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Components_1_1GroupRequest_a78685da9fdb569d6a5a9e30304bb0d22}{{\bfseries on\-Run} ()}\label{classDMA_1_1Friends_1_1Components_1_1GroupRequest_a78685da9fdb569d6a5a9e30304bb0d22}
+
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Components_1_1GroupRequest_a809f2ed08437eb0458240725f07d098c}{on\-Change\-Status} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Components_1_1GroupRequest_abf24425ad2bc88375097dd15bb35fd01}{{\bfseries getuser} ()}\label{classDMA_1_1Friends_1_1Components_1_1GroupRequest_abf24425ad2bc88375097dd15bb35fd01}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Components_1_1GroupRequest_a45abdc367821a9a6d105917f125057e9}{{\bfseries get\-Group\-Request} ()}\label{classDMA_1_1Friends_1_1Components_1_1GroupRequest_a45abdc367821a9a6d105917f125057e9}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Components_1_1GroupRequest_a8c20a7584f43b3e79ea92e77f8ba4b45}{{\bfseries prepare\-Vars} (\$vars=\mbox{[}$\,$\mbox{]})}\label{classDMA_1_1Friends_1_1Components_1_1GroupRequest_a8c20a7584f43b3e79ea92e77f8ba4b45}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Components_1_1GroupRequest_a809f2ed08437eb0458240725f07d098c}{\index{D\-M\-A\-::\-Friends\-::\-Components\-::\-Group\-Request@{D\-M\-A\-::\-Friends\-::\-Components\-::\-Group\-Request}!on\-Change\-Status@{on\-Change\-Status}}
+\index{on\-Change\-Status@{on\-Change\-Status}!DMA::Friends::Components::GroupRequest@{D\-M\-A\-::\-Friends\-::\-Components\-::\-Group\-Request}}
+\subsubsection[{on\-Change\-Status}]{\setlength{\rightskip}{0pt plus 5cm}D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Components\textbackslash{}\-Group\-Request\-::on\-Change\-Status (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Components_1_1GroupRequest_a809f2ed08437eb0458240725f07d098c}
+Ajax handler for accept request 
+\begin{DoxyCode}
+98                                     \{
+99                 
+100         \textcolor{keywordflow}{if} (($groupId = post(\textcolor{stringliteral}{'groupId'})) != \textcolor{stringliteral}{''})\{
+101             
+102             $group = UserGroup::findOrFail($groupId);
+103             
+104             \textcolor{keywordflow}{if} (($status = post(\textcolor{stringliteral}{'status'})) != \textcolor{stringliteral}{''})\{
+105                 $user = $this->getuser();
+106                 
+107                 \textcolor{keywordflow}{switch} ($status)\{
+108                     \textcolor{keywordflow}{case} UserGroup::MEMBERSHIP\_ACCEPTED:
+109                         $group->acceptMembership($user);
+110                         \textcolor{keywordflow}{break};
+111                         
+112                     \textcolor{keywordflow}{case} UserGroup::MEMBERSHIP\_REJECTED:
+113                         $group->rejectMembership($user);
+114                         \textcolor{keywordflow}{break};
+115                         
+116                     \textcolor{keywordflow}{case} UserGroup::MEMBERSHIP\_CANCELLED:
+117                         $group->cancelMembership($user);
+118                         \textcolor{keywordflow}{break};                                                  
+119                        
+120                 \} 
+121             \}
+122         \}
+123         
+124         
+125         \textcolor{comment}{// Updated list of request and other vars}
+126         $this->prepareVars();
+127     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+components/Group\-Request.\-php\end{DoxyCompactItemize}
