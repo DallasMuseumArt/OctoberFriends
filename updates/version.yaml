@@ -50,3 +50,6 @@
     - Add user groups     
     - create_user_group_table.php
     - create_users_groups_table.php
+1.0.16:
+    - Add uuid to location model
+    - add_location_uuid.php
