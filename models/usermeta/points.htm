@@ -1,0 +1,24 @@
+<?php $user = $this->widget->formAvatar->model; ?>
+
+<div class="form-group span-full">
+    <label>Points</label>
+    <?= $user->points ?>
+</div>
+<div class="form-group span-full">
+    <label>Points Earned Today</label>
+    <?= $user->points_today ?>
+</div>
+<div class="form-group span-full">
+    <label>Points Earned This Week</label>
+    <?= $user->points_this_week ?>
+</div>
+
+<style type="text/css">
+#Form-field-User-points-group label {
+    display: block;
+    font-size: 12px;
+}
+#Form-field-User-points-group .form-group {
+    font-size: 2em;
+}
+</style>

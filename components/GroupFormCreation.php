@@ -1,8 +1,9 @@
 <?php namespace DMA\Friends\Components;
 
-use Request;
 use Auth;
+use Request;
 use Redirect; 
+use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 
 use System\Classes\ApplicationException;
@@ -18,6 +19,11 @@ class GroupFormCreation extends ComponentBase
      * @var string RainLab.User pluging username field
      */
     private $loginAttr;
+    
+    /**
+     * @var RainLab\User\Models\User
+     */
+    private $user = null;
     
     public function componentDetails()
     {
@@ -36,10 +42,24 @@ class GroupFormCreation extends ComponentBase
             ],
             'noUserRedirectTo' => [
                 'title'     => 'Redirect anonymous users to',
+                'type'      => 'dropdown'
+            ],
+            'newGroupRedirectTo' => [
+                'title'     => 'Redirect to page after create group',
                 'type'      => 'dropdown',
-                'default'   => '/'
-            ]            
+             ]
         ];
+    }
+    
+    /**
+     * @return RainLab\User\Models\User
+     */
+    protected function getUser()
+    {
+        if(is_null($this->user)){
+            $this->user = Auth::getUser();
+        }
+        return $this->user;
     }
     
     /**
@@ -47,16 +67,15 @@ class GroupFormCreation extends ComponentBase
      */
     protected function getGroup()
     {
-        $user = Auth::getUser();
-        
+        $user = $this->getUser();
         if (!is_null($user)){
-            //if (!UserGroup::hasActiveMemberships($user)){
+            if (!UserGroup::hasActiveMemberships($user)){
                 //1. If user don't have an active membership create a group for it
                 $group = UserGroup::where('owner_id', $user->getKey())
                             ->where('is_active', true)
                             ->first();
                 return $group;
-            //}
+            }
         }
     }
     
@@ -74,6 +93,12 @@ class GroupFormCreation extends ComponentBase
         $this->page['users'] = (!is_null($group)) ? $group->getUsers()->toArray() : [];
         
         $this->page['owner'] = (!is_null($group)) ? $group->owner : Null;
+        
+        // Set flag to tell interface to present and option to create a group
+        $this->page['addGroup'] = is_null($group);
+        
+        // Set flag to tell interface to present options to add or remove member of a group
+        $this->page['editGroup'] = !is_null($group);
         
         // Allow to add more users
         $this->page['allowAdd'] =  count($this->page['users']) < Settings::get('maximum_users_group');
@@ -95,12 +120,18 @@ class GroupFormCreation extends ComponentBase
         $this->addCss('components/groupformcreation/assets/css/group.creation.css');
         $this->addJs('components/groupformcreation/assets/js/group.creation.js');
         
-        // Populate users and other variables
-    	$group = $this->getGroup();
-    	$this->prepareVars($group);
-    
+        if($user = $this->getUser()){ 
+        
+            // Populate users and other variables
+    	   $group = $this->getGroup();
+    	   $this->prepareVars($group);
+        }else{
+           if($goTo = $this->property('noUserRedirectTo')){
+    	       return Redirect::to($goTo);
+           }
+        }
     }    
-    
+        
     /**
      * Ajax handler for adding members
      */
@@ -178,13 +209,43 @@ class GroupFormCreation extends ComponentBase
         }
     }    
     
+    /**
+     * Create a new group
+     */
+    public function onCreateGroup()
+    {
+        if ($user = $this->getUser()){
+                      
+            $group = new UserGroup();
+            $group->owner = $user;
+            
+            $group->save();
+            
+            $goTo = $this->property('newGroupRedirectTo');
+            $goTo = (trim($goTo) === '' || !isset($goTo)) ? $_SERVER['PHP_SELF'] : $goTo;
+            return Redirect::to($goTo);
+            
+        }
+    }
     
     ###
     # OPTIONS
     ##
     
+    private function getListPages()
+    {
+        $pages = Page::sortBy('baseFileName')->lists('baseFileName', 'url');
+        return [''=>'- none -'] + $pages;
+    }   
+
+    
     public function getNoUserRedirectToOptions()
     {
-    	return [''=>'- none -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
-    }    
+        return $this->getListPages();
+    }
+    
+    public function getNewGroupRedirectToOptions()
+    {
+    	return $this->getListPages();
+    }
 }

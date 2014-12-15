@@ -10,7 +10,10 @@ fields:
         
     owner:
         label: Owner / Creator of the group
-        type: relation
+        type: recordfinder
+        list:  @/plugins/rainlab/user/models/user/columns.yaml
+        prompt: Click the %s button to find an Owner / Creator group
         nameFrom: name
+        descriptionFrom: name
         span: left
         placeholder: -- select owner --  

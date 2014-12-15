@@ -5,5 +5,7 @@
 columns:
     title:
         label: Title
+    uuid:
+        label: UUID
     description:
         label: Description

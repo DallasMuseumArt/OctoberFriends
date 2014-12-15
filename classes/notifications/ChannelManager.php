@@ -156,13 +156,18 @@ class ChannelManager
         }
 
         $activeChannels = Settings::get('active_notification_channels', []);
-        // Filter out channels that are not enable in the settings
-        $channels = array_filter($channels, function($ch) use($activeChannels){
-            if(in_array($ch->getKey(), $activeChannels)){
-                return true;
-            }
-            return false;
-        });
+
+        if (!empty($activeChannels)){
+            // Filter out channels that are not enable in the settings
+            $channels = array_filter($channels, function($ch) use($activeChannels){
+                if(in_array($ch->getKey(), $activeChannels)){
+                    return true;
+                }
+                return false;
+            });
+        }else{
+            $channels = [];
+        }
 
         foreach($channels as $channel){
             try{
