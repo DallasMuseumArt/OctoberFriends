@@ -9,6 +9,13 @@
                 </th>
             </thead>
             <tbody>
+            <?php if (!sizeof($activities)) { ?>
+                <tr>
+                    <td>
+                The user has not completed any activities
+                    </td>
+                </tr>
+            <?php } ?>
             <?php foreach($activities as $activity) { ?>
                 <tr class="list-tree-level-0  rowlink">
                     <td class="list-cell-index-1 list-cell-name-title list-cell-type-text">
