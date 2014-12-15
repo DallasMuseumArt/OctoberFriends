@@ -71,6 +71,24 @@ class NotificationMessage
 	}
 
 	/**
+	 * Set message to the notification
+	 * @param string $subject
+	 */
+	public function message($message)
+	{
+		$this->data['message'] = $message;
+	}
+	
+	/**
+	 * Returns message of the notification
+	 * @return string
+	 */
+	public function getMessage()
+	{
+		return @$this->data['message'];
+	}
+	
+	/**
 	 * override view prefix of the notification
 	 * @param string $view
 	 */
