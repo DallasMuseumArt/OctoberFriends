@@ -73,6 +73,7 @@ class FriendsEventHandler {
      */
     public function onStepCompleted($step, $user)
     {   
+        
     }   
 
     public function onAuthLogin($event)

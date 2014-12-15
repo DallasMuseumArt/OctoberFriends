@@ -40,7 +40,7 @@ class NotificationCounter extends ComponentBase
     {
         $user = $this->getUser();
         $this->page['count'] = $user->notifications()->unread()->count();
-        $this->page['goToPage'] = $this->property('goToNotificationPage', '/');
+        $this->page['goToPage'] = $this->property('goToNotificationPage');
      
        
         foreach($vars as $key => $value){
@@ -68,7 +68,7 @@ class NotificationCounter extends ComponentBase
     
     public function getGoToNotificationPageOptions()
     {
-        $pages = Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
+        $pages = Page::sortBy('baseFileName')->lists('baseFileName', 'url');
     	return [''=>'- none -'] + $pages;
     }   
 
