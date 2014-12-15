@@ -10,6 +10,13 @@
                 <th>
             </thead>
             <tbody>
+            <?php if (!sizeof($rewards)) { ?>
+                <tr>
+                    <td>
+                The user has not redeemed any rewards
+                    </td>
+                </tr>
+            <?php } ?>
             <?php foreach($rewards as $reward) { ?>
                 <tr class="list-tree-level-0  rowlink">
                     <td class="list-cell-index-1 list-cell-name-title list-cell-type-text">

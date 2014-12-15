@@ -9,6 +9,13 @@
                 </th>
             </thead>
             <tbody>
+            <?php if (!sizeof($badges)) { ?>
+                <tr>
+                    <td>
+                The user has not earned any badges
+                    </td>
+                </tr>
+            <?php } ?>
             <?php foreach($badges as $badge) { ?>
                 <tr class="list-tree-level-0  rowlink">
                     <td class="list-cell-index-1 list-cell-name-title list-cell-type-text">
