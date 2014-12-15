@@ -24,27 +24,6 @@ class Groups extends Controller
 
         BackendMenu::setContext('DMA.Friends', 'friends', 'groups');
     }
-
-    protected function execPageAction($actionName, $parameters)
-    {
-    	\Log::info($actionName);
-    	\Log::info($parameters);
-    	return parent::execPageAction($actionName, $parameters);
-    }
-    
-    public function update($recordId, $context = null){
-    	//throw new \Exception('' . get_object_vars($this));
-    	\Log::info(get_class($this));
-
-    	
-    	return $this->asExtension('FormController')->update($recordId, $context);
-    }
-    
-	public function update_onSave($recordId, $context = null)
-	{
-	
-	    // Call the FormController behavior update() method
-	    return $this->asExtension('FormController')->update_onSave($recordId, $context);
-	}   
     
 }
+

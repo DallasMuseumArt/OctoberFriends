@@ -1,14 +1,21 @@
-# ===================================
+# :::::::::::::::::::::::::::::::::::
 #  Relation Behavior Config
-# ===================================
+# :::::::::::::::::::::::::::::::::::
 
 users:
     label: Users
     list: @/plugins/rainlab/user/models/user/columns.yaml
-    form: @/plugins/rainlab/user/models/user/fields.yaml        
-    pivot:
-        title: Hello
-        fields:
-            membership_status:
-                label: Membership status
-                type: dropdown
+    form: @/plugins/rainlab/user/models/user/fields.yaml
+    manage:
+        recordsPerPage: 5
+        showSearch: true
+    # pivot:
+    #     fields:
+    #         membership_status:
+    #             label: Membership status
+    #             type: dropdown
+    #             options:
+    #                 PENDING   : PENDING
+    #                 ACCEPTED  : ACCEPTED
+    #                 REJECTED  : REJECTED
+    #                 CANCELLED : CANCELLED

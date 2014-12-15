@@ -49,10 +49,6 @@ class FriendsServiceProvider extends ServiceProvider
         {
         	$channelManager = new ChannelManager;
         	$channelManager->registerChannels([
-        		'\DMA\Friends\Classes\Notifications\Channels\ChannelDummy' => [
-        			'name' => 'Dummy',
-        			'description' => 'Channel useful for testing and debuging. All notifications are send to OctoberCMS log system.'
-        		],
         		'\DMA\Friends\Classes\Notifications\Channels\ChannelKiosk' => [
         			'name' => 'Kiosk',
         			'description' => 'Store notification in the database. So they can be read in a Kiosk or a Web interface.'
@@ -65,10 +61,20 @@ class FriendsServiceProvider extends ServiceProvider
         			'name' => 'SMS',
         			'description' => 'Send notifications by SMS using Twilio.'
         		],
+        	    '\DMA\Friends\Classes\Notifications\Channels\ChannelFlash' => [
+        	        'name' => 'Flash',
+        	        'description' => 'Send notifications by OctoberCMS Flash messaging'
+        	    ],
+        	    '\DMA\Friends\Classes\Notifications\Channels\ChannelDummy' => [
+        	        'name' => 'Dummy',
+        	        'description' => 'Channel useful for testing and debuging. All notifications are send to OctoberCMS log system.'
+        	    ],
+        	    /*    
         		'\DMA\Friends\Classes\Notifications\Channels\ChannelTwitter' => [
         	         'name' => 'Twitter',
-        	         'description' => 'Send notifications via Twitter.'
+        	         'description' => 'Send notifications via Twitter. (Experimental)'
         	    ],
+        	    */
             ]);
         
         	// Register input validators

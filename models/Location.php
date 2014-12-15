@@ -23,7 +23,7 @@ class Location extends Model
     /**
      * @var array Fillable fields
      */
-    protected $fillable = [];
+    protected $fillable = ['uuid'];
 
     public $rules = [];
 
@@ -34,8 +34,13 @@ class Location extends Model
         'activityLogs'  => ['DMA\Friends\Models\ActivityLog', 'name' => 'object'],
     ];
 
+    public function scopeFindByUUID($query, $uuid)
+    {
+        return $query->where('uuid', $uuid);
+    }
+
     public function scopefindWordpress($query, $id)
     {   
         return $query->where('wordpress_id', $id);
-    }  
+    } 
 }
