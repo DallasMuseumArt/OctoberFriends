@@ -7,7 +7,7 @@
         <h4>{{ model.title }}</h4>
 
         <div class="description">
-            {{ model.excerpt }}
+            {{ model.excerpt|raw }}
         </div>
         <div class="earned">
             {{ model.timeAgo }}
