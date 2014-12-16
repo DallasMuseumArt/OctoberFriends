@@ -1,0 +1,12 @@
+input.points {
+    width: 150px;
+    float: left;
+    margin-right: 20px;
+}
+#Form-field-User-points-group label {
+    display: block;
+    font-size: 12px;
+}
+#Form-field-User-points-group .form-group {
+    font-size: 2em;
+}
