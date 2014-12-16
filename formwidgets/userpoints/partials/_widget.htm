@@ -1,0 +1,21 @@
+<?php $user = $this->model ?>
+
+<div class="form-group span-full">
+    <label>Points</label>
+    <span class="points"><?= $user->points ?></span>
+</div>
+<div class="form-group span-full">
+    <label>Points Earned Today</label>
+    <span class="points-today"><?= $user->points_today ?></span>
+</div>
+<div class="form-group span-full">
+    <label>Points Earned This Week</label>
+    <span class="points-week"><?= $user->points_this_week ?></span>
+</div>
+
+<label>Add or remove points manually</label>
+<form method="POST">
+    <input type="text" name="points" class="form-control points" />
+    <button data-request="onAdd" type="submit" class="btn btn-primary">Add</button>
+    <button data-request="onRemove" type="submit" class="btn btn-primary">Remove</button>
+</form>

@@ -259,8 +259,7 @@ class Plugin extends PluginBase
         	],
             'points' => [
                 'tab'   => 'Points',
-                'type'  => 'partial',
-                'path'  => '@/plugins/dma/friends/models/usermeta/points.htm',
+                'type'  => 'points',
             ],
             'activities[activities]' => [
                 'tab'   => 'Activities',
@@ -303,6 +302,10 @@ class Plugin extends PluginBase
             'DMA\Friends\FormWidgets\TimeRestrictions' => [
                 'label' => 'Time Restrictions',
                 'alias' => 'timerestrictions',
+            ],
+            'DMA\Friends\FormWidgets\UserPoints' => [
+                'label' => 'Points',
+                'alias' => 'points',
             ],
         ];   
     }
