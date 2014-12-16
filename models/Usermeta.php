@@ -18,6 +18,8 @@ class Usermeta extends Model
     public $table = 'dma_friends_usermetas';
     public $timestamps = false;
 
+    protected $primaryKey = 'user_id';
+
     /**
      * @var array Guarded fields
      */
@@ -33,7 +35,6 @@ class Usermeta extends Model
      */
     public $belongsTo = [
         'user'          => ['RainLab\User\Models\User',
-            'primaryKey'    => 'id',
             'foreignKey'    => 'user_id',        
         ],
     ];
