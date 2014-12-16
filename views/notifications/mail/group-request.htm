@@ -1,13 +1,21 @@
 subject = "You have a notification!"
 layout = "system"
 ==
+<p>
+Hello {{ toUser.name|title }},
+</p>
 
-Hello {{ user.name }},
+<p>
+<strong>{{ fromUser.name|title }}</strong> wants you to join his group.
 
-{{ message }}
+Click  <a href="/group/request">here</a> to accept his request.
+
+</p>
 
 ==
 
-<p>Hello {{ user.name }},</p>
+Hello {{ toUser.name|title }},
 
-<p>{{ message }}</p>
+{{ fromUser.name|title }} wants you to join his group.
+
+Click  /group/request here to accept his request.
