@@ -2,12 +2,12 @@
     <div class="col-md-6">
         <div class="form-group">
             <label>First Name</label>
-            <input type="text" name="first_name" class="form-control" value="{{ user.metadata.first_name }}" />
+            <input type="text" name="metadata[first_name]" class="form-control" value="{{ user.metadata.first_name }}" />
         </div>
 
         <div class="form-group">
             <label>Last Name</label>
-            <input type="text" name="last_name" class="form-control"  value="{{ user.metadata.last_name }}"/>
+            <input type="text" name="metadata[last_name]" class="form-control"  value="{{ user.metadata.last_name }}"/>
         </div>
 
         <div class="form-group">
@@ -21,7 +21,7 @@
 
          <div class="checkbox">
             <label>
-                <input type="checkbox" name="email_optin" value="1" 
+                <input type="checkbox" name="metadata[email_optin]" value="1" 
                 {% if user.metadata.email_optin %}
                     checked="checked"
                 {% endif %}
