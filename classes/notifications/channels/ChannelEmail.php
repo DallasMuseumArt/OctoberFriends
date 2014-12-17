@@ -52,7 +52,7 @@ class ChannelEmail implements Channel
 	        $user = $notification->getTo();
 	    	$message->to($user->email, $user->name);
 	    }) == 0){
-	    	throw new \Exception('Email notification was not send.');
+	    	//throw new \Exception('Email notification was not send.');
 	    }
 
 	}

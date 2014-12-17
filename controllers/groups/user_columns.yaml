@@ -1,0 +1,30 @@
+# ===================================
+#  Column Definitions
+# ===================================
+
+columns:
+
+    id:
+        label: rainlab.user::lang.user.id
+        searchable: true
+
+    username:
+        label: rainlab.user::lang.user.username
+        searchable: true
+        invisible: true
+
+    name:
+        label: rainlab.user::lang.user.name
+        searchable: true
+        
+    email:
+        label: rainlab.user::lang.user.email
+        searchable: true
+
+    created_at:
+        label: rainlab.user::lang.user.created_at
+
+    membership_status:
+        label: Membership status
+        searchable: false
+        # select: dma_friends_users_groups.membership_status
