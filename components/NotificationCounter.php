@@ -39,7 +39,8 @@ class NotificationCounter extends ComponentBase
     protected function prepareVars($vars = [])
     {
         $user = $this->getUser();
-        $this->page['count'] = $user->notifications()->unread()->count();
+        $count = (is_null($user)) ? 0 : $user->notifications()->unread()->count();
+        $this->page['count'] = $count;
         $this->page['goToPage'] = $this->property('goToNotificationPage');
      
        

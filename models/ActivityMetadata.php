@@ -50,7 +50,7 @@ class ActivityMetadata extends Model
             ];
             $rows[] = $row;
         }
-        var_dump($rows);
+        //var_dump($rows);
         if (count($row) > 0){
             static::insert($rows);
         }

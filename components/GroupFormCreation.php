@@ -74,7 +74,12 @@ class GroupFormCreation extends ComponentBase
                 $group = UserGroup::where('owner_id', $user->getKey())
                             ->where('is_active', true)
                             ->first();
+                
+                $this->page['memberOfotherGroup'] = false;
+                
                 return $group;
+            }else{
+                $this->page['memberOfotherGroup'] = true;
             }
         }
     }
@@ -95,10 +100,11 @@ class GroupFormCreation extends ComponentBase
         $this->page['owner'] = (!is_null($group)) ? $group->owner : Null;
         
         // Set flag to tell interface to present and option to create a group
-        $this->page['addGroup'] = is_null($group);
+        $this->page['addGroup'] = is_null($group) && !$this->page['memberOfotherGroup'];
         
         // Set flag to tell interface to present options to add or remove member of a group
         $this->page['editGroup'] = !is_null($group);
+            
         
         // Allow to add more users
         $this->page['allowAdd'] =  count($this->page['users']) < Settings::get('maximum_users_group');
