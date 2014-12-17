@@ -159,9 +159,9 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
         if (!$activity->isActive()) return false;
 
         // Check activity lockout
-        if ($activity->activity_lockout && $user->activities()->first()) {
+        if ($activity->activity_lockout && $pivot = $user->activities()->where('activity_id', $activity->id)->first()) {
             $time       = Carbon::now();
-            $lastTime   = $user->activities()->first()->pivot->created_at;
+            $lastTime   = $pivot->pivot->created_at;
             $lastTime->addMinutes($activity->activity_lockout);
 
             if ($time->diffInMinutes($lastTime) && $time->diffInMinutes($lastTime) < $activity->activity_lockout) {
