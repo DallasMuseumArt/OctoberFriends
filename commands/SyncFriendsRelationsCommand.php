@@ -76,7 +76,9 @@ class SyncFriendsRelationsCommand extends Command
             if ($activity) {
                 if (!$activity->categories->contains($relation->term_taxonomy_id)) {
                     $category = Category::find($relation->term_taxonomy_id);
-                    $activity->categories()->save($category);
+                    if ($category) {
+                        $activity->categories()->save($category);
+                    }
                 }
             }
         }
