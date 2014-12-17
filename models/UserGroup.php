@@ -135,6 +135,19 @@ class UserGroup extends GroupBase{
     }
     
     /**
+     * 
+     * @param \RainLab\User\Models\User $user
+     * @return \DMA\Friends\Models\UserGroup
+     */
+    public function createGroup($user)
+    {
+        $group = new self();
+        $group->owner = $user;
+        
+        return $group;
+    }
+    
+    /**
      * Adds the user to the group.
      * @param RainLab\User\Models\User $user
      * @return bool
@@ -164,7 +177,7 @@ class UserGroup extends GroupBase{
                     }
                 }
                 
-                $this->sendNotification($user, 'invite');
+                $this->sendNotification($user, 'invite', ['mail', 'kiosk', 'flash']);
                 
                 // Fire event 
                 $this->fireGroupEvent('user.added', array($this, $user));
@@ -283,7 +296,7 @@ class UserGroup extends GroupBase{
                 // is different to PENDING. That notification is send by addUser.
                 if ($status != self::MEMBERSHIP_PENDING){
                     $notificationName = strtolower($status);
-                    $this->sendNotification($this->owner, $notificationName);
+                    $this->sendNotification($this->owner, $notificationName, ['mail', 'kiosk']);
                     
                     // Fire event
                     $event = strtolower($status);
@@ -321,9 +334,10 @@ class UserGroup extends GroupBase{
      * 
      * @param RainLab\User\Models\User $user $user
      * @param string $notificationName
+     * @param array $channel
      * @return boolean|Ambigous <boolean, void>
      */
-    public function sendNotification(&$user, $notificationName)
+    public function sendNotification(&$user, $notificationName, array $channel=null)
     {
         // Check if the user is part of the group or the owner.
         if (!$this->inGroup($user)) 
@@ -337,7 +351,7 @@ class UserGroup extends GroupBase{
         	$notification->from($fromUser);
         	$notification->subject('Group request');
         	$notification->attachObject($group);
-        });
+        }, $channel);
         
         return false;
     }
