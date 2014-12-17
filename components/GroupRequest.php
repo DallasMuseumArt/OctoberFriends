@@ -3,6 +3,7 @@
 use Request;
 use Auth;
 use Redirect; 
+use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 
 use System\Classes\ApplicationException;
@@ -27,7 +28,12 @@ class GroupRequest extends ComponentBase
     
     public function defineProperties()
     {
-        return [];
+        return [            
+            'noUserRedirectTo' => [
+                    'title'     => 'Redirect anonymous users to',
+                    'type'      => 'dropdown'
+            ],
+        ];
     }
     
     protected function getuser()
@@ -86,9 +92,15 @@ class GroupRequest extends ComponentBase
         $this->addCss('components/grouprequest/assets/css/group.request.css');
         $this->addJs('components/grouprequest/assets/js/group.request.js');
         
-        // Populate page user and other variables
-    	$this->prepareVars();
-    
+    	if($user = $this->getUser()){
+    	
+    		// Populate users and other variables
+    		$this->prepareVars();
+    	}else{
+    		if($goTo = $this->property('noUserRedirectTo')){
+    			return Redirect::to($goTo);
+    		}
+    	}    	
     }    
    
     
@@ -126,6 +138,20 @@ class GroupRequest extends ComponentBase
         $this->prepareVars();
     }
   
+    ###
+    # OPTIONS
+    ##
     
+    private function getListPages()
+    {
+    	$pages = Page::sortBy('baseFileName')->lists('baseFileName', 'url');
+    	return [''=>'- none -'] + $pages;
+    }
+    
+    
+    public function getNoUserRedirectToOptions()
+    {
+    	return $this->getListPages();
+    }    
   
 }
