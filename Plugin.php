@@ -137,7 +137,8 @@ class Plugin extends PluginBase
             'DMA\Friends\Components\NotificationCounter'        => 'NotificationCounter',
             'DMA\Friends\Components\NotificationList'           => 'NotificationList',
             'DMA\Friends\Components\GroupFormCreation'  		=> 'GroupFormCreation',
-            'DMA\Friends\Components\GroupRequest'       		=> 'GroupRequest',                        
+            'DMA\Friends\Components\GroupRequest'       		=> 'GroupRequest',
+            'DMA\Friends\Components\UserProfile'                => 'UserProfile',                         
         ];
     }
 

@@ -1,0 +1,77 @@
+<form id="user-profile" class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>First Name</label>
+            <input type="text" name="first_name" class="form-control" value="{{ user.metadata.first_name }}" />
+        </div>
+
+        <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" name="last_name" class="form-control"  value="{{ user.metadata.last_name }}"/>
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" name="email" class="form-control"  value="{{ user.email }}"/>
+        </div>
+
+        <div class="form-group">
+            <a href="#" data-control="popup" data-handler="onPassword">Change Password</a>
+        </div>
+
+         <div class="checkbox">
+            <label>
+                <input type="checkbox" name="email_optin" value="1" 
+                {% if user.metadata.email_optin %}
+                    checked="checked"
+                {% endif %}
+                /> Email Opt-in
+            </label>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="form-group">
+            <label>Street Address</label>
+            <input type="text" name="street_addr" class="form-control"  value="{{ user.street_addr }}"/>
+        </div>
+
+        <div class="form-group">
+            <label>City</label>
+            <input type="text" name="city" class="form-control"  value="{{ user.city }}"/>
+        </div>
+
+        <div class="form-group">
+            <label>State</label>
+            <select
+                id="state"
+                name="state"
+                class="form-control custom-select">
+
+                {% for state in states %}
+                    <option
+                    {% if state.id == user.state.id %}
+                    selected="selected"
+                    {% endif %}
+                    value="{{ state.id }}">
+                    {{state.name}}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Zipcode</label>
+            <input type="text" name="zip" class="form-control"  value="{{ user.zip }}"/>
+        </div>
+
+        <div class="form-group text-field">
+            <label>Phone</label>
+            <input type="text" name="phone" value="{{ user.phone }}" class="form-control"/>   
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <button type="submit" data-request="onSave" class="btn btn-primary">Save</button>
+</form>
