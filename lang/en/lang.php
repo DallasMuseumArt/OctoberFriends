@@ -27,9 +27,12 @@ return [
         'reward'    => ':name claimed the reward ":title"',
         'unlocked'  => ':name unlocked the step ":title"',
     ],
-    // 'group' => [
-    //     ''  => '',
-    // ]
+    'user' => [
+        'save'          => 'Successfully saved user profile',
+        'saveFailed'    => 'Unable to save user profile',
+        'passwordSave'  => 'Your password has been successfully updated',
+        'passwordFail'  => 'The password you entered is incorrect',
+    ],
     'exceptions' => [
         'missingActivityClass'      => 'Could not find the activity :class',
         'missingReward'             => 'Could not find reward ":id"',
