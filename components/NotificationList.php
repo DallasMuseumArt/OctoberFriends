@@ -37,23 +37,27 @@ class NotificationList extends ComponentBase
 
     protected function getNotifications()
     {
-        $user = $this->getUser();
-        $query = $user->notifications();
-        
-        if ($this->property('onlyUnread')){
-            $query = $query->unread();   
+        if($user = $this->getUser()){
+            $query = $user->notifications();
+            
+            if ($this->property('onlyUnread')){
+                $query = $query->unread();   
+            }
+            
+            // sort by creation
+            $query = $query->orderBy('created_at','desc');
+            
+            return $query->get()->toArray();
+        }else{
+            return [];
         }
-        
-        // sort by creation
-        $query = $query->orderBy('created_at','desc');
-        
-        return $query->get()->toArray();
     }
     
     protected function markAllAsRead(){
-        $user = $this->getUser();
-        // Mark all message as readed
-        $user->notifications()->markAllAsRead();
+        if($user = $this->getUser()){
+            // Mark all message as readed
+            $user->notifications()->markAllAsRead();
+        }
     }
     
     protected function prepareVars($vars = [])
@@ -78,7 +82,7 @@ class NotificationList extends ComponentBase
         
         // Populate page user and other variables
     	$this->prepareVars();
-    	$this->markAllAsRead();
+    	//$this->markAllAsRead();
     
     }    
    
