@@ -42,28 +42,30 @@
             <input type="text" name="city" class="form-control"  value="{{ user.city }}"/>
         </div>
 
-        <div class="form-group">
-            <label>State</label>
-            <select
-                id="state"
-                name="state"
-                class="form-control custom-select">
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label>State</label>
+                <select
+                    id="state"
+                    name="state"
+                    class="form-control custom-select">
 
-                {% for state in states %}
-                    <option
-                    {% if state.id == user.state.id %}
-                    selected="selected"
-                    {% endif %}
-                    value="{{ state.id }}">
-                    {{state.name}}
-                    </option>
-                {% endfor %}
-            </select>
-        </div>
+                    {% for state in states %}
+                        <option
+                        {% if state.id == user.state.id %}
+                        selected="selected"
+                        {% endif %}
+                        value="{{ state.id }}">
+                        {{state.name}}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
 
-        <div class="form-group">
-            <label>Zipcode</label>
-            <input type="text" name="zip" class="form-control"  value="{{ user.zip }}"/>
+            <div class="form-group col-md-6">
+                <label>Zipcode</label>
+                <input type="text" name="zip" class="form-control"  value="{{ user.zip }}"/>
+            </div>
         </div>
 
         <div class="form-group text-field">
