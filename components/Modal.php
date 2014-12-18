@@ -47,7 +47,6 @@ class Modal extends ComponentBase
 
     public function onRun()
     {
-        $this->addCss('/modules/backend/assets/css/october.css');
         $this->addJs('/modules/system/assets/vendor/bootstrap/js/modal.js');
         $this->addJs('/modules/backend/assets/js/october.popup.js');
     }
