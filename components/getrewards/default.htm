@@ -1,3 +1,14 @@
+<div class="row rewards-menu">
+    <div class="col-md-12">
+        <ul class="filter-buttons-wrap button-group buttons">
+            <li><a class="filter-all button large current" href="#">All</a></li>
+            <li><a class="filter-limited-time button large" href="#">Limited Time</a></li>
+            <li><a class="filter-limited-qty button large" href="#">Limited Qty.</a></li>
+            <li><a class="filter-bookmarked button large" href="#">Bookmarked</a></li>              
+        </ul>
+    </div>
+</div>
+
 <div class="row rewards">
     {% for reward in rewards %}
         {{ reward.rendered|raw }}
