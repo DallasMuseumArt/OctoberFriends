@@ -53,7 +53,7 @@ class Modal extends ComponentBase
 
     public function onRenderModal()
     {
-        return $this->makePartial('modal', [
+        return $this->renderPartial('@modalDisplay', [
             'title'     => $this->property('title'),
             'content'   => $this->makePartial($this->property('partial')),
         ]);
