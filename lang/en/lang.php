@@ -33,6 +33,10 @@ return [
         'passwordSave'  => 'Your password has been successfully updated',
         'passwordFail'  => 'The password you entered is incorrect',
     ],
+    'userLogin' => [
+        'loginTitle'    => 'Scan Membership Card',
+        'registerTitle' => 'Sign Up for Friends',
+    ],
     'exceptions' => [
         'missingActivityClass'      => 'Could not find the activity :class',
         'missingReward'             => 'Could not find reward ":id"',

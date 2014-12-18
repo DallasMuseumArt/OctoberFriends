@@ -41,14 +41,13 @@ class UserLogin extends ComponentBase
 
     public function getRedirectOptions()
     {
-        return [''=>'- none -'] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
+        return [ '' => '- none -' ] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
     public function onLogin()
     {
-
         return $this->renderPartial('@modalDisplay', [
-            'title'     => 'Login',
+            'title'     => Lang::get('dma.friends::lang.userLogin.loginTitle'),
             'content'   => $this->makePartial('login-form'),
         ]);
     }
@@ -102,12 +101,11 @@ class UserLogin extends ComponentBase
 
     public function onRegister()
     {
-        $content = [
-            'title'     => 'Register to become a friend',
-            'content'   => $this->renderPartial('UserLogin::register-form'),
-        ];
 
-        return $this->renderPartial('@modalDisplay', $content);
+        return $this->renderPartial('@modalDisplay', [
+            'title'     => Lang::get('dma.friends::lang.userLogin.registerTitle'),
+            'content'   => $this->makePartial('register-form'),
+        ]);
     }
 
     /**
