@@ -34,7 +34,7 @@ class GetRewards extends ComponentBase
 
         $renderedRewards = [];
         //TODO determine how to sort rewards
-        $rewards = Reward::isActive()->paginate($this->property('limit'));
+        $rewards = Reward::isActive()->orderBy('points')->paginate($this->property('limit'));
 
         foreach($rewards as $reward) {
             $renderedRewards[] = [
