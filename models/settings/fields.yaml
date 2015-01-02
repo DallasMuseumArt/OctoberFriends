@@ -10,6 +10,11 @@ tabs:
             type: dropdown
             tab: General
 
+        kiosk_idle_time:
+            label: Kiosk Idle Logout Time (in seconds)
+            span: left
+            tab: Kiosk settings
+
         # Groups
         maximum_users_group:
             span: auto
