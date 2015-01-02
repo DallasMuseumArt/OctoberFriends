@@ -47,6 +47,7 @@ class User extends Post
             $user->id           = $wuser->ID;
             $user->created_at   = $wuser->user_registered;
             $user->name         = $wuser->user_nicename;
+            $user->barcode_id   = $wuser->user_nicename;
             $user->email        = $wuser->user_email;
 
             // This gets changed to a real password later
@@ -121,6 +122,11 @@ class User extends Post
         $user->city             = $data['city'];
         $user->zip              = $data['zip'];
         $user->points           = $data['_badgeos_points'];
+
+        // Ensures that we have a barcode id for the user
+        if (empty($user->barcode_id)) {
+            $user->barcode_id = $user->name;
+        }
 
         // Populate state and country objects
         if (!empty($data['state'])) {
