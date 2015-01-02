@@ -2,8 +2,9 @@
 
 return [
     'app' => [
-        'name'                  => 'Friends',
-        'stepTitle'             => 'Complete activity ":title" :count times',
+        'name'          => 'Friends',
+        'stepTitle'     => 'Complete activity ":title" :count times',
+        'loginFailed'   => 'Login Failed',
     ],
     'activities' => [
         'codeSuccess'   => 'Congratulations, you have completed ":title"',

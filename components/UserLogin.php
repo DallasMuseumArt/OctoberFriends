@@ -45,7 +45,7 @@ class UserLogin extends ComponentBase
     }
 
     public function onLogin()
-    {
+    {        
         return $this->renderPartial('@modalDisplay', [
             'title'     => Lang::get('dma.friends::lang.userLogin.loginTitle'),
             'content'   => $this->makePartial('login-form'),
@@ -157,10 +157,3 @@ class UserLogin extends ComponentBase
         return $theme->getPath() . '/partials/';
     }
 }
-
-// login code so wordpress works
-// function onSignin()
-// {
-//     \DMA\Friends\Wordpress\Auth::verifyFromEmail(post('email'), post('password'));
-//     return $this->account->onSignIn();
-// }

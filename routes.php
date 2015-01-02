@@ -12,6 +12,10 @@ Route::get('logout', function()
     return Redirect::to('/');
 });
 
+Route::get('location/barcode-login', function() {
+	return DMA\Friends\Controllers\Locations::barcodeLogin();
+});
+
 Route::group(['prefix'=>'webhooks'], function(){
 	// Implement here each individual webhook
 	Route::post('twilio/sms', function()
