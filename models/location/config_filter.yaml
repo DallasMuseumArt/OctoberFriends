@@ -1,0 +1,6 @@
+scopes:
+    is_authorized:
+        label: Show authorized kiosks
+        type: checkbox
+        conditions: is_authorized = 1
+

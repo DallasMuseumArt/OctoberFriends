@@ -9,6 +9,12 @@ fields:
     description:
         label: Description
         type: textarea
+    is_authorized:
+        label: Authorized to login
+        description: Check this to allow this kiosk to login with the barcode scanner
+        type: checkbox
+    uuid:
+        label: UUID
     printer_reward:
         label: Print rewards to:
     printer_membership:
