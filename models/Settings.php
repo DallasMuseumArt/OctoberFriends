@@ -11,7 +11,7 @@ use Postman;
  * @author Kristen Arnold, Carlos Arroyo
  *
  */
-class Settings extends Model{
+class Settings extends Model {
     
     public $implement = ['System.Behaviors.SettingsModel'];
     
@@ -115,6 +115,6 @@ class Settings extends Model{
      */
     public function getActiveListenableChannelsOptions(){
     	return $this->getChannelOptions(true, $description=false); 
-    }   
+    }
 
 }
