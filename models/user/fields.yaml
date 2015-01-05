@@ -79,6 +79,9 @@ tabs:
 secondaryTabs:
     fields:
 
+        print_membership_card:
+            label: Print Membership Card
+            type: printmembershipcard
         avatar:
             label: rainlab.user::lang.user.avatar
             type: fileupload

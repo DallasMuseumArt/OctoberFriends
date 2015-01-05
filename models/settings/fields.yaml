@@ -52,4 +52,38 @@ tabs:
             label: Listenable channels
             description: Enable or disable listen any incoming data of the channel.
             tab: Listeners
-
+        # Print settings
+        coupon_width:
+            label: Coupon Width
+            type: number
+            span: left
+            tab: Printer
+        coupon_height:
+            label: Coupon Height 
+            type: number
+            span: right
+            tab: Printer
+        coupon_orientation:
+            label: Coupon Orientation 
+            type: dropdown
+            options:
+                P: Portrait
+                L: Landscape
+            tab: Printer
+        membership_width:
+            label: Membership Card Width
+            type: number
+            span: left
+            tab: Printer
+        membership_height:
+            label: Membership Card Height
+            type: number
+            span: right
+            tab: Printer
+        membership_orientation:
+            label: Membership Card Orientation
+            type: dropdown
+            options:
+                P: Portrait
+                L: Landscape
+            tab: Printer

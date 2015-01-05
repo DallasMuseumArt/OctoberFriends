@@ -39,6 +39,16 @@ class Location extends Model
         return $query->where('uuid', $uuid);
     }
 
+    public function scopeHasMemberPrinter($query)
+    {
+        return $query->where('printer_membership', '!=', '');
+    }
+
+    public function scopeHasRewardPrinter($query)
+    {
+        return $query->where('printer_reward', '!=', '');
+    }
+
     public function scopefindWordpress($query, $id)
     {   
         return $query->where('wordpress_id', $id);
