@@ -44,6 +44,11 @@ class UserLogin extends ComponentBase
         return [ '' => '- none -' ] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
+    public function onRun()
+    {
+        $this->addJs('/plugins/dma/friends/components/userlogin/assets/login.js');
+    }
+
     public function onLogin()
     {        
         return $this->renderPartial('@modalDisplay', [
