@@ -3,6 +3,8 @@
 namespace DMA\Friends\Classes;
 
 use Mail;
+use DMA\Friends\Classes\LocationManager;
+use DMA\Friends\Classes\PrintManager;
 
 /**
  * Manage custom events in the friends platform
@@ -62,6 +64,14 @@ class FriendsEventHandler {
         {
             $message->to($user->email, $user->full_name);
         });
+
+        // Print the reward if user is at a kiosk
+        $location = LocationManager::getLocation();
+        if ($location) {
+            $printManager = new PrintManager($location, $user);
+            $printManager->printCoupon($reward);
+        }
+
     }   
 
     /**
@@ -79,7 +89,7 @@ class FriendsEventHandler {
     public function onAuthLogin($event)
     {   
         // Log an event that the user has logged in
-    }   
+    }
 
     public function subscribe($events)
     {   

@@ -278,6 +278,10 @@ class Plugin extends PluginBase
                 'type'  => 'partial',
                 'path'  => '@/plugins/dma/friends/models/reward/users.htm',
             ],
+            'print' => [
+                'tab'   => 'Membership Card',
+                'type'  => 'printmembershipcard',
+            ],
         ], 'primary');        
     }
     
@@ -308,6 +312,10 @@ class Plugin extends PluginBase
             'DMA\Friends\FormWidgets\UserPoints' => [
                 'label' => 'Points',
                 'alias' => 'points',
+            ],
+            'DMA\Friends\FormWidgets\PrintMembershipCard' => [
+                'label' => 'Print Membership Card',
+                'alias' => 'printmembershipcard',
             ],
         ];   
     }

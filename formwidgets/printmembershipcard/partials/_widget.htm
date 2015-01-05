@@ -1,0 +1,8 @@
+<label>Select a location to print to</label>
+<select name="printerLocation">
+    <?php foreach ($locationOptions as $option) { ?>
+        <?= $option ?>
+    <?php } ?>
+</select>
+
+<button data-request="onPrintCard" class="btn btn-success">Print Membership Card</button>

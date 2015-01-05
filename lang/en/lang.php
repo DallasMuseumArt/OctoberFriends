@@ -19,6 +19,7 @@ return [
     'rewards' => [
         'redeemed'      => 'Congratulations, you have redeemed the reward ":title"',
         'noPoints'      => 'Sorry you do not have enough points to redeem this reward',
+        'couponText'    => 'Thank you for being a DMA Friend!',
     ],
     'log' => [
         'activity'  => ':name just completed the activity of ":title"',
@@ -33,6 +34,7 @@ return [
         'saveFailed'    => 'Unable to save user profile',
         'passwordSave'  => 'Your password has been successfully updated',
         'passwordFail'  => 'The password you entered is incorrect',
+        'memberCard'    => 'The card has been sent to the designated membership printer for ":title"',
     ],
     'userLogin' => [
         'loginTitle'    => 'Scan Membership Card',
