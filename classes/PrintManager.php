@@ -17,9 +17,9 @@ require_once('fpdf17/code39.php');
 class PrintManager
 {
     protected $pdf;       // PDF Engine  
-    protected $location;   // The location model
-    protected $user;       // The user model
-    public $logo = '/assets/images/printer_logo.png';
+    protected $location;  // The location model
+    protected $user;      // The user model
+    public $logo = '/assets/images/printer_logo.png'; // Path to print logo inside of the active theme
     
     /**
      * @param Location $location
