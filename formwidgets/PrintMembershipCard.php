@@ -53,12 +53,12 @@ class PrintMembershipCard extends FormWidgetBase
      */
     public function prepareVars()
     {
-        $locations = Location::hasMemberPrinter()->get();
+        $locations = Location::hasMemberPrinter()->groupBy('printer_membership')->get();
 
         $options[] = '<option value="">Select One</option>';
 
         foreach ($locations as $location) {
-            $options[] = '<option value="'. $location->id . '">'. $location->title . '</option>';
+            $options[] = '<option value="'. $location->id . '">'. $location->printer_membership . '</option>';
         }
 
         $this->vars['locationOptions'] = $options;

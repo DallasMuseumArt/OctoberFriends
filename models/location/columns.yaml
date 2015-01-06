@@ -12,3 +12,7 @@ columns:
         type: switch
     description:
         label: Description
+    printer_membership:
+        label: Membership Printer 
+    printer_reward:
+        label: Reward Printer
