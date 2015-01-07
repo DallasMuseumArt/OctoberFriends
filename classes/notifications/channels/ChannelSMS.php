@@ -118,8 +118,8 @@ class ChannelSMS implements Channel, Listenable, Webhook
 
 	        // TODO : this should be reusable for other channels
 	        $key = $this->getKey();
-	        $event = "dma.channel.$key.incoming.data";
-	        Event::fire($event, [$msg]);
+	        $event = strtolower("dma.channel.$key.incoming.data");
+	        Event::fire($event, [[$msg]]);
 	        Log::info('Processed Twilio incoming SMS', $msg->getData());
 	    }
 	    catch(\Exception $e)
