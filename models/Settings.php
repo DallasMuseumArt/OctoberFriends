@@ -48,25 +48,7 @@ class Settings extends Model {
 
         return $timezones;
     }
-
-    public function getMailGroupInviteTemplateOptions()
-    {    
-        switch ($this->comunication_channel)
-        {
-            case self::CHANNEL_EMAIL:
-                return MailTemplate::where('code', 'LIKE', 'dma.friends::%')
-                                    ->orderBy('code')
-                                    ->lists('code', 'code');
-                break;
-            case self::CHANNEL_TEXT:
-                return [];//MailTemplate::orderBy('code')->lists('code', 'code');
-                break;
-            case self::CHANNEL_KIOSK:
-                return [];//MailTemplate::orderBy('code')->lists('code', 'code');
-                break;                    
-        }
-        
-    }    
+ 
     
     public function getResetGroupsEveryDayOptions()
     {
@@ -91,7 +73,7 @@ class Settings extends Model {
     private function getChannelOptions($onlyListenable=false, $description=true){
     	$options = [];
     	foreach(Postman::getRegisterChannels($onlyListenable) as $ch){
-    		$info = $ch->info;
+    		$info = $ch->getDetails();
     		$options[$ch->getKey()] = [@$info['name'], ($description) ? @$info['description'] : ''];
     	}
     	return $options;

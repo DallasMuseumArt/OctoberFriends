@@ -28,6 +28,18 @@ class ChannelSMS implements Channel, Listenable, Webhook
 
 	/**
 	 * {@inheritDoc}
+	 * @see \DMA\Friends\Classes\Notifications\Channels\Channel::getDetails()
+	 */
+	public function getDetails()
+	{
+	    return [
+	            'name'           => 'SMS',
+	            'description'    => 'Send notifications by SMS using Twilio.'
+	    ];
+	}
+	
+	/**
+	 * {@inheritDoc}
 	 * @see \DMA\Friends\Classes\Notifications\Channels\Channel::configChannel()
 	 */
 	public function configChannel()

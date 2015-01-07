@@ -25,6 +25,18 @@ class ChannelFlash implements Channel
 		return 'flash';
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @see \DMA\Friends\Classes\Notifications\Channels\Channel::getDetails()
+	 */
+	public function getDetails()
+	{
+	    return [
+	            'name'           => 'Flash message',
+	            'description'    => 'Send notifications by OctoberCMS Flash messaging.'
+	    ];
+	}	
+	
     /**
      * {@inheritDoc}
      * @see \DMA\Friends\Classes\Notifications\Channels\Channel::configChannel()
@@ -57,13 +69,24 @@ class ChannelFlash implements Channel
 	 */
 	public function send(NotificationMessage $message)
 	{
-	    $message = $message->getContent();
+	    try{
+    	    $content = (string)$message->getContent();
+    	    
+    	    if(!empty($content)){
+    	        $viewSettings  = $message->getViewSettings();   	        
+    	        $type          = @$viewSettings['type'];
 
-	    // TODO : Allow to set the type of Flash message. 
-	    // Maybe a variable use in NotificationMessage
-	     
-	    Flash::info($message);
-    
+    	        if(!in_array($type, ['info', 'success', 'error'])){
+    	           $type = 'info';
+    	        }
+    	        
+    	       Flash::$type($content);
+
+    	    }
+	    }catch(\Exception $e){
+	        Log::error(sprintf('Sending a Flash notification failed:  %s', $e));
+	    }
+	    
 	}
 
   
