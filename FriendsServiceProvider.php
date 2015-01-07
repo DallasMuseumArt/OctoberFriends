@@ -71,7 +71,7 @@ class FriendsServiceProvider extends ServiceProvider
         	 
         	return $channelManager;
         });
-        
+                
         // Create alias Facade to the Notification manager
         $this->createAlias('Postman', 'DMA\Friends\Facades\Postman');        
     }
