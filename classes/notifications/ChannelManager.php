@@ -1,6 +1,7 @@
 <?php namespace DMA\Friends\Classes\Notifications;
 
 use Closure;
+use Event;
 use DMA\Friends\Models\Settings;
 use DMA\Friends\Classes\Notifications\Channels\Listenable;
 
@@ -24,7 +25,6 @@ class ChannelManager
      * @var array
      */
     private $channels = [];
-
 
 
     /**
@@ -53,6 +53,8 @@ class ChannelManager
            $ch->configChannel();
            $this->channels[$ch->getKey()] = $ch;
        }
+       
+       
 
     }
 

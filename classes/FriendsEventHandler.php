@@ -3,8 +3,10 @@
 namespace DMA\Friends\Classes;
 
 use Mail;
+use DMA\Friends\Facades\Postman;    
 use DMA\Friends\Classes\LocationManager;
 use DMA\Friends\Classes\PrintManager;
+use DMA\Friends\Classes\Notifications\IncomingMessage;
 
 /**
  * Manage custom events in the friends platform
@@ -91,6 +93,17 @@ class FriendsEventHandler {
         // Log an event that the user has logged in
     }
 
+    public function onNotificationsReady()
+    {
+
+        Postman::listen(['sms', 'regex' => '/(\d.*)\.(\d.*)/'], function(IncomingMessage $message){
+            //var_dump($message);
+            //var_dump($message->getMatches());
+            \Log::info($message->getContent());
+            \Log::info($message->getMatches());
+        });        
+    }
+    
     public function subscribe($events)
     {   
         $events->listen('dma.friends.activity.completed', 'DMA\Friends\Classes\FriendsEventHandler@onActivityCompleted');
@@ -98,5 +111,9 @@ class FriendsEventHandler {
         $events->listen('dma.friends.reward.redeemed', 'DMA\Friends\Classes\FriendsEventHandler@onRewardRedeemed');
         $events->listen('dma.friends.step.completed', 'DMA\Friends\Classes\FriendsEventHandler@onStepCompleted');
         $events->listen('auth.login', 'DMA\Friends\Classes\FriendsEventHandler@onAuthLogin');
+        
+        // Register events for listen incomming data by each channel
+        //$events->listen('dma.notifications.ready', 'DMA\Friends\Classes\FriendsEventHandler@onNotificationsReady');
+        $this->onNotificationsReady();
     }   
 }
