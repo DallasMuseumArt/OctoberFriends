@@ -50,6 +50,7 @@ secondaryTabs:
             description: The number of points required to redeem this reward
             tab: Configuration
             type: number
+            required: true
         barcode:
             label: Barcode Value
             description: The value of the barcode printed on the coupon.
