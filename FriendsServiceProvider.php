@@ -49,31 +49,14 @@ class FriendsServiceProvider extends ServiceProvider
         {
         	$channelManager = new ChannelManager;
         	$channelManager->registerChannels([
-        		'\DMA\Friends\Classes\Notifications\Channels\ChannelKiosk' => [
-        			'name' => 'Kiosk',
-        			'description' => 'Store notification in the database. So they can be read in a Kiosk or a Web interface.'
-        		],
-        		'\DMA\Friends\Classes\Notifications\Channels\ChannelEmail' => [
-        			'name' => 'Email',
-        			'description' => 'Send notifications using OctoberCMS Mail implementation'
-        		],
-        		'\DMA\Friends\Classes\Notifications\Channels\ChannelSMS' => [
-        			'name' => 'SMS',
-        			'description' => 'Send notifications by SMS using Twilio.'
-        		],
-        	    '\DMA\Friends\Classes\Notifications\Channels\ChannelFlash' => [
-        	        'name' => 'Flash',
-        	        'description' => 'Send notifications by OctoberCMS Flash messaging'
-        	    ],
-        	    '\DMA\Friends\Classes\Notifications\Channels\ChannelDummy' => [
-        	        'name' => 'Dummy',
-        	        'description' => 'Channel useful for testing and debuging. All notifications are send to OctoberCMS log system.'
-        	    ],
+        		'\DMA\Friends\Classes\Notifications\Channels\ChannelKiosk',
+        	    '\DMA\Friends\Classes\Notifications\Channels\ChannelFlash',
+        	    '\DMA\Friends\Classes\Notifications\Channels\ChannelEmail',
+        		'\DMA\Friends\Classes\Notifications\Channels\ChannelSMS',
+        	    '\DMA\Friends\Classes\Notifications\Channels\ChannelMandrill',
+        	    '\DMA\Friends\Classes\Notifications\Channels\ChannelDummy',
         	    /*    
-        		'\DMA\Friends\Classes\Notifications\Channels\ChannelTwitter' => [
-        	         'name' => 'Twitter',
-        	         'description' => 'Send notifications via Twitter. (Experimental)'
-        	    ],
+        		'\DMA\Friends\Classes\Notifications\Channels\ChannelTwitter',
         	    */
             ]);
         
@@ -84,7 +67,7 @@ class FriendsServiceProvider extends ServiceProvider
         			'\DMA\Friends\Classes\Notifications\Inputs\InputEquals',
         			'\DMA\Friends\Classes\Notifications\Inputs\InputStartsWith',
         			'\DMA\Friends\Classes\Notifications\Inputs\InputEndsWith'
-        			]);
+        	]);
         	 
         	return $channelManager;
         });
