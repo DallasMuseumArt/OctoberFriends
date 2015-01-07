@@ -22,6 +22,18 @@ class ChannelEmail implements Channel
 
 	/**
 	 * {@inheritDoc}
+	 * @see \DMA\Friends\Classes\Notifications\Channels\Channel::getDetails()
+	 */
+	public function getDetails()
+	{
+	    return [
+	            'name'           => 'Email',
+	            'description'    => 'Send notifications using OctoberCMS Mail.'
+	    ];
+	}	
+	
+	/**
+	 * {@inheritDoc}
 	 * @see \DMA\Friends\Classes\Notifications\Channels\Channel::configChannel()
 	 */
 	public function configChannel()

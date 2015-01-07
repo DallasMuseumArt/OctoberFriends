@@ -1,5 +1,10 @@
 <?php namespace DMA\Friends\Classes\Notifications;
 
+use App;
+use File;
+use View;
+use DMA\Friends\Classes\Notifications\Templates\TemplateParser;
+
 /**
  * Generic notification
  * @author Carlos Arroyo
@@ -9,6 +14,8 @@ class NotificationMessage
 
     protected $data = [];
     private   $view;
+    private   $viewSettings = [];
+    private   $templateInfo = null;
 
 
     /**
@@ -107,14 +114,47 @@ class NotificationMessage
 	}
 
 	/**
-	 * Returns formated content using the configured view
+	 * Add settings to the view. This settings are use individually
+	 * by each Channel.
+	 * 
+	 * @param string $view
+	 */
+	public function addViewSettings(array $settings)
+	{
+	    if (!is_null($settings) && is_array($settings)){
+	       $this->viewSettings = $settings;
+	    }
+	}
+	
+	/**
+	 * Return settings of the view use by this message
 	 * @return string
 	 */
-	public function getContent()
+	public function getViewSettings()
+	{
+	    // Merge pass settings by code with settings define in the 
+	    // template defined settings
+	    $templateInfo = $this->getTemplateInfo();
+	    return array_merge(array_get($templateInfo, 'settings', []), $this->viewSettings);
+	}
+	
+	
+	/**
+	 * Returns formated content using the configured view and selected template 
+	 * within the view.
+	 * 
+	 * @param $template Template section to format the content. Could be main or alternative 
+	 * @return string
+	 */
+	public function getContent($template = 'main')
 	{
 	    // TODO : throw exceptions if view is null
 	    $data = $this->getData();
-	    return \View::make($this->view, $data);
+	    $templateInfo = $this->getTemplateInfo();
+	    $template = array_get($templateInfo, $template, '');
+	    
+	    $twig = App::make('twig.string');
+	    return $twig->render($template, $data);
 	}
 
 	/**
@@ -157,4 +197,19 @@ class NotificationMessage
 	{
 	    return $this->data;
 	}
+	
+	/**
+	 * Get template info
+	 * @return array
+	 * Returns an associative array with the following keys: 'settings', 'template_1', 'template_2'
+	 */
+	protected function getTemplateInfo()
+	{
+	    if(is_null($this->templateInfo)){
+	       $view = $this->getView();
+	       $path = File::get(View::make($view)->getPath());
+	       $this->templateInfo =  TemplateParser::parse($path);
+	    }
+	    return $this->templateInfo;
+	} 
 }

@@ -25,6 +25,18 @@ class ChannelTwitter implements Channel, Listenable
 
 	/**
 	 * {@inheritDoc}
+	 * @see \DMA\Friends\Classes\Notifications\Channels\Channel::getDetails()
+	 */
+	public function getDetails()
+	{
+	    return [
+	            'name'           => 'Twitter',
+	            'description'    => 'Send notifications via Twitter. (Experimental)'
+	    ];
+	}	
+	
+	/**
+	 * {@inheritDoc}
 	 * @see \DMA\Friends\Classes\Notifications\Channels\Channel::configChannel()
 	 */
 	public function configChannel()

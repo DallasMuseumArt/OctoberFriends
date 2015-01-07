@@ -5,6 +5,20 @@ use DMA\Friends\Classes\Notifications\NotificationMessage;
 interface Channel
 {
 
+    /**
+     * Return details of the channel. 
+     * Manly used in the Backend interface.
+     *
+     * @return array
+     * 
+     * eg.
+     * [
+     *  	'name' => 'Kiosk',
+     *  	'description' => 'Store notification in the database. So they can be read in a Kiosk or a Web interface.'
+     * ]
+     */
+    public function getDetails();
+    
 	/**
 	 * Used to identify view per channel.
 	 *
