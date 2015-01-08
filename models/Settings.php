@@ -103,7 +103,7 @@ class Settings extends Model {
     private function getChannelOptions($onlyListenable=false, $description=true){
     	$options = [];
     	foreach(Postman::getRegisterChannels($onlyListenable) as $ch){
-    		$info = $ch->info;
+    		$info = $ch->getDetails();
     		$options[$ch->getKey()] = [@$info['name'], ($description) ? @$info['description'] : ''];
     	}
     	return $options;
