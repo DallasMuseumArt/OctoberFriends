@@ -75,6 +75,7 @@ secondaryTabs:
             span: left
             tab: Configuration
             type: number
+            required: true;
         maximum_earnings:
             label: Maximum Earnings
             description: The number of times an individual can earn this badge

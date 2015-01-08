@@ -2,6 +2,7 @@
 
 use Model;
 use System\Models\MailTemplate;
+use RainLab\User\Models\State;
 use Postman;
 
 
@@ -47,6 +48,17 @@ class Settings extends Model {
         $timezones = array_combine($timezones, $timezones);
 
         return $timezones;
+    }
+
+    public function getDefaultStateOptions()
+    {
+        $states = State::all();
+
+        foreach ($states as $state) {
+            $stateOptions[$state->id] = $state->name;
+        }
+
+        return $stateOptions;
     }
 
     public function getMailGroupInviteTemplateOptions()

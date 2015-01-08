@@ -57,5 +57,8 @@
     - Add is_authorized to location model
     - add_location_is_authorized.php
 1.0.18:
-    - Add barcode_id field to users (NOTE: sync user metadata after this upgrade)
+    - Add barcode_id field to users (NOTE sync user metadata after this upgrade)
     - add_user_barcode_id.php
+1.0.19:
+    - Add demographic info to usermeta table
+    - add_demographic_metadata.php

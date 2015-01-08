@@ -2,6 +2,7 @@
 
 use Model;
 use RainLab\User\Models\User;
+use RainLab\User\Models\State;
 
 /**
  * Usermeta Model
@@ -11,6 +12,44 @@ class Usermeta extends Model
     const NON_MEMBER    = 0;
     const IS_MEMBER     = 1;
     const IS_STAFF      = 2;
+
+    public static $genderOptions = [
+        'Male',
+        'Female',
+        'Trans Man',
+        'Trans Women',
+        'Non Binary/Other',
+    ];
+
+    public static $raceOptions = [
+        'White',
+        'Hispanic',
+        'Black or African American',
+        'American Indian or Alaska Native',
+        'Asian',
+        'Native Hawaiian or Other Pacific Islander',
+        'Two or more races',
+        'Other',
+    ];
+
+    public static $householdIncomeOptions = [
+        'Less then 25k',
+        '25k - 50k',
+        '50k - 75k',
+        '75k - 150k',
+        '150k - 500k',
+        '500k or more',
+    ];
+
+    public static $educationOptions = [
+        'Never Completed High School',
+        'High School/GED',
+        'Some College',
+        'Vocational or Trade School',
+        'Bachelors Degree',
+        'Masters Degree',
+        'PhD',
+    ];
 
     /**
      * @var string The database table used by the model.
@@ -68,6 +107,23 @@ class Usermeta extends Model
     public function scopeExcludeStaff($query)
     {
         return $query->where('current_member', '!=', self::IS_STAFF);
+    }
+
+    public static function getOptions()
+    {
+        $states = State::all();
+
+        foreach ($states as $state) {
+            $stateOptions[$state->id] = $state->name;
+        }
+
+        return [
+            'gender'            => self::$genderOptions,
+            'states'            => $stateOptions,
+            'race'              => self::$raceOptions,
+            'household_income'  => self::$householdIncomeOptions,
+            'education'         => self::$educationOptions,
+        ];
     }
 
 }
