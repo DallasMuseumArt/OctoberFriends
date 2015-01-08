@@ -4,16 +4,23 @@
 
 tabs:
     fields:
+        # General
         timezone:
             label: Timezone
             span: left
             type: dropdown
             tab: General
+        default_state:
+            label: Default State 
+            span: left
+            type: dropdown
+            tab: General
 
+        # Kiosk
         kiosk_idle_time:
             label: Kiosk Idle Logout Time (in seconds)
             span: left
-            tab: Kiosk settings
+            tab: Kiosk
 
         # Groups
         maximum_users_group:
@@ -21,24 +28,22 @@ tabs:
             label: Limit of users
             description: Limit of users that can be join or invite to a group.
             tab: Groups
-
         maximum_points_group:
             span: auto
             label: Limit of point
             description: Limit of point and user can earn by the group.
-            tab: Groups
-            
+            tab: Groups           
         reset_groups_every_day:
             type: checkboxlist
             span: auto
             label: Day to reset group
-            tab: Groups
-            
+            tab: Groups           
         reset_groups_time:            
             span: auto
             label: Reset groups at:
             tab: Groups
-            
+
+        # Notifications
         active_notification_channels:
             type: checkboxlist
             span: auto
@@ -46,12 +51,14 @@ tabs:
             description: Enable or disable notification channels used by the platform.
             tab: Notifications
 
+        # Listeners
         active_listenable_channels:
             type: checkboxlist
             span: auto
             label: Listenable channels
             description: Enable or disable listen any incoming data of the channel.
             tab: Listeners
+
         # Print settings
         coupon_width:
             label: Coupon Width
