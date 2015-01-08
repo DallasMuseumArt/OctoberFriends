@@ -1,6 +1,7 @@
 <?php namespace DMA\Friends\Classes\Notifications;
 
 use Closure;
+use Event;
 use DMA\Friends\Models\Settings;
 use DMA\Friends\Classes\Notifications\Channels\Listenable;
 
@@ -26,7 +27,6 @@ class ChannelManager
     private $channels = [];
 
 
-
     /**
      * Register inputs
      * @param array $inputs classnames of input validators to be register
@@ -45,15 +45,16 @@ class ChannelManager
      */
     public function registerChannels(array $channels)
     {
-       foreach($channels as $class => $details){
+       foreach($channels as $class){
 
            $ch = \App::make($class);
 
            // Run channel configurations
            $ch->configChannel();
-           $ch->info = $details;
            $this->channels[$ch->getKey()] = $ch;
        }
+       
+       
 
     }
 
@@ -98,7 +99,8 @@ class ChannelManager
     		$fields = $ch->settingFields();
     		if(is_array($fields)){
     			foreach($fields as $key => $opts){
-    				$tab = $ch->info['name'] . ' settings';
+    			    $info = $ch->getDetails();
+    				$tab = $info['name'] . ' settings';
     				$opts['tab'] = $tab;
     				$extra[$key] = $opts;
     			}
@@ -172,7 +174,7 @@ class ChannelManager
         foreach($channels as $channel){
             try{
                 // Update view template for each channel
-                $view = sprintf('dma.friends::notifications.%s.%s', $channel->getKey(), $notificationName);
+                $view = sprintf('dma.friends::notifications.%s.%s', strtolower($channel->getKey()), $notificationName);
                 $notification->setView($view);
 
                 // Send notification
