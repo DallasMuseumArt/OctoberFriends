@@ -15,7 +15,7 @@ use DMA\Friends\Classes\Notifications\IncomingMessage;
  */
 class ChannelDummy implements Channel, Listenable
 {
-
+    
 	/**
 	 * {@inheritDoc}
 	 * @see \DMA\Friends\Classes\Notifications\Channels\Channel::getKey()
@@ -25,6 +25,18 @@ class ChannelDummy implements Channel, Listenable
 		return 'dummy';
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @see \DMA\Friends\Classes\Notifications\Channels\Channel::getDetails()
+	 */
+	public function getDetails()
+	{
+	    return [
+	            'name'           => 'Dummy',
+	            'description'    => 'Channel useful for testing and debuging. All notifications are send to OctoberCMS log system.'
+	    ];
+	}	
+	
     /**
      * {@inheritDoc}
      * @see \DMA\Friends\Classes\Notifications\Channels\Channel::configChannel()

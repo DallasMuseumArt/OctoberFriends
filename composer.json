@@ -25,6 +25,7 @@
         "twilio/sdk": "3.12.6",
         "j7mbo/twitter-api-php": "dev-master",
         "smirik/php-datetime-ago": "~1.0",
-        "nategood/httpful": "*"        
+        "nategood/httpful": "*",
+        "mandrill/mandrill": "1.0.*"        
     }
 }
