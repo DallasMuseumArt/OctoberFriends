@@ -5,6 +5,7 @@ use Redirect;
 use Validator;
 use October\Rain\Support\ValidationException;
 use RainLab\User\Models\Settings as UserSettings;
+use DMA\Friends\Models\Usermeta;
 use Cms\Classes\Theme;
 use System\Classes\SystemException;
 use Cms\Classes\Page;
@@ -44,6 +45,15 @@ class UserLogin extends ComponentBase
         return [ '' => '- none -' ] + Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
+    public function onRun()
+    {
+        $this->loadAssets();
+    }
+
+    /**
+     * Render the login form.  Override the partial "login-form" 
+     * in the active theme to customize the login form
+     */
     public function onLogin()
     {        
         return $this->renderPartial('@modalDisplay', [
@@ -52,6 +62,9 @@ class UserLogin extends ComponentBase
         ]);
     }
 
+    /**
+     * Submit handler for the login form
+     */
     public function onUserLogin()
     {
         // Update wordpress passwords if necessary
@@ -99,13 +112,96 @@ class UserLogin extends ComponentBase
             return Redirect::intended($redirectUrl);
     }
 
+    /**
+     * Render the registration form.  Override the partial "register-form" 
+     * in the active theme to customize the registration form
+     */
     public function onRegister()
     {
+        $options = Usermeta::getOptions();
 
         return $this->renderPartial('@modalDisplay', [
             'title'     => Lang::get('dma.friends::lang.userLogin.registerTitle'),
-            'content'   => $this->makePartial('register-form'),
+            'content'   => $this->makePartial('register-form', [ 'options' => $options ]),
         ]);
+    }
+
+    /**
+     * Submit handler for registration
+     */
+    public function onRegisterSubmit()
+    {
+        $data = post();
+
+        $rules = [
+            'first_name'            => 'required|min:2',
+            'last_name'             => 'required|min:2',
+            'username'              => 'required|min:6',
+            'email'                 => 'required|email|between:2,64',
+            'password'              => 'required|min:6',
+            'password_confirmation' => 'required|min:6',
+        ];
+
+        $validation = Validator::make($data, $rules);
+        if ($validation->fails())
+            throw new ValidationException($validation);
+
+        /*
+         * Register user
+         */
+        $requireActivation = UserSettings::get('require_activation', true);
+        $automaticActivation = UserSettings::get('activate_mode') == UserSettings::ACTIVATE_AUTO;
+        $userActivation = UserSettings::get('activate_mode') == UserSettings::ACTIVATE_USER;
+
+        // Split the data into whats required for the user and usermeta models
+        $userData = [
+            'username'              => $data['username'],
+            'password'              => $data['password'],
+            'password_confirmation' => $data['password_confirmation'],
+            'email'                 => $data['email'],
+            'street_addr'           => $data['street_addr'],
+            'city'                  => $data['city'],
+            'state'                 => $data['state'],
+            'zip'                   => $data['zip'],
+            'phone'                 => $data['phone'],
+        ];
+
+        $user = Auth::register($userData, $automaticActivation);
+
+        // Save user metadata
+        $usermeta = new Usermeta;
+        $usermeta->first_name       = $data['first_name'];
+        $usermeta->last_name        = $data['last_name'];
+        $usermeta->gender           = $data['gender'];
+        $usermeta->birth_date       = $data['birth_date'];
+        $usermeta->race             = $data['race'];
+        $usermeta->household_income = $data['household_income'];
+        $usermeta->household_size   = $data['household_size'];
+        $usermeta->education        = $data['education'];
+
+        $user->metadata()->save($usermeta);
+
+        /*
+         * Activation is by the user, send the email
+         */
+        if ($userActivation) {
+            $this->sendActivationEmail($user);
+        }
+
+        /*
+         * Automatically activated or not required, log the user in
+         */
+        if ($automaticActivation || !$requireActivation) {
+            Auth::login($user);
+        }
+
+        /*
+         * Redirect to the intended page after successful sign in
+         */
+        $redirectUrl = $this->pageUrl($this->property('redirect'));
+
+        if ($redirectUrl = post('redirect', $redirectUrl))
+            return Redirect::intended($redirectUrl);
     }
 
     /**
@@ -155,5 +251,20 @@ class UserLogin extends ComponentBase
     {
         $theme = Theme::getActiveTheme();
         return $theme->getPath() . '/partials/';
+    }
+
+    public function loadAssets()
+    {
+        $base_path = '../../../modules/backend/FormWidgets/datepicker/assets/';
+
+        $this->addCss($base_path . 'vendor/pikaday/css/pikaday.css', 'core');
+        $this->addCss($base_path . 'vendor/clockpicker/css/jquery-clockpicker.css', 'core');
+        $this->addCss($base_path . 'css/datepicker.css', 'core');
+        $this->addJs($base_path . 'vendor/moment/moment.js', 'core');
+        $this->addJs($base_path . 'vendor/pikaday/js/pikaday.js', 'core');
+        $this->addJs($base_path . 'vendor/pikaday/js/pikaday.jquery.js', 'core');
+        $this->addJs($base_path . 'vendor/clockpicker/js/jquery-clockpicker.js', 'core');
+        $this->addJs($base_path . 'js/datepicker.js', 'core');
+        $this->addJs($base_path . 'js/timepicker.js', 'core');
     }
 }

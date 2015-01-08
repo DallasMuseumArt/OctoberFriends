@@ -240,10 +240,12 @@ class Plugin extends PluginBase
         	'metadata[first_name]' => [
         		'label' => 'First Name',
         		'tab'   => 'Metadata',
+                'span'  => 'left',
         	],
         	'metadata[last_name]' => [
         		'label' => 'Last Name',
         		'tab'   => 'Metadata',
+                'span'  => 'right',
         	],
         	'metadata[email_optin]' => [
         		'label' => 'Email Opt-in',
@@ -258,7 +260,27 @@ class Plugin extends PluginBase
         	'metadata[current_member_number]' => [
         		'label' => 'Current Member Number',
         		'tab'   => 'Metadata',
+                'span'  => 'left',
         	],
+            'metadata[gender]' => [
+                'label' => 'Gender',
+                'tab'   => 'Metadata',
+                'span'  => 'left',
+                //'type'  => 'dropdown',
+                //'options'   => '\DMA\Friends\Models\Usermeta::getGenderOptions'
+            ],
+            'metadata[education]' => [
+                'label' => 'Education',
+                'tab'   => 'Metadata',
+            ],
+            'metadata[household_income]' => [
+                'label' => 'Household Income',
+                'tab'   => 'Metadata',
+            ],
+            'metadata[household_size]' => [
+                'label' => 'Household Size',
+                'tab'   => 'Metadata',
+            ],
             'points' => [
                 'tab'   => 'Points',
                 'type'  => 'points',

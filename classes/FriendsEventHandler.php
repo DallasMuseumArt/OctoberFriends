@@ -41,7 +41,6 @@ class FriendsEventHandler {
 
         Mail::send('dma.friends::mail.badge', $data, function($message) use ($user)
         {
-            \Debugbar::info('badge trigger fired');
             $message->to($user->email, $user->full_name);
         });
     }
