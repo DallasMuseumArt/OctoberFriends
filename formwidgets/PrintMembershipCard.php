@@ -8,6 +8,8 @@ use RainLab\User\Models\User;
 use DMA\Friends\Classes\PrintManager;
 use Flash;
 use Lang;
+use System\Classes\SystemException;
+
 
 /**
  * Activity Type Widget
@@ -68,7 +70,7 @@ class PrintMembershipCard extends FormWidgetBase
     {
         $locationId = post('printerLocation');
         if (empty($locationId)) {
-            Flash::error('Select a location to print the membership card');
+            Flash::error(Lang::get('dma.friends::lang.user.memberCardLocation'));
             return;
         }
 
@@ -76,8 +78,12 @@ class PrintMembershipCard extends FormWidgetBase
         $user = post('User');
         $user = User::where('name', '=', $user['name'])->first();
 
-        $manager = new PrintManager($location, $user);
-        $manager->printIdCard();
-        Flash::info(Lang::get('dma.friends::lang.user.memberCard', ['title' => $location->title]));
+        try { 
+            $manager = new PrintManager($location, $user);
+            $manager->printIdCard();
+            Flash::info(Lang::get('dma.friends::lang.user.memberCard', ['title' => $location->title]));
+        } catch(SystemException $e) {
+            Flash::error($e->getMessage());
+        }
     }
 }

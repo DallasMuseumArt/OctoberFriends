@@ -30,11 +30,12 @@ return [
         'unlocked'  => ':name unlocked the step ":title"',
     ],
     'user' => [
-        'save'          => 'Successfully saved user profile',
-        'saveFailed'    => 'Unable to save user profile',
-        'passwordSave'  => 'Your password has been successfully updated',
-        'passwordFail'  => 'The password you entered is incorrect',
-        'memberCard'    => 'The card has been sent to the designated membership printer for ":title"',
+        'save'                  => 'Successfully saved user profile',
+        'saveFailed'            => 'Unable to save user profile',
+        'passwordSave'          => 'Your password has been successfully updated',
+        'passwordFail'          => 'The password you entered is incorrect',
+        'memberCard'            => 'The card has been sent to the designated membership printer for ":title"',
+        'memberCardLocation'    => 'Select a location to print the membership card',
     ],
     'userLogin' => [
         'loginTitle'    => 'Scan Membership Card',
@@ -47,5 +48,6 @@ return [
         'activityTypeNotInitiated'  => 'An activity type must be instantiated before form fields can be used',
         'stepFailed'                => 'Failed to complete step',
         'badgeFailed'               => 'Failed to complete badge',
+        'printerSettingsMissing'    => 'Invalid printer settings. Please check your configuration',
     ],
 ];
