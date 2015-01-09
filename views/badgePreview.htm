@@ -4,6 +4,10 @@
     {% endif %}
 >
     <div class="friends-badge preview">
+        {% if model.image.getPath() %}
+        <img src="{{ model.image.getPath() }}"/>
+        {% endif %}
+
         <h4>{{ model.title }}</h4>
 
         <div class="description">
