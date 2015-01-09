@@ -56,7 +56,7 @@ class Reward extends Model
     {
         return $query->where('is_published', '=', 1)
             ->where('is_archived', '=', 0)
-            ->where('hidden', '=', 0)
+            ->where('is_hidden', '=', 0)
             ->whereNull('inventory')
             ->orWhere('inventory', '>', 0);
     }

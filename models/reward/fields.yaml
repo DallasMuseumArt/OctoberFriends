@@ -87,7 +87,7 @@ secondaryTabs:
             tab: Publishing Options
             type: datepicker
             mode: datetime
-        hidden:
+        is_hidden:
             label: Hide Reward
             description: If checked hide this Reward from users until they meet the points requirement.
             tab: Publishing Options
