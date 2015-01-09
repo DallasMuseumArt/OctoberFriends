@@ -29,7 +29,7 @@ class UserMostRecentBadge extends ComponentBase
             return;
         }
 
-        $this->page['badge'] = View::make('dma.friends::badgePreview', ['badge' => $badge])->render();
+        $this->page['badge'] = View::make('dma.friends::badgePreview', ['model' => $badge])->render();
         
     }
 }
