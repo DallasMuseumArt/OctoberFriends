@@ -347,6 +347,7 @@ class Plugin extends PluginBase
         // Commands for syncing wordpress data
         $this->registerConsoleCommand('friends.sync-data', 'DMA\Friends\Commands\SyncFriendsDataCommand');
         $this->registerConsoleCommand('friends.sync-relations', 'DMA\Friends\Commands\SyncFriendsRelationsCommand');
+        $this->registerConsoleCommand('friends.sync-images', 'DMA\Friends\Commands\SyncFriendsImagesCommand');
 
         // Crontasks
         $this->registerConsoleCommand('friends.points-weekly', 'DMA\Friends\Commands\WeeklyPoints');
