@@ -92,6 +92,16 @@ class FriendsEventHandler {
         // Log an event that the user has logged in
     }
 
+    public function onAuthRegister($user)
+    {
+        // Print the reward if user is at a kiosk
+        $location = LocationManager::getLocation();
+        if ($location) {
+            $printManager = new PrintManager($location, $user);
+            $printManager->printIdCard();
+        }
+    }
+
     public function onNotificationsReady()
     {
 
@@ -110,6 +120,7 @@ class FriendsEventHandler {
         $events->listen('dma.friends.reward.redeemed', 'DMA\Friends\Classes\FriendsEventHandler@onRewardRedeemed');
         $events->listen('dma.friends.step.completed', 'DMA\Friends\Classes\FriendsEventHandler@onStepCompleted');
         $events->listen('auth.login', 'DMA\Friends\Classes\FriendsEventHandler@onAuthLogin');
+        $events->listen('auth.register', 'DMA\Friends\Classes\FriendsEventHandler@onAuthRegister');
         
         // Register events for listen incomming data by each channel
         //$events->listen('dma.notifications.ready', 'DMA\Friends\Classes\FriendsEventHandler@onNotificationsReady');
