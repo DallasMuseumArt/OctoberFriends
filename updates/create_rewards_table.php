@@ -27,7 +27,7 @@ class CreateRewardsTable extends Migration
             $table->timestamp('date_end')->nullable();
             $table->integer('days_valid')->nullable();
             $table->integer('inventory')->nullable();
-            $table->boolean('hidden')->default(false);
+            $table->boolean('is_hidden')->default(false);
             $table->text('fine_print')->nullable();
             $table->boolean('enable_email')->default(false);
             $table->text('redemption_email')->nullable();
