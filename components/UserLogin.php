@@ -6,6 +6,7 @@ use Validator;
 use October\Rain\Support\ValidationException;
 use RainLab\User\Models\Settings as UserSettings;
 use DMA\Friends\Models\Usermeta;
+use DMA\Friends\Wordpress\Auth as WordpressAuth;
 use Cms\Classes\Theme;
 use System\Classes\SystemException;
 use Cms\Classes\Page;
@@ -13,7 +14,7 @@ use File;
 use Lang;
 use Auth;
 use Flash;
-use DMA\Friends\Wordpress\Auth as WordpressAuth;
+use Event;
 
 class UserLogin extends ComponentBase
 {
@@ -102,6 +103,11 @@ class UserLogin extends ComponentBase
             'login' => array_get($data, 'login'),
             'password' => array_get($data, 'password')
         ], true);
+
+        /*
+         * Fire event that user has registered
+         */
+        Event::fire('auth.register', $user);
 
         /*  
          * Redirect to the intended page after successful sign in
