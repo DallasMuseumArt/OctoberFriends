@@ -6,6 +6,7 @@ use DMA\Friends\Models\Reward;
 use DMA\Friends\Models\Settings;
 use Lang;
 use Cms\Classes\Theme;
+use System\Classes\SystemException;
 
 require_once('fpdf17/code39.php');
 
@@ -46,6 +47,9 @@ class PrintManager
      */
     public function init($width, $height, $orientation)
     {
+        if (!$width || !$height || !$orientation)
+            throw new SystemException(Lang::get('dma.friends::lang.exceptions.printerSettingsMissing'));
+        
         $this->pdf = new \PDF_Code39($orientation, "mm", [ $height, $width]);
         $this->pdf->AddPage();
     }
