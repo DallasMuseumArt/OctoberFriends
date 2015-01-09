@@ -4,6 +4,7 @@ use DMA\Friends\Models\Activity;
 use DMA\Friends\Models\Step;
 use DMA\Friends\Models\Badge;
 use RainLab\User\Models\User;
+use DMA\Friends\Classes\UserExtend;
 use DB;
 use Flash;
 use Lang;
@@ -113,6 +114,9 @@ class BadgeManager
         try {
             // If loop completes with out returning false the user has completed all steps
             $user->badges()->save($badge);
+            $userExtend = new UserExtend($user);
+            $userExtend->addPoints($badge->points);
+
             Event::fire('dma.friends.badge.completed', [ $badge, $user ]);
             Flash::info(Lang::get('dma.friends::lang.badges.completed', ['title' => $badge->title]));
         } catch(Exception $e) {
