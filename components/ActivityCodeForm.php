@@ -21,7 +21,12 @@ class ActivityCodeForm extends ComponentBase
 
     public function defineProperties()
     {
-        return [];
+        return [
+            'title' => [
+                'title'     => 'Title',
+                'default'   => '',
+            ]
+        ];
     }
 
     public function onSubmit()
