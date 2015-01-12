@@ -62,3 +62,6 @@
 1.0.19:
     - Add demographic info to usermeta table
     - add_demographic_metadata.php
+1.0.20:
+    - Fix time restriction settings on imported data 
+    - fix_time_restrictions.php
