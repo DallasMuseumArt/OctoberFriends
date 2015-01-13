@@ -37,7 +37,7 @@ class TimeRestrictions extends FormWidgetBase
 
     public function prepareVars()
     {
-        $data = $this->getLoadData();
+        $data = $this->getLoadValue();
 
         $this->vars['name']         = $this->formField->getName();
         $this->vars['start_time']   = $data['start_time'];
