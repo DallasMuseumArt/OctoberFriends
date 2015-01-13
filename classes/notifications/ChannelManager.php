@@ -264,9 +264,25 @@ class ChannelManager
             throw new Exception(sprintf('Listen arguments are invalid:  %s ', $arguments) );
         }
 
-
-
-        // Bind channel listener event
+        // Filter out inactive and invalid listable channels 
+        $activeChannels = Settings::get('active_listenable_channels', []);
+        $validChannels = [];
+            if(!empty($activeChannels)){
+            foreach($bindChannels as $key){
+                $key = strtolower($key);
+                if(in_array($key, $activeChannels)){
+                    if($ch = @$this->channels[$key]){
+                        $validChannels[] = $key;
+                    }else{
+                        throw new \Exception('Invalid channel ' . $key);
+                    }
+                }
+            }
+        }
+        
+        $bindChannels = $validChannels;
+        
+        // Bind active listenable channel events
         foreach($bindChannels as $channelKey){
             // Start listen incoming messages for each active channel
             $channelKey = strtolower($channelKey);
@@ -297,6 +313,8 @@ class ChannelManager
                 }
 
             });
+            
+            \Log::debug('register: ' . $event);
         }
 
     }

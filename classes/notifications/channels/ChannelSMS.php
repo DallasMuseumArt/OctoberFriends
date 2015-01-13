@@ -46,8 +46,8 @@ class ChannelSMS implements Channel, Listenable, Webhook
 	{
 	    // TOOD : get this values for OctoberCMS settings
 	    $accountSid = Settings::get('twilio_account_id');
-	    $authToken  = Settings::get('twilio_auth_token');
-	    $this->fromNumber = Settings::get('twilio_default_from_number');
+	    $authToken  = Settings::get('twilio_auth_token');	    
+	    $this->fromNumber = $this->cleanPhone(Settings::get('twilio_default_from_number'));
 
 	    $this->client = new Services_Twilio($accountSid, $authToken);
 	}
@@ -76,6 +76,20 @@ class ChannelSMS implements Channel, Listenable, Webhook
 	}
 
 	/**
+	 * Clean phone number for Twilio
+	 * @param string $phone
+	 * @return string
+	 */
+	protected function cleanPhone($phone)
+	{
+	    $phone = preg_replace('/\\D+/', '', $phone);
+	    if(!empty($phone)){
+	        return '+' . $phone;
+	    }
+	    return '';
+	}
+	
+	/**
 	 * {@inheritDoc}
 	 * @see \DMA\Friends\Classes\Notifications\Channels\Channel::send()
 	 */
@@ -87,11 +101,16 @@ class ChannelSMS implements Channel, Listenable, Webhook
 	    $data    = $message->getData();
 	    $txt     = $message->getContent();
 
-	    $sms = $this->client->account->sms_messages->create(
-	    		$this->fromNumber, // From a Twilio number in your account
-	    		$toUser->phone, // Text any number
-	    		$txt
-	    );
+	    // Clean phone user
+	    $toPhone = $this->cleanPhone($toUser->phone);
+	    if(!empty($toPhone)){
+    	    $sms = $this->client->account->sms_messages->create(
+    	    		$this->fromNumber, // From a Twilio number in your account
+    	    		$toPhone, // Text any number
+    	    		$txt
+    	    );
+	    }
+	   
 	}
 
 	/**
@@ -120,7 +139,7 @@ class ChannelSMS implements Channel, Listenable, Webhook
 	        $key = $this->getKey();
 	        $event = strtolower("dma.channel.$key.incoming.data");
 	        Event::fire($event, [[$msg]]);
-	        Log::info('Processed Twilio incoming SMS', $msg->getData());
+	        Log::debug('Processed Twilio incoming SMS', $msg->getData());
 	    }
 	    catch(\Exception $e)
 	    {
