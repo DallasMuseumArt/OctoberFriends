@@ -46,15 +46,34 @@ class IncomingMessage
 
 
 	/**
-	 * Returns formated content using the configured view
+	 * Returns raw incomming message content
 	 * @return string
 	 */
-	public function getContent()
+	public function getRawContent()
 	{
         $content = @$this->data['content'];
 	    return (!is_null($content))?$content:'';
 	}
 
+
+	/**
+	 * Return a normalize content with no leading or tailing spaces and clean uniform whitespaces. 
+	 * Useful to do lookups in the database with the content of the message.
+	 * @return $string
+	 */
+	public function getContent()
+	{
+	    $content = $this->getRawContent();
+	    
+	    // Remove leading and ending white spaces
+	    $content = trim($content);
+	
+	    // Normalize white spaces
+	    $content = preg_replace('/[ ]{2,}/i', ' ', $content);
+	    return $content;
+	}
+	
+	
 	/**
 	 * Add array of match string found in the content.
 	 * This is use manly por input regex expressions

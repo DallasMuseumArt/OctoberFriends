@@ -31,6 +31,11 @@ class LikeWorkOfArt extends ActivityTypeBase
 
         if ($activity = Activity::findActivityType('LikeWorkOfArt')->first()) {          
             if($ret = parent::process($user, ['activity' => $activity])){
+                
+                // TODO: Find a better way to pass this data
+                $activity->objectData = $data;
+                unset($data['object_title']); // Don't save title in user metadata table
+                
                 ActivityMetadata::addUserActivity($user, $activity, $data);
             }
             return $ret;
@@ -56,7 +61,7 @@ class LikeWorkOfArt extends ActivityTypeBase
     public static function isAssessionNumber($code)
     {
         // Brain API request template URL
-        $template = 'http://brain.dma.org/api/v1/collection/object/?fields=id,number&format=json&number=%s';
+        $template = 'http://brain.dma.org/api/v1/collection/object/?fields=id,number,title&format=json&number=%s';
         
         // Clean code from spaces in case user miss type it
         $code     = str_replace(' ', '', $code);
@@ -71,7 +76,8 @@ class LikeWorkOfArt extends ActivityTypeBase
         if($obj = @$response->body->results[0]){
             $data = [
                 'object_id'     => $obj->id,
-                'object_number' => $obj->number
+                'object_number' => $obj->number,
+                'object_title'  => $obj->title
             ];
             
             return $data;

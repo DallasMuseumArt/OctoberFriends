@@ -3,10 +3,15 @@
 namespace DMA\Friends\Classes;
 
 use Mail;
+use Session;
+use RainLab\User\Models\User;
 use DMA\Friends\Facades\Postman;    
 use DMA\Friends\Classes\LocationManager;
 use DMA\Friends\Classes\PrintManager;
 use DMA\Friends\Classes\Notifications\IncomingMessage;
+use DMA\Friends\Activities\ActivityCode;
+use DMA\Friends\Activities\LikeWorkOfArt;
+use DMA\Friends\Classes\Notifications\NotificationMessage;
 
 /**
  * Manage custom events in the friends platform
@@ -105,11 +110,46 @@ class FriendsEventHandler {
     public function onNotificationsReady()
     {
 
-        Postman::listen(['sms', 'regex' => '/(\d.*)\.(\d.*)/'], function(IncomingMessage $message){
-            //var_dump($message);
-            //var_dump($message->getMatches());
-            \Log::info($message->getContent());
-            \Log::info($message->getMatches());
+        Postman::listen(['sms', 'regex'=>'/.*/'], function(IncomingMessage $message){
+
+            // Find user using mobile phone
+            $phoneUser = $message->getFrom();
+            
+            // Getting first user match. Assuming that phone is 
+            // unique in the database  
+            if($user = User::where('phone', $phoneUser)->first()){
+
+                // Get code from message
+                $params['code'] = $code = $message->getContent();
+
+                // process Activity code first
+                if(!$activity = ActivityCode::process($user, $params)){
+                    // Not found activity with that code.
+                    // Trying if is a object assession number
+                    $activity = LikeWorkOfArt::process($user, $params);
+                }
+                
+                // Send SMS and kiosk notification
+                $typeMessage = ($activity) ? 'successful' : 'error';
+                $template = 'activity_code_' . $typeMessage; 
+                Postman::send($template, function(NotificationMessage $notification) use ($user, $typeMessage, $code, $activity){
+
+                     // Reply to same phone number
+                     $notification->to($user, $user->name);
+                     
+                     // Send code and activity just in case we want to use in the template 
+                     $notification->addData(['code' => $code, 
+                                             'activity' => $activity]);
+                     
+                     // Determine the content of the message
+                     $holder = ($typeMessage == 'successful') ? 'activityMessage' : 'activityError';
+                     $notification->message(Session::pull($holder));
+                     
+                }, ['sms', 'kiosk']);
+                
+                \Log::debug('Incoming SMS', ['user' => $user, 'code' => $code, 'activity' => $activity]);
+            }
+             
         });        
     }
     

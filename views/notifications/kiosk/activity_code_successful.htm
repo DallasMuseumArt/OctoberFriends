@@ -1,0 +1,13 @@
+<h4>Activity code send by SMS</h4>
+<p>
+{{ message }}
+</p>
+
+{% if activity.objectData %}
+<p>
+you liked:<br> 
+<strong>{{ activity.objectData.object_title }}</strong><br>
+{{ activity.objectData.object_number }}
+</p> 
+
+{% endif %}

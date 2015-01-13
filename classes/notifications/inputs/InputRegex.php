@@ -36,7 +36,7 @@ class InputRegex implements InputParser
     }
 
     /**
-     * Normailize whitespace in a string
+     * Normalize whitespace in a string
      * useful when comparing strings
      * @param string $input
      * @return $string
