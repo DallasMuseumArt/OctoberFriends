@@ -79,7 +79,7 @@ class ActivityType extends FormWidgetBase
             $options[$alias] = $details['name'];
         }
 
-        $this->vars['defaultValue']     = $this->getLoadData();
+        $this->vars['defaultValue']     = $this->getLoadValue();
         $this->vars['additionalFields'] = ($this->vars['defaultValue']) ? $this->prepareFormFields($this->model) : null;
         $this->vars['options']          = $options;
         $this->vars['options']          = $options;
