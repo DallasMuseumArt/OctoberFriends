@@ -171,8 +171,6 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
             }
         }
 
-        //TODO: need a better way to return errors on why the activity couldnt complete
-
         switch ($activity->time_restriction) {
             case Activity::TIME_RESTRICT_NONE:
                 return true;
