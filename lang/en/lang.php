@@ -7,10 +7,11 @@ return [
         'loginFailed'   => 'Login Failed',
     ],
     'activities' => [
-        'codeSuccess'   => 'Congratulations, you have completed ":title"',
-        'codeError'     => 'Sorry the code :code could not be found',
-        'lockout'       => 'You cannot use this code for :x minutes',
-        'notAvailable'  => 'Sorry this activity is currently not available',
+        'codeSuccess'           => 'Congratulations, you have completed ":title"',
+        'codeError'             => 'Sorry the code :code could not be found',
+        'lockout'               => 'You cannot use this code for :x minutes',
+        'notAvailable'          => 'Sorry this activity is currently not available',
+        'likeWorkArtCodeError'  => 'Sorry the artwork :code could not be found',
     ],
     'badges' => [
         'completed'     => 'Congratulations, you have been awarded the badge ":title"',
@@ -36,6 +37,7 @@ return [
         'passwordFail'          => 'The password you entered is incorrect',
         'memberCard'            => 'The card has been sent to the designated membership printer for ":title"',
         'memberCardLocation'    => 'Select a location to print the membership card',
+        'memberPhoneNotFound'   => 'Phone not found. Please update your Friend profile...',
     ],
     'userLogin' => [
         'loginTitle'    => 'Scan Membership Card',

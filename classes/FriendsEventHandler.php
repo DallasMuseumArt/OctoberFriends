@@ -2,6 +2,8 @@
 
 namespace DMA\Friends\Classes;
 
+use Log;
+use Lang;
 use Mail;
 use Session;
 use RainLab\User\Models\User;
@@ -132,7 +134,7 @@ class FriendsEventHandler {
                 // Send SMS and kiosk notification
                 $typeMessage = ($activity) ? 'successful' : 'error';
                 $template = 'activity_code_' . $typeMessage; 
-                Postman::send($template, function(NotificationMessage $notification) use ($user, $typeMessage, $code, $activity){
+                Postman::send($template, function(NotificationMessage $notification) use ($user, $code, $activity){
 
                      // Reply to same phone number
                      $notification->to($user, $user->name);
@@ -142,12 +144,24 @@ class FriendsEventHandler {
                                              'activity' => $activity]);
                      
                      // Determine the content of the message
-                     $holder = ($typeMessage == 'successful') ? 'activityMessage' : 'activityError';
-                     $notification->message(Session::pull($holder));
+                     $holder = ( $activity ) ? 'activityMessage' : 'activityError';
+                     $message = Session::pull($holder);
+                                          
+                     $notification->message($message);
                      
                 }, ['sms', 'kiosk']);
                 
-                \Log::debug('Incoming SMS', ['user' => $user, 'code' => $code, 'activity' => $activity]);
+                Log::debug('Incoming SMS', ['user' => $user, 'code' => $code, 'activity' => $activity]);
+            }else{
+                Postman::send('simple', function(NotificationMessage $notification) use ( $phoneUser ){
+                
+                    $user = new User();
+                    $user->phone = $phoneUser;
+                    // Reply to same phone number
+                    $notification->to($user, $user->name);
+                    $notification->message(Lang::get('dma.friends::lang.user.memberPhoneNotFound'));
+                     
+                }, ['sms']);                
             }
              
         });        
