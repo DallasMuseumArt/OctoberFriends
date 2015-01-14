@@ -7,7 +7,9 @@ use Symfony\Component\Console\Input\InputArgument;
 use DB;
 use DMA\Friends\Models\Reward;
 use DMA\Friends\Models\Badge;
+use RainLab\User\Models\User;
 use System\Models\File;
+use Cms\Classes\Theme;
 
 /**
  * Set a cron task that will reset the points all users have earned for the week back to zero
@@ -54,10 +56,11 @@ class SyncFriendsImagesCommand extends Command
         Badge::where('wordpress_id', '>', 0)->chunk(200, function($badges) {
             foreach ($badges as $badge) {
                 if (isset($badge->wordpress_id)) {
-                    $image = $this->getImage($badge->wordpress_id);
+                    $image = $this->getPostImage($badge->wordpress_id);
 
                     if (isset($image->guid)) {
-                        $this->processImage($badge, $image->guid);
+                        $badge->image()->delete();
+                        $this->processImage($badge->image(), $image->guid);
                     }
                 }
             }
@@ -68,18 +71,35 @@ class SyncFriendsImagesCommand extends Command
         Reward::where('wordpress_id', '>', 0)->chunk(200, function($rewards) {
             foreach ($rewards as $reward) {
                 if (isset($reward->wordpress_id)) {
-                    $image = $this->getImage($reward->wordpress_id);
+                    $image = $this->getPostImage($reward->wordpress_id);
 
                     if (isset($image->guid)) {
-                        $this->processImage($reward, $image->guid);
+                        $reward->image()->delete();
+                        $this->processImage($reward->image(), $image->guid);
                     }
+                }
+            }
+        });
+
+        $this->info('Importing user avatars');
+
+        $avatarPath = $this->getAvatarDir();
+
+        User::chunk(200, function($users) use ($avatarPath) {
+            foreach ($users as $user) {
+                $image = $this->getUserImage($user->id);
+                if (!empty($image->avatar)) {
+                    $user->avatar()->delete();
+                    $path = $avatarPath . $image->avatar . '.jpg';
+                    $this->processImage($user->avatar(), $path);
                 }
             }
         });
 
     }
 
-    public function processImage($object, $image) {
+    public function processImage($objectImage, $image) 
+    {
         $basename = basename($image);
         $dst = '/tmp/' . $basename;
         copy($image, $dst);
@@ -90,18 +110,35 @@ class SyncFriendsImagesCommand extends Command
         $file->save();
 
         if ($file) {
-            $this->info('Saved: ' . $object->title . ' -> ' . $file->file_name);
-            $object->image()->add($file);
+            $this->info('Saved: ' . $file->file_name);
+            $objectImage->add($file);
         }
         
     }
 
-    public function getImage($wordpress_id) {
+    public function getPostImage($wordpress_id) 
+    {
         return $this->db->table('wp_postmeta')
             ->join('wp_posts', 'wp_posts.ID', '=', 'wp_postmeta.meta_value')
             ->select('wp_posts.guid')
             ->where('meta_key', '_thumbnail_id')
             ->where('post_id', $wordpress_id)
             ->first();
+    }
+
+    public function getUserImage($wordpress_id) 
+    {
+        return $this->db->table('wp_usermeta')
+            ->select('meta_value AS avatar')
+            ->where('meta_key', 'avatar')
+            ->where('user_id', $wordpress_id)
+            ->first();
+    }
+
+    public function getAvatarDir()
+    {
+        $activeTheme = Theme::getActiveTheme();
+        $themeDir = $activeTheme->getDirName();
+        return base_path() . '/themes/' . $themeDir . '/assets/images/avatars/';
     }
 }
