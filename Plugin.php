@@ -63,22 +63,6 @@ class Plugin extends PluginBase
                 'order'       => 500,
                 'keywords'    => 'friends system settings'
             ],
-            'locations' => [
-                'label'         => 'Locations',
-                'description'   => 'Manage the kiosk locations',
-                'category'      => 'Friends',
-                'icon'          => 'icon-location-arrow',
-                'url'           => Backend::url('dma/friends/locations'),
-                'order'         => 0,
-            ],  
-            'categories' => [
-                'label'         => 'Categories',
-                'description'   => 'Manage the Categories',
-                'category'      => 'Friends',
-                'icon'          => 'icon-square',
-                'url'           => Backend::url('dma/friends/categories'),
-                'order'         => 10,
-            ],
         ];
     }
 
@@ -86,7 +70,7 @@ class Plugin extends PluginBase
     {
         return [
             'friends' => [
-                'label'         => 'Friends',
+                'label'         => 'Friends Content',
                 'url'           => Backend::url('dma/friends/activities'),
                 'icon'          => 'icon-users',
                 'permissions'   => ['dma.friends.*'],
@@ -110,6 +94,12 @@ class Plugin extends PluginBase
                         'url'           => Backend::url('dma/friends/rewards'),
                         'permissions'   => ['dma.friends.access_admin'],
                     ],
+                    'categories' => [
+                        'label'         => 'Categories',
+                        'icon'          => 'icon-list-ul',
+                        'url'           => Backend::url('dma/friends/categories'),
+                        'permissions'   => ['dma.friends.access_admin'],
+                    ],  
                     'activitylogs'   => [
                         'label'         => 'Activity Logs',
                         'icon'          => 'icon-rocket',
@@ -121,8 +111,13 @@ class Plugin extends PluginBase
                         'icon'          => 'icon-users',
                         'url'           => Backend::url('dma/friends/groups'),
                         'permissions'   => ['dma.friends.access_admin'],
-                    ],                    
-                    
+                    ],
+                    'locations' => [
+                        'label'         => 'Locations',
+                        'icon'          => 'icon-location-arrow',
+                        'url'           => Backend::url('dma/friends/locations'),
+                        'permissions'   => ['dma.friends.access_admin'],
+                    ],                
                 ]
             ]
         ];
