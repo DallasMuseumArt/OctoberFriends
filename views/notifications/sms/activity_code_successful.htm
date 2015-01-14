@@ -1,1 +1,5 @@
 {{ message|raw }}
+
+{% if activity.objectData %}
+You liked: {{ activity.objectData.object_number }} - {{ activity.objectData.object_title }}
+{% endif %}

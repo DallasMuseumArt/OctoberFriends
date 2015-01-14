@@ -101,7 +101,8 @@ class NotificationMessage
 	 */
 	public function setView($view)
 	{
-		$this->view = $view;
+	    $this->templateInfo = null;
+	    $this->view = $view;
 	}
 
 	/**
