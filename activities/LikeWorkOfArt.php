@@ -1,5 +1,7 @@
 <?php namespace DMA\Friends\Activities;
 
+use Lang;
+use Session;
 use Httpful\Request;
 use RainLab\User\Models\User;
 use DMA\Friends\Models\Activity;
@@ -24,33 +26,43 @@ class LikeWorkOfArt extends ActivityTypeBase
      * {%inheritDoc}
      */
     public static function process(User $user, $params)
-    {
+    {        
         if (!isset($params['code']) || empty($params['code'])) return false;
 
-        if (!$data = self::isAssessionNumber($params['code'])) return false;
-
         if ($activity = Activity::findActivityType('LikeWorkOfArt')->first()) {          
-            if($ret = parent::process($user, ['activity' => $activity])){
-                
-                // TODO: Find a better way to pass this data
-                $activity->objectData = $data;
-                unset($data['object_title']); // Don't save title in user metadata table
-                
-                ActivityMetadata::addUserActivity($user, $activity, $data);
-            }
-            return $ret;
+            $code = $params['code'];
             
-        }
+            if ($data = self::isAssessionNumber($code)){
+            
+                if($ret = parent::process($user, ['activity' => $activity])){
+                    
+                    // TODO: Find a better way to pass this data
+                    $activity->objectData = $data;
+                    unset($data['object_title']); // Don't save title in user metadata table
+                    
+                    ActivityMetadata::addUserActivity($user, $activity, $data);
+                }
+                
+                return $ret;
+                
+            }else{
+                // Verify if user try to enter an Object number
+                // Regex expression to match object number format
+                $re = "/((([a-zA-Z0-9_\\-]+\\.){1,})([a-zA-Z0-9_\\-]+))/";
+                $isObjectNumber = (preg_match_all($re, str_replace(' ', '',$code)) > 0); 
+                       
+                if( $isObjectNumber ) {
+                    Session::put('activityError', Lang::get('dma.friends::lang.activities.likeWorkArtCodeError', ['code' => $params['code']]));
+                }
+            }     
+       }
 
         return false;
 
     }
 
     /**
-     * Take a string of text and determine if it is an assession #
-     * TODO: This function will eventually be return to provide some sort of
-     * proper validation to ensure that we are actually pulling a valid
-     * assession number
+     * Take a string of text and determine if it is an assession object
      *
      * @param string A string of text to check 
      *
