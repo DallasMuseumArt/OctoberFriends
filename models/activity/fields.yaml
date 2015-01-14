@@ -102,6 +102,7 @@ secondaryTabs:
             label: Beginning Date
             description: If set, Reward can only be redeemed after this date.
             tab: Publishing Options 
+            required: true
             span: left
             type: datepicker
             mode: datetime
@@ -113,6 +114,7 @@ secondaryTabs:
             label: Ending Date
             description: If set, Reward can only be redeemed before this date.
             tab: Publishing Options 
+            required: true
             span: right 
             type: datepicker
             mode: datetime
