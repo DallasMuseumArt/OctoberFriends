@@ -9,13 +9,21 @@
                 </th>
             </thead>
             <tbody>
-            <?php foreach($badges as $badge) { ?>
+            <?php if (!count($badges)): ?>
                 <tr class="list-tree-level-0  rowlink">
                     <td class="list-cell-index-1 list-cell-name-title list-cell-type-text">
-                        <a href="/backend/dma/friends/badges/update/<?= $badge->id ?>"><?= $badge->title; ?></a>
+                        This activity is not associated with any badges
                     </td>
                 </tr>
-            <?php } ?>
+            <?php else: ?>
+                <?php foreach($badges as $badge) { ?>
+                    <tr class="list-tree-level-0  rowlink">
+                        <td class="list-cell-index-1 list-cell-name-title list-cell-type-text">
+                            <a href="/backend/dma/friends/badges/update/<?= $badge->id ?>"><?= $badge->title; ?></a>
+                        </td>
+                    </tr>
+                <?php } ?>
+            <?php endif; ?>
             </tbody>
         </table>
     </div>
