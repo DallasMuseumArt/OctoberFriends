@@ -22,10 +22,15 @@ class NotificationCounter extends ComponentBase
     {
         return [
             'goToNotificationPage' => [
-                'title'     => 'Link to notification page',
-                'type'      => 'dropdown',
-                'default'   => '/'
-            ]            
+                    'title'     => 'Link to notification page',
+                    'type'      => 'dropdown',
+                    'default'   => '/'
+            ],
+            'cssClass' => [
+                    'title'     => 'CSS classes',
+                    'type'      => 'dropdown',
+                    'default'   => 'nav-item notifications-feed icon-envelope'
+            ]                    
         ];
     }
     
@@ -42,6 +47,7 @@ class NotificationCounter extends ComponentBase
         $count = (is_null($user)) ? 0 : $user->notifications()->unread()->count();
         $this->page['count'] = $count;
         $this->page['goToPage'] = $this->property('goToNotificationPage');
+        $this->page['cssClass'] = $this->property('cssClass');
      
        
         foreach($vars as $key => $value){
