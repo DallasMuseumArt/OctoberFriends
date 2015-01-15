@@ -1,11 +1,48 @@
+{% if notifications %}
 {% for notification in notifications %}
-	<div class="alert alert-warning alert-dismissible" role="alert">
-		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-		{% if notification.subject %}
-		<h4>{{ notification.subject }}</h4>
+	
+	
+		{% set notifyDate = date(notification.created_at) %}
+		
+		{%  if notifyDate  >= date("today") %}
+			{% set group = 'Today' %}
+		{% elseif notifyDate >= date("yesterday") %}
+			{% set group = 'Yesterday' %}
+		{% else %}
+			{% set group = notifyDate|date('F d') %}
 		{% endif %}
-		<p>{{ notification.message|raw }}</p>
-		<!--  <p>send : {{ notification.created_at }}<br></p> -->
+	
+	{% if currentGroup != group %}
+		{% set currentGroup = group %}
+		<h3>
+			{{ currentGroup }}
+		</h3>
+	
+	{% endif %}
+	
+	<div class="notification {{ ( not notification.is_read )? 'notification-unread' : '' }}">
+		
+		<button data-request="onMarkRead" 
+				data-request-data="id: {{ notification.id }}"
+				data-request-success="$($el).parent('div').removeClass('notification-unread');"
+				type="button" class="close" >
+				<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+		</button>
+		{% if notification.subject %}
+			<h4>{{ notification.subject }}</h4>
+		{% endif %}
+		<div id="message">
+			{{ notification.message|raw }}
+		</div>
+		<div id="time">
+			<small>{{ notification.created_at|date("g:i A") }}</small>
+		</div>
 
 	</div>	
 {% endfor %}
+{% else %}
+	<div>
+		<p>There is not new notifications !!</p>
+	</div>
+
+{% endif %}

@@ -39,7 +39,7 @@ class ChannelKiosk implements Channel
                 'label' => 'Maximum days to keep an notifications open',
                 'type'  => 'Number',
                 'span'  => 'auto',
-                'default' => 120
+                'default' => 60
  		    ],
 		];
 	}

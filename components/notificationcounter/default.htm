@@ -1,3 +1,1 @@
-<a href="{{ goToPage }}" class="btn btn-primary">
-	Notifications <span class="badge">{{ count }}</span>
-</a>	
+<a class="{{ cssClass }}" href="{{ goToPage }}">Notifications {% if count > 0 %}<span class="badge">{{ count }}</span> {% endif %}</a>
