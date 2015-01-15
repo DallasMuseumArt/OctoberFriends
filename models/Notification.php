@@ -2,6 +2,8 @@
 
 use Event;
 use Model;
+use Carbon\Carbon;
+use DMA\Friends\Models\Settings;
 
 
 /**
@@ -58,8 +60,29 @@ class Notification extends Model{
      */
     public function markAsRead()
     {
-        $notification->is_read = true;
-        $notification->save();
+        $this->is_read = true;
+        $this->save();
+    }
+    
+    /** 
+     * Call this scope to expire unread notifications
+     * @param mixed $query
+     * @return mixed
+     * Return query unmodified
+     */
+    public function scopeExpire($query)
+    {
+        $expireQuery = clone($query);
+        
+        $expireDays = Settings::get('kiosk_notification_max_age', 60);
+        $expireDays = (empty($expireDays)) ? 60 : $expireDays;
+        $expireDate = Carbon::today()->subDays($expireDays);
+        
+        $expireQuery->where("created_at", "<=",  $expireDate)
+                    ->unread()
+                    ->update(['is_read' =>  true]);
+        
+        return $query;
     }
     
 
@@ -69,16 +92,16 @@ class Notification extends Model{
      */
     public function scopeUnread($query)
     {
-    	return $query->where('is_read', '=', 0);
+    	return $query->where('is_read', '=', false);
     }
     
     /**
      * Scope method for mark all selected messages 
      * as read.
      */
-    public function scopeMarkAllAsRead()
+    public function scopeMarkAllAsRead($query)
     {
-        self::unread()->update(['is_read' => true ]);
+        return $query->unread()->update(['is_read' => true ]);
     }
     
 }
