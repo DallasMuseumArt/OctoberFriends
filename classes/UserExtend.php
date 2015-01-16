@@ -4,6 +4,7 @@ use Event;
 use DMA\Friends\Classes\FriendsLog;
 use RainLab\User\Models\User;
 use System\Classes\SystemException;
+use System\Models\File;
 
 /**
  * Custom class to add additional functionality based on the Rainlab User model
@@ -90,7 +91,24 @@ class UserExtend
 
         return true;
     }
-    
+
+    public static function uploadAvatar($user, $image)
+    {
+
+        $basename = basename($image);
+        $dst = '/tmp/' . $basename;
+        copy(base_path() . $image, $dst);
+        
+        $file = new File;
+        $file->data = $dst;
+        $file->is_public = true;
+        $file->save();
+
+        if ($file) {
+            $user->avatar()->add($file);
+        }
+    }
+
     public function getMembershipStatusOptions()
     {
         return [
