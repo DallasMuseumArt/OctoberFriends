@@ -169,6 +169,13 @@ class Plugin extends PluginBase
         // Register Event Subscribers
         $subscriber = new FriendsEventHandler;
         Event::subscribe($subscriber);
+
+        // Generate barcode_id when a user object is created
+        // TODO: Migrate when user plugin is forked
+        User::creating(function($user)
+        {
+            $user->barcode_id = md5($user->email);
+        });
         
         // Extend the user model to support our custom metadata        
         User::extend(function($model) {        
