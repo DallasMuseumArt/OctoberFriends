@@ -5,6 +5,7 @@ use Redirect;
 use Validator;
 use October\Rain\Support\ValidationException;
 use RainLab\User\Models\Settings as UserSettings;
+use DMA\Friends\Classes\UserExtend;
 use DMA\Friends\Models\Usermeta;
 use DMA\Friends\Wordpress\Auth as WordpressAuth;
 use Cms\Classes\Theme;
@@ -184,8 +185,11 @@ class UserLogin extends ComponentBase
         $usermeta->household_income = $data['household_income'];
         $usermeta->household_size   = $data['household_size'];
         $usermeta->education        = $data['education'];
+        $usermeta->email_optin      = $data['email_optin'];
 
         $user->metadata()->save($usermeta);
+
+        UserExtend::uploadAvatar($user, $data['avatar']);
 
         /*
          * Activation is by the user, send the email
@@ -208,6 +212,24 @@ class UserLogin extends ComponentBase
 
         if ($redirectUrl = post('redirect', $redirectUrl))
             return Redirect::intended($redirectUrl);
+    }
+
+    public function getAvatars()
+    {
+        $avatars = [];
+
+        $themePath = UserLogin::getThemeDir();
+        $avatarPath = $themePath . '/assets/images/avatars/*.jpg';
+
+        // loop through all the files in the plugin's avatars directory and parse the file names
+        foreach ( glob($avatarPath ) as $file ) { 
+            $path = str_replace(base_path(), '', $file);
+
+            $avatars[] = $path;
+        }   
+
+        return $this->renderPartial('@avatars', ['avatars' => $avatars]);
+
     }
 
     /**
@@ -255,8 +277,18 @@ class UserLogin extends ComponentBase
      */ 
     protected static function getThemePartialsDir()
     {
+        return self::getThemeDir() . '/partials/';
+    }
+
+    /**
+     * Get the path to the theme's partials
+     *
+     * @return string $path
+     */ 
+    protected static function getThemeDir()
+    {
         $theme = Theme::getActiveTheme();
-        return $theme->getPath() . '/partials/';
+        return $theme->getPath();
     }
 
     public function loadAssets()
