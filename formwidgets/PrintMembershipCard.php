@@ -3,6 +3,7 @@
 namespace DMA\Friends\FormWidgets;
 
 use Backend\Classes\FormWidgetBase;
+use Backend\Classes\FormField;
 use DMA\Friends\Models\Location;
 use RainLab\User\Models\User;
 use DMA\Friends\Classes\PrintManager;
@@ -39,6 +40,14 @@ class PrintMembershipCard extends FormWidgetBase
             'name'        => 'Print Membership Card',
             'description' => 'Prints a new membership card'
         ];
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSaveValue($value)
+    {
+        return FormField::NO_SAVE_DATA;
     }
 
     /** 
