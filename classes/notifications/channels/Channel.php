@@ -24,7 +24,7 @@ interface Channel
 	 *
 	 * @return string
 	 */
-	public function getKey();
+	public static function getKey();
 
 
 	/**

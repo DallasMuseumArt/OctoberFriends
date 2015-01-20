@@ -21,7 +21,7 @@ class ChannelSMS implements Channel, Listenable, Webhook
     private $client;
     private $fromNumber;
 
-	public function getKey()
+	public static function getKey()
 	{
 		return 'sms';
 	}

@@ -20,7 +20,7 @@ class ChannelFlash implements Channel
 	 * {@inheritDoc}
 	 * @see \DMA\Friends\Classes\Notifications\Channels\Channel::getKey()
 	 */
-    public function getKey()
+    public static function getKey()
 	{
 		return 'flash';
 	}
