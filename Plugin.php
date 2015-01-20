@@ -358,6 +358,7 @@ class Plugin extends PluginBase
         // Crontasks
         $this->registerConsoleCommand('friends.points-weekly', 'DMA\Friends\Commands\WeeklyPoints');
         $this->registerConsoleCommand('friends.points-daily', 'DMA\Friends\Commands\DailyPoints');
+        $this->registerConsoleCommand('friends.read-channels', 'DMA\Friends\Commands\ReadChannels');
 
     } 
 

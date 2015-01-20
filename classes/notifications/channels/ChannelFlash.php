@@ -79,8 +79,9 @@ class ChannelFlash implements Channel
     	        if(!in_array($type, ['info', 'success', 'error'])){
     	           $type = 'info';
     	        }
-    	        
-    	       Flash::$type($content);
+
+    	       //Flash::$type($content);
+    	       Flash::add($type, $content);
 
     	    }
 	    }catch(\Exception $e){
