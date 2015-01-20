@@ -314,7 +314,7 @@ class ChannelManager
 
             });
             
-            \Log::debug('register: ' . $event);
+            // \Log::debug('register: ' . $event);
         }
 
     }
