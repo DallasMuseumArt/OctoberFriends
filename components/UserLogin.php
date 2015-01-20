@@ -293,7 +293,7 @@ class UserLogin extends ComponentBase
 
     public function loadAssets()
     {
-        $base_path = '../../../modules/backend/FormWidgets/datepicker/assets/';
+        $base_path = '../../../modules/backend/formwidgets/datepicker/assets/';
 
         $this->addCss($base_path . 'vendor/pikaday/css/pikaday.css', 'core');
         $this->addCss($base_path . 'vendor/clockpicker/css/jquery-clockpicker.css', 'core');
