@@ -18,7 +18,7 @@ class ChannelTwitter implements Channel, Listenable
     private $client;
     private $settings;
 
-	public function getKey()
+	public static function getKey()
 	{
 		return 'twitter';
 	}
