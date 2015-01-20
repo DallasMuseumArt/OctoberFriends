@@ -16,8 +16,6 @@ class Usermeta extends Model
     public static $genderOptions = [
         'Male',
         'Female',
-        'Trans Man',
-        'Trans Women',
         'Non Binary/Other',
     ];
 
