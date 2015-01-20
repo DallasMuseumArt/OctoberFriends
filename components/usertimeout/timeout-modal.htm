@@ -1,13 +1,15 @@
-For security, please enter your password to remain logged in.
-You will automatically be logged out for inactivity in <span class="time"></span> seconds.
+<p>For security, please enter your password to remain logged in.
+You will automatically be logged out for inactivity in <span class="time"></span> seconds.</p>
 
 <form id="stay-logged-in">
     <div class="form-group">
         <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" />
     </div>
     
-    <a role="button" class="timeout-logged-in btn btn-info" data-request="onStayLoggedIn">Stay logged in</a>
-    <a role="button" class="timeout-logout btn btn-default" data-request="onLogout">Logout</a>
+    <div class="buttons">
+        <a role="button" class="timeout-logged-in btn btn-info" data-request="onStayLoggedIn">Stay logged in</a>
+        <a role="button" class="timeout-logout btn btn-default" data-request="onLogout">Logout</a>
+    </div>
 </form>
 
 <script type="text/javascript">
