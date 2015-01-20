@@ -138,7 +138,8 @@ class Plugin extends PluginBase
             'DMA\Friends\Components\GroupFormCreation'  		=> 'GroupFormCreation',
             'DMA\Friends\Components\GroupRequest'       		=> 'GroupRequest',
             'DMA\Friends\Components\UserProfile'                => 'UserProfile',
-            'DMA\Friends\Components\UserLogin'                  => 'UserLogin',                     
+            'DMA\Friends\Components\UserLogin'                  => 'UserLogin',
+            'DMA\Friends\Components\UserTimeout'                => 'UserTimeout',                  
         ];
     }
 
