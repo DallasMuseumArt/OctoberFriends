@@ -40,7 +40,7 @@ class Badge extends Model
         'steps' => ['DMA\Friends\Models\Step'],
     ];
     public $belongsToMany = [
-        'users' => ['RainLab\User\Models\User', 'dma_friends_badge_user'],
+        'users' => ['RainLab\User\Models\User', 'table' => 'dma_friends_badge_user'],
     ];
     public $attachOne = [
         'image' => ['System\Models\File']
