@@ -185,7 +185,7 @@ class UserLogin extends ComponentBase
         $usermeta->household_income = $data['household_income'];
         $usermeta->household_size   = $data['household_size'];
         $usermeta->education        = $data['education'];
-        $usermeta->email_optin      = $data['email_optin'];
+        $usermeta->email_optin      = isset($data['email_optin']) ? $data['email_optin'] : false;
 
         $user->metadata()->save($usermeta);
 
