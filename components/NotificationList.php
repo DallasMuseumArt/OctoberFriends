@@ -123,6 +123,13 @@ class NotificationList extends ComponentBase
                 $notification->markAsRead();
             }
         }
+        
+        $user = $this->getUser();
+        $count = (is_null($user)) ? 0 : $user->notifications()->unread()->count();
+        
+        return [
+                '#notification-counter .badge' => $count
+        ];
     }
 
     
