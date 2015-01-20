@@ -47,7 +47,8 @@ class Activity extends Model
     protected $dates = ['date_begin', 'date_end'];
 
     public $rules = [ 
-        'title' => 'required',
+        'title'         => 'required',
+        'activity_code' => 'unique:dma_friends_activities',
     ]; 
 
     /**
