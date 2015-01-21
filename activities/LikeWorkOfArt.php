@@ -7,6 +7,7 @@ use RainLab\User\Models\User;
 use DMA\Friends\Models\Activity;
 use DMA\Friends\Models\ActivityMetadata;
 use DMA\Friends\Classes\ActivityTypeBase;
+use DMA\Friends\Classes\FriendsLog;
 
 class LikeWorkOfArt extends ActivityTypeBase
 {
@@ -34,24 +35,29 @@ class LikeWorkOfArt extends ActivityTypeBase
             
             if ($data = self::isAssessionNumber($code)){
             
-                if($ret = parent::process($user, ['activity' => $activity])){
+                if ($ret = parent::process($user, ['activity' => $activity])) {
                     
                     // TODO: Find a better way to pass this data
                     $activity->objectData = $data;
                     unset($data['object_title']); // Don't save title in user metadata table
                     
                     ActivityMetadata::addUserActivity($user, $activity, $data);
+
+                    FriendsLog::artwork([
+                        'user'          => $user,
+                        'artwork_id'    => $params['code'],
+                    ]);
                 }
                 
                 return $ret;
                 
-            }else{
+            } else {
                 // Verify if user try to enter an Object number
                 // Regex expression to match object number format
                 $re = "/((([a-zA-Z0-9_\\-]+\\.){1,})([a-zA-Z0-9_\\-]+))/";
                 $isObjectNumber = (preg_match_all($re, str_replace(' ', '',$code)) > 0); 
                        
-                if( $isObjectNumber ) {
+                if ( $isObjectNumber ) {
                     Session::put('activityError', Lang::get('dma.friends::lang.activities.likeWorkArtCodeError', ['code' => $params['code']]));
                 }
             }     
