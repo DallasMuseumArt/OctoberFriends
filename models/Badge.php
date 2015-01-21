@@ -3,6 +3,7 @@
 use Model;
 use RainLab\User\Models\User;
 use Smirik\PHPDateTimeAgo\DateTimeAgo as TimeAgo;
+use Auth;
 
 /**
  * Badge Model
@@ -68,7 +69,8 @@ class Badge extends Model
 
     /**
      * Mutator function to return the pivot timestamp as time ago
-     * @return string The time since the badge was earned
+     * @return string 
+     * The time since the badge was earned
      */
     public function getTimeAgoAttribute($value)
     {
@@ -76,5 +78,18 @@ class Badge extends Model
 
         $timeAgo = new TimeAgo;
         return $timeAgo->get($this->pivot->created_at);
+    }
+
+    /**
+     * Mutator to return the number of times a user has earned a badge
+     * @return int 
+     * The number of times the authenticated user has earned the badge
+     */
+    public function getUserCountAttribute($value)
+    {
+        $user   = Auth::getUser();
+        $count  = $user->badges()->where('badge_id', '=', $this->id)->count();
+
+        return $count;
     }
 }

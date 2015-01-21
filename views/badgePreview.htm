@@ -4,6 +4,12 @@
     {% endif %}
 >
     <div class="friends-badge preview">
+        {% if model.userCount > 1 %}
+        <div class="times-earned">
+            x{{ model.userCount }}
+        </div>
+        {% endif %}
+
         {% if model.image.getPath() %}
         <img src="{{ model.image.getPath() }}"/>
         {% endif %}

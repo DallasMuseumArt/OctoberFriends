@@ -35,16 +35,14 @@ class BadgeManager
 
         foreach ($steps as $step) {
 
-            // see if step is associated with user
-            if (!$step->users->contains($user->id)) {
-                // user has not completed the step
-                $isStepCompletable = self::checkUserActivities($user, $activity, $step);
+            // user has not completed the step
+            $isStepCompletable = self::checkUserActivities($user, $activity, $step);
 
-                if ($isStepCompletable) {
-                    // Find badge associated with steps
-                    self::completeBadge($step, $user);
-                }
+            if ($isStepCompletable) {
+                // Find badge associated with steps
+                self::completeBadge($step, $user);
             }
+        
         }
 
     }
@@ -80,7 +78,15 @@ class BadgeManager
             $count = $cache[$key];
         }
 
-        return ($count->count == $step->count);
+        if ($step->badge->maximum_earnings) {
+            $timesEarned = floor($count->count / $step->count);
+
+            if ($timesEarned >= $step->badge->maximum_earnings) 
+                return false;
+        }
+
+        // If count is evenly divisable by the required step count then return true
+        return !($count->count % $step->count);
     }
 
     /**
@@ -118,7 +124,21 @@ class BadgeManager
             $userExtend->addPoints($badge->points);
 
             Event::fire('dma.friends.badge.completed', [ $badge, $user ]);
-            Flash::info(Lang::get('dma.friends::lang.badges.completed', ['title' => $badge->title]));
+
+            // log an entry to the activity log
+            FriendsLog::unlocked([
+                'user'      => $user,
+                'object'    => $badge,
+            ]); 
+
+            if ($badge->congratulations_text) {
+                $notificationText = $badge->congratulations_text;
+            } else { 
+                $notificationText = Lang::get('dma.friends::lang.badges.completed', ['title' => $badge->title]);
+            }
+            
+            Flash::info($notificationText);
+
         } catch(Exception $e) {
             throw new Exception(Lang::get('dma.friends::lang.exceptions.badgeFailed'));
         }
