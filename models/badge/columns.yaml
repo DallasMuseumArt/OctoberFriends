@@ -12,6 +12,9 @@ columns:
     created_at:
         label: Created
         type: datetime
+    updated_at:
+        label: Last Modified
+        type: datetime
     date_begin:
         label: Beginning Date
         type: datetime
