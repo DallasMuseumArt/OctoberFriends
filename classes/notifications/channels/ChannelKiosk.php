@@ -36,7 +36,7 @@ class ChannelKiosk implements Channel
 	{
 		return [
             'kiosk_notification_max_age' => [
-                'label' => 'Maximum days to keep an notifications open',
+                'label' => 'Maximum days to keep notifications open',
                 'type'  => 'Number',
                 'span'  => 'auto',
                 'default' => 60

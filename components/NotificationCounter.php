@@ -61,8 +61,8 @@ class NotificationCounter extends ComponentBase
     public function onRun()
     {
         // Inject CSS and JS
-        //$this->addCss('components/grouprequest/assets/css/group.request.css');
-        //$this->addJs('components/grouprequest/assets/js/group.request.js');
+        //$this->addCss('components/notificationcounter/assets/css/notification.counter.css');
+        $this->addJs('components/notificationcounter/assets/js/notification.counter.js');
         
         // Populate page user and other variables
     	$this->prepareVars();
@@ -79,6 +79,12 @@ class NotificationCounter extends ComponentBase
     	return [''=>'- none -'] + $pages;
     }   
 
-    
+    ## AJAX
+    public function onUpdateCounter()
+    {
+        //$this->prepareVars();
+        //return $this->page;
+        return [];
+    }
   
 }
