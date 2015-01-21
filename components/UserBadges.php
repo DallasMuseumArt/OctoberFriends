@@ -34,6 +34,7 @@ class UserBadges extends ComponentBase
         $renderedBadges = [];
         $badges = $user->badges()
             ->take($this->property('limit'))
+            ->groupBy('id')
             ->get();
         
         foreach($badges as $badge) {
