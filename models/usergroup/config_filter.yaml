@@ -1,5 +1,5 @@
 scopes:
     is_active:
-        label: Hide in active groups
+        label: Hide inactive groups
         type: checkbox
         conditions: is_active = 1   

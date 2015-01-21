@@ -25,12 +25,12 @@ tabs:
         # Groups
         maximum_users_group:
             span: auto
-            label: Limit of users
+            label: Maximum number of users per group
             description: Limit of users that can be join or invite to a group.
             tab: Groups
         maximum_points_group:
             span: auto
-            label: Limit of point
+            label: Maximum points per group
             description: Limit of point and user can earn by the group.
             tab: Groups           
         reset_groups_every_day:
