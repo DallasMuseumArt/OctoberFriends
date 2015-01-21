@@ -1,8 +1,8 @@
     {% flash %}
         {% if type == 'error' %}
-            <div class="btn btn-danger alert alert-{{ type }}">{{ message }}</div>
+            <div class="btn btn-danger alert alert-{{ type }}">{{ message|raw }}</div>
         {% else %}
-            <div class="btn btn-{{ type }} alert alert-{{ type }}">{{ message }}</div>
+            <div class="btn btn-{{ type }} alert alert-{{ type }}">{{ message|raw }}</div>
         {% endif %}
     {% endflash %}
     <script type="text/javascript">
