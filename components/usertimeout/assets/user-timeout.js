@@ -24,7 +24,7 @@
             $('a.usertimeoutHandler').click();
 
             $(document).on('modal.open', function(e) {
-                var countDown = modalTimeout;
+                var countDown = 30; // allow 30 seconds to log back in
                 var interval = setInterval(function() {
                     $('span.time').html(countDown);
                     countDown--;
