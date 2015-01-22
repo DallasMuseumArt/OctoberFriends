@@ -43,9 +43,6 @@
 1.0.13:
     - Create Activity Metadata table
     - create_activity_metadata_table.php
-1.0.14:
-    - Add view for the activity stream
-    - create_activity_view.php 
 1.0.15:
     - Add user groups     
     - create_user_group_table.php

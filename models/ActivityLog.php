@@ -1,5 +1,6 @@
 <?php namespace DMA\Friends\Models;
 
+use Smirik\PHPDateTimeAgo\DateTimeAgo as TimeAgo;
 use Model;
 
 /**
@@ -59,4 +60,18 @@ class ActivityLog extends Model
         'object',
     ];
 
+    public function scopeByUser($query, $user_id)
+    {
+        return $query->where('user_id', $user_id);
+    }
+
+    /**
+     * Mutator function to return the pivot timestamp as time ago
+     * @return string The time since the badge was earned
+     */
+    public function getTimeAgoAttribute($value)
+    {
+        $timeAgo = new TimeAgo;
+        return $timeAgo->get($this->timestamp);
+    }
 }

@@ -2,7 +2,7 @@
 
 use Cms\Classes\ComponentBase;
 use October\Rain\Database\DataFeed;
-use DMA\Friends\Models\ActivityStream as ActivityStreamModel;
+use DMA\Friends\Models\ActivityLog;
 use Auth;
 use DB;
 
@@ -44,12 +44,14 @@ class ActivityStream extends ComponentBase
 
         if (!$user) return;
         
-        $results = ActivityStreamModel::user($user->id)->remember(1);
+        $results = ActivityLog::byUser($user->id)
+            ->whereIn('action', ['activity', 'artwork', 'reward', 'unlocked']);
 
         if ($filter && $filter != 'all') {
-            $results = $results->where('object_type', $filter);
+            $results = $results->where('action', $filter);
         }
 
+        $results->orderBy('timestamp', 'desc');
         return $results->paginate(10);
     }
 }
