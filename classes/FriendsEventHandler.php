@@ -141,7 +141,9 @@ class FriendsEventHandler {
                      
                      // Send code and activity just in case we want to use in the template 
                      $notification->addData(['code' => $code, 
-                                             'activity' => $activity]);
+                                             'activity' => $activity,
+                                             'viaSMS' => true
+                     ]);
                      
                      // Determine the content of the message
                      $holder = ( $activity ) ? 'activityMessage' : 'activityError';

@@ -78,6 +78,13 @@ class NotificationList extends ComponentBase
         }
     }
     
+    protected function getUnreadCount()
+    {
+        $user = $this->getUser();
+        return (is_null($user)) ? 0 : $user->notifications()->unread()->count();
+        
+    }
+    
     protected function markAllAsRead(){
         if($user = $this->getUser()){
             // Mark all message as readed
@@ -89,6 +96,7 @@ class NotificationList extends ComponentBase
     {
         $user = $this->getUser();
         $this->page['notifications'] = $this->getNotifications();
+        $this->page['unReadCount'] = $this->getUnreadCount();
      
        
         foreach($vars as $key => $value){
@@ -124,14 +132,21 @@ class NotificationList extends ComponentBase
             }
         }
         
-        $user = $this->getUser();
-        $count = (is_null($user)) ? 0 : $user->notifications()->unread()->count();
+        $count = $this->getUnreadCount();
+        $count = ($count >0) ? $count : '';
         
         return [
                 '#notification-counter .badge' => $count
         ];
     }
 
+    public function onMarkAllRead()
+    {
+        $this->markAllAsRead();    
+        return [
+                '#notification-counter .badge' => ''
+        ];
+    }
     
   
 }

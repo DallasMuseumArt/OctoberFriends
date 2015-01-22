@@ -79,11 +79,11 @@ class ChannelFlash implements Channel
     	        if(!in_array($type, ['info', 'success', 'error'])){
     	           $type = 'info';
     	        }
-
-    	       //Flash::$type($content);
-    	       Flash::add($type, $content);
-
+    	        
+    	        Flash::add($type, $content);
+    	       
     	    }
+  
 	    }catch(\Exception $e){
 	        Log::error(sprintf('Sending a Flash notification failed:  %s', $e));
 	    }

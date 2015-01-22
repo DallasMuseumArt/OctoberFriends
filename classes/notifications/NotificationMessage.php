@@ -111,7 +111,7 @@ class NotificationMessage
 	 */
 	public function getView()
 	{
-		return $this->view;
+	    return $this->view;
 	}
 
 	/**
@@ -207,9 +207,13 @@ class NotificationMessage
 	protected function getTemplateInfo()
 	{
 	    if(is_null($this->templateInfo)){
-	       $view = $this->getView();
-	       $path = File::get(View::make($view)->getPath());
-	       $this->templateInfo =  TemplateParser::parse($path);
+	        try{
+	           $view = $this->getView();
+	           $path = File::get(View::make($view)->getPath());
+	           $this->templateInfo =  TemplateParser::parse($path);
+	        }catch(\InvalidArgumentException $e){
+	            throw new \Exception("Notification view [ $view ] not found");
+	        }
 	    }
 	    return $this->templateInfo;
 	} 

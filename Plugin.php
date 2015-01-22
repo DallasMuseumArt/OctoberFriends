@@ -107,7 +107,7 @@ class Plugin extends PluginBase
                         'permissions'   => ['dma.friends.access_admin'],
                     ],
                     'groups'   => [
-                        'label'         => 'Friends Groups',
+                        'label'         => 'Groups',
                         'icon'          => 'icon-users',
                         'url'           => Backend::url('dma/friends/groups'),
                         'permissions'   => ['dma.friends.access_admin'],
@@ -137,6 +137,7 @@ class Plugin extends PluginBase
             'DMA\Friends\Components\NotificationList'           => 'NotificationList',
             'DMA\Friends\Components\GroupFormCreation'  		=> 'GroupFormCreation',
             'DMA\Friends\Components\GroupRequest'       		=> 'GroupRequest',
+            'DMA\Friends\Components\GroupJoinCodeForm'          => 'GroupJoinCodeForm',
             'DMA\Friends\Components\UserProfile'                => 'UserProfile',
             'DMA\Friends\Components\UserLogin'                  => 'UserLogin',
             'DMA\Friends\Components\UserTimeout'                => 'UserTimeout',                  
@@ -376,6 +377,15 @@ class Plugin extends PluginBase
             ],
         ];  
     } 
+    
+    public function registerMarkupTags()
+    {   
+        return [
+            'tokens' => [
+                 'flashMessages' =>  new \DMA\Friends\Classes\Notifications\Twig\FlashMultipleTokenParser()
+             ]
+        ];
+    }
     
     public function registerMailTemplates()
     {
