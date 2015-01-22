@@ -7,6 +7,10 @@ columns:
         label: Group ID
         searchable: yes
         
+    name:
+        label: Name
+        searchable: yes
+                
     owner_name:
         label: Owner Name
         relation: owner
@@ -17,7 +21,11 @@ columns:
         label: Owner ID
         relation: owner
         select: @id
-        searchable: yes    
+        searchable: yes   
+ 
+    code:
+        label: Code
+        searchable: yes
     
     is_active:
         label: Active

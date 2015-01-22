@@ -7,7 +7,7 @@ fields:
         label: Group is active
         type: checkbox
         default: True
-        
+                
     owner:
         label: Owner / Creator of the group
         type: recordfinder
@@ -17,3 +17,13 @@ fields:
         descriptionFrom: name
         span: left
         placeholder: -- select owner --  
+
+    code:
+        label: Code for join this group
+        type: partial
+        path: @/plugins/dma/friends/models/usergroup/_code_field.htm
+        span: right
+
+    name:
+        label: Group name
+        span: full

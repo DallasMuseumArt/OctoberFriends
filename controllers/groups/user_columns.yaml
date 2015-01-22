@@ -27,4 +27,5 @@ columns:
     membership_status:
         label: Membership status
         searchable: false
-        # select: dma_friends_users_groups.membership_status
+        relation: groups
+        select: membership_status

@@ -65,3 +65,6 @@
 1.0.20:
     - Fix time restriction settings on imported data 
     - fix_time_restrictions.php
+1.0.21:
+    - Add user group code
+    - add_user_group_code.php      

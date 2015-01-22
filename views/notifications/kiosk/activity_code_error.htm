@@ -1,4 +1,8 @@
+{% if viaSMS %}
 <h4>Activity code send by SMS</h4>
+{% else %}
+<h4>Activity code</h4>
+{% endif %}
 <p>
 {{ message }}
 </p>

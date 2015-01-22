@@ -1,6 +1,7 @@
 <?php namespace DMA\Friends\Models;
 
 use Event;
+use Hashids\Hashids;
 use DMA\Friends\Models\Settings;
 use Illuminate\Database\QueryException;
 use October\Rain\Auth\Models\Group as GroupBase;
@@ -73,6 +74,18 @@ class UserGroup extends GroupBase{
     
         // Setup event bindings...
         //UserGroup::observe(new UserGroupObserver);
+        
+
+        /**
+         * Attach to the 'creating' Model Event to provide a UUID
+         * for the `id` field (provided by $model->getKeyName())
+         */
+        static::saved(function ($model) {
+            if(!$model->code){
+                $model->code = $model->generateCode();
+                $model->save();
+            }
+        });
     }
     
     
@@ -137,13 +150,45 @@ class UserGroup extends GroupBase{
     /**
      * 
      * @param \RainLab\User\Models\User $user
+     * @param string $name name of the group
      * @return \DMA\Friends\Models\UserGroup
      */
-    public function createGroup($user)
+    public function createGroup($user, $name=null)
     {
         $group = new self();
         $group->owner = $user;
         
+        return $group;
+    }
+    
+    
+    /**
+     * Generate a unique code for this group.
+     * This code can be used to join this group
+     * @return string
+     */
+    public function generateCode()
+    {
+        $hashids = new Hashids('friends', 6, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890');
+        $id = $this->getKey();
+        $owner_id = $this->owner->getKey();
+        $code = $hashids->encode($id, $owner_id);
+        return $code;
+    }
+    
+    /**
+     * Join user to a given group using its code
+     * @param sting $code Group code
+     * @param RainLab\User\Models\User $user
+     * 
+     * @return DMA\Friends\Models\UserGroup
+     */
+    
+    public static function joinByCode($code, $user)
+    {
+        $group = static::where('code', $code)->firstOrFail();
+        $group->addUser($user);
+        $group->acceptMembership($user);
         return $group;
     }
     
@@ -329,7 +374,8 @@ class UserGroup extends GroupBase{
         return count($groups) > 0;
     }  
 
-    
+
+   
     /**
      * 
      * @param RainLab\User\Models\User $user $user

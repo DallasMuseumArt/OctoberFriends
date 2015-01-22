@@ -14,20 +14,31 @@
 	
 	{% if currentGroup != group %}
 		{% set currentGroup = group %}
-		<h3>
-			{{ currentGroup }}
-		</h3>
-	
+
+		{% if not tools and unReadCount > 0 %}
+			{% set tools = true %}
+			<div class="col-md-12">
+			<a data-request="onMarkAllRead" 
+			   data-request-success="$('div.notification-unread').removeClass('notification-unread');"
+			   href="#" class="pull-right">mark all as read</a>	
+			</div>
+		{% endif %}
+
+		<h3>{{ currentGroup }}</h3>
+			
 	{% endif %}
 	
+	
 	<div class="notification {{ ( not notification.is_read )? 'notification-unread' : '' }}">
-		
+		{% if not notification.is_read %}
 		<button data-request="onMarkRead" 
 				data-request-data="id: {{ notification.id }}"
 				data-request-success="$($el).parent('div').removeClass('notification-unread');"
 				type="button" class="close" >
 				<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 		</button>
+		{% endif %}
+		
 		{% if notification.subject %}
 			<h4>{{ notification.subject }}</h4>
 		{% endif %}
