@@ -215,15 +215,19 @@ class SyncFriendsRelationsCommand extends Command
                 if ($d->post_type == 'step') {
 
                     $step = Step::findWordpress($d->ID)->first();
-                    $link['step_id'] = $step->id;
-                    DB::table($this->userStepTable)->insert($link);
+                    if ($step) {
+                        $link['step_id'] = $step->id;
+                        DB::table($this->userStepTable)->insert($link);
+                    }
 
                 } elseif ($d->post_type == 'badge') {
 
                     $badge = Badge::findWordpress($d->ID)->first();
-                    $link['badge_id'] = $badge->id;
-                    DB::table($this->userBadgeTable)->insert($link);
 
+                    if ($badge) {
+                        $link['badge_id'] = $badge->id;
+                        DB::table($this->userBadgeTable)->insert($link);
+                    }
                 }
 
             }
