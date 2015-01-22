@@ -10,7 +10,8 @@ use Flash;
 use Lang;
 use Exception;
 use Event;
-
+use Postman;
+use DMA\Friends\Classes\Notifications\NotificationMessage;
 /**
  * This class handles badging logic
  *
@@ -137,7 +138,21 @@ class BadgeManager
                 $notificationText = Lang::get('dma.friends::lang.badges.completed', ['title' => $badge->title]);
             }
             
-            Flash::info($notificationText);
+            //Flash::info($notificationText);
+            
+            Postman::send('simple', function(NotificationMessage $notification) use ($user, $badge, $notificationText){
+           
+                // Set user
+                $notification->to($user, $user->name);
+                 
+                // Send code and activity just in case we want to use in the template
+                $notification->addData(['badge' => $badge]);
+            
+                $notification->message($notificationText);
+                 
+            }, ['flash', 'kiosk']);
+            
+            
 
         } catch(Exception $e) {
             throw new Exception(Lang::get('dma.friends::lang.exceptions.badgeFailed'));

@@ -7,6 +7,8 @@ use Auth;
 use View;
 use Session;
 use Flash;
+use Postman;
+use DMA\Friends\Classes\Notifications\NotificationMessage;
 
 class GetRewards extends ComponentBase
 {
@@ -52,15 +54,31 @@ class GetRewards extends ComponentBase
         $user = Auth::getUser();
         RewardManager::redeem($id, $user);
 
-        $message = Session::pull('rewardMessage');
-
-        if ($message) {
-            //TODO replace with advanced notification system when ready
-            Flash::info($message);
-        } else {
-            Flash::error(Session::pull('rewardError'));
-        }
-
+        // Send Flash and kiosk notification
+        Postman::send('simple', function(NotificationMessage $notification) use ($user){
+        
+            // Set user in the notification
+            $notification->to($user, $user->name);
+             
+            // Send code and activity just in case we want to use in the template
+            $notification->addData([]);
+        
+            // Determine the content of the message and type of message
+            $message = Session::pull('rewardMessage');
+            $type    = ($message) ? 'info' : 'error'; // Only for flash messages
+            
+            if($type == 'error'){
+                $message = Session::pull('rewardError');
+            }
+                        
+            // Set type of flash 
+            $notification->addViewSettings(['type' => $type]);
+                     
+            $notification->message($message);
+             
+        }, ['flash', 'kiosk']);
+        
+        
         return [
             '#flashMessages'    => $this->renderPartial('@flashMessages'),
             'span.points'       => $user->points,

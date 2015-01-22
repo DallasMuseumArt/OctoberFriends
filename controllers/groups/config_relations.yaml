@@ -5,10 +5,10 @@
 users:
     label: Users
     list: @/plugins/dma/friends/controllers/groups/user_columns.yaml
-    list: @/plugins/dma/friends/controllers/groups/user_fields.yaml
+    #form: @/plugins/dma/friends/controllers/groups/user_fields.yaml        
     manage:
-        recordsPerPage: 5
-        showSearch: true
+        recordsPerPage: 10
+        showSearch: true    
         
     # pivot:
     #     fields:
@@ -20,3 +20,5 @@ users:
     #                 ACCEPTED  : ACCEPTED
     #                 REJECTED  : REJECTED
     #                 CANCELLED : CANCELLED
+                
+        
