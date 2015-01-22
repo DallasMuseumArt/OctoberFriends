@@ -16,6 +16,9 @@
 
         <h4>{{ model.title }}</h4>
 
+        <div class="earned-info">
+            {{ model.points }} Points / {{ model.steps|length }} Steps
+        </div>
         <div class="description">
             {{ model.excerpt|raw }}
         </div>
