@@ -174,10 +174,8 @@ class SyncFriendsRelationsCommand extends Command
         foreach ($achievements as $achievement) {
             $user = User::find($achievement->user_id);
 
-            if (!$user) continue;
+            if (empty($user)) continue;
 
-            $this->info('Importing achievements for ' . $user->email);
-            
             // Flush existing records
             DB::table($this->userStepTable)
                 ->where('user_id', $user->id)
@@ -189,9 +187,10 @@ class SyncFriendsRelationsCommand extends Command
 
             $data = unserialize($achievement->meta_value);
 
+            // wtf we don't need arrays in our arrays if we want to array
+            $data = array_pop($data);
+
             foreach($data as $d) {
-                // wtf we don't need arrays in our arrays if we want to array
-                $d = array_pop($d);
 
                 $link = [
                     'user_id'       => $user->id,
@@ -226,7 +225,7 @@ class SyncFriendsRelationsCommand extends Command
                     DB::table($this->userBadgeTable)->insert($link);
 
                 }
-        
+
             }
         }
 
