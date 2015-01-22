@@ -1,10 +1,7 @@
-    {% flash %}
-        {% if type == 'error' %}
-            <div class="btn btn-danger alert alert-{{ type }}">{{ message|raw }}</div>
-        {% else %}
-            <div class="btn btn-{{ type }} alert alert-{{ type }}">{{ message|raw }}</div>
-        {% endif %}
-    {% endflash %}
+    {% flashMessages %}
+        {% set class = ( type == 'error') ? 'danger' : type %}
+        <div class="alert alert-{{ class }}">{{ message }}</div>
+    {% endflashMessages %}
     <script type="text/javascript">
         setTimeout(function() {
             $('.alert').fadeOut(500, function() {

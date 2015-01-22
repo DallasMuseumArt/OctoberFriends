@@ -25,5 +25,45 @@ class Groups extends Controller
         BackendMenu::setContext('DMA.Friends', 'friends', 'groups');
     }
     
+    public function relationExtendQuery($query, $field, $manageMode)
+    {
+        # Extend relation query to exclude owner of the group
+        $ownerId = $this->relationObject->getParent()->owner_id;
+        $foreignKeyName = $this->relationModel->getQualifiedKeyName();        
+        $query->where($foreignKeyName, '<>', $ownerId);
+
+        
+    }
+
+
+    public function update_onSave($recordId = null, $context = null)
+    {
+   
+        // parent::update_onSave($context) don't work here because 
+        // this method is injected by FormController behavior so
+        // the following code manually get FormController instance and 
+        // and calll create_onSave method
+
+        if ($extension = @$this->extensionData['methods']['update_onSave']) {
+            $extensionObject = $this->extensionData['extensions'][$extension];
+
+            $model = $this->formFindModelObject($recordId);
+            $noCode = empty($model->code);
+            
+            if (method_exists($extension, 'update_onSave') && is_callable([$extension, 'update_onSave']))
+                 $return = call_user_func_array(array($extensionObject, 'update_onSave'), [$recordId, $context]);
+            
+            if(!$return && $noCode){
+                // We need to get again this object 
+                $model = $this->formFindModelObject($recordId);
+                return [
+                       '#group_code' => $model->code
+                ];
+            }else{
+                return $return;
+            }
+        }
+          
+    }
 }
 
