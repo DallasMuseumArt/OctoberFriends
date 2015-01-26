@@ -143,7 +143,7 @@ class UserLogin extends ComponentBase
         $rules = [
             'first_name'            => 'required|min:2',
             'last_name'             => 'required|min:2',
-            'username'              => 'required|min:6',
+            //'username'              => 'required|min:6',
             'email'                 => 'required|email|between:2,64',
             'password'              => 'required|min:6',
             'password_confirmation' => 'required|min:6',
@@ -162,7 +162,7 @@ class UserLogin extends ComponentBase
 
         // Split the data into whats required for the user and usermeta models
         $userData = [
-            'username'              => $data['username'],
+            'username'              => md5($data['email']), //$data['username'],
             'password'              => $data['password'],
             'password_confirmation' => $data['password_confirmation'],
             'email'                 => $data['email'],
