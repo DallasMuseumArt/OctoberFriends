@@ -90,35 +90,35 @@ secondaryTabs:
             options:
                 featured: Featured
                 limited: Limited Edition
-        is_sequential:
-            label: Sequential Steps
-            description: If checked, steps must be created in sequentual order
-            span: left
-            type: checkbox
-            tab: Configuration
-        show_earners:
-            label: Show earners
-            description: If checked, people who have earned this badge will be displayed publicly
-            span: left 
-            tab: Configuration
-            type: checkbox
-        time_between_steps_min:
-            label: Minimum Time Between Steps (minutes)
-            description: The minimum number of minutes that must pass before earning a step.
-            span: left
-            tab: Configuration 
-            type: number
-        time_between_steps_max:
-            label: Maximum Time Between Steps (minutes)
-            description: The maximum number of minutes that must pass before failing the badge.
-            span: right
-            tab: Configuration 
-            type: number
-        maximium_time:
-            label: Maximum Time to Complete Badge (days)
-            description: The maximum amount of time to complete all steps after the first has been awarded
-            tab: Configuration 
-            type: number
+        # is_sequential:
+        #     label: Sequential Steps
+        #     description: If checked, steps must be created in sequentual order
+        #     span: left
+        #     type: checkbox
+        #     tab: Configuration
+        # show_earners:
+        #     label: Show earners
+        #     description: If checked, people who have earned this badge will be displayed publicly
+        #     span: left 
+        #     tab: Configuration
+        #     type: checkbox
+        # time_between_steps_min:
+        #     label: Minimum Time Between Steps (minutes)
+        #     description: The minimum number of minutes that must pass before earning a step.
+        #     span: left
+        #     tab: Configuration 
+        #     type: number
+        # time_between_steps_max:
+        #     label: Maximum Time Between Steps (minutes)
+        #     description: The maximum number of minutes that must pass before failing the badge.
+        #     span: right
+        #     tab: Configuration 
+        #     type: number
+        # maximium_time:
+        #     label: Maximum Time to Complete Badge (days)
+        #     description: The maximum amount of time to complete all steps after the first has been awarded
+        #     tab: Configuration 
+        #     type: number
         # ===================================
         #  Publishing Options tab 
         # ===================================
