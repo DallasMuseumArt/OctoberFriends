@@ -31,16 +31,16 @@ class Usermeta extends Model
     ];
 
     public static $householdIncomeOptions = [
-        'Less then 25k',
-        '25k - 50k',
-        '50k - 75k',
-        '75k - 150k',
-        '150k - 500k',
-        '500k or more',
+        'Less then $25,000',
+        '$25,000 - $50,000',
+        '$50,000 - $75,000',
+        '$75,000 - $150,000',
+        '$150,000 - $500,000',
+        '$500,000 or more',
     ];
 
     public static $educationOptions = [
-        'Never Completed High School',
+        'K-12',
         'High School/GED',
         'Some College',
         'Vocational or Trade School',
