@@ -1,10 +1,26 @@
 <div class="row rewards-menu">
     <div class="col-md-12">
         <ul class="filter-buttons-wrap button-group buttons">
-            <li><a class="filter-all button large current" href="#">All</a></li>
-            <li><a class="filter-limited-time button large" href="#">Limited Time</a></li>
-            <li><a class="filter-limited-qty button large" href="#">Limited Qty.</a></li>
-            <li><a class="filter-bookmarked button large" href="#">Bookmarked</a></li>              
+            <li><a class="filter-all button large current" 
+                    href="#"
+                    data-request="onUpdate" 
+                    data-request-data="filter: 'all'"
+            >All</a></li>
+            <li><a class="filter-limited-time button large" 
+                href="#"
+                data-request="onUpdate" 
+                data-request-data="filter: 'time'"
+            >Limited Time</a></li>
+            <li><a class="filter-limited-qty button large" 
+                href="#"
+                    data-request="onUpdate" 
+                    data-request-data="filter: 'qty'"
+            >Limited Qty.</a></li>
+            <li><a class="filter-bookmarked button large" 
+                href="#"
+                data-request="onUpdate" 
+                data-request-data="filter: 'bookmarked'"
+            >Bookmarked</a></li>              
         </ul>
     </div>
 </div>
