@@ -34,8 +34,50 @@ class GetRewards extends ComponentBase
     public function onRun()
     {
 
+        $results = $this->getResults();
+
+        $this->page['rewards'] = $results['rewards'];
+        $this->page['links']   = $results['links'];
+
+    }
+
+    public function onUpdate()
+    {
+        $filter = post('filter');
+        $results = $this->getResults($filter);
+        
+        $this->page['rewards']  = $results['rewards'];
+        $this->page['links']    = $results['links'];
+
+        return [
+            '#rewards' => $this->renderPartial('@default'),
+        ];
+    }
+
+    public function getResults($filter = null)
+    {
         $renderedRewards = [];
-        $rewards = Reward::isActive()->orderBy('points')->paginate($this->property('limit'));
+
+        $rewards = Reward::isActive();
+
+        switch($filter) {
+            case 'qty':
+                $rewards->where('inventory', '>', 0);
+                break;
+            case 'time':
+                $rewards->whereNotNull('date_begin');
+                $rewards->whereNotNull('date_end');
+                break;
+            case 'bookmarked':
+                break;
+            case 'all':
+            default:
+                $rewards->whereNull('inventory');
+                $rewards->orWhere('inventory', '>', 0);
+                break;
+        }
+
+        $rewards = $rewards->orderBy('points')->paginate($this->property('limit'));
 
         foreach($rewards as $reward) {
             $renderedRewards[] = [
@@ -43,9 +85,11 @@ class GetRewards extends ComponentBase
                 'id' => $reward->id,
             ];
         }
-        $this->page['rewards'] = $renderedRewards;
-        $this->page['links']   = $rewards->links();
 
+        return [
+            'links' => $rewards->links(),
+            'rewards' => $renderedRewards,
+        ];
     }
 
     public function onRedeem()
