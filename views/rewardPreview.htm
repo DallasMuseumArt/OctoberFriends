@@ -1,9 +1,9 @@
-<div class="col-md-6 col-sm-6">
+<div class="col-md-12 col-sm-12">
     <div class="friends-reward preview">
 
-        <div class="image col-md-3 col-sm-3">
+        <div class="image">
             {% if reward.image.getPath() %}
-            <img src="{{ reward.image.getPath() }}"/>
+            <img src="{{ reward.image.getThumb(130, 180) }}"/>
             {% endif %}
         </div>
         <div class="description col-md-5 col-sm-5">

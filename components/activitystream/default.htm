@@ -1,5 +1,5 @@
 <div class="activity-stream row">
-    <div class="col-md-8 col-xs-6">
+    <div class="col-md-9 col-sm-9">
         <ul class="items list-group">
             {% for result in results %}
                 <li class="list-group-item">
@@ -14,13 +14,14 @@
                         Liked a work of art
                     {% endif %}
                     <div>{{ result.object.title }}</div>
+                    {{ result.message }}
                 </li>
             {% endfor %}
         </ul>
         <div class="links">{{ links|raw }}</div>
     </div>
 
-    <div class="col-md-4 col-xs-6">
+    <div class="col-md-3 col-sm-3">
         <ul class="filter-buttons-wrap button-group buttons">
             <li class="first">
                 <a 
