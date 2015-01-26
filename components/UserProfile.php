@@ -8,12 +8,12 @@ use File;
 use Hash;
 use Cms\Classes\Theme;
 use RainLab\User\Models\State;
+use DMA\Friends\Classes\UserExtend;
 
 class UserProfile extends ComponentBase
 {
 
     use \System\Traits\ViewMaker;
-
 
     public function componentDetails()
     {
@@ -36,6 +36,55 @@ class UserProfile extends ComponentBase
 
         $this->page['states'] = State::all();
         $this->page['user'] = $user;
+
+    }
+
+    /**
+     * render the change avatar popup
+     */
+    public function onAvatar()
+    {
+
+        $avatars = [];
+
+        $themePath = UserLogin::getThemeDir();
+        $avatarPath = $themePath . '/assets/images/avatars/*.jpg';
+
+        // loop through all the files in the plugin's avatars directory and parse the file names
+        foreach ( glob($avatarPath ) as $file ) { 
+            $path = str_replace(base_path(), '', $file);
+
+            $avatars[] = [
+                'path' => $path,
+                'basename' => basename($path)
+            ];
+        }
+
+        $user = Auth::getUser();
+
+        return $this->renderPartial('@modalDisplay', [
+            'title' => 'Select an avatar',
+            'content' => $this->renderPartial('@avatars', [
+                'avatars' => $avatars,
+                'userAvatar' => $user->avatar->file_name,
+            ]),
+        ]);
+
+    }
+
+    public function onAvatarSave()
+    {
+        $user = Auth::getUser();
+
+        $avatar = post('avatar');
+
+        if ($avatar) 
+            UserExtend::uploadAvatar($user, $avatar);
+
+        return [
+            '.avatar-image' => '<img src="' . $user->avatar->getThumb(100, 100) . '"/>',
+            '.modal-body'   => "<script type='text/javascript'>$('button.close').click();</script>",
+        ];
 
     }
 

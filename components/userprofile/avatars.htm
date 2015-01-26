@@ -1,0 +1,28 @@
+<form id="avatar-select" method="POST">
+    <div class="avatars row">
+        <ul class="selectable">
+        {% for avatar in avatars %}
+            <li class="avatar col-md-3 col-sm-3
+                {% if userAvatar == avatar.basename %}
+                    ui-selected
+                {% endif %}
+                "
+            >
+                <img 
+                    data-basename="{{ avatar.basename }}" 
+                    src="{{ avatar.path }}"
+                />
+            </li>
+        {% endfor %}
+        </ul>
+
+        <input type="hidden" id="avatar" name="avatar"/>
+
+        <div class="buttons">
+            <button type="submit" data-dismiss="popup" class="btn btn-default">Cancel</button>
+            <button type="submit" data-request="onAvatarSave" class="btn btn-primary">Save</button>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript" src="/plugins/dma/friends/components/userprofile/assets/user-profile.js"></script>
