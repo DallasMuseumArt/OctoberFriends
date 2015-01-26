@@ -1,5 +1,12 @@
 <form id="user-profile" class="row">
     <div class="col-md-6 col-sm-6">
+        
+        <div class="form-group">
+            <a href="#" class="avatar-image" data-control="popup" data-handler="onAvatar">
+                <img src="{{ user.avatar.getThumb(100, 100) }}"/>
+            </a>
+        </div>
+
         <div class="form-group">
             <label>First Name</label>
             <input type="text" name="metadata[first_name]" class="form-control" value="{{ user.metadata.first_name }}" />
@@ -28,6 +35,7 @@
                 /> Email Opt-in
             </label>
         </div>
+
     </div>
 
     <div class="col-md-6 col-sm-6">
