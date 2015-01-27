@@ -64,4 +64,7 @@
     - fix_time_restrictions.php
 1.0.21:
     - Add user group code
-    - add_user_group_code.php      
+    - add_user_group_code.php    
+1.0.22:
+    - Add new email options for rewards 
+    - add_reward_email_options.php   
