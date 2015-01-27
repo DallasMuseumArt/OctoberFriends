@@ -109,7 +109,7 @@ class Usermeta extends Model
 
     public static function getOptions()
     {
-        $states = State::all();
+        $states = State::where('country_id', '=', 1)->get();
 
         foreach ($states as $state) {
             $stateOptions[$state->id] = $state->name;
