@@ -111,13 +111,9 @@ class Usermeta extends Model
     {
         $states = State::where('country_id', '=', 1)->get();
 
-        foreach ($states as $state) {
-            $stateOptions[$state->id] = $state->name;
-        }
-
         return [
             'gender'            => self::$genderOptions,
-            'states'            => $stateOptions,
+            'states'            => $states,
             'race'              => self::$raceOptions,
             'household_income'  => self::$householdIncomeOptions,
             'education'         => self::$educationOptions,

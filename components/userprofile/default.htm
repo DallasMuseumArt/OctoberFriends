@@ -36,9 +36,7 @@
             </label>
         </div>
 
-    </div>
-
-    <div class="col-md-6 col-sm-6">
+        <h3>Contact Information</h3>
 
         <div class="form-group">
             <label>Street Address</label>
@@ -58,7 +56,7 @@
                     name="state"
                     class="form-control custom-select">
 
-                    {% for state in states %}
+                    {% for state in options.states %}
                         <option
                         {% if state.id == user.state.id %}
                         selected="selected"
@@ -80,6 +78,81 @@
             <label>Phone</label>
             <input type="text" name="phone" value="{{ user.phone }}" class="form-control"/>   
         </div>
+
+    </div>
+
+    <div class="col-md-6 col-sm-6">
+
+        <h3>Demographic Information</h3>
+
+        <div class="form-group">
+            <label>Gender</label>
+            <select id="gender" name="metadata[gender]" class="form-control">
+                <option value="">Choose not to disclose</option>
+                {% for option in options.gender %}
+                <option
+                {% if option == user.metadata.gender %}
+                selected="selected"
+                {% endif %}
+                >{{ option }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Race</label>
+            <select name="metadata[race]" class="form-control">
+                <option value=""> - Select One - </option>
+                {% for option in options.race %}
+                <option
+                {% if option == user.metadata.race %}
+                selected="selected"
+                {% endif %}
+                >{{ option }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Education</label>
+            <select name="metadata[education]" class="form-control">
+                <option value=""> - Select One - </option>
+                {% for option in options.education %}
+                <option
+                {% if option == user.metadata.education %}
+                selected="selected"
+                {% endif %}
+                >{{ option }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Household Income</label>
+            <select name="metadata[household_income]" class="form-control">
+                <option value=""> - Select One - </option>
+                {% for option in options.household_income %}
+                <option
+                {% if option == user.metadata.household_income %}
+                selected="selected"
+                {% endif %}
+                >{{ option }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Number of people in your household</label>
+            <select name="metadata[household_size]" class="form-control">
+                <option value=""> - Select One - </option>
+                {% for i in 0..9 %}
+                <option
+                {% if i == user.metadata.household_size %}
+                selected="selected"
+                {% endif %}
+                >{{ i }}</option>
+                {% endfor %}
+                <option>10+</option>
+            </select>
+        </div>
+
     </div>
 
     <div class="col-md-12 col-sm-12">
