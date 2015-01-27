@@ -2,6 +2,7 @@
 
 use Model;
 use Smirik\PHPDateTimeAgo\DateTimeAgo as TimeAgo;
+use System\Models\MailTemplate;
 
 /**
  * Reward Model
@@ -74,6 +75,20 @@ class Reward extends Model
 
         $timeAgo = new TimeAgo;
         return $timeAgo->get($this->pivot->created_at);
+    }
+
+    public function getEmailTemplateOptions()
+    {
+        MailTemplate::syncAll();
+        $mailTemplate = new MailTemplate;
+
+        return array_merge(['' => 'No Template Defined'], $mailTemplate->listRegisteredTemplates());
+
+    }
+
+    public function getAdminEmailTemplateOptions()
+    {
+        return $this->getEmailTemplateOptions();
     }
 
 }

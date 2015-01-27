@@ -51,20 +51,38 @@ secondaryTabs:
             tab: Configuration
             type: number
             required: true
+            span: left
         barcode:
             label: Barcode Value
             description: The value of the barcode printed on the coupon.
             tab: Configuration
+            span: left
         inventory:
             label: Inventory
             description: Number of reward items in inventory
             tab: Configuration
+            span: left
             type: number
         enable_email:
             label: Email upon redemption
             description: If checked send an email to the user if they redeem this reward
             tab: Configuration
             type: checkbox
+        email_template:
+            label: Email Template 
+            tab: Configuration
+            span: left
+            type: dropdown
+        enable_admin_email:
+            label: Email a notification to administrators
+            description: When a reward has been redeemed send administrators a notification
+            tab: Configuration
+            type: checkbox
+        admin_email_template:
+            label: Admin Email Template
+            tab: Configuration
+            span: left
+            type: dropdown
         redemption_email:
             label: Redemption Email
             description: If not blank, send an email to the recipient upon redemption with the specified text.

@@ -14,6 +14,8 @@ use DMA\Friends\Classes\Notifications\IncomingMessage;
 use DMA\Friends\Activities\ActivityCode;
 use DMA\Friends\Activities\LikeWorkOfArt;
 use DMA\Friends\Classes\Notifications\NotificationMessage;
+use DMA\Friends\Models\Settings;
+use Backend\Models\UserGroup;
 
 /**
  * Manage custom events in the friends platform
@@ -68,10 +70,29 @@ class FriendsEventHandler {
             'user'      => $user,
         ];
 
-        Mail::send('dma.friends::mail.reward', $data, function($message) use ($user)
-        {
-            $message->to($user->email, $user->full_name);
-        });
+\Debugbar::info($reward);
+        if ($reward->enable_email) { 
+            Mail::send($reward->email_template, $data, function($message) use ($user)
+            {
+\Debugbar::info('user email sent');
+                $message->to($user->email, $user->full_name);
+            });
+        }
+
+        if ($reward->enable_admin_email) {
+            Mail::send($reward->admin_email_template, $data, function($message) use ($user)
+            {
+    \Debugbar::info('admin email sent');
+
+                $group = UserGroup::find(Settings::get('reward_notification_group'));
+
+\Debugbar::info($group);
+                foreach($group->users as $user) {
+                    \Debugbar::info($user);
+                    $message->to($user->email, $user->first_name . ' ' . $user->last_name);
+                }
+            });
+        }
 
         // Print the reward if user is at a kiosk
         $location = LocationManager::getLocation();
