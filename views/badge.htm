@@ -1,3 +1,27 @@
-<div class="badge">
-    this is a badge
+<div class="badge-full row">
+    <div class="image col-md-4 col-sm-4">
+         <img src="{{ model.image.getPath() }}"/>
+
+         <p>Earn {{ model.points }} points</p>
+    </div>
+    
+    <div class="body col-md-8 col-sm-8">
+        {{ model.description|raw }}
+        {{ model.steps|length }} Step{% if model.steps|length > 1 %}s{% endif %}
+
+        <div class="steps">
+        {% for step in model.steps %}
+            <div class="step">
+                <div class="step-indicator {% if step.users.contains(user.id) %}icon-check{% endif %}"></div> 
+                <span class="step-title">{{ step.title }}</span>
+                <div class="clearfix"></div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+
+    <div class="buttons">
+
+        <button type="submit" data-dismiss="popup" class="btn btn-default">Cancel</button>
+    </div>
 </div>

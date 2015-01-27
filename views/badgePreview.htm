@@ -11,7 +11,9 @@
         {% endif %}
 
         {% if model.image.getPath() %}
-        <img src="{{ model.image.getPath() }}"/>
+        <a href="#" data-control="popup" data-handler="onRenderBadge" data-request-data="id: {{ model.id }}">
+            <img src="{{ model.image.getPath() }}"/>
+        </a>
         {% endif %}
 
         <h4>{{ model.title }}</h4>
