@@ -128,7 +128,6 @@ class Plugin extends PluginBase
         return [
             'DMA\Friends\Components\ActivityCodeForm'           => 'ActivityCodeForm',
             'DMA\Friends\Components\ActivityStream'             => 'ActivityStream',
-            'DMA\Friends\Components\BadgeRecommend'             => 'BadgeRecommend',
             'DMA\Friends\Components\GetRewards'                 => 'GetRewards',
             'DMA\Friends\Components\Modal'                      => 'Modal',
             'DMA\Friends\Components\UserBadges'                 => 'UserBadges',
