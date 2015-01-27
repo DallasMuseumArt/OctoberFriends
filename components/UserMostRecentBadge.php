@@ -4,6 +4,8 @@ use Cms\Classes\ComponentBase;
 use Auth;
 use View;
 use Lang;
+use DMA\Friends\Classes\BadgeManager;
+use DMA\Friends\Models\Badge;
 
 class UserMostRecentBadge extends ComponentBase
 {
@@ -31,5 +33,12 @@ class UserMostRecentBadge extends ComponentBase
 
         $this->page['badge'] = View::make('dma.friends::badgePreview', ['model' => $badge])->render();
         
+    }
+
+    public function onRenderBadge()
+    {
+        $id = post('id');
+        $badge = Badge::find($id);
+        return BadgeManager::render($this, $badge);
     }
 }

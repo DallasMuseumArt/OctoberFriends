@@ -3,6 +3,8 @@
 use Cms\Classes\ComponentBase;
 use Auth;
 use View;
+use DMA\Friends\Classes\BadgeManager;
+use DMA\Friends\Models\Badge;
 
 class UserBadges extends ComponentBase
 {
@@ -43,6 +45,13 @@ class UserBadges extends ComponentBase
 
         $this->page['badges'] = $renderedBadges;
         
+    }
+
+    public function onRenderBadge()
+    {
+        $id = post('id');
+        $badge = Badge::find($id);
+        return BadgeManager::render($this, $badge);
     }
 
 }

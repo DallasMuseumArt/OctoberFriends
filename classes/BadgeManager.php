@@ -5,13 +5,16 @@ use DMA\Friends\Models\Step;
 use DMA\Friends\Models\Badge;
 use RainLab\User\Models\User;
 use DMA\Friends\Classes\UserExtend;
+use DMA\Friends\Classes\Notifications\NotificationMessage;
 use DB;
 use Flash;
 use Lang;
 use Exception;
 use Event;
 use Postman;
-use DMA\Friends\Classes\Notifications\NotificationMessage;
+use View;
+use Auth;
+
 /**
  * This class handles badging logic
  *
@@ -152,10 +155,19 @@ class BadgeManager
                  
             }, ['flash', 'kiosk']);
             
-            
-
         } catch(Exception $e) {
             throw new Exception(Lang::get('dma.friends::lang.exceptions.badgeFailed'));
         }
+    }
+
+    public static function render($controller, $badge)
+    {
+
+        $user = Auth::getUser();
+        
+        return $controller->renderPartial('@modalDisplay', [
+            'title'     => $badge->title,
+            'content'   => View::make('dma.friends::badge', ['model' => $badge, 'user' => $user])->render(),
+        ]);
     }
 }
