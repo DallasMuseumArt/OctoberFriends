@@ -68,6 +68,7 @@ secondaryTabs:
             span: left
             type: number
             required: true
+            default: 0
         activity_lockout:
             label: Check-in Lockout (minutes)
             description: Allow only check-in with same activity code once per X minutes.
