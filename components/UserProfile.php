@@ -8,6 +8,7 @@ use File;
 use Hash;
 use Cms\Classes\Theme;
 use RainLab\User\Models\State;
+use DMA\Friends\Models\UserMeta;
 use DMA\Friends\Classes\UserExtend;
 
 class UserProfile extends ComponentBase
@@ -34,7 +35,7 @@ class UserProfile extends ComponentBase
 
         $user = $this->getUser();
 
-        $this->page['states'] = State::all();
+        $this->page['options'] = UserMeta::getOptions();
         $this->page['user'] = $user;
 
     }
