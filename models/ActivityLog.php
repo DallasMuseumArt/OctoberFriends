@@ -57,7 +57,7 @@ class ActivityLog extends Model
     ];
 
     public $morphTo = [
-        'object',
+        'object' => ['id' => 'object_id'],
     ];
 
     public function scopeByUser($query, $user_id)
