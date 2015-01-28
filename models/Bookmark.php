@@ -30,15 +30,9 @@ class Bookmark extends Model
      */
     public $hasOne = [
         'user'  => ['RainLab\User\Models\User'],
-        'badge' => ['DMA\Friends\Models\Badge'],
     ];
     public $hasMany = [];
-    public $belongsTo = [];
-    public $belongsToMany = [];
-    public $morphTo = [];
-    public $morphOne = [];
-    public $morphMany = [];
-    public $attachOne = [];
-    public $attachMany = [];
-
+    public $morphTo = [
+        'object' => ['id' => 'object_id'],
+    ];
 }

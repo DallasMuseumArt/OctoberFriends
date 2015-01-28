@@ -49,6 +49,7 @@ class Badge extends Model
 
     public $morphMany = [
         'activityLogs'  => ['DMA\Friends\Models\ActivityLog', 'name' => 'object'],
+        'bookmarks'     => ['DMA\Friends\Models\Bookmark', 'name' => 'object'],
     ];
 
     public $morphToMany = [
