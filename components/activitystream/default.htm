@@ -13,8 +13,7 @@
                     {% elseif result.action == 'artwork' %}
                         Liked a work of art
                     {% endif %}
-                    <div>{{ result.object.title }}</div>
-                    {{ result.message }}
+                    <div>"{{ result.object.title }}"</div>
                 </li>
             {% endfor %}
         </ul>
