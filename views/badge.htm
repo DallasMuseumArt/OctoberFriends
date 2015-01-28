@@ -21,7 +21,7 @@
     </div>
 
     <div class="buttons">
-        {% if hideBookmark != false %}
+        {% if hideBookmark is empty %}
         <span class="bookmark">
             {% if model.isBookmarked %}
             <button type="submit" 
