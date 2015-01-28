@@ -89,8 +89,9 @@ secondaryTabs:
             tab: Configuration 
             type: dropdown
             options:
+                no: None
                 featured: Featured
-                limited: Limited Edition
+                limited_edition: Limited Edition
         # is_sequential:
         #     label: Sequential Steps
         #     description: If checked, steps must be created in sequentual order

@@ -4,6 +4,11 @@
     {% endif %}
 >
     <div class="friends-badge preview">
+        {% if model.special == 'limited_edition' %}
+            <span class="special limited-edition">Limited Edition</span>
+        {% elseif model.special == 'featured' %}
+            <span class="special featured">Featured</span>
+        {% endif %}
         {% if model.userCount > 1 %}
         <div class="times-earned">
             x{{ model.userCount }}
@@ -16,16 +21,18 @@
         </a>
         {% endif %}
 
-        <h4>{{ model.title }}</h4>
+        <a href="#" data-control="popup" data-handler="onRenderBadge" data-request-data="id: {{ model.id }}">
+            <h4>{{ model.title }}</h4>
 
-        <div class="earned-info">
-            {{ model.points }} Points / {{ model.steps|length }} Steps
-        </div>
-        <div class="description">
-            {{ model.excerpt|raw }}
-        </div>
-        <div class="earned">
-            {{ model.timeAgo }}
-        </div>
+            <div class="earned-info">
+                {{ model.points }} Points / {{ model.steps|length }} Steps
+            </div>
+            <div class="description">
+                {{ model.excerpt|raw }}
+            </div>
+            <div class="earned">
+                {{ model.timeAgo }}
+            </div>
+        </a>
     </div>
 </div>
