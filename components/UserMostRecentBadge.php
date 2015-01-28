@@ -31,14 +31,22 @@ class UserMostRecentBadge extends ComponentBase
             return;
         }
 
-        $this->page['badge'] = View::make('dma.friends::badgePreview', ['model' => $badge])->render();
+        $this->page['badge'] = View::make('dma.friends::badgePreview', [
+            'model'         => $badge, 
+            'hideBookmark'  => true
+        ])->render();
         
     }
 
     public function onRenderBadge()
     {
-        $id = post('id');
-        $badge = Badge::find($id);
+        $badge = $this->loadBadge();
         return BadgeManager::render($this, $badge);
+    }
+
+    protected function loadBadge()
+    {
+        $id = post('id');
+        return Badge::find($id);
     }
 }
