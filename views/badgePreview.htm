@@ -17,9 +17,18 @@
 
         {% if model.image.getPath() %}
         <a href="#" data-control="popup" data-handler="onRenderBadge" data-request-data="id: {{ model.id }}">
+            {% if model.userProgress and model.userProgress != 100 %}
+            <div class="progress-wrap">
+                <div class="progress">
+                    <div class="progress-indicator" style="width: {{ model.userProgress }}%;"></div>
+                </div>
+            </div>
+            {% endif %}
             <img src="{{ model.image.getPath() }}"/>
         </a>
         {% endif %}
+
+
 
         <a href="#" data-control="popup" data-handler="onRenderBadge" data-request-data="id: {{ model.id }}">
             <h4>{{ model.title }}</h4>
