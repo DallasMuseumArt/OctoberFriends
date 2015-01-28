@@ -2,6 +2,7 @@
 
 use Model;
 use RainLab\User\Models\User;
+use DMA\Friends\Models\Bookmark;
 use Smirik\PHPDateTimeAgo\DateTimeAgo as TimeAgo;
 use Auth;
 use DB;
@@ -123,5 +124,11 @@ class Badge extends Model
             return (count($this->steps) / $stepCount) * 100;
         
         return 0;
+    }
+
+    public function getIsBookmarkedAttribute()
+    {
+        $user = Auth::getUser();
+        return (boolean)Bookmark::findBookmark($user, $this);
     }
 }

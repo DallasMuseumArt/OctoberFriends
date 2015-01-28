@@ -21,7 +21,21 @@
     </div>
 
     <div class="buttons">
-
-        <button type="submit" data-dismiss="popup" class="btn btn-default">Cancel</button>
+        {% if hideBookmark != false %}
+        <span class="bookmark">
+            {% if model.isBookmarked %}
+            <button type="submit" 
+                data-request="onBookmarkRemove" 
+                data-request-data="id: {{ model.id }}" 
+                class="btn btn-info icon-bookmark bookmarked">Remove Bookmark</button>
+            {% else %}
+            <button type="submit" 
+                data-request="onBookmarkAdd" 
+                data-request-data="id: {{ model.id }}" 
+                class="btn btn-info icon-bookmark">Bookmark This</button>
+            {% endif %}
+        </span>
+        {% endif %}
+        <button type="submit" data-dismiss="popup" class="btn btn-default">Close</button>
     </div>
 </div>

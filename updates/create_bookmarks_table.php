@@ -13,13 +13,12 @@ class CreateBookmarksTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->timestamp('created_at');
-            $table->integer('badge_id')
-                ->references('id')
-                ->on('dma_friends_badges')
-                ->onDelete('cascade');
             $table->integer('user_id')->unsigned();
+            $table->string('object_type')->nullable();
+            $table->integer('object_id')->nullable();
 
-            $table->index('badge_id');
+            $table->index('object_id');
+            $table->index('object_type');
             $table->index('user_id');
         });
     }
