@@ -7,18 +7,18 @@
         //Automatically logout authorized kiosks after a specific amount of inactivity
         $('a.usertimeoutHandler').hide();
 
-        //Increment the idle time counter every minute.
-        var idleInterval = setInterval(idleTimeout, timer);
+        // //Increment the idle time counter every minute.
+        // var idleInterval = setInterval(idleTimeout, timer);
 
-        //Zero the idle timer on mouse movement.
-        $(this).mousemove(function (e) {
-            clearInterval(idleInterval);
-            idleInterval = setInterval(idleTimeout, timer);
-        });
-        $(this).keypress(function (e) {
-            clearInterval(idleInterval);
-            idleInterval = setInterval(idleTimeout, timer);
-        });
+        // //Zero the idle timer on mouse movement.
+        // $(this).mousemove(function (e) {
+        //     clearInterval(idleInterval);
+        //     idleInterval = setInterval(idleTimeout, timer);
+        // });
+        // $(this).keypress(function (e) {
+        //     clearInterval(idleInterval);
+        //     idleInterval = setInterval(idleTimeout, timer);
+        // });
 
         function idleTimeout() {
             $('a.usertimeoutHandler').click();

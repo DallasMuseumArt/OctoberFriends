@@ -182,6 +182,7 @@ class Plugin extends PluginBase
         User::extend(function($model) {        
             $model->hasOne['metadata']          = ['DMA\Friends\Models\Usermeta'];     
             $model->hasMany['activityLogs']     = ['DMA\Friends\Models\ActivityLog'];
+            $model->hasMany['bookmarks']        = ['DMA\Friends\Models\Bookmark'];
             $model->hasMany['notifications']    = ['DMA\Friends\Models\Notification'];
             $model->belongsToMany['activities'] = ['DMA\Friends\Models\Activity',   'table' => 'dma_friends_activity_user', 'user_id', 'activity_id',   'timestamps' => true, 'order' => 'dma_friends_activity_user.created_at desc'];     
             $model->belongsToMany['steps']      = ['DMA\Friends\Models\Step',       'table' => 'dma_friends_step_user',     'user_id', 'step_id',       'timestamps' => true, 'order' => 'dma_friends_step_user.created_at desc'];     
