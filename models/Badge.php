@@ -103,12 +103,13 @@ class Badge extends Model
     {
         $user = Auth::getUser();
         $ids = [];
+        $stepCount = 0;
 
         foreach($this->steps as $step) {
             $ids[] = $step->id;
         }
 
-        if ($ids) {
+        if ($ids && $this->userCount) {
             $stepCount = DB::table('dma_friends_step_user')
                 ->whereIn('step_id', $ids)
                 ->where('user_id', $user->id)
