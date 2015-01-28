@@ -30,6 +30,7 @@ class ActivityStream extends ComponentBase
     {
         $filter = post('filter');
         $results = $this->getResults($filter);
+
         $this->page['results'] = $results;
         $this->page['links'] = $results->links();
 
