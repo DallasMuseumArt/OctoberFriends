@@ -1,0 +1,38 @@
+<div class="reward-full row">
+    <div class="image col-md-4 col-sm-4">
+         <img src="{{ model.image.getPath() }}"/>
+    </div>
+    
+    <div class="body col-md-8 col-sm-8">
+        <div class="description">
+            {{ model.description|raw }}
+        </div>
+
+        {{ model.fine_print|raw }}
+
+        <button class="btn btn-primary redeem" 
+            data-control="popup" 
+            data-handler="onRedeem" 
+            data-request-data="id: {{ model.id }}"
+        >Claim for {{ model.pointsFormatted }} points</button>
+    </div>
+
+    <div class="buttons">
+        {% if hideBookmark is empty %}
+        <span class="bookmark">
+            {% if model.isBookmarked %}
+            <button type="submit" 
+                data-request="onBookmarkRemove" 
+                data-request-data="id: {{ model.id }}" 
+                class="btn btn-info icon-bookmark bookmarked">Remove Bookmark</button>
+            {% else %}
+            <button type="submit" 
+                data-request="onBookmarkAdd" 
+                data-request-data="id: {{ model.id }}" 
+                class="btn btn-info icon-bookmark">Bookmark This</button>
+            {% endif %}
+        </span>
+        {% endif %}
+        <button type="submit" data-dismiss="popup" class="btn btn-default">Close</button>
+    </div>
+</div>

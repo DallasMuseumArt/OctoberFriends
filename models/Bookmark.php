@@ -1,5 +1,6 @@
 <?php namespace DMA\Friends\Models;
 
+use DateTime;
 use Model;
 use RainLab\User\Models\User;
 use DMA\Friends\Models\Bookmark;
@@ -17,6 +18,7 @@ class Bookmark extends Model
 
     public $timestamps = false;
 
+    protected $dates = ['created_at'];
     /**
      * @var array Guarded fields
      */
@@ -37,6 +39,11 @@ class Bookmark extends Model
     public $morphTo = [
         'object' => ['id' => 'object_id'],
     ];
+
+    public function setCreatedAtAttribute($value)
+    {
+        return new DateTime('now');
+    }
 
     public static function findBookmark($user, $object)
     {
