@@ -73,7 +73,7 @@ class ActivityCodeForm extends ComponentBase
        
         return [
             '#flashMessages'    => $this->renderPartial('@flashMessages'),
-            'span.points'       => $user->points,
+            'span.points'       => number_format($user->points),
         ];
         
 
