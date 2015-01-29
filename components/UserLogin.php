@@ -69,54 +69,78 @@ class UserLogin extends ComponentBase
      */
     public function onUserLogin()
     {
-        // Update wordpress passwords if necessary
-        WordpressAuth::verifyFromEmail(post('email'), post('password'));
-  
-        /*  
-         * Validate input
-         */
-        $data = post();
-        $rules = [ 
-            'password' => 'required|min:2'
-        ];  
+        try{
+            
+            // Update wordpress passwords if necessary
+            WordpressAuth::verifyFromEmail(post('email'), post('password'));
+      
+            /*  
+             * Validate input
+             */
+            $data = post();
+            $rules = [ 
+                'password' => 'required|min:2'
+            ];  
+    
+            $loginAttribute = UserSettings::get('login_attribute', UserSettings::LOGIN_EMAIL);
+    
+            if ($loginAttribute == UserSettings::LOGIN_USERNAME)
+                $rules['login'] = 'required|between:2,64';
+            else
+                $rules['login'] = 'required|email|between:2,64';
+    
+            if (!in_array('login', $data))
+                $data['login'] = post('username', post('email'));
 
-        $loginAttribute = UserSettings::get('login_attribute', UserSettings::LOGIN_EMAIL);
+            /*
+             * Validate user credentials
+             */
+            $validation = Validator::make($data, $rules);
+            if ($validation->fails())
+                throw new ValidationException($validation);
 
-        if ($loginAttribute == UserSettings::LOGIN_USERNAME)
-            $rules['login'] = 'required|between:2,64';
-        else
-            $rules['login'] = 'required|email|between:2,64';
-
-        if (!in_array('login', $data))
-            $data['login'] = post('username', post('email'));
-
-        /*
-         * Validate user credintials
-         */
-        $validation = Validator::make($data, $rules);
-        if ($validation->fails())
-            throw new ValidationException($validation);
-
-        /*  
-         * Authenticate user
-         */
-        $user = Auth::authenticate([
-            'login' => array_get($data, 'login'),
-            'password' => array_get($data, 'password')
-        ], true);
-
-        /*
-         * Fire event that user has registered
-         */
-        Event::fire('auth.register', $user);
-
-        /*  
-         * Redirect to the intended page after successful sign in
-         */
-        $redirectUrl = $this->pageUrl($this->property('redirect'));
-
-        if ($redirectUrl = post('redirect', $redirectUrl))
-            return Redirect::intended($redirectUrl);
+        
+            /*  
+             * Authenticate user
+             */
+            $user = Auth::authenticate([
+                'login' => array_get($data, 'login'),
+                'password' => array_get($data, 'password')
+            ], true);
+    
+            /*
+             * Fire event that user has registered
+             */
+            Event::fire('auth.register', $user);
+    
+            /*  
+             * Redirect to the intended page after successful sign in
+             */
+            $redirectUrl = $this->pageUrl($this->property('redirect'));
+    
+            if ($redirectUrl = post('redirect', $redirectUrl))
+                return Redirect::intended($redirectUrl);
+        
+        
+        }catch(\Exception $e){
+            // Catch all exceptions producced by RainLab User or DMA authentication
+            // and update error block message using OctoberCMS Ajax framework
+            $message = Lang::get('dma.friends::lang.userLogin.failCredentials');
+                       
+            // Bit doggy but if the exception message contains the login
+            // is because the account is been suspend or banned by RainLab user plugin
+            // This usually because the user has atent to loging multiple times with a 
+            // wrong password.
+            if(preg_match("/\[" . $data['login'] . "\]/", $e->getMessage())){ 
+                $message = $message = Lang::get('dma.friends::lang.userLogin.throttleUser', $data);
+            }
+            
+            return [
+               '.modal-content #errorBlock' => $message
+            ];
+      
+        }
+        
     }
 
     /**
