@@ -81,7 +81,7 @@ class FriendsEventHandler {
             Mail::send($reward->admin_email_template, $data, function($message) use ($reward, $user)
             {
                 // If a group is configured email those users
-                if (!empty($reward->admin_email_group) {
+                if (!empty($reward->admin_email_group)) {
                     $group = UserGroup::find($reward->admin_email_group);
 
                     foreach($group->users as $user) {
