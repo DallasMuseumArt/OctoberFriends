@@ -24,19 +24,21 @@ class FlashMultipleTokenParser extends Twig_TokenParser
     {
         $lineno = $token->getLine();
         $stream = $this->parser->getStream();
-
-        if ($token = $stream->nextIf(Twig_Token::NAME_TYPE)) {
-            $name = $token->getValue();
+        
+        if ($$stream) {
+            if ($token = $stream->nextIf(Twig_Token::NAME_TYPE)) {
+                $name = $token->getValue();
+            }
+            else {
+                $name = 'all';
+            }
+            $stream->expect(Twig_Token::BLOCK_END_TYPE);
+    
+            $body = $this->parser->subparse(array($this, 'decideIfEnd'), true);
+            $stream->expect(Twig_Token::BLOCK_END_TYPE);
+    
+            return new FlashMultipleNode($name, $body, $lineno, $this->getTag());
         }
-        else {
-            $name = 'all';
-        }
-        $stream->expect(Twig_Token::BLOCK_END_TYPE);
-
-        $body = $this->parser->subparse(array($this, 'decideIfEnd'), true);
-        $stream->expect(Twig_Token::BLOCK_END_TYPE);
-
-        return new FlashMultipleNode($name, $body, $lineno, $this->getTag());
     }
 
     public function decideIfEnd(Twig_Token $token)
