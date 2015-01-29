@@ -1,6 +1,8 @@
 <?php namespace DMA\Friends\Models;
 
 use Model;
+use Auth;
+use DMA\Friends\Models\Bookmark;
 use Smirik\PHPDateTimeAgo\DateTimeAgo as TimeAgo;
 
 /**
@@ -75,6 +77,12 @@ class Reward extends Model
 
         $timeAgo = new TimeAgo;
         return $timeAgo->get($this->pivot->created_at);
+    }
+
+    public function getIsBookmarkedAttribute()
+    {
+        $user = Auth::getUser();
+        return (boolean)Bookmark::findBookmark($user, $this);
     }
 
 }
