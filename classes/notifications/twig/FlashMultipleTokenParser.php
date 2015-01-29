@@ -25,7 +25,7 @@ class FlashMultipleTokenParser extends Twig_TokenParser
         $lineno = $token->getLine();
         $stream = $this->parser->getStream();
         
-        if ($$stream) {
+        if ($stream) {
             if ($token = $stream->nextIf(Twig_Token::NAME_TYPE)) {
                 $name = $token->getValue();
             }
