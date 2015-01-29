@@ -4,7 +4,6 @@ use Model;
 use System\Models\MailTemplate;
 use RainLab\User\Models\State;
 use Postman;
-use Backend\Models\UserGroup;
 
 /**
  * Friends Settings model
@@ -129,17 +128,6 @@ class Settings extends Model {
     public function getActiveListenableChannelsOptions ()
     {
     	return $this->getChannelOptions(true, $description=false); 
-    }
-
-    public function getRewardNotificationGroupOptions()
-    {
-        $options[] = 'None';
-        $groups = UserGroup::all();
-        foreach($groups as $group) {
-            $options[$group->id] = $group->name;
-        }
-
-        return $options;
     }
 
 }

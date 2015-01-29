@@ -4,7 +4,7 @@ namespace DMA\Friends\Classes;
 
 use DMA\Friends\Models\Reward;
 use DMA\Friends\Classes\UserExtend;
-use Exception;
+use SystemException;
 use Lang;
 use Auth;
 use View;
@@ -26,7 +26,7 @@ class RewardManager
         $reward = Reward::find($id);
 
         if (!$reward) {
-            throw Exception(Lang::get('dma.friends.exceptions.missingReward', ['id' => $id]));
+            throw SystemException(Lang::get('dma.friends.exceptions.missingReward', ['id' => $id]));
         }
 
         try {
@@ -51,7 +51,8 @@ class RewardManager
                 Session::put('rewardError', Lang::get('dma.friends::lang.rewards.noPoints'));
             }
         } catch (Exception $e) {
-            throw Exception(Lang::get('dma.friends.exceptions.rewardFailed'));
+            \Debugbar::info($e);
+            throw SystemException(Lang::get('dma.friends.exceptions.rewardFailed'));
         }
     }
 

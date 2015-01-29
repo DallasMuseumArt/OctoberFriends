@@ -14,6 +14,8 @@ class AddRewardEmailOptionsTable extends Migration
             $table->boolean('enable_admin_email')->default(false);
             $table->string('email_template')->nullable();
             $table->string('admin_email_template')->nullable();
+            $table->integer('admin_email_group')->nullable();
+            $table->string('admin_email_address')->nullable();
         });
 
     }
@@ -25,6 +27,8 @@ class AddRewardEmailOptionsTable extends Migration
             $table->dropColumn('enable_admin_email');
             $table->dropColumn('email_template');
             $table->dropColumn('admin_email_template');
+            $table->dropColumn('admin_email_group');
+            $table->dropColumn('admin_email_address');
         });
     }
 
