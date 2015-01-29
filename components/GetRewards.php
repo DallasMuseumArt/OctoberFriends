@@ -70,6 +70,10 @@ class GetRewards extends ComponentBase
                 $rewards->whereNotNull('date_end');
                 break;
             case 'bookmarked':
+                $user = \Auth::getUser();
+                $rewards->whereHas('bookmarks', function($query) use ($user) {
+                    $query->where('user_id', '=', $user->id);
+                });
                 break;
             case 'all':
             default:
