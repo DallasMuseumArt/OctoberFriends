@@ -75,7 +75,8 @@ secondaryTabs:
             span: left
             tab: Configuration
             type: number
-            required: true;
+            required: true
+            default: 0
         maximum_earnings:
             label: Maximum Earnings
             description: The number of times an individual can earn this badge
@@ -88,8 +89,9 @@ secondaryTabs:
             tab: Configuration 
             type: dropdown
             options:
+                no: None
                 featured: Featured
-                limited: Limited Edition
+                limited_edition: Limited Edition
         # is_sequential:
         #     label: Sequential Steps
         #     description: If checked, steps must be created in sequentual order

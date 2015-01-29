@@ -1,14 +1,15 @@
 <?php namespace DMA\Friends\Components;
 
 use Cms\Classes\ComponentBase;
+use DMA\Friends\Classes\Notifications\NotificationMessage;
 use DMA\Friends\Models\Reward;
+use DMA\Friends\Models\Bookmark;
 use DMA\Friends\Classes\RewardManager;
 use Auth;
 use View;
 use Session;
 use Flash;
 use Postman;
-use DMA\Friends\Classes\Notifications\NotificationMessage;
 
 class GetRewards extends ComponentBase
 {
@@ -69,6 +70,10 @@ class GetRewards extends ComponentBase
                 $rewards->whereNotNull('date_end');
                 break;
             case 'bookmarked':
+                $user = \Auth::getUser();
+                $rewards->whereHas('bookmarks', function($query) use ($user) {
+                    $query->where('user_id', '=', $user->id);
+                });
                 break;
             case 'all':
             default:
@@ -90,6 +95,12 @@ class GetRewards extends ComponentBase
             'links' => $rewards->links(),
             'rewards' => $renderedRewards,
         ];
+    }
+
+    public function onRedeemModal()
+    {
+        $reward = $this->loadReward();
+        return RewardManager::render($this, $reward);
     }
 
     public function onRedeem()
@@ -124,9 +135,38 @@ class GetRewards extends ComponentBase
         
         
         return [
+            '.modal-body'       => "<script type='text/javascript'>$('button.close').click();</script>",
             '#flashMessages'    => $this->renderPartial('@flashMessages'),
-            'span.points'       => $user->points,
+            'span.points'       => number_format($user->points),
         ];
+    }
+
+    public function onBookmarkAdd()
+    {
+        $reward = $this->loadReward();
+        $user = Auth::getUser();
+
+        Bookmark::saveBookmark($user, $reward);
+        return [
+            '.bookmark' => View::make('dma.friends::onBookmarkRemove', ['id' => $reward->id])->render(),
+        ];
+    }
+
+    public function onBookmarkRemove()
+    {
+        $reward = $this->loadReward();
+        $user = Auth::getUser();
+
+        Bookmark::removeBookmark($user, $reward);
+        return [
+            '.bookmark' => View::make('dma.friends::onBookmarkAdd', ['id' => $reward->id])->render(),
+        ];
+    }
+
+    public function loadReward()
+    {
+        $id = post('id');
+        return Reward::find($id);
     }
 
 }

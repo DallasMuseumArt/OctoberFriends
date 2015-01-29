@@ -37,11 +37,13 @@ return [
         'passwordFail'          => 'The password you entered is incorrect',
         'memberCard'            => 'The card has been sent to the designated membership printer for ":title"',
         'memberCardLocation'    => 'Select a location to print the membership card',
-        'memberPhoneNotFound'   => 'Phone not found. Please update your Friend profile...',
+        'memberPhoneNotFound'   => 'Phone not found. Please update your Friends profile',
     ],
     'userLogin' => [
-        'loginTitle'    => 'Scan Membership Card',
-        'registerTitle' => 'Sign Up for Friends',
+        'loginTitle'        => 'Scan Membership Card',
+        'registerTitle'     => 'Sign Up for Friends',
+        'failCredentials'   => 'The email or password you entered is incorrect',
+        'throttleUser'      => 'Invalid login attempts. User ":login" has been temporarily suspended.'
     ],
     'exceptions' => [
         'missingActivityClass'      => 'Could not find the activity :class',

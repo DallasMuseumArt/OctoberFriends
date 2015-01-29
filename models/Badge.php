@@ -2,8 +2,10 @@
 
 use Model;
 use RainLab\User\Models\User;
+use DMA\Friends\Models\Bookmark;
 use Smirik\PHPDateTimeAgo\DateTimeAgo as TimeAgo;
 use Auth;
+use DB;
 
 /**
  * Badge Model
@@ -49,6 +51,7 @@ class Badge extends Model
 
     public $morphMany = [
         'activityLogs'  => ['DMA\Friends\Models\ActivityLog', 'name' => 'object'],
+        'bookmarks'     => ['DMA\Friends\Models\Bookmark', 'name' => 'object'],
     ];
 
     public $morphToMany = [
@@ -91,5 +94,41 @@ class Badge extends Model
         $count  = $user->badges()->where('badge_id', '=', $this->id)->count();
 
         return $count;
+    }
+
+    /**
+     * Mutator to return the percentage of steps completed by the authenticated user
+     * @return int
+     * percentage of steps complete
+     */
+    public function getUserProgressAttribute()
+    {
+        $user = Auth::getUser();
+        $ids = [];
+        $stepCount = 0;
+
+        foreach($this->steps as $step) {
+            $ids[] = $step->id;
+        }
+
+        if ($ids && $this->userCount) {
+            $stepCount = DB::table('dma_friends_step_user')
+                ->whereIn('step_id', $ids)
+                ->where('user_id', $user->id)
+                ->count();
+
+            $stepCount = $stepCount / $this->userCount;
+        }
+        
+        if ($stepCount)
+            return (count($this->steps) / $stepCount) * 100;
+        
+        return 0;
+    }
+
+    public function getIsBookmarkedAttribute()
+    {
+        $user = Auth::getUser();
+        return (boolean)Bookmark::findBookmark($user, $this);
     }
 }
