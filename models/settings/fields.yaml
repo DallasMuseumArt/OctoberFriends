@@ -48,11 +48,6 @@ tabs:
             tab: Groups
             
         # Notifications
-        reward_notification_group:
-            type: dropdown
-            label: Send admin reward notifications to the following group
-            tab: Notifications
-            span: left
         active_notification_channels:
             type: checkboxlist
             span: auto

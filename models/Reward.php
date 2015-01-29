@@ -5,6 +5,7 @@ use Auth;
 use DMA\Friends\Models\Bookmark;
 use Smirik\PHPDateTimeAgo\DateTimeAgo as TimeAgo;
 use System\Models\MailTemplate;
+use Backend\Models\UserGroup;
 
 /**
  * Reward Model
@@ -91,13 +92,33 @@ class Reward extends Model
         MailTemplate::syncAll();
         $mailTemplate = new MailTemplate;
 
-        return array_merge(['' => 'No Template Defined'], $mailTemplate->listRegisteredTemplates());
+        \Debugbar::info($mailTemplate->listRegisteredTemplates());
+        $templates = $mailTemplate->listRegisteredTemplates();
+
+        $options[] = 'No Template Defined';
+
+        foreach($templates as $key => $template) {
+            $options[$key] = '<strong>' . $key . '</strong> - ' . $template;
+        }
+
+        return $options;
 
     }
 
     public function getAdminEmailTemplateOptions()
     {
         return $this->getEmailTemplateOptions();
+    }
+
+    public function getAdminEmailGroupOptions()
+    {
+        $options[] = 'None';
+        $groups = UserGroup::all();
+        foreach($groups as $group) {
+            $options[$group->id] = $group->name;
+        }
+
+        return $options;
     }
 
 }
