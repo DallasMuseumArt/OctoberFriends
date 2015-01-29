@@ -6,6 +6,8 @@ use DMA\Friends\Models\Reward;
 use DMA\Friends\Classes\UserExtend;
 use Exception;
 use Lang;
+use Auth;
+use View;
 use Event;
 use Session;
 use FriendsLog;
@@ -51,5 +53,16 @@ class RewardManager
         } catch (Exception $e) {
             throw Exception(Lang::get('dma.friends.exceptions.rewardFailed'));
         }
+    }
+
+    public static function render($controller, $reward)
+    {
+
+        $user = Auth::getUser();
+        
+        return $controller->renderPartial('@modalDisplay', [
+            'title'     => $reward->title,
+            'content'   => View::make('dma.friends::reward', ['model' => $reward, 'user' => $user])->render(),
+        ]);
     }
 }

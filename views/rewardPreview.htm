@@ -3,19 +3,42 @@
 
         <div class="image">
             {% if reward.image.getPath() %}
-            <img src="{{ reward.image.getThumb(130, 180) }}"/>
+            <a href="#" 
+                data-control="popup" 
+                data-handler="onRedeemModal" 
+                data-request-data="id: {{ model.id }}"
+            >
+                <img src="{{ reward.image.getThumb(130, 180) }}"/>
+            </a>
             {% endif %}
         </div>
         <div class="description col-md-5 col-sm-5">
             
-            <h4>{{ reward.title }}</h4>
-            {{ reward.excerpt|raw }}
+            <h4>
+                <a href="#" 
+                    data-control="popup" 
+                    data-handler="onRedeemModal" 
+                    data-request-data="id: {{ reward.id }}"
+                >
+                    {{ reward.title }}
+                </a>
+            </h4>
+            <a href="#" 
+                data-control="popup" 
+                data-handler="onRedeemModal" 
+                data-request-data="id: {{ reward.id }}"
+            >
+                {{ reward.excerpt|raw }}
+            </a>
             
         </div>
-
         <div class="claim col-md-4">
             <p>Claim for</p>
-            <button class="btn btn-primary" data-request="onRedeem" data-request-data="id: {{ reward.id }}">{{ reward.pointsFormatted }} points</a>
+            <button class="btn btn-primary" 
+                data-control="popup" 
+                data-handler="onRedeemModal" 
+                data-request-data="id: {{ reward.id }}"
+            >{{ reward.pointsFormatted }} points</button>
         </div>
 
     </div>
