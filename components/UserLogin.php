@@ -135,6 +135,9 @@ class UserLogin extends ComponentBase
                 $message = $message = Lang::get('dma.friends::lang.userLogin.throttleUser', $data);
             }
             
+            // Send to log the authentication exception.
+            \Log::debug($e);
+            
             return [
                '.modal-content #errorBlock' => $message
             ];
