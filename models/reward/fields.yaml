@@ -85,6 +85,15 @@ secondaryTabs:
             tab: Configuration
             span: left
             type: dropdown
+        admin_email_group:
+            label: Send admin email to a user group 
+            tab: Configuration
+            span: left
+            type: dropdown
+        admin_email_address:
+            label: Send admin email to an individual email address 
+            tab: Configuration
+            span: right
         redemption_email:
             label: Redemption Email
             description: If not blank, send an email to the recipient upon redemption with the specified text.

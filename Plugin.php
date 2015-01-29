@@ -390,7 +390,10 @@ class Plugin extends PluginBase
     public function registerMailTemplates()
     {
         return [
-                'dma.friends::mail.invite' => 'Invitation email to join a group sent when a user is added to a group.',
+            'dma.friends::mail.invite'      => 'Invitation email to join a group sent when a user is added to a group.',
+            'dma.friends::mail.badge'       => 'Email to send to a user when a badge is awarded',
+            'dma.friends::mail.reward'      => 'Email to send to a user when a reward is redeemed',
+            'dma.friends::mail.adminReward' => 'Administrative email to send when a reward is redeemed',
         ];
     }    
 
