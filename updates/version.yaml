@@ -65,6 +65,9 @@
 1.0.21:
     - Add user group code
     - add_user_group_code.php    
-1.0.22:
+1.0.23:
+    - Add bookmarks table
+    - create_bookmarks_table.php      
+1.0.24:
     - Add new email options for rewards 
     - add_reward_email_options.php   

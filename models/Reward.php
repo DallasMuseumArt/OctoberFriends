@@ -1,6 +1,8 @@
 <?php namespace DMA\Friends\Models;
 
 use Model;
+use Auth;
+use DMA\Friends\Models\Bookmark;
 use Smirik\PHPDateTimeAgo\DateTimeAgo as TimeAgo;
 use System\Models\MailTemplate;
 
@@ -46,6 +48,7 @@ class Reward extends Model
 
     public $morphMany = [ 
         'activityLogs'  => ['DMA\Friends\Models\ActivityLog', 'name' => 'object'],
+        'bookmarks'     => ['DMA\Friends\Models\Bookmark', 'name' => 'object'],
     ];
 
     public function scopefindWordpress($query, $id)
@@ -60,7 +63,7 @@ class Reward extends Model
             ->where('is_hidden', '=', 0);
     }
 
-    public function getPointsFormatted()
+    public function getPointsFormattedAttribute()
     {
         return number_format($this->points);
     }
@@ -75,6 +78,12 @@ class Reward extends Model
 
         $timeAgo = new TimeAgo;
         return $timeAgo->get($this->pivot->created_at);
+    }
+
+    public function getIsBookmarkedAttribute()
+    {
+        $user = Auth::getUser();
+        return (boolean)Bookmark::findBookmark($user, $this);
     }
 
     public function getEmailTemplateOptions()

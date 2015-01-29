@@ -4,6 +4,7 @@ use App;
 use File;
 use View;
 use DMA\Friends\Classes\Notifications\Templates\TemplateParser;
+use DMA\Friends\Classes\Notifications\Exceptions\TemplateNotFoundException;
 
 /**
  * Generic notification
@@ -208,13 +209,33 @@ class NotificationMessage
 	{
 	    if(is_null($this->templateInfo)){
 	        try{
-	           $view = $this->getView();
-	           $path = File::get(View::make($view)->getPath());
-	           $this->templateInfo =  TemplateParser::parse($path);
-	        }catch(\InvalidArgumentException $e){
-	            throw new \Exception("Notification view [ $view ] not found");
+	            $view = $this->getView();
+	            $this->templateInfo = $this->parseTemplate($view);
+	        }catch(TemplateNotFoundException $e){
+	            // Fallback to default view template
+	            $view = substr($view, 0, strrpos($view, '.')) . '.simple';
+	            $this->templateInfo = $this->parseTemplate($view);
 	        }
 	    }
 	    return $this->templateInfo;
 	} 
+
+	/**
+	 * Internal function to parse template
+	 * 
+	 * @param string $view
+	 * @throws \DMA\Friends\Classes\Notifications\Exceptions\TemplateNotFoundException
+	 * @return array
+	 * Returns an associative array with the following keys: 'settings', 'template_1', 'template_2'
+	 */
+	private function parseTemplate($view)
+	{
+        try{
+            $path = File::get(View::make($view)->getPath());
+            return TemplateParser::parse($path);
+        }catch(\InvalidArgumentException $e){
+            throw new TemplateNotFoundException("Notification view [ $view ] not found");
+        }
+	}
+	
 }
