@@ -51,6 +51,7 @@ secondaryTabs:
             tab: Configuration
             type: number
             required: true
+            default: 0
             span: left
         barcode:
             label: Barcode Value
@@ -63,6 +64,7 @@ secondaryTabs:
             tab: Configuration
             span: left
             type: number
+            span: left
         enable_email:
             label: Email upon redemption
             description: If checked send an email to the user if they redeem this reward
