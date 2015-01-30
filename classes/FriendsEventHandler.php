@@ -148,7 +148,7 @@ class FriendsEventHandler {
     public function onNotificationsReady()
     {
 
-        Postman::listen(['sms', 'regex'=>'/.*/'], function(IncomingMessage $message){
+        Postman::listen(['sms', 'regex'=>'/.*/'], function(IncomingMessage $message) {
 
             // Find user using mobile phone
             $phoneUser = $message->getFrom();
@@ -161,7 +161,7 @@ class FriendsEventHandler {
                 $params['code'] = $code = $message->getContent();
 
                 // process Activity code first
-                if(!$activity = ActivityCode::process($user, $params)){
+                if (!$activity = ActivityCode::process($user, $params)) {
                     // Not found activity with that code.
                     // Trying if is a object assession number
                     $activity = LikeWorkOfArt::process($user, $params);
@@ -170,7 +170,7 @@ class FriendsEventHandler {
                 // Send SMS and kiosk notification
                 $typeMessage = ($activity) ? 'successful' : 'error';
                 $template = 'activity_code_' . $typeMessage; 
-                Postman::send($template, function(NotificationMessage $notification) use ($user, $code, $activity){
+                Postman::send($template, function(NotificationMessage $notification) use ($user, $code, $activity) {
 
                      // Reply to same phone number
                      $notification->to($user, $user->name);
@@ -191,7 +191,7 @@ class FriendsEventHandler {
                 
                 Log::debug('Incoming SMS', ['user' => $user, 'code' => $code, 'activity' => $activity]);
             }else{
-                Postman::send('simple', function(NotificationMessage $notification) use ( $phoneUser ){
+                Postman::send('simple', function(NotificationMessage $notification) use ( $phoneUser ) {
                 
                     $user = new User();
                     $user->phone = $phoneUser;
