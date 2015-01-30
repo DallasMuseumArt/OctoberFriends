@@ -9,6 +9,7 @@ use App;
 use Flash;
 use Lang;
 use Redirect;
+use Event;
 
 /**
  * Locations Back-end Controller
@@ -52,6 +53,7 @@ class Locations extends Controller
             } else {
                 //The user exists so log them in
                 Auth::login($user);
+                Event::fire('auth.login', [$user]);
             }
 
         }
