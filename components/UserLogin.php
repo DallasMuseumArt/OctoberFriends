@@ -145,6 +145,18 @@ class UserLogin extends ComponentBase
         }
         
     }
+    
+    /**
+     * Render the registration form.  Override the partial "register-form"
+     * in the active theme to customize the registration form
+     */
+    public function onForgotPassword()
+    {    
+        return $this->renderPartial('@modalDisplay', [
+                'title'     => Lang::get('dma.friends::lang.userLogin.forgotPasswordTitle'),
+                'content'   => $this->makePartial('forgot-password'),
+        ]);
+    }    
 
     /**
      * Render the registration form.  Override the partial "register-form" 
