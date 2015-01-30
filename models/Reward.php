@@ -92,7 +92,6 @@ class Reward extends Model
         MailTemplate::syncAll();
         $mailTemplate = new MailTemplate;
 
-        \Debugbar::info($mailTemplate->listRegisteredTemplates());
         $templates = $mailTemplate->listRegisteredTemplates();
 
         $options[] = 'No Template Defined';
