@@ -26,7 +26,9 @@ class FixTimeRestrictions extends Migration {
 
             }
         });
-    }     
+    }
+
+    public function down() {}
 
 }
 
