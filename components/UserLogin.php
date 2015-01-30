@@ -153,8 +153,8 @@ class UserLogin extends ComponentBase
     public function onForgotPassword()
     {    
         return $this->renderPartial('@modalDisplay', [
-                'title'     => Lang::get('dma.friends::lang.userLogin.forgotPasswordTitle'),
-                'content'   => $this->makePartial('forgot-password'),
+            'title'     => Lang::get('dma.friends::lang.userLogin.forgotPasswordTitle'),
+            'content'   => $this->makePartial('forgot-password'),
         ]);
     }    
 
