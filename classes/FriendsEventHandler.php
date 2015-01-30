@@ -6,8 +6,10 @@ use Log;
 use Lang;
 use Mail;
 use Session;
+use Auth;
 use RainLab\User\Models\User;
 use DMA\Friends\Facades\Postman;    
+use DMA\Friends\Classes\FriendsLog;
 use DMA\Friends\Classes\LocationManager;
 use DMA\Friends\Classes\PrintManager;
 use DMA\Friends\Classes\Notifications\IncomingMessage;
@@ -119,7 +121,18 @@ class FriendsEventHandler {
 
     public function onAuthLogin($event)
     {   
-        // Log an event that the user has logged in
+        $user = Auth::getUser();
+        $location = LocationManager::getLocation();
+
+        if ($location) {
+
+            $data = [
+                'user'      => $user,
+                'object'    => $location,
+            ];
+
+            FriendsLog::checkin($data);
+        }
     }
 
     public function onAuthRegister($user)
