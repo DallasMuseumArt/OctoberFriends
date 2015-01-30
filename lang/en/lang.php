@@ -40,10 +40,11 @@ return [
         'memberPhoneNotFound'   => 'Phone not found. Please update your Friends profile',
     ],
     'userLogin' => [
-        'loginTitle'        => 'Scan Membership Card',
-        'registerTitle'     => 'Sign Up for Friends',
-        'failCredentials'   => 'The email or password you entered is incorrect',
-        'throttleUser'      => 'Invalid login attempts. User ":login" has been temporarily suspended.'
+        'loginTitle'            => 'Scan Membership Card',
+        'registerTitle'         => 'Sign Up for Friends',
+        'failCredentials'       => 'The email or password you entered is incorrect',
+        'throttleUser'          => 'Invalid login attempts. User ":login" has been temporarily suspended.',
+        'forgotPasswordTitle'   => 'Forgot your password'
     ],
     'exceptions' => [
         'missingActivityClass'      => 'Could not find the activity :class',
