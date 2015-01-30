@@ -51,7 +51,6 @@ class RewardManager
                 Session::put('rewardError', Lang::get('dma.friends::lang.rewards.noPoints'));
             }
         } catch (Exception $e) {
-            \Debugbar::info($e);
             throw SystemException(Lang::get('dma.friends.exceptions.rewardFailed'));
         }
     }
