@@ -97,8 +97,7 @@ class UserExtend
 
         $basename = basename($image);
         $dst = '/tmp/' . $basename;
-\Log::debug($image);
-\Log::debug($dst);
+
         copy(base_path() . $image, $dst);
         
         $file = new File;
