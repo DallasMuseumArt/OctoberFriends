@@ -175,7 +175,9 @@ class Plugin extends PluginBase
         // TODO: Migrate when user plugin is forked
         User::creating(function($user)
         {
-            $user->barcode_id = md5($user->email);            
+            if (empty($user->barcode_id)) {
+                $user->barcode_id = md5($user->email); 
+            }           
         });
         
         // Extend the user model to support our custom metadata        
