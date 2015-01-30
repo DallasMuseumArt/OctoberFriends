@@ -109,9 +109,9 @@ class UserLogin extends ComponentBase
             ], true);
     
             /*
-             * Fire event that user has registered
+             * Fire event that user has logged in
              */
-            Event::fire('auth.register', $user);
+            Event::fire('auth.login', $user);
     
             /*  
              * Redirect to the intended page after successful sign in
@@ -122,7 +122,7 @@ class UserLogin extends ComponentBase
                 return Redirect::intended($redirectUrl);
         
         
-        }catch(\Exception $e){
+        } catch(\Exception $e) {
             // Catch all exceptions producced by RainLab User or DMA authentication
             // and update error block message using OctoberCMS Ajax framework
             $message = Lang::get('dma.friends::lang.userLogin.failCredentials');
@@ -231,6 +231,11 @@ class UserLogin extends ComponentBase
         if ($automaticActivation || !$requireActivation) {
             Auth::login($user);
         }
+
+        /*
+         * Fire event that user has registered
+         */
+        Event::fire('auth.registered', [$user]);
 
         /*
          * Redirect to the intended page after successful sign in
