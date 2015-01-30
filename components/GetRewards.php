@@ -135,7 +135,7 @@ class GetRewards extends ComponentBase
         
         
         return [
-            '.modal-body'       => "<script type='text/javascript'>$('button.close').click();</script>",
+            '.modal-dialog'     => "<script type='text/javascript'>$('button.close').click();</script>", //$('button.close').click();</script>",
             '#flashMessages'    => $this->renderPartial('@flashMessages'),
             'span.points'       => number_format($user->points),
         ];

@@ -11,8 +11,8 @@
         {{ model.fine_print|raw }}
 
         <button class="btn btn-primary redeem" 
-            data-control="popup" 
-            data-handler="onRedeem" 
+            data-request="onRedeem"
+            data-dismiss="popup"
             data-request-data="id: {{ model.id }}"
         >Claim for {{ model.pointsFormatted }} points</button>
     </div>
