@@ -53,7 +53,6 @@ class FriendsServiceProvider extends ServiceProvider
         	    '\DMA\Friends\Classes\Notifications\Channels\ChannelFlash',
         	    '\DMA\Friends\Classes\Notifications\Channels\ChannelEmail',
         		'\DMA\Friends\Classes\Notifications\Channels\ChannelSMS',
-        	    '\DMA\Friends\Classes\Notifications\Channels\ChannelMandrill',
         	    '\DMA\Friends\Classes\Notifications\Channels\ChannelDummy',
         	    /*    
         		'\DMA\Friends\Classes\Notifications\Channels\ChannelTwitter',
