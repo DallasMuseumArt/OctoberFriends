@@ -1,0 +1,18 @@
+{% for group in groups %}
+    <tr>
+    	<td> {{ group.name }} </td>
+		<td> {{ group.code }} </td>
+		<td>
+			<div class="btn-group pull-right" role="group" aria-label="...">
+			{% for action in ['Invite', 'Cancel'] %} 		
+			  <button type="button" class="btn btn-default"  
+			  	data-request="on{{ action }}"
+			  	data-request-update="'{{ __SELF__ }}::list': '#result'"	
+			  	data-request-data="groupId: {{ group.id }}"> 
+			  	{{ action }}
+			  </button>
+			{% endfor %}
+			</div>
+	    </td>
+    </tr>
+{% endfor %}
