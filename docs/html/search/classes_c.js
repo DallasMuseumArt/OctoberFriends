@@ -7,5 +7,6 @@ var searchData=
   ['steps',['Steps',['../d0/d0f/classDMA_1_1Friends_1_1Controllers_1_1Steps.html',1,'DMA::Friends::Controllers']]],
   ['steptransformer',['StepTransformer',['../d0/dbc/classDMA_1_1Friends_1_1Api_1_1StepTransformer.html',1,'DMA::Friends::Api']]],
   ['syncfriendsdatacommand',['SyncFriendsDataCommand',['../d1/d1d/classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand.html',1,'DMA::Friends::Commands']]],
+  ['syncfriendsimagescommand',['SyncFriendsImagesCommand',['../d0/da8/classDMA_1_1Friends_1_1Commands_1_1SyncFriendsImagesCommand.html',1,'DMA::Friends::Commands']]],
   ['syncfriendsrelationscommand',['SyncFriendsRelationsCommand',['../d1/dd5/classDMA_1_1Friends_1_1Commands_1_1SyncFriendsRelationsCommand.html',1,'DMA::Friends::Commands']]]
 ];

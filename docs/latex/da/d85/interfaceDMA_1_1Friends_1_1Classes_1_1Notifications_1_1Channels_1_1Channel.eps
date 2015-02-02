@@ -5,7 +5,7 @@
 %%For: 
 %Magnification: 1.00
 %%Orientation: Portrait
-%%BoundingBox: 0 0 500 21.857923
+%%BoundingBox: 0 0 500 18.214936
 %%Pages: 0
 %%BeginSetup
 %%EndSetup
@@ -19,13 +19,13 @@
 /marginwidth 10 def
 /distx 20 def
 /disty 40 def
-/boundaspect 22.875000 def  % aspect ratio of the BoundingBox (width/height)
+/boundaspect 27.450001 def  % aspect ratio of the BoundingBox (width/height)
 /boundx 500 def
 /boundy boundx boundaspect div def
 /xspacing 0 def
 /yspacing 0 def
 /rows 2 def
-/cols 5 def
+/cols 6 def
 /scalefactor 0 def
 /boxfont /Times-Roman findfont fontheight scalefont def
 
@@ -176,6 +176,7 @@ boxfont setfont
 (DMA\Friends\Classes\Notifications\Channels\Channel) cw
 (DMA\Friends\Classes\Notifications\Channels\ChannelDummy) cw
 (DMA\Friends\Classes\Notifications\Channels\ChannelEmail) cw
+(DMA\Friends\Classes\Notifications\Channels\ChannelFlash) cw
 (DMA\Friends\Classes\Notifications\Channels\ChannelKiosk) cw
 (DMA\Friends\Classes\Notifications\Channels\ChannelSMS) cw
 (DMA\Friends\Classes\Notifications\Channels\ChannelTwitter) cw
@@ -190,19 +191,20 @@ boundx scalefactor div boundy scalefactor div scale
 
 % ----- classes -----
 
- (DMA\Friends\Classes\Notifications\Channels\Channel) 2.000000 1.000000 box
+ (DMA\Friends\Classes\Notifications\Channels\Channel) 2.500000 1.000000 box
  (DMA\Friends\Classes\Notifications\Channels\ChannelDummy) 0.000000 0.000000 box
  (DMA\Friends\Classes\Notifications\Channels\ChannelEmail) 1.000000 0.000000 box
- (DMA\Friends\Classes\Notifications\Channels\ChannelKiosk) 2.000000 0.000000 box
- (DMA\Friends\Classes\Notifications\Channels\ChannelSMS) 3.000000 0.000000 box
- (DMA\Friends\Classes\Notifications\Channels\ChannelTwitter) 4.000000 0.000000 box
+ (DMA\Friends\Classes\Notifications\Channels\ChannelFlash) 2.000000 0.000000 box
+ (DMA\Friends\Classes\Notifications\Channels\ChannelKiosk) 3.000000 0.000000 box
+ (DMA\Friends\Classes\Notifications\Channels\ChannelSMS) 4.000000 0.000000 box
+ (DMA\Friends\Classes\Notifications\Channels\ChannelTwitter) 5.000000 0.000000 box
 
 % ----- relations -----
 
 solid
-1 2.000000 0.250000 out
+1 2.500000 0.250000 out
 solid
-0.000000 4.000000 1.000000 conn
+0.000000 5.000000 1.000000 conn
 solid
 0 0.000000 0.750000 in
 solid
@@ -213,3 +215,5 @@ solid
 0 3.000000 0.750000 in
 solid
 0 4.000000 0.750000 in
+solid
+0 5.000000 0.750000 in

@@ -1,0 +1,79 @@
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Templates_1_1TemplateParser}{\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}Notifications\textbackslash{}Templates\textbackslash{}Template\+Parser Class Reference}
+\label{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Templates_1_1TemplateParser}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Notifications\textbackslash{}\+Templates\textbackslash{}\+Template\+Parser@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Notifications\textbackslash{}\+Templates\textbackslash{}\+Template\+Parser}}
+}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Templates_1_1TemplateParser_a9979e7218aa198939d99e9ebbc654327}{parse} (\$content)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Templates_1_1TemplateParser_a0671a5759e44ca9e4bb5db9796682f74}{const {\bfseries S\+E\+C\+T\+I\+O\+N\+\_\+\+S\+E\+P\+A\+R\+A\+T\+O\+R} = '=='}\label{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Templates_1_1TemplateParser_a0671a5759e44ca9e4bb5db9796682f74}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{namespaceDMA}{D\+M\+A} Template notification parser. \begin{DoxyAuthor}{Author}
+Carlos Arroyo 
+\end{DoxyAuthor}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Templates_1_1TemplateParser_a9979e7218aa198939d99e9ebbc654327}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Templates\+::\+Template\+Parser@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Templates\+::\+Template\+Parser}!parse@{parse}}
+\index{parse@{parse}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Templates\+::\+Template\+Parser@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Templates\+::\+Template\+Parser}}
+\subsubsection[{parse}]{\setlength{\rightskip}{0pt plus 5cm}static D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Notifications\textbackslash{}\+Templates\textbackslash{}\+Template\+Parser\+::parse (
+\begin{DoxyParamCaption}
+\item[{}]{\$content}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Templates_1_1TemplateParser_a9979e7218aa198939d99e9ebbc654327}
+Parses Notifications template content. The expected file format is following\+: 
+\begin{DoxyPre}
+Settings section
+==
+alternative template
+==
+main template
+\end{DoxyPre}
+ 
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$content} & Specifies the file content. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array Returns an array with the following indexes\+: 'settings', 'main', 'alternative'. The 'settings' element contains the parsed I\+N\+I file as array. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+33     \{
+34         $sections = preg\_split(\textcolor{stringliteral}{'/^=\{2,\}\(\backslash\)s*/m'}, $content, -1);
+35         $count = count($sections);
+36         \textcolor{keywordflow}{foreach} ($sections as &$section)
+37             $section = trim($section);
+38     
+39         $result = [
+40                 \textcolor{stringliteral}{'settings'} => [],
+41                 \textcolor{stringliteral}{'main'} => null,
+42                 \textcolor{stringliteral}{'alternative'} => null
+43         ];
+44     
+45         \textcolor{keywordflow}{if} ($count >= 3) \{
+46             $result[\textcolor{stringliteral}{'settings'}] = parse\_ini\_string($sections[0], \textcolor{keyword}{true});
+47             $result[\textcolor{stringliteral}{'alternative'}] = $sections[1];
+48             $result[\textcolor{stringliteral}{'main'}] = $sections[2];
+49         \} elseif ($count == 2) \{
+50             $result[\textcolor{stringliteral}{'settings'}] = parse\_ini\_string($sections[0], \textcolor{keyword}{true});
+51             $result[\textcolor{stringliteral}{'main'}] = $sections[1];
+52         \} elseif ($count == 1) \{
+53             $result[\textcolor{stringliteral}{'main'}] = $sections[0];
+54         \}
+55 
+56         \textcolor{keywordflow}{return} $result;
+57     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+classes/notifications/templates/Template\+Parser.\+php\end{DoxyCompactItemize}
