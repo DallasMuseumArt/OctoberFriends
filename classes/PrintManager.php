@@ -83,7 +83,7 @@ class PrintManager
         $this->pdf->Ln(17);     
         $this->pdf->Code39(2, $this->pdf->getY(), $this->user->barcode_id);   //Bar Code
 
-        $this->doPrint($this->location->print_membership);
+        $this->doPrint($this->location->printer_membership);
     }
 
     /**
@@ -129,7 +129,7 @@ class PrintManager
         $this->pdf->setX(8);
         $this->pdf->Write(14, '      ');
 
-        $this->doPrint($this->location->print_reward);
+        $this->doPrint($this->location->printer_reward);
 
     }
 
@@ -137,7 +137,7 @@ class PrintManager
     {
         $activeTheme = Theme::getActiveTheme();
         $themeDir = $activeTheme->getDirName();
-        $logo = '/themes/' . $themeDir . $this->logo;
+        $logo = base_path() . '/themes/' . $themeDir . $this->logo;
 
         return $logo;
     }
