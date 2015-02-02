@@ -1,0 +1,31 @@
+<a 	href="#" class="btn btn-default" 
+	data-request="onGoToStep"
+ 	data-request-data="step: '@groups-manager'">
+ 	Go back groups</a>
+
+<div class="col-xs-12 col-md-12">
+	<h1 class="lead pull-left">
+		Group<br/>
+		{{ group.name }}
+	</h1>
+	
+	<h1 class="lead pull-right">
+		Code<br/>
+		{{ group.code }}
+	</h1>
+</div>
+
+{{ form_ajax('onSubmit', { class : 'form-horizontal', update: { '@flashMessages': '#flashMessages', 'GroupManager::members-list': '#result' } } ) }} 
+
+      <div class="input-group">
+      	  <input type="hidden" name="step"    value="{{ step }}" />
+      	  <input type="hidden" name="groupId" value="{{ group.id }}" />
+          <input type="text" class="form-control" placeholder="Type username of a friend you wish to invite" name="username" >
+          <span class="input-group-btn">
+              <button type="submit" class="btn btn-default" >Invite</button>
+          </span>
+      </div>
+
+{{ form_close() }}
+
+{% partial "@members-list" %}
