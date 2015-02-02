@@ -1,0 +1,13 @@
+{{ form_ajax('onSubmit', { class : 'form-horizontal', update: { '@flashMessages': '#flashMessages', 'GroupManager::groups-list': '#result' } } ) }} 
+
+      <div class="input-group">
+      	  <input type="hidden" name="step" value="{{ step }}" />
+          <input type="text" class="form-control" placeholder="Type here the name of your Friends Group" name="name" >
+          <span class="input-group-btn">
+              <button type="submit" class="btn btn-default" >Create</button>
+          </span>
+      </div>
+
+{{ form_close() }}
+
+{% partial '@groups-list' %}

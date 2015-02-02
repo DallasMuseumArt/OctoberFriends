@@ -1,0 +1,36 @@
+<table id="result" class="table table-hover table-striped table-result">
+{% if members.count > 0 %}
+	<thead>
+		<tr>
+			<th>Username</th>
+			<th>Name</th>
+			<th>Has join the group?</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+	{% for member in members %}
+	    <tr>
+	    	<td>{{ member[loginAttr] }}</td>
+			<td>{{ member.metadata.first_name }} {{ member.metadata.last_name }} </td>
+	        <td>{{ ( member.pivot.membership_status == 'PENDING') ? 'NO' : 'YES' }}</td>
+			<td>
+				<div class="btn-group pull-right" role="group">
+
+				  <button type="button" class="btn btn-default"  
+				  	data-request="onRemoveMember"
+				  	data-request-data="groupId: {{ group.id }}, memberId: {{ member.id }}"
+				  	data-request-update="'@flashMessages': '#flashMessages', '@members-list': '#result'"
+				  	data-request-confirm="Are you sure?">
+				  	Remove
+				  </button>
+
+			
+				</div>
+		    </td>
+	    </tr>
+	{% endfor %}
+	
+	</tbody>
+{% endif %}
+</table>

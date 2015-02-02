@@ -25,7 +25,7 @@ class Groups extends Controller
         BackendMenu::setContext('DMA.Friends', 'friends', 'groups');
     }
     
-    public function relationExtendQuery($query, $field, $manageMode)
+    public function relationExtendQuery($query, $field, $manageMode=null)
     {
         # Extend relation query to exclude owner of the group
         $ownerId = $this->relationObject->getParent()->owner_id;
