@@ -155,7 +155,7 @@ FactoryMuffin::define('DMA\Friends\Models\UserGroup', [
  */
 FactoryMuffin::define('filled:DMA\Friends\Models\UserGroup', [
 ], function($object){
-    $limit = Settings::get('maximum_users_group');
+    $limit = Settings::get('maximum_users_per_group');
     $members = FactoryMuffin::seed($limit, 'RainLab\User\Models\User');
     $members_ids = array_map(function($m) {return $m->id;}, $members);
     $object->users()->attach($members_ids);
