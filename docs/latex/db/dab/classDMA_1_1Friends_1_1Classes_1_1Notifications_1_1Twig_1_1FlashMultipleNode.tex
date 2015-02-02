@@ -1,0 +1,91 @@
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Twig_1_1FlashMultipleNode}{\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}Notifications\textbackslash{}Twig\textbackslash{}Flash\+Multiple\+Node Class Reference}
+\label{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Twig_1_1FlashMultipleNode}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Notifications\textbackslash{}\+Twig\textbackslash{}\+Flash\+Multiple\+Node@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Notifications\textbackslash{}\+Twig\textbackslash{}\+Flash\+Multiple\+Node}}
+}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}Notifications\textbackslash{}Twig\textbackslash{}Flash\+Multiple\+Node\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{db/dab/classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Twig_1_1FlashMultipleNode}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Twig_1_1FlashMultipleNode_a24c16c7fcf28befcf22abe1a793929f0}{{\bfseries \+\_\+\+\_\+construct} (\$name, Twig\+\_\+\+Node\+Interface \$body, \$lineno, \$tag= 'flash')}\label{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Twig_1_1FlashMultipleNode_a24c16c7fcf28befcf22abe1a793929f0}
+
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Twig_1_1FlashMultipleNode_ac6bd08da54fa162093a87dcabd1bef65}{compile} (Twig\+\_\+\+Compiler \$compiler)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Twig_1_1FlashMultipleNode_ac6bd08da54fa162093a87dcabd1bef65}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Twig\+::\+Flash\+Multiple\+Node@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Twig\+::\+Flash\+Multiple\+Node}!compile@{compile}}
+\index{compile@{compile}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Twig\+::\+Flash\+Multiple\+Node@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Twig\+::\+Flash\+Multiple\+Node}}
+\subsubsection[{compile}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Notifications\textbackslash{}\+Twig\textbackslash{}\+Flash\+Multiple\+Node\+::compile (
+\begin{DoxyParamCaption}
+\item[{Twig\+\_\+\+Compiler}]{\$compiler}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Twig_1_1FlashMultipleNode_ac6bd08da54fa162093a87dcabd1bef65}
+Compiles the node to P\+H\+P.
+
+
+\begin{DoxyParams}[1]{Parameters}
+Twig\+\_\+\+Compiler & {\em \$compiler} & A Twig\+\_\+\+Compiler instance \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+27     \{
+28         $attrib = $this->getAttribute(\textcolor{stringliteral}{'name'});
+29 
+30         $compiler
+31             ->write(\textcolor{stringliteral}{'$\_type = isset($context["type"]) ? $context["type"] : null;'})
+32             ->write(\textcolor{stringliteral}{'$\_message = isset($context["message"]) ? $context["message"] : null;'})
+33         ;
+34 
+35         \textcolor{keywordflow}{if} ($attrib == \textcolor{stringliteral}{'all'}) \{
+36             $compiler
+37                 ->addDebugInfo($this)
+38                 ->write(\textcolor{stringliteral}{'foreach (Flash::getMessages() as $type => $messages) \{'}.PHP\_EOL)
+39                 ->indent()
+40                     ->write(\textcolor{stringliteral}{'foreach ($messages as $message) \{'}.PHP\_EOL)
+41                     ->indent()
+42                         ->write(\textcolor{stringliteral}{'$context["type"] = $type;'})
+43                         ->write(\textcolor{stringliteral}{'$context["message"] = $message;'})
+44                         ->subcompile($this->getNode(\textcolor{stringliteral}{'body'}))
+45                     ->outdent()
+46                     ->write(\textcolor{charliteral}{'\}'}.PHP\_EOL)
+47                 ->outdent()
+48                 ->write(\textcolor{charliteral}{'\}'}.PHP\_EOL)
+49                 ->write(\textcolor{stringliteral}{'Flash::purge();'})
+50             ;
+51         \}
+52         \textcolor{keywordflow}{else} \{
+53             
+54             $compiler
+55                 ->addDebugInfo($this)
+56                 ->write(\textcolor{stringliteral}{'$context["type"] = '})
+57                 ->string($attrib)
+58                 ->write(\textcolor{charliteral}{';'})
+59                 ->write(\textcolor{stringliteral}{'foreach (Flash::get("'} . $attrib . \textcolor{stringliteral}{'") as $message) \{'}.PHP\_EOL)
+60                 ->indent()
+61                     ->write(\textcolor{stringliteral}{'$context["message"] = $message;'})
+62                     ->subcompile($this->getNode(\textcolor{stringliteral}{'body'}))
+63                 ->outdent()
+64                 ->write(\textcolor{charliteral}{'\}'}.PHP\_EOL)
+65                 ->write(\textcolor{stringliteral}{'Flash::purge();'})
+66             ;
+67             
+68         \}
+69         
+70         $compiler
+71             ->write(\textcolor{stringliteral}{'$context["type"] = $\_type;'})
+72             ->write(\textcolor{stringliteral}{'$context["message"] = $\_message;'})
+73         ;
+74         
+75     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+classes/notifications/twig/Flash\+Multiple\+Node.\+php\end{DoxyCompactItemize}

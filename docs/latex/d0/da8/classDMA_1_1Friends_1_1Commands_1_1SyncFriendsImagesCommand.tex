@@ -1,0 +1,130 @@
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsImagesCommand}{\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Commands\textbackslash{}Sync\+Friends\+Images\+Command Class Reference}
+\label{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsImagesCommand}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Commands\textbackslash{}\+Sync\+Friends\+Images\+Command@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Commands\textbackslash{}\+Sync\+Friends\+Images\+Command}}
+}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Commands\textbackslash{}Sync\+Friends\+Images\+Command\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d0/da8/classDMA_1_1Friends_1_1Commands_1_1SyncFriendsImagesCommand}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsImagesCommand_ad5c3b40d790972d62e09fbb4ca0fe07e}{\+\_\+\+\_\+construct} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsImagesCommand_a1242d83a58090238be6662886c3d0c0f}{fire} ()
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsImagesCommand_a7c929e259be2eb05e61365b49aaddcbe}{{\bfseries process\+Image} (\$object\+Image, \$image)}\label{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsImagesCommand_a7c929e259be2eb05e61365b49aaddcbe}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsImagesCommand_a54ef93b139104077ca340c109f82c5ec}{{\bfseries get\+Post\+Image} (\$wordpress\+\_\+id)}\label{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsImagesCommand_a54ef93b139104077ca340c109f82c5ec}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsImagesCommand_a799b52fec1f43c8f1b1515bc30188399}{{\bfseries get\+User\+Image} (\$wordpress\+\_\+id)}\label{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsImagesCommand_a799b52fec1f43c8f1b1515bc30188399}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsImagesCommand_a39d7b97f5ea08198e864c38054e540aa}{{\bfseries get\+Avatar\+Dir} ()}\label{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsImagesCommand_a39d7b97f5ea08198e864c38054e540aa}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsImagesCommand_aacf0ad1b892d33c6267aa9465c7b9a9d}{{\bfseries \$name} = 'friends\+:sync-\/images'}\label{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsImagesCommand_aacf0ad1b892d33c6267aa9465c7b9a9d}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsImagesCommand_af752261d56aa5f93582d32513d326707}{{\bfseries \$description} = 'Syncronize wordpress images into October'}\label{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsImagesCommand_af752261d56aa5f93582d32513d326707}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsImagesCommand_a11f452fdee5e0e909c24a96d29668acf}{{\bfseries \$db} = null}\label{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsImagesCommand_a11f452fdee5e0e909c24a96d29668acf}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsImagesCommand_ad5c3b40d790972d62e09fbb4ca0fe07e}{\index{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Images\+Command@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Images\+Command}!\+\_\+\+\_\+construct@{\+\_\+\+\_\+construct}}
+\index{\+\_\+\+\_\+construct@{\+\_\+\+\_\+construct}!D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Images\+Command@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Images\+Command}}
+\subsubsection[{\+\_\+\+\_\+construct}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Commands\textbackslash{}\+Sync\+Friends\+Images\+Command\+::\+\_\+\+\_\+construct (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsImagesCommand_ad5c3b40d790972d62e09fbb4ca0fe07e}
+Create a new command instance. \begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+42     \{
+43         $this->db = DB::connection(\textcolor{stringliteral}{'friends\_wordpress'});
+44 
+45         parent::\_\_construct();
+46     \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsImagesCommand_a1242d83a58090238be6662886c3d0c0f}{\index{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Images\+Command@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Images\+Command}!fire@{fire}}
+\index{fire@{fire}!D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Images\+Command@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+Images\+Command}}
+\subsubsection[{fire}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Commands\textbackslash{}\+Sync\+Friends\+Images\+Command\+::fire (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsImagesCommand_a1242d83a58090238be6662886c3d0c0f}
+Set the number of points set per week back to zero on sunday morning \begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+52     \{
+53 
+54         $this->info(\textcolor{stringliteral}{'Importing badge images'});
+55 
+56         Badge::where(\textcolor{stringliteral}{'wordpress\_id'}, \textcolor{charliteral}{'>'}, 0)->chunk(200, \textcolor{keyword}{function}($badges) \{
+57             \textcolor{keywordflow}{foreach} ($badges as $badge) \{
+58                 \textcolor{keywordflow}{if} (isset($badge->wordpress\_id)) \{
+59                     $image = $this->getPostImage($badge->wordpress\_id);
+60 
+61                     if (isset($image->guid)) \{
+62                         $badge->image()->delete();
+63                         $this->processImage($badge->image(), $image->guid);
+64                     \}
+65                 \}
+66             \}
+67         \});
+68 
+69         $this->info(\textcolor{stringliteral}{'Importing reward images'});
+70 
+71         Reward::where(\textcolor{stringliteral}{'wordpress\_id'}, \textcolor{charliteral}{'>'}, 0)->chunk(200, \textcolor{keyword}{function}($rewards) \{
+72             \textcolor{keywordflow}{foreach} ($rewards as $reward) \{
+73                 \textcolor{keywordflow}{if} (isset($reward->wordpress\_id)) \{
+74                     $image = $this->getPostImage($reward->wordpress\_id);
+75 
+76                     if (isset($image->guid)) \{
+77                         $reward->image()->delete();
+78                         $this->processImage($reward->image(), $image->guid);
+79                     \}
+80                 \}
+81             \}
+82         \});
+83 
+84         $this->info(\textcolor{stringliteral}{'Importing user avatars'});
+85 
+86         $avatarPath = $this->getAvatarDir();
+87 
+88         User::chunk(200, \textcolor{keyword}{function}($users) use ($avatarPath) \{
+89             \textcolor{keywordflow}{foreach} ($users as $user) \{
+90                 $image = $this->getUserImage($user->id);
+91                 \textcolor{keywordflow}{if} (!empty($image->avatar)) \{
+92                     $user->avatar()->delete();
+93                     $path = $avatarPath . $image->avatar . \textcolor{stringliteral}{'.jpg'};
+94                     $this->processImage($user->avatar(), $path);
+95                 \}
+96             \}
+97         \});
+98 
+99     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+commands/Sync\+Friends\+Images\+Command.\+php\end{DoxyCompactItemize}

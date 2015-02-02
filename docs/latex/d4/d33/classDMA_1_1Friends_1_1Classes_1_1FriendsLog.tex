@@ -1,5 +1,5 @@
-\hypertarget{classDMA_1_1Friends_1_1Classes_1_1FriendsLog}{\section{D\-M\-A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}Friends\-Log Class Reference}
-\label{classDMA_1_1Friends_1_1Classes_1_1FriendsLog}\index{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Classes\textbackslash{}\-Friends\-Log@{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Classes\textbackslash{}\-Friends\-Log}}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1FriendsLog}{\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}Friends\+Log Class Reference}
+\label{classDMA_1_1Friends_1_1Classes_1_1FriendsLog}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Friends\+Log@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Friends\+Log}}
 }
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -21,9 +21,9 @@ static \hyperlink{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_ac7705d4873f6b315
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_a0b90db29da51f53991f2dcc1a55f14c7}{\index{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Friends\-Log@{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Friends\-Log}!activity@{activity}}
-\index{activity@{activity}!DMA::Friends::Classes::FriendsLog@{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Friends\-Log}}
-\subsubsection[{activity}]{\setlength{\rightskip}{0pt plus 5cm}static D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Classes\textbackslash{}\-Friends\-Log\-::activity (
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_a0b90db29da51f53991f2dcc1a55f14c7}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log}!activity@{activity}}
+\index{activity@{activity}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log}}
+\subsubsection[{activity}]{\setlength{\rightskip}{0pt plus 5cm}static D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Friends\+Log\+::activity (
 \begin{DoxyParamCaption}
 \item[{}]{\$params}
 \end{DoxyParamCaption}
@@ -43,7 +43,7 @@ void
 \begin{DoxyCode}
 71     \{
 72         \textcolor{keywordflow}{if} (empty($params[\textcolor{stringliteral}{'user'}]) || empty($params[\textcolor{stringliteral}{'object'}]))
-73             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} InvalidArgumentException(\textcolor{stringliteral}{'Invalid Parameters'});
+73             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceInvalidArgumentException}{InvalidArgumentException}(\textcolor{stringliteral}{'Invalid Parameters'});
 74 
 75         $params[\textcolor{stringliteral}{'message'}] = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.log.activity'}, [
 76             \textcolor{stringliteral}{'name'}          => $params[\textcolor{stringliteral}{'user'}]->name, 
@@ -54,9 +54,9 @@ void
 81         self::write(\textcolor{stringliteral}{'activity'}, $params);
 82     \}
 \end{DoxyCode}
-\hypertarget{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_aa3c63d0a5b1ffcd9f58c03e443a2dc8f}{\index{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Friends\-Log@{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Friends\-Log}!artwork@{artwork}}
-\index{artwork@{artwork}!DMA::Friends::Classes::FriendsLog@{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Friends\-Log}}
-\subsubsection[{artwork}]{\setlength{\rightskip}{0pt plus 5cm}static D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Classes\textbackslash{}\-Friends\-Log\-::artwork (
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_aa3c63d0a5b1ffcd9f58c03e443a2dc8f}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log}!artwork@{artwork}}
+\index{artwork@{artwork}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log}}
+\subsubsection[{artwork}]{\setlength{\rightskip}{0pt plus 5cm}static D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Friends\+Log\+::artwork (
 \begin{DoxyParamCaption}
 \item[{}]{\$params}
 \end{DoxyParamCaption}
@@ -72,7 +72,7 @@ void
 \begin{DoxyCode}
 94     \{
 95         \textcolor{keywordflow}{if} (empty($params[\textcolor{stringliteral}{'user'}]) || empty($params[\textcolor{stringliteral}{'artwork\_id'}]))
-96             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} InvalidArgumentException(\textcolor{stringliteral}{'Invalid Parameters'});
+96             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceInvalidArgumentException}{InvalidArgumentException}(\textcolor{stringliteral}{'Invalid Parameters'});
 97 
 98         $params[\textcolor{stringliteral}{'message'}] = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.log.artwork'}, [
 99             \textcolor{stringliteral}{'name'}          => $params[\textcolor{stringliteral}{'user'}]->name, 
@@ -82,9 +82,9 @@ void
 103         self::write(\textcolor{stringliteral}{'artwork'}, $params);
 104     \}
 \end{DoxyCode}
-\hypertarget{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_ae6c33847a3d3f094a3bd27ac2dbbfa72}{\index{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Friends\-Log@{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Friends\-Log}!checkin@{checkin}}
-\index{checkin@{checkin}!DMA::Friends::Classes::FriendsLog@{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Friends\-Log}}
-\subsubsection[{checkin}]{\setlength{\rightskip}{0pt plus 5cm}static D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Classes\textbackslash{}\-Friends\-Log\-::checkin (
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_ae6c33847a3d3f094a3bd27ac2dbbfa72}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log}!checkin@{checkin}}
+\index{checkin@{checkin}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log}}
+\subsubsection[{checkin}]{\setlength{\rightskip}{0pt plus 5cm}static D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Friends\+Log\+::checkin (
 \begin{DoxyParamCaption}
 \item[{}]{\$params}
 \end{DoxyParamCaption}
@@ -100,7 +100,7 @@ void
 \begin{DoxyCode}
 116     \{
 117         \textcolor{keywordflow}{if} (empty($params[\textcolor{stringliteral}{'user'}]) || empty($params[\textcolor{stringliteral}{'object'}]))
-118             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} InvalidArgumentException(\textcolor{stringliteral}{'Invalid Parameters'});
+118             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceInvalidArgumentException}{InvalidArgumentException}(\textcolor{stringliteral}{'Invalid Parameters'});
 119 
 120         $params[\textcolor{stringliteral}{'message'}] = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.log.checkin'}, [
 121             \textcolor{stringliteral}{'name'}  => $params[\textcolor{stringliteral}{'user'}]->name, 
@@ -110,9 +110,9 @@ void
 125         self::write(\textcolor{stringliteral}{'checkin'}, $params);
 126     \}
 \end{DoxyCode}
-\hypertarget{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_a083fa01b3e143ca77bdbb1562db724de}{\index{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Friends\-Log@{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Friends\-Log}!points@{points}}
-\index{points@{points}!DMA::Friends::Classes::FriendsLog@{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Friends\-Log}}
-\subsubsection[{points}]{\setlength{\rightskip}{0pt plus 5cm}static D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Classes\textbackslash{}\-Friends\-Log\-::points (
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_a083fa01b3e143ca77bdbb1562db724de}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log}!points@{points}}
+\index{points@{points}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log}}
+\subsubsection[{points}]{\setlength{\rightskip}{0pt plus 5cm}static D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Friends\+Log\+::points (
 \begin{DoxyParamCaption}
 \item[{}]{\$params}
 \end{DoxyParamCaption}
@@ -128,7 +128,7 @@ void
 \begin{DoxyCode}
 138     \{
 139         \textcolor{keywordflow}{if} (empty($params[\textcolor{stringliteral}{'user'}]) || empty($params[\textcolor{stringliteral}{'points\_earned'}]))
-140             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} InvalidArgumentException(\textcolor{stringliteral}{'Invalid Parameters'});
+140             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceInvalidArgumentException}{InvalidArgumentException}(\textcolor{stringliteral}{'Invalid Parameters'});
 141 
 142         $params[\textcolor{stringliteral}{'message'}] = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.log.points'}, [
 143             \textcolor{stringliteral}{'name'}          => $params[\textcolor{stringliteral}{'user'}]->name, 
@@ -139,9 +139,9 @@ void
 148         self::write(\textcolor{stringliteral}{'points'}, $params);
 149     \}
 \end{DoxyCode}
-\hypertarget{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_a9f38b9c2e3b1c9d36bc7a1247b2571eb}{\index{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Friends\-Log@{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Friends\-Log}!reward@{reward}}
-\index{reward@{reward}!DMA::Friends::Classes::FriendsLog@{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Friends\-Log}}
-\subsubsection[{reward}]{\setlength{\rightskip}{0pt plus 5cm}static D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Classes\textbackslash{}\-Friends\-Log\-::reward (
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_a9f38b9c2e3b1c9d36bc7a1247b2571eb}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log}!reward@{reward}}
+\index{reward@{reward}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log}}
+\subsubsection[{reward}]{\setlength{\rightskip}{0pt plus 5cm}static D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Friends\+Log\+::reward (
 \begin{DoxyParamCaption}
 \item[{}]{\$params}
 \end{DoxyParamCaption}
@@ -157,7 +157,7 @@ void
 \begin{DoxyCode}
 161     \{
 162         \textcolor{keywordflow}{if} (empty($params[\textcolor{stringliteral}{'user'}]) || empty($params[\textcolor{stringliteral}{'object'}]))
-163             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} InvalidArgumentException(\textcolor{stringliteral}{'Invalid Parameters'});
+163             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceInvalidArgumentException}{InvalidArgumentException}(\textcolor{stringliteral}{'Invalid Parameters'});
 164 
 165         $params[\textcolor{stringliteral}{'message'}] = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.log.reward'}, [
 166             \textcolor{stringliteral}{'name'}  => $params[\textcolor{stringliteral}{'user'}]->name, 
@@ -167,9 +167,9 @@ void
 170         self::write(\textcolor{stringliteral}{'reward'}, $params);
 171     \}
 \end{DoxyCode}
-\hypertarget{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_ac7705d4873f6b3156efde3e049a21ca6}{\index{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Friends\-Log@{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Friends\-Log}!unlocked@{unlocked}}
-\index{unlocked@{unlocked}!DMA::Friends::Classes::FriendsLog@{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Friends\-Log}}
-\subsubsection[{unlocked}]{\setlength{\rightskip}{0pt plus 5cm}static D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Classes\textbackslash{}\-Friends\-Log\-::unlocked (
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_ac7705d4873f6b3156efde3e049a21ca6}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log}!unlocked@{unlocked}}
+\index{unlocked@{unlocked}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log}}
+\subsubsection[{unlocked}]{\setlength{\rightskip}{0pt plus 5cm}static D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Friends\+Log\+::unlocked (
 \begin{DoxyParamCaption}
 \item[{}]{\$params}
 \end{DoxyParamCaption}
@@ -185,7 +185,7 @@ void
 \begin{DoxyCode}
 183     \{
 184         \textcolor{keywordflow}{if} (empty($params[\textcolor{stringliteral}{'user'}]) || empty($params[\textcolor{stringliteral}{'object'}]))
-185             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} InvalidArgumentException(\textcolor{stringliteral}{'Invalid Parameters'});
+185             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceInvalidArgumentException}{InvalidArgumentException}(\textcolor{stringliteral}{'Invalid Parameters'});
 186 
 187         $params[\textcolor{stringliteral}{'message'}] = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.log.unlocked'}, [
 188             \textcolor{stringliteral}{'name'}  => $params[\textcolor{stringliteral}{'user'}]->name, 
@@ -195,9 +195,9 @@ void
 192         self::write(\textcolor{stringliteral}{'unlocked'}, $params);
 193     \}
 \end{DoxyCode}
-\hypertarget{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_a99a5a2ee4bc69aab07f58308d9cee669}{\index{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Friends\-Log@{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Friends\-Log}!write@{write}}
-\index{write@{write}!DMA::Friends::Classes::FriendsLog@{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Friends\-Log}}
-\subsubsection[{write}]{\setlength{\rightskip}{0pt plus 5cm}static D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Classes\textbackslash{}\-Friends\-Log\-::write (
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_a99a5a2ee4bc69aab07f58308d9cee669}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log}!write@{write}}
+\index{write@{write}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Log}}
+\subsubsection[{write}]{\setlength{\rightskip}{0pt plus 5cm}static D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Friends\+Log\+::write (
 \begin{DoxyParamCaption}
 \item[{}]{\$action, }
 \item[{array}]{\$params}
@@ -211,11 +211,11 @@ Write a log entry to the activity log
 \hline
 {\em \$params} & An array of parameters about the log entry
 \begin{DoxyItemize}
-\item 'user'\-: The user object to associate the log entry
-\item 'message'\-: A log message
-\item (optional) 'object'\-: A database model to associate the log with
-\item (optional) 'points\-\_\-earned'\-: The number of points earned by the action
-\item (optional) 'artwork\-\_\-id'\-: The assession number of an artwork to associate the log entry 
+\item 'user'\+: The user object to associate the log entry
+\item 'message'\+: A log message
+\item (optional) 'object'\+: A database model to associate the log with
+\item (optional) 'points\+\_\+earned'\+: The number of points earned by the action
+\item (optional) 'artwork\+\_\+id'\+: The assession number of an artwork to associate the log entry 
 \end{DoxyItemize}\\
 \hline
 \end{DoxyParams}
@@ -227,7 +227,7 @@ Write a log entry to the activity log
 37         $log->action        = $action;
 38         $log->message       = $params[\textcolor{stringliteral}{'message'}];
 39         $log->points\_earned = isset($params[\textcolor{stringliteral}{'points\_earned'}]) ? $params[\textcolor{stringliteral}{'points\_earned'}] : 0;
-40         $log->timestamp     = \textcolor{keyword}{new} DateTime(\textcolor{stringliteral}{'now'});
+40         $log->timestamp     = \textcolor{keyword}{new} \hyperlink{namespaceDateTime}{DateTime}(\textcolor{stringliteral}{'now'});
 41 
 42         \textcolor{keywordflow}{if} (isset($params[\textcolor{stringliteral}{'artwork\_id'}])) \{
 43             $log->artwork\_id = $params[\textcolor{stringliteral}{'artwork\_id'}];
@@ -244,6 +244,6 @@ Write a log entry to the activity log
 \end{DoxyCode}
 
 
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-classes/Friends\-Log.\-php\end{DoxyCompactItemize}
+classes/Friends\+Log.\+php\end{DoxyCompactItemize}

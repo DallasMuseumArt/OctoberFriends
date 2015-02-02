@@ -1,8 +1,26 @@
 var searchData=
 [
-  ['plugindetails',['pluginDetails',['../db/d85/classDMA_1_1Friends_1_1Plugin.html#abcae4983c18bdb7b266c6aaa7a081d68',1,'DMA::Friends::Plugin']]],
-  ['points',['points',['../d4/d33/classDMA_1_1Friends_1_1Classes_1_1FriendsLog.html#a083fa01b3e143ca77bdbb1562db724de',1,'DMA::Friends::Classes::FriendsLog']]],
-  ['prepareformfields',['prepareFormFields',['../dd/d00/classDMA_1_1Friends_1_1FormWidgets_1_1ActivityType.html#ab8b5e6c785f85176a4884d3218b1b064',1,'DMA::Friends::FormWidgets::ActivityType']]],
-  ['preparevars',['prepareVars',['../dd/d00/classDMA_1_1Friends_1_1FormWidgets_1_1ActivityType.html#abb8585f86e795e2f9bfd6bea78a2f7ab',1,'DMA::Friends::FormWidgets::ActivityType']]],
-  ['process',['process',['../d2/d5d/classDMA_1_1Friends_1_1Activities_1_1ActivityCode.html#a3de9ef142396ba94532566598b508d58',1,'DMA\Friends\Activities\ActivityCode\process()'],['../d2/d05/classDMA_1_1Friends_1_1Activities_1_1LikeWorkOfArt.html#a814a0bc1a22cc72f91dac635c871b43c',1,'DMA\Friends\Activities\LikeWorkOfArt\process()'],['../d3/d35/classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase.html#a772667f95a25c6aa44e31ce9c6903384',1,'DMA\Friends\Classes\ActivityTypeBase\process()']]]
+  ['onactivitycompleted',['onActivityCompleted',['../d1/d89/classDMA_1_1Friends_1_1Classes_1_1FriendsEventHandler.html#a6467365017b9d494122c8ded41a9a406',1,'DMA::Friends::Classes::FriendsEventHandler']]],
+  ['onadd',['onAdd',['../de/dd1/classDMA_1_1Friends_1_1Components_1_1GroupFormCreation.html#a9dd18b90b440803a9026ac790275f804',1,'DMA::Friends::Components::GroupFormCreation']]],
+  ['onaddmember',['onAddMember',['../d9/d20/classDMA_1_1Friends_1_1Components_1_1GroupManager.html#ac0784d39e4fe94f792bec571cec1b202',1,'DMA::Friends::Components::GroupManager']]],
+  ['onavatar',['onAvatar',['../de/dfc/classDMA_1_1Friends_1_1Components_1_1UserProfile.html#a8762bd608981dc640c3fb5d86090649e',1,'DMA::Friends::Components::UserProfile']]],
+  ['onbadgecompleted',['onBadgeCompleted',['../d1/d89/classDMA_1_1Friends_1_1Classes_1_1FriendsEventHandler.html#aa13c2568369d06c2a0ca1c96f099ff09',1,'DMA::Friends::Classes::FriendsEventHandler']]],
+  ['oncancelgroup',['onCancelGroup',['../d9/d20/classDMA_1_1Friends_1_1Components_1_1GroupManager.html#a7cec31625dfe221d62d620a078883815',1,'DMA::Friends::Components::GroupManager']]],
+  ['onchangestatus',['onChangeStatus',['../d1/d29/classDMA_1_1Friends_1_1Components_1_1GroupRequest.html#a809f2ed08437eb0458240725f07d098c',1,'DMA::Friends::Components::GroupRequest']]],
+  ['oncreategroup',['onCreateGroup',['../de/dd1/classDMA_1_1Friends_1_1Components_1_1GroupFormCreation.html#aeddc641a6672000bcf9bcf89d338ee71',1,'DMA\Friends\Components\GroupFormCreation\onCreateGroup()'],['../d9/d20/classDMA_1_1Friends_1_1Components_1_1GroupManager.html#a1022b6c4b9d4a31cf1b41d15ba13ab1f',1,'DMA\Friends\Components\GroupManager\onCreateGroup()']]],
+  ['ondelete',['onDelete',['../de/dd1/classDMA_1_1Friends_1_1Components_1_1GroupFormCreation.html#a7f4ddea881f2d0205ec7837c698e9490',1,'DMA::Friends::Components::GroupFormCreation']]],
+  ['onforgotpassword',['onForgotPassword',['../df/d81/classDMA_1_1Friends_1_1Components_1_1UserLogin.html#a232f43a38ed3fcdb7ebf6c774b031496',1,'DMA::Friends::Components::UserLogin']]],
+  ['ongotostep',['onGoToStep',['../d9/d20/classDMA_1_1Friends_1_1Components_1_1GroupManager.html#a852933111a787d927fc27d3f9465cd07',1,'DMA::Friends::Components::GroupManager']]],
+  ['onlogin',['onLogin',['../df/d81/classDMA_1_1Friends_1_1Components_1_1UserLogin.html#ae62d795e0eb073ab1e9b6e74425a04a7',1,'DMA::Friends::Components::UserLogin']]],
+  ['onpassword',['onPassword',['../de/dfc/classDMA_1_1Friends_1_1Components_1_1UserProfile.html#af07aef56eea64e63a102c3f4f5d4ee4e',1,'DMA::Friends::Components::UserProfile']]],
+  ['onpasswordsave',['onPasswordSave',['../de/dfc/classDMA_1_1Friends_1_1Components_1_1UserProfile.html#ad43136888e9abbd354167db885b1d0ee',1,'DMA::Friends::Components::UserProfile']]],
+  ['onregister',['onRegister',['../df/d81/classDMA_1_1Friends_1_1Components_1_1UserLogin.html#a61008348cecd24a9b01b20aeebc04b4b',1,'DMA::Friends::Components::UserLogin']]],
+  ['onregistersubmit',['onRegisterSubmit',['../df/d81/classDMA_1_1Friends_1_1Components_1_1UserLogin.html#adb35ec3a5460d1a197337104a54b55b1',1,'DMA::Friends::Components::UserLogin']]],
+  ['onremovemember',['onRemoveMember',['../d9/d20/classDMA_1_1Friends_1_1Components_1_1GroupManager.html#a66ab56b50c4bc943aad47bc5fdd33789',1,'DMA::Friends::Components::GroupManager']]],
+  ['onrewardredeemed',['onRewardRedeemed',['../d1/d89/classDMA_1_1Friends_1_1Classes_1_1FriendsEventHandler.html#aeb8499a09334c87311a7f5840c43685a',1,'DMA::Friends::Classes::FriendsEventHandler']]],
+  ['onsave',['onSave',['../de/dfc/classDMA_1_1Friends_1_1Components_1_1UserProfile.html#aeb1223b998f0e1e5eff79d84bda27011',1,'DMA::Friends::Components::UserProfile']]],
+  ['onsearchuser',['onSearchUser',['../de/dd1/classDMA_1_1Friends_1_1Components_1_1GroupFormCreation.html#a8cc5c8e020c44811c6ccdd75c7375940',1,'DMA::Friends::Components::GroupFormCreation']]],
+  ['onstepcompleted',['onStepCompleted',['../d1/d89/classDMA_1_1Friends_1_1Classes_1_1FriendsEventHandler.html#a3a99cae5eaa37efa395ef4fe8eb30c11',1,'DMA::Friends::Classes::FriendsEventHandler']]],
+  ['onsubmit',['onSubmit',['../d7/df7/classDMA_1_1Friends_1_1Components_1_1GroupJoinCodeForm.html#a973e8781fba9d6310f07af9463fa8c58',1,'DMA\Friends\Components\GroupJoinCodeForm\onSubmit()'],['../d9/d20/classDMA_1_1Friends_1_1Components_1_1GroupManager.html#ab676c63165e8a5ac01b8c7e6630f187f',1,'DMA\Friends\Components\GroupManager\onSubmit()']]],
+  ['onuserlogin',['onUserLogin',['../df/d81/classDMA_1_1Friends_1_1Components_1_1UserLogin.html#a9f64120e2a98aca7bb6ad628d9a72844',1,'DMA::Friends::Components::UserLogin']]]
 ];

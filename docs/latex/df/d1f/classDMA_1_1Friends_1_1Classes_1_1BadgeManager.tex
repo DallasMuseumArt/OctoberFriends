@@ -1,17 +1,20 @@
-\hypertarget{classDMA_1_1Friends_1_1Classes_1_1BadgeManager}{\section{D\-M\-A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}Badge\-Manager Class Reference}
-\label{classDMA_1_1Friends_1_1Classes_1_1BadgeManager}\index{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Classes\textbackslash{}\-Badge\-Manager@{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Classes\textbackslash{}\-Badge\-Manager}}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1BadgeManager}{\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}Badge\+Manager Class Reference}
+\label{classDMA_1_1Friends_1_1Classes_1_1BadgeManager}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Badge\+Manager@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Badge\+Manager}}
 }
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static \hyperlink{classDMA_1_1Friends_1_1Classes_1_1BadgeManager_aecab9f0ae063c6bd484857abda4252bd}{apply\-Activity\-To\-Badges} (User \$user, \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity}{Activity} \$activity)
+static \hyperlink{classDMA_1_1Friends_1_1Classes_1_1BadgeManager_aecab9f0ae063c6bd484857abda4252bd}{apply\+Activity\+To\+Badges} (User \$user, \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity}{Activity} \$activity)
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1BadgeManager_a31f11ff95b28b3663891400d26614ea5}{static {\bfseries render} (\$controller, \$badge)}\label{classDMA_1_1Friends_1_1Classes_1_1BadgeManager_a31f11ff95b28b3663891400d26614ea5}
+
 \end{DoxyCompactItemize}
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classDMA_1_1Friends_1_1Classes_1_1BadgeManager_aecab9f0ae063c6bd484857abda4252bd}{\index{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Badge\-Manager@{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Badge\-Manager}!apply\-Activity\-To\-Badges@{apply\-Activity\-To\-Badges}}
-\index{apply\-Activity\-To\-Badges@{apply\-Activity\-To\-Badges}!DMA::Friends::Classes::BadgeManager@{D\-M\-A\-::\-Friends\-::\-Classes\-::\-Badge\-Manager}}
-\subsubsection[{apply\-Activity\-To\-Badges}]{\setlength{\rightskip}{0pt plus 5cm}static D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Classes\textbackslash{}\-Badge\-Manager\-::apply\-Activity\-To\-Badges (
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1BadgeManager_aecab9f0ae063c6bd484857abda4252bd}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Badge\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Badge\+Manager}!apply\+Activity\+To\+Badges@{apply\+Activity\+To\+Badges}}
+\index{apply\+Activity\+To\+Badges@{apply\+Activity\+To\+Badges}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Badge\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Badge\+Manager}}
+\subsubsection[{apply\+Activity\+To\+Badges}]{\setlength{\rightskip}{0pt plus 5cm}static D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Badge\+Manager\+::apply\+Activity\+To\+Badges (
 \begin{DoxyParamCaption}
 \item[{User}]{\$user, }
 \item[{{\bf Activity}}]{\$activity}
@@ -28,28 +31,26 @@ Activity & {\em \$activity} & An activity model \\
 \end{DoxyParams}
 
 \begin{DoxyCode}
-31     \{
-32 
-33         $steps = $activity->steps()->get();
-34 
-35         \textcolor{keywordflow}{foreach} ($steps as $step) \{
-36 
-37             \textcolor{comment}{// see if step is associated with user}
-38             \textcolor{keywordflow}{if} (!$step->users->contains($user->id)) \{
-39                 \textcolor{comment}{// user has not completed the step}
-40                 $isStepCompletable = self::checkUserActivities($user, $activity, $step);
+36     \{
+37 
+38         $steps = $activity->steps()->get();
+39 
+40         \textcolor{keywordflow}{foreach} ($steps as $step) \{
 41 
-42                 \textcolor{keywordflow}{if} ($isStepCompletable) \{
-43                     \textcolor{comment}{// Find badge associated with steps}
-44                     self::completeBadge($step, $user);
-45                 \}
-46             \}
-47         \}
-48 
-49     \}
+42             \textcolor{comment}{// user has not completed the step}
+43             $isStepCompletable = self::checkUserActivities($user, $activity, $step);
+44 
+45             \textcolor{keywordflow}{if} ($isStepCompletable) \{
+46                 \textcolor{comment}{// Find badge associated with steps}
+47                 self::completeBadge($step, $user);
+48             \}
+49         
+50         \}
+51 
+52     \}
 \end{DoxyCode}
 
 
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-classes/Badge\-Manager.\-php\end{DoxyCompactItemize}
+classes/Badge\+Manager.\+php\end{DoxyCompactItemize}
