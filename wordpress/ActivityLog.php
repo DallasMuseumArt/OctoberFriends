@@ -87,7 +87,11 @@ class ActivityLog extends Post
                         case 'step':
                             $object = OctoberStep::findWordpress($wlog->object_id);
                             break;
+                        default:
+                            continue;
                     }
+                } else {
+                    continue;
                 }
  
             }   
@@ -98,6 +102,8 @@ class ActivityLog extends Post
                     // If the log is related to an object, save that relation
                     if ($object) {
                         $object = $object->first();
+                        // Ugly hack to get sync working for now
+                        if (get_class($object) == 'DMA\Friends\Wordpress\ActivityLog') continue;
                         $object->activityLogs()->save($log);
                     }
                     $count++;
