@@ -90,14 +90,12 @@ class Reward extends Model
     public function getEmailTemplateOptions()
     {
         MailTemplate::syncAll();
-        $mailTemplate = new MailTemplate;
-
-        $templates = $mailTemplate->listRegisteredTemplates();
+        $templates = MailTemplate::all();
 
         $options[] = 'No Template Defined';
 
         foreach($templates as $key => $template) {
-            $options[$key] = '<strong>' . $key . '</strong> - ' . $template;
+            $options[$template->code] = '<strong>' . $template->code . '</strong> - ' . $template->description;
         }
 
         return $options;
