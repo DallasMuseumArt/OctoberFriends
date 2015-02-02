@@ -27,25 +27,39 @@ tabs:
             tab: Kiosk
 
         # Groups
-        maximum_users_group:
+        maximum_users_per_group:
             span: auto
             label: Maximum number of users per group
             description: Limit of users that can be join or invite to a group.
             tab: Groups
-        maximum_points_group:
+        maximum_points_per_group:
             span: auto
             label: Maximum points per group
             description: Limit of point and user can earn by the group.
-            tab: Groups           
+            tab: Groups
+        maximum_user_group_memberships:
+            span: auto
+            label: Maximum number of groups a user can join
+            description: Limit of groups a user can join.
+            default: 1
+            tab: Groups  
+        maximum_groups_own_per_user:
+            span: auto
+            label: Maximum number of groups a user can own
+            description: Limit of groups a user can own.
+            default: 1
+            tab: Groups                                                 
+        reset_groups_time:            
+            span: left
+            label: Reset groups at
+            tab: Groups
+            type: datepicker
+            mode: time
         reset_groups_every_day:
             type: checkboxlist
             span: auto
-            label: Day to reset group
+            label: Day to reset groups
             tab: Groups           
-        reset_groups_time:            
-            span: auto
-            label: Reset groups at:
-            tab: Groups
             
         # Notifications
         active_notification_channels:

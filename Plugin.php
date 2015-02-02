@@ -134,7 +134,7 @@ class Plugin extends PluginBase
             'DMA\Friends\Components\UserMostRecentBadge'        => 'UserMostRecentBadge',
             'DMA\Friends\Components\NotificationCounter'        => 'NotificationCounter',
             'DMA\Friends\Components\NotificationList'           => 'NotificationList',
-            'DMA\Friends\Components\GroupFormCreation'  		=> 'GroupFormCreation',
+            'DMA\Friends\Components\GroupManager'         		=> 'GroupManager',               
             'DMA\Friends\Components\GroupRequest'       		=> 'GroupRequest',
             'DMA\Friends\Components\GroupJoinCodeForm'          => 'GroupJoinCodeForm',
             'DMA\Friends\Components\UserProfile'                => 'UserProfile',
@@ -363,6 +363,7 @@ class Plugin extends PluginBase
         $this->registerConsoleCommand('friends.points-weekly', 'DMA\Friends\Commands\WeeklyPoints');
         $this->registerConsoleCommand('friends.points-daily', 'DMA\Friends\Commands\DailyPoints');
         $this->registerConsoleCommand('friends.read-channels', 'DMA\Friends\Commands\ReadChannels');
+        $this->registerConsoleCommand('friends:reset-groups', 'DMA\Friends\Commands\ResetGroups');
 
     } 
 

@@ -29,7 +29,9 @@ class Settings extends Model {
      */
     public function initSettingsData()
     {
-        $this->maximum_users_group  = 5;
+        $this->maximum_users_per_group          = 5;
+        $this->maximum_user_group_memberships   = 3;
+        $this->maximum_groups_own_per_user      = 3;
         $this->maximum_points_group = 200;
         //$this->mail_group_invite_template = 'dma.friends::mail.invite'; 
         $this->reset_groups_every_day = $this->days;

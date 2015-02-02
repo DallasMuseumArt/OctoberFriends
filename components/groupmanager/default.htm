@@ -1,25 +1,3 @@
-{{ form_ajax('onSubmit', { update: { '@flashMessages': '#flashMessages', 'GroupManager::list': '#result' } } ) }} 
-
-  <div class="panel-body">
-      <div class="input-group">
-          <input type="text" class="form-control" placeholder="Group name" name="name" >
-          <span class="input-group-btn">
-              <button type="submit" class="btn btn-default" >Create</button>
-          </span>
-      </div>
-  </div>
-
-{{ form_close() }}
-
-<table class="table table-hover">
-	<thead>
-		<tr>
-			<th>Name</th>
-			<th>Code</th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody id="result">
-		{% partial __SELF__~"::list" %}
-	</tbody>
-</table>
+<div id="step"> 
+	{% partial '@groups-manager' %} 
+</div>
