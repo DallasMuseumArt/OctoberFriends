@@ -100,6 +100,7 @@ class FriendsEventHandler {
 
         // Print the reward if user is at a kiosk
         $location = LocationManager::getLocation();
+
         if ($location) {
             $printManager = new PrintManager($location, $user);
             $printManager->printCoupon($reward);
