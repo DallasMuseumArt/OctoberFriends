@@ -137,7 +137,7 @@ class PrintManager
     {
         $activeTheme = Theme::getActiveTheme();
         $themeDir = $activeTheme->getDirName();
-        $logo = '/themes/' . $themeDir . $this->logo;
+        $logo = base_path() . '/themes/' . $themeDir . $this->logo;
 
         return $logo;
     }
