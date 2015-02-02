@@ -54,5 +54,14 @@ return [
         'stepFailed'                => 'Failed to complete step',
         'badgeFailed'               => 'Failed to complete badge',
         'printerSettingsMissing'    => 'Invalid printer settings. Please check your configuration',
+        'limitUserOwnGroups'        => 'Maximum group limit reached',
+        'limitGroupUsers'           => 'Maximum users limit reached', 
+        'groupNotFound'             => 'Group not found',   
+        'userNotFound'              => 'User not found',
+    ],
+    'groups' => [
+        'groupCanceled'             => 'Group was cancelled succesfully',
+        'ownerCanBeMember'          => 'The owner of the group is already part of the group',
+        'memberRemoved'             => 'Member was succesfully removed',        
     ],
 ];

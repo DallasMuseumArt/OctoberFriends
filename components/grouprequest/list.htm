@@ -1,15 +1,16 @@
-	{% for group in groups %}
+{% for group in requests %}
 	{% set status 	 = group.pivot.membership_status %}
 	{% set optStatus = (status|upper == 'PENDING') ? ['ACCEPTED', 'REJECTED'] : ['CANCELLED']  %}
 	{% set optStatus = (status|upper == 'CANCELLED') ? [] : optStatus  %}
     <tr>
+    	<td>{{ group.name }}</td>
     	<td>{{ group.owner.name }}</td>
 		<td>{{ status }}</td>
     	<td>
 			<div class="btn-group pull-right" data-toggle="buttons">
 			  {% for key, option in options %} 	
 				  {% if key in optStatus %}
-				  	{% set btnStatus = (hasActiveMemberships) ? 'disabled' : '' %}
+				  	{% set btnStatus = (hasAvailableMemberships) ? '' : 'disabled' %}
 				  	{% set btnStatus = (status|upper == 'ACCEPTED') ? '' : btnStatus %}
 				  	
 					  <label class="btn btn-primary {{ btnStatus }} btn-{{ option }}">
@@ -17,7 +18,7 @@
 					    	name="options" 
 					    	id="option{{ loop.index }}"  
 					    	data-request-data="groupId: {{ group.id }}, status: '{{ key }}'"
-					    	data-request-update="'{{ __SELF__ }}::list': '#result'"	  
+					    	data-request-update="'{{ __SELF__ }}::default': '#result'"	  
 					    	data-request="onChangeStatus"
 					    	
 					    	{% if key == 'CANCELLED' %}

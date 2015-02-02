@@ -107,7 +107,7 @@ class GroupFormCreation extends ComponentBase
             
         
         // Allow to add more users
-        $this->page['allowAdd'] =  count($this->page['users']) < Settings::get('maximum_users_group');
+        $this->page['allowAdd'] =  count($this->page['users']) < Settings::get('maximum_users_per_group');
 
         // Get login attribute configured in RainLab.User plugin
         $this->page['loginAttr'] = $this->getLoginAttr();
@@ -143,7 +143,7 @@ class GroupFormCreation extends ComponentBase
      */
     public function onAdd(){
         $users = post('users', []);
-        $maxUsers = Settings::get('maximum_users_group');
+        $maxUsers = Settings::get('maximum_users_per_group');
         
         if (count($users) >= $maxUsers)
             //trans('dma.friends::lang.group.invalid_activation_code')

@@ -251,7 +251,7 @@ class UserGroupModelTest extends MuffinCase
         $group = FactoryMuffin::create('filled:DMA\Friends\Models\UserGroup');
         
         // Group limit from settings
-        $limit = Settings::get('maximum_users_group');
+        $limit = Settings::get('maximum_users_per_group');
         
         $this->assertEquals($limit, count($group->getUsers()));
         
