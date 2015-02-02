@@ -174,7 +174,7 @@ class ChannelManager
         foreach($channels as $channel){
             try{
                 // Update view template for each channel
-                $view = sprintf('dma.friends::notifications.%s.%s', strtolower($channel->getKey()), $notificationName);
+                $view = sprintf('dma.friends::%s.%s', strtolower($channel->getKey()), $notificationName);
                 $notification->setView($view);
 
                 // Send notification

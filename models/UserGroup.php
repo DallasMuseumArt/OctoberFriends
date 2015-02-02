@@ -1,6 +1,7 @@
 <?php namespace DMA\Friends\Models;
 
 use Event;
+use Lang;
 use Hashids\Hashids;
 use DMA\Friends\Models\Settings;
 use Illuminate\Database\QueryException;
@@ -123,14 +124,15 @@ class UserGroup extends GroupBase{
      * Mark inactive all open groups
      * @param unknown $datetime
      */
-    public static function markInactiveGroups($datetime=null){
+    public static function markInactiveGroups(){
         return self::where('is_active', '=', true)
         ->update(array('is_active' => false));
     }
     
     /**
      * Returns an array of users which the given group belongs to.
-     * Only returns Pending and Active users
+     * Only returns Pending and Active users.
+     * 
      * @return array
      */
     public function getUsers()
@@ -148,17 +150,37 @@ class UserGroup extends GroupBase{
     }
     
     /**
+     * Create a new user group
      * 
      * @param \RainLab\User\Models\User $user
      * @param string $name name of the group
      * @return \DMA\Friends\Models\UserGroup
      */
-    public function createGroup($user, $name=null)
+    public static function createGroup($user, $name)
     {
-        $group = new self();
-        $group->owner = $user;
+        $activeGroups = self::where('owner_id', $user->getKey())
+                                ->isActive()->count();
+               
+        if ($activeGroups < Settings::get('maximum_groups_own_per_user')) {
         
-        return $group;
+            $group = new self();
+            $group->owner = $user;
+            $group->name = $name;
+            
+            if($group->save()) {
+                \Postman::send('group-creation', function($notification) use ($user, $user, $group){
+                    $notification->to($user, $user->name);
+                    $notification->subject("Group '$group->name' created");
+                    $notification->message('You have succesfully create a new group');
+                    $notification->attachObject($group);
+                }, ['kiosk', 'flash']);
+            }
+                        
+            return $group;
+        }else{
+            $message = Lang::get('dma.friends::lang.exceptions.limitUserOwnGroups');
+            throw new \Exception($message);
+        }
     }
     
     
@@ -200,12 +222,13 @@ class UserGroup extends GroupBase{
     public function addUser(&$user)
     {
 
-        if (count($this->getUsers()) < Settings::get('maximum_users_group')
+        if (count($this->getUsers()) < Settings::get('maximum_users_per_group')
             && $this->is_active ){
-            if (!$this->inGroup($user)) {
+            if (!$this->inGroup($user) && 
+                    $this->owner->getKey() != $user->getKey()) {
                 
-                // Test this users is not part of an active group
-                if(self::hasActiveMemberships($user))
+                // Test if the given user has available memberships 
+                if(!self::hasAvailableMemberships($user))
                     return false;
                 
                 try{
@@ -222,7 +245,7 @@ class UserGroup extends GroupBase{
                     }
                 }
                 
-                $this->sendNotification($user, 'invite', ['mail', 'kiosk', 'flash']);
+                $this->sendNotification($user, 'group-request', ['mail', 'kiosk', 'flash']);
                 
                 // Fire event 
                 $this->fireGroupEvent('user.added', array($this, $user));
@@ -230,7 +253,8 @@ class UserGroup extends GroupBase{
                 return true;
             }
         }else{
-            // TODO : Raise exceptions or fire events 
+            $message = Lang::get('dma.friends::lang.exceptions.limitGroupUsers');
+            throw new \Exception($message);
         }
 
         return false;
@@ -286,8 +310,8 @@ class UserGroup extends GroupBase{
      */
     public function acceptMembership(&$user)
     {
-        // Test this users is not part of an active group
-        if(self::hasActiveMemberships($user))
+        // Test if the given user has available memberships
+        if(!self::hasAvailableMemberships($user))
             return false;        
         $status = $this->setMembershipStatus($user, self::MEMBERSHIP_ACCEPTED);
         return $status == self::MEMBERSHIP_ACCEPTED;
@@ -340,7 +364,7 @@ class UserGroup extends GroupBase{
                 // Send notification to group owners if the status
                 // is different to PENDING. That notification is send by addUser.
                 if ($status != self::MEMBERSHIP_PENDING){
-                    $notificationName = strtolower($status);
+                    $notificationName = 'group-' . strtolower($status);
                     $this->sendNotification($this->owner, $notificationName, ['mail', 'kiosk']);
                     
                     // Fire event
@@ -362,18 +386,41 @@ class UserGroup extends GroupBase{
      * @return boolean
      */
     public static function hasActiveMemberships($user){
-        $status = self::MEMBERSHIP_ACCEPTED;
-        $groups = self::where('is_active', true)
-                    ->with('users')
-                    ->whereHas('users', function($query) use ($user, $status){
-                        $query->where('membership_status', $status)
-                              ->where('user_id', $user->getKey());
-                    }
-        )->get();
-        
-        return count($groups) > 0;
+        return self::getActiveMembershipsCount($user) > 0;
     }  
 
+    /**
+     * Test if user has available memberships left
+     *
+     * @param RainLab\User\Models\User $user
+     * @return boolean
+     */
+    public static function hasAvailableMemberships($user){
+        $memberships = self::getActiveMembershipsCount($user);
+        return $memberships < Settings::get('maximum_user_group_memberships');
+    }
+    
+    
+    
+    /**
+     * Count active memberships for a given user
+     *
+     * @param RainLab\User\Models\User $user
+     * @return integer
+     */
+    public static function getActiveMembershipsCount($user){
+        $status = self::MEMBERSHIP_ACCEPTED;
+        return self::where('is_active', true)
+                ->with('users')
+                ->whereHas('users', function($query) use ($user, $status){
+                    $query->where('membership_status', $status)
+                    ->where('user_id', $user->getKey());
+                }
+        )->count();
+    
+    }
+    
+    
 
    
     /**
@@ -392,10 +439,10 @@ class UserGroup extends GroupBase{
             
         $group      = $this;
         $fromUser   = $this->owner;
-        \Postman::send('group-request', function($notification) use ($user, $fromUser, $group){
+        \Postman::send($notificationName, function($notification) use ($user, $fromUser, $group){
         	$notification->to($user, $user->name);
         	$notification->from($fromUser);
-        	$notification->subject('Group request');
+        	$notification->subject('Groups');
         	$notification->attachObject($group);
         }, $channel);
         
@@ -415,6 +462,15 @@ class UserGroup extends GroupBase{
         	$user = $this->users()->where('user_id', $user->getKey())->get()[0];
         }    
         return $user;    
+    }
+    
+    
+    /**
+     * Scope to return only active groups
+     * @param  $query
+     */
+    public function scopeIsActive($query){
+        return $query->where('is_active', true);
     }
 
 }

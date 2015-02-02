@@ -10,6 +10,7 @@ use System\Classes\ApplicationException;
 use DMA\Friends\Models\Settings;
 use DMA\Friends\Models\UserGroup;
 use RainLab\User\Models\Settings as UserSettings;
+use Illuminate\Support\Collection;
 
 class GroupRequest extends ComponentBase
 {
@@ -55,20 +56,22 @@ class GroupRequest extends ComponentBase
                            ->where(function($query) use ($user){
                                 $status = [ UserGroup::MEMBERSHIP_PENDING, 
                                             UserGroup::MEMBERSHIP_ACCEPTED,
-                                            UserGroup::MEMBERSHIP_CANCELLED
+                                            //UserGroup::MEMBERSHIP_CANCELLED
                                 ];
                                 $query->whereIn('membership_status', $status);
-                           })->get();
+                           })->orderBy('membership_status', 'DESC')
+                             ->orderBy('name', 'ASC')
+                             ->get();
             return $groups;
         }        
-        return [];
+        return new Collection([]);
     }
     
     protected function prepareVars($vars = [])
     {
         // Refresh group list
-        $this->page['groups'] = $this->getGroupRequest();
-        $this->page['hasActiveMemberships'] = UserGroup::hasActiveMemberships($this->getuser());
+        $this->page['requests'] = $this->getGroupRequest();
+        $this->page['hasAvailableMemberships'] = UserGroup::hasAvailableMemberships($this->getuser());
         
         // UI group options
         $this->page['options'] = [ 

@@ -1,22 +1,17 @@
-<div class="row group">
-<h4>{{ user.name|title }} you have invited to join</h4>	
-<form
-	    id="group-request">
+<table id="result" class="table table-hover table-striped">
+	{% if requests.count > 0 %}
+	<thead>
+		<tr>
+		<th>Group</th>
+		<th>Created by</th>
+		<th>Membership</th>
+		<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		{% partial '@list' %}
+	</tbody>
+	{% endif %}
+</table>
 
-	        <table class="table table-hover">
-				<thead>
-					<tr>
-						<th>Group created by</th>
-		        		<th></th>
-		        		<th></th>
-		        	</tr>
-	        	</thead>
-	        	
-	        	<tbody id="result">
-					{% partial __SELF__~"::list" %}
-				</tbody>
-	        </table>
-	    </div>
-	</form>
 
-</div>
