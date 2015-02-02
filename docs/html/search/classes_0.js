@@ -15,7 +15,6 @@ var searchData=
   ['activitymetadata',['ActivityMetadata',['../de/d4f/classDMA_1_1Friends_1_1Models_1_1ActivityMetadata.html',1,'DMA::Friends::Models']]],
   ['activityresource',['ActivityResource',['../d7/d53/classDMA_1_1Friends_1_1Api_1_1ActivityResource.html',1,'DMA::Friends::Api']]],
   ['activitystream',['ActivityStream',['../da/db8/classDMA_1_1Friends_1_1Components_1_1ActivityStream.html',1,'DMA::Friends::Components']]],
-  ['activitystream',['ActivityStream',['../dc/dae/classDMA_1_1Friends_1_1Models_1_1ActivityStream.html',1,'DMA::Friends::Models']]],
   ['activitytransformer',['ActivityTransformer',['../d8/d07/classDMA_1_1Friends_1_1Api_1_1ActivityTransformer.html',1,'DMA::Friends::Api']]],
   ['activitytype',['ActivityType',['../dd/d00/classDMA_1_1Friends_1_1FormWidgets_1_1ActivityType.html',1,'DMA::Friends::FormWidgets']]],
   ['activitytypebase',['ActivityTypeBase',['../d3/d35/classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase.html',1,'DMA::Friends::Classes']]],

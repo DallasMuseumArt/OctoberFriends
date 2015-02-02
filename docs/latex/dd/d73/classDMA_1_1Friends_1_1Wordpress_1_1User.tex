@@ -1,7 +1,7 @@
-\hypertarget{classDMA_1_1Friends_1_1Wordpress_1_1User}{\section{D\-M\-A\textbackslash{}Friends\textbackslash{}Wordpress\textbackslash{}User Class Reference}
-\label{classDMA_1_1Friends_1_1Wordpress_1_1User}\index{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Wordpress\textbackslash{}\-User@{D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Wordpress\textbackslash{}\-User}}
+\hypertarget{classDMA_1_1Friends_1_1Wordpress_1_1User}{\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Wordpress\textbackslash{}User Class Reference}
+\label{classDMA_1_1Friends_1_1Wordpress_1_1User}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Wordpress\textbackslash{}\+User@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Wordpress\textbackslash{}\+User}}
 }
-Inheritance diagram for D\-M\-A\textbackslash{}Friends\textbackslash{}Wordpress\textbackslash{}User\-:\begin{figure}[H]
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Wordpress\textbackslash{}User\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{dd/d73/classDMA_1_1Friends_1_1Wordpress_1_1User}
@@ -12,17 +12,17 @@ Inheritance diagram for D\-M\-A\textbackslash{}Friends\textbackslash{}Wordpress\
 \item 
 \hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1User_ab33f393b12ecbd1a7a274a041006348f}{import} (\$limit=0)
 \item 
-\hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1User_a9664b94f73cb6ed82746b94d9bdac91b}{update\-Existing\-Users} ()
+\hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1User_a9664b94f73cb6ed82746b94d9bdac91b}{update\+Existing\+Users} ()
 \item 
-\hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1User_aa2d2c2c9b82db76a0eab7af41629e011}{update\-Metadata} (October\-User \$user, \$wordpress\-Id)
+\hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1User_aa2d2c2c9b82db76a0eab7af41629e011}{update\+Metadata} (October\+User \$user, \$wordpress\+Id)
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classDMA_1_1Friends_1_1Wordpress_1_1User_ab33f393b12ecbd1a7a274a041006348f}{\index{D\-M\-A\-::\-Friends\-::\-Wordpress\-::\-User@{D\-M\-A\-::\-Friends\-::\-Wordpress\-::\-User}!import@{import}}
-\index{import@{import}!DMA::Friends::Wordpress::User@{D\-M\-A\-::\-Friends\-::\-Wordpress\-::\-User}}
-\subsubsection[{import}]{\setlength{\rightskip}{0pt plus 5cm}D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Wordpress\textbackslash{}\-User\-::import (
+\hypertarget{classDMA_1_1Friends_1_1Wordpress_1_1User_ab33f393b12ecbd1a7a274a041006348f}{\index{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+User@{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+User}!import@{import}}
+\index{import@{import}!D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+User@{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+User}}
+\subsubsection[{import}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Wordpress\textbackslash{}\+User\+::import (
 \begin{DoxyParamCaption}
 \item[{}]{\$limit = {\ttfamily 0}}
 \end{DoxyParamCaption}
@@ -60,123 +60,129 @@ int & {\em \$limit} & The amount of records to import at one time \\
 47             $user->id           = $wuser->ID;
 48             $user->created\_at   = $wuser->user\_registered;
 49             $user->name         = $wuser->user\_nicename;
-50             $user->email        = $wuser->user\_email;
-51 
-52             \textcolor{comment}{// This gets changed to a real password later}
-53             $user->password = \textcolor{stringliteral}{'temppassword'};
-54             $user->password\_confirmation = \textcolor{stringliteral}{'temppassword'};
-55 
-56             $this->\hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1User_aa2d2c2c9b82db76a0eab7af41629e011}{updateMetadata}($user, $wuser->ID);
-57 
-58             \textcolor{comment}{// Manually update the password hash as the model wants to rehash and validate it}
-59             $this->model->where(\textcolor{stringliteral}{'id'}, $user->id)->update([\textcolor{stringliteral}{'password'} => $wuser->user\_pass]);
-60 
-61             $count++;
-62 
-63         \}
-64 
-65         \textcolor{keywordflow}{return} $count;
-66     \}
+50             $user->barcode\_id   = $wuser->user\_nicename;
+51             $user->email        = $wuser->user\_email;
+52 
+53             \textcolor{comment}{// This gets changed to a real password later}
+54             $user->password = \textcolor{stringliteral}{'temppassword'};
+55             $user->password\_confirmation = \textcolor{stringliteral}{'temppassword'};
+56 
+57             $this->\hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1User_aa2d2c2c9b82db76a0eab7af41629e011}{updateMetadata}($user, $wuser->ID);
+58 
+59             \textcolor{comment}{// Manually update the password hash as the model wants to rehash and validate it}
+60             $this->model->where(\textcolor{stringliteral}{'id'}, $user->id)->update([\textcolor{stringliteral}{'password'} => $wuser->user\_pass]);
+61 
+62             $count++;
+63 
+64         \}
+65 
+66         \textcolor{keywordflow}{return} $count;
+67     \}
 \end{DoxyCode}
-\hypertarget{classDMA_1_1Friends_1_1Wordpress_1_1User_a9664b94f73cb6ed82746b94d9bdac91b}{\index{D\-M\-A\-::\-Friends\-::\-Wordpress\-::\-User@{D\-M\-A\-::\-Friends\-::\-Wordpress\-::\-User}!update\-Existing\-Users@{update\-Existing\-Users}}
-\index{update\-Existing\-Users@{update\-Existing\-Users}!DMA::Friends::Wordpress::User@{D\-M\-A\-::\-Friends\-::\-Wordpress\-::\-User}}
-\subsubsection[{update\-Existing\-Users}]{\setlength{\rightskip}{0pt plus 5cm}D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Wordpress\textbackslash{}\-User\-::update\-Existing\-Users (
+\hypertarget{classDMA_1_1Friends_1_1Wordpress_1_1User_a9664b94f73cb6ed82746b94d9bdac91b}{\index{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+User@{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+User}!update\+Existing\+Users@{update\+Existing\+Users}}
+\index{update\+Existing\+Users@{update\+Existing\+Users}!D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+User@{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+User}}
+\subsubsection[{update\+Existing\+Users}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Wordpress\textbackslash{}\+User\+::update\+Existing\+Users (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
 )}}\label{classDMA_1_1Friends_1_1Wordpress_1_1User_a9664b94f73cb6ed82746b94d9bdac91b}
 Updates the metadata from wordpress on existing users 
 \begin{DoxyCode}
-72     \{
-73 
-74         OctoberUser::chunk(500, \textcolor{keyword}{function}($users) \{
-75         
-76             \textcolor{keywordflow}{foreach}($users as $user) \{
-77                 $id = $this->db
-78                     ->table(\textcolor{stringliteral}{'wp\_users'})
-79                     ->select(\textcolor{stringliteral}{'ID'})
-80                     ->where(\textcolor{stringliteral}{'user\_email'}, $user->email)
-81                     ->first();
-82 
-83                 \textcolor{keywordflow}{if} (!$id) \textcolor{keywordflow}{continue};
-84                 
-85                 $this->\hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1User_aa2d2c2c9b82db76a0eab7af41629e011}{updateMetadata}($user, $id->ID);
-86             \}
-87         \});
-88     \}
+73     \{
+74 
+75         OctoberUser::chunk(500, \textcolor{keyword}{function}($users) \{
+76         
+77             \textcolor{keywordflow}{foreach}($users as $user) \{
+78                 $id = $this->db
+79                     ->table(\textcolor{stringliteral}{'wp\_users'})
+80                     ->select(\textcolor{stringliteral}{'ID'})
+81                     ->where(\textcolor{stringliteral}{'user\_email'}, $user->email)
+82                     ->first();
+83 
+84                 \textcolor{keywordflow}{if} (!$id) \textcolor{keywordflow}{continue};
+85                 
+86                 $this->\hyperlink{classDMA_1_1Friends_1_1Wordpress_1_1User_aa2d2c2c9b82db76a0eab7af41629e011}{updateMetadata}($user, $id->ID);
+87             \}
+88         \});
+89     \}
 \end{DoxyCode}
-\hypertarget{classDMA_1_1Friends_1_1Wordpress_1_1User_aa2d2c2c9b82db76a0eab7af41629e011}{\index{D\-M\-A\-::\-Friends\-::\-Wordpress\-::\-User@{D\-M\-A\-::\-Friends\-::\-Wordpress\-::\-User}!update\-Metadata@{update\-Metadata}}
-\index{update\-Metadata@{update\-Metadata}!DMA::Friends::Wordpress::User@{D\-M\-A\-::\-Friends\-::\-Wordpress\-::\-User}}
-\subsubsection[{update\-Metadata}]{\setlength{\rightskip}{0pt plus 5cm}D\-M\-A\textbackslash{}\-Friends\textbackslash{}\-Wordpress\textbackslash{}\-User\-::update\-Metadata (
+\hypertarget{classDMA_1_1Friends_1_1Wordpress_1_1User_aa2d2c2c9b82db76a0eab7af41629e011}{\index{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+User@{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+User}!update\+Metadata@{update\+Metadata}}
+\index{update\+Metadata@{update\+Metadata}!D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+User@{D\+M\+A\+::\+Friends\+::\+Wordpress\+::\+User}}
+\subsubsection[{update\+Metadata}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Wordpress\textbackslash{}\+User\+::update\+Metadata (
 \begin{DoxyParamCaption}
-\item[{October\-User}]{\$user, }
-\item[{}]{\$wordpress\-Id}
+\item[{October\+User}]{\$user, }
+\item[{}]{\$wordpress\+Id}
 \end{DoxyParamCaption}
 )}}\label{classDMA_1_1Friends_1_1Wordpress_1_1User_aa2d2c2c9b82db76a0eab7af41629e011}
 Updates and save the metadata for a user object 
 \begin{DoxyCode}
-94     \{
-95         $metadata = $this->db
-96             ->table(\textcolor{stringliteral}{'wp\_usermeta'})
-97             ->where(\textcolor{stringliteral}{'user\_id'}, $wordpressId)
-98             ->get();
-99 
-100         \textcolor{comment}{// Organize the metadata for mapping to user fields}
-101         $data = [
-102             \textcolor{stringliteral}{'home\_phone'}            => \textcolor{stringliteral}{''},
-103             \textcolor{stringliteral}{'street\_address'}        => \textcolor{stringliteral}{''},
-104             \textcolor{stringliteral}{'city'}                  => \textcolor{stringliteral}{''},
-105             \textcolor{stringliteral}{'state'}                 => \textcolor{stringliteral}{''},
-106             \textcolor{stringliteral}{'zip'}                   => \textcolor{stringliteral}{''},
-107             \textcolor{stringliteral}{'first\_name'}            => \textcolor{stringliteral}{''},
-108             \textcolor{stringliteral}{'last\_name'}             => \textcolor{stringliteral}{''},
-109             \textcolor{stringliteral}{'\_badgeos\_points'}       => \textcolor{stringliteral}{''},
-110             \textcolor{stringliteral}{'email\_optin'}           => \textcolor{keyword}{false},
-111             \textcolor{stringliteral}{'current\_member'}        => \textcolor{keyword}{false},
-112             \textcolor{stringliteral}{'current\_member\_number'} => \textcolor{stringliteral}{''},
-113         ];
-114 
-115         \textcolor{keywordflow}{foreach}($metadata as $mdata) \{
-116             $data[$mdata->meta\_key] = $mdata->meta\_value;
-117         \}
-118 
-119         $user->phone            = $data[\textcolor{stringliteral}{'home\_phone'}];
-120         $user->street\_addr      = $data[\textcolor{stringliteral}{'street\_address'}];
-121         $user->city             = $data[\textcolor{stringliteral}{'city'}];
-122         $user->zip              = $data[\textcolor{stringliteral}{'zip'}];
-123         $user->points           = $data[\textcolor{stringliteral}{'\_badgeos\_points'}];
-124 
-125         \textcolor{comment}{// Populate state and country objects}
-126         \textcolor{keywordflow}{if} (!empty($data[\textcolor{stringliteral}{'state'}])) \{
-127             $state = State::where(\textcolor{stringliteral}{'code'}, strtoupper($data[\textcolor{stringliteral}{'state'}]))->first();
-128             \textcolor{keywordflow}{if} (!$state) \{
-129                 $state = State::where(\textcolor{stringliteral}{'name'}, $data[\textcolor{stringliteral}{'state'}])->first();
-130             \}
-131 
-132             \textcolor{keywordflow}{if} ($state) \{
-133                 $user->state()->associate($state);
-134                 $user->country()->associate(Country::find($state->country\_id));
-135             \}
-136         \}
+95     \{
+96         $metadata = $this->db
+97             ->table(\textcolor{stringliteral}{'wp\_usermeta'})
+98             ->where(\textcolor{stringliteral}{'user\_id'}, $wordpressId)
+99             ->get();
+100 
+101         \textcolor{comment}{// Organize the metadata for mapping to user fields}
+102         $data = [
+103             \textcolor{stringliteral}{'home\_phone'}            => \textcolor{stringliteral}{''},
+104             \textcolor{stringliteral}{'street\_address'}        => \textcolor{stringliteral}{''},
+105             \textcolor{stringliteral}{'city'}                  => \textcolor{stringliteral}{''},
+106             \textcolor{stringliteral}{'state'}                 => \textcolor{stringliteral}{''},
+107             \textcolor{stringliteral}{'zip'}                   => \textcolor{stringliteral}{''},
+108             \textcolor{stringliteral}{'first\_name'}            => \textcolor{stringliteral}{''},
+109             \textcolor{stringliteral}{'last\_name'}             => \textcolor{stringliteral}{''},
+110             \textcolor{stringliteral}{'\_badgeos\_points'}       => \textcolor{stringliteral}{''},
+111             \textcolor{stringliteral}{'email\_optin'}           => \textcolor{keyword}{false},
+112             \textcolor{stringliteral}{'current\_member'}        => \textcolor{keyword}{false},
+113             \textcolor{stringliteral}{'current\_member\_number'} => \textcolor{stringliteral}{''},
+114         ];
+115 
+116         \textcolor{keywordflow}{foreach}($metadata as $mdata) \{
+117             $data[$mdata->meta\_key] = $mdata->meta\_value;
+118         \}
+119 
+120         $user->phone            = $data[\textcolor{stringliteral}{'home\_phone'}];
+121         $user->street\_addr      = $data[\textcolor{stringliteral}{'street\_address'}];
+122         $user->city             = $data[\textcolor{stringliteral}{'city'}];
+123         $user->zip              = $data[\textcolor{stringliteral}{'zip'}];
+124         $user->points           = $data[\textcolor{stringliteral}{'\_badgeos\_points'}];
+125 
+126         \textcolor{comment}{// Ensures that we have a barcode id for the user}
+127         \textcolor{keywordflow}{if} (empty($user->barcode\_id)) \{
+128             $user->barcode\_id = $user->name;
+129         \}
+130 
+131         \textcolor{comment}{// Populate state and country objects}
+132         \textcolor{keywordflow}{if} (!empty($data[\textcolor{stringliteral}{'state'}])) \{
+133             $state = State::where(\textcolor{stringliteral}{'code'}, strtoupper($data[\textcolor{stringliteral}{'state'}]))->first();
+134             \textcolor{keywordflow}{if} (!$state) \{
+135                 $state = State::where(\textcolor{stringliteral}{'name'}, $data[\textcolor{stringliteral}{'state'}])->first();
+136             \}
 137 
-138         $metadata                           = \textcolor{keyword}{new} Usermeta;
-139         $metadata->first\_name               = $data[\textcolor{stringliteral}{'first\_name'}];
-140         $metadata->last\_name                = $data[\textcolor{stringliteral}{'last\_name'}];
-141         $metadata->email\_optin              = $data[\textcolor{stringliteral}{'email\_optin'}];
-142         $metadata->current\_member           = $data[\textcolor{stringliteral}{'current\_member'}];
-143         $metadata->current\_member\_number    = $data[\textcolor{stringliteral}{'current\_member\_number'}];
-144 
-145         \textcolor{keywordflow}{try} \{
-146             $user->forceSave();
-147             $user->metadata()->delete();
-148             $user->metadata()->save($metadata);
-149         \} \textcolor{keywordflow}{catch}(Exception $e) \{
+138             \textcolor{keywordflow}{if} ($state) \{
+139                 $user->state()->associate($state);
+140                 $user->country()->associate(Country::find($state->country\_id));
+141             \}
+142         \}
+143 
+144         $metadata                           = \textcolor{keyword}{new} Usermeta;
+145         $metadata->first\_name               = $data[\textcolor{stringliteral}{'first\_name'}];
+146         $metadata->last\_name                = $data[\textcolor{stringliteral}{'last\_name'}];
+147         $metadata->email\_optin              = $data[\textcolor{stringliteral}{'email\_optin'}];
+148         $metadata->current\_member           = $data[\textcolor{stringliteral}{'current\_member'}];
+149         $metadata->current\_member\_number    = $data[\textcolor{stringliteral}{'current\_member\_number'}];
 150 
-151         \}
-152     \}
+151         \textcolor{keywordflow}{try} \{
+152             $user->forceSave();
+153             $user->metadata()->delete();
+154             $user->metadata()->save($metadata);
+155         \} \textcolor{keywordflow}{catch}(\hyperlink{namespaceException}{Exception} $e) \{
+156 
+157         \}
+158     \}
 \end{DoxyCode}
 
 
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-wordpress/User.\-php\end{DoxyCompactItemize}
+wordpress/User.\+php\end{DoxyCompactItemize}

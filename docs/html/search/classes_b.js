@@ -1,5 +1,7 @@
 var searchData=
 [
+  ['readchannels',['ReadChannels',['../d6/d3d/classDMA_1_1Friends_1_1Commands_1_1ReadChannels.html',1,'DMA::Friends::Commands']]],
+  ['resetgroups',['ResetGroups',['../dc/d80/classDMA_1_1Friends_1_1Commands_1_1ResetGroups.html',1,'DMA::Friends::Commands']]],
   ['reward',['Reward',['../d6/d94/classDMA_1_1Friends_1_1Wordpress_1_1Reward.html',1,'DMA::Friends::Wordpress']]],
   ['reward',['Reward',['../d7/dc4/classDMA_1_1Friends_1_1Models_1_1Reward.html',1,'DMA::Friends::Models']]],
   ['rewardmanager',['RewardManager',['../d2/dfe/classDMA_1_1Friends_1_1Classes_1_1RewardManager.html',1,'DMA::Friends::Classes']]],
