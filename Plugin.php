@@ -359,11 +359,14 @@ class Plugin extends PluginBase
         $this->registerConsoleCommand('friends.sync-relations', 'DMA\Friends\Commands\SyncFriendsRelationsCommand');
         $this->registerConsoleCommand('friends.sync-images', 'DMA\Friends\Commands\SyncFriendsImagesCommand');
 
+        // Commands for clean up data
+        $this->registerConsoleCommand('friends.normalize-users', 'DMA\Friends\Commands\NormalizeUserData');
+        
         // Crontasks
         $this->registerConsoleCommand('friends.points-weekly', 'DMA\Friends\Commands\WeeklyPoints');
         $this->registerConsoleCommand('friends.points-daily', 'DMA\Friends\Commands\DailyPoints');
         $this->registerConsoleCommand('friends.read-channels', 'DMA\Friends\Commands\ReadChannels');
-        $this->registerConsoleCommand('friends:reset-groups', 'DMA\Friends\Commands\ResetGroups');
+        $this->registerConsoleCommand('friends.reset-groups', 'DMA\Friends\Commands\ResetGroups');
 
     } 
 
