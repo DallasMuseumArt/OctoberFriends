@@ -156,7 +156,9 @@ class FriendsEventHandler {
             
             // Getting first user match. Assuming that phone is 
             // unique in the database  
-            if($user = User::where('phone', $phoneUser)->first()){
+            if($user = User::where('phone', $phoneUser)
+                             ->orWhere('phone', str_replace('+', '', $phoneUser))
+                             ->first()){
 
                 // Get code from message
                 $params['code'] = $code = $message->getContent();
