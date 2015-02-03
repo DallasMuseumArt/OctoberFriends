@@ -96,9 +96,12 @@ class UserExtend
     {
 
         $basename = basename($image);
+        $src = base_path() . $image;
         $dst = '/tmp/' . $basename;
 
-        copy(base_path() . $image, $dst);
+        if (is_dir($src)) return;
+
+        copy($src, $dst);
         
         $file = new File;
         $file->data = $dst;
