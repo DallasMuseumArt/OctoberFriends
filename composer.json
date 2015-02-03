@@ -27,6 +27,7 @@
         "smirik/php-datetime-ago": "~1.0",
         "nategood/httpful": "*",
         "mandrill/mandrill": "1.0.*",
-        "hashids/hashids": "1.0.5"       
+        "hashids/hashids": "1.0.5",
+        "giggsey/libphonenumber-for-php": "~7.0"       
     }
 }
