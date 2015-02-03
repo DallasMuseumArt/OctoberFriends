@@ -214,12 +214,17 @@ class UserLogin extends ComponentBase
 
         $user = Auth::register($userData, $automaticActivation);
 
+        $birth_date = $data['birthday']['year'] 
+            . '-' .  sprintf("%02s", $data['birthday']['month']) 
+            . '-' .  sprintf("%02s", $data['birthday']['day'])
+            . ' 00:00:00';
+
         // Save user metadata
         $usermeta = new Usermeta;
         $usermeta->first_name       = $data['first_name'];
         $usermeta->last_name        = $data['last_name'];
         $usermeta->gender           = $data['gender'];
-        $usermeta->birth_date       = $data['birth_date'];
+        $usermeta->birth_date       = $birth_date;
         $usermeta->race             = $data['race'];
         $usermeta->household_income = $data['household_income'];
         $usermeta->household_size   = $data['household_size'];
