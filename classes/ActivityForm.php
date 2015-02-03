@@ -244,13 +244,13 @@ class ActivityForm extends WidgetBase
      */
     public function getFieldDepends($field)
     {
-        if (!$field->depends) {
+        if (!$field->dependsOn) {
             return;
         }
 
-        $depends = is_array($field->depends) ? $field->depends : [$field->depends];
-        $depends = htmlspecialchars(json_encode($depends), ENT_QUOTES, 'UTF-8');
-        return $depends;
+        $dependsOn = is_array($field->dependsOn) ? $field->dependsOn : [$field->dependsOn];
+        $dependsOn = htmlspecialchars(json_encode($dependsOn), ENT_QUOTES, 'UTF-8');
+        return $dependsOn;
     }
 
         /**
