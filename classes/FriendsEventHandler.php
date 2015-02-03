@@ -156,8 +156,8 @@ class FriendsEventHandler {
             
             // Getting first user match. Assuming that phone is 
             // unique in the database  
-            if($user = User::where('phone', $phoneUser)
-                             ->orWhere('phone', str_replace('+', '', $phoneUser))
+            if($user = User::where('phone', $phoneUser) # Lookup phone in E164 format +(country)(area)(phone) 
+                             ->orWhere('phone', str_replace('+1', '', $phoneUser)) # lookup phone without US code ( temporally hack for legacy data )
                              ->first()){
 
                 // Get code from message
