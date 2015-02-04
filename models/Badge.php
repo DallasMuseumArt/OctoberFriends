@@ -71,6 +71,16 @@ class Badge extends Model
     }  
 
     /**
+     * Return only badage that are active
+     */
+    public function scopeIsActive($query)
+    {
+        return $query->where('is_published', true)
+                     ->where('is_archived',  false);
+    }
+    
+    
+    /**
      * Mutator function to return the pivot timestamp as time ago
      * @return string 
      * The time since the badge was earned
