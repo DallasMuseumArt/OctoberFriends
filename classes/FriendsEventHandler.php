@@ -138,6 +138,7 @@ class FriendsEventHandler {
 
     public function onAuthRegister($user)
     {
+
         // Print the reward if user is at a kiosk
         $location = LocationManager::getLocation();
         if ($location) {
