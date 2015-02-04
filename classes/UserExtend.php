@@ -69,10 +69,13 @@ class UserExtend
      * @param integer $points
      * The amount of points to remove from a user account
      *
+     * @param boolean $deduct
+     * If false points will not be deducted from leaderboard points
+     *
      * @return boolean
      * returns true if points where removed
      */
-    public function removePoints($points)
+    public function removePoints($points, $deduct = true)
     {
         if (!is_numeric($points))
             throw new SystemException('Points must be an integer');
@@ -81,9 +84,12 @@ class UserExtend
             return false;
         }
 
-        $this->user->points -= $points;        
-        $this->user->points_this_week -= $points;
-        $this->user->points_today -= $points;
+        $this->user->points -= $points;    
+
+        if ($deduct) {    
+            $this->user->points_this_week -= $points;
+            $this->user->points_today -= $points;
+        }
         
         if ($this->user->forceSave()) {
             Event::fire('dma.friends.user.pointsRemoved', [$this->user, $points]);

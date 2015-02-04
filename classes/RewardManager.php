@@ -32,7 +32,7 @@ class RewardManager
         try {
             $userExtend = new UserExtend($user);
 
-            if ($userExtend->removePoints($reward->points)) {
+            if ($userExtend->removePoints($reward->points, false)) {
                 
                 $user->rewards()->save($reward);
                 
