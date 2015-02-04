@@ -176,7 +176,7 @@ class Plugin extends PluginBase
         User::creating(function($user)
         {
             if (empty($user->barcode_id)) {
-                $user->barcode_id = md5($user->email); 
+                $user->barcode_id = substr(md5($user->email), 0, 9); 
             }           
         });
         
