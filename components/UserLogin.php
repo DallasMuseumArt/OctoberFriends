@@ -201,7 +201,7 @@ class UserLogin extends ComponentBase
 
         // Split the data into whats required for the user and usermeta models
         $userData = [
-            'username'              => md5($data['email']), //$data['username'],
+            'username'              => substr(md5($data['email']), 0, 9), //$data['username'],
             'password'              => $data['password'],
             'password_confirmation' => $data['password_confirmation'],
             'email'                 => $data['email'],
