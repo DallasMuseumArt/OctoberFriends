@@ -60,6 +60,7 @@ class GetRewards extends ComponentBase
         $renderedRewards = [];
 
         $rewards = Reward::isActive();
+        $user = Auth::getUser();
 
         switch($filter) {
             case 'qty':
@@ -86,7 +87,7 @@ class GetRewards extends ComponentBase
 
         foreach($rewards as $reward) {
             $renderedRewards[] = [
-                'rendered' => View::make('dma.friends::rewardPreview', ['reward' => $reward])->render(),
+                'rendered' => View::make('dma.friends::rewardPreview', ['reward' => $reward, 'user' => $user])->render(),
                 'id' => $reward->id,
             ];
         }
@@ -135,7 +136,7 @@ class GetRewards extends ComponentBase
         
         
         return [
-            '.modal-dialog'     => "<script type='text/javascript'>$('button.close').click();</script>", //$('button.close').click();</script>",
+            '.modal-dialog'     => "<script type='text/javascript'>$('button.close').click();</script>",
             '#flashMessages'    => $this->renderPartial('@flashMessages'),
             'span.points'       => number_format($user->points),
         ];
