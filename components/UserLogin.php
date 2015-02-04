@@ -252,7 +252,7 @@ class UserLogin extends ComponentBase
         /*
          * Fire event that user has registered
          */
-        Event::fire('auth.registered', [$user]);
+        Event::fire('auth.register', [$user]);
 
         /*
          * Redirect to the intended page after successful sign in
