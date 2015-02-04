@@ -84,13 +84,10 @@ class PrintMembershipCard extends FormWidgetBase
         }
 
         $location = Location::find($locationId)->first();
-        \Debugbar::info($location);
-        \Debugbar::info($locationId);
         $user = post('User');
         $user = User::where('name', '=', $user['name'])->first();
 
         try { 
-            \Debugbar::info($location);
             $manager = new PrintManager($location, $user);
             $manager->printIdCard();
             Flash::info(Lang::get('dma.friends::lang.user.memberCard', ['title' => $location->title]));

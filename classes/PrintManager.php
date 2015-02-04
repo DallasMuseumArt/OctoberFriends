@@ -30,7 +30,6 @@ class PrintManager
      */
     public function __construct(Location $location, User $user)
     {
-        \Debugbar::info($location);
         $this->location = $location;
         $this->user = $user;
     }
@@ -83,7 +82,6 @@ class PrintManager
         
         $this->pdf->Ln(17);     
         $this->pdf->Code39(2, $this->pdf->getY(), $this->user->barcode_id);   //Bar Code
-\Debugbar::info($this->location);
         $this->doPrint($this->location->printer_membership);
     }
 
