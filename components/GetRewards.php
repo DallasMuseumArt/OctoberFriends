@@ -77,8 +77,8 @@ class GetRewards extends ComponentBase
                 break;
             case 'all':
             default:
-                $rewards->whereNull('inventory');
-                $rewards->orWhere('inventory', '>', 0);
+                #$rewards->whereNull('inventory');
+                #$rewards->orWhere('inventory', '>', 0);
                 break;
         }
 
