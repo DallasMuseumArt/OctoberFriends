@@ -10,11 +10,15 @@
 
         {{ model.fine_print|raw }}
 
+        {% if user.points > model.points %}
         <button class="btn btn-primary redeem" 
             data-request="onRedeem"
             data-dismiss="popup"
             data-request-data="id: {{ model.id }}"
         >Claim for {{ model.pointsFormatted }} points</button>
+        {% else %}
+        <button class="btn btn-default redeem">You need {{ model.pointsFormatted }} points</button>
+        {% endif %}
     </div>
 
     <div class="buttons">
