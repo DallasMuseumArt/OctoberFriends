@@ -4,7 +4,7 @@ namespace DMA\Friends\FormWidgets;
 
 use Backend\Classes\FormWidgetBase;
 use DMA\Friends\Classes\UserExtend;
-
+use Backend\Classes\FormField;
 
 /**
  * Time Restriction Widget
@@ -26,6 +26,14 @@ class UserPoints extends FormWidgetBase
             'name'        => 'User Points',
             'description' => 'form widget for points options'
         ];
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSaveValue($value)
+    {
+        return FormField::NO_SAVE_DATA;
     }
 
     /** 
