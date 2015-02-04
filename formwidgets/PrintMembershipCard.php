@@ -83,7 +83,8 @@ class PrintMembershipCard extends FormWidgetBase
             return;
         }
 
-        $location = Location::find($locationId)->first();
+        $location = Location::find($locationId);
+
         $user = post('User');
         $user = User::where('name', '=', $user['name'])->first();
 
