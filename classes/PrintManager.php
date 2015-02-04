@@ -105,7 +105,7 @@ class PrintManager
         $this->pdf->Image($logo, 8, 1,-170);
         
         $this->pdf->Ln(14);     
-        $this->pdf->SetFont('Arial', 'B', 8);
+        $this->pdf->SetFont('Arial', 'B', 6);
         $this->pdf->setX(8);
         $this->pdf->Write(4, $reward->fine_print);
         
