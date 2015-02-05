@@ -62,34 +62,34 @@ mixed boolean, array boolean False if code is an assession number array if code 
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-80     \{
-81         \textcolor{comment}{// Brain API request template URL}
-82         $template = \textcolor{stringliteral}{'
+88     \{
+89         \textcolor{comment}{// Brain API request template URL}
+90         $template = \textcolor{stringliteral}{'
       http://brain.dma.org/api/v1/collection/object/?fields=id,number,title&format=json&number=%s'};
-83         
-84         \textcolor{comment}{// Clean code from spaces in case user miss type it}
-85         $code     = str\_replace(\textcolor{charliteral}{' '}, \textcolor{stringliteral}{''}, $code);
-86         
-87         \textcolor{comment}{// Get URL}
-88         $url      = sprintf($template, urlencode($code));
-89         
-90         \textcolor{comment}{// Call Brain}
-91         $response = Request::get($url)                   
-92                             ->send();
-93         
-94         \textcolor{keywordflow}{if}($obj = @$response->body->results[0])\{
-95             $data = [
-96                 \textcolor{stringliteral}{'object\_id'}     => $obj->id,
-97                 \textcolor{stringliteral}{'object\_number'} => $obj->number,
-98                 \textcolor{stringliteral}{'object\_title'}  => $obj->title
-99             ];
-100             
-101             \textcolor{keywordflow}{return} $data;
-102            
-103         \}
-104         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-105         
-106     \}
+91         
+92         \textcolor{comment}{// Clean code from spaces in case user miss type it}
+93         $code     = str\_replace(\textcolor{charliteral}{' '}, \textcolor{stringliteral}{''}, $code);
+94         
+95         \textcolor{comment}{// Get URL}
+96         $url      = sprintf($template, urlencode($code));
+97         
+98         \textcolor{comment}{// Call Brain}
+99         $response = Request::get($url)                   
+100                             ->send();
+101         
+102         \textcolor{keywordflow}{if}($obj = @$response->body->results[0])\{
+103             $data = [
+104                 \textcolor{stringliteral}{'object\_id'}     => $obj->id,
+105                 \textcolor{stringliteral}{'object\_number'} => $obj->number,
+106                 \textcolor{stringliteral}{'object\_title'}  => $obj->title
+107             ];
+108             
+109             \textcolor{keywordflow}{return} $data;
+110            
+111         \}
+112         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+113         
+114     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Activities_1_1LikeWorkOfArt_a814a0bc1a22cc72f91dac635c871b43c}{\index{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art}!process@{process}}
 \index{process@{process}!D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art}}
@@ -113,38 +113,49 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInte
 35             
 36             \textcolor{keywordflow}{if} ($data = self::isAssessionNumber($code))\{
 37             
-38                 \textcolor{keywordflow}{if} ($ret = parent::process($user, [\textcolor{stringliteral}{'activity'} => $activity])) \{
-39                     
-40                     \textcolor{comment}{// TODO: Find a better way to pass this data}
-41                     $activity->objectData = $data;
-42                     unset($data[\textcolor{stringliteral}{'object\_title'}]); \textcolor{comment}{// Don't save title in user metadata table}
-43                     
-44                     ActivityMetadata::addUserActivity($user, $activity, $data);
-45 
-46                     \hyperlink{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_aa3c63d0a5b1ffcd9f58c03e443a2dc8f}{FriendsLog::artwork}([
-47                         \textcolor{stringliteral}{'user'}          => $user,
-48                         \textcolor{stringliteral}{'artwork\_id'}    => $params[\textcolor{stringliteral}{'code'}],
-49                     ]);
-50                 \}
-51                 
-52                 \textcolor{keywordflow}{return} $ret;
-53                 
-54             \} \textcolor{keywordflow}{else} \{
-55                 \textcolor{comment}{// Verify if user try to enter an Object number}
-56                 \textcolor{comment}{// Regex expression to match object number format}
-57                 $re = \textcolor{stringliteral}{"/((([a-zA-Z0-9\_\(\backslash\)\(\backslash\)-]+\(\backslash\)\(\backslash\).)\{1,\})([a-zA-Z0-9\_\(\backslash\)\(\backslash\)-]+))/"};
-58                 $isObjectNumber = (preg\_match\_all($re, str\_replace(\textcolor{charliteral}{' '}, \textcolor{stringliteral}{''},$code)) > 0); 
-59                        
-60                 \textcolor{keywordflow}{if} ( $isObjectNumber ) \{
-61                     Session::put(\textcolor{stringliteral}{'activityError'}, Lang::get(\textcolor{stringliteral}{'
+38                 \textcolor{comment}{// Skip activity process if user has already like this work of art}
+39                 $likeCount = ActivityMetadata::hasMetadataValue($user, $activity, \textcolor{stringliteral}{'object\_id'}, $data[\textcolor{stringliteral}{'
+      object\_id'}])->count();
+40      
+41                 \textcolor{keywordflow}{if} ($likeCount == 0) \{
+42                     \textcolor{comment}{// User haven't like this artwork yet}
+43                     \textcolor{keywordflow}{if} ($ret = parent::process($user, [\textcolor{stringliteral}{'activity'} => $activity])) \{
+44                         
+45                         \textcolor{comment}{// TODO: Find a better way to pass this data}
+46                         $activity->objectData = $data;
+47     
+48                         \textcolor{comment}{// Save user metada activity}
+49                         \hyperlink{classDMA_1_1Friends_1_1Models_1_1ActivityMetadata_ae65caa4e45de84ab2518f465d328fc24}{ActivityMetadata::addUserActivity}($user, $activity
+      , $data, [\textcolor{stringliteral}{'object\_title'}]);
+50     
+51                         \hyperlink{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_aa3c63d0a5b1ffcd9f58c03e443a2dc8f}{FriendsLog::artwork}([
+52                             \textcolor{stringliteral}{'user'}          => $user,
+53                             \textcolor{stringliteral}{'artwork\_id'}    => $params[\textcolor{stringliteral}{'code'}],
+54                         ]);
+55                     \}
+56                 
+57                     \textcolor{keywordflow}{return} $ret;
+58                 \} \textcolor{keywordflow}{else} \{
+59                     Session::put(\textcolor{stringliteral}{'activityError'}, Lang::get(\textcolor{stringliteral}{'
+      dma.friends::lang.activities.alreadyLikeWorkArtError'}, [\textcolor{stringliteral}{'code'} => $params[\textcolor{stringliteral}{'code'}]]));
+60                 \}
+61                 
+62             \} \textcolor{keywordflow}{else} \{
+63                 \textcolor{comment}{// Verify if user try to enter an Object number}
+64                 \textcolor{comment}{// Regex expression to match object number format}
+65                 $re = \textcolor{stringliteral}{"/((([a-zA-Z0-9\_\(\backslash\)\(\backslash\)-]+\(\backslash\)\(\backslash\).)\{1,\})([a-zA-Z0-9\_\(\backslash\)\(\backslash\)-]+))/"};
+66                 $isObjectNumber = (preg\_match\_all($re, str\_replace(\textcolor{charliteral}{' '}, \textcolor{stringliteral}{''},$code)) > 0); 
+67                        
+68                 \textcolor{keywordflow}{if} ( $isObjectNumber ) \{
+69                     Session::put(\textcolor{stringliteral}{'activityError'}, Lang::get(\textcolor{stringliteral}{'
       dma.friends::lang.activities.likeWorkArtCodeError'}, [\textcolor{stringliteral}{'code'} => $params[\textcolor{stringliteral}{'code'}]]));
-62                 \}
-63             \}     
-64        \}
-65 
-66         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-67 
-68     \}
+70                 \}
+71             \}     
+72        \}
+73 
+74         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+75 
+76     \}
 \end{DoxyCode}
 
 

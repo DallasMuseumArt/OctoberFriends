@@ -93,6 +93,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
@@ -110,11 +111,15 @@ Inheritance diagram for DMA\Friends\Models\ActivityMetadata:</div>
 </map>
  </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a93dc8a8c1ebf8bbe7f56e665751597ab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4f/classDMA_1_1Friends_1_1Models_1_1ActivityMetadata.html#a93dc8a8c1ebf8bbe7f56e665751597ab">scopeHasMetadataValue</a> ($query, $user, $activity, $key, $value)</td></tr>
+<tr class="separator:a93dc8a8c1ebf8bbe7f56e665751597ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:aeebfd8f11220b629898c1c969714671c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeebfd8f11220b629898c1c969714671c"></a>
-static&#160;</td><td class="memItemRight" valign="bottom"><b>addUserActivity</b> (User $user, <a class="el" href="../../dc/d8c/classDMA_1_1Friends_1_1Models_1_1Activity.html">Activity</a> $activity, array $data)</td></tr>
-<tr class="separator:aeebfd8f11220b629898c1c969714671c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae65caa4e45de84ab2518f465d328fc24"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4f/classDMA_1_1Friends_1_1Models_1_1ActivityMetadata.html#ae65caa4e45de84ab2518f465d328fc24">addUserActivity</a> (User $user, <a class="el" href="../../dc/d8c/classDMA_1_1Friends_1_1Models_1_1Activity.html">Activity</a> $activity, array $data, array $exclude=[])</td></tr>
+<tr class="separator:ae65caa4e45de84ab2518f465d328fc24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -141,7 +146,166 @@ Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="../../de/d4f/classDMA_1_1Friends_1_1Models_1_1ActivityMetadata.html">ActivityMetadata</a> Model </p>
-</div><h2 class="groupheader">Member Data Documentation</h2>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="ae65caa4e45de84ab2518f465d328fc24"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static DMA\Friends\Models\ActivityMetadata::addUserActivity </td>
+          <td>(</td>
+          <td class="paramtype">User&#160;</td>
+          <td class="paramname"><em>$user</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../dc/d8c/classDMA_1_1Friends_1_1Models_1_1Activity.html">Activity</a>&#160;</td>
+          <td class="paramname"><em>$activity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">array&#160;</td>
+          <td class="paramname"><em>$data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">array&#160;</td>
+          <td class="paramname"><em>$exclude</em> = <code>[]</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Add activity metadata</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">User</td><td class="paramname">$user</td><td></td></tr>
+    <tr><td class="paramtype"><a class="el" href="../../dc/d8c/classDMA_1_1Friends_1_1Models_1_1Activity.html">Activity</a></td><td class="paramname">$activity</td><td></td></tr>
+    <tr><td class="paramtype">array</td><td class="paramname">$data</td><td>key-value pair data to store </td></tr>
+    <tr><td class="paramtype">array</td><td class="paramname">$exclude</td><td>When given exclude keys to be stored in the database </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        $rows = [];</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        $exclude = array_map(<span class="stringliteral">&#39;strtolower&#39;</span>, $exclude);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="comment">// Create a session_id.</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="comment">// Session_id is use for easily identify groups of metadata </span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        $hashids = <span class="keyword">new</span> Hashids(<span class="stringliteral">&#39;dma.activity.metadata&#39;</span>, 6);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        $user_id        = $user-&gt;getKey();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        $activity_id    = $activity-&gt;getKey();</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="comment">// Add unixtime and microseconds to avoid session_id collisions </span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        $micro       = microtime(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        $unixtime    = floor($micro);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        $milseconds  = floor(($micro - $unixtime) * pow(10, 8)); </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="comment">// Create session_id</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        $session_id     = $hashids-&gt;encode($user_id, $activity_id, $unixtime, $milseconds);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="comment">// Current date and time</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        $now            = date(<span class="stringliteral">&#39;Y-m-d H:i:s&#39;</span>);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keywordflow">foreach</span>($data as $key =&gt; $value){</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            $key = strtolower($key);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            <span class="keywordflow">if</span> (!in_array($key, $exclude)) {</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                $row = [</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                    <span class="stringliteral">&#39;session_id&#39;</span>    =&gt;  $session_id,</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                    <span class="stringliteral">&#39;user_id&#39;</span>       =&gt;  $user_id,</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                    <span class="stringliteral">&#39;activity_id&#39;</span>   =&gt;  $activity_id,</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                    <span class="stringliteral">&#39;key&#39;</span>           =&gt;  $key,</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                    <span class="stringliteral">&#39;value&#39;</span>         =&gt;  $value,</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                    <span class="stringliteral">&#39;created_at&#39;</span>    =&gt;  $now,</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                    <span class="stringliteral">&#39;updated_at&#39;</span>    =&gt;  $now</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                ];</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                $rows[] = $row;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            }</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        }</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keywordflow">if</span> (count($row) &gt; 0){</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            static::insert($rows);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        }</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a93dc8a8c1ebf8bbe7f56e665751597ab"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DMA\Friends\Models\ActivityMetadata::scopeHasMetadataValue </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$query</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$user</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$activity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Query scope to filter activity metadata by the given key and value </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">mixed</td><td class="paramname">$query</td><td></td></tr>
+    <tr><td class="paramtype">RainLab\User\Models\User</td><td class="paramname">$user</td><td></td></tr>
+    <tr><td class="paramtype">DMA\Friends\Models\Activity</td><td class="paramname">$activity</td><td></td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$key</td><td></td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$value</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    {</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="keywordflow">return</span> self::where(<span class="stringliteral">&#39;user_id&#39;</span>,       $user-&gt;getKey())</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                    -&gt;where(<span class="stringliteral">&#39;activity_id&#39;</span>,  $activity-&gt;getKey())</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                    -&gt;where(<span class="stringliteral">&#39;key&#39;</span>,          $key)</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                    -&gt;where(<span class="stringliteral">&#39;value&#39;</span>,        $value);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
 <a class="anchor" id="a41b080a3ea1f2019d7695e7825b449fe"></a>
 <div class="memitem">
 <div class="memproto">
@@ -163,7 +327,7 @@ Protected Attributes</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Feb 2 2015 09:48:07 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 5 2015 14:51:09 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

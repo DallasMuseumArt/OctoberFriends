@@ -124,7 +124,7 @@ Updates and save the metadata for a user object
 100 
 101         \textcolor{comment}{// Organize the metadata for mapping to user fields}
 102         $data = [
-103             \textcolor{stringliteral}{'home\_phone'}            => \textcolor{stringliteral}{''},
+103             \textcolor{stringliteral}{'phone'}            => \textcolor{stringliteral}{''},
 104             \textcolor{stringliteral}{'street\_address'}        => \textcolor{stringliteral}{''},
 105             \textcolor{stringliteral}{'city'}                  => \textcolor{stringliteral}{''},
 106             \textcolor{stringliteral}{'state'}                 => \textcolor{stringliteral}{''},
@@ -141,7 +141,7 @@ Updates and save the metadata for a user object
 117             $data[$mdata->meta\_key] = $mdata->meta\_value;
 118         \}
 119 
-120         $user->phone            = $data[\textcolor{stringliteral}{'home\_phone'}];
+120         $user->phone            = $data[\textcolor{stringliteral}{'phone'}];
 121         $user->street\_addr      = $data[\textcolor{stringliteral}{'street\_address'}];
 122         $user->city             = $data[\textcolor{stringliteral}{'city'}];
 123         $user->zip              = $data[\textcolor{stringliteral}{'zip'}];
@@ -177,7 +177,7 @@ Updates and save the metadata for a user object
 153             $user->metadata()->delete();
 154             $user->metadata()->save($metadata);
 155         \} \textcolor{keywordflow}{catch}(\hyperlink{namespaceException}{Exception} $e) \{
-156 
+156             var\_dump($e);
 157         \}
 158     \}
 \end{DoxyCode}
