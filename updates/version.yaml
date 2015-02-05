@@ -77,3 +77,6 @@
 1.0.26:
     - Add index to user_activity table
     - add_activity_user_index.php
+1.0.27:
+    - Add image to locations
+    - add_location_image.php
