@@ -100,7 +100,7 @@ class User extends Post
 
         // Organize the metadata for mapping to user fields
         $data = [
-            'home_phone'            => '',
+            'phone'            => '',
             'street_address'        => '',
             'city'                  => '',
             'state'                 => '',
@@ -117,7 +117,7 @@ class User extends Post
             $data[$mdata->meta_key] = $mdata->meta_value;
         }
 
-        $user->phone            = $data['home_phone'];
+        $user->phone            = $data['phone'];
         $user->street_addr      = $data['street_address'];
         $user->city             = $data['city'];
         $user->zip              = $data['zip'];
@@ -153,7 +153,7 @@ class User extends Post
             $user->metadata()->delete();
             $user->metadata()->save($metadata);
         } catch(Exception $e) {
-
+            var_dump($e);
         }
     }
 
