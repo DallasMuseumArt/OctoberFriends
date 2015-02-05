@@ -28,8 +28,8 @@ secondaryTabs:
             span: right
             tab: Content
             mode: image
-            imageHeight: 300 
-            imageWidth: 100%
+            imageHeight: 300
+            imageWidth: 500
         excerpt:
             label: Excerpt
             description: a short amount of text about this badge.  This will be displayed in badge listings
