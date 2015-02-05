@@ -34,6 +34,10 @@ class Location extends Model
         'activityLogs'  => ['DMA\Friends\Models\ActivityLog', 'name' => 'object'],
     ];
 
+    public $attachOne = [
+        'image' => ['System\Models\File']
+    ];
+
     public function scopeFindByUUID($query, $uuid)
     {
         return $query->where('uuid', $uuid);
