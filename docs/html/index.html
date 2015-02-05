@@ -84,20 +84,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">DMA Friends Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Friends is an open source plugin based on OctoberCMS that encourages and recognizes visitor participation as an essential ingredient of the museum experience. Currently, participants must enroll at kiosks in the Museum, but plans are underway to add an online sign-up option.</p>
+<div class="textblock"><p><a class="el" href="d2/d01/namespaceDMA.html">DMA</a> Friends is an open source plugin for <a href="http://octobercms.com">October CMS</a> that encourages and recognizes visitor participation as an essential ingredient of the museum experience.</p>
 <h1>Installation</h1>
 <ul>
 <li>Download and complete the installation for October CMS (<a href="http://octobercms.com">http://octobercms.com</a>)</li>
+<li>Install the Rainlab "User" Plugin</li>
 <li>Extract this repository into plugins/dma/friends</li>
 <li>In plugins/dma/friends folder run <code>composer install</code>.</li>
-<li>Install the Rainlab "User" Plugin</li>
 <li>Enable the "Friends" Plugin</li>
+<li>Go to the <a href="https://github.com/DallasMuseumArt/OctoberFriendsTheme">Friends Theme Repository</a> for instructions on downloading and installing the companion theme.</li>
 </ul>
 <h1>Documentation</h1>
+<p><a class="el" href="df/d06/md_docs_ACTIVITY-TYPES.html">Developing custom activity types</a></p>
+<p><a class="el" href="df/d0e/md_docs_EVENTS.html">Using custom events</a></p>
 <p>PHP API Documentation is available at <a href="http://developer.dma.org/friends/">http://developer.dma.org/friends/</a></p>
 <p>OctoberCMS Documentation is available at <a href="https://octobercms.com/docs/">https://octobercms.com/docs/</a></p>
-<h2>Wordpress Migrations</h2>
-<p>If you are migrating from a wordpress installation of friends you will also need to provide database configuration in order to migrate your data</p>
+<h3>(LEGACY) Wordpress Migrations</h3>
+<p>If you are migrating from a wordpress/badgeos installation of friends you will also need to provide database configuration in order to migrate your data</p>
 <ul>
 <li>edit apps/config/database.php and add the following <pre>
         'friends_wordpress' =&gt; array(
@@ -117,7 +120,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Feb 2 2015 09:48:08 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 5 2015 14:51:11 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

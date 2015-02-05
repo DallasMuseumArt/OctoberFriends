@@ -7,11 +7,15 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Models\tex
 \includegraphics[height=2.000000cm]{de/d4f/classDMA_1_1Friends_1_1Models_1_1ActivityMetadata}
 \end{center}
 \end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Models_1_1ActivityMetadata_a93dc8a8c1ebf8bbe7f56e665751597ab}{scope\+Has\+Metadata\+Value} (\$query, \$user, \$activity, \$key, \$value)
+\end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classDMA_1_1Friends_1_1Models_1_1ActivityMetadata_aeebfd8f11220b629898c1c969714671c}{static {\bfseries add\+User\+Activity} (User \$user, \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity}{Activity} \$activity, array \$data)}\label{classDMA_1_1Friends_1_1Models_1_1ActivityMetadata_aeebfd8f11220b629898c1c969714671c}
-
+static \hyperlink{classDMA_1_1Friends_1_1Models_1_1ActivityMetadata_ae65caa4e45de84ab2518f465d328fc24}{add\+User\+Activity} (User \$user, \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity}{Activity} \$activity, array \$data, array \$exclude=\mbox{[}$\,$\mbox{]})
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -40,6 +44,110 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Models\tex
 
 \subsection{Detailed Description}
 \hyperlink{classDMA_1_1Friends_1_1Models_1_1ActivityMetadata}{Activity\+Metadata} Model 
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1ActivityMetadata_ae65caa4e45de84ab2518f465d328fc24}{\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity\+Metadata@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity\+Metadata}!add\+User\+Activity@{add\+User\+Activity}}
+\index{add\+User\+Activity@{add\+User\+Activity}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity\+Metadata@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity\+Metadata}}
+\subsubsection[{add\+User\+Activity}]{\setlength{\rightskip}{0pt plus 5cm}static D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Models\textbackslash{}\+Activity\+Metadata\+::add\+User\+Activity (
+\begin{DoxyParamCaption}
+\item[{User}]{\$user, }
+\item[{{\bf Activity}}]{\$activity, }
+\item[{array}]{\$data, }
+\item[{array}]{\$exclude = {\ttfamily \mbox{[}\mbox{]}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classDMA_1_1Friends_1_1Models_1_1ActivityMetadata_ae65caa4e45de84ab2518f465d328fc24}
+Add activity metadata
+
+
+\begin{DoxyParams}[1]{Parameters}
+User & {\em \$user} & \\
+\hline
+\hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity}{Activity} & {\em \$activity} & \\
+\hline
+array & {\em \$data} & key-\/value pair data to store \\
+\hline
+array & {\em \$exclude} & When given exclude keys to be stored in the database \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+49     \{
+50         $rows = [];
+51         $exclude = array\_map(\textcolor{stringliteral}{'strtolower'}, $exclude);
+52         
+53         \textcolor{comment}{// Create a session\_id.}
+54         \textcolor{comment}{// Session\_id is use for easily identify groups of metadata }
+55         $hashids = \textcolor{keyword}{new} Hashids(\textcolor{stringliteral}{'dma.activity.metadata'}, 6);
+56         $user\_id        = $user->getKey();
+57         $activity\_id    = $activity->getKey();
+58         
+59         \textcolor{comment}{// Add unixtime and microseconds to avoid session\_id collisions }
+60         $micro       = microtime(\textcolor{keyword}{true});
+61         $unixtime    = floor($micro);
+62         $milseconds  = floor(($micro - $unixtime) * pow(10, 8)); 
+63         
+64         \textcolor{comment}{// Create session\_id}
+65         $session\_id     = $hashids->encode($user\_id, $activity\_id, $unixtime, $milseconds);
+66         
+67         \textcolor{comment}{// Current date and time}
+68         $now            = date(\textcolor{stringliteral}{'Y-m-d H:i:s'});
+69         
+70         \textcolor{keywordflow}{foreach}($data as $key => $value)\{
+71             $key = strtolower($key);
+72             \textcolor{keywordflow}{if} (!in\_array($key, $exclude)) \{
+73                 $row = [
+74                     \textcolor{stringliteral}{'session\_id'}    =>  $session\_id,
+75                     \textcolor{stringliteral}{'user\_id'}       =>  $user\_id,
+76                     \textcolor{stringliteral}{'activity\_id'}   =>  $activity\_id,
+77                     \textcolor{stringliteral}{'key'}           =>  $key,
+78                     \textcolor{stringliteral}{'value'}         =>  $value,
+79                     \textcolor{stringliteral}{'created\_at'}    =>  $now,
+80                     \textcolor{stringliteral}{'updated\_at'}    =>  $now
+81                 ];
+82                 $rows[] = $row;
+83             \}
+84         \}
+85 
+86         \textcolor{keywordflow}{if} (count($row) > 0)\{
+87             static::insert($rows);
+88         \}
+89         
+90     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1ActivityMetadata_a93dc8a8c1ebf8bbe7f56e665751597ab}{\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity\+Metadata@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity\+Metadata}!scope\+Has\+Metadata\+Value@{scope\+Has\+Metadata\+Value}}
+\index{scope\+Has\+Metadata\+Value@{scope\+Has\+Metadata\+Value}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity\+Metadata@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity\+Metadata}}
+\subsubsection[{scope\+Has\+Metadata\+Value}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Models\textbackslash{}\+Activity\+Metadata\+::scope\+Has\+Metadata\+Value (
+\begin{DoxyParamCaption}
+\item[{}]{\$query, }
+\item[{}]{\$user, }
+\item[{}]{\$activity, }
+\item[{}]{\$key, }
+\item[{}]{\$value}
+\end{DoxyParamCaption}
+)}}\label{classDMA_1_1Friends_1_1Models_1_1ActivityMetadata_a93dc8a8c1ebf8bbe7f56e665751597ab}
+Query scope to filter activity metadata by the given key and value 
+\begin{DoxyParams}[1]{Parameters}
+mixed & {\em \$query} & \\
+\hline
+Rain\+Lab\textbackslash{}\+User\textbackslash{}\+Models\textbackslash{}\+User & {\em \$user} & \\
+\hline
+D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Models\textbackslash{}\+Activity & {\em \$activity} & \\
+\hline
+string & {\em \$key} & \\
+\hline
+string & {\em \$value} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+102     \{
+103         \textcolor{keywordflow}{return} self::where(\textcolor{stringliteral}{'user\_id'},       $user->getKey())
+104                     ->where(\textcolor{stringliteral}{'activity\_id'},  $activity->getKey())
+105                     ->where(\textcolor{stringliteral}{'key'},          $key)
+106                     ->where(\textcolor{stringliteral}{'value'},        $value);
+107     \}
+\end{DoxyCode}
+
 
 \subsection{Member Data Documentation}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1ActivityMetadata_a41b080a3ea1f2019d7695e7825b449fe}{\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity\+Metadata@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity\+Metadata}!\$belongs\+To@{\$belongs\+To}}

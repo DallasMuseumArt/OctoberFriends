@@ -1,27 +1,31 @@
-OctoberFriends
+DMA Friends
 ==============
 
-Friends is an open source plugin based on OctoberCMS that encourages and recognizes visitor participation 
-as an essential ingredient of the museum experience. 
-Currently, participants must enroll at kiosks in the Museum, but plans are underway to add an online sign-up option.
+DMA Friends is an open source plugin for [October CMS](http://octobercms.com) that encourages and recognizes visitor participation as an essential ingredient of the museum experience. 
+
 
 # Installation
 
 * Download and complete the installation for October CMS (http://octobercms.com)
+* Install the Rainlab "User" Plugin
 * Extract this repository into plugins/dma/friends
 * In plugins/dma/friends folder run `composer install`. 
-* Install the Rainlab "User" Plugin
 * Enable the "Friends" Plugin
+* Go to the [Friends Theme Repository](https://github.com/DallasMuseumArt/OctoberFriendsTheme) for instructions on downloading and installing the companion theme.
 
 # Documentation
+
+[Developing custom activity types](docs/ACTIVITY-TYPES.md)
+
+[Using custom events](docs/EVENTS.md) 
 
 PHP API Documentation is available at [http://developer.dma.org/friends/](http://developer.dma.org/friends/)
 
 OctoberCMS Documentation is available at [https://octobercms.com/docs/](https://octobercms.com/docs/)
 
-## Wordpress Migrations
+### (LEGACY) Wordpress Migrations
 
-If you are migrating from a wordpress installation of friends you will also
+If you are migrating from a wordpress/badgeos installation of friends you will also
 need to provide database configuration in order to migrate your data
 
 * edit apps/config/database.php and add the following
