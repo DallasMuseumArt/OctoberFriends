@@ -7,19 +7,37 @@
             </a>
         </div>
 
-        <div class="form-group">
+        <div class="form-group is-required">
             <label>First Name</label>
-            <input type="text" name="metadata[first_name]" class="form-control" value="{{ user.metadata.first_name }}" />
+            <input type="text" 
+                name="metadata[first_name]" 
+                class="form-control" 
+                value="{{ user.metadata.first_name }}" 
+                data-parsley-required="true" 
+                data-parsley-minlength="2"
+            />
         </div>
 
-        <div class="form-group">
+        <div class="form-group is-required">
             <label>Last Name</label>
-            <input type="text" name="metadata[last_name]" class="form-control"  value="{{ user.metadata.last_name }}"/>
+            <input type="text" 
+                name="metadata[last_name]" 
+                class="form-control is-required" 
+                value="{{ user.metadata.last_name }}"
+                data-parsley-required="true" 
+                data-parsley-minlength="2"
+            />
         </div>
 
-        <div class="form-group">
+        <div class="form-group is-required">
             <label>Email</label>
-            <input type="text" name="email" class="form-control"  value="{{ user.email }}"/>
+            <input type="text" 
+                name="email" 
+                class="form-control"  
+                value="{{ user.email }}"
+                data-parsley-required="true"
+                data-parsley-type="email"
+            />
         </div>
 
         <div class="form-group">
@@ -68,9 +86,17 @@
                 </select>
             </div>
 
-            <div class="form-group col-md-6">
+            <div class="form-group is-required col-md-6">
                 <label>Zipcode</label>
-                <input type="text" name="zip" class="form-control"  value="{{ user.zip }}"/>
+                <input type="text" 
+                    name="zip" 
+                    class="form-control"  
+                    value="{{ user.zip }}"
+                    data-parsley-type="number"
+                    data-parsley-required="true"
+                    data-parsley-length="[5, 5]"
+                    data-parsley-error-message="Please enter a valid zipcode"
+                />
             </div>
         </div>
 
