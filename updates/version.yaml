@@ -71,3 +71,6 @@
 1.0.24:
     - Add new email options for rewards 
     - add_reward_email_options.php   
+1.0.25:
+    - Add activity metadata session id
+    - add_activity_metadata_session_id.php
