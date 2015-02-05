@@ -4,6 +4,7 @@ use BackendMenu;
 use Backend\Classes\Controller;
 use DMA\Friends\Classes\LocationManager;
 use RainLab\User\Models\User;
+use DMA\Friends\Models\Usermeta;
 use Auth;
 use App;
 use Flash;
@@ -46,6 +47,12 @@ class Locations extends Controller
         
         if ($location->is_authorized) {
             $user = User::where('barcode_id', $barcodeId)->first();
+
+            // Attempt to lookup membership if a user isnt present
+            if (!$user) {
+                $usermeta = Usermeta::where('current_member_number', $barcodeId)->first();
+                $user = $usermeta->user;
+            }
 
             if (!$user) {
                 // The user does not exist, so flash an error
