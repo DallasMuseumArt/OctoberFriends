@@ -6,16 +6,27 @@ fields:
     title:
         label: Title
         required: true;
+    image:
+        label: Background image
+        description: A background image to display on the kiosk
+        span: left
+        type: fileupload
+        mode: image
+        imageHeight: 300
+        imageWidth: 500
     description:
         label: Description
         type: textarea
+        span: right
     is_authorized:
         label: Authorized to login
         description: Check this to allow this kiosk to login with the barcode scanner
         type: checkbox
-    uuid:
-        label: UUID
     printer_reward:
         label: Print rewards to:
     printer_membership:
         label: Print membership cards to:
+
+    uuid:
+        label: UUID
+
