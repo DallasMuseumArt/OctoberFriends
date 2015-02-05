@@ -9,6 +9,9 @@ use DMA\Friends\Classes\Notifications\Channels\Listenable;
 use DMA\Friends\Classes\Notifications\Channels\Webhook;
 use DMA\Friends\Classes\Notifications\NotificationMessage;
 use DMA\Friends\Classes\Notifications\IncomingMessage;
+use libphonenumber\PhoneNumberUtil;
+use libphonenumber\PhoneNumberFormat;
+use Carbon\Carbon;
 
 
 /**
@@ -47,7 +50,7 @@ class ChannelSMS implements Channel, Listenable, Webhook
 	    // TOOD : get this values for OctoberCMS settings
 	    $accountSid = Settings::get('twilio_account_id');
 	    $authToken  = Settings::get('twilio_auth_token');	    
-	    $this->fromNumber = $this->cleanPhone(Settings::get('twilio_default_from_number'));
+	    $this->fromNumber = $this->cleanPhone(Settings::get('twilio_default_from_number'), false);
 
 	    $this->client = new Services_Twilio($accountSid, $authToken);
 	}
@@ -80,13 +83,36 @@ class ChannelSMS implements Channel, Listenable, Webhook
 	 * @param string $phone
 	 * @return string
 	 */
-	protected function cleanPhone($phone)
+	protected function cleanPhone($phone, $useTimezone=true)
 	{
-	    $phone = preg_replace('/\\D+/', '', $phone);
-	    if(!empty($phone)){
+	    // if Phone number is not in E164 try to parse it
+	    if(!preg_match('/^\+.\d+$/', $phone)){
+	        if($useTimezone){
+    	        $phoneUtil = PhoneNumberUtil::getInstance();
+    	        try {
+    	            // Get country code using configure timezone
+    	            $tz = Carbon::now()->getTimezone();
+    	            $country_code = array_get($tz->getLocation(), 'country_code', 'US');
+    	            
+    	            // Parse phone number
+    	            $numberProto = $phoneUtil->parse($phone, $country_code);
+    	           
+    	            // Return phone
+    	            return $phoneUtil->format($numberProto, PhoneNumberFormat::E164);
+    	        
+    	        } catch (\libphonenumber\NumberParseException $e) {
+    	            // Invalid phone let twilio complain :D
+    	            return '';
+    	        } 
+	        } 
+	        
+	        // Just add missing plus sing
+
 	        return '+' . $phone;
+	        
+	    }else{
+	        return $phone;
 	    }
-	    return '';
 	}
 	
 	/**
