@@ -108,8 +108,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa399d503ccb972cb46171bd7cc2fbadf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2d0cddf99425d8ffbe2ed2c74372024"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/df1/classDMA_1_1Friends_1_1Classes_1_1UserExtend.html#ae2d0cddf99425d8ffbe2ed2c74372024">addPoints</a> ($points)</td></tr>
 <tr class="separator:ae2d0cddf99425d8ffbe2ed2c74372024"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a452030297bbe4f11bb8452e4d57396cd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/df1/classDMA_1_1Friends_1_1Classes_1_1UserExtend.html#a452030297bbe4f11bb8452e4d57396cd">removePoints</a> ($points)</td></tr>
-<tr class="separator:a452030297bbe4f11bb8452e4d57396cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72299c6e170b749617a262f18a8d7d67"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/df1/classDMA_1_1Friends_1_1Classes_1_1UserExtend.html#a72299c6e170b749617a262f18a8d7d67">removePoints</a> ($points, $deduct=true)</td></tr>
+<tr class="separator:a72299c6e170b749617a262f18a8d7d67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1de8e9326eaa1466503bf34fa0a3748"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac1de8e9326eaa1466503bf34fa0a3748"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>getMembershipStatusOptions</b> ()</td></tr>
 <tr class="separator:ac1de8e9326eaa1466503bf34fa0a3748"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -202,7 +202,7 @@ Public Attributes</h2></td></tr>
 </div><!-- fragment -->
 </div>
 </div>
-<a class="anchor" id="a452030297bbe4f11bb8452e4d57396cd"></a>
+<a class="anchor" id="a72299c6e170b749617a262f18a8d7d67"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -210,8 +210,18 @@ Public Attributes</h2></td></tr>
           <td class="memname">DMA\Friends\Classes\UserExtend::removePoints </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>$points</em></td><td>)</td>
+          <td class="paramname"><em>$points</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$deduct</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -219,28 +229,32 @@ Public Attributes</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramtype">integer</td><td class="paramname">$points</td><td>The amount of points to remove from a user account</td></tr>
+    <tr><td class="paramtype">boolean</td><td class="paramname">$deduct</td><td>If false points will not be deducted from leaderboard points</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>boolean returns true if points where removed </dd></dl>
-<div class="fragment"><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordflow">if</span> (!is_numeric($points))</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="../../df/d42/namespaceSystemException.html">SystemException</a>(<span class="stringliteral">&#39;Points must be an integer&#39;</span>);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordflow">if</span> ($this-&gt;user-&gt;points &lt; $points) {</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        }</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        $this-&gt;user-&gt;points -= $points;        </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        $this-&gt;user-&gt;points_this_week -= $points;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        $this-&gt;user-&gt;points_today -= $points;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keywordflow">if</span> ($this-&gt;user-&gt;forceSave()) {</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            Event::fire(<span class="stringliteral">&#39;dma.friends.user.pointsRemoved&#39;</span>, [$this-&gt;user, $points]);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        }</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    {</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordflow">if</span> (!is_numeric($points))</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="../../df/d42/namespaceSystemException.html">SystemException</a>(<span class="stringliteral">&#39;Points must be an integer&#39;</span>);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keywordflow">if</span> ($this-&gt;user-&gt;points &lt; $points) {</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        }</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        $this-&gt;user-&gt;points -= $points;    </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keywordflow">if</span> ($deduct) {    </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            $this-&gt;user-&gt;points_this_week -= $points;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            $this-&gt;user-&gt;points_today -= $points;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        }</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keywordflow">if</span> ($this-&gt;user-&gt;forceSave()) {</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            Event::fire(<span class="stringliteral">&#39;dma.friends.user.pointsRemoved&#39;</span>, [$this-&gt;user, $points]);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        }</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    }</div>
 <div class="ttc" id="namespaceSystemException_html"><div class="ttname"><a href="../../df/d42/namespaceSystemException.html">SystemException</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -252,7 +266,7 @@ Public Attributes</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Feb 2 2015 09:48:05 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 5 2015 14:51:07 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

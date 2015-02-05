@@ -112,6 +112,8 @@ Inheritance diagram for DMA\Friends\FormWidgets\UserPoints:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a2f5e6b76ab55e44a579486785b7b41c7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/df1/classDMA_1_1Friends_1_1FormWidgets_1_1UserPoints.html#a2f5e6b76ab55e44a579486785b7b41c7">widgetDetails</a> ()</td></tr>
 <tr class="separator:a2f5e6b76ab55e44a579486785b7b41c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc3a3971957b5aa008327001f195979f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/df1/classDMA_1_1Friends_1_1FormWidgets_1_1UserPoints.html#afc3a3971957b5aa008327001f195979f">getSaveValue</a> ($value)</td></tr>
+<tr class="separator:afc3a3971957b5aa008327001f195979f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a910893df29c6c508ced5d84185d22bcb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/df1/classDMA_1_1Friends_1_1FormWidgets_1_1UserPoints.html#a910893df29c6c508ced5d84185d22bcb">render</a> ()</td></tr>
 <tr class="separator:a910893df29c6c508ced5d84185d22bcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a19e5e2cce310f6c8547f7b50f42c1d0f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a19e5e2cce310f6c8547f7b50f42c1d0f"></a>
@@ -124,6 +126,25 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:adbaf2876c58fc27d29147c94893696b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="afc3a3971957b5aa008327001f195979f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DMA\Friends\FormWidgets\UserPoints::getSaveValue </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="fragment"><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    {</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordflow">return</span> FormField::NO_SAVE_DATA;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div>
+</div><!-- fragment -->
+</div>
+</div>
 <a class="anchor" id="adbaf2876c58fc27d29147c94893696b1"></a>
 <div class="memitem">
 <div class="memproto">
@@ -136,9 +157,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    {   </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        $this-&gt;addCss(<span class="stringliteral">&#39;user-points.css&#39;</span>);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    } </div>
+<div class="fragment"><div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    {   </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        $this-&gt;addCss(<span class="stringliteral">&#39;user-points.css&#39;</span>);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    } </div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -154,9 +175,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordflow">return</span> $this-&gt;makePartial(<span class="stringliteral">&#39;widget&#39;</span>);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordflow">return</span> $this-&gt;makePartial(<span class="stringliteral">&#39;widget&#39;</span>);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -188,7 +209,7 @@ Public Member Functions</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Feb 2 2015 09:48:07 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 5 2015 14:51:09 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

@@ -40,7 +40,7 @@ User & {\em \$user} & The user model to redeem the reward for \\
 32         \textcolor{keywordflow}{try} \{
 33             $userExtend = \textcolor{keyword}{new} UserExtend($user);
 34 
-35             \textcolor{keywordflow}{if} ($userExtend->removePoints($reward->points)) \{
+35             \textcolor{keywordflow}{if} ($userExtend->removePoints($reward->points, \textcolor{keyword}{false})) \{
 36                 
 37                 $user->rewards()->save($reward);
 38                 

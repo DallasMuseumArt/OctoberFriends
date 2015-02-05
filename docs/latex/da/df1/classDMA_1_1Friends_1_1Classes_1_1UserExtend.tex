@@ -8,7 +8,7 @@
 \item 
 \hyperlink{classDMA_1_1Friends_1_1Classes_1_1UserExtend_ae2d0cddf99425d8ffbe2ed2c74372024}{add\+Points} (\$points)
 \item 
-\hyperlink{classDMA_1_1Friends_1_1Classes_1_1UserExtend_a452030297bbe4f11bb8452e4d57396cd}{remove\+Points} (\$points)
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1UserExtend_a72299c6e170b749617a262f18a8d7d67}{remove\+Points} (\$points, \$deduct=true)
 \item 
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1UserExtend_ac1de8e9326eaa1466503bf34fa0a3748}{{\bfseries get\+Membership\+Status\+Options} ()}\label{classDMA_1_1Friends_1_1Classes_1_1UserExtend_ac1de8e9326eaa1466503bf34fa0a3748}
 
@@ -90,18 +90,21 @@ integer & {\em \$points} & The amount of points to add to a user \\
 63         \}
 64     \}
 \end{DoxyCode}
-\hypertarget{classDMA_1_1Friends_1_1Classes_1_1UserExtend_a452030297bbe4f11bb8452e4d57396cd}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+User\+Extend@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+User\+Extend}!remove\+Points@{remove\+Points}}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1UserExtend_a72299c6e170b749617a262f18a8d7d67}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+User\+Extend@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+User\+Extend}!remove\+Points@{remove\+Points}}
 \index{remove\+Points@{remove\+Points}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+User\+Extend@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+User\+Extend}}
 \subsubsection[{remove\+Points}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+User\+Extend\+::remove\+Points (
 \begin{DoxyParamCaption}
-\item[{}]{\$points}
+\item[{}]{\$points, }
+\item[{}]{\$deduct = {\ttfamily true}}
 \end{DoxyParamCaption}
-)}}\label{classDMA_1_1Friends_1_1Classes_1_1UserExtend_a452030297bbe4f11bb8452e4d57396cd}
+)}}\label{classDMA_1_1Friends_1_1Classes_1_1UserExtend_a72299c6e170b749617a262f18a8d7d67}
 Remove points from a user account
 
 
 \begin{DoxyParams}[1]{Parameters}
 integer & {\em \$points} & The amount of points to remove from a user account\\
+\hline
+boolean & {\em \$deduct} & If false points will not be deducted from leaderboard points\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -109,24 +112,27 @@ boolean returns true if points where removed
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-76     \{
-77         \textcolor{keywordflow}{if} (!is\_numeric($points))
-78             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceSystemException}{SystemException}(\textcolor{stringliteral}{'Points must be an integer'});
-79 
-80         \textcolor{keywordflow}{if} ($this->user->points < $points) \{
-81             \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-82         \}
-83 
-84         $this->user->points -= $points;        
-85         $this->user->points\_this\_week -= $points;
-86         $this->user->points\_today -= $points;
-87         
-88         \textcolor{keywordflow}{if} ($this->user->forceSave()) \{
-89             Event::fire(\textcolor{stringliteral}{'dma.friends.user.pointsRemoved'}, [$this->user, $points]);
-90         \}
-91 
-92         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-93     \}
+79     \{
+80         \textcolor{keywordflow}{if} (!is\_numeric($points))
+81             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceSystemException}{SystemException}(\textcolor{stringliteral}{'Points must be an integer'});
+82 
+83         \textcolor{keywordflow}{if} ($this->user->points < $points) \{
+84             \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+85         \}
+86 
+87         $this->user->points -= $points;    
+88 
+89         \textcolor{keywordflow}{if} ($deduct) \{    
+90             $this->user->points\_this\_week -= $points;
+91             $this->user->points\_today -= $points;
+92         \}
+93         
+94         \textcolor{keywordflow}{if} ($this->user->forceSave()) \{
+95             Event::fire(\textcolor{stringliteral}{'dma.friends.user.pointsRemoved'}, [$this->user, $points]);
+96         \}
+97 
+98         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+99     \}
 \end{DoxyCode}
 
 

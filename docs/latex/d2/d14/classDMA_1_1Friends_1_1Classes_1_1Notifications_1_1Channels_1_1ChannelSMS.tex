@@ -30,7 +30,7 @@ static \hyperlink{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_a8d32e94f3f24ede631441da75b3084e6}{clean\+Phone} (\$phone)
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_aafb8c47b6e382d41069e13c3362b33fd}{clean\+Phone} (\$phone, \$use\+Timezone=true)
 \end{DoxyCompactItemize}
 
 
@@ -41,13 +41,14 @@ Carlos Arroyo
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_a8d32e94f3f24ede631441da75b3084e6}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S}!clean\+Phone@{clean\+Phone}}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_aafb8c47b6e382d41069e13c3362b33fd}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S}!clean\+Phone@{clean\+Phone}}
 \index{clean\+Phone@{clean\+Phone}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S}}
 \subsubsection[{clean\+Phone}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Notifications\textbackslash{}\+Channels\textbackslash{}\+Channel\+S\+M\+S\+::clean\+Phone (
 \begin{DoxyParamCaption}
-\item[{}]{\$phone}
+\item[{}]{\$phone, }
+\item[{}]{\$use\+Timezone = {\ttfamily true}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_a8d32e94f3f24ede631441da75b3084e6}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_aafb8c47b6e382d41069e13c3362b33fd}
 Clean phone number for Twilio 
 \begin{DoxyParams}[1]{Parameters}
 string & {\em \$phone} & \\
@@ -58,13 +59,36 @@ string
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-84     \{
-85         $phone = preg\_replace(\textcolor{stringliteral}{'/\(\backslash\)\(\backslash\)D+/'}, \textcolor{stringliteral}{''}, $phone);
-86         \textcolor{keywordflow}{if}(!empty($phone))\{
-87             \textcolor{keywordflow}{return} \textcolor{charliteral}{'+'} . $phone;
-88         \}
-89         \textcolor{keywordflow}{return} \textcolor{stringliteral}{''};
-90     \}
+87     \{
+88         \textcolor{comment}{// if Phone number is not in E164 try to parse it}
+89         \textcolor{keywordflow}{if}(!preg\_match(\textcolor{stringliteral}{'/^\(\backslash\)+.\(\backslash\)d+$/'}, $phone))\{
+90             \textcolor{keywordflow}{if}($useTimezone)\{
+91                 $phoneUtil = PhoneNumberUtil::getInstance();
+92                 \textcolor{keywordflow}{try} \{
+93                     \textcolor{comment}{// Get country code using configure timezone}
+94                     $tz = Carbon::now()->getTimezone();
+95                     $country\_code = array\_get($tz->getLocation(), \textcolor{stringliteral}{'country\_code'}, \textcolor{stringliteral}{'US'});
+96                     
+97                     \textcolor{comment}{// Parse phone number}
+98                     $numberProto = $phoneUtil->parse($phone, $country\_code);
+99                    
+100                     \textcolor{comment}{// Return phone}
+101                     \textcolor{keywordflow}{return} $phoneUtil->format($numberProto, PhoneNumberFormat::E164);
+102                 
+103                 \} \textcolor{keywordflow}{catch} (\(\backslash\)libphonenumber\(\backslash\)NumberParseException $e) \{
+104                     \textcolor{comment}{// Invalid phone let twilio complain :D}
+105                     \textcolor{keywordflow}{return} \textcolor{stringliteral}{''};
+106                 \} 
+107             \} 
+108             
+109             \textcolor{comment}{// Just add missing plus sing}
+110 
+111             \textcolor{keywordflow}{return} \textcolor{charliteral}{'+'} . $phone;
+112             
+113         \}\textcolor{keywordflow}{else}\{
+114             \textcolor{keywordflow}{return} $phone;
+115         \}
+116     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_a3b57af73b9e017991e9872232717b686}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S}!config\+Channel@{config\+Channel}}
 \index{config\+Channel@{config\+Channel}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S}}
@@ -82,14 +106,15 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Cha
 
 
 \begin{DoxyCode}
-46     \{
-47         \textcolor{comment}{// TOOD : get this values for OctoberCMS settings}
-48         $accountSid = Settings::get(\textcolor{stringliteral}{'twilio\_account\_id'});
-49         $authToken  = Settings::get(\textcolor{stringliteral}{'twilio\_auth\_token'});       
-50         $this->fromNumber = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_a8d32e94f3f24ede631441da75b3084e6}{cleanPhone}(Settings::get(\textcolor{stringliteral}{'twilio\_default\_from\_number'}));
-51 
-52         $this->client = \textcolor{keyword}{new} \hyperlink{namespaceServices__Twilio}{Services\_Twilio}($accountSid, $authToken);
-53     \}
+49     \{
+50         \textcolor{comment}{// TOOD : get this values for OctoberCMS settings}
+51         $accountSid = Settings::get(\textcolor{stringliteral}{'twilio\_account\_id'});
+52         $authToken  = Settings::get(\textcolor{stringliteral}{'twilio\_auth\_token'});       
+53         $this->fromNumber = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_aafb8c47b6e382d41069e13c3362b33fd}{cleanPhone}(Settings::get(\textcolor{stringliteral}{'twilio\_default\_from\_number'}), \textcolor{keyword}{false})
+      ;
+54 
+55         $this->client = \textcolor{keyword}{new} \hyperlink{namespaceServices__Twilio}{Services\_Twilio}($accountSid, $authToken);
+56     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_a262b4247250915521d2d9962c9624fc7}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S}!get\+Details@{get\+Details}}
 \index{get\+Details@{get\+Details}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S}}
@@ -112,12 +137,12 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Cha
 
 
 \begin{DoxyCode}
-34     \{
-35         \textcolor{keywordflow}{return} [
-36                 \textcolor{stringliteral}{'name'}           => \textcolor{stringliteral}{'SMS'},
-37                 \textcolor{stringliteral}{'description'}    => \textcolor{stringliteral}{'Send notifications by SMS using Twilio.'}
-38         ];
-39     \}
+37     \{
+38         \textcolor{keywordflow}{return} [
+39                 \textcolor{stringliteral}{'name'}           => \textcolor{stringliteral}{'SMS'},
+40                 \textcolor{stringliteral}{'description'}    => \textcolor{stringliteral}{'Send notifications by SMS using Twilio.'}
+41         ];
+42     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_ae6e3c43b02d2ccbb3fc4bd63ac5d7c9e}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S}!get\+Key@{get\+Key}}
 \index{get\+Key@{get\+Key}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S}}
@@ -137,9 +162,9 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Cha
 
 
 \begin{DoxyCode}
-25     \{
-26         \textcolor{keywordflow}{return} \textcolor{stringliteral}{'sms'};
-27     \}
+28     \{
+29         \textcolor{keywordflow}{return} \textcolor{stringliteral}{'sms'};
+30     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_ad07cd397e4a5d268f56cf59c850f1583}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S}!read@{read}}
 \index{read@{read}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S}}
@@ -162,9 +187,9 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Cha
 
 
 \begin{DoxyCode}
-121     \{
-122         \textcolor{keywordflow}{return} [];
-123     \}
+147     \{
+148         \textcolor{keywordflow}{return} [];
+149     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_a74d477bcee51e0a8d4c27e482e775eb8}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S}!send@{send}}
 \index{send@{send}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S}}
@@ -190,24 +215,24 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Cha
 
 
 \begin{DoxyCode}
-97     \{
-98 
-99         \textcolor{comment}{// TODO : add validation to control the size of the message.}
-100         $toUser  = $message->getTo();
-101         $data    = $message->getData();
-102         $txt     = $message->getContent();
-103 
-104         \textcolor{comment}{// Clean phone user}
-105         $toPhone = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_a8d32e94f3f24ede631441da75b3084e6}{cleanPhone}($toUser->phone);
-106         \textcolor{keywordflow}{if}(!empty($toPhone))\{
-107             $sms = $this->client->account->sms\_messages->create(
-108                     $this->fromNumber, \textcolor{comment}{// From a Twilio number in your account}
-109                     $toPhone, \textcolor{comment}{// Text any number}
-110                     $txt
-111             );
-112         \}
-113        
-114     \}
+123     \{
+124 
+125         \textcolor{comment}{// TODO : add validation to control the size of the message.}
+126         $toUser  = $message->getTo();
+127         $data    = $message->getData();
+128         $txt     = $message->getContent();
+129 
+130         \textcolor{comment}{// Clean phone user}
+131         $toPhone = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_aafb8c47b6e382d41069e13c3362b33fd}{cleanPhone}($toUser->phone);
+132         \textcolor{keywordflow}{if}(!empty($toPhone))\{
+133             $sms = $this->client->account->sms\_messages->create(
+134                     $this->fromNumber, \textcolor{comment}{// From a Twilio number in your account}
+135                     $toPhone, \textcolor{comment}{// Text any number}
+136                     $txt
+137             );
+138         \}
+139        
+140     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_aee4d07da05caa5a14b8c126d6ccf2083}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S}!setting\+Fields@{setting\+Fields}}
 \index{setting\+Fields@{setting\+Fields}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S}}
@@ -230,23 +255,23 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Cha
 
 
 \begin{DoxyCode}
-60     \{
-61         \textcolor{keywordflow}{return} [
-62             \textcolor{stringliteral}{'twilio\_account\_id'} => [
-63                 \textcolor{stringliteral}{'label'} => \textcolor{stringliteral}{'Twilio account ID'},
-64                 \textcolor{stringliteral}{'span'}  => \textcolor{stringliteral}{'auto'}
-65             ],
-66             \textcolor{stringliteral}{'twilio\_auth\_token'} => [
-67                  \textcolor{stringliteral}{'label'} => \textcolor{stringliteral}{'Twilio authentication token'},
-68                  \textcolor{stringliteral}{'span'}  => \textcolor{stringliteral}{'auto'}
-69             ],
-70             \textcolor{stringliteral}{'twilio\_default\_from\_number'} => [
-71                  \textcolor{stringliteral}{'label'} => \textcolor{stringliteral}{'Twilio default from number'},
-72                  \textcolor{stringliteral}{'span'}  => \textcolor{stringliteral}{'auto'}
-73             ],
-74         ];
-75 
-76     \}
+63     \{
+64         \textcolor{keywordflow}{return} [
+65             \textcolor{stringliteral}{'twilio\_account\_id'} => [
+66                 \textcolor{stringliteral}{'label'} => \textcolor{stringliteral}{'Twilio account ID'},
+67                 \textcolor{stringliteral}{'span'}  => \textcolor{stringliteral}{'auto'}
+68             ],
+69             \textcolor{stringliteral}{'twilio\_auth\_token'} => [
+70                  \textcolor{stringliteral}{'label'} => \textcolor{stringliteral}{'Twilio authentication token'},
+71                  \textcolor{stringliteral}{'span'}  => \textcolor{stringliteral}{'auto'}
+72             ],
+73             \textcolor{stringliteral}{'twilio\_default\_from\_number'} => [
+74                  \textcolor{stringliteral}{'label'} => \textcolor{stringliteral}{'Twilio default from number'},
+75                  \textcolor{stringliteral}{'span'}  => \textcolor{stringliteral}{'auto'}
+76             ],
+77         ];
+78 
+79     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_a64e0d1bb196c93b02f3f208b50574c76}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S}!webhook@{webhook}}
 \index{webhook@{webhook}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S}}
@@ -269,31 +294,31 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Cha
 
 
 \begin{DoxyCode}
-130     \{
-131         $httpCode = 200;
-132         \textcolor{keywordflow}{try}
-133         \{
-134             $msg = \textcolor{keyword}{new} IncomingMessage($this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_ae6e3c43b02d2ccbb3fc4bd63ac5d7c9e}{getKey}());
-135             $msg->from($request[\textcolor{stringliteral}{'From'}]);
-136             $msg->setContent($request[\textcolor{stringliteral}{'Body'}]);
-137 
-138             \textcolor{comment}{// TODO : this should be reusable for other channels}
-139             $key = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_ae6e3c43b02d2ccbb3fc4bd63ac5d7c9e}{getKey}();
-140             $event = strtolower(\textcolor{stringliteral}{"dma.channel.$key.incoming.data"});
-141             Event::fire($event, [[$msg]]);
-142             Log::debug(\textcolor{stringliteral}{'Processed Twilio incoming SMS'}, $msg->getData());
-143         \}
-144         \textcolor{keywordflow}{catch}(\(\backslash\)\hyperlink{namespaceException}{Exception} $e)
-145         \{
-146             Log::error(\textcolor{stringliteral}{'Processing Twilio webhook request'}, $request);
-147             Log::error(sprintf(\textcolor{stringliteral}{'Processing Twilio webhook:  %s'}, $e));
-148             $httpCode = 500;
-149         \}
-150 
-151 
-152         \textcolor{comment}{// Response message was read ok}
-153         return \(\backslash\)Response::make(\textcolor{stringliteral}{'<Response></Response>'}, $httpCode);
-154     \}
+156     \{
+157         $httpCode = 200;
+158         \textcolor{keywordflow}{try}
+159         \{
+160             $msg = \textcolor{keyword}{new} IncomingMessage($this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_ae6e3c43b02d2ccbb3fc4bd63ac5d7c9e}{getKey}());
+161             $msg->from($request[\textcolor{stringliteral}{'From'}]);
+162             $msg->setContent($request[\textcolor{stringliteral}{'Body'}]);
+163 
+164             \textcolor{comment}{// TODO : this should be reusable for other channels}
+165             $key = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_ae6e3c43b02d2ccbb3fc4bd63ac5d7c9e}{getKey}();
+166             $event = strtolower(\textcolor{stringliteral}{"dma.channel.$key.incoming.data"});
+167             Event::fire($event, [[$msg]]);
+168             Log::debug(\textcolor{stringliteral}{'Processed Twilio incoming SMS'}, $msg->getData());
+169         \}
+170         \textcolor{keywordflow}{catch}(\(\backslash\)\hyperlink{namespaceException}{Exception} $e)
+171         \{
+172             Log::error(\textcolor{stringliteral}{'Processing Twilio webhook request'}, $request);
+173             Log::error(sprintf(\textcolor{stringliteral}{'Processing Twilio webhook:  %s'}, $e));
+174             $httpCode = 500;
+175         \}
+176 
+177 
+178         \textcolor{comment}{// Response message was read ok}
+179         return \(\backslash\)Response::make(\textcolor{stringliteral}{'<Response></Response>'}, $httpCode);
+180     \}
 \end{DoxyCode}
 
 

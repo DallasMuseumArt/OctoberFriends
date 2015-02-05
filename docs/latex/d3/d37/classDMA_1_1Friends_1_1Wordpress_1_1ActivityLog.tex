@@ -93,29 +93,35 @@ int & {\em \$limit} & The amount of records to import at one time \\
 87                         \textcolor{keywordflow}{case} \textcolor{stringliteral}{'step'}:
 88                             $object = OctoberStep::findWordpress($wlog->object\_id);
 89                             \textcolor{keywordflow}{break};
-90                     \}
-91                 \}
-92  
-93             \}   
-94 
-95             \textcolor{keywordflow}{try} \{
-96                 \textcolor{keywordflow}{if} ($log->save()) \{
-97 
-98                     \textcolor{comment}{// If the log is related to an object, save that relation}
-99                     \textcolor{keywordflow}{if} ($object) \{
-100                         $object = $object->first();
-101                         $object->activityLogs()->save($log);
-102                     \}
-103                     $count++;
-104                 \} 
-105             \} \textcolor{keywordflow}{catch}(\hyperlink{namespaceException}{Exception} $e) \{
-106                 echo \textcolor{stringliteral}{"Failed to import log entry id: "} . $log->id . \textcolor{stringliteral}{"\(\backslash\)n"};
-107                 echo $e->getMessage() . \textcolor{stringliteral}{"\(\backslash\)n"};
-108             \}
-109         \}  
-110 
-111         \textcolor{keywordflow}{return} $count;
-112     \}
+90                         \textcolor{keywordflow}{default}:
+91                             \textcolor{keywordflow}{continue};
+92                     \}
+93                 \} \textcolor{keywordflow}{else} \{
+94                     \textcolor{keywordflow}{continue};
+95                 \}
+96  
+97             \}   
+98 
+99             \textcolor{keywordflow}{try} \{
+100                 \textcolor{keywordflow}{if} ($log->save()) \{
+101 
+102                     \textcolor{comment}{// If the log is related to an object, save that relation}
+103                     \textcolor{keywordflow}{if} ($object) \{
+104                         $object = $object->first();
+105                         \textcolor{comment}{// Ugly hack to get sync working for now}
+106                         \textcolor{keywordflow}{if} (get\_class($object) == \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Wordpress\(\backslash\)ActivityLog'}) \textcolor{keywordflow}{continue};
+107                         $object->activityLogs()->save($log);
+108                     \}
+109                     $count++;
+110                 \} 
+111             \} \textcolor{keywordflow}{catch}(\hyperlink{namespaceException}{Exception} $e) \{
+112                 echo \textcolor{stringliteral}{"Failed to import log entry id: "} . $log->id . \textcolor{stringliteral}{"\(\backslash\)n"};
+113                 echo $e->getMessage() . \textcolor{stringliteral}{"\(\backslash\)n"};
+114             \}
+115         \}  
+116 
+117         \textcolor{keywordflow}{return} $count;
+118     \}
 \end{DoxyCode}
 
 

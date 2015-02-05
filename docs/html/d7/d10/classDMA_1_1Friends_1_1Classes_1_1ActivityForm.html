@@ -185,13 +185,13 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>string </dd></dl>
 <div class="fragment"><div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    {</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        <span class="keywordflow">if</span> (!$field-&gt;depends) {</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        <span class="keywordflow">if</span> (!$field-&gt;dependsOn) {</div>
 <div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;            <span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        }</div>
 <div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        $depends = is_array($field-&gt;depends) ? $field-&gt;depends : [$field-&gt;depends];</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        $depends = htmlspecialchars(json_encode($depends), ENT_QUOTES, <span class="stringliteral">&#39;UTF-8&#39;</span>);</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        <span class="keywordflow">return</span> $depends;</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        $dependsOn = is_array($field-&gt;dependsOn) ? $field-&gt;dependsOn : [$field-&gt;dependsOn];</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        $dependsOn = htmlspecialchars(json_encode($dependsOn), ENT_QUOTES, <span class="stringliteral">&#39;UTF-8&#39;</span>);</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        <span class="keywordflow">return</span> $dependsOn;</div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
@@ -518,7 +518,7 @@ Protected Attributes</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Feb 2 2015 09:48:05 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 5 2015 14:51:07 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

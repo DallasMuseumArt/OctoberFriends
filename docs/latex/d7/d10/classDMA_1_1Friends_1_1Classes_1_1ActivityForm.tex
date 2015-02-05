@@ -80,13 +80,13 @@ string
 
 \begin{DoxyCode}
 246     \{
-247         \textcolor{keywordflow}{if} (!$field->depends) \{
+247         \textcolor{keywordflow}{if} (!$field->dependsOn) \{
 248             \textcolor{keywordflow}{return};
 249         \}
 250 
-251         $depends = is\_array($field->depends) ? $field->depends : [$field->depends];
-252         $depends = htmlspecialchars(json\_encode($depends), ENT\_QUOTES, \textcolor{stringliteral}{'UTF-8'});
-253         \textcolor{keywordflow}{return} $depends;
+251         $dependsOn = is\_array($field->dependsOn) ? $field->dependsOn : [$field->dependsOn];
+252         $dependsOn = htmlspecialchars(json\_encode($dependsOn), ENT\_QUOTES, \textcolor{stringliteral}{'UTF-8'});
+253         \textcolor{keywordflow}{return} $dependsOn;
 254     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_a105d514226be33dec93db56dbfe61ff1}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form}!get\+Field\+Name@{get\+Field\+Name}}

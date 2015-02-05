@@ -38,31 +38,37 @@ static \hyperlink{classDMA_1_1Friends_1_1Controllers_1_1Locations_a9b6fce6b3f0cf
 )\hspace{0.3cm}{\ttfamily [static]}}}\label{classDMA_1_1Friends_1_1Controllers_1_1Locations_a9b6fce6b3f0cf4fe6671fe110b0c8791}
 Resource to login user via barcode scanner for authorized kiosks 
 \begin{DoxyCode}
-38     \{
-39         $barcodeId = post(\textcolor{stringliteral}{'barcodeId'});
-40         $location = LocationManager::getLocation();
-41 
-42         \textcolor{keywordflow}{if} (!$location || empty($barcodeId)) \{
-43             App::abort(403, \textcolor{stringliteral}{'Unauthorized access'});
-44             \textcolor{keywordflow}{return};
-45         \}
-46         
-47         \textcolor{keywordflow}{if} ($location->is\_authorized) \{
-48             $user = User::where(\textcolor{stringliteral}{'barcode\_id'}, $barcodeId)->first();
-49 
-50             \textcolor{keywordflow}{if} (!$user) \{
-51                 \textcolor{comment}{// The user does not exist, so flash an error}
-52                 Flash::error(Lang::get(\textcolor{stringliteral}{'dma.friends::lang.app.loginFailed'}));
-53             \} \textcolor{keywordflow}{else} \{
-54                 \textcolor{comment}{//The user exists so log them in}
-55                 Auth::login($user);
-56                 Event::fire(\textcolor{stringliteral}{'auth.login'}, [$user]);
-57             \}
-58 
-59         \}
-60 
-61         \textcolor{keywordflow}{return} Redirect::to(\textcolor{charliteral}{'/'});
-62     \}
+39     \{
+40         $barcodeId = post(\textcolor{stringliteral}{'barcodeId'});
+41         $location = LocationManager::getLocation();
+42 
+43         \textcolor{keywordflow}{if} (!$location || empty($barcodeId)) \{
+44             App::abort(403, \textcolor{stringliteral}{'Unauthorized access'});
+45             \textcolor{keywordflow}{return};
+46         \}
+47         
+48         \textcolor{keywordflow}{if} ($location->is\_authorized) \{
+49             $user = User::where(\textcolor{stringliteral}{'barcode\_id'}, $barcodeId)->first();
+50 
+51             \textcolor{comment}{// Attempt to lookup membership if a user isnt present}
+52             \textcolor{keywordflow}{if} (!$user) \{
+53                 $usermeta = Usermeta::where(\textcolor{stringliteral}{'current\_member\_number'}, $barcodeId)->first();
+54                 $user = $usermeta->user;
+55             \}
+56 
+57             \textcolor{keywordflow}{if} (!$user) \{
+58                 \textcolor{comment}{// The user does not exist, so flash an error}
+59                 Flash::error(Lang::get(\textcolor{stringliteral}{'dma.friends::lang.app.loginFailed'}));
+60             \} \textcolor{keywordflow}{else} \{
+61                 \textcolor{comment}{//The user exists so log them in}
+62                 Auth::login($user);
+63                 Event::fire(\textcolor{stringliteral}{'auth.login'}, [$user]);
+64             \}
+65 
+66         \}
+67 
+68         \textcolor{keywordflow}{return} Redirect::to(\textcolor{charliteral}{'/'});
+69     \}
 \end{DoxyCode}
 
 

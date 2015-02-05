@@ -111,46 +111,46 @@ Reward & {\em \$reward} & The reward model that the coupon is being printed for 
 \end{DoxyParams}
 
 \begin{DoxyCode}
-95     \{
-96         $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1PrintManager_a452bdf8905705bfce94858e232a02d81}{init}(
-97             Settings::get(\textcolor{stringliteral}{'coupon\_width'}), 
-98             Settings::get(\textcolor{stringliteral}{'coupon\_height'}), 
-99             Settings::get(\textcolor{stringliteral}{'coupon\_orientation'})
-100         );
-101 
-102         $expires = date( \textcolor{stringliteral}{'m-d-Y'}, strtotime( \textcolor{stringliteral}{"+"} . $reward->days\_valid .\textcolor{stringliteral}{" days"} ) );
-103 
-104         $logo = $this->getLogoPath();
-105 
-106         $this->pdf->Image($logo, 8, 1,-170);
-107         
-108         $this->pdf->Ln(14);     
-109         $this->pdf->SetFont(\textcolor{stringliteral}{'Arial'}, \textcolor{charliteral}{'B'}, 8);
-110         $this->pdf->setX(8);
-111         $this->pdf->Write(4, $reward->fine\_print);
-112         
-113         $this->pdf->Ln(6);      
-114         $this->pdf->SetFont(\textcolor{stringliteral}{'Arial'}, \textcolor{charliteral}{'B'}, 8);
-115         $this->pdf->setY($this->pdf->getY());
-116         $this->pdf->setX(7);
-117         $this->pdf->Write(8, \textcolor{stringliteral}{"Expires: "} . $expires); \textcolor{comment}{//Expiration Date}
-118         $this->pdf->Ln(7);      
-119         $this->pdf->setX(8);
-120         $this->pdf->Code39(8, $this->pdf->getY(), $reward->barcode);   \textcolor{comment}{//Bar Code}
-121         $this->pdf->Ln(8);  
-122         $this->pdf->setX(8);    
-123         $this->pdf->SetFont(\textcolor{stringliteral}{'Arial'}, \textcolor{charliteral}{'B'}, 8);
-124         $this->pdf->setY($this->pdf->getY()+8);     
-125         
-126         $this->pdf->setX(8);
-127         $this->pdf->Write(8, Lang::get(\textcolor{stringliteral}{'dma.friends::lang.rewards.couponText'}));
-128         
-129         $this->pdf->setX(8);
-130         $this->pdf->Write(14, \textcolor{stringliteral}{'      '});
-131 
-132         $this->doPrint($this->location->print\_reward);
-133 
-134     \}
+94     \{
+95         $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1PrintManager_a452bdf8905705bfce94858e232a02d81}{init}(
+96             Settings::get(\textcolor{stringliteral}{'coupon\_width'}), 
+97             Settings::get(\textcolor{stringliteral}{'coupon\_height'}), 
+98             Settings::get(\textcolor{stringliteral}{'coupon\_orientation'})
+99         );
+100 
+101         $expires = date( \textcolor{stringliteral}{'m-d-Y'}, strtotime( \textcolor{stringliteral}{"+"} . $reward->days\_valid .\textcolor{stringliteral}{" days"} ) );
+102 
+103         $logo = $this->getLogoPath();
+104 
+105         $this->pdf->Image($logo, 8, 1,-170);
+106         
+107         $this->pdf->Ln(14);     
+108         $this->pdf->SetFont(\textcolor{stringliteral}{'Arial'}, \textcolor{charliteral}{'B'}, 6);
+109         $this->pdf->setX(8);
+110         $this->pdf->Write(4, $reward->fine\_print);
+111         
+112         $this->pdf->Ln(6);      
+113         $this->pdf->SetFont(\textcolor{stringliteral}{'Arial'}, \textcolor{charliteral}{'B'}, 8);
+114         $this->pdf->setY($this->pdf->getY());
+115         $this->pdf->setX(7);
+116         $this->pdf->Write(8, \textcolor{stringliteral}{"Expires: "} . $expires); \textcolor{comment}{//Expiration Date}
+117         $this->pdf->Ln(7);      
+118         $this->pdf->setX(8);
+119         $this->pdf->Code39(8, $this->pdf->getY(), $reward->barcode);   \textcolor{comment}{//Bar Code}
+120         $this->pdf->Ln(8);  
+121         $this->pdf->setX(8);    
+122         $this->pdf->SetFont(\textcolor{stringliteral}{'Arial'}, \textcolor{charliteral}{'B'}, 8);
+123         $this->pdf->setY($this->pdf->getY()+8);     
+124         
+125         $this->pdf->setX(8);
+126         $this->pdf->Write(8, Lang::get(\textcolor{stringliteral}{'dma.friends::lang.rewards.couponText'}));
+127         
+128         $this->pdf->setX(8);
+129         $this->pdf->Write(14, \textcolor{stringliteral}{'      '});
+130 
+131         $this->doPrint($this->location->printer\_reward);
+132 
+133     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1PrintManager_a036da54763a007f23c7f477562c47783}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Print\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Print\+Manager}!print\+Id\+Card@{print\+Id\+Card}}
 \index{print\+Id\+Card@{print\+Id\+Card}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Print\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Print\+Manager}}
@@ -176,9 +176,8 @@ Print an identification card for a member
 82         
 83         $this->pdf->Ln(17);     
 84         $this->pdf->Code39(2, $this->pdf->getY(), $this->user->barcode\_id);   \textcolor{comment}{//Bar Code}
-85 
-86         $this->doPrint($this->location->print\_membership);
-87     \}
+85         $this->doPrint($this->location->printer\_membership);
+86     \}
 \end{DoxyCode}
 
 
