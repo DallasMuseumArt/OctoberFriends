@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>DMA Friends by DallasMuseumArt</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>DMA Friends</h1>
+        <p>An OctoberCMS implementation of DMA Friends</p>
+
+        <p class="view"><a href="https://github.com/DallasMuseumArt/OctoberFriends">View the Project on GitHub <small>DallasMuseumArt/OctoberFriends</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/DallasMuseumArt/OctoberFriends/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/DallasMuseumArt/OctoberFriends/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/DallasMuseumArt/OctoberFriends">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="dma-friends" class="anchor" href="#dma-friends" aria-hidden="true"><span class="octicon octicon-link"></span></a>DMA Friends</h1>
+
+<p>DMA Friends is an open source plugin for <a href="http://octobercms.com">October CMS</a> that encourages and recognizes visitor participation as an essential ingredient of the museum experience. </p>
+
+<h1>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h1>
+
+<ul>
+<li>Download and complete the installation for October CMS (<a href="http://octobercms.com">http://octobercms.com</a>)</li>
+<li>Install the Rainlab "User" Plugin</li>
+<li>Extract this repository into plugins/dma/friends</li>
+<li>In plugins/dma/friends folder run <code>composer install</code>. </li>
+<li>Enable the "Friends" Plugin</li>
+<li>Go to the <a href="https://github.com/DallasMuseumArt/OctoberFriendsTheme">Friends Theme Repository</a> for instructions on downloading and installing the companion theme.</li>
+</ul>
+
+<h1>
+<a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Documentation</h1>
+
+<p><a href="docs/ACTIVITY-TYPES.md">Developing custom activity types</a></p>
+
+<p><a href="docs/EVENTS.md">Using custom events</a> </p>
+
+<p>PHP API Documentation is available at <a href="http://developer.dma.org/friends/">http://developer.dma.org/friends/</a></p>
+
+<p>OctoberCMS Documentation is available at <a href="https://octobercms.com/docs/">https://octobercms.com/docs/</a></p>
+
+<h3>
+<a id="legacy-wordpress-migrations" class="anchor" href="#legacy-wordpress-migrations" aria-hidden="true"><span class="octicon octicon-link"></span></a>(LEGACY) Wordpress Migrations</h3>
+
+<p>If you are migrating from a wordpress/badgeos installation of friends you will also
+need to provide database configuration in order to migrate your data</p>
+
+<ul>
+<li>edit apps/config/database.php and add the following
+<pre>
+    'friends_wordpress' =&gt; array(
+        'driver'    =&gt; 'mysql',
+        'host'      =&gt; 'localhost',
+        'port'      =&gt; '', 
+        'database'  =&gt; 'WORDPRESS_FRIENDS_DB',
+        'username'  =&gt; 'WORDPRESS_USER',
+        'password'  =&gt; 'WORDPRESS_PASS',
+        'charset'   =&gt; 'utf8',
+        'collation' =&gt; 'utf8_unicode_ci',
+        'prefix'    =&gt; '', 
+    ), 
+</pre>
+Substituting the appropriate database, user, and password</li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/DallasMuseumArt">DallasMuseumArt</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-20829143-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
