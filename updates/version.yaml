@@ -74,3 +74,6 @@
 1.0.25:
     - Add activity metadata session id
     - add_activity_metadata_session_id.php
+1.0.26:
+    - Add index to user_activity table
+    - add_activity_user_index.php
