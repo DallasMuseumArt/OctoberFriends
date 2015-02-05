@@ -35,21 +35,29 @@ class LikeWorkOfArt extends ActivityTypeBase
             
             if ($data = self::isAssessionNumber($code)){
             
-                if ($ret = parent::process($user, ['activity' => $activity])) {
-                    
-                    // TODO: Find a better way to pass this data
-                    $activity->objectData = $data;
-                    unset($data['object_title']); // Don't save title in user metadata table
-                    
-                    ActivityMetadata::addUserActivity($user, $activity, $data);
-
-                    FriendsLog::artwork([
-                        'user'          => $user,
-                        'artwork_id'    => $params['code'],
-                    ]);
-                }
+                // Skip activity process if user has already like this work of art
+                $likeCount = ActivityMetadata::hasMetadataValue($user, $activity, 'object_id', $data['object_id'])->count();
+     
+                if ($likeCount == 0) {
+                    // User haven't like this artwork yet
+                    if ($ret = parent::process($user, ['activity' => $activity])) {
+                        
+                        // TODO: Find a better way to pass this data
+                        $activity->objectData = $data;
+    
+                        // Save user metada activity
+                        ActivityMetadata::addUserActivity($user, $activity, $data, ['object_title']);
+    
+                        FriendsLog::artwork([
+                            'user'          => $user,
+                            'artwork_id'    => $params['code'],
+                        ]);
+                    }
                 
-                return $ret;
+                    return $ret;
+                } else {
+                    Session::put('activityError', Lang::get('dma.friends::lang.activities.alreadyLikeWorkArtError', ['code' => $params['code']]));
+                }
                 
             } else {
                 // Verify if user try to enter an Object number
