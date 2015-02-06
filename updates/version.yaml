@@ -80,3 +80,6 @@
 1.0.27:
     - Add image to locations
     - add_location_image.php
+1.0.28:
+    - Fix barcodes
+    - fix_barcodes.php

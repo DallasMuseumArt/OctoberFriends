@@ -177,7 +177,7 @@ class Plugin extends PluginBase
         {
             if (empty($user->barcode_id)) {
                 $user->barcode_id = substr(md5($user->email), 0, 9); 
-            }           
+            }
         });
         
         // Extend the user model to support our custom metadata        
@@ -204,6 +204,9 @@ class Plugin extends PluginBase
             if (!$widget->getController() instanceof \RainLab\User\Controllers\Users) return;
 
             $widget->addColumns([
+                'barcode_id' => [
+                    'label'     => 'Barcode ID',
+                ],
                 'full_name' => [
                     'label'         => 'Full Name',
                     'relation'      => 'metadata',
