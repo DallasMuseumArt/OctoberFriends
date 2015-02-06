@@ -204,6 +204,9 @@ class Plugin extends PluginBase
             if (!$widget->getController() instanceof \RainLab\User\Controllers\Users) return;
 
             $widget->addColumns([
+                'barcode_id' => [
+                    'label'     => 'Barcode ID',
+                ],
                 'full_name' => [
                     'label'         => 'Full Name',
                     'relation'      => 'metadata',
