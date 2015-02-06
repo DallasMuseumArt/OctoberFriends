@@ -177,7 +177,7 @@ class Plugin extends PluginBase
         {
             if (empty($user->barcode_id)) {
                 $user->barcode_id = substr(md5($user->email), 0, 9); 
-            }           
+            }
         });
         
         // Extend the user model to support our custom metadata        
