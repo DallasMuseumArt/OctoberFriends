@@ -5,6 +5,7 @@ use Redirect;
 use Validator;
 use October\Rain\Support\ValidationException;
 use RainLab\User\Models\Settings as UserSettings;
+use RainLab\User\Models\User;
 use DMA\Friends\Classes\UserExtend;
 use DMA\Friends\Models\Usermeta;
 use DMA\Friends\Wordpress\Auth as WordpressAuth;
@@ -170,6 +171,19 @@ class UserLogin extends ComponentBase
             'title'     => Lang::get('dma.friends::lang.userLogin.registerTitle'),
             'content'   => $this->makePartial('register-form', [ 'options' => $options ]),
         ]);
+    }
+    
+    /**
+     * Verify if the given user mail is not already register
+     */
+    public function onAvailableUser()
+    {
+        $email = post('email');
+        $data = ['available' =>  true];
+        if ( User::where('email', $email)->count() > 0 ) {
+            $data['available'] = false;
+        }
+        return $data;
     }
 
     /**
