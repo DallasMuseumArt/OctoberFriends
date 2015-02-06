@@ -86,7 +86,7 @@ class PrintMembershipCard extends FormWidgetBase
         $location = Location::find($locationId);
 
         $user = post('User');
-        $user = User::where('name', '=', $user['name'])->first();
+        $user = User::where('email', '=', $user['email'])->first();
 
         try { 
             $manager = new PrintManager($location, $user);
