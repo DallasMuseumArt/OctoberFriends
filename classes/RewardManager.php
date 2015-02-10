@@ -30,9 +30,20 @@ class RewardManager
         }
 
         try {
+
+            if ($reward->inventory !== null && $reward->inventory == 0) {
+                Session::put('rewardError', Lang::get('dma.friends::lang.rewards.noInventory'));
+                return;
+            }
+
             $userExtend = new UserExtend($user);
 
             if ($userExtend->removePoints($reward->points, false)) {
+
+                if ($reward->inventory > 0) {
+                    $reward->inventory--;
+                    $reward->save();
+                }
                 
                 $user->rewards()->save($reward);
                 
