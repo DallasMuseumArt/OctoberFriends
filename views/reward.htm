@@ -10,7 +10,7 @@
 
         {{ model.fine_print|raw }}
 
-        {% if user.points > model.points %}
+        {% if user.points >= model.points %}
         <button class="btn btn-primary redeem" 
             data-request="onRedeem"
             data-dismiss="popup"
