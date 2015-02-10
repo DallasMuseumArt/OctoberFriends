@@ -95,7 +95,7 @@ secondaryTabs:
             tab: Configuration
             span: right
         redemption_email:
-            label: Redemption Email
+            label: Redemption Email (NOTE: This field is legacy and will be removed in a future version)
             description: If not blank, send an email to the recipient upon redemption with the specified text.
             tab: Configuration
             type: textarea
