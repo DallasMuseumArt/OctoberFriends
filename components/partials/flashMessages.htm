@@ -3,6 +3,8 @@
         <div class="alert alert-{{ class }}">{{ message }}</div>
     {% endflashMessages %}
     <script type="text/javascript">
+        window.scrollTo(0, 0);
+
         setTimeout(function() {
             $('.alert').fadeOut(500, function() {
                 $('.alert').remove();
