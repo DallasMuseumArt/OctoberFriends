@@ -21,6 +21,7 @@ return [
     'rewards' => [
         'redeemed'      => 'Congratulations, you have redeemed the reward ":title"',
         'noPoints'      => 'Sorry you do not have enough points to redeem this reward',
+        'noInventory'   => 'Sorry this reward is no longer available',
         'couponText'    => 'Thank you for being a DMA Friend!',
     ],
     'log' => [
