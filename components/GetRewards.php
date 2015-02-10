@@ -78,6 +78,12 @@ class GetRewards extends ComponentBase
                 break;
             case 'all':
             default:
+                $rewards->whereIn('id', function($query) {
+                    $query->select('id')
+                        ->from(with(new Reward)->getTable())
+                        ->whereNull('inventory')
+                        ->orWhere('inventory', '>', 0);
+                });
                 #$rewards->whereNull('inventory');
                 #$rewards->orWhere('inventory', '>', 0);
                 break;
