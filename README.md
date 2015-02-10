@@ -10,7 +10,7 @@ DMA Friends is an open source plugin for [October CMS](http://octobercms.com) th
 * Install the Rainlab "User" Plugin
 * Extract this repository into plugins/dma/friends
 * In plugins/dma/friends folder run `composer install`. 
-* Enable the "Friends" Plugin
+* Then run: `php artisan october:up`.
 * Go to the [Friends Theme Repository](https://github.com/DallasMuseumArt/OctoberFriendsTheme) for instructions on downloading and installing the companion theme.
 
 # Documentation
@@ -22,6 +22,13 @@ DMA Friends is an open source plugin for [October CMS](http://octobercms.com) th
 PHP API Documentation is available at [http://developer.dma.org/friends/](http://developer.dma.org/friends/)
 
 OctoberCMS Documentation is available at [https://octobercms.com/docs/](https://octobercms.com/docs/)
+
+### Installing Rainlab plugin:
+Log into to the OctoberCMS backend (default http://HOSTNAME/backent) site.
+Click Settings.
+Select System / Updates from the left menu.
+Type rainlab.user and click Install Plugin on this page.
+
 
 ### (LEGACY) Wordpress Migrations
 
