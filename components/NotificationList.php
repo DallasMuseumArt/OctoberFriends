@@ -97,6 +97,7 @@ class NotificationList extends ComponentBase
         $user = $this->getUser();
         $this->page['notifications'] = $this->getNotifications();
         $this->page['unReadCount'] = $this->getUnreadCount();
+        $this->page['onlyUnread'] = $this->property('onlyUnread');
      
        
         foreach($vars as $key => $value){
@@ -135,6 +136,8 @@ class NotificationList extends ComponentBase
         $count = $this->getUnreadCount();
         $count = ($count >0) ? $count : '';
         
+        $this->prepareVars();
+        
         return [
                 '#notification-counter .badge' => $count
         ];
@@ -142,10 +145,13 @@ class NotificationList extends ComponentBase
 
     public function onMarkAllRead()
     {
-        $this->markAllAsRead();    
+        $this->markAllAsRead();  
+        $this->prepareVars();
+       
         return [
                 '#notification-counter .badge' => ''
         ];
+        
     }
     
   
