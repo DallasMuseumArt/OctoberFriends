@@ -7,6 +7,7 @@ use Lang;
 use Mail;
 use Session;
 use Auth;
+use Event;
 use RainLab\User\Models\User;
 use DMA\Friends\Facades\Postman;    
 use DMA\Friends\Classes\FriendsLog;
@@ -15,7 +16,9 @@ use DMA\Friends\Classes\PrintManager;
 use DMA\Friends\Classes\Notifications\IncomingMessage;
 use DMA\Friends\Activities\ActivityCode;
 use DMA\Friends\Activities\LikeWorkOfArt;
+use DMA\Friends\Activities\EventTrigger;
 use DMA\Friends\Classes\Notifications\NotificationMessage;
+use DMA\Friends\Models\Settings;
 use Backend\Models\UserGroup;
 
 /**
@@ -46,15 +49,17 @@ class FriendsEventHandler {
      */
     public function onBadgeCompleted($badge, $user)
     {
-        $data = [
-            'badge' => $badge,
-            'user'  => $user,
-        ];
+        if (Settings::get('send_badge_email')) {
+            $data = [
+                'badge' => $badge,
+                'user'  => $user,
+            ];
 
-        Mail::send('dma.friends::mail.badge', $data, function($message) use ($user)
-        {
-            $message->to($user->email, $user->full_name);
-        });
+            Mail::send('dma.friends::mail.badge', $data, function($message) use ($user)
+            {
+                $message->to($user->email, $user->full_name);
+            });
+        }
     }
 
     /**
@@ -194,7 +199,7 @@ class FriendsEventHandler {
                 }, ['sms', 'kiosk']);
                 
                 Log::debug('Incoming SMS', ['user' => $user, 'code' => $code, 'activity' => $activity]);
-            }else{
+            } else {
                 Postman::send('simple', function(NotificationMessage $notification) use ( $phoneUser ) {
                 
                     $user = new User();
@@ -208,6 +213,17 @@ class FriendsEventHandler {
              
         });        
     }
+
+    // public function allEvents()
+    // {
+    //     $params = [
+    //         'event' => Event::firing()
+    //     ];
+        
+    //     // $user = Auth::getUser();
+        
+    //     // EventTrigger::process($user, $params);
+    // }
     
     public function subscribe($events)
     {   
@@ -217,6 +233,7 @@ class FriendsEventHandler {
         $events->listen('dma.friends.step.completed', 'DMA\Friends\Classes\FriendsEventHandler@onStepCompleted');
         $events->listen('auth.login', 'DMA\Friends\Classes\FriendsEventHandler@onAuthLogin');
         $events->listen('auth.register', 'DMA\Friends\Classes\FriendsEventHandler@onAuthRegister');
+        //$events->listen('*', 'DMA\Friends\Classes\FriendsEventHandler@allEvents');
         
         // Register events for listen incomming data by each channel
         //$events->listen('dma.notifications.ready', 'DMA\Friends\Classes\FriendsEventHandler@onNotificationsReady');
