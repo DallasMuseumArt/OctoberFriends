@@ -4,6 +4,9 @@ DMA Friends
 DMA Friends is an open source plugin for [October CMS](http://octobercms.com) that encourages and recognizes visitor participation as an essential ingredient of the museum experience. 
 
 
+### NOTE
+The friends plugin is currently designed to work with builds no later then 186 of October CMS
+
 # Installation
 
 * Download and complete the installation for October CMS (http://octobercms.com)
