@@ -25,7 +25,11 @@ tabs:
             label: Kiosk Idle Logout Time (in seconds)
             span: left
             tab: Kiosk
-
+        send_badge_email:
+            label: Send email upon badge completion
+            span: left
+            tab: Kiosk
+            type: checkbox
         # Groups
         maximum_users_per_group:
             span: auto
