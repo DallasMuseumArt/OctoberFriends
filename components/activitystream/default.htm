@@ -6,14 +6,17 @@
                     <span class="time-ago">{{ result.timeAgo }}</span>
                     {% if result.action == 'reward' %}
                         You claimed a reward
+                        <div>"{{ result.object.title }}"</div>
                     {% elseif result.action == 'unlocked' %}
                         You earned a badge 
+                        <div>"{{ result.object.title }}"</div>
                     {% elseif result.action == 'activity' %}
                         You completed the activity
+                        <div>"{{ result.object.title }}"</div>
                     {% elseif result.action == 'artwork' %}
                         Liked a work of art
+                        <div>{{ result.artwork_id }}</div>
                     {% endif %}
-                    <div>"{{ result.object.title }}"</div>
                 </li>
             {% endfor %}
         </ul>
