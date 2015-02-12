@@ -46,8 +46,10 @@ class ActivityCodeForm extends ComponentBase
             $activity = LikeWorkOfArt::process($user, $params);
         }
         
-        // Find and run  UserMostRecentBadge component. 
-        // NOTE: Do this before call Postman there is a bug when calling App::make twice 
+        // FIXME : Find and run  UserMostRecentBadge component. 
+        // Do this before call Postman there is a bug either in Larvel or OctoberCMS. 
+        // Postman internally calls App::make('twig.string') but for some reason it affects View::make(...)  that is been 
+        // run by UserMostRecentBadge
         $mostRecent = $this->controller->findComponentByName('UserMostRecentBadge');
         $mostRecent->onRun();
                
