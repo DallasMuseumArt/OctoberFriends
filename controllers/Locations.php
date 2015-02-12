@@ -46,6 +46,9 @@ class Locations extends Controller
         }
         
         if ($location->is_authorized) {
+
+            \Log::debug("User attempted to login with: " . $barcodeId);
+            
             $user = User::where('barcode_id', $barcodeId)->first();
 
             // Attempt to lookup membership if a user isnt present
