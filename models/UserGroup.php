@@ -33,11 +33,11 @@ class UserGroup extends GroupBase{
      */
     public $belongsToMany = [
         'users' => ['Rainlab\User\Models\User', 
-        'table' => 'dma_friends_users_groups',
-        'primaryKey' => 'group_id',
-        'foreignKey' => 'user_id',
-        'timestamps' => true,
-        'pivot' => ['membership_status']
+            'table'         => 'dma_friends_users_groups',
+            'primaryKey'    => 'group_id',
+            'foreignKey'    => 'user_id',
+            'timestamps'    => true,
+            'pivot'         => ['membership_status']
         ]
     ];   
     
@@ -67,7 +67,7 @@ class UserGroup extends GroupBase{
         
 
     /**
-     * @see \October\Rain\Database\Model::boot()
+     * {@inheritDoc}
      */
     public static function boot()
     {
@@ -91,7 +91,7 @@ class UserGroup extends GroupBase{
     
     
     /**
-     * @see \October\Rain\Database\Model::save()
+     * {@inheritDoc}
      */
     /*
     public function save(array $data = NULL, $sessionKey = NULL)
@@ -152,9 +152,9 @@ class UserGroup extends GroupBase{
     /**
      * Create a new user group
      * 
-     * @param \RainLab\User\Models\User $user
+     * @param RainLab\User\Models\User $user
      * @param string $name name of the group
-     * @return \DMA\Friends\Models\UserGroup
+     * @return DMA\Friends\Models\UserGroup
      */
     public static function createGroup($user, $name)
     {
