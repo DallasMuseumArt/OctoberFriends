@@ -13,12 +13,20 @@ class Usermeta extends Model
     const IS_MEMBER     = 1;
     const IS_STAFF      = 2;
 
+    /**
+     * @var array $genderOptions
+     * Provide a list of gender options for the user profile
+     */
     public static $genderOptions = [
         'Male',
         'Female',
         'Non Binary/Other',
     ];
 
+    /**
+     * @var array $raceOptions
+     * Provide a list of race options for the user profile
+     */
     public static $raceOptions = [
         'White',
         'Hispanic',
@@ -30,6 +38,10 @@ class Usermeta extends Model
         'Other',
     ];
 
+    /**
+     * @var array $householdIncomeOptions
+     * Provide a list of income options for the user profile
+     */
     public static $householdIncomeOptions = [
         'Less then $25,000',
         '$25,000 - $50,000',
@@ -39,6 +51,10 @@ class Usermeta extends Model
         '$500,000 or more',
     ];
 
+    /**
+     * @var array $educationOptions
+     * Provide a list of education options for the user profile
+     */
     public static $educationOptions = [
         'K-12',
         'High School/GED',
@@ -53,8 +69,16 @@ class Usermeta extends Model
      * @var string The database table used by the model.
      */
     public $table = 'dma_friends_usermetas';
+
+    /**
+     * @var boolean $timestamps
+     * Do not use timestamps on the usermeta object
+     */
     public $timestamps = false;
 
+    /**
+     * @var string $primaryKey
+     */
     protected $primaryKey = 'user_id';
 
     /**
@@ -97,16 +121,26 @@ class Usermeta extends Model
         return $user->metadata;
     }
     
+    /**
+     * Return users that are not staff and order them by points descending
+     */
     public function scopeByPoints($query)
     {
         return $query->excludeStaff()->orderBy('points', 'desc');
     }
 
+    /**
+     * Exclude staff members from results
+     */
     public function scopeExcludeStaff($query)
     {
         return $query->where('current_member', '!=', self::IS_STAFF);
     }
 
+    /**
+     * @return array
+     * Return all demographic options 
+     */
     public static function getOptions()
     {
         $states = State::where('country_id', '=', 1)->get();

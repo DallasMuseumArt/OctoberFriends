@@ -1,0 +1,95 @@
+\hypertarget{classDMA_1_1Friends_1_1Activities_1_1EventTrigger}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Activities\textbackslash{}Event\+Trigger Class Reference}
+\label{classDMA_1_1Friends_1_1Activities_1_1EventTrigger}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Activities\textbackslash{}\+Event\+Trigger@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Activities\textbackslash{}\+Event\+Trigger}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Activities\textbackslash{}Event\+Trigger\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{de/d31/classDMA_1_1Friends_1_1Activities_1_1EventTrigger}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Activities_1_1EventTrigger_a413e82d1dcf52936ce308715e96e1a39}{details} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Activities_1_1EventTrigger_a68acc002c50d305dda21ddd26ec4265b}{get\+Form\+Default\+Values} (\$model)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classDMA_1_1Friends_1_1Activities_1_1EventTrigger_a45956c83b20db41db895e61b4a13ebd6}{process} (User \$user, \$params)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Activities_1_1EventTrigger_a413e82d1dcf52936ce308715e96e1a39}{}\index{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Event\+Trigger@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Event\+Trigger}!details@{details}}
+\index{details@{details}!D\+M\+A\+::\+Friends\+::\+Activities\+::\+Event\+Trigger@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Event\+Trigger}}
+\subsubsection[{details}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Activities\textbackslash{}\+Event\+Trigger\+::details (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Activities_1_1EventTrigger_a413e82d1dcf52936ce308715e96e1a39}
+
+
+Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInterface}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Type\+Base\+Interface}.
+
+
+\begin{DoxyCode}
+15     \{
+16         \textcolor{keywordflow}{return} [
+17             \textcolor{stringliteral}{'name'}          => \textcolor{stringliteral}{'Event Trigger'},
+18             \textcolor{stringliteral}{'description'}   => \textcolor{stringliteral}{'This Activity Type must be triggered by a valid laravel event'},
+19         ];
+20     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Activities_1_1EventTrigger_a68acc002c50d305dda21ddd26ec4265b}{}\index{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Event\+Trigger@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Event\+Trigger}!get\+Form\+Default\+Values@{get\+Form\+Default\+Values}}
+\index{get\+Form\+Default\+Values@{get\+Form\+Default\+Values}!D\+M\+A\+::\+Friends\+::\+Activities\+::\+Event\+Trigger@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Event\+Trigger}}
+\subsubsection[{get\+Form\+Default\+Values}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Activities\textbackslash{}\+Event\+Trigger\+::get\+Form\+Default\+Values (
+\begin{DoxyParamCaption}
+\item[{}]{\$model}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Activities_1_1EventTrigger_a68acc002c50d305dda21ddd26ec4265b}
+
+
+Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInterface}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Type\+Base\+Interface}.
+
+
+\begin{DoxyCode}
+26     \{
+27         \textcolor{keywordflow}{return} [
+28             \textcolor{stringliteral}{'event'} => (isset($model->event)) ? $model->event : null,
+29         ];
+30     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Activities_1_1EventTrigger_a45956c83b20db41db895e61b4a13ebd6}{}\index{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Event\+Trigger@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Event\+Trigger}!process@{process}}
+\index{process@{process}!D\+M\+A\+::\+Friends\+::\+Activities\+::\+Event\+Trigger@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Event\+Trigger}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}static D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Activities\textbackslash{}\+Event\+Trigger\+::process (
+\begin{DoxyParamCaption}
+\item[{User}]{\$user, }
+\item[{}]{\$params}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classDMA_1_1Friends_1_1Activities_1_1EventTrigger_a45956c83b20db41db895e61b4a13ebd6}
+
+
+Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInterface}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Type\+Base\+Interface}.
+
+
+\begin{DoxyCode}
+36     \{
+37         \textcolor{keywordflow}{if} (!isset($params[\textcolor{stringliteral}{'event'}]) || empty($params[\textcolor{stringliteral}{'event'}])) \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+38 
+39         $activities = Activity::where(\textcolor{stringliteral}{'event'}, $params[\textcolor{stringliteral}{'event'}])->get();
+40 
+41         \textcolor{keywordflow}{foreach}($activities as $activity) \{
+42             parent::process($user, [\textcolor{stringliteral}{'activity'} => $activity]);
+43         \}
+44 
+45         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+46 
+47     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+activities/Event\+Trigger.\+php\end{DoxyCompactItemize}

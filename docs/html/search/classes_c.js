@@ -1,12 +1,11 @@
 var searchData=
 [
-  ['settings',['Settings',['../d1/d8a/classDMA_1_1Friends_1_1Models_1_1Settings.html',1,'DMA::Friends::Models']]],
-  ['step',['Step',['../d9/d03/classDMA_1_1Friends_1_1Models_1_1Step.html',1,'DMA::Friends::Models']]],
-  ['step',['Step',['../d0/d87/classDMA_1_1Friends_1_1Wordpress_1_1Step.html',1,'DMA::Friends::Wordpress']]],
-  ['stepresource',['StepResource',['../d8/da8/classDMA_1_1Friends_1_1Api_1_1StepResource.html',1,'DMA::Friends::Api']]],
-  ['steps',['Steps',['../d0/d0f/classDMA_1_1Friends_1_1Controllers_1_1Steps.html',1,'DMA::Friends::Controllers']]],
-  ['steptransformer',['StepTransformer',['../d0/dbc/classDMA_1_1Friends_1_1Api_1_1StepTransformer.html',1,'DMA::Friends::Api']]],
-  ['syncfriendsdatacommand',['SyncFriendsDataCommand',['../d1/d1d/classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand.html',1,'DMA::Friends::Commands']]],
-  ['syncfriendsimagescommand',['SyncFriendsImagesCommand',['../d0/da8/classDMA_1_1Friends_1_1Commands_1_1SyncFriendsImagesCommand.html',1,'DMA::Friends::Commands']]],
-  ['syncfriendsrelationscommand',['SyncFriendsRelationsCommand',['../d1/dd5/classDMA_1_1Friends_1_1Commands_1_1SyncFriendsRelationsCommand.html',1,'DMA::Friends::Commands']]]
+  ['readchannels',['ReadChannels',['../d6/d3d/classDMA_1_1Friends_1_1Commands_1_1ReadChannels.html',1,'DMA::Friends::Commands']]],
+  ['resetgroups',['ResetGroups',['../dc/d80/classDMA_1_1Friends_1_1Commands_1_1ResetGroups.html',1,'DMA::Friends::Commands']]],
+  ['reward',['Reward',['../d7/dc4/classDMA_1_1Friends_1_1Models_1_1Reward.html',1,'DMA::Friends::Models']]],
+  ['reward',['Reward',['../d6/d94/classDMA_1_1Friends_1_1Wordpress_1_1Reward.html',1,'DMA::Friends::Wordpress']]],
+  ['rewardmanager',['RewardManager',['../d2/dfe/classDMA_1_1Friends_1_1Classes_1_1RewardManager.html',1,'DMA::Friends::Classes']]],
+  ['rewardresource',['RewardResource',['../d2/d30/classDMA_1_1Friends_1_1Api_1_1RewardResource.html',1,'DMA::Friends::Api']]],
+  ['rewards',['Rewards',['../d2/dab/classDMA_1_1Friends_1_1Controllers_1_1Rewards.html',1,'DMA::Friends::Controllers']]],
+  ['rewardtransformer',['RewardTransformer',['../da/d2c/classDMA_1_1Friends_1_1Api_1_1RewardTransformer.html',1,'DMA::Friends::Api']]]
 ];

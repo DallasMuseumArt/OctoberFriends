@@ -1,10 +1,10 @@
 Activity Types must be registered in the \href{#registration-file}{\tt Plugin registration file}. This tells the Friends Plugin about Available Activities and provides a {\bfseries short name} for using it. An example of registering a activity\+:
 
-``` public function register\+Components() \{ return \mbox{[} '\hyperlink{namespaceDMA}{D\+M\+A}' =$>$ 'activity\+Code' \mbox{]}; \} ```
+``` public function register\+Components() \{ return \mbox{[} \textquotesingle{}\hyperlink{namespaceDMA}{D\+M\+A}\textquotesingle{} =$>$ \textquotesingle{}activity\+Code\textquotesingle{} \mbox{]}; \} ```
 
 Define the details(). This will report some basic information about your plugin.
 
-``` public function details() \{ return \mbox{[} 'name' =$>$ 'Activity Code', 'description' =$>$ 'Complete activities by entering in a code', \mbox{]}; \} ```
+``` public function details() \{ return \mbox{[} \textquotesingle{}name\textquotesingle{} =$>$ \textquotesingle{}Activity Code\textquotesingle{}, \textquotesingle{}description\textquotesingle{} =$>$ \textquotesingle{}Complete activities by entering in a code\textquotesingle{}, \mbox{]}; \} ```
 
 If your activity requires additional configuration options create the file field.\+yaml in a corresponding folder named after the class. The file should be named fields.\+yaml see \href{https://octobercms.com/docs/backend/forms#field-types}{\tt documentation} for details.
 
@@ -14,7 +14,7 @@ Example
 
 When implementing custom fields you must also define the {\bfseries get\+Form\+Default\+Values()} method to provide default values
 
-``` public function get\+Form\+Default\+Values(\$model) \{ return \mbox{[} 'activity\+\_\+code' =$>$ (isset(\$model-\/$>$activity\+\_\+code)) ? \$model-\/$>$activity\+\_\+code \+: null, \mbox{]}; \} ```
+``` public function get\+Form\+Default\+Values(\$model) \{ return \mbox{[} \textquotesingle{}activity\+\_\+code\textquotesingle{} =$>$ (isset(\$model-\/$>$activity\+\_\+code)) ? \$model-\/$>$activity\+\_\+code \+: null, \mbox{]}; \} ```
 
 When saving an activity with a custom activity type, the class will attempt to map the fields to attributes on the model. If you need to further extend this functionality you can implement {\bfseries save\+Data()} to customize the behavior when an activity form is saved.
 

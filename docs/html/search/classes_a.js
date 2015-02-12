@@ -1,10 +1,8 @@
 var searchData=
 [
-  ['passwordhash',['PasswordHash',['../d8/d56/classDMA_1_1Friends_1_1Wordpress_1_1PasswordHash.html',1,'DMA::Friends::Wordpress']]],
-  ['pdf_5fcode39',['PDF_Code39',['../d1/d2e/classPDF__Code39.html',1,'']]],
-  ['plugin',['Plugin',['../db/d85/classDMA_1_1Friends_1_1Plugin.html',1,'DMA::Friends']]],
-  ['post',['Post',['../d2/de2/classDMA_1_1Friends_1_1Wordpress_1_1Post.html',1,'DMA::Friends::Wordpress']]],
-  ['postman',['Postman',['../d9/dbf/classDMA_1_1Friends_1_1Facades_1_1Postman.html',1,'DMA::Friends::Facades']]],
-  ['printmanager',['PrintManager',['../df/d0e/classDMA_1_1Friends_1_1Classes_1_1PrintManager.html',1,'DMA::Friends::Classes']]],
-  ['printmembershipcard',['PrintMembershipCard',['../dd/daf/classDMA_1_1Friends_1_1FormWidgets_1_1PrintMembershipCard.html',1,'DMA::Friends::FormWidgets']]]
+  ['normalizeuserdata',['NormalizeUserData',['../dc/d26/classDMA_1_1Friends_1_1Commands_1_1NormalizeUserData.html',1,'DMA::Friends::Commands']]],
+  ['notification',['Notification',['../de/d7f/classDMA_1_1Friends_1_1Models_1_1Notification.html',1,'DMA::Friends::Models']]],
+  ['notificationcounter',['NotificationCounter',['../d7/def/classDMA_1_1Friends_1_1Components_1_1NotificationCounter.html',1,'DMA::Friends::Components']]],
+  ['notificationlist',['NotificationList',['../dc/d03/classDMA_1_1Friends_1_1Components_1_1NotificationList.html',1,'DMA::Friends::Components']]],
+  ['notificationmessage',['NotificationMessage',['../d2/d68/classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1NotificationMessage.html',1,'DMA::Friends::Classes::Notifications']]]
 ];

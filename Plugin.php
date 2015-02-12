@@ -44,6 +44,9 @@ class Plugin extends PluginBase
         ];
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function registerPermissions()
     {
         return [
@@ -51,6 +54,9 @@ class Plugin extends PluginBase
         ];
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function registerSettings()
     {
         return [
@@ -66,6 +72,9 @@ class Plugin extends PluginBase
         ];
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function registerNavigation()
     {
         return [
@@ -123,6 +132,9 @@ class Plugin extends PluginBase
         ];
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function registerComponents()
     {
         return [
@@ -154,6 +166,9 @@ class Plugin extends PluginBase
         ];
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function boot()
     {
 
@@ -331,8 +346,10 @@ class Plugin extends PluginBase
         
         $form->addFields(\Postman::getChannelSettingFields(), 'primary');        
     }
-    
-    
+        
+    /**
+     * {@inheritDoc}
+     */
     public function registerFormWidgets()
     {
         return [
@@ -355,6 +372,9 @@ class Plugin extends PluginBase
         ];   
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function register()
     {
         // Commands for syncing wordpress data
@@ -373,6 +393,9 @@ class Plugin extends PluginBase
 
     } 
 
+    /**
+     * {@inheritDoc}
+     */
     public function registerReportWidgets()
     {   
         return [
@@ -386,7 +409,10 @@ class Plugin extends PluginBase
             ],
         ];  
     } 
-    
+   
+    /**
+     * {@inheritDoc}
+     */ 
     public function registerMarkupTags()
     {   
         return [
@@ -395,7 +421,10 @@ class Plugin extends PluginBase
              ]
         ];
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     public function registerMailTemplates()
     {
         return [
