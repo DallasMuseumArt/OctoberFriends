@@ -1,10 +1,11 @@
 <?php
 namespace DMA\Friends\Commands;
 
+use DB;
+use Log;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
-use DB;
 use DMA\Friends\Models\Reward;
 use DMA\Friends\Models\Badge;
 use RainLab\User\Models\User;
@@ -40,7 +41,11 @@ class SyncFriendsImagesCommand extends Command
      */
     public function __construct()
     {
-        $this->db = DB::connection('friends_wordpress');
+        try {
+            $this->db = DB::connection('friends_wordpress');
+        } catch (\InvalidArgumentException $e) {
+            Log::info('Missing configuration for wordpress migration');
+        }
 
         parent::__construct();
     }
