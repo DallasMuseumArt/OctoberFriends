@@ -142,6 +142,7 @@ class Plugin extends PluginBase
             'DMA\Friends\Components\ActivityStream'             => 'ActivityStream',
             'DMA\Friends\Components\GetRewards'                 => 'GetRewards',
             'DMA\Friends\Components\Modal'                      => 'Modal',
+            'DMA\Friends\Components\Leaderboard'                => 'Leaderboard',
             'DMA\Friends\Components\UserBadges'                 => 'UserBadges',
             'DMA\Friends\Components\UserMostRecentBadge'        => 'UserMostRecentBadge',
             'DMA\Friends\Components\NotificationCounter'        => 'NotificationCounter',
