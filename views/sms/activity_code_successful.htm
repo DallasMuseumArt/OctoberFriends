@@ -1,5 +1,8 @@
-{{ message|raw }}
+{{ message|raw }} {% if activity.points %} You've been awarded {{ activity.points }} points.{% endif %}
 
 {% if activity.objectData %}
-You liked: {{ activity.objectData.object_number }} - {{ activity.objectData.object_title }}
+You liked {{ activity.objectData.object_number }} - {{ activity.objectData.object_title }}
 {% endif %}
+
+
+	
