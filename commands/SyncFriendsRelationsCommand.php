@@ -2,11 +2,12 @@
 
 namespace DMA\Friends\Commands;
 
+use Schema;
+use Log;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
-use Schema;
 use Rainlab\User\Models\User;
 use DMA\Friends\Wordpress\Post;
 use DMA\Friends\Models\Activity;
@@ -55,7 +56,11 @@ class SyncFriendsRelationsCommand extends Command
      */
     public function __construct()
     {   
-        $this->db = DB::connection('friends_wordpress');
+        try {
+            $this->db = DB::connection('friends_wordpress');
+        } catch (\InvalidArgumentException $e) {
+            Log::info('Missing configuration for wordpress migration');
+        }
 
         parent::__construct();
     }   
