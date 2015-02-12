@@ -46,10 +46,17 @@ class ActivityCodeForm extends ComponentBase
             $activity = LikeWorkOfArt::process($user, $params);
         }
         
+        // FIXME : Find and run  UserMostRecentBadge component. 
+        // Do this before call Postman there is a bug either in Larvel or OctoberCMS. 
+        // Postman internally calls App::make('twig.string') but for some reason it affects View::make(...)  that is been 
+        // run by UserMostRecentBadge
+        $mostRecent = $this->controller->findComponentByName('UserMostRecentBadge');
+        $mostRecent->onRun();
                
         // Send Flash and kiosk notification
         $typeMessage = ($activity) ? 'successful' : 'error';
         $template = 'activity_code_' . $typeMessage;
+        
         Postman::send($template, function(NotificationMessage $notification) use ($user, $code, $activity){
 
             // Set user in the notification
@@ -70,10 +77,11 @@ class ActivityCodeForm extends ComponentBase
              
         }, ['flash', 'kiosk']);
         
-       
+        
         return [
-            '#flashMessages'    => $this->renderPartial('@flashMessages'),
-            'span.points'       => number_format($user->points),
+            '#flashMessages'            => $this->renderPartial('@flashMessages'),
+            'span.points'               => number_format($user->points),
+            'div.most-recent-badge'     => $this->controller->renderComponent('UserMostRecentBadge'),
         ];
         
 
