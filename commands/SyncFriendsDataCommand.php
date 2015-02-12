@@ -2,6 +2,7 @@
 
 namespace DMA\Friends\Commands;
 
+use Log;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Console\Input\InputOption;
@@ -49,7 +50,11 @@ class SyncFriendsDataCommand extends Command
      */
     public function __construct()
     {
-        $this->db = DB::connection('friends_wordpress');
+        try {
+            $this->db = DB::connection('friends_wordpress');
+        } catch (\InvalidArgumentException $e) {
+            Log::info('Missing configuration for wordpress migration');
+        }
 
         parent::__construct();
     }
