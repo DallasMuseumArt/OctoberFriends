@@ -1,0 +1,14 @@
+<div class="leaderboard">
+    <table class="table table-stripped">
+    {% for user in users %}
+        <tr>
+            <td>
+                {{ user.metadata.first_name }} {{ user.metadata.last_name }}
+            </td>
+            <td>
+                {{ user.points_today }}
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+</div>
