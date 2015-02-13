@@ -17,12 +17,12 @@ The friends plugin is currently designed to work with builds no later then 186 o
 * Go to the [Friends Theme Repository](https://github.com/DallasMuseumArt/OctoberFriendsTheme) for instructions on downloading and installing the companion theme.
 
 ### Installing Rainlab plugin:
-Log into to the OctoberCMS backend (default http://HOSTNAME/backent) site.
+Log into to the OctoberCMS backend (default http://HOSTNAME/backend) site.
 Click Settings.
 Select System / Updates from the left menu.
 Type rainlab.user and click Install Plugin on this page.
 
-# Installation via Installer
+# Installation via Makefile 
 * Download the makefile in this repository installer/Makefile (e.g. curl -O https://raw.githubusercontent.com/artsmia/OctoberFriends/master/installer/Makefile)
 * Uncomment and set the lines for your Github username and the OctoberCMS database details.
 * Run `make install` in your chosen install directory.
