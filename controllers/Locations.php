@@ -47,15 +47,17 @@ class Locations extends Controller
         
         if ($location->is_authorized) {
 
-            \Log::debug("User attempted to login with", ['barcodeId' => $barcodeId]);
             
             $user = User::where('barcode_id', $barcodeId)->first();
+
 
             // Attempt to lookup membership if a user isnt present
             if (!$user) {
                 $usermeta = Usermeta::where('current_member_number', $barcodeId)->first();
                 $user = $usermeta->user;
             }
+
+            \Log::debug("User attempted to login with", ['barcodeId' => $barcodeId, 'user' => $user]);
 
             if (!$user) {
                 // The user does not exist, so flash an error
