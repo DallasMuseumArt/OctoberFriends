@@ -1,6 +1,9 @@
 <div class="col-md-12 col-sm-12">
     <div class="friends-reward preview">
-
+        {% if reward.inventory > 0 %}
+        <span class="special limited">Limited</span>
+        {% endif %}
+        
         <div class="image">
             {% if reward.image.getPath() %}
             <a href="#" 
