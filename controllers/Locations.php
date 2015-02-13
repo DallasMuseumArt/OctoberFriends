@@ -47,7 +47,7 @@ class Locations extends Controller
         
         if ($location->is_authorized) {
 
-            \Log::debug("User attempted to login with: " . $barcodeId);
+            \Log::debug("User attempted to login", ['barcodeId' => $barcodeId]);
             
             $user = User::where('barcode_id', $barcodeId)->first();
 
