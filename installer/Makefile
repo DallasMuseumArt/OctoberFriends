@@ -52,7 +52,7 @@ octobercms: check
 .PHONY: rainlabusers
 rainlabusers: october/plugins/rainlab
 	cd october/plugins/rainlab; \
-	git clone https://$(GITUSERNAME)github.com/rainlab/user-plugin.git user; \
+	git clone https://$(GITUSERNAME)@github.com/rainlab/user-plugin.git user; \
 	cd user; \
 	composer install; \
 	cd ../../../; \
@@ -61,7 +61,7 @@ rainlabusers: october/plugins/rainlab
 .PHONY: rainlabgoogle
 rainlabgoogle: rainlabusers
 	cd october/plugins/rainlab; \
-	git clone https://$(GITUSERNAME)github.com/rainlab/googleanalytics-plugin.git googleanalytics; \
+	git clone https://$(GITUSERNAME)@github.com/rainlab/googleanalytics-plugin.git googleanalytics; \
 	cd googleanalytics; \
 	composer install; \
 	cd ../../../; \
