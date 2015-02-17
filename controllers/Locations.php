@@ -54,15 +54,17 @@ class Locations extends Controller
             // Attempt to lookup membership if a user isnt present
             if (!$user) {
                 $usermeta = Usermeta::where('current_member_number', $barcodeId)->first();
-                $user = $usermeta->user;
+                if (isset($usermeta->user)) {
+                    $user = $usermeta->user;
+                }
             }
 
-            \Log::debug("User attempted to login with", ['barcodeId' => $barcodeId, 'user' => $user]);
-
             if (!$user) {
+                \Log::debug("Failed to login user", ['barcodeId' => $barcodeId, 'user' => $user]);
                 // The user does not exist, so flash an error
                 Flash::error(Lang::get('dma.friends::lang.app.loginFailed'));
             } else {
+                \Log::debug("Logged in user", ['barcodeId' => $barcodeId, 'user' => $user]);
                 //The user exists so log them in
                 Auth::login($user);
                 Event::fire('auth.login', [$user]);
