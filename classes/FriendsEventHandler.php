@@ -16,7 +16,7 @@ use DMA\Friends\Classes\PrintManager;
 use DMA\Friends\Classes\Notifications\IncomingMessage;
 use DMA\Friends\Activities\ActivityCode;
 use DMA\Friends\Activities\LikeWorkOfArt;
-use DMA\Friends\Activities\EventTrigger;
+use DMA\Friends\Activities\Registration;
 use DMA\Friends\Classes\Notifications\NotificationMessage;
 use DMA\Friends\Models\Settings;
 use Backend\Models\UserGroup;
@@ -150,6 +150,9 @@ class FriendsEventHandler {
             $printManager = new PrintManager($location, $user);
             $printManager->printIdCard();
         }
+
+        // Process Activity for registration
+        Registration::process($user);
     }
 
     public function onNotificationsReady()
@@ -213,17 +216,6 @@ class FriendsEventHandler {
              
         });        
     }
-
-    // public function allEvents()
-    // {
-    //     $params = [
-    //         'event' => Event::firing()
-    //     ];
-        
-    //     // $user = Auth::getUser();
-        
-    //     // EventTrigger::process($user, $params);
-    // }
     
     public function subscribe($events)
     {   
@@ -233,7 +225,6 @@ class FriendsEventHandler {
         $events->listen('dma.friends.step.completed', 'DMA\Friends\Classes\FriendsEventHandler@onStepCompleted');
         $events->listen('auth.login', 'DMA\Friends\Classes\FriendsEventHandler@onAuthLogin');
         $events->listen('auth.register', 'DMA\Friends\Classes\FriendsEventHandler@onAuthRegister');
-        //$events->listen('*', 'DMA\Friends\Classes\FriendsEventHandler@allEvents');
         
         // Register events for listen incomming data by each channel
         //$events->listen('dma.notifications.ready', 'DMA\Friends\Classes\FriendsEventHandler@onNotificationsReady');
