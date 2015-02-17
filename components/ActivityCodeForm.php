@@ -8,6 +8,7 @@ use Postman;
 use Cms\Classes\ComponentBase;
 use DMA\Friends\Activities\ActivityCode;
 use DMA\Friends\Activities\LikeWorkOfArt;
+use DMA\Friends\Classes\Notifications\NotificationMessage;
 
 class ActivityCodeForm extends ComponentBase
 {
