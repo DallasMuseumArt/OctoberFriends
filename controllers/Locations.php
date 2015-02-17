@@ -5,6 +5,7 @@ use Backend\Classes\Controller;
 use DMA\Friends\Classes\LocationManager;
 use RainLab\User\Models\User;
 use DMA\Friends\Models\Usermeta;
+use DMA\Friends\Classes\Notifications\NotificationMessage;
 use Auth;
 use App;
 use Flash;
@@ -41,19 +42,17 @@ class Locations extends Controller
         $location = LocationManager::getLocation();
 
         if (!$location || empty($barcodeId)) {
-            App::abort(403, 'Unauthorized access');
-            return;
+            //App::abort(403, 'Unauthorized access');
+            return Redirect::to('/');
         }
         
         if ($location->is_authorized) {
 
-            
             $user = User::where('barcode_id', $barcodeId)->first();
-
 
             // Attempt to lookup membership if a user isnt present
             if (!$user) {
-                $usermeta = Usermeta::where('current_member_number', $barcodeId)->first();
+                $usermeta = Usermeta::where('current_member_number', '=', $barcodeId)->first();
                 if (isset($usermeta->user)) {
                     $user = $usermeta->user;
                 }
