@@ -20,7 +20,7 @@ interface ActivityTypeBaseInterface {
     public function getConfig();
     public function getFormDefaultValues($model);
     public function saveData($model, $values);
-    public static function process(User $user, $params);
+    public static function process(User $user, $params = []);
     public static function canComplete(Activity $activity, User $user);
 }
 
@@ -115,7 +115,7 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
      * @return boolean
      * returns true if the process was successful
      */
-    public static function process(User $user, $params)
+    public static function process(User $user, $params = [])
     {
         $activity = $params['activity'];
 
