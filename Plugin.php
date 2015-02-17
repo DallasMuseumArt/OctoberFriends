@@ -163,6 +163,7 @@ class Plugin extends PluginBase
         return [
             'DMA\Friends\Activities\ActivityCode'   => 'ActivityCode',
             'DMA\Friends\Activities\LikeWorkOfArt'  => 'LikeWorkOfArt',
+            'DMA\Friends\Activities\Registration'   => 'Registration',
         ];
     }
 
