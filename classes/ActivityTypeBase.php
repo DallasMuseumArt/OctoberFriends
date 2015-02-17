@@ -187,7 +187,7 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
                     $end_time->setTime($end['hour'], $start['minutes']);
                     $day        = date('w');
 
-                    if ($activity->time_restriction_date['days'][$day] !== false
+                    if ($activity->time_restriction_data['days'][$day] !== false
                         && $now->gte($start_time) && $now->lte($end_time)) {
 
                         return true;
