@@ -408,6 +408,10 @@ class Plugin extends PluginBase
                 'label'     => 'Friends Leaderboard',
                 'context'   => 'dashboard',
             ],
+            'DMA\Friends\ReportWidgets\NewFriendsByDay' => [
+                'label'     => 'Chart - New Friends By Day',
+                'context'   => 'dashboard',
+            ],
         ];  
     } 
    
