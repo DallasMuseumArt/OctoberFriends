@@ -83,3 +83,6 @@
 1.0.28:
     - Fix barcodes
     - fix_barcodes.php
+1.0.29:
+    - Change data type for member number
+    - change_member_number_type.php
