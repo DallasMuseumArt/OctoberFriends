@@ -1,0 +1,13 @@
+<div class="report-widget activities-by-day">
+    <h3>Activities Completed by Day</h3>
+    
+    <div id="ActivitiesByDay"></div>
+
+    <div class="clearfix"></div>
+
+    <script type="text/javascript">
+    window.graphActivitiesByDay = <?php print json_encode($data) ?>;
+    $(document).trigger('ActivitiesDataReady');
+    </script>
+
+</div>

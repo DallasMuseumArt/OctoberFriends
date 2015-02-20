@@ -412,6 +412,10 @@ class Plugin extends PluginBase
                 'label'     => 'Chart - New Friends By Day',
                 'context'   => 'dashboard',
             ],
+            'DMA\Friends\ReportWidgets\ActivitiesByDay' => [
+                'label'     => 'Chart - Activities By Day',
+                'context'   => 'dashboard',
+            ],
         ];  
     } 
    

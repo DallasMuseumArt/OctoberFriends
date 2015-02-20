@@ -16,4 +16,5 @@ class GraphReport extends ReportWidgetBase {
         $this->addJs('../../graphreport/assets/c3.js');
         $this->addCss('../../graphreport/assets/c3.css');    
     }
+
 }
