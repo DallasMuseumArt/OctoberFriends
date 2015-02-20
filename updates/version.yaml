@@ -86,3 +86,5 @@
 1.0.29:
     - Change data type for member number
     - change_member_number_type.php
+2.2.0:
+    - Release v2.2
