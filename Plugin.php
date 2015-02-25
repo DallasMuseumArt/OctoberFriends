@@ -164,6 +164,7 @@ class Plugin extends PluginBase
         return [
             'DMA\Friends\Activities\ActivityCode'   => 'ActivityCode',
             'DMA\Friends\Activities\LikeWorkOfArt'  => 'LikeWorkOfArt',
+            'DMA\Friends\Activities\Registration'   => 'Registration',
         ];
     }
 
@@ -406,6 +407,14 @@ class Plugin extends PluginBase
             ],  
             'DMA\Friends\ReportWidgets\FriendsLeaderboard' => [
                 'label'     => 'Friends Leaderboard',
+                'context'   => 'dashboard',
+            ],
+            'DMA\Friends\ReportWidgets\NewFriendsByDay' => [
+                'label'     => 'Chart - New Friends By Day',
+                'context'   => 'dashboard',
+            ],
+            'DMA\Friends\ReportWidgets\ActivitiesByDay' => [
+                'label'     => 'Chart - Activities By Day',
                 'context'   => 'dashboard',
             ],
         ];  

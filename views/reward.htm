@@ -5,6 +5,9 @@
     
     <div class="body col-md-8 col-sm-8">
         <div class="description">
+            {% if model.inventory > 0 %}
+            <p><strong>{{ model.inventory }} rewards remaining</strong></p>
+            {% endif %}
             {{ model.description|raw }}
         </div>
 
