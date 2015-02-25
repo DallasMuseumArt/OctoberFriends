@@ -1,14 +1,13 @@
 <div class="leaderboard">
-    <table class="table table-stripped">
+    <ol class="list-group">
     {% for user in users %}
-        <tr>
-            <td>
-                {{ user.metadata.first_name }} {{ user.metadata.last_name|first|upper }}.
-            </td>
-            <td>
+        <li class="list-group-item">
+            {{ user.metadata.first_name }} {{ user.metadata.last_name|first|upper }}.
+
+            <span class="badge">
                 {{ user.points_today }}
-            </td>
-        </tr>
+            </span>
+        </li>
     {% endfor %}
-    </table>
+    </ol>
 </div>
