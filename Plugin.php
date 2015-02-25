@@ -284,7 +284,13 @@ class Plugin extends PluginBase
         	],
         	'metadata[current_member]' => [
         		'label' => 'Current member?',
-        		'type'  => 'checkbox',
+        		'type'  => 'dropdown',
+                'span'  => 'left',
+                'options'   => [
+                    'Non Member',
+                    'Member',
+                    'Staff',
+                ],
         		'tab'   => 'Metadata',
         	],
         	'metadata[current_member_number]' => [
