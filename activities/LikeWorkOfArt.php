@@ -26,7 +26,7 @@ class LikeWorkOfArt extends ActivityTypeBase
     /**
      * {%inheritDoc}
      */
-    public static function process(User $user, $params)
+    public static function process(User $user, $params = [])
     {        
         if (!isset($params['code']) || empty($params['code'])) return false;
 

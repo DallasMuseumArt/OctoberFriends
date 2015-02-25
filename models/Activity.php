@@ -71,7 +71,11 @@ class Activity extends Model
     ];
     
     public $morphToMany = [
-        'categories'    => ['DMA\Friends\Models\Category', 'name' => 'object', 'table' => 'dma_friends_object_categories'],
+        'categories'    => ['DMA\Friends\Models\Category', 
+            'name'  => 'object', 
+            'table' => 'dma_friends_object_categories',
+            'order' => 'name',
+        ],
     ];
 
     /**
