@@ -85,7 +85,7 @@ class BadgeManager
         if ($step->badge->maximum_earnings) {
             $timesEarned = floor($count->count / $step->count);
 
-            if ($timesEarned >= $step->badge->maximum_earnings) 
+            if ($timesEarned > $step->badge->maximum_earnings) 
                 return false;
         }
 
@@ -115,6 +115,7 @@ class BadgeManager
 
         // See if the user has completed all steps for a badge
         foreach($badge->steps as $step) {
+
             if (!$user->steps->contains($step->id)) {
                 //user did not complete a step in badge so we cannot complete the badge
                 return;

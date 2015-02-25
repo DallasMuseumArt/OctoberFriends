@@ -237,13 +237,15 @@ class UserLogin extends ComponentBase
         $usermeta = new Usermeta;
         $usermeta->first_name       = $data['first_name'];
         $usermeta->last_name        = $data['last_name'];
-        $usermeta->gender           = $data['gender'];
         $usermeta->birth_date       = $birth_date;
-        $usermeta->race             = $data['race'];
-        $usermeta->household_income = $data['household_income'];
-        $usermeta->household_size   = $data['household_size'];
-        $usermeta->education        = $data['education'];
         $usermeta->email_optin      = isset($data['email_optin']) ? $data['email_optin'] : false;
+
+        // Uncomment to enable demographics in registration form;
+        // $usermeta->gender           = $data['gender'];
+        // $usermeta->race             = $data['race'];
+        // $usermeta->household_income = $data['household_income'];
+        // $usermeta->household_size   = $data['household_size'];
+        // $usermeta->education        = $data['education'];
 
         $user->metadata()->save($usermeta);
 

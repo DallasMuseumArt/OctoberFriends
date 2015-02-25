@@ -20,7 +20,7 @@ interface ActivityTypeBaseInterface {
     public function getConfig();
     public function getFormDefaultValues($model);
     public function saveData($model, $values);
-    public static function process(User $user, $params);
+    public static function process(User $user, $params = []);
     public static function canComplete(Activity $activity, User $user);
 }
 
@@ -115,7 +115,7 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
      * @return boolean
      * returns true if the process was successful
      */
-    public static function process(User $user, $params)
+    public static function process(User $user, $params = [])
     {
         $activity = $params['activity'];
 
@@ -187,7 +187,7 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
                     $end_time->setTime($end['hour'], $start['minutes']);
                     $day        = date('w');
 
-                    if ($activity->time_restriction_date['days'][$day] !== false
+                    if ($activity->time_restriction_data['days'][$day] !== false
                         && $now->gte($start_time) && $now->lte($end_time)) {
 
                         return true;

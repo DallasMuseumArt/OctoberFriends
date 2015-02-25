@@ -46,7 +46,7 @@ class ActivityCode extends ActivityTypeBase
      * @return boolean
      * returns true if the process was successful
      */
-    public static function process(User $user, $params)
+    public static function process(User $user, $params = [])
     {
         if (!isset($params['code']) || empty($params['code'])) return false;
 
