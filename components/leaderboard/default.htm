@@ -3,7 +3,7 @@
     {% for user in users %}
         <tr>
             <td>
-                {{ user.metadata.first_name }} {{ user.metadata.last_name }}
+                {{ user.metadata.first_name }} {{ user.metadata.last_name|first|upper }}.
             </td>
             <td>
                 {{ user.points_today }}
