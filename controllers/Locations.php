@@ -55,8 +55,10 @@ class Locations extends Controller
             // Attempt to lookup membership if a user isnt present
             if (!$user) {
                 $usermeta = Usermeta::where('current_member_number', '=', $barcodeId)->first();
-                if (isset($usermeta->user)) {
+                try {
                     $user = $usermeta->user;
+                } catch(\SystemException $e) {
+                    \Log::error($e);
                 }
             }
 
