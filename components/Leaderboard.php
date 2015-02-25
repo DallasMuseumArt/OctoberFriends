@@ -30,7 +30,6 @@ class Leaderboard extends ComponentBase
             ->get();
 
         $this->page['users'] = $users;
-        \Debugbar::info($users);
     }
 
 }
