@@ -39,13 +39,15 @@ class Locations extends Controller
     public static function barcodeLogin()
     {
         $barcodeId = post('barcodeId');
+        $barcodeId = trim($barcodeId);
+
         $location = LocationManager::getLocation();
 
         if (!$location || empty($barcodeId)) {
             //App::abort(403, 'Unauthorized access');
             return Redirect::to('/');
         }
-        
+
         if ($location->is_authorized) {
 
             $user = User::where('barcode_id', $barcodeId)->first();
