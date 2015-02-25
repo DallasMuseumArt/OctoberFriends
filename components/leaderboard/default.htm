@@ -5,7 +5,7 @@
             {{ user.metadata.first_name }} {{ user.metadata.last_name|first|upper }}.
 
             <span class="badge">
-                {{ user.points_today }}
+                {{ user.points_today|number_format }}
             </span>
         </li>
     {% endfor %}
