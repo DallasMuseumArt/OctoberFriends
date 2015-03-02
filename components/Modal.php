@@ -2,7 +2,7 @@
 
 use Cms\Classes\ComponentBase;
 use Cms\Classes\Theme;
-use System\Classes\SystemException;
+use SystemException;
 use File;
 use Lang;
 

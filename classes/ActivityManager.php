@@ -6,7 +6,7 @@ use Config;
 use File;
 use Illuminate\Container\Container;
 use System\Classes\PluginManager;
-use System\Classes\SystemException;
+use SystemException;
 
 /**
  * Activity Manager

@@ -1,6 +1,6 @@
 categories:
     label: Categories
-    list: @/plugins/dma/friends/models/category/columns.yaml
-    form: @/plugins/dma/friends/models/category/fields.yaml
+    list: ~/plugins/dma/friends/models/category/columns.yaml
+    form: ~/plugins/dma/friends/models/category/fields.yaml
     defaultSort: name 
     showSorting: false

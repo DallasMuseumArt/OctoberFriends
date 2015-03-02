@@ -2,7 +2,7 @@
 
 use Backend\Classes\FormField;
 use Backend\Classes\WidgetBase;
-use System\Classes\ApplicationException;
+use ApplicationException;
 use Str;
 use File;
 use DMA\Friends\Classes\ActivityManager;

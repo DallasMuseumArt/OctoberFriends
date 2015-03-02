@@ -34,8 +34,8 @@ class UserGroup extends GroupBase{
     public $belongsToMany = [
         'users' => ['Rainlab\User\Models\User', 
             'table'         => 'dma_friends_users_groups',
-            'primaryKey'    => 'group_id',
-            'foreignKey'    => 'user_id',
+            'key'           => 'group_id',
+            'otherKey'      => 'user_id',
             'timestamps'    => true,
             'pivot'         => ['membership_status']
         ]

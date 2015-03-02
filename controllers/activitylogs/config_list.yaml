@@ -3,7 +3,7 @@
 # ===================================
 
 # Model List Column configuration
-list: @/plugins/dma/friends/models/activitylog/columns.yaml
+list: ~/plugins/dma/friends/models/activitylog/columns.yaml
 
 # Model Class name
 modelClass: DMA\Friends\Models\ActivityLog

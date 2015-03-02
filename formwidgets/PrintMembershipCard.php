@@ -9,7 +9,7 @@ use RainLab\User\Models\User;
 use DMA\Friends\Classes\PrintManager;
 use Flash;
 use Lang;
-use System\Classes\SystemException;
+use SystemException;
 
 
 /**

@@ -6,7 +6,7 @@
 name: Reward
 
 # Model Form Field configuration
-form: @/plugins/dma/friends/models/reward/fields.yaml
+form: ~/plugins/dma/friends/models/reward/fields.yaml
 
 # Model Class name
 modelClass: DMA\Friends\Models\Reward

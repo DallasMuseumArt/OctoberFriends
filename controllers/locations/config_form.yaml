@@ -6,7 +6,7 @@
 name: Location
 
 # Model Form Field configuration
-form: @/plugins/dma/friends/models/location/fields.yaml
+form: ~/plugins/dma/friends/models/location/fields.yaml
 
 # Model Class name
 modelClass: DMA\Friends\Models\Location

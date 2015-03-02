@@ -3,7 +3,7 @@
 use Event;
 use DMA\Friends\Classes\FriendsLog;
 use RainLab\User\Models\User;
-use System\Classes\SystemException;
+use SystemException;
 use System\Models\File;
 
 /**

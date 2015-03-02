@@ -5,8 +5,6 @@ use Auth;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 
-use System\Classes\ApplicationException;
-
 class NotificationCounter extends ComponentBase
 {
   

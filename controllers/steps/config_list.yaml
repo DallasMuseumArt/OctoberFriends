@@ -3,7 +3,7 @@
 # ===================================
 
 # Model List Column configuration
-list: @/plugins/dma/friends/models/step/columns.yaml
+list: ~/plugins/dma/friends/models/step/columns.yaml
 
 # Model Class name
 modelClass: DMA\Friends\Models\Step

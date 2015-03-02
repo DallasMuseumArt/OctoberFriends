@@ -6,7 +6,7 @@ use DMA\Friends\Models\Reward;
 use DMA\Friends\Models\Settings;
 use Lang;
 use Cms\Classes\Theme;
-use System\Classes\SystemException;
+use SystemException;
 
 require_once('fpdf17/code39.php');
 

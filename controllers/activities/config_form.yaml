@@ -6,7 +6,7 @@
 name: Activity
 
 # Model Form Field configuration
-form: @/plugins/dma/friends/models/activity/fields.yaml
+form: ~/plugins/dma/friends/models/activity/fields.yaml
 
 # Model Class name
 modelClass: DMA\Friends\Models\Activity
