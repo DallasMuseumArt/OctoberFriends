@@ -6,8 +6,10 @@ use DMA\Friends\Classes\LocationManager;
 use RainLab\User\Models\User;
 use DMA\Friends\Models\Usermeta;
 use DMA\Friends\Classes\Notifications\NotificationMessage;
+use SystemException;
 use Auth;
 use App;
+use Log;
 use Flash;
 use Lang;
 use Redirect;
@@ -57,17 +59,17 @@ class Locations extends Controller
                 $usermeta = Usermeta::where('current_member_number', '=', $barcodeId)->first();
                 try {
                     $user = $usermeta->user;
-                } catch(\SystemException $e) {
-                    \Log::error($e);
+                } catch(SystemException $e) {
+                    Log::error($e);
                 }
             }
 
             if (!$user) {
-                \Log::debug("Failed to login user", ['barcodeId' => $barcodeId, 'user' => $user]);
+                Log::debug("Failed to login user", ['barcodeId' => $barcodeId, 'user' => $user]);
                 // The user does not exist, so flash an error
                 Flash::error(Lang::get('dma.friends::lang.app.loginFailed'));
             } else {
-                \Log::debug("Logged in user", ['barcodeId' => $barcodeId, 'user' => $user]);
+                Log::debug("Logged in user", ['barcodeId' => $barcodeId, 'user' => $user]);
                 //The user exists so log them in
                 Auth::login($user);
                 Event::fire('auth.login', [$user]);

@@ -9,7 +9,7 @@ fields:
         required: true
     toolbar:
         type: partial
-        path: @/plugins/dma/friends/partials/_content_toolbar.htm
+        path: ~/plugins/dma/friends/partials/_content_toolbar.htm
         cssClass: collapse-visible
 
 secondaryTabs:
@@ -167,4 +167,4 @@ secondaryTabs:
             tab: Steps 
             context: update
             type: partial
-            path: @/plugins/dma/friends/controllers/badges/_form_steps.htm
+            path: ~/plugins/dma/friends/controllers/badges/_form_steps.htm

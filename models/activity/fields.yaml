@@ -8,7 +8,7 @@ fields:
         required: true
     toolbar:
         type: partial
-        path: @/plugins/dma/friends/partials/_content_toolbar.htm
+        path: ~/plugins/dma/friends/partials/_content_toolbar.htm
         cssClass: collapse-visible
 
 secondaryTabs:
@@ -98,7 +98,7 @@ secondaryTabs:
             type: timerestrictions
             tab: Publishing Options
             containerAttributes:
-                data-trigger-type: display
+                data-trigger-action: display
                 data-trigger: 'select[name="Activity[time_restriction]"]'
                 data-trigger-condition: value[1]
         date_begin:
@@ -110,7 +110,7 @@ secondaryTabs:
             type: datepicker
             mode: datetime
             containerAttributes:
-                data-trigger-type: display
+                data-trigger-action: display
                 data-trigger: 'select[name="Activity[time_restriction]"]'
                 data-trigger-condition: value[2]
         date_end:
@@ -122,7 +122,7 @@ secondaryTabs:
             type: datepicker
             mode: datetime
             containerAttributes:
-                data-trigger-type: display
+                data-trigger-action: display
                 data-trigger: 'select[name="Activity[time_restriction]"]'
                 data-trigger-condition: value[2]
         is_published:
@@ -148,5 +148,5 @@ secondaryTabs:
         badges:
             tab: Badges
             type: partial
-            path: @/plugins/dma/friends/models/activity/badges.htm
+            path: ~/plugins/dma/friends/models/activity/badges.htm
 

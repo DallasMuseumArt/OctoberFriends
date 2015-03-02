@@ -105,7 +105,7 @@ class ActivityType extends FormWidgetBase
      * @param $value The existing value for this widget.
      * @return string The new value for this widget.
      */
-    public function getSaveData($value)
+    public function getSaveValue($value)
     {
         if ($value['activity_type'])
             $this->manager->saveData($this->model, $value);

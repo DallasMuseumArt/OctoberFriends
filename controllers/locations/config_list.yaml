@@ -3,8 +3,8 @@
 # ===================================
 
 # Model List Column configuration
-list: @/plugins/dma/friends/models/location/columns.yaml
-filter: @/plugins/dma/friends/models/location/config_filter.yaml
+list: ~/plugins/dma/friends/models/location/columns.yaml
+filter: ~/plugins/dma/friends/models/location/config_filter.yaml
 
 
 # Model Class name

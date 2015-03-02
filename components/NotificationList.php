@@ -6,8 +6,6 @@ use Redirect;
 use Cms\Classes\ComponentBase;
 use DMA\Friends\Models\Notification;
 
-use System\Classes\ApplicationException;
-
 class NotificationList extends ComponentBase
 {
   

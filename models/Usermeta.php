@@ -77,9 +77,9 @@ class Usermeta extends Model
     public $timestamps = false;
 
     /**
-     * @var string $primaryKey
+     * @var string $key
      */
-    protected $primaryKey = 'user_id';
+    protected $key = 'user_id';
 
     /**
      * @var array Guarded fields
@@ -95,8 +95,8 @@ class Usermeta extends Model
      * @var array Relations
      */
     public $belongsTo = [
-        'user'          => ['RainLab\User\Models\User',
-            'foreignKey'    => 'user_id',        
+        'user' => ['RainLab\User\Models\User',
+            'key' => 'user_id',        
         ],
     ];
 

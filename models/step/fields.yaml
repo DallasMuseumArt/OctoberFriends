@@ -10,5 +10,5 @@ fields:
     activity:
         label: Activity
         type: relation
-        options:
-            nameColumn: title
+        properties:
+            nameFrom: title

@@ -5,8 +5,6 @@ use Auth;
 use Redirect; 
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
-
-use System\Classes\ApplicationException;
 use DMA\Friends\Models\Settings;
 use DMA\Friends\Models\UserGroup;
 use RainLab\User\Models\Settings as UserSettings;

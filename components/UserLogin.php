@@ -3,14 +3,14 @@
 use Cms\Classes\ComponentBase;
 use Redirect;
 use Validator;
-use October\Rain\Support\ValidationException;
+use ValidationException;
 use RainLab\User\Models\Settings as UserSettings;
 use RainLab\User\Models\User;
 use DMA\Friends\Classes\UserExtend;
 use DMA\Friends\Models\Usermeta;
 use DMA\Friends\Wordpress\Auth as WordpressAuth;
 use Cms\Classes\Theme;
-use System\Classes\SystemException;
+use SystemException;
 use Cms\Classes\Page;
 use File;
 use Lang;

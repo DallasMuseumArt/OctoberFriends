@@ -6,27 +6,22 @@ columns:
     id:
         label: Group ID
         searchable: yes
-        
     name:
         label: Name
-        searchable: yes
-                
+        searchable: yes             
     owner_name:
         label: Owner Name
         relation: owner
         select: @name
         searchable: yes
-    
     owner_id:
         label: Owner ID
         relation: owner
         select: @id
         searchable: yes   
- 
     code:
         label: Code
         searchable: yes
-    
     is_active:
         label: Active
         type: switch

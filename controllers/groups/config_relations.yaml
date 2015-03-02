@@ -4,8 +4,7 @@
 
 users:
     label: Users
-    list: @/plugins/dma/friends/controllers/groups/user_columns.yaml
-    #form: @/plugins/dma/friends/controllers/groups/user_fields.yaml        
+    list: ~/plugins/dma/friends/controllers/groups/user_columns.yaml
     manage:
         recordsPerPage: 10
         showSearch: true    

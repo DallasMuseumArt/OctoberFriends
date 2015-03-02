@@ -6,7 +6,7 @@
 name: Step
 
 # Model Form Field configuration
-form: @/plugins/dma/friends/models/step/fields.yaml
+form: ~/plugins/dma/friends/models/step/fields.yaml
 
 # Model Class name
 modelClass: DMA\Friends\Models\Step

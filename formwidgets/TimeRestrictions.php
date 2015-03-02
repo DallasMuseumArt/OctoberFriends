@@ -55,7 +55,7 @@ class TimeRestrictions extends FormWidgetBase
     /** 
      * {@inheritDoc}
      */
-    public function getSaveData($value)
+    public function getSaveValue($value)
     {   
         // Convert check values to conform to ISO php day standards
         for ($i = 0; $i < 7; $i++) {

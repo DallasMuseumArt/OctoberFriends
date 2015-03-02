@@ -203,11 +203,40 @@ class Plugin extends PluginBase
             $model->hasMany['activityLogs']     = ['DMA\Friends\Models\ActivityLog'];
             $model->hasMany['bookmarks']        = ['DMA\Friends\Models\Bookmark'];
             $model->hasMany['notifications']    = ['DMA\Friends\Models\Notification'];
-            $model->belongsToMany['activities'] = ['DMA\Friends\Models\Activity',   'table' => 'dma_friends_activity_user', 'user_id', 'activity_id',   'timestamps' => true, 'order' => 'dma_friends_activity_user.created_at desc'];     
-            $model->belongsToMany['steps']      = ['DMA\Friends\Models\Step',       'table' => 'dma_friends_step_user',     'user_id', 'step_id',       'timestamps' => true, 'order' => 'dma_friends_step_user.created_at desc'];     
-            $model->belongsToMany['badges']     = ['DMA\Friends\Models\Badge',      'table' => 'dma_friends_badge_user',    'user_id', 'badge_id',      'timestamps' => true, 'order' => 'dma_friends_badge_user.created_at desc'];        
-            $model->belongsToMany['rewards']    = ['DMA\Friends\Models\Reward',     'table' => 'dma_friends_reward_user',   'user_id', 'reward_id',     'timestamps' => true, 'order' => 'dma_friends_reward_user.created_at desc'];       
-            $model->belongsToMany['groups']     = ['DMA\Friends\Models\UserGroup',  'table' => 'dma_friends_users_groups',  'primaryKey' => 'user_id',  'foreignKey' => 'group_id', 'pivot' => ['membership_status']];        
+            $model->belongsToMany['activities'] = ['DMA\Friends\Models\Activity',
+                'table' => 'dma_friends_activity_user', 
+                'user_id', 
+                'activity_id',   
+                'timestamps' => true, 
+                'order' => 'dma_friends_activity_user.created_at desc'
+            ];     
+            $model->belongsToMany['steps']      = ['DMA\Friends\Models\Step',
+                'table' => 'dma_friends_step_user',     
+                'user_id', 
+                'step_id',       
+                'timestamps' => true, 
+                'order' => 'dma_friends_step_user.created_at desc'
+            ];     
+            $model->belongsToMany['badges']     = ['DMA\Friends\Models\Badge',      
+                'table' => 'dma_friends_badge_user',    
+                'user_id', 
+                'badge_id',      
+                'timestamps' => true, 
+                'order' => 'dma_friends_badge_user.created_at desc'
+            ];        
+            $model->belongsToMany['rewards']    = ['DMA\Friends\Models\Reward',     
+                'table' => 'dma_friends_reward_user',   
+                'user_id', 
+                'reward_id',     
+                'timestamps' => true, 
+                'order' => 'dma_friends_reward_user.created_at desc'
+            ];       
+            $model->belongsToMany['groups']     = ['DMA\Friends\Models\UserGroup',  
+                'table' => 'dma_friends_users_groups',  
+                'key' => 'user_id',  
+                'foreignKey' => 'group_id', 
+                'pivot' => ['membership_status']
+            ];        
         });
         
         // Extend User fields
@@ -363,19 +392,19 @@ class Plugin extends PluginBase
         return [
             'DMA\Friends\FormWidgets\ActivityType' => [
                 'label' => 'ActivityType',
-                'alias' => 'activitytype',
+                'code'  => 'activitytype',
             ],
             'DMA\Friends\FormWidgets\TimeRestrictions' => [
                 'label' => 'Time Restrictions',
-                'alias' => 'timerestrictions',
+                'code'  => 'timerestrictions',
             ],
             'DMA\Friends\FormWidgets\UserPoints' => [
                 'label' => 'Points',
-                'alias' => 'points',
+                'code'  => 'points',
             ],
             'DMA\Friends\FormWidgets\PrintMembershipCard' => [
                 'label' => 'Print Membership Card',
-                'alias' => 'printmembershipcard',
+                'code'  => 'printmembershipcard',
             ],
         ];   
     }
