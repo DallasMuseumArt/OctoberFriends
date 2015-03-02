@@ -52,9 +52,11 @@ secondaryTabs:
             label: Priority
             type: dropdown
             options:
+                0: Hide
                 1: Low
                 5: Medium
                 10: High
+                11: Always Display
             default: 5
             tab: Categories
             span: left
