@@ -187,6 +187,9 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
                     $end_time->setTime($end['hour'], $start['minutes']);
                     $day        = date('w');
 
+                    // Sunday is on the end of the week and date sets sunday as 0
+                    if ($day == 0) $day = 7;
+
                     if ($activity->time_restriction_data['days'][$day] !== false
                         && $now->gte($start_time) && $now->lte($end_time)) {
 
