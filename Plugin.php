@@ -1,6 +1,9 @@
 <?php namespace DMA\Friends;
 
+use App;
+use Config;
 use Backend;
+use Postman;
 use Illuminate\Support\Facades\Event;
 use Rainlab\User\Models\User as User;
 use DMA\Friends\Models\Usermeta as Metadata;
@@ -9,8 +12,6 @@ use DMA\Friends\Classes\LocationManager;
 use DMA\Friends\Classes\ActivityManager;
 use System\Classes\PluginBase;
 use DMA\Friends\Classes\FriendsEventHandler;
-use App;
-use Config;
 use Illuminate\Foundation\AliasLoader;
 
 /**
@@ -22,7 +23,7 @@ use Illuminate\Foundation\AliasLoader;
 class Plugin extends PluginBase
 {
 
-    /** 
+    /**
      * @var array Plugin dependencies
      */
     public $require = [
@@ -90,7 +91,7 @@ class Plugin extends PluginBase
                         'icon'          => 'icon-child',
                         'url'           => Backend::url('dma/friends/activities'),
                         'permissions'   => ['dma.friends.access_admin'],
-                    ],  
+                    ],
                     'badges'    => [
                         'label'         => 'Badges',
                         'icon'          => 'icon-shield',
@@ -108,7 +109,7 @@ class Plugin extends PluginBase
                         'icon'          => 'icon-list-ul',
                         'url'           => Backend::url('dma/friends/categories'),
                         'permissions'   => ['dma.friends.access_admin'],
-                    ],  
+                    ],
                     'activitylogs'   => [
                         'label'         => 'Activity Logs',
                         'icon'          => 'icon-rocket',
@@ -126,7 +127,7 @@ class Plugin extends PluginBase
                         'icon'          => 'icon-location-arrow',
                         'url'           => Backend::url('dma/friends/locations'),
                         'permissions'   => ['dma.friends.access_admin'],
-                    ],                
+                    ],
                 ]
             ]
         ];
@@ -147,12 +148,12 @@ class Plugin extends PluginBase
             'DMA\Friends\Components\UserMostRecentBadge'        => 'UserMostRecentBadge',
             'DMA\Friends\Components\NotificationCounter'        => 'NotificationCounter',
             'DMA\Friends\Components\NotificationList'           => 'NotificationList',
-            'DMA\Friends\Components\GroupManager'         		=> 'GroupManager',               
+            'DMA\Friends\Components\GroupManager'         		=> 'GroupManager',
             'DMA\Friends\Components\GroupRequest'       		=> 'GroupRequest',
             'DMA\Friends\Components\GroupJoinCodeForm'          => 'GroupJoinCodeForm',
             'DMA\Friends\Components\UserProfile'                => 'UserProfile',
             'DMA\Friends\Components\UserLogin'                  => 'UserLogin',
-            'DMA\Friends\Components\UserTimeout'                => 'UserTimeout',                  
+            'DMA\Friends\Components\UserTimeout'                => 'UserTimeout',
         ];
     }
 
@@ -182,8 +183,8 @@ class Plugin extends PluginBase
 
         // Register ServiceProviders
         App::register('\EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider');
-        App::register('DMA\Friends\FriendsServiceProvider');
-        
+        App::register('\DMA\Friends\FriendsServiceProvider');
+
         // Register Event Subscribers
         $subscriber = new FriendsEventHandler;
         Event::subscribe($subscriber);
@@ -193,58 +194,58 @@ class Plugin extends PluginBase
         User::creating(function($user)
         {
             if (empty($user->barcode_id)) {
-                $user->barcode_id = substr(md5($user->email), 0, 9); 
+                $user->barcode_id = substr(md5($user->email), 0, 9);
             }
         });
-        
-        // Extend the user model to support our custom metadata        
-        User::extend(function($model) {        
-            $model->hasOne['metadata']          = ['DMA\Friends\Models\Usermeta'];     
+
+        // Extend the user model to support our custom metadata
+        User::extend(function($model) {
+            $model->hasOne['metadata']          = ['DMA\Friends\Models\Usermeta'];
             $model->hasMany['activityLogs']     = ['DMA\Friends\Models\ActivityLog'];
             $model->hasMany['bookmarks']        = ['DMA\Friends\Models\Bookmark'];
             $model->hasMany['notifications']    = ['DMA\Friends\Models\Notification'];
             $model->belongsToMany['activities'] = ['DMA\Friends\Models\Activity',
-                'table' => 'dma_friends_activity_user', 
-                'user_id', 
-                'activity_id',   
-                'timestamps' => true, 
+                'table' => 'dma_friends_activity_user',
+                'user_id',
+                'activity_id',
+                'timestamps' => true,
                 'order' => 'dma_friends_activity_user.created_at desc'
-            ];     
+            ];
             $model->belongsToMany['steps']      = ['DMA\Friends\Models\Step',
-                'table' => 'dma_friends_step_user',     
-                'user_id', 
-                'step_id',       
-                'timestamps' => true, 
+                'table' => 'dma_friends_step_user',
+                'user_id',
+                'step_id',
+                'timestamps' => true,
                 'order' => 'dma_friends_step_user.created_at desc'
-            ];     
-            $model->belongsToMany['badges']     = ['DMA\Friends\Models\Badge',      
-                'table' => 'dma_friends_badge_user',    
-                'user_id', 
-                'badge_id',      
-                'timestamps' => true, 
+            ];
+            $model->belongsToMany['badges']     = ['DMA\Friends\Models\Badge',
+                'table' => 'dma_friends_badge_user',
+                'user_id',
+                'badge_id',
+                'timestamps' => true,
                 'order' => 'dma_friends_badge_user.created_at desc'
-            ];        
-            $model->belongsToMany['rewards']    = ['DMA\Friends\Models\Reward',     
-                'table' => 'dma_friends_reward_user',   
-                'user_id', 
-                'reward_id',     
-                'timestamps' => true, 
+            ];
+            $model->belongsToMany['rewards']    = ['DMA\Friends\Models\Reward',
+                'table' => 'dma_friends_reward_user',
+                'user_id',
+                'reward_id',
+                'timestamps' => true,
                 'order' => 'dma_friends_reward_user.created_at desc'
-            ];       
-            $model->belongsToMany['groups']     = ['DMA\Friends\Models\UserGroup',  
-                'table' => 'dma_friends_users_groups',  
-                'key' => 'user_id',  
-                'foreignKey' => 'group_id', 
+            ];
+            $model->belongsToMany['groups']     = ['DMA\Friends\Models\UserGroup',
+                'table' => 'dma_friends_users_groups',
+                'key' => 'user_id',
+                'foreignKey' => 'group_id',
                 'pivot' => ['membership_status']
-            ];        
+            ];
         });
-        
+
         // Extend User fields
         $context = $this;
         Event::listen('backend.form.extendFields', function($widget) use ($context){
             $context->extendedUserFields($widget);
             $context->extendedSettingFields($widget);
-        }); 
+        });
 
         Event::listen('backend.list.extendColumns', function($widget) {
             if (!$widget->getController() instanceof \RainLab\User\Controllers\Users) return;
@@ -257,7 +258,7 @@ class Plugin extends PluginBase
                     'label'         => 'Full Name',
                     'relation'      => 'metadata',
                     'sortable'   => false,
-                    'select'        => "concat(first_name, ' ', last_name)", 
+                    'select'        => "concat(first_name, ' ', last_name)",
                     'searchable'    => true,
                 ],
                 'first_name' => [
@@ -265,24 +266,24 @@ class Plugin extends PluginBase
                     'relation'      => 'metadata',
                     'select'        => '@first_name',
                     'searchable'    => true,
-                ],  
+                ],
                 'last_name' => [
                     'label'         => 'Last Name',
                     'relation'      => 'metadata',
                     'select'        => '@last_name',
                     'searchable'    => true,
-                ], 
+                ],
                 'points' => [
                     'label'     => 'Points'
-                ], 
+                ],
                 'zip' => [
                     'label' => 'Zip',
-                ],            
-            ]); 
+                ],
+            ]);
         });
 
     }
-    
+
     /**
      * Extend User fields in Rainlab.User plugin
      * @param mixed $widget
@@ -291,10 +292,10 @@ class Plugin extends PluginBase
     {
         if (!$widget->getController() instanceof \RainLab\User\Controllers\Users) return;
         if ($widget->getContext() != 'update') return;
-        
+
         // Make sure the User metadata exists for this user.
         if (!Metadata::getFromUser($widget->model)) return;
-        
+
         $widget->addFields([
         	'metadata[first_name]' => [
         		'label' => 'First Name',
@@ -369,9 +370,9 @@ class Plugin extends PluginBase
                 'tab'   => 'Membership Card',
                 'type'  => 'printmembershipcard',
             ],
-        ], 'primary');        
+        ], 'primary');
     }
-    
+
     /**
      * Add settings fields of all available channels.
      * @param mixed $form
@@ -380,10 +381,10 @@ class Plugin extends PluginBase
     {
         if (!$form->model instanceof \DMA\Friends\Models\Settings) return;
         if ($form->getContext() != 'update') return;
-        
-        $form->addFields(\Postman::getChannelSettingFields(), 'primary');        
+
+        $form->addFields(Postman::getChannelSettingFields(), 'primary');
     }
-        
+
     /**
      * {@inheritDoc}
      */
@@ -406,7 +407,7 @@ class Plugin extends PluginBase
                 'label' => 'Print Membership Card',
                 'code'  => 'printmembershipcard',
             ],
-        ];   
+        ];
     }
 
     /**
@@ -421,25 +422,25 @@ class Plugin extends PluginBase
 
         // Commands for clean up data
         $this->registerConsoleCommand('friends.normalize-users', 'DMA\Friends\Commands\NormalizeUserData');
-        
+
         // Crontasks
         $this->registerConsoleCommand('friends.points-weekly', 'DMA\Friends\Commands\WeeklyPoints');
         $this->registerConsoleCommand('friends.points-daily', 'DMA\Friends\Commands\DailyPoints');
         $this->registerConsoleCommand('friends.read-channels', 'DMA\Friends\Commands\ReadChannels');
         $this->registerConsoleCommand('friends.reset-groups', 'DMA\Friends\Commands\ResetGroups');
 
-    } 
+    }
 
     /**
      * {@inheritDoc}
      */
     public function registerReportWidgets()
-    {   
+    {
         return [
             'DMA\Friends\ReportWidgets\FriendsToolbar' => [
                 'label'     => 'Friends Toolbar',
                 'context'   => 'dashboard'
-            ],  
+            ],
             'DMA\Friends\ReportWidgets\FriendsLeaderboard' => [
                 'label'     => 'Friends Leaderboard',
                 'context'   => 'dashboard',
@@ -452,19 +453,38 @@ class Plugin extends PluginBase
                 'label'     => 'Chart - Activities By Day',
                 'context'   => 'dashboard',
             ],
-        ];  
-    } 
-   
+        ];
+    }
+
     /**
      * {@inheritDoc}
-     */ 
+     */
     public function registerMarkupTags()
-    {   
+    {
         return [
             'tokens' => [
                  'flashMessages' =>  new \DMA\Friends\Classes\Notifications\Twig\FlashMultipleTokenParser()
              ]
         ];
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function registerSchedule($schedule)
+    {
+        // Reset the points all users have earned for the week back to zero
+        $schedule->command('friends:points-weekly')->weekly();
+
+        // Reset the points all users have earned for the day back to zero
+        $schedule->command('friends:points-daily')->daily();
+
+        // Retrive data for all active listenable channel
+        $schedule->command('friends:read-channels')->everyFiveMinutes();
+
+        // Check every 5 minutes if is time to reset all active groups
+        $schedule->command('friends:reset-groups')->everyFiveMinutes();
+
     }
 
     /**
@@ -478,7 +498,7 @@ class Plugin extends PluginBase
             'dma.friends::mail.reward'      => 'Email to send to a user when a reward is redeemed',
             'dma.friends::mail.adminReward' => 'Administrative email to send when a reward is redeemed',
         ];
-    }    
+    }
 
     /**
      * register the location of a kiosk with the browser session
@@ -493,4 +513,3 @@ class Plugin extends PluginBase
     }
 
 }
-

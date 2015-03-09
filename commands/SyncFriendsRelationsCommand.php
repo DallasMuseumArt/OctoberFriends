@@ -25,17 +25,17 @@ use DMA\Friends\Models\Location;
  */
 class SyncFriendsRelationsCommand extends Command
 {
-    /** 
+    /**
      * @var string The console command name.
      */
     protected $name = 'friends:sync-relations';
 
-    /** 
+    /**
      * @var string The console command description.
      */
     protected $description = 'Syncronize wordpress data relations';
 
-    /** 
+    /**
      * @var object Contains the database object when fired
      */
     protected $db = null;
@@ -50,12 +50,12 @@ class SyncFriendsRelationsCommand extends Command
      */
     protected $userBadgeTable = 'dma_friends_badge_user';
 
-    /** 
+    /**
      * Create a new command instance.
      * @return void
      */
     public function __construct()
-    {   
+    {
         try {
             $this->db = DB::connection('friends_wordpress');
         } catch (\InvalidArgumentException $e) {
@@ -63,21 +63,21 @@ class SyncFriendsRelationsCommand extends Command
         }
 
         parent::__construct();
-    }   
+    }
 
-    /** 
+    /**
      * Execute the console command.
      * @return void
      */
     public function fire()
-    {  
+    {
 
         // Taxonomy terms
         $termRelations = $this->db->table('wp_term_relationships')->get();
 
         foreach($termRelations as $relation) {
             $activity = Activity::findWordpress($relation->object_id)->first();
-            
+
             if ($activity) {
                 if (!$activity->categories->contains($relation->term_taxonomy_id)) {
                     $category = Category::find($relation->term_taxonomy_id);
@@ -131,7 +131,7 @@ class SyncFriendsRelationsCommand extends Command
                     break;
                 case 'step':
                     $to = Step::findWordpress($p2p->p2p_to)->first();
-                    $to_table = 'step'; 
+                    $to_table = 'step';
                     break;
                 default:
                     $to = false;
@@ -161,7 +161,7 @@ class SyncFriendsRelationsCommand extends Command
                             $this->info('from: ' . $from->title . ' ----- ' . $to->title);
                         } else {
                             $this->error('table doesnt exist: ' . $table);
-                        } 
+                        }
 
                 }
             }
@@ -174,7 +174,7 @@ class SyncFriendsRelationsCommand extends Command
 
         $post = new Post;
 
-        $this->info('Sync Achievements');        
+        $this->info('Sync Achievements');
 
         foreach ($achievements as $achievement) {
             $user = User::find($achievement->user_id);
@@ -241,7 +241,7 @@ class SyncFriendsRelationsCommand extends Command
         // Syncronize activities and users
 
         $this->info('Importing Activity/User relations');
-        
+
         $table = 'dma_friends_activity_user';
 
         DB::table($table)->delete();

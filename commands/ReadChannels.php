@@ -1,10 +1,9 @@
 <?php
 namespace DMA\Friends\Commands;
 
+use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
-use Indatus\Dispatcher\Scheduling\Schedulable;
-use Indatus\Dispatcher\Scheduling\ScheduledCommand;
 use Postman;
 
 /**
@@ -13,7 +12,7 @@ use Postman;
  * @package DMA\Friends\Commands
  * @author Kristen Arnold, Carlos Arroyo
  */
-class ReadChannels extends ScheduledCommand
+class ReadChannels extends Command
 {
     /**
      * @var string The console command name.
