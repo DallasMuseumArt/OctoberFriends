@@ -67,6 +67,8 @@ class BadgeManager
      */
     private static function checkUserActivities(User $user, Activity $activity, Step $step)
     {
+        if (!isset($step->badge)) return;
+
         static $cache;
         $key = $user->id . '_' . $activity->id;
 
