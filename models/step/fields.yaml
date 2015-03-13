@@ -10,5 +10,4 @@ fields:
     activity:
         label: Activity
         type: relation
-        properties:
-            nameFrom: title
+        nameFrom: title
