@@ -81,10 +81,9 @@ class FriendsServiceProvider extends ServiceProvider
      */
     protected function createAlias($alias, $class)
     {
-        $this->app->booting(function() use ($alias, $class)
-        {   
-            $loader = \Illuminate\Foundation\AliasLoader::getInstance();
-            $loader->alias($alias, $class);
-        }); 
+
+        $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+        $loader->alias($alias, $class);
+
     }
 }
