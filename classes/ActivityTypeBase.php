@@ -166,7 +166,10 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
 
             if ($time->diffInMinutes($lastTime) && $time->diffInMinutes($lastTime) < $activity->activity_lockout) {
                 $x = $time->diffInMinutes($lastTime);
-                Session::put('activityError', Lang::get('dma.friends::lang.activities.lockout', ['x' => $x]));
+
+                $message = self::convertToHoursMins($x, '%d hours and %02d minutes');
+
+                Session::put('activityError', Lang::get('dma.friends::lang.activities.lockout', ['x' => $message]));
                 return false;
             }
         }
@@ -237,5 +240,18 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
             'minutes'   => $minutes,
         ];
     }
+
+    protected static function convertToHoursMins($time, $format = '%d:%d') 
+    {
+        settype($time, 'integer');
+        if ($time < 1) {
+            return;
+        }
+        $hours = floor($time / 60);
+        \Debugbar::info($hours);
+        $minutes = ($time % 60);
+        return sprintf($format, $hours, $minutes);
+    }
+
 
 }

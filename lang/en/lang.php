@@ -9,7 +9,7 @@ return [
     'activities' => [
         'codeSuccess'               => 'Congratulations, you have completed ":title"',
         'codeError'                 => 'Sorry the code :code could not be found',
-        'lockout'                   => 'You cannot use this code for :x minutes',
+        'lockout'                   => 'You cannot use this code for :x',
         'notAvailable'              => 'Sorry this activity is currently not available',
         'likeWorkArtCodeError'      => 'Sorry the artwork :code could not be found',
         'alreadyLikeWorkArtError'   => 'You have already liked the artwork ":code"'
