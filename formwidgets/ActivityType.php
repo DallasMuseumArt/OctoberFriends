@@ -80,6 +80,7 @@ class ActivityType extends FormWidgetBase
         }
 
         $this->vars['defaultValue']     = $this->getLoadValue();
+        \Debugbar::info($this->prepareFormFields($this->model));
         $this->vars['additionalFields'] = ($this->vars['defaultValue']) ? $this->prepareFormFields($this->model) : null;
         $this->vars['options']          = $options;
         $this->vars['options']          = $options;

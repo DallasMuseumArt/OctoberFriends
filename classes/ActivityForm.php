@@ -1,9 +1,9 @@
 <?php namespace DMA\Friends\Classes;
 
 use Backend\Classes\FormField;
-use Backend\Classes\WidgetBase;
+use Backend\Widgets\Form;
 use ApplicationException;
-use Str;
+use October\Rain\Html\Helper;
 use File;
 use DMA\Friends\Classes\ActivityManager;
 
@@ -13,7 +13,7 @@ use DMA\Friends\Classes\ActivityManager;
  * @package DMA\Friends\Classes
  * @author Kristen Arnold, Carlos Arroyo
  */
-class ActivityForm extends WidgetBase
+class ActivityForm extends Form
 {
 
     /**
@@ -24,7 +24,7 @@ class ActivityForm extends WidgetBase
     /**
      * @var An elequant model
      */
-    protected $model;
+    public $model;
 
     /**
      * @var an array of fields to be rendered
@@ -34,12 +34,12 @@ class ActivityForm extends WidgetBase
     /**
      * @var string Path to backend widgets
      */
-    protected $partialsDir = '@/modules/backend/widgets/form/partials/';
+    protected $partialsDir = '~/modules/backend/widgets/form/partials/';
 
     /**
      * @var an array of data values for a form
      */
-    protected $data = [];
+    public $data = [];
 
     /**
      * @var Field name
@@ -67,7 +67,7 @@ class ActivityForm extends WidgetBase
     /**
      * Render a group of form elements
      */
-    public function render()
+    public function render($options = [])
     {
         $fields = [];
 
@@ -212,7 +212,7 @@ class ActivityForm extends WidgetBase
         /*
          * Array field name, eg: field[key][key2][key3]
          */
-        $keyParts   = Str::evalHtmlArray($fieldName);
+        $keyParts   = Helper::nameToArray($fieldName);
         $lastField  = end($keyParts);
         $result     = $this->data;
 

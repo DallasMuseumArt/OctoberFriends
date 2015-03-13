@@ -50,7 +50,7 @@ class ActivityManager
 
     public function __construct()
     {
-        $this->configPath = base_path() . Config::get('cms.pluginsDir');
+        $this->configPath = base_path() . Config::get('cms.pluginsPath');
     }
 
     /**
@@ -170,7 +170,7 @@ class ActivityManager
 
         $formConfig = $this->activityType->getConfig();
         $formConfig = $this->getConfigPath($formConfig);
-        
+      
         if (File::isFile($formConfig)) {
             return $this->makeConfig($formConfig);
         } else {
