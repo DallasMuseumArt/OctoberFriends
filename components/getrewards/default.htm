@@ -30,6 +30,12 @@
         {{ reward.rendered|raw }}
     {% endfor %}
 
+    {% if rewards is empty %}
+        <div class="col-xs-12 col-md-12 col-lg-12">
+            <h3>Sorry there are no rewards</h3>
+        </div>
+    {% endif %}
+
     <div class="links">
         {{ links|raw }}
     </div>

@@ -71,7 +71,6 @@ class GetRewards extends ComponentBase
                 $rewards->whereNotNull('date_end');
                 break;
             case 'bookmarked':
-                $user = \Auth::getUser();
                 $rewards->whereHas('bookmarks', function($query) use ($user) {
                     $query->where('user_id', '=', $user->id);
                 });
@@ -84,8 +83,6 @@ class GetRewards extends ComponentBase
                         ->whereNull('inventory')
                         ->orWhere('inventory', '>', 0);
                 });
-                #$rewards->whereNull('inventory');
-                #$rewards->orWhere('inventory', '>', 0);
                 break;
         }
 
@@ -99,7 +96,7 @@ class GetRewards extends ComponentBase
         }
 
         return [
-            'links' => $rewards->links(),
+            'links' => $rewards->appends(['sort' => 'created_at'])->render(),
             'rewards' => $renderedRewards,
         ];
     }
