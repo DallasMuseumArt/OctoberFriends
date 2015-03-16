@@ -59,6 +59,9 @@ class FriendsToolbar extends ReportWidgetBase
             ")
         );
 
-        return $average[0]->avgNum;
+        if (!empty($average)) {
+            return $average[0]->avgNum;
+        }
+        return 0;
     }
 }
