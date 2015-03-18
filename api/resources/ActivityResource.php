@@ -1,6 +1,11 @@
 <?php namespace DMA\Friends\API\Resources;
 
+use Response;
+use Session;
+use RainLab\User\Models\User;
 use DMA\Friends\Classes\API\BaseResource;
+use DMA\Friends\Activities\ActivityCode;
+use DMA\Friends\Activities\LikeWorkOfArt;
 
 class ActivityResource extends BaseResource {
 
@@ -18,7 +23,37 @@ class ActivityResource extends BaseResource {
 
     public function checkin($user, $code)
     {
-        return ['data' => [$user, $code]];
+        try{
+            $user = User::find($user);
+            $result = [];
+            if (!is_null($user)){
+                $params = [];
+                // Get code from message
+                $params['code'] = $code;
+                
+                // process Activity code first
+                if (!$activity = ActivityCode::process($user, $params)) {
+                    // Not found activity with that code.
+                    // Trying if is a object assession number
+                    $activity = LikeWorkOfArt::process($user, $params);
+                }
+                
+                // Determine the content of the message
+                $holder = ( $activity ) ? 'activityMessage' : 'activityError';
+                $message = Session::pull($holder);
+                
+                return [
+                    'data' => [
+                        'message' => $message
+                    ]
+                ];
+                                     
+            }
+            
+            return Response::api()->errorNotFound('User not found');
+        } catch(Exception $e) {
+            return Response::api()->errorInternalError($e->getMessage());   
+        }
     }
 
 }

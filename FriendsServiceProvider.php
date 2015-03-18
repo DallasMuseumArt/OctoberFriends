@@ -77,14 +77,19 @@ class FriendsServiceProvider extends ServiceProvider
     
     public function registerAPI()
     {
-        //App::register('\EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider');
+        //\App::register('\EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider');
         
         $this->app['FriendsAPI'] = $this->app->share(function($app) {
+            \App::register('\EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider');
+            //\App::register('\LucaDegasperi\OAuth2Server\Storage\FluentStorageServiceProvider');
+            //\App::register('\LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider');
+            
             $api = new APIManager;
             return $api;            
         });
         
         $this->createAlias('FriendsAPI', 'DMA\Friends\Classes\API\APIManager');
+        //$this->createAlias('Authorizer', '\LucaDegasperi\OAuth2Server\Facades\AuthorizerFacade');
         
     }
     

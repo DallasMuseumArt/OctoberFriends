@@ -182,7 +182,6 @@ class Plugin extends PluginBase
         date_default_timezone_set( Settings::get('timezone', Config::get('app.timezone')) );
 
         // Register ServiceProviders
-        App::register('\EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider');
         //App::register('DMA\Friends\FriendsServiceProvider');
         
         // Register Event Subscribers
@@ -387,8 +386,8 @@ class Plugin extends PluginBase
     public function register()
     {
         
+        // Register ServiceProviders
         App::register('DMA\Friends\FriendsServiceProvider');
-
         
         // Commands for syncing wordpress data
         $this->registerConsoleCommand('friends.sync-data', 'DMA\Friends\Commands\SyncFriendsDataCommand');

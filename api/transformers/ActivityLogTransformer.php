@@ -4,7 +4,7 @@ use Model;
 
 use DMA\Friends\Classes\API\BaseTransformer;
 
-class ActivityTransformer extends BaseTransformer {
+class ActivityLogTransformer extends BaseTransformer {
     
     
     /**
@@ -13,10 +13,10 @@ class ActivityTransformer extends BaseTransformer {
      * @var array
      */
     protected $defaultIncludes = [
-            'steps'
+            'user'
     ];
     
-    public function getData($instance)
+    public function getDatas($instance)
     {
         return [
             'id'    => (int)$instance->id,
@@ -27,13 +27,13 @@ class ActivityTransformer extends BaseTransformer {
     /**
      * Include Steps
      *
-     * @return League\Fractal\CollectionResource
+     * @return League\Fractal\ItemResource
      */
-    public function includeSteps(Model $instance)
+    public function includeUser(Model $instance)
     {
  
-        $steps = $instance->steps;
-        return $this->collection($steps, new StepTransformer(false));
+        $user = $instance->user;
+        return $this->item($user, new UserTransformer);
     }
 
 

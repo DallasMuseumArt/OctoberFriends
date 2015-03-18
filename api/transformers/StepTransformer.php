@@ -13,8 +13,8 @@ class StepTransformer extends BaseTransformer {
      * @var array
      */
     protected $defaultIncludes = [
-            'activity',
-            'badge'
+            //'activity',
+            //'badge'
     ];
     
     public function getData($instance)

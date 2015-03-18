@@ -13,7 +13,7 @@ class BadgeTransformer extends BaseTransformer {
      * @var array
      */
     protected $defaultIncludes = [
-        //'steps'
+        'steps'
     ];
     
     public function getData($instance)
