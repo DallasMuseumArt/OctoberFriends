@@ -168,6 +168,7 @@ class Plugin extends PluginBase
         ];
     }
 
+    
     /**
      * {@inheritDoc}
      */
@@ -182,7 +183,7 @@ class Plugin extends PluginBase
 
         // Register ServiceProviders
         App::register('\EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider');
-        App::register('DMA\Friends\FriendsServiceProvider');
+        //App::register('DMA\Friends\FriendsServiceProvider');
         
         // Register Event Subscribers
         $subscriber = new FriendsEventHandler;
@@ -385,6 +386,10 @@ class Plugin extends PluginBase
      */
     public function register()
     {
+        
+        App::register('DMA\Friends\FriendsServiceProvider');
+
+        
         // Commands for syncing wordpress data
         $this->registerConsoleCommand('friends.sync-data', 'DMA\Friends\Commands\SyncFriendsDataCommand');
         $this->registerConsoleCommand('friends.sync-relations', 'DMA\Friends\Commands\SyncFriendsRelationsCommand');
@@ -400,6 +405,25 @@ class Plugin extends PluginBase
         $this->registerConsoleCommand('friends.reset-groups', 'DMA\Friends\Commands\ResetGroups');
 
     } 
+    
+    /**
+     * Register Friends API resource endpoints 
+     * 
+     * @return array
+     */
+    public function registerFriendAPIResources()
+    {
+        return [
+            'activity'      => '\DMA\Friends\API\Resources\ActivityResource',
+            'activity-log'  => '\DMA\Friends\API\Resources\ActivityLogResource',
+            'badge'         => '\DMA\Friends\API\Resources\BadgeResource',
+            'step'          => '\DMA\Friends\API\Resources\StepResource',
+            'category'      => '\DMA\Friends\API\Resources\CategoryResource',
+            'location'      => '\DMA\Friends\API\Resources\LocationResource',
+            'reward'        => '\DMA\Friends\API\Resources\RewardResource',
+        ];
+    }
+    
 
     /**
      * {@inheritDoc}

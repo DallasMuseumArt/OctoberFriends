@@ -1,5 +1,6 @@
 <?php
 
+use DMA\Friends\Facades\FriendsAPI;
 /**
  * Provide custom routes outside of what october provides
  *
@@ -27,15 +28,9 @@ Route::group(['prefix'=>'webhooks'], function(){
 });
 
 
-
-Route::group(['prefix' => 'friends/api', 'namespace' => 'DMA\Friends\Api'], function() {
-
-	Route::resource('activity', 				'ActivityResource');
-	Route::resource('activity-log', 			'ActivityLogResource');
-    Route::resource('category',                 'Category');
-	Route::resource('badge',		 			'BadgeResource');
-	Route::resource('location',		 			'LocationResource');
-	Route::resource('reward',		 			'RewardResource');
-	Route::resource('step',			 			'StepResource');
+Route::group(['prefix' => 'friends/api'], function() {    
+    
+    // Register API Routes
+    FriendsAPI::getRoutes();
 
 });

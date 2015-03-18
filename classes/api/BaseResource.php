@@ -1,42 +1,58 @@
-<?php namespace DMA\Friends\Api;
+<?php namespace DMA\Friends\Classes\API;
 
+
+use Model;
+use Response;
+use Controller;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
+use Illuminate\Pagination\Paginator;
 use League\Fractal\TransformerAbstract;
-use Response;
-use Model;
+use DMA\Friends\Classes\API\AdditionalRoutesTrait;
 
-class BaseResource extends \Controller {
 
-    /**    
-     * @var string Eloquent model name 
+class BaseResource extends Controller {
+
+    use AdditionalRoutesTrait;
+
+    /**
+     * @var string Eloquent model name
      */
     protected $model;
-    
+
+
+    /**
+    * @var DMA\Friends\Clasess\API\ModelRepository
+    */
+    protected $modelRepository;
+
     /**
      * @var League\Fractal\TransformerAbstract classname of the transformer should be use
      */
-    protected $transformer = 'DMA\Friends\Api\BaseTransformer';
-    
+    protected $transformer = 'DMA\Friends\Classes\API\BaseTransformer';
+
     /**
-     * @var int 
+     * @var int
      */
     protected $pageSize = 50;
-        
-    
+
+
     /**
-     * Create and return an instance of a GenericModelRepository
-     * @var GenericModelRepository   
+     * Create and return an instance of a ModelRepository or the configure model
+
+     * @return GenericModelRepository
      */
-    private function getModel()
+    protected function getModel()
     {
-        if (!is_null($this->model))
+        if (is_null($this->modelRepository))
         {
-            $this->model = new GenericModelRepository($this->model);
+            $this->modelRepository = new ModelRepository($this->model);
         }
-        return $this->model;
+        return $this->modelRepository;
     }
-    
+
+
+
     /**
      * Display a listing of items
      *
@@ -52,7 +68,7 @@ class BaseResource extends \Controller {
             return Response::api()->withCollection($model->all(), new $this->transformer);
         }
     }
-    
+
     /**
      * Show the form for creating a new item
      *
@@ -62,7 +78,7 @@ class BaseResource extends \Controller {
     {
         return $this->errorForbidden();
     }
-    
+
     /**
      * Store a newly created item in storage.
      *
@@ -72,7 +88,7 @@ class BaseResource extends \Controller {
     {
         return $this->errorForbidden();
     }
-    
+
     /**
      * Display the specified item.
      *
@@ -83,7 +99,7 @@ class BaseResource extends \Controller {
     {
         try {
             $model = $this->getModel();
-            $instance = $model->findOrFail($id);    
+            $instance = $model->findOrFail($id);
             return Response::api()->withItem($instance, new $this->transformer);
         }catch(ModelNotFoundException $e) {
             return Response::api()->errorNotFound();
@@ -91,7 +107,7 @@ class BaseResource extends \Controller {
             return Response::api()->errorInternalError();
         }
     }
-    
+
     /**
      * Show the form for editing the specified item.
      *
@@ -102,7 +118,7 @@ class BaseResource extends \Controller {
     {
         return Response::api()->errorForbidden();
     }
-    
+
     /**
      * Update the specified item in storage.
      *
@@ -114,7 +130,7 @@ class BaseResource extends \Controller {
         return Response::api()->errorForbidden();
 
     }
-    
+
     /**
      * Remove the specified item from storage.
      *
@@ -125,64 +141,6 @@ class BaseResource extends \Controller {
     {
         return Response::api()->errorForbidden();
 
-    }    
-    
-}
-
-class BaseTransformer extends TransformerAbstract{
-    /**
-     * Return all attributes of the model
-     * @var $instance October\Model 
-     * @param array 
-     */
-    public function transform(Model $instance){
-        return $instance->getAttributes();
-    }    
-}
-
-class GenericModelRepository {
-
-    protected $modelClassName;
-    
-    public function __construct($modelClassName)
-    {
-        $this->modelClassName = $modelClassName;
-    }
-    
-    private function call($method, $parameters=array())
-    {
-        return call_user_func_array("{$this->modelClassName}::{$method}", $parameters);
-    }
-
-    public function create(array $attributes)
-    {
-        return $this->call("create", array($attributes));
-    }
-
-    public function all($columns = array('*'))
-    {
-        return  $this->call("all", array($columns));
-    }
-
-    public function find($id, $columns = array('*'))
-    {
-        return  $this->call("find", array($id, $columns));
-    }
-
-    public function findOrFail($id, $columns = array('*'))
-    {
-        return  $this->call("findOrFail", array($id, $columns));
-    }    
-
-    public function destroy($ids)
-    {
-        return  $this->call("destroy", array($ids));
-    }
-    
-    public function paginate($perPage = null, $columns = array('*'))
-    {
-         return $this->call("paginate", array($perPage, $columns));
     }
 
 }
-
