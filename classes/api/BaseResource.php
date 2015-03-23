@@ -3,7 +3,7 @@
 
 use Model;
 use Response;
-use Controller;
+use Illuminate\Routing\Controller;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use Illuminate\Pagination\Paginator;
@@ -51,6 +51,14 @@ class BaseResource extends Controller {
         return $this->modelRepository;
     }
 
+    /**
+     * Create a new instance of the transformer of this resource
+     * @return DMA\Friends\Classes\API\BaseTransformer
+     */
+    protected function getTransformer()
+    {
+        return new $this->transformer;
+    }
 
 
     /**
@@ -63,9 +71,9 @@ class BaseResource extends Controller {
         $model = $this->getModel();
         if ($this->pageSize > 0){
             $paginator = $model->paginate($this->pageSize);
-            return Response::api()->withPaginator(new IlluminatePaginatorAdapter($paginator), new $this->transformer);
+            return Response::api()->withPaginator(new IlluminatePaginatorAdapter($paginator), $this->getTransformer());
         }else{
-            return Response::api()->withCollection($model->all(), new $this->transformer);
+            return Response::api()->withCollection($model->all(), $this->getTransformer());
         }
     }
 
@@ -76,7 +84,7 @@ class BaseResource extends Controller {
      */
     public function create()
     {
-        return $this->errorForbidden();
+        return Response::api()->errorForbidden();
     }
 
     /**
@@ -86,7 +94,7 @@ class BaseResource extends Controller {
      */
     public function store()
     {
-        return $this->errorForbidden();
+        return Response::api()->errorForbidden();
     }
 
     /**
@@ -100,7 +108,7 @@ class BaseResource extends Controller {
         try {
             $model = $this->getModel();
             $instance = $model->findOrFail($id);
-            return Response::api()->withItem($instance, new $this->transformer);
+            return Response::api()->withItem($instance, $this->getTransformer());
         }catch(ModelNotFoundException $e) {
             return Response::api()->errorNotFound();
         }catch(Exception $e){

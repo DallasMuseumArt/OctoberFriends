@@ -9,6 +9,23 @@ use MyProject\Proxies\__CG__\OtherProject\Proxies\__CG__\stdClass;
 
 class BaseTransformer extends TransformerAbstract
 {
+    
+    /**
+     * When true call getExtemdedData and append it to 
+     * the tranformation
+     * @var boolean
+     */
+    protected $extendedData = false;
+    
+    /**
+     * 
+     * @param boolean $basic 
+     */
+    public function __construct($extendedData=false)
+    {
+        $this->extendedData = $extendedData;
+    }
+    
     /**
      * Return all attributes of the model
      * @var $instance October\Model
@@ -17,7 +34,14 @@ class BaseTransformer extends TransformerAbstract
     public function transform($instance)
     {
         if(!is_null($instance)) {
-            return $this->getData($instance);
+            $data = $this->getData($instance);
+            if($this->extendedData) {
+                $extended = $this->getExtendedData($instance);
+                if(is_array($data, $extend)) {
+                    $data = array_merge($data, $extended);
+                }
+            }
+            return $data;
         }
         return [];
     }
@@ -29,6 +53,15 @@ class BaseTransformer extends TransformerAbstract
      */
     public function getData($instance){
         return $instance->getAttributes();
+    }
+
+    /**
+     * Return all extend data of the model
+     * @var $instance October\Model
+     * @param array
+     */
+    public function getExtendedData($instance){
+        return [];
     }
     
     
@@ -43,9 +76,11 @@ class BaseTransformer extends TransformerAbstract
     public function processIncludedResources(Scope $scope, $data)
     {
         $embeded = parent::processIncludedResources($scope, $data);
-        $embeded = array_map(function($d){
-            return current($d);
-        }, $embeded);
+        if (!is_null($embeded) && !is_bool($embeded)) {
+            $embeded = array_map(function($d){
+                return current($d);
+            }, $embeded);
+        }
         return $embeded;
     }
 

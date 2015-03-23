@@ -6,6 +6,6 @@ class RewardResource extends BaseResource {
 
     protected $model        = '\DMA\Friends\Models\Reward';
 
-    //protected $transformer  = '\DMA\Friends\API\Transformers\ActivityTransformer';
+    protected $transformer  = '\DMA\Friends\API\Transformers\RewardTransformer';
 
 }

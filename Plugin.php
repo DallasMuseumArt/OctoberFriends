@@ -174,7 +174,7 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
-
+        
         // Handle locations upon login
         $this->registerLocation();
 
@@ -182,7 +182,7 @@ class Plugin extends PluginBase
         date_default_timezone_set( Settings::get('timezone', Config::get('app.timezone')) );
 
         // Register ServiceProviders
-        //App::register('DMA\Friends\FriendsServiceProvider');
+        App::register('DMA\Friends\FriendsServiceProvider');
         
         // Register Event Subscribers
         $subscriber = new FriendsEventHandler;
@@ -386,9 +386,6 @@ class Plugin extends PluginBase
     public function register()
     {
         
-        // Register ServiceProviders
-        App::register('DMA\Friends\FriendsServiceProvider');
-        
         // Commands for syncing wordpress data
         $this->registerConsoleCommand('friends.sync-data', 'DMA\Friends\Commands\SyncFriendsDataCommand');
         $this->registerConsoleCommand('friends.sync-relations', 'DMA\Friends\Commands\SyncFriendsRelationsCommand');
@@ -413,13 +410,16 @@ class Plugin extends PluginBase
     public function registerFriendAPIResources()
     {
         return [
-            'activity'      => '\DMA\Friends\API\Resources\ActivityResource',
-            'activity-log'  => '\DMA\Friends\API\Resources\ActivityLogResource',
-            'badge'         => '\DMA\Friends\API\Resources\BadgeResource',
-            'step'          => '\DMA\Friends\API\Resources\StepResource',
-            'category'      => '\DMA\Friends\API\Resources\CategoryResource',
-            'location'      => '\DMA\Friends\API\Resources\LocationResource',
-            'reward'        => '\DMA\Friends\API\Resources\RewardResource',
+            'activities'            => '\DMA\Friends\API\Resources\ActivityResource',
+            'activity-logs'         => '\DMA\Friends\API\Resources\ActivityLogResource',
+            'badges'                => '\DMA\Friends\API\Resources\BadgeResource',
+            'steps'                 => '\DMA\Friends\API\Resources\StepResource',
+            'categories'            => '\DMA\Friends\API\Resources\CategoryResource',
+            'locations'             => '\DMA\Friends\API\Resources\LocationResource',
+            'rewards'               => '\DMA\Friends\API\Resources\RewardResource',
+            'users'                 => '\DMA\Friends\API\Resources\UserResource',
+            'countries'             => '\DMA\Friends\API\Resources\CountryResource',   
+            'countries.states'      => '\DMA\Friends\API\Resources\StateResource',
         ];
     }
     

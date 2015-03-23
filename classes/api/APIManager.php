@@ -3,9 +3,12 @@
 use Log;
 use App;
 use Route;
+use Response;
 use Exception;
-use DMA\Friends\Classes\API\BaseResource;
 use System\Classes\PluginManager;
+use DMA\Friends\Classes\API\BaseResource;
+use DMA\Friends\Classes\API\NotFoundResource;
+
 
 class APIManager
 {
@@ -78,9 +81,15 @@ class APIManager
                 }
 
             }catch(Exception $e){
-                Log::error("API : Resource endpoint fail to register due to '$e'");
+               Log::error("API : Resource endpoint fail to register due to '" . $e->getMessage() . "'");
             }
         }
+        
+        // Catch all
+        Route::any('{all?}', function($path) { 
+            return Response::api()->errorNotFound(); 
+        })->where('all', '.+');
+        
 
     }
     

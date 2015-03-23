@@ -7,6 +7,17 @@ use DMA\Friends\Facades\FriendsAPI;
  * @package DMA\Friends
  * @author Kristen Arnold, Carlos Arroyo
  */
+
+// Register API routers after Pluging is booted and Laravel is ready
+App::before(function($request, $response){
+
+    Route::group(['prefix' => 'friends/api'], function() {
+        // Register API Routes
+        FriendsAPI::getRoutes();
+    });
+});
+
+
 Route::get('logout', function()
 {
     Auth::logout();
@@ -28,9 +39,3 @@ Route::group(['prefix'=>'webhooks'], function(){
 });
 
 
-Route::group(['prefix' => 'friends/api'], function() {    
-    
-    // Register API Routes
-    FriendsAPI::getRoutes();
-
-});
