@@ -13,17 +13,62 @@ class ActivityLogTransformer extends BaseTransformer {
      * @var array
      */
     protected $defaultIncludes = [
-            'user'
+            'user',
+            'object'
     ];
     
-    public function getDatas($instance)
+    public function getData($instance)
     {
         return [
             'id'    => (int)$instance->id,
-            'title' => $instance->title,
+            'action' => $instance->action,
+            'message' => $instance->message,
+            'points_earned' => $instance->points_earned,
+            'total_points' => $instance->total_points,   
+            'object_type'  => $instance->object_type,  
         ];
     }
 
+    /**
+     * Include Steps
+     *
+     * @return League\Fractal\ItemResource
+     */
+    public function includeObject(Model $instance)
+    {
+   
+        $class  = $instance->object_type;
+        // There are logs without object
+        if ($class) {
+            $obj_id = $instance->object_id;
+            $relObj = $instance->object;
+            
+            
+            $transformer = null;
+            
+            switch ($class) {
+                case 'DMA\Friends\Models\Reward':
+                    $transformer = '\DMA\Friends\API\Transformers\RewardTransformer';
+                    break;
+                case 'DMA\Friends\Models\Activity':
+                    $transformer = '\DMA\Friends\API\Transformers\ActivityTransformer';
+                    break;
+                case 'DMA\Friends\Models\Step':
+                    $transformer = '\DMA\Friends\API\Transformers\StepTransformer';
+                    break;
+                case 'DMA\Friends\Models\Badge':
+                    $transformer = '\DMA\Friends\API\Transformers\BadgeTransformer';
+                    break;
+                default:
+                    $transformer = 'BaseTransformer';
+                    break;
+            }
+           
+            return $this->item($relObj, new $transformer);
+        }
+        return null;
+    }
+    
     /**
      * Include Steps
      *
