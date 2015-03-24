@@ -6,6 +6,6 @@ class CategoryResource extends BaseResource {
 
     protected $model        = '\DMA\Friends\Models\Category';
 
-    //protected $transformer  = '\DMA\Friends\API\Transformers\ActivityTransformer';
+    protected $transformer  = '\DMA\Friends\API\Transformers\CategoryTransformer';
 
 }

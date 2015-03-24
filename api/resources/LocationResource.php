@@ -6,6 +6,6 @@ class LocationResource extends BaseResource {
 
     protected $model        = '\DMA\Friends\Models\Location';
 
-    //protected $transformer  = '\DMA\Friends\API\Transformers\ActivityTransformer';
+    protected $transformer  = '\DMA\Friends\API\Transformers\LocationTransformer';
 
 }
