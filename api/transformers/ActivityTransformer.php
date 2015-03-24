@@ -22,6 +22,7 @@ class ActivityTransformer extends BaseTransformer {
         return [
             'id'                => (int)$instance->id,
             'title'             => $instance->title,
+            'image_url'         => $this->getImageUrl($instance),
             'time_restrictions' => $this->getTimeRestrictions($instance),
         ];
     }
@@ -92,6 +93,23 @@ class ActivityTransformer extends BaseTransformer {
     }
     
 
+    /**
+     * Get Image URL of the reward
+     * @param unknown $instance
+     */
+    protected function getImageUrl(Model $instance)
+    {
+        try{
+            if (!is_null($instance->image)) {
+                return $instance->image->getPath();
+            }
+        }catch(\Exception $e){
+            // Do nothing
+        }
+        return null;
+    }
+    
+    
     
     /**
      * Include Steps

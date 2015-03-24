@@ -27,8 +27,8 @@ class BadgeTransformer extends BaseTransformer {
             'excerpt'                   => $instance->excerpt,
             'congratulations_text'      => $instance->congratulations_text,
             'maximum_earnings'          => $instance->maximum_earnings,
-            'points'                    => $instance->image_id,
-            'image_id'                  => $instance->is_sequential,
+            'points'                    => $instance->points,
+            'image_url'                 => $this->getImageUrl($instance),
             'is_published'              => ($instance->is_published)?true:false,
             'is_archived'               => ($instance->is_archived)?true:false,                
             'is_sequential'             => ($instance->is_sequential)?true:false,
@@ -65,6 +65,24 @@ class BadgeTransformer extends BaseTransformer {
     
         return $restrictions;
     }
+    
+    /**
+     * Get Image URL of the reward
+     * @param unknown $instance
+     */
+    protected function getImageUrl(Model $instance)
+    {
+        try{
+            if (!is_null($instance->image)) {
+                return $instance->image->getPath();
+            }
+        }catch(\Exception $e){
+            // Do nothing
+        }
+        return null;
+    }
+    
+    
     
     /**
      * Include Steps
