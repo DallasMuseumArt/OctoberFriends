@@ -23,6 +23,8 @@ class ActivityTransformer extends BaseTransformer {
             'id'                => (int)$instance->id,
             'title'             => $instance->title,
             'image_url'         => $this->getImageUrl($instance),
+            'is_published'      => ($instance->is_published)?true:false,
+            'is_archived'       => ($instance->is_archived)?true:false,  
             'time_restrictions' => $this->getTimeRestrictions($instance),
         ];
     }
