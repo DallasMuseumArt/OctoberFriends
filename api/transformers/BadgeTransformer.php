@@ -37,8 +37,6 @@ class BadgeTransformer extends BaseTransformer {
             'time_between_steps_min'    => $instance->time_between_steps_min,
             'time_between_steps_max'    => $instance->time_between_steps_max,
             'maximium_time'             => $instance->maximium_time,
-            'date_begin'                => $this->carbonToIso($instance->date_begin),
-            'date_end'                  => $this->carbonToIso($instance->date_end),
             'special'                   => ($instance->special)?true:false,
             'time_restrictions'         => $this->getTimeRestrictions($instance),
         ];

@@ -24,6 +24,11 @@ class ModelRepository {
         return  $this->call("all", array($columns));
     }
 
+    public function where($column, $operator = null, $value = null, $boolean = 'and')
+    {
+        return  $this->call("where", array($column, $operator, $value, $boolean));
+    }
+    
     public function find($id, $columns = array('*'))
     {
         return  $this->call("find", array($id, $columns));
@@ -43,5 +48,60 @@ class ModelRepository {
     {
          return $this->call("paginate", array($perPage, $columns));
     }
+    
+    public function query()
+    {
+        return $this->call("query");
+    }
+    
+    
+    public function applyFiltersToQuery($filters)
+    {
+        $query = $this->query();
+        foreach($filters as $filterSpec) {
+            $field      = $filterSpec->getField();
+            $value      = $filterSpec->getValue();
+            $operator   = $filterSpec->getOperator();
+            
+            // TODO : Review this logic I think there 
+            // is a better way of doing this
+            // Test if field is a scope
+            $fieldCamelCase = ucwords($this->underscoreToCamelCase($field));
+            $scopeName = 'scope'. $fieldCamelCase;
+            if (method_exists($this->modelClassName, $scopeName)) {
+                $query = $query->{$fieldCamelCase}($value);
+            } else {
+                switch($filterSpec->getOperatorAlias()) {
+                    case 'is_null':
+                        if ($value) {
+                            $query = $query->whereNull($field);
+                        } else {
+                            $query = $query->whereNotNull($field);
+                        }
+                        break;
+                    default:
+                        $query = $query->where($field, $operator, $value);
+                        break;
+                }
+                
+            }
+            
+        }
+        return $query;
+    }
+    
+
+    protected function underscoreToCamelCase($string, $capitalizeFirstCharacter = false)
+    {
+    
+        $str = str_replace(' ', '', ucwords(str_replace('_', ' ', $string)));
+    
+        if (!$capitalizeFirstCharacter) {
+            $str[0] = strtolower($str[0]);
+        }
+    
+        return $str;
+    }
+    
 
 }

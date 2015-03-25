@@ -2,12 +2,16 @@
 
 
 use Model;
+use Input;
 use Response;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use League\Fractal\Pagination\IlluminatePaginatorAdapter;
+use Illuminate\Database\QueryException;
 use Illuminate\Pagination\Paginator;
+use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use League\Fractal\TransformerAbstract;
+use DMA\Friends\Classes\API\FilterSpec;
 use DMA\Friends\Classes\API\AdditionalRoutesTrait;
 
 
@@ -60,7 +64,31 @@ class BaseResource extends Controller {
         return new $this->transformer;
     }
 
+    
+    
+    protected function getFilters()
+    {
+        $filters=[];
+        foreach(Input::all() as $key => $value) {
+            // Separate operator and filter name
+            $bits = explode('__', $key);
+            
+            $filter   = $bits[0];
+            $operatorAlias = 'exact';
+            
+            if (count($bits) > 1) {
+                $operatorAlias = $bits[1];
+            }
 
+            // Create instance of a filter field specification
+            $filterSpec = new FilterSpec($filter, $value, $operatorAlias);
+            $filters[] = $filterSpec;
+        }
+        return $filters;
+    }
+    
+    
+    
     /**
      * Display a listing of items
      *
@@ -68,12 +96,25 @@ class BaseResource extends Controller {
      */
     public function index()
     {
-        $model = $this->getModel();
-        if ($this->pageSize > 0){
-            $paginator = $model->paginate($this->pageSize);
-            return Response::api()->withPaginator(new IlluminatePaginatorAdapter($paginator), $this->getTransformer());
-        }else{
-            return Response::api()->withCollection($model->all(), $this->getTransformer());
+        try {
+            $filters = $this->getFilters();
+            $model   = $this->getModel();
+            $query   = $model->applyFiltersToQuery($filters);
+            
+            if ($this->pageSize > 0){
+                $paginator = $query->paginate($this->pageSize);
+                return Response::api()->withPaginator(new IlluminatePaginatorAdapter($paginator), $this->getTransformer());
+            }else{
+                return Response::api()->withCollection($query->all(), $this->getTransformer());
+            }
+        } catch(\Exception $e) {
+
+            $message = $e->getMessage();
+            if( $e instanceof QueryException){
+                \Log::error('API endpoint ' . get_class($this) . ' : ' . $e->getMessage());
+                $message = 'One or multiple filter fields does not exists in the model';
+            }
+            return Response::api()->errorInternalError($message);
         }
     }
 

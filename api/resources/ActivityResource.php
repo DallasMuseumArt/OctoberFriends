@@ -1,7 +1,7 @@
 <?php namespace DMA\Friends\API\Resources;
 
-use Response;
 use Session;
+use Response;
 use RainLab\User\Models\User;
 use DMA\Friends\Classes\API\BaseResource;
 use DMA\Friends\Activities\ActivityCode;
