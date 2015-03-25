@@ -7,7 +7,8 @@
  * 
  * [ActivityFilters]
  * target_component = "ActivityCatalog"
- * target_element = "'@default': '#activity-catalog'"
+ * partial = "@default"
+ * target_element = "#activity-catalog"
  * ==
  * ==
  * {% component 'ActivityCatalog' %}
