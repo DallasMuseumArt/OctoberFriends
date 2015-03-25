@@ -133,7 +133,38 @@ class Activity extends Model
         return $query->where('wordpress_id', $id);
     }  
 
-        /**
+    /**
+     * Find activities by category
+     * @param  string|array $categories string or array of strings of category name(s)
+     */
+    public function scopeByCategory($query, $categories) {
+        // Still digging through the Eloquent ORM documentation.
+        // There has to be a cleaner way to do this efficiently
+        if (is_array($categories)) {
+            // Get first category in list to begin query with whereHas
+            $firstcategory = array_shift($categories);
+            $query = $query->whereHas('categories', function($q) use ($firstcategory) {
+                $q->where('name', $firstcategory);
+            });
+
+            // if any categories left in list, iterate over for orWhereHas
+            foreach ($categories as $category) {
+                $query = $query->orWhereHas('categories', function($q) use ($category) {
+                    $q->where('name', $category);
+                });
+            }
+            
+            return $query;
+        }
+        else {
+            // if $categories is a string, only one category to filter against
+            return $query->whereHas('categories', function($q) use ($categories) {
+                $q->where('name', $categories);
+            });
+        }
+    }
+
+    /**
      * Mutator function to return the pivot timestamp as time ago
      * @return string The time since the badge was earned
      */

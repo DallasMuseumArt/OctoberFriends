@@ -138,7 +138,9 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
+            'DMA\Friends\Components\ActivityCatalog'            => 'ActivityCatalog',
             'DMA\Friends\Components\ActivityCodeForm'           => 'ActivityCodeForm',
+            'DMA\Friends\Components\ActivityFilters'            => 'ActivityFilters',
             'DMA\Friends\Components\ActivityStream'             => 'ActivityStream',
             'DMA\Friends\Components\GetRewards'                 => 'GetRewards',
             'DMA\Friends\Components\Modal'                      => 'Modal',

@@ -1,0 +1,10 @@
+<div id="activity-catalog" class="activity-catalog filtered-activity-list">
+    <ul class="activities">
+        {% for activity in activities %}
+        <li class="activity">
+            {{ activity.title }} — {% for category in activity.categories %} {{ category.name }} {% endfor %}
+        </li>
+        {% endfor %}
+    </ul>
+    <div class="links">{{ links|raw }}</div>
+</div>
