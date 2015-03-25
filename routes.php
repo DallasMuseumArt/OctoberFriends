@@ -1,11 +1,23 @@
 <?php
 
+use DMA\Friends\Facades\FriendsAPI;
 /**
  * Provide custom routes outside of what october provides
  *
  * @package DMA\Friends
  * @author Kristen Arnold, Carlos Arroyo
  */
+
+// Register API routers after Pluging is booted and Laravel is ready
+App::before(function($request, $response){
+
+    Route::group(['prefix' => 'friends/api'], function() {
+        // Register API Routes
+        FriendsAPI::getRoutes();
+    });
+});
+
+
 Route::get('logout', function()
 {
     Auth::logout();
@@ -27,15 +39,3 @@ Route::group(['prefix'=>'webhooks'], function(){
 });
 
 
-
-Route::group(['prefix' => 'friends/api', 'namespace' => 'DMA\Friends\Api'], function() {
-
-	Route::resource('activity', 				'ActivityResource');
-	Route::resource('activity-log', 			'ActivityLogResource');
-    Route::resource('category',                 'Category');
-	Route::resource('badge',		 			'BadgeResource');
-	Route::resource('location',		 			'LocationResource');
-	Route::resource('reward',		 			'RewardResource');
-	Route::resource('step',			 			'StepResource');
-
-});

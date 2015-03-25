@@ -7,6 +7,7 @@ use DMA\Friends\Classes\ActivityCode;
 use DMA\Friends\Classes\BadgeProcessor;
 use DMA\Friends\Classes\FriendsLog;
 use DMA\Friends\Classes\Notifications\ChannelManager;
+use DMA\Friends\Classes\API\APIManager;
 
 /**
  * Register service providers for Friends
@@ -25,6 +26,7 @@ class FriendsServiceProvider extends ServiceProvider
     {
         $this->registerFriendsLog();
         $this->registerNotifications();
+        $this->registerAPI();
     }
 
     /**
@@ -71,6 +73,24 @@ class FriendsServiceProvider extends ServiceProvider
                 
         // Create alias Facade to the Notification manager
         $this->createAlias('Postman', 'DMA\Friends\Facades\Postman');        
+    }
+    
+    public function registerAPI()
+    {
+        //\App::register('\EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider');
+        
+        $this->app['FriendsAPI'] = $this->app->share(function($app) {
+            \App::register('\EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider');
+            //\App::register('\LucaDegasperi\OAuth2Server\Storage\FluentStorageServiceProvider');
+            //\App::register('\LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider');
+            
+            $api = new APIManager;
+            return $api;            
+        });
+        
+        $this->createAlias('FriendsAPI', 'DMA\Friends\Classes\API\APIManager');
+        //$this->createAlias('Authorizer', '\LucaDegasperi\OAuth2Server\Facades\AuthorizerFacade');
+        
     }
     
     
