@@ -83,9 +83,17 @@ class GetRewards extends ComponentBase
                         ->from(with(new Reward)->getTable())
                         ->whereNull('inventory')
                         ->orWhere('inventory', '>', 0);
-                });
-                #$rewards->whereNull('inventory');
-                #$rewards->orWhere('inventory', '>', 0);
+                })->whereIn('id', function($query) {
+                    $query->select('id')
+                        ->from(with(new Reward)->getTable())
+                        ->whereNull('date_begin')
+                        ->whereNull('date_end');
+                })->whereIn('id', function($query) {
+                    $query->select('id')
+                        ->from(with(new Reward)->getTable())
+                        ->where('date_begin', '<=', date('c'))
+                        ->where('date_end', '>=', date('c'));
+                }, 'or');
                 break;
         }
 
