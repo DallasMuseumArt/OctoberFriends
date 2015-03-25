@@ -38,7 +38,7 @@ class UserTransformer extends BaseTransformer {
     public function getData($instance)
     {
         $data = [
-            'id' => $instance->id, 
+            'id' => (int)$instance->id, 
             // first_name and last_name are stored in usermetadata model. 
             // not sure why were are not using name and surname of the User model     
             'first_name' => $this->getMetadataValue($instance, 'first_name'),
