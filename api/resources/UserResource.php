@@ -1,10 +1,12 @@
 <?php namespace DMA\Friends\API\Resources;
 
+use Auth;
+use Input;
 use Request;
 use Response;
 use Exception;
 use Validator;
-use Auth;
+use DMA\Friends\Wordpress\Auth as WordpressAuth;
 
 use DMA\Friends\Models\Usermeta;
 use DMA\Friends\Models\UserExtend;
@@ -26,6 +28,14 @@ class UserResource extends BaseResource
      */
     private $include_profile = false;
     
+    public function __construct()
+    {
+        // Add additional routes to Activity resource
+        $this->addAdditionalRoute('login', 'login', ['GET', 'POST']);
+    }
+    
+    
+    
     public function getTransformer()
     {
         $profile = $this->include_profile;
@@ -33,6 +43,62 @@ class UserResource extends BaseResource
         return new $this->transformer($profile);
         
     }
+
+    public function login()
+    {
+        try{
+            $data = Input::all();
+            
+            // TODO : I think this logic should be centralized 
+            // Base on loginUser component
+            // Update wordpress passwords if necessary
+            WordpressAuth::verifyFromEmail(array_get($data, 'email'), array_get($data, 'password'));
+            
+            /*
+             * Validate input
+            */
+            $rules = [
+                    'password' => 'required|min:2'
+            ];
+            
+            $loginAttribute = UserSettings::get('login_attribute', UserSettings::LOGIN_EMAIL);
+            
+            if ($loginAttribute == UserSettings::LOGIN_USERNAME)
+                $rules['username'] = 'required|between:2,64';
+            else
+                $rules['username'] = 'required|email|between:2,64';
+            
+            if (!in_array('username', $data))
+                $data['username'] = array_get($data, 'username', array_get($data, 'email'));
+            
+            /*
+             * Validate user credentials
+            */
+            $validation = Validator::make($data, $rules);
+            if ($validation->fails()){
+                return $this->errorDataValidation('User credantials fail to validate', $validation->errors());
+            }
+            
+            /*
+             * Authenticate user
+            */
+            $user = Auth::authenticate([
+                    'login' => array_get($data, 'username'),
+                    'password' => array_get($data, 'password')
+            ], true);
+            
+            if ($user) {
+                return $this->show($user->id);
+            } else {
+                return Response::api()->errorNotFound('User not found');
+            }
+    
+            
+        } catch(Exception $e) {
+            return Response::api()->errorInternalError($e->getMessage());
+        }
+    }
+    
     
     public function show($id)
     {
@@ -59,7 +125,6 @@ class UserResource extends BaseResource
             $validation = Validator::make($data, $rules);
             if ($validation->fails()){
                 return $this->errorDataValidation('User data fails to validated', $validation->errors());
-                throw new Exception();
             }
             /*
              * Register user
