@@ -9,7 +9,7 @@ use Validator;
 use DMA\Friends\Wordpress\Auth as WordpressAuth;
 
 use DMA\Friends\Models\Usermeta;
-use DMA\Friends\Models\UserExtend;
+use DMA\Friend\Classes\UserExtend;
 use DMA\Friends\Classes\API\BaseResource;
 use RainLab\User\Models\Settings as UserSettings;
 
