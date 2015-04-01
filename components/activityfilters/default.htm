@@ -1,20 +1,20 @@
-<div id="activity-filters" class="activity-filters">
+<div class="friends-activity-filters">
     <ul
-        class="activity-filters-list"
+        class="friends-activity-filters-list"
         data-filter-element="{{ element }}"
         data-filter-partial="{{ partial }}"
         data-filter-component="{{ component }}"
     >
-        <li class="activity-filters-item">
-            <a href="#" class="activity-filter-all"
+        <li class="friends-activity-filters-item">
+            <a href="#" class="friends-activity-filter-all"
                 data-request="onUpdate"
                 data-request-data="filter: 'all'"
             >View All</a>
         </li>
         {% for category in categories %}
-            <li class="activity-filters-item">
+            <li class="friends-activity-filters-item">
                 <a href="#"
-                    class="activity-filter active"
+                    class="friends-activity-filter active"
                     data-filter-name="{{ category.name }}"
                 >{{ category.name }}</a>
             </li>

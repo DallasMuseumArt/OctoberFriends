@@ -1,18 +1,14 @@
 <?php namespace DMA\Friends\Components;
 
 /**
- * You don't need to specifiy component properties 90% of the time, but if you do
- * here's an example use of this component with properties:
  * [ActivityCatalog]
  * 
  * [ActivityFilters]
  * target_component = "ActivityCatalog"
- * partial = "@default"
- * target_element = "#activity-catalog"
  * ==
  * ==
- * {% component 'ActivityCatalog' %}
  * {% component 'ActivityFilters' %}
+ * {% component 'ActivityCatalog' %}
  */
 
 use Cms\Classes\ComponentBase;
@@ -72,6 +68,8 @@ class ActivityFilters extends ComponentBase
         else {
             $this->page['component'] = $this->property('target_component') . '::onUpdate';
         }
+        // Currently the targets aren't being used by the Javascript AJAX handlers
+        // But it could be... once we figure out why the AJAX isn't working
         $this->page['element'] = $this->property('target_element');
         $this->page['partial'] = $this->property('partial');
     }

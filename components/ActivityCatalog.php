@@ -8,34 +8,44 @@ use DB;
 
 class ActivityCatalog extends ComponentBase
 {
-    public function componentDetails() {
+    public function componentDetails()
+    {
         return [
             'name' => 'Activity Catalog',
             'description' => 'Allows the user to explore a full list of available activities',
         ];
     }
 
-    public function onRun() {
+    public function onRun()
+    {
         $this->getResults();
     }
 
-    public function onUpdate() {
-        $filter = post('filter');
-        $this->getResults($filter);
+    public function onUpdate()
+    {
+        $filters = post('filters');
+        $this->getResults($filters);
 
         return [
-            '#activity-catalog' => $this->renderPartial('@default'),
+            '#activity-catalog' => $this->renderPartial('@activitylist'),
         ];
     }
 
-    private function getResults($filter = null) {
+    private function getResults($filter = null)
+    {
+        $perpage = 10;
+
         if ($filter && $filter != 'all') {
-            //$filters = preg_split('/(\s*,\s*)+/', $filter);
-            $filters = explode(',', $filter);
-            $results = Activity::isActive()->byCategory($filters)->paginate(10);
+            $filters = json_decode($filter, true);
+            if (is_array($filters['categories'])) {
+                $results = Activity::isActive()->byCategory($filters['categories'])->paginate($perpage);
+            }
+            else {
+                $results = Activity::isActive()->paginate($perpage);
+            }
         }
         else {
-            $results = Activity::isActive()->paginate(10);
+            $results = Activity::isActive()->paginate($perpage);
         }
 
         $this->page['activities'] = $results;
