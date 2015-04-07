@@ -66,23 +66,33 @@ class BaseResource extends Controller {
 
     
     
+    protected function getPageSize()
+    {
+        return Input::get('per_page', $this->pageSize);
+    }
+    
+    
     protected function getFilters()
     {
         $filters=[];
+        $ignoreParameter = ['per_page'];
+        
         foreach(Input::all() as $key => $value) {
-            // Separate operator and filter name
-            $bits = explode('__', $key);
-            
-            $filter   = $bits[0];
-            $operatorAlias = 'exact';
-            
-            if (count($bits) > 1) {
-                $operatorAlias = $bits[1];
+            if (!in_array($key, $ignoreParameter)) {
+                // Separate operator and filter name
+                $bits = explode('__', $key);
+                
+                $filter   = $bits[0];
+                $operatorAlias = 'exact';
+                
+                if (count($bits) > 1) {
+                    $operatorAlias = $bits[1];
+                }
+    
+                // Create instance of a filter field specification
+                $filterSpec = new FilterSpec($filter, $value, $operatorAlias);
+                $filters[] = $filterSpec;
             }
-
-            // Create instance of a filter field specification
-            $filterSpec = new FilterSpec($filter, $value, $operatorAlias);
-            $filters[] = $filterSpec;
         }
         return $filters;
     }
@@ -97,15 +107,16 @@ class BaseResource extends Controller {
     public function index()
     {
         try {
-            $filters = $this->getFilters();
-            $model   = $this->getModel();
-            $query   = $model->applyFiltersToQuery($filters);
+            $filters    = $this->getFilters();
+            $model      = $this->getModel();
+            $query      = $model->applyFiltersToQuery($filters);
+            $pageSize   = $this->getPageSize(); 
             
-            if ($this->pageSize > 0){
-                $paginator = $query->paginate($this->pageSize);
+            if ($pageSize > 0){
+                $paginator = $query->paginate($pageSize);
                 return Response::api()->withPaginator(new IlluminatePaginatorAdapter($paginator), $this->getTransformer());
             }else{
-                return Response::api()->withCollection($query->all(), $this->getTransformer());
+                return Response::api()->withCollection($query->get(), $this->getTransformer());
             }
         } catch(\Exception $e) {
 
