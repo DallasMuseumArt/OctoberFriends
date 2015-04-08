@@ -1,6 +1,5 @@
 <?php
 
-use DMA\Friends\Facades\FriendsAPI;
 /**
  * Provide custom routes outside of what october provides
  *
@@ -10,10 +9,20 @@ use DMA\Friends\Facades\FriendsAPI;
 
 // Register API routers after Pluging is booted and Laravel is ready
 App::before(function($request, $response){
-
+       
     Route::group(['prefix' => 'friends/api'], function() {
         // Register API Routes
-        FriendsAPI::getRoutes();
+        // History : 
+        // 04/08/2015 : Adding Try Catch statement to prevent a fatal exception when acessing 
+        // October backend update settings. What happens in there is a race 
+        // condition when visiting October backend update page. Plugings don't follow their normal flow it looks like 
+        // the boot function is not called, so facades are not created therfore FriendsAPI doesn't exists.
+        try {
+            DMA\Friends\Facades\FriendsAPI::getRoutes();
+        } catch(\ReflectionException $e) {
+            // FriendsAPI facade doesn't exist yet
+            // Do nothing, just live long and prosper
+        }
     });
 });
 
