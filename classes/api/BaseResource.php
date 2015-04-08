@@ -75,7 +75,7 @@ class BaseResource extends Controller {
     protected function getFilters()
     {
         $filters=[];
-        $ignoreParameter = ['per_page'];
+        $ignoreParameter = ['per_page','page'];
         
         foreach(Input::all() as $key => $value) {
             if (!in_array($key, $ignoreParameter)) {

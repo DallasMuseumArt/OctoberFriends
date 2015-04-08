@@ -79,6 +79,13 @@ class ModelRepository {
                             $query = $query->whereNotNull($field);
                         }
                         break;
+                    case 'in':
+                        $value = is_string($value) ? explode(',', $value) : $value;
+                        $value = is_array($value) ? $value : [];
+                        $value = array_map('trim', $value);
+                        $query = $query->whereIn($field, $value);
+                        break;
+                        
                     default:
                         $query = $query->where($field, $operator, $value);
                         break;

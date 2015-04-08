@@ -14,13 +14,13 @@ class FilterSpec
     
     protected $operators = ['exact' => '=',  'iexact' => 'like', 'ne' => '!=',
                              'gt' => '>', 'gte' => '>=', 'lt' => '<', 'lte' => '<=',
-                             'is_null' => 'IS NOT NULL'
+                             'is_null' => 'IS NOT NULL', 'in' => 'IN'
                             ];
 
     public function __construct($field, $value, $operatorAlias = 'exact')
     {
         $field = trim($field);
-        $value = trim($value);
+        $value = is_string($value) ? trim($value) : $value;
         $operatorAlias = strtolower( trim($operatorAlias) );
 
         $this->validate($field, $value, $operatorAlias);

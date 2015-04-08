@@ -60,7 +60,7 @@ class ActivityLogTransformer extends BaseTransformer {
                     $transformer = '\DMA\Friends\API\Transformers\BadgeTransformer';
                     break;
                 default:
-                    $transformer = 'BaseTransformer';
+                    $transformer = 'DMA\Friends\Classes\API\BaseTransformer';
                     break;
             }
            
