@@ -21,7 +21,7 @@ class UserProfileTransformer extends BaseTransformer {
 
     public function getData($instance)
     {
-        return [
+        $data = [
             'barcode_id'         => $instance->barcode_id,
             'is_activated'       => $instance->is_activated,
             'email'              => $instance->email,
@@ -36,10 +36,13 @@ class UserProfileTransformer extends BaseTransformer {
             ],
                 
         ];
+        
+        // Add to profile user metadata
+        $data = array_merge($data, $this->getUserMetadata($instance));
+                
+        return $data;
     }    
     
-    
-
     
    
     /**
@@ -73,5 +76,19 @@ class UserProfileTransformer extends BaseTransformer {
         $state = $instance->state;
         return $this->item($state, new StateTransformer);
     }
+
+    
+    private function getUserMetadata(Model $instance)
+    {
+        $metadata = $instance->metadata;
+        if(!is_null($metadata)){
+            $item = new UserMetadataTransformer;
+            return $item->getData($metadata);
+        }
+        
+        return [];
+        
+    }
+    
     
 }

@@ -39,6 +39,12 @@ class BaseResource extends Controller {
      * @var int
      */
     protected $pageSize = 50;
+    
+    /**
+     * Laravel resources actions allowed for this resource
+     * @var array
+     */
+    public $allowActions = ['index', 'show', 'store', 'update', 'destroy'];
 
 
     /**
@@ -216,5 +222,52 @@ class BaseResource extends Controller {
         return Response::api()->errorForbidden();
 
     }
+    
+    
+    /**
+     * Catch all missing HTTP verbs
+     * @see \Illuminate\Routing\Controller::missingMethod()
+     */
+    public function missingMethod($parameters = array())
+    {
+        return Response::api()->errorForbidden();
+    }
 
+    /**
+     * Helper method to update models attributes
+     * @param unknown $model
+     * @param array $data
+     * @param array $attrsToUpdate
+     * @return unknown
+     */
+    protected function updateModelData($model, $data, $attrsToUpdate)
+    {
+        foreach ($attrsToUpdate as $attr) {
+            $new_value = array_get($data, $attr, null);
+            if(!is_null($new_value)) {
+                $model->{$attr} = $new_value;
+            }
+        }
+        return $model;
+    }
+    
+    /**
+     * Generates a response with a 422 HTTP header a given message and given errors.
+     *
+     * @param string $message
+     * @param array $errors
+     * @return mixed
+     */
+    protected function errorDataValidation($message = 'Invalid data ', $errors = [])
+    {
+        return Response::api()->setStatusCode(422)->withArray([
+                'error' => [
+                        'code' => 422,
+                        'http_code' => 'GEN-UNPROCESSABLE',
+                        'message' => $message,
+                        'errors' => $errors
+                ]
+        ]);
+    }
+    
 }

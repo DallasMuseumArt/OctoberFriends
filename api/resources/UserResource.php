@@ -9,8 +9,9 @@ use Validator;
 use DMA\Friends\Wordpress\Auth as WordpressAuth;
 
 use DMA\Friends\Models\Usermeta;
-use DMA\Friend\Classes\UserExtend;
+use DMA\Friends\Classes\UserExtend;
 use DMA\Friends\Classes\API\BaseResource;
+use RainLab\User\Models\User;
 use RainLab\User\Models\Settings as UserSettings;
 
 use October\Rain\Database\ModelException;
@@ -102,7 +103,7 @@ class UserResource extends BaseResource
     
     public function show($id)
     {
-        // Hacky variable to make the user transformter 
+        // Hacky variable to make the user transformer 
         // to include the user profile
         $this->include_profile = true;
         return parent::show($id);
@@ -118,7 +119,7 @@ class UserResource extends BaseResource
                     'last_name'             => 'required|min:2',
                     //'username'              => 'required|min:6',
                     'email'                 => 'required|email|between:2,64',
-                    'password'              => 'required|min:6',
+                    'password'              => 'required|confirmed|min:6',
                     'password_confirmation' => 'required|min:6',
             ];
             
@@ -196,23 +197,94 @@ class UserResource extends BaseResource
         
     }
     
-    
-    /**
-     * Generates a response with a 422 HTTP header a given message and given errors.
-     *
-     * @param string $message
-     * @param array $errors
-     * @return mixed
-     */
-    private function errorDataValidation($message = 'Invalid data ', $errors = [])
+    public function update($id)
     {
-        return Response::api()->setStatusCode(422)->withArray([
-            'error' => [
-                'code' => 422,
-                'http_code' => 'GEN-UNPROCESSABLE',
-                'message' => $message,
-                'errors' => $errors
-            ]
-        ]);
+        try{
+            if(is_null($user = User::find($id))){
+                return Response::api()->errorNotFound('User not found'); 
+            }
+            
+            
+            $data = Request::all();
+            $rules = [
+                    'first_name'            => 'required|min:2',
+                    'last_name'             => 'required|min:2',
+                    //'username'              => 'required|min:6',
+                    'email'                 => 'required|email|between:2,64',
+                    'password'              => 'sometimes|required|confirmed|min:6',
+                    'password_confirmation' => 'min:6',
+                    'birthday'
+            ];
+            
+            $validation = Validator::make($data, $rules);
+            if ($validation->fails()){
+                return $this->errorDataValidation('User data fails to validated', $validation->errors());
+            }
+            
+            // Drop password_confirmation if password is not present
+            if(is_null(array_get($data, 'password', null))) {
+                unset($data['password_confirmation']);
+            }
+                        
+            // Update user data
+            $userAttrs = ['name' , 'password', 'password_confirmation', 'email',
+                          'street_addr', 'city', 'state', 'zip', 'phone'];
+
+            $user = $this->updateModelData($user, $data, $userAttrs);
+            
+
+            if($user->save()) {
+                // If user save ok them we update usermetadata
+                $bd_year = array_get($data, 'birthday_year', null);
+                $bd_month = array_get($data, 'birthday_month', null);
+                $bd_day = array_get($data, 'birthday_day', null);
+                
+                $birth_date = null;
+                
+                if ( $bd_year && $bd_month && $bd_day ) {
+                    $data['birth_date'] = $bd_year
+                    . '-' .  sprintf("%02s", $bd_month)
+                    . '-' .  sprintf("%02s", $bd_day)
+                    . ' 00:00:00';
+                }
+                
+                // Save user metadata
+                $usermeta = $user->metadata;
+                if(!is_null($usermeta)){
+                    $userMetadataAttrs = ['first_name' , 'last_name', 'birth_date', 'email_optin',
+                                          'gender', 'race', 'household_income', 'household_size', 'education'];
+                    $usermeta = $this->updateModelData($usermeta, $data, $userMetadataAttrs);
+                    $usermeta->save();
+                }
+               
+                $avatar = array_get($data,'avatar', null);
+                if (!is_null($avatar)) {
+                    UserExtend::uploadAvatar($user, $avatar);
+                }
+                
+                
+                // TODO : Do we need to re-authenticate?
+                /*
+                // Re-authenticate the user
+                $user = Auth::authenticate([
+                        'email'     => $user->email,
+                        'password'  => $data['password'],
+                ], true);
+                */
+            }
+            
+          
+            return $this->show($user->id);
+                               
+        } catch(Exception $e) {
+            if ($e instanceof ModelException) {
+                return $this->errorDataValidation($e->getMessage());
+            } else {
+                return Response::api()->errorInternalError($e->getMessage());
+            }
+
+        }
     }
+    
+  
 }
