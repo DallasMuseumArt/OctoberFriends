@@ -92,7 +92,9 @@ class GetRewards extends ComponentBase
                     $query->select('id')
                         ->from(with(new Reward)->getTable())
                         ->where('date_begin', '<=', date('c'))
-                        ->where('date_end', '>=', date('c'));
+                        ->where('date_end', '>=', date('c'))
+                        ->where('is_published', '>', 0)
+                        ->where('inventory', '>', 0);
                 }, 'or');
                 break;
         }
