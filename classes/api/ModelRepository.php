@@ -71,6 +71,7 @@ class ModelRepository {
             if (method_exists($this->modelClassName, $scopeName)) {
                 $query = $query->{$fieldCamelCase}($value);
             } else {
+                // Apply filters and operators 
                 switch($filterSpec->getOperatorAlias()) {
                     case 'is_null':
                         if ($value) {
@@ -97,7 +98,31 @@ class ModelRepository {
         return $query;
     }
     
+    public function applySortByToQuery(array $sortBy)
+    {
 
+        $query = $this->query();
+        $re = "/^(-|\\+).*/";
+        foreach($sortBy as $field) {
+            if ($field) {
+                $dir = '+';
+                if(preg_match($re, $field, $matches)){
+                    $dir = $matches[1];
+                    $field = trim(str_replace($dir, '', $field));
+                }
+                $oper = [
+                   '+' => 'ASC',
+                   '-' => 'DESC'          
+                ][$dir];
+                
+                $query = $query->orderBy($field, $oper);
+            }
+        }
+        return $query;
+    }
+    
+    
+    
     protected function underscoreToCamelCase($string, $capitalizeFirstCharacter = false)
     {
     

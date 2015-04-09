@@ -70,12 +70,23 @@ class BaseResource extends Controller {
     {
         return Input::get('per_page', $this->pageSize);
     }
+
+    protected function getSortBy()
+    {
+        $sortBy = Input::get('sort', []);
+        $sortBy = explode(',', $sortBy);
+        $sortBy = array_map(function($s) {
+            $s = strtolower(trim($s));
+            return $s;
+        }, $sortBy);
+        return $sortBy;
+    }
     
-    
+        
     protected function getFilters()
     {
         $filters=[];
-        $ignoreParameter = ['per_page','page'];
+        $ignoreParameter = ['per_page','page', 'sort'];
         
         foreach(Input::all() as $key => $value) {
             if (!in_array($key, $ignoreParameter)) {
@@ -108,8 +119,10 @@ class BaseResource extends Controller {
     {
         try {
             $filters    = $this->getFilters();
+            $sortBy     = $this->getSortBy();
             $model      = $this->getModel();
             $query      = $model->applyFiltersToQuery($filters);
+            $query      = $model->applySortByToQuery($sortBy);
             $pageSize   = $this->getPageSize(); 
             
             if ($pageSize > 0){

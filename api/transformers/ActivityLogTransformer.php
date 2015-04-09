@@ -1,10 +1,12 @@
 <?php namespace DMA\Friends\API\Transformers;
 
 use Model;
-
 use DMA\Friends\Classes\API\BaseTransformer;
+use DMA\Friends\API\Transformers\DateTimeTransformerTrait;
 
 class ActivityLogTransformer extends BaseTransformer {
+    
+    use DateTimeTransformerTrait;
     
     
     /**
@@ -25,7 +27,8 @@ class ActivityLogTransformer extends BaseTransformer {
             'message' => $instance->message,
             'points_earned' => $instance->points_earned,
             'total_points' => $instance->total_points,   
-            'object_type'  => $instance->object_type,  
+            //'object_type'  => $instance->object_type,  
+            'timestamp' => $this->carbonToIso($instance->timestamp),    
         ];
     }
 
