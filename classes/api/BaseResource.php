@@ -73,7 +73,7 @@ class BaseResource extends Controller {
 
     protected function getSortBy()
     {
-        $sortBy = Input::get('sort', []);
+        $sortBy = Input::get('sort', '');
         $sortBy = explode(',', $sortBy);
         $sortBy = array_map(function($s) {
             $s = strtolower(trim($s));
@@ -105,6 +105,7 @@ class BaseResource extends Controller {
                 $filters[] = $filterSpec;
             }
         }
+        
         return $filters;
     }
     
@@ -122,7 +123,7 @@ class BaseResource extends Controller {
             $sortBy     = $this->getSortBy();
             $model      = $this->getModel();
             $query      = $model->applyFiltersToQuery($filters);
-            $query      = $model->applySortByToQuery($sortBy);
+            $query      = $model->applySortByToQuery($sortBy, $query);
             $pageSize   = $this->getPageSize(); 
             
             if ($pageSize > 0){

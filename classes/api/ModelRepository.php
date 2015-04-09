@@ -1,5 +1,7 @@
 <?php namespace DMA\Friends\Classes\API;
 
+use Illuminate\Database\Eloquent\Builder;
+
 class ModelRepository {
 
     protected $modelClassName;
@@ -55,9 +57,9 @@ class ModelRepository {
     }
     
     
-    public function applyFiltersToQuery($filters)
+    public function applyFiltersToQuery($filters, Builder $query=null)
     {
-        $query = $this->query();
+        $query = (is_null($query)) ? $this->query() : $query;
         foreach($filters as $filterSpec) {
             $field      = $filterSpec->getField();
             $value      = $filterSpec->getValue();
@@ -98,11 +100,14 @@ class ModelRepository {
         return $query;
     }
     
-    public function applySortByToQuery(array $sortBy)
+    public function applySortByToQuery(array $sortBy, Builder $query=null)
     {
 
-        $query = $this->query();
+        $query = (is_null($query)) ? $this->query() : $query;
+        
+        // Regex operation to detect what operation use to sort
         $re = "/^(-|\\+).*/";
+        
         foreach($sortBy as $field) {
             if ($field) {
                 $dir = '+';

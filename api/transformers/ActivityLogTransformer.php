@@ -27,7 +27,7 @@ class ActivityLogTransformer extends BaseTransformer {
             'message' => $instance->message,
             'points_earned' => $instance->points_earned,
             'total_points' => $instance->total_points,   
-            //'object_type'  => $instance->object_type,  
+            'object_type'  => $instance->object_type,  
             'timestamp' => $this->carbonToIso($instance->timestamp),    
         ];
     }
