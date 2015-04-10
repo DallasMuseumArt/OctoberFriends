@@ -21,6 +21,7 @@ class ActivityTransformer extends BaseTransformer {
     {
         return [
             'id'                => (int)$instance->id,
+            'activity_code'     => $instance->activity_code,
             'title'             => $instance->title,
             'image_url'         => $this->getImageUrl($instance),
             'is_published'      => ($instance->is_published)?true:false,
