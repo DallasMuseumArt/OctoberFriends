@@ -6,15 +6,17 @@ use Request;
 use Response;
 use Exception;
 use Validator;
-use DMA\Friends\Wordpress\Auth as WordpressAuth;
 
 use DMA\Friends\Models\Usermeta;
 use DMA\Friends\Classes\UserExtend;
 use DMA\Friends\Classes\API\BaseResource;
+use DMA\Friends\Wordpress\Auth as WordpressAuth;
+
 use RainLab\User\Models\User;
 use RainLab\User\Models\Settings as UserSettings;
 
 use October\Rain\Database\ModelException;
+
 
 class UserResource extends BaseResource
 {
@@ -32,7 +34,7 @@ class UserResource extends BaseResource
     public function __construct()
     {
         // Add additional routes to Activity resource
-        $this->addAdditionalRoute('login', 'login', ['GET', 'POST']);
+        $this->addAdditionalRoute('login', 'login',             ['GET', 'POST']);
     }
     
     
@@ -100,7 +102,7 @@ class UserResource extends BaseResource
         }
     }
     
-    
+
     public function show($id)
     {
         // Hacky variable to make the user transformer 

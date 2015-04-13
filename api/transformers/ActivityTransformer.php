@@ -13,23 +13,42 @@ class ActivityTransformer extends BaseTransformer {
      *
      * @var array
      */
-    protected $defaultIncludes = [
+    protected $avilableIncludes = [
             'steps'
     ];
     
+    /**
+     * {@inheritDoc}
+     * @see \DMA\Friends\Classes\API\BaseTransformer::getData()
+     */
     public function getData($instance)
     {
         return [
-            'id'                => (int)$instance->id,
-            'activity_code'     => $instance->activity_code,
-            'title'             => $instance->title,
-            'image_url'         => $this->getImageUrl($instance),
-            'is_published'      => ($instance->is_published)?true:false,
-            'is_archived'       => ($instance->is_archived)?true:false,  
-            'time_restrictions' => $this->getTimeRestrictions($instance),
+                'id'                => (int)$instance->id,
+                'title'             => $instance->title,
+                'image_url'         => $this->getImageUrl($instance),
+                'activity_code'     => $instance->activity_code,
+                'activity_type'     => $instance->activity_type,   
         ];
     }
 
+    /**
+     * {@inheritDoc}
+     * @see \DMA\Friends\Classes\API\BaseTransformer::getExtendedData()
+     */
+    public function getExtendedData($instance)
+    {
+        // Adding steps by the Fractal embeding system
+        $this->setDefaultIncludes(['steps']);
+    
+        return [
+            'is_published'      => ($instance->is_published)?true:false,
+            'is_archived'       => ($instance->is_archived)?true:false,
+            'time_restrictions' => $this->getTimeRestrictions($instance),
+        ];
+    }
+    
+    
     /**
      * Helper method to deserialize time_restiction data
      * @param Model $instance

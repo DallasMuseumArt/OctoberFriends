@@ -11,19 +11,19 @@ class BaseTransformer extends TransformerAbstract
 {
     
     /**
-     * When true call getExtemdedData and append it to 
+     * When true call getExtendedData and append it to 
      * the tranformation
      * @var boolean
      */
-    protected $extendedData = false;
+    protected $useExtendedData = true;
     
     /**
      * 
      * @param boolean $basic 
      */
-    public function __construct($extendedData=false)
+    public function __construct($useExtendedData=null)
     {
-        $this->extendedData = $extendedData;
+        $this->useExtendedData = (is_null($useExtendedData)) ? $this->useExtendedData : $useExtendedData;
     }
     
     /**
@@ -35,9 +35,9 @@ class BaseTransformer extends TransformerAbstract
     {
         if(!is_null($instance)) {
             $data = $this->getData($instance);
-            if($this->extendedData) {
+            if($this->useExtendedData) {
                 $extended = $this->getExtendedData($instance);
-                if(is_array($data, $extend)) {
+                if(is_array($extended)) {
                     $data = array_merge($data, $extended);
                 }
             }
@@ -56,7 +56,8 @@ class BaseTransformer extends TransformerAbstract
     }
 
     /**
-     * Return all extend data of the model
+     * Return extended data of the model. Useful for
+     * creating details views of a model
      * @var $instance October\Model
      * @param array
      */

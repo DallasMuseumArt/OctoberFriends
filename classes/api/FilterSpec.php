@@ -12,7 +12,8 @@ class FilterSpec
     
     private $operator;
     
-    protected $operators = ['exact' => '=',  'iexact' => 'like', 'ne' => '!=',
+    protected $operators = ['exact' => '=',  'iexact' => '=', 'contains' => 'LIKE', 'ne' => '!=',
+                            'startswith' => 'LIKE', 'endswith' => 'LIKE',
                              'gt' => '>', 'gte' => '>=', 'lt' => '<', 'lte' => '<=',
                              'is_null' => 'IS NOT NULL', 'in' => 'IN'
                             ];

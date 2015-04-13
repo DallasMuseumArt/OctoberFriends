@@ -12,11 +12,13 @@ use DMA\Friends\API\Transformers\UserProfileTransformer;
 
 class UserTransformer extends BaseTransformer {
     
-    /*
-     * @var boolean transform profile user data
+
+    /**
+     * By default always show extended data
+     * @var boolean
      */
-     private $include_profile = false;
-    
+    protected $useExtendedData = false;
+     
     /**
      * List of resources possible to include
      *
@@ -29,12 +31,10 @@ class UserTransformer extends BaseTransformer {
             'badges'
     ];
     
-    
-    public function __construct($include_profile=false)
-    {
-        $this->include_profile = $include_profile;
-    }
-    
+    /**
+     * {@inheritDoc}
+     * @see \DMA\Friends\Classes\API\BaseTransformer::getData()
+     */        
     public function getData($instance)
     {
         $data = [
@@ -47,13 +47,20 @@ class UserTransformer extends BaseTransformer {
             'avatar_url' => $this->getAvatar($instance),
         ];
         
-        if ($this->include_profile) {
-            $this->setDefaultIncludes(['profile', 'rewards', 'activities', 'badges']);
-        }
-        
         return $data;
     }
 
+    /**
+     * {@inheritDoc}
+     * @see \DMA\Friends\Classes\API\BaseTransformer::getExtendedData()
+     */
+    public function getExtendedData($instance)
+    {
+        // Adding full user profile by the Fractal embeding system
+        $this->setDefaultIncludes(['profile', 'rewards', 'activities', 'badges']);
+        
+    }
+    
     /**
      * Get URL path to user avatar
      * @param unknown $instance
@@ -104,7 +111,7 @@ class UserTransformer extends BaseTransformer {
     {
     
         $rewards = $instance->rewards;
-        $item = $this->collection($rewards, new RewardTransformer);
+        $item = $this->collection($rewards, new RewardTransformer(false));
         return $item;
     
     }
@@ -117,7 +124,7 @@ class UserTransformer extends BaseTransformer {
     public function includeActivities(Model $instance)
     {
         $rewards = $instance->rewards;
-        return $this->collection($rewards, new ActivityTransformer);    
+        return $this->collection($rewards, new ActivityTransformer(false));    
     }
     
     
@@ -129,6 +136,6 @@ class UserTransformer extends BaseTransformer {
     public function includeBadges(Model $instance)
     {
         $badges = $instance->badges;
-        return $this->collection($badges, new BadgeTransformer);
+        return $this->collection($badges, new BadgeTransformer(false));
     }
 }

@@ -4,15 +4,21 @@
 use Model;
 use Input;
 use Response;
+
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Pagination\Paginator;
+
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use League\Fractal\TransformerAbstract;
+
+use DMA\Friends\Classes\API\ModelRepository;
 use DMA\Friends\Classes\API\FilterSpec;
 use DMA\Friends\Classes\API\AdditionalRoutesTrait;
+
+use October\Rain\Database\Builder;
 
 
 class BaseResource extends Controller {
@@ -71,12 +77,19 @@ class BaseResource extends Controller {
     }
 
     
-    
+    /**
+     * Get size of the page
+     * @return integer
+     */
     protected function getPageSize()
     {
         return Input::get('per_page', $this->pageSize);
     }
 
+    /**
+     * Get fields to sort by
+     * @return array
+     */
     protected function getSortBy()
     {
         $sortBy = Input::get('sort', '');
@@ -88,7 +101,10 @@ class BaseResource extends Controller {
         return $sortBy;
     }
     
-        
+    /**
+     * Get filters to apply to this resource
+     * @return array of \DMA\Friends\Classes\API\FilterSpec
+     */ 
     protected function getFilters()
     {
         $filters=[];
@@ -115,6 +131,62 @@ class BaseResource extends Controller {
         return $filters;
     }
     
+    /**
+     * Helper function to apply filter and sort paremeters to the given
+     * ModelRepository.
+     *
+     * @param ModelRepository $model
+     * @throws \Illuminate\Database\QueryException
+     * @return \October\Rain\Database\Builder
+     */
+    protected function applyFilters(ModelRepository $model = null)
+    {
+        try {
+            $model      = (is_null($model)) ? $this->getModel() : $model;
+            $filters    = $this->getFilters();
+            $sortBy     = $this->getSortBy();
+            $query      = $model->applyFiltersToQuery($filters);
+            $query      = $model->applySortByToQuery($sortBy, $query);
+    
+        } catch(\Exception $e) {
+    
+            $message = $e->getMessage();
+            \Log::error('API endpoint ' . get_class($this) . ' when applying filters: ' . $e->getMessage());
+    
+            // Re-throw exception
+            throw $e;
+        }
+        return $query;
+         
+    }
+    
+    /**
+     * Paginate resultset 
+     * 
+     * @param Builder $query
+     * @return Response
+     */
+    protected function paginateResult(Builder $query)
+    {
+        try {
+            $pageSize   = $this->getPageSize();
+    
+            if ($pageSize > 0){
+                $paginator = $query->paginate($pageSize);
+                return Response::api()->withPaginator(new IlluminatePaginatorAdapter($paginator), $this->getTransformer());
+            }else{
+                return Response::api()->withCollection($query->get(), $this->getTransformer());
+            }
+        } catch(\Exception $e) {
+    
+            $message = $e->getMessage();
+            if( $e instanceof QueryException){
+                \Log::error('API endpoint ' . get_class($this) . ' : ' . $e->getMessage());
+                $message = 'One or multiple filter fields does not exists in the model';
+            }
+            return Response::api()->errorInternalError($message);
+        }
+    }
     
     
     /**
@@ -125,30 +197,18 @@ class BaseResource extends Controller {
     public function index()
     {
         try {
-            $filters    = $this->getFilters();
-            $sortBy     = $this->getSortBy();
             $model      = $this->getModel();
-            $query      = $model->applyFiltersToQuery($filters);
-            $query      = $model->applySortByToQuery($sortBy, $query);
-            $pageSize   = $this->getPageSize(); 
+            $query      = $this->applyFilters($model);
             
-            if ($pageSize > 0){
-                $paginator = $query->paginate($pageSize);
-                return Response::api()->withPaginator(new IlluminatePaginatorAdapter($paginator), $this->getTransformer());
-            }else{
-                return Response::api()->withCollection($query->get(), $this->getTransformer());
-            }
+            // Paginate result
+            return $this->paginateResult($query);
         } catch(\Exception $e) {
-
+            
             $message = $e->getMessage();
-            if( $e instanceof QueryException){
-                \Log::error('API endpoint ' . get_class($this) . ' : ' . $e->getMessage());
-                $message = 'One or multiple filter fields does not exists in the model';
-            }
             return Response::api()->errorInternalError($message);
         }
     }
-
+    
     /**
      * Show the form for creating a new item
      *
@@ -223,6 +283,15 @@ class BaseResource extends Controller {
 
     }
     
+    public function callAction($method, $parameters)
+    {
+        try{
+            return parent::callAction($method, $parameters);
+        } catch(\Exception $e) {
+            $message = $e->getMessage(); 
+            return Response::api()->errorInternalError($message);
+        }
+    }
     
     /**
      * Catch all missing HTTP verbs
@@ -233,6 +302,7 @@ class BaseResource extends Controller {
         return Response::api()->errorForbidden();
     }
 
+    
     /**
      * Helper method to update models attributes
      * @param unknown $model

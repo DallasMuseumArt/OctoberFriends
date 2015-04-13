@@ -90,6 +90,17 @@ class ModelRepository {
                         break;
                         
                     default:
+                        switch($filterSpec->getOperatorAlias()) { 
+                            case 'contains':
+                                $value = '%' . $value . '%';
+                                break;
+                            case 'endswith':
+                                $value = '%' . $value;
+                                break;
+                            case 'startswith':
+                                $value = $value . '%';
+                                break;
+                        }
                         $query = $query->where($field, $operator, $value);
                         break;
                 }

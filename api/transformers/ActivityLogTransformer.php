@@ -67,7 +67,7 @@ class ActivityLogTransformer extends BaseTransformer {
                     break;
             }
            
-            return $this->item($relObj, new $transformer);
+            return $this->item($relObj, new $transformer(false));
         }
         return null;
     }

@@ -414,6 +414,7 @@ class Plugin extends PluginBase
         return [
             'activities'            => '\DMA\Friends\API\Resources\ActivityResource',
             'activity-logs'         => '\DMA\Friends\API\Resources\ActivityLogResource',
+            'activity-metadata'     => '\DMA\Friends\API\Resources\ActivityMetadataResource',
             'badges'                => '\DMA\Friends\API\Resources\BadgeResource',
             'steps'                 => '\DMA\Friends\API\Resources\StepResource',
             'categories'            => '\DMA\Friends\API\Resources\CategoryResource',
