@@ -30,7 +30,8 @@ class ActivityMetadataTransformer extends BaseTransformer {
             'id'           => (int)$instance->id,
             'user'         => null,
             'activity'     => null,
-            'metadata'     => $this->getMetadata($instance),    
+            'metadata'     => $this->getMetadata($instance),   
+            'created_at'   => $this->carbonToIso($instance->created_at)
             //'session_id'   => $instance->session_id,
             
         ];
