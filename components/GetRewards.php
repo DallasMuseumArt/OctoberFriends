@@ -37,8 +37,8 @@ class GetRewards extends ComponentBase
 
         $results = $this->getResults();
 
-        $this->page['rewards'] = $results['rewards'];
-        $this->page['links']   = $results['links'];
+        $this->page['rewards']  = $results['rewards'];
+        $this->page['links']    = $results['links'];
 
     }
 
@@ -109,8 +109,8 @@ class GetRewards extends ComponentBase
         }
 
         return [
-            'links' => $rewards->appends(['sort' => 'created_at'])->render(),
-            'rewards' => $renderedRewards,
+            'links'     => $rewards->render(),
+            'rewards'   => $renderedRewards,
         ];
     }
 
