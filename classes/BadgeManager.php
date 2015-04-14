@@ -67,9 +67,13 @@ class BadgeManager
      */
     private static function checkUserActivities(User $user, Activity $activity, Step $step)
     {
-        if (!isset($step->badge)) return;
-
         static $cache;
+
+        // Relationship isnt instantiated until we use it
+        $badge = $step->badge;
+
+        if (!isset($badge)) return;
+
         $key = $user->id . '_' . $activity->id;
 
         if (!isset($cache[$key])) {
@@ -87,8 +91,9 @@ class BadgeManager
         if ($step->badge->maximum_earnings) {
             $timesEarned = floor($count->count / $step->count);
 
-            if ($timesEarned > $step->badge->maximum_earnings) 
+            if ($timesEarned > $step->badge->maximum_earnings) {
                 return false;
+            }
         }
 
         // If count is evenly divisable by the required step count then return true
