@@ -2,6 +2,7 @@
 
 use Model;
 use DMA\Friends\Classes\API\BaseTransformer;
+use DMA\Friends\API\Transformers\MediaTransformer;
 use DMA\Friends\API\Transformers\StepTransformer;
 use DMA\Friends\API\Transformers\DateTimeTransformerTrait;
 
@@ -9,6 +10,15 @@ class BadgeTransformer extends BaseTransformer {
 
      use DateTimeTransformerTrait;
 
+     /**
+      * List of default resources to include
+      *
+      * @var array
+      */
+     protected $defaultIncludes = [
+             'media'
+     ];     
+     
     /**
      * List of resources possible to include
      *
@@ -22,8 +32,7 @@ class BadgeTransformer extends BaseTransformer {
     {
         return [
             'id'                        => (int)$instance->id,
-            'title'                     => $instance->title,
-            'image_url'                 => $this->getImageUrl($instance),    
+            'title'                     => $instance->title, 
         ];
     }
 
@@ -35,7 +44,7 @@ class BadgeTransformer extends BaseTransformer {
     public function getExtendedData($instance)
     {
         // Adding steps by the Fractal embeding system
-        $this->setDefaultIncludes(['steps']);
+        $this->setDefaultIncludes( array_merge($this->getDefaultIncludes(), ['steps']));
     
         return [
                 'description'               => $instance->description,
@@ -79,25 +88,7 @@ class BadgeTransformer extends BaseTransformer {
         return $restrictions;
     }
     
-    
-    /**
-     * Get Image URL of the reward
-     * @param unknown $instance
-     */
-    protected function getImageUrl(Model $instance)
-    {
-        try{
-            if (!is_null($instance->image)) {
-                return $instance->image->getPath();
-            }
-        }catch(\Exception $e){
-            // Do nothing
-        }
-        return null;
-    }
-    
-    
-    
+       
     /**
      * Include Steps
      *
@@ -110,4 +101,15 @@ class BadgeTransformer extends BaseTransformer {
         return $this->collection($steps, new StepTransformer);
     }
 
+
+    /**
+     * Include Media
+     *
+     * @return League\Fractal\ItemResource
+     */
+    public function includeMedia(Model $instance)
+    {
+        return $this->item($instance, new MediaTransformer);
+    }
+    
 }

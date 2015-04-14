@@ -2,11 +2,21 @@
 
 use Model;
 use DMA\Friends\Classes\API\BaseTransformer;
+use DMA\Friends\API\Transformers\MediaTransformer;
 use DMA\Friends\API\Transformers\DateTimeTransformerTrait;
 
 class ActivityTransformer extends BaseTransformer {
     
     use DateTimeTransformerTrait;
+
+    /**
+     * List of default resources to include
+     *
+     * @var array
+     */
+    protected $defaultIncludes = [
+            'media'
+    ];
     
     /**
      * List of resources possible to include
@@ -17,6 +27,8 @@ class ActivityTransformer extends BaseTransformer {
             'steps'
     ];
     
+   protected $useExtendedData = true;
+    
     /**
      * {@inheritDoc}
      * @see \DMA\Friends\Classes\API\BaseTransformer::getData()
@@ -26,7 +38,6 @@ class ActivityTransformer extends BaseTransformer {
         return [
                 'id'                => (int)$instance->id,
                 'title'             => $instance->title,
-                'image_url'         => $this->getImageUrl($instance),
                 'activity_code'     => $instance->activity_code,
                 'activity_type'     => $instance->activity_type,   
         ];
@@ -39,7 +50,7 @@ class ActivityTransformer extends BaseTransformer {
     public function getExtendedData($instance)
     {
         // Adding steps by the Fractal embeding system
-        $this->setDefaultIncludes(['steps']);
+        $this->setDefaultIncludes( array_merge($this->getDefaultIncludes(), ['steps']));
     
         return [
             'is_published'      => ($instance->is_published)?true:false,
@@ -113,26 +124,7 @@ class ActivityTransformer extends BaseTransformer {
 
 	    return $restrictions;
     }
-    
-
-    /**
-     * Get Image URL of the reward
-     * @param unknown $instance
-     */
-    protected function getImageUrl(Model $instance)
-    {
-        try{
-            if (!is_null($instance->image)) {
-                return $instance->image->getPath();
-            }
-        }catch(\Exception $e){
-            // Do nothing
-        }
-        return null;
-    }
-    
-    
-    
+        
     /**
      * Include Steps
      *
@@ -145,6 +137,16 @@ class ActivityTransformer extends BaseTransformer {
         return $this->collection($steps, new StepTransformer(false));
     }
 
-
+    /**
+     * Include Media
+     *
+     * @return League\Fractal\ItemResource
+     */
+    public function includeMedia(Model $instance)
+    {
+        //throw new \Exception('buu');
+        return $this->item($instance, new MediaTransformer);
+    }
+    
     
 }

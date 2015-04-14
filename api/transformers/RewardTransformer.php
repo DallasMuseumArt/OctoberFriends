@@ -11,6 +11,19 @@ class RewardTransformer extends BaseTransformer {
    
     use DateTimeTransformerTrait;
    
+    /**
+     * List of default resources to include
+     *
+     * @var array
+     */
+    protected $defaultIncludes = [
+            'media'
+    ];
+     
+    /**
+     * {@inheritDoc}
+     * @see \DMA\Friends\Classes\API\BaseTransformer::getData()
+     */    
     public function getData($instance)
     {
         $data = [
@@ -28,7 +41,6 @@ class RewardTransformer extends BaseTransformer {
      */
     public function getExtendedData($instance)
     {
-    
         return [
                 'description'   => $instance->description,
                 'excerpt'       => $instance->excerpt,
@@ -36,7 +48,6 @@ class RewardTransformer extends BaseTransformer {
                 'is_archived'   => ($instance->is_archived)?true:false,
                 'is_hidden'     => ($instance->is_hidden)?true:false,
                 'points'        => $instance->points,
-                'image_url'     => $this->getImageUrl($instance),
                 'barcode'       => $instance->barcode,
                 'date_begin'    => $this->carbonToIso($instance->date_begin),
                 'date_end'      => $this->carbonToIso($instance->date_end),
@@ -55,24 +66,6 @@ class RewardTransformer extends BaseTransformer {
     }    
         
     /**
-     * Get Image URL of the reward 
-     * @param unknown $instance
-     */
-    protected function getImageUrl(Model $instance)
-    {
-        try{
-            if (!is_null($instance->image)) {
-                return $instance->image->getPath();
-            }
-        }catch(\Exception $e){
-            // Do nothing
-        }
-        return null;
-    }
-
-    
-
-    /**
      * Normalize inventory value
      * @param Model $instance
      * @return int
@@ -88,5 +81,17 @@ class RewardTransformer extends BaseTransformer {
         }
         return 0;
     }
+    
+
+    /**
+     * Include Media
+     *
+     * @return League\Fractal\ItemResource
+     */
+    public function includeMedia(Model $instance)
+    {
+        return $this->item($instance, new MediaTransformer);
+    }
+    
     
 }

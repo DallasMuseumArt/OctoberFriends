@@ -18,8 +18,7 @@ class BaseTransformer extends TransformerAbstract
     protected $useExtendedData = true;
     
     /**
-     * 
-     * @param boolean $basic 
+     * @param boolean $useExtendedData 
      */
     public function __construct($useExtendedData=null)
     {

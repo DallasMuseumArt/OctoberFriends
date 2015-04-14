@@ -44,6 +44,7 @@ class ActivityResource extends BaseResource {
                 
                 return [
                     'data' => [
+                        'success' => ($activity) ? true : false,    
                         'message' => $message
                     ]
                 ];
