@@ -282,25 +282,6 @@ class BaseResource extends Controller {
         return Response::api()->errorForbidden();
 
     }
-    
-    public function callAction($method, $parameters)
-    {
-        try{
-            return parent::callAction($method, $parameters);
-        } catch(\Exception $e) {
-            $message = $e->getMessage(); 
-            return Response::api()->errorInternalError($message);
-        }
-    }
-    
-    /**
-     * Catch all missing HTTP verbs
-     * @see \Illuminate\Routing\Controller::missingMethod()
-     */
-    public function missingMethod($parameters = array())
-    {
-        return Response::api()->errorForbidden();
-    }
 
     
     /**

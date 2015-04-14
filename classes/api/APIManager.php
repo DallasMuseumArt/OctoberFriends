@@ -64,19 +64,23 @@ class APIManager
         foreach($this->getResources() as $url => $class){
             try{
                 $resource = App::make($class);
-                if(is_subclass_of($resource, 'DMA\Friends\Classes\API\BaseResource')){
-                    // Register additional routes first
+                
+                // Register additional routes first
+                if(method_exists($resource, 'getAdditionalRoutes')){
                     $extra = $resource->getAdditionalRoutes();
                     foreach ($extra as $u => $args) {
                         $verbs = $args['verbs'];
                         foreach($verbs as $v) {
-                             Route::{$v}($url . '/' . $u, $class . "@" . $args['handler']);
+                            Route::{$v}($url . '/' . $u, $class . "@" . $args['handler']);
                         }
                     }
-
+                }
+                
+                if(is_subclass_of($resource, 'DMA\Friends\Classes\API\BaseResource')){
                     // Register resource
                     Route::resource($url, $class);
                 } else if (is_subclass_of($resource, '\Controller')) {
+                    // Register controller
                     Route::controller($url, $class);
                 }
 
