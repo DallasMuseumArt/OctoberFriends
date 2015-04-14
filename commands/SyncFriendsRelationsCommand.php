@@ -15,6 +15,7 @@ use DMA\Friends\Models\ActivityLog;
 use DMA\Friends\Models\Badge;
 use DMA\Friends\Models\Category;
 use DMA\Friends\Models\Step;
+use DMA\Friends\Models\Reward;
 use DMA\Friends\Models\Location;
 
 /**
@@ -261,6 +262,38 @@ class SyncFriendsRelationsCommand extends Command
                     ];
 
                     DB::table($table)->insert($pivotTable);
+                }
+            }
+        });
+
+        // Syncronize rewards and users
+
+        $this->info('Importing Reward/User relations');
+        
+        $table = 'dma_friends_reward_user';
+
+        //DB::table($table)->delete();
+
+        ActivityLog::where('action', '=', 'reward')
+            ->where('timestamp', '<', '2015-02-02 12:10:35')
+            ->chunk(100, function($activityLogs) use ($table) {
+            
+            foreach ($activityLogs as $activityLog) {
+
+                if ($activityLog->object_id) {
+
+                    echo '.';
+
+                    if (Reward::find($activityLog->object_id) && User::find($activityLog->user_id)) {
+                        $pivotTable = [
+                            'user_id'       => $activityLog->user_id,
+                            'reward_id'     => $activityLog->object_id,
+                            'created_at'    => $activityLog->timestamp,
+                            'updated_at'    => $activityLog->timestamp,
+                        ];
+
+                        DB::table($table)->insert($pivotTable);
+                    }
                 }
             }
         });

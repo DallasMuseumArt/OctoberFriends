@@ -157,7 +157,7 @@ class UserProfile extends ComponentBase
         if ($user->push()) {
             Flash::info(Lang::get('dma.friends::lang.user.save'));
         } else {
-            Flash::info(Lang::get('dma.friends::lang.user.saveFailed'));
+            Flash::error(Lang::get('dma.friends::lang.user.saveFailed'));
         }
 
         return [

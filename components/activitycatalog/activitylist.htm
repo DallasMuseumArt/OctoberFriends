@@ -1,0 +1,14 @@
+<ul class="activities">
+    {% for activity in activities %}
+    <li class="friends-activity preview{% if activityclass %} {{ activityclass }}{% endif %}">
+        <h4>{{ activity.title }}</h4>
+        <div class="description">
+            {{ activity.excerpt|raw }}
+        </div>
+        <div class="earned">
+            {{ model.timeAgo }}
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+<div class="links">{{ links|raw }}</div>

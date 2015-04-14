@@ -1,6 +1,8 @@
 <?php namespace DMA\Friends\Classes;
 
 use Event;
+use File as FileHelper;
+
 use DMA\Friends\Classes\FriendsLog;
 use RainLab\User\Models\User;
 use SystemException;
@@ -119,6 +121,57 @@ class UserExtend
         }
     }
 
+    /**
+     * Upload Avatar from Base64 encoded image
+     * 
+     * @param \RainLab\User\Models\User $user
+     * @param string $source
+     * string contend of an image on Base64 enconding 
+     */
+    public static function uploadAvatarFromString($user, $source)
+    {
+        $dst = '/tmp/avatar_' . $user->getKey() . '_' . uniqid();
+        
+        FileHelper::put($dst, base64_decode($source));
+        
+        $validImage = true;
+        try{
+            // Validated is a JPG or PNG
+            $imageType = exif_imagetype($dst);
+            $validImage = in_array($imageType, [IMAGETYPE_JPEG, IMAGETYPE_PNG]);
+            // Validated is not bigger that xx by xx
+            if($validImage){
+                list($width, $height, $type, $attr) = getimagesize($dst);
+                $validImage = ($width <= 400 && $height <= 400);
+            }
+            // Add right file extension to the upload file
+            if($validImage){
+                $extension = [ IMAGETYPE_JPEG => 'jpg', IMAGETYPE_PNG => 'png'][$imageType];
+                $newDst = $dst . '.' . $extension;
+                rename($dst, $newDst);
+                $dst = $newDst;
+            }
+        } catch(\Exception $e){
+            //throw $e;
+            $validImage = false;
+        }
+        
+        if(!$validImage){
+            throw new \Exception('Must be a valid JPG, or PNG. And not bigger that 400x400 pixels.');
+        }
+  
+        
+        $file = new File;
+        $file->data = $dst;
+        $file->is_public = true;
+        $file->save();
+    
+        if ($file) {
+            $user->avatar()->add($file);
+        }
+        
+    }
+    
     public function getMembershipStatusOptions()
     {
         return [
