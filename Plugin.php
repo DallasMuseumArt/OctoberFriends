@@ -10,6 +10,8 @@ use DMA\Friends\Classes\ActivityManager;
 use System\Classes\PluginBase;
 use DMA\Friends\Classes\FriendsEventHandler;
 use App;
+use DB;
+use Log;
 use Config;
 use Illuminate\Foundation\AliasLoader;
 
@@ -414,18 +416,37 @@ class Plugin extends PluginBase
     /**
      * {@inheritDoc}
      */
+    public function registerSchedule($schedule)
+    {
+
+        $schedule->command("friends.points-weekly")->weekly();
+        $schedule->command("friends.points-daily")->daily();
+        $schedule->command("friends.read-channels")->everyFiveMinutes();
+        $schedule->command("friends.reset-groups")->everyFiveMinutes();
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function register()
     {
-        
-        // Commands for syncing wordpress data
-        $this->registerConsoleCommand('friends.sync-data', 'DMA\Friends\Commands\SyncFriendsDataCommand');
-        $this->registerConsoleCommand('friends.sync-relations', 'DMA\Friends\Commands\SyncFriendsRelationsCommand');
-        $this->registerConsoleCommand('friends.sync-images', 'DMA\Friends\Commands\SyncFriendsImagesCommand');
+        $db = false;
 
-        // Commands for clean up data
+        try {
+            $db = DB::connection('friends_wordpress');
+        } catch (\InvalidArgumentException $e) {
+            Log::info('Missing configuration for wordpress migration');
+        }
+
+        if ($db) {
+            // Commands for syncing wordpress data
+            $this->registerConsoleCommand('friends.sync-data', 'DMA\Friends\Commands\SyncFriendsDataCommand');
+            $this->registerConsoleCommand('friends.sync-relations', 'DMA\Friends\Commands\SyncFriendsRelationsCommand');
+            $this->registerConsoleCommand('friends.sync-images', 'DMA\Friends\Commands\SyncFriendsImagesCommand');
+        }
+
         $this->registerConsoleCommand('friends.normalize-users', 'DMA\Friends\Commands\NormalizeUserData');
-        
-        // Crontasks
         $this->registerConsoleCommand('friends.points-weekly', 'DMA\Friends\Commands\WeeklyPoints');
         $this->registerConsoleCommand('friends.points-daily', 'DMA\Friends\Commands\DailyPoints');
         $this->registerConsoleCommand('friends.read-channels', 'DMA\Friends\Commands\ReadChannels');

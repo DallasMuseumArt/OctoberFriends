@@ -3,8 +3,7 @@ namespace DMA\Friends\Commands;
 
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
-use Indatus\Dispatcher\Scheduling\Schedulable;
-use Indatus\Dispatcher\Scheduling\ScheduledCommand;
+use Illuminate\Console\Command;
 use DB;
 
 /**
@@ -13,23 +12,12 @@ use DB;
  * @package DMA\Friends\Commands
  * @author Kristen Arnold, Carlos Arroyo
  */
-class DailyPoints extends ScheduledCommand
+class DailyPoints extends Command
 {
     /**
      * @var string The console command name.
      */
     protected $name = 'friends:points-daily';
-
-    /**
-     * When a command should run
-     * @param Scheduler $scheduler
-     * @return \Indatus\Dispatcher\Scheduling\Schedulable
-     */
-    public function schedule(Schedulable $scheduler)
-    {
-        // Run every 5 minutes
-        return $scheduler->daily();
-    }
 
     /**
      * Set the number of points set per week back to zero on sunday morning
