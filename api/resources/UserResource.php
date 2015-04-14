@@ -16,7 +16,7 @@ use RainLab\User\Models\User;
 use RainLab\User\Models\Settings as UserSettings;
 
 use October\Rain\Database\ModelException;
-
+use Cms\Classes\Theme;
 
 class UserResource extends BaseResource
 {
@@ -34,7 +34,10 @@ class UserResource extends BaseResource
     public function __construct()
     {
         // Add additional routes to Activity resource
-        $this->addAdditionalRoute('login', 'login',             ['GET', 'POST']);
+        $this->addAdditionalRoute('login',          'login',                    ['POST']);
+        $this->addAdditionalRoute('uploadAvatar',   '{user}/upload-avatar',     ['POST', 'PUT']);
+        $this->addAdditionalRoute('profileOptions', 'profile-options/{field}',  ['GET']);
+        $this->addAdditionalRoute('profileOptions', 'profile-options',          ['GET']);
     }
     
     
@@ -181,10 +184,12 @@ class UserResource extends BaseResource
             
             $user->metadata()->save($usermeta);
             
+            /*
             $avatar = array_get($data,'avatar', null);
             if (!is_null($avatar)) {
                 UserExtend::uploadAvatar($user, $avatar);
             }
+            */
             
             return $this->show($user->id);
                                
@@ -259,10 +264,12 @@ class UserResource extends BaseResource
                     $usermeta->save();
                 }
                
+                /*
                 $avatar = array_get($data,'avatar', null);
                 if (!is_null($avatar)) {
                     UserExtend::uploadAvatar($user, $avatar);
                 }
+                */
                 
                 
                 // TODO : Do we need to re-authenticate?
@@ -288,5 +295,83 @@ class UserResource extends BaseResource
         }
     }
     
+    
+    public function uploadAvatar($userId)
+    {
+
+        if(is_null($user = User::find($userId))){
+            return Response::api()->errorNotFound('User not found');
+        }
+        
+        $data = Request::all();
+        $rules = [
+                'source'            => 'required',
+        ];
+        
+        $validation = Validator::make($data, $rules);
+        if ($validation->fails()){
+            return $this->errorDataValidation('Data fails to validated', $validation->errors());
+        }        
+        
+        if($source = array_get($data, 'source', null)){
+            
+            // Check if is a selected avatar from the theme
+            $avatars    = $this->getThemeAvatarOptions();
+            $avatars    = array_keys($avatars);
+            $keyAvatar  = trim(strtolower(basename(basename($source))));
+            
+            if(in_array($keyAvatar, $avatars)){
+                UserExtend::uploadAvatar($user, $source);
+            }else{
+                UserExtend::uploadAvatarFromString($user, $source);
+            }
+            
+            return [ 'success' => true];
+            
+        } 
+    }
   
+    
+        
+    public function profileOptions($field=null)
+    {
+        $opts = null;
+        
+        // Options from Usermeta
+        $options = Usermeta::getOptions();
+        
+        // Avatar options as is used in the UserProfile component
+        $options['avatars'] = $this->getThemeAvatarOptions();
+        
+        if (!is_null($field)) {
+            $fieldOpts = array_get($options, strtolower(trim($field)), null);
+            if (!is_null($fieldOpts)) {
+                $opts = [ $field => $fieldOpts ];
+            }else{
+                $message = 'Valid fields are: [ ' . implode(', ', array_keys($options)) . ' ]' ;
+                return Response::api()->errorInternalError($message);
+            }
+        }else{
+            $opts = $options; // Return all
+        }
+        
+        return $opts;
+    }
+    
+    private function getThemeAvatarOptions()
+    {
+        $avatars = [];
+        $theme = Theme::getActiveTheme();
+        $themePath =  $theme->getPath();
+        $avatarPath = $themePath . '/assets/images/avatars/*.jpg';
+        
+        // loop through all the files in the plugin's avatars directory and parse the file names
+        foreach ( glob($avatarPath ) as $file ) {
+            $path = str_replace(base_path(), '', $file);
+        
+            $avatars[trim(strtolower(basename($path)))] = $path;
+        }
+        
+        return $avatars; 
+    }
 }
