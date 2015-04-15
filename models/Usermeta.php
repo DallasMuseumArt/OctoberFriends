@@ -76,6 +76,8 @@ class Usermeta extends Model
      */
     public $timestamps = false;
 
+    public $primaryKey = 'user_id';
+
     /**
      * @var string $key
      */

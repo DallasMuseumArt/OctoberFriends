@@ -203,7 +203,7 @@ class Plugin extends PluginBase
         
         // Extend the user model to support our custom metadata        
         User::extend(function($model) {        
-            $model->hasOne['metadata']          = ['DMA\Friends\Models\Usermeta'];     
+            $model->hasOne['metadata']          = ['DMA\Friends\Models\Usermeta', 'key' => 'user_id'];     
             $model->hasMany['activityLogs']     = ['DMA\Friends\Models\ActivityLog'];
             $model->hasMany['bookmarks']        = ['DMA\Friends\Models\Bookmark'];
             $model->hasMany['notifications']    = ['DMA\Friends\Models\Notification'];
