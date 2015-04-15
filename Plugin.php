@@ -436,7 +436,7 @@ class Plugin extends PluginBase
         try {
             $db = DB::connection('friends_wordpress');
         } catch (\InvalidArgumentException $e) {
-            Log::info('Missing configuration for wordpress migration');
+            //Log::info('Missing configuration for wordpress migration');
         }
 
         if ($db) {
