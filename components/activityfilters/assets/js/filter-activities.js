@@ -18,6 +18,7 @@
             filter.removeClass('inactive').addClass('active');
         }
 
+        // Initialize filters array with default values
         var active_filters = {
             categories: 'all',
             search: ''
@@ -37,26 +38,6 @@
         var options = {
             data: { filters: JSON.stringify(active_filters) }
         };
-
-        //console.log(options.data.filters);
-
-/*
- * Something's not right with the way October's AJAX handlers deal with
- * the 'update' property. The ActivityCodeForm onSubmit handler is firing when
- * the activitylist partial/element is explicitly targeted, but not when no
- * specific target is specified.
-        // If we're specifying partial and target element properties, use them
-        if (list.data('filter-element') != '') {
-            var update = {};
-            if (list.data('filter-partial') != '') {
-                update[list.data('filter-partial')] = list.data('filter-element');
-            }
-            else {
-                update['@default'] = list.data('filter-element'); 
-            }
-            options['update'] = update;
-        }
-*/
 
         // Send the AJAX request to update the page
         $.request(list.data('filter-component'), options);

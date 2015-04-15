@@ -8,6 +8,9 @@ use DB;
 
 class ActivityCatalog extends ComponentBase
 {
+    /**
+     * {@inheritDoc}
+     */
     public function componentDetails()
     {
         return [
@@ -16,28 +19,57 @@ class ActivityCatalog extends ComponentBase
         ];
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function defineProperties()
+    {
+        return [
+            'containerclass' => [
+                'title'             => 'Container Class',
+                'description'       => 'Optional CSS class for Activity List container div',
+                'type'              => 'string',
+                'default'           => '',
+                'validationPattern' => '^[a-zA-Z_- ]*$',
+                'validationMessage' => 'Class must be a valid CSS class identifier.',
+            ],
+        ];
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function onRun()
     {
         $this->getResults();
+        $this->page['containerclass'] = $this->property('containerclass');
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function onUpdate()
     {
         $filters = post('filters');
         $this->getResults($filters);
 
+        // Render only the activitylist partial and not the full default partial
+        // Avoids AJAX producing a load of nested div#activity-catalog elements
         return [
             '#activity-catalog' => $this->renderPartial('@activitylist'),
         ];
     }
 
-    private function getResults($filter = null)
+    /**
+     * Produce a collection of Activities based on recommendations and filters
+     */
+    private function getResults($filterstr = null)
     {
         $perpage = 10;
 
-        if ($filter && $filter != 'all') {
-            $filters = json_decode($filter, true);
-            if (is_array($filters['categories'])) {
+        if ($filterstr && $filterstr != 'all') {
+            $filters = json_decode($filterstr, true);
+            if ($filters && is_array($filters['categories'])) {
                 $results = Activity::isActive()->byCategory($filters['categories'])->paginate($perpage);
             }
             else {

@@ -13,11 +13,13 @@
 
 use Cms\Classes\ComponentBase;
 use DMA\Friends\Models\Category;
-//use Auth;
 use DB;
 
 class ActivityFilters extends ComponentBase
 {
+    /**
+     * {@inheritDoc}
+     */
     public function componentDetails()
     {
         return [
@@ -26,6 +28,9 @@ class ActivityFilters extends ComponentBase
         ];
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function defineProperties()
     {
         return [
@@ -37,21 +42,12 @@ class ActivityFilters extends ComponentBase
                  'validationPattern' => '^[a-zA-Z_]*$',
                  'validationMessage' => 'The target component must be a string reference to a valid component.',
             ],
-            'target_element'    => [
-                'title'                 => 'Target Element',
-                'description'           => 'The DOM element to replace',
-                'default'               => '',
-                'type'                  => 'string',
-            ],
-            'partial'           => [
-                'title'                 => 'Partial',
-                'description'           => 'The partial to use when updating',
-                'default'               => '',
-                'type'                  => 'string',
-            ],
         ];
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function onRun()
     {
         // Inject JS
@@ -61,23 +57,15 @@ class ActivityFilters extends ComponentBase
         $filters = $this->getCategories();
         $this->page['categories'] = $filters;
 
-        // Pass properties through to partial
-        if ($this->property('target_component') == '') {
-            $this->page['component'] = '';
-        }
-        else {
-            $this->page['component'] = $this->property('target_component') . '::onUpdate';
-        }
-        // Currently the targets aren't being used by the Javascript AJAX handlers
-        // But it could be... once we figure out why the AJAX isn't working
-        $this->page['element'] = $this->property('target_element');
-        $this->page['partial'] = $this->property('partial');
+        // Pass through component property to partial
+        $this->page['component'] = $this->property('target_component') . '::onUpdate';
     }
 
+    /**
+     * Get a collection of all Categories
+     */
     private function getCategories()
     {
-        $results = Category::all();
-
-        return $results;
+        return Category::all();
     }
 }

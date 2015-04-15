@@ -249,8 +249,9 @@ class UserLogin extends ComponentBase
 
         $user->metadata()->save($usermeta);
 
-        UserExtend::uploadAvatar($user, $data['avatar']);
-
+        if (isset($data['avatar'])) {
+            UserExtend::uploadAvatar($user, $data['avatar']);
+        }
         /*
          * Activation is by the user, send the email
          */
