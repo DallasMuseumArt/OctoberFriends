@@ -173,7 +173,7 @@ class BaseResource extends Controller {
     
             if ($pageSize > 0){
                 $paginator = $query->paginate($pageSize);
-                return Response::api()->withPaginator(new IlluminatePaginatorAdapter($paginator), $this->getTransformer());
+                return Response::api()->withPaginator($paginator, $this->getTransformer());
             }else{
                 return Response::api()->withCollection($query->get(), $this->getTransformer());
             }
