@@ -168,6 +168,8 @@ class ActivityManager
     {
         $this->loadActivity($alias);
 
+        if (!$this->activityType) return false;
+
         $formConfig = $this->activityType->getConfig();
         $formConfig = $this->getConfigPath($formConfig);
       
