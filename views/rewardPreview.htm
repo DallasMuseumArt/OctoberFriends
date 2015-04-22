@@ -5,13 +5,13 @@
         {% endif %}
         
         <div class="image">
-            {% if reward.image.getThumb(130, 180) %}
+            {% if reward.image.getThumb(130, 180, {'extension': 'png'}) %}
             <a href="#" 
                 data-control="popup" 
                 data-handler="onRedeemModal" 
                 data-request-data="id: {{ reward.id }}"
             >
-                <img src="{{ reward.image.getThumb(130, 180) }}"/>
+                <img src="{{ reward.image.getThumb(130, 180, {'extension': 'png'}) }}"/>
             </a>
             {% endif %}
         </div>

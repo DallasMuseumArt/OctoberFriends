@@ -24,7 +24,8 @@
                 </div>
             </div>
             {% endif %}
-            <img src="{{ model.image.getThumb(300, 300) }}"/>
+
+            <img src="{{ model.image.getThumb(300, 300, {'extension': 'png'}) }}"/>
         </a>
         {% endif %}
 
