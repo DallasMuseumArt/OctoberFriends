@@ -5,7 +5,7 @@
         {% endif %}
         
         <div class="image">
-            {% if reward.image.getPath() %}
+            {% if reward.image.getThumb(130, 180) %}
             <a href="#" 
                 data-control="popup" 
                 data-handler="onRedeemModal" 
