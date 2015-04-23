@@ -31,9 +31,11 @@ class MediaTransformer extends BaseTransformer {
         try{
             if (!is_null($instance->image)) {
                 if (!is_null($size) && is_array($size)) {
-                    return $instance->image->getThumb($size[0], $size[1]);
+                    return $instance->image->getThumb($size[0], $size[1], ['extension' => 'png']);
                 }else{
-                    return $instance->image->getPath();
+                    # Force original image to be a PNG. I am doing this for consistency with other 
+                    # images derivatives. But it my not necessary and getPath() will be enough
+                    return $instance->image->getThumb('auto', 'auto', ['extension' => 'png']);
                 }
             }
         }catch(\Exception $e){

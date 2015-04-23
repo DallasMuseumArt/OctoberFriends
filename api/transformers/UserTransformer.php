@@ -69,7 +69,7 @@ class UserTransformer extends BaseTransformer {
     {
         try{
             if (!is_null($instance->avatar)) {
-                return $instance->avatar->getThumb(50, 50);
+                return $instance->avatar->getThumb('auto', 'auto', ['extension' => 'png']);
             }
         }catch(\Exception $e){
             // Do nothing
