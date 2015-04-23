@@ -40,7 +40,7 @@ class Locations extends Controller
      */
     public static function barcodeLogin()
     {
-        $barcodeId = post('barcodeId');
+        $barcodeId = get('barcodeId');
         $barcodeId = trim($barcodeId);
 
         $location = LocationManager::getLocation();
