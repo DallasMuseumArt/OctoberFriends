@@ -223,7 +223,7 @@ class UserLogin extends ComponentBase
             'city'                  => $data['city'],
             'state'                 => $data['state'],
             'zip'                   => $data['zip'],
-            'phone'                 => $data['phone'],
+            'phone'                 => UserExtend::parsePhone($data['phone']),
         ];
 
         $user = Auth::register($userData, $automaticActivation);

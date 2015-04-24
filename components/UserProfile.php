@@ -147,6 +147,10 @@ class UserProfile extends ComponentBase
                 }
 
             } else {
+                if ($key == "phone") {
+                    $val = UserExtend::parsePhone($val);
+                }
+
                 $user->{$key} = $val;
             }
         }

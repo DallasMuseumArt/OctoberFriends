@@ -7,12 +7,18 @@ use DMA\Friends\Classes\FriendsLog;
 use RainLab\User\Models\User;
 use SystemException;
 use System\Models\File;
+use libphonenumber\PhoneNumberUtil;
+use libphonenumber\PhoneNumberFormat;
+use Carbon\Carbon;
 
 /**
  * Custom class to add additional functionality based on the Rainlab User model
  * 
  * @package DMA\Friends\Classes
- * @author Carlos Arroyo
+ * @author Carlos Arroyo, Kristen Arnold
+ *
+ * TODO: eventually we need to fork the rainlab plugin and incorporate these functions into
+ * the model
  */
 class UserExtend
 {
@@ -180,5 +186,23 @@ class UserExtend
             UserGroup::MEMBERSHIP_REJECTED  =>  UserGroup::MEMBERSHIP_REJECTED,
             UserGroup::MEMBERSHIP_CANCELLED =>  UserGroup::MEMBERSHIP_CANCELLED
         ];
+    }
+
+    public static function parsePhone($phone)
+    {
+        $phoneUtil = PhoneNumberUtil::getInstance();
+        
+        // Get country code using configure timezone
+        $tz = Carbon::now()->getTimezone();
+        $country_code = array_get($tz->getLocation(), 'country_code', 'US');
+        
+        // Parse phone number
+        $numberProto = $phoneUtil->parse($phone, $country_code);
+        
+        if ($phoneUtil->isValidNumber($numberProto)){
+            return $phoneUtil->format($numberProto, PhoneNumberFormat::E164);
+        }  
+
+        return false;
     }
 }
