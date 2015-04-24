@@ -42,13 +42,28 @@ class ActivityResource extends BaseResource {
                 $holder = ( $activity ) ? 'activityMessage' : 'activityError';
                 $message = Session::pull($holder);
                 
-                return [
+                $payload = [
                     'data' => [
                         'success' => ($activity) ? true : false,    
                         'message' => $message
                     ]
                 ];
-                                     
+                
+                $httpCode = 200;
+                
+                // check if is not a boolean if not is because is an intance of an activity
+                if( !is_bool($activity) ) {
+                    // Check if and artwork is attached to the activity
+                    // if so this activity is a LikeWorkOfArt
+                    $objectData = (array_get($activity, 'objectData', null));
+                    if(!is_null($objectData)) {
+                        $httpCode = 201;
+                        $payload['data']['artwork'] = $objectData;
+                    }
+                }
+                
+                return Response::api()->setStatusCode($httpCode)->withArray($payload);
+
             }
             
             return Response::api()->errorNotFound('User not found');

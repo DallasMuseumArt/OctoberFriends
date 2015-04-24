@@ -251,7 +251,7 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
             return;
         }
         $hours = floor($time / 60);
-        \Debugbar::info($hours);
+        //\Debugbar::info($hours);
         $minutes = ($time % 60);
         return sprintf($format, $hours, $minutes);
     }
