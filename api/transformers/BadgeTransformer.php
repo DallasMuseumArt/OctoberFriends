@@ -18,7 +18,7 @@ class BadgeTransformer extends BaseTransformer {
      protected $defaultIncludes = [
              'media'
      ];     
-     
+        
     /**
      * List of resources possible to include
      *
@@ -27,6 +27,8 @@ class BadgeTransformer extends BaseTransformer {
     protected $availableIncludes = [
             'steps'
     ];
+    
+   
     
     public function getData($instance)
     {
@@ -97,8 +99,9 @@ class BadgeTransformer extends BaseTransformer {
     public function includeSteps(Model $instance)
     {
         $steps = $instance->steps;
-
-        return $this->collection($steps, new StepTransformer);
+        // No necessary to show steps activities given that the parent is an activity
+        $exclude = ['badge'];
+        return $this->collection($steps, new StepTransformer(true, $exclude));
     }
 
 

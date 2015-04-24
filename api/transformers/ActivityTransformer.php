@@ -8,7 +8,8 @@ use DMA\Friends\API\Transformers\DateTimeTransformerTrait;
 class ActivityTransformer extends BaseTransformer {
     
     use DateTimeTransformerTrait;
-
+    
+    
     /**
      * List of default resources to include
      *
@@ -26,9 +27,8 @@ class ActivityTransformer extends BaseTransformer {
     protected $avilableIncludes = [
             'steps'
     ];
-    
-   protected $useExtendedData = true;
-    
+        
+      
     /**
      * {@inheritDoc}
      * @see \DMA\Friends\Classes\API\BaseTransformer::getData()
@@ -132,9 +132,10 @@ class ActivityTransformer extends BaseTransformer {
      */
     public function includeSteps(Model $instance)
     {
- 
         $steps = $instance->steps;
-        return $this->collection($steps, new StepTransformer(false));
+        // No necessary to show steps activities given that the parent is an activity
+        $exclude = ['activity']; 
+        return $this->collection($steps, new StepTransformer(true, $exclude));
     }
 
     /**
@@ -144,7 +145,6 @@ class ActivityTransformer extends BaseTransformer {
      */
     public function includeMedia(Model $instance)
     {
-        //throw new \Exception('buu');
         return $this->item($instance, new MediaTransformer);
     }
     

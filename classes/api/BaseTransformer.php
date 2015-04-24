@@ -18,11 +18,21 @@ class BaseTransformer extends TransformerAbstract
     protected $useExtendedData = true;
     
     /**
+     * Don't enclude embeds even if the transformer
+     * is set to use extended data. Useful improve 
+     * perforamce and remove redundate data in nested data
+     * @var array
+     */
+    protected $excludeEmbededs = [];
+    
+    
+    /**
      * @param boolean $useExtendedData 
      */
-    public function __construct($useExtendedData=null)
+    public function __construct($useExtendedData=null, $excludeEmbededs=[])
     {
         $this->useExtendedData = (is_null($useExtendedData)) ? $this->useExtendedData : $useExtendedData;
+        $this->excludeEmbededs = $excludeEmbededs;
     }
     
     /**
@@ -40,6 +50,13 @@ class BaseTransformer extends TransformerAbstract
                     $data = array_merge($data, $extended);
                 }
             }
+            
+            // Remove exclude embeds 
+            $includes = array_diff($this->getDefaultIncludes(), $this->excludeEmbededs);
+            $includes = array_unique($includes);
+            
+            $this->setDefaultIncludes( $includes);
+            
             return $data;
         }
         return [];
