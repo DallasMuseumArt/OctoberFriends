@@ -120,6 +120,11 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a0052edba29ca35647646bd33a05d9ccf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0052edba29ca35647646bd33a05d9ccf"></a>
 static&#160;</td><td class="memItemRight" valign="bottom"><b>uploadAvatar</b> ($user, $image)</td></tr>
 <tr class="separator:a0052edba29ca35647646bd33a05d9ccf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdb44d04557d6679074fa0399f0ce843"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/df1/classDMA_1_1Friends_1_1Classes_1_1UserExtend.html#afdb44d04557d6679074fa0399f0ce843">uploadAvatarFromString</a> ($user, $source)</td></tr>
+<tr class="separator:afdb44d04557d6679074fa0399f0ce843"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee1fe63ac574c2a6acabebcc00f2b4db"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aee1fe63ac574c2a6acabebcc00f2b4db"></a>
+static&#160;</td><td class="memItemRight" valign="bottom"><b>parsePhone</b> ($phone)</td></tr>
+<tr class="separator:aee1fe63ac574c2a6acabebcc00f2b4db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -148,12 +153,12 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<div class="fragment"><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    {</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordflow">if</span> (!$user)</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            $user = <span class="keyword">new</span> <a class="code" href="../../dd/d3d/namespaceRainlab_1_1User_1_1Models_1_1User.html">User</a>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        $this-&gt;user = $user;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordflow">if</span> (!$user)</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            $user = <span class="keyword">new</span> <a class="code" href="../../dd/d3d/namespaceRainlab_1_1User_1_1Models_1_1User.html">User</a>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        $this-&gt;user = $user;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    }</div>
 <div class="ttc" id="namespaceRainlab_1_1User_1_1Models_1_1User_html"><div class="ttname"><a href="../../dd/d3d/namespaceRainlab_1_1User_1_1Models_1_1User.html">User</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -179,25 +184,25 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<div class="fragment"><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordflow">if</span> (!is_numeric($points))</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="../../df/d42/namespaceSystemException.html">SystemException</a>(<span class="stringliteral">&#39;Points must be an integer&#39;</span>);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        $this-&gt;user-&gt;points += $points;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        $this-&gt;user-&gt;points_this_week += $points;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        $this-&gt;user-&gt;points_today += $points;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordflow">if</span> ($this-&gt;user-&gt;forceSave()) {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            Event::fire(<span class="stringliteral">&#39;dma.friends.user.pointsEarned&#39;</span>, [$this-&gt;user, $points]);</div>
+<div class="fragment"><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordflow">if</span> (!is_numeric($points))</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="../../df/d42/namespaceSystemException.html">SystemException</a>(<span class="stringliteral">&#39;Points must be an integer&#39;</span>);</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            $params = [</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                <span class="stringliteral">&#39;user&#39;</span>          =&gt; $this-&gt;user,</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                <span class="stringliteral">&#39;points_earned&#39;</span> =&gt; $points,</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            ];</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <a class="code" href="../../d4/d33/classDMA_1_1Friends_1_1Classes_1_1FriendsLog.html#a083fa01b3e143ca77bdbb1562db724de">FriendsLog::points</a>($params);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        }</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    }</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        $this-&gt;user-&gt;points += $points;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        $this-&gt;user-&gt;points_this_week += $points;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        $this-&gt;user-&gt;points_today += $points;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordflow">if</span> ($this-&gt;user-&gt;forceSave()) {</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            Event::fire(<span class="stringliteral">&#39;dma.friends.user.pointsEarned&#39;</span>, [$this-&gt;user, $points]);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            $params = [</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                <span class="stringliteral">&#39;user&#39;</span>          =&gt; $this-&gt;user,</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                <span class="stringliteral">&#39;points_earned&#39;</span> =&gt; $points,</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            ];</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            <a class="code" href="../../d4/d33/classDMA_1_1Friends_1_1Classes_1_1FriendsLog.html#a083fa01b3e143ca77bdbb1562db724de">FriendsLog::points</a>($params);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        }</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    }</div>
 <div class="ttc" id="namespaceSystemException_html"><div class="ttname"><a href="../../df/d42/namespaceSystemException.html">SystemException</a></div></div>
 <div class="ttc" id="classDMA_1_1Friends_1_1Classes_1_1FriendsLog_html_a083fa01b3e143ca77bdbb1562db724de"><div class="ttname"><a href="../../d4/d33/classDMA_1_1Friends_1_1Classes_1_1FriendsLog.html#a083fa01b3e143ca77bdbb1562db724de">DMA\Friends\Classes\FriendsLog\points</a></div><div class="ttdeci">static points($params)</div><div class="ttdef"><b>Definition:</b> FriendsLog.php:137</div></div>
 </div><!-- fragment -->
@@ -235,28 +240,114 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>boolean returns true if points where removed </dd></dl>
-<div class="fragment"><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    {</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordflow">if</span> (!is_numeric($points))</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="../../df/d42/namespaceSystemException.html">SystemException</a>(<span class="stringliteral">&#39;Points must be an integer&#39;</span>);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keywordflow">if</span> ($this-&gt;user-&gt;points &lt; $points) {</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        }</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        $this-&gt;user-&gt;points -= $points;    </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keywordflow">if</span> ($deduct) {    </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            $this-&gt;user-&gt;points_this_week -= $points;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            $this-&gt;user-&gt;points_today -= $points;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        }</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keywordflow">if</span> ($this-&gt;user-&gt;forceSave()) {</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            Event::fire(<span class="stringliteral">&#39;dma.friends.user.pointsRemoved&#39;</span>, [$this-&gt;user, $points]);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        }</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    {</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keywordflow">if</span> (!is_numeric($points))</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="../../df/d42/namespaceSystemException.html">SystemException</a>(<span class="stringliteral">&#39;Points must be an integer&#39;</span>);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keywordflow">if</span> ($this-&gt;user-&gt;points &lt; $points) {</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        }</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        $this-&gt;user-&gt;points -= $points;    </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keywordflow">if</span> ($deduct) {    </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            $this-&gt;user-&gt;points_this_week -= $points;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            $this-&gt;user-&gt;points_today -= $points;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        }</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keywordflow">if</span> ($this-&gt;user-&gt;forceSave()) {</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            Event::fire(<span class="stringliteral">&#39;dma.friends.user.pointsRemoved&#39;</span>, [$this-&gt;user, $points]);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        }</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    }</div>
 <div class="ttc" id="namespaceSystemException_html"><div class="ttname"><a href="../../df/d42/namespaceSystemException.html">SystemException</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="afdb44d04557d6679074fa0399f0ce843"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static DMA\Friends\Classes\UserExtend::uploadAvatarFromString </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$user</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$source</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Upload Avatar from Base64 encoded image</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">\RainLab\User\Models\User</td><td class="paramname">$user</td><td></td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$source</td><td>string contend of an image on Base64 enconding </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    {</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        $dst = <span class="stringliteral">&#39;/tmp/avatar_&#39;</span> . $user-&gt;getKey() . <span class="charliteral">&#39;_&#39;</span> . uniqid();</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        </div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        FileHelper::put($dst, base64_decode($source));</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        </div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        $validImage = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        <span class="keywordflow">try</span>{</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            <span class="comment">// Validated is a JPG or PNG</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;            $imageType = exif_imagetype($dst);</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            $validImage = in_array($imageType, [IMAGETYPE_JPEG, IMAGETYPE_PNG]);</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            <span class="comment">// Validated is not bigger that xx by xx</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;            <span class="keywordflow">if</span>($validImage){</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                list($width, $height, $type, $attr) = getimagesize($dst);</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                $validImage = ($width &lt;= 400 &amp;&amp; $height &lt;= 400);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            }</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            <span class="comment">// Add right file extension to the upload file</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            <span class="keywordflow">if</span>($validImage){</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                $extension = [ IMAGETYPE_JPEG =&gt; <span class="stringliteral">&#39;jpg&#39;</span>, IMAGETYPE_PNG =&gt; <span class="stringliteral">&#39;png&#39;</span>][$imageType];</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                $newDst = $dst . <span class="charliteral">&#39;.&#39;</span> . $extension;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                rename($dst, $newDst);</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                $dst = $newDst;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;            }</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        } <span class="keywordflow">catch</span>(\<a class="code" href="../../d6/d65/namespaceException.html">Exception</a> $e){</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;            <span class="comment">//throw $e;</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;            $validImage = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        }</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        </div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        <span class="keywordflow">if</span>(!$validImage){</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;            <span class="keywordflow">throw</span> new \Exception(<span class="stringliteral">&#39;Must be a valid JPG, or PNG. And not bigger that 400x400 pixels.&#39;</span>);</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        }</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  </div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        </div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        $file = <span class="keyword">new</span> <a class="code" href="../../db/dda/namespaceFile.html">File</a>;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        $file-&gt;data = $dst;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        $file-&gt;is_public = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        $file-&gt;save();</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    </div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        <span class="keywordflow">if</span> ($file) {</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            $user-&gt;avatar()-&gt;add($file);</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        }</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        </div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    }</div>
+<div class="ttc" id="namespaceFile_html"><div class="ttname"><a href="../../db/dda/namespaceFile.html">File</a></div></div>
+<div class="ttc" id="namespaceException_html"><div class="ttname"><a href="../../d6/d65/namespaceException.html">Exception</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -267,7 +358,7 @@ Public Attributes</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 12 2015 13:36:14 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 27 2015 11:30:55 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

@@ -1,0 +1,91 @@
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserProfileTransformer}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\textbackslash{}Transformers\textbackslash{}User\+Profile\+Transformer Class Reference}
+\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserProfileTransformer}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+User\+Profile\+Transformer@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+User\+Profile\+Transformer}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\textbackslash{}Transformers\textbackslash{}User\+Profile\+Transformer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{d6/d08/classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserProfileTransformer}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserProfileTransformer_ada552f9a08e428c52c044ca8e7abc915}{}{\bfseries get\+Data} (\$instance)\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserProfileTransformer_ada552f9a08e428c52c044ca8e7abc915}
+
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserProfileTransformer_aaea113bbd8cf8bd53b6ef3530d3fc07a}{include\+Country} (Model \$instance)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserProfileTransformer_accd7c7ec420193cbaa6077b26aa8d292}{include\+State} (Model \$instance)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries \$default\+Includes}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserProfileTransformer_aaea113bbd8cf8bd53b6ef3530d3fc07a}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Profile\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Profile\+Transformer}!include\+Country@{include\+Country}}
+\index{include\+Country@{include\+Country}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Profile\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Profile\+Transformer}}
+\subsubsection[{include\+Country}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+User\+Profile\+Transformer\+::include\+Country (
+\begin{DoxyParamCaption}
+\item[{Model}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserProfileTransformer_aaea113bbd8cf8bd53b6ef3530d3fc07a}
+Include Country
+
+\begin{DoxyReturn}{Returns}
+League 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+54     \{
+55     
+56         \textcolor{keywordflow}{if} (is\_null($country = $instance->country))\{
+57             \textcolor{comment}{// Check if state is been set}
+58             \textcolor{keywordflow}{if}(!is\_null($state = $instance->state))\{
+59                 $country = $state->country;
+60             \}
+61         \}
+62         $item = $this->item($country, \textcolor{keyword}{new} CountryTransformer);
+63         \textcolor{keywordflow}{return} $item;
+64         
+65     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserProfileTransformer_accd7c7ec420193cbaa6077b26aa8d292}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Profile\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Profile\+Transformer}!include\+State@{include\+State}}
+\index{include\+State@{include\+State}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Profile\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Profile\+Transformer}}
+\subsubsection[{include\+State}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+User\+Profile\+Transformer\+::include\+State (
+\begin{DoxyParamCaption}
+\item[{Model}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserProfileTransformer_accd7c7ec420193cbaa6077b26aa8d292}
+Include State
+
+\begin{DoxyReturn}{Returns}
+League 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+74     \{
+75     
+76         $state = $instance->state;
+77         \textcolor{keywordflow}{return} $this->item($state, \textcolor{keyword}{new} StateTransformer);
+78     \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserProfileTransformer_abdc182c7aa0635a6fd2c00c7b6c57982}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Profile\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Profile\+Transformer}!\$default\+Includes@{\$default\+Includes}}
+\index{\$default\+Includes@{\$default\+Includes}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Profile\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Profile\+Transformer}}
+\subsubsection[{\$default\+Includes}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+User\+Profile\+Transformer\+::\$default\+Includes\hspace{0.3cm}{\ttfamily [protected]}}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserProfileTransformer_abdc182c7aa0635a6fd2c00c7b6c57982}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= [
+            \textcolor{stringliteral}{'country'},
+            \textcolor{stringliteral}{'state'},
+    ]
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+api/transformers/User\+Profile\+Transformer.\+php\end{DoxyCompactItemize}

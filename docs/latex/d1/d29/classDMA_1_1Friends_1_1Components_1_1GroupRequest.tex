@@ -47,36 +47,36 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Components
 )}\label{classDMA_1_1Friends_1_1Components_1_1GroupRequest_a809f2ed08437eb0458240725f07d098c}
 Ajax handler for accept request 
 \begin{DoxyCode}
-113                                     \{
-114                 
-115         \textcolor{keywordflow}{if} (($groupId = post(\textcolor{stringliteral}{'groupId'})) != \textcolor{stringliteral}{''})\{
+111                                     \{
+112                 
+113         \textcolor{keywordflow}{if} (($groupId = post(\textcolor{stringliteral}{'groupId'})) != \textcolor{stringliteral}{''})\{
+114             
+115             $group = UserGroup::findOrFail($groupId);
 116             
-117             $group = UserGroup::findOrFail($groupId);
-118             
-119             \textcolor{keywordflow}{if} (($status = post(\textcolor{stringliteral}{'status'})) != \textcolor{stringliteral}{''})\{
-120                 $user = $this->getuser();
-121                 
-122                 \textcolor{keywordflow}{switch} ($status)\{
-123                     \textcolor{keywordflow}{case} UserGroup::MEMBERSHIP\_ACCEPTED:
-124                         $group->acceptMembership($user);
-125                         \textcolor{keywordflow}{break};
-126                         
-127                     \textcolor{keywordflow}{case} UserGroup::MEMBERSHIP\_REJECTED:
-128                         $group->rejectMembership($user);
-129                         \textcolor{keywordflow}{break};
-130                         
-131                     \textcolor{keywordflow}{case} UserGroup::MEMBERSHIP\_CANCELLED:
-132                         $group->cancelMembership($user);
-133                         \textcolor{keywordflow}{break};                                                  
-134                        
-135                 \} 
-136             \}
-137         \}
-138         
-139         
-140         \textcolor{comment}{// Updated list of request and other vars}
-141         $this->prepareVars();
-142     \}
+117             \textcolor{keywordflow}{if} (($status = post(\textcolor{stringliteral}{'status'})) != \textcolor{stringliteral}{''})\{
+118                 $user = $this->getuser();
+119                 
+120                 \textcolor{keywordflow}{switch} ($status)\{
+121                     \textcolor{keywordflow}{case} UserGroup::MEMBERSHIP\_ACCEPTED:
+122                         $group->acceptMembership($user);
+123                         \textcolor{keywordflow}{break};
+124                         
+125                     \textcolor{keywordflow}{case} UserGroup::MEMBERSHIP\_REJECTED:
+126                         $group->rejectMembership($user);
+127                         \textcolor{keywordflow}{break};
+128                         
+129                     \textcolor{keywordflow}{case} UserGroup::MEMBERSHIP\_CANCELLED:
+130                         $group->cancelMembership($user);
+131                         \textcolor{keywordflow}{break};                                                  
+132                        
+133                 \} 
+134             \}
+135         \}
+136         
+137         
+138         \textcolor{comment}{// Updated list of request and other vars}
+139         $this->prepareVars();
+140     \}
 \end{DoxyCode}
 
 

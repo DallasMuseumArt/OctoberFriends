@@ -15,6 +15,9 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Friends\+S
 \item 
 \hypertarget{classDMA_1_1Friends_1_1FriendsServiceProvider_a4a51f5a9c32c49373284c0b35f8dfd35}{}{\bfseries register\+Notifications} ()\label{classDMA_1_1Friends_1_1FriendsServiceProvider_a4a51f5a9c32c49373284c0b35f8dfd35}
 
+\item 
+\hypertarget{classDMA_1_1Friends_1_1FriendsServiceProvider_a36966f2e276697e1143a2d670680122b}{}{\bfseries register\+A\+P\+I} ()\label{classDMA_1_1Friends_1_1FriendsServiceProvider_a36966f2e276697e1143a2d670680122b}
+
 \end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -39,13 +42,12 @@ void
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-83     \{
-84         $this->app->booting(\textcolor{keyword}{function}() use ($alias, $class)
-85         \{   
-86             $loader = \(\backslash\)Illuminate\(\backslash\)Foundation\(\backslash\)AliasLoader::getInstance();
-87             $loader->alias($alias, $class);
-88         \}); 
-89     \}
+103     \{
+104 
+105         $loader = \(\backslash\)Illuminate\(\backslash\)Foundation\(\backslash\)AliasLoader::getInstance();
+106         $loader->alias($alias, $class);
+107 
+108     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1FriendsServiceProvider_a6a90d2cdc4c6b153b45764ba66e154ae}{}\index{D\+M\+A\+::\+Friends\+::\+Friends\+Service\+Provider@{D\+M\+A\+::\+Friends\+::\+Friends\+Service\+Provider}!register@{register}}
 \index{register@{register}!D\+M\+A\+::\+Friends\+::\+Friends\+Service\+Provider@{D\+M\+A\+::\+Friends\+::\+Friends\+Service\+Provider}}
@@ -61,10 +63,11 @@ void
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-25     \{
-26         $this->\hyperlink{classDMA_1_1Friends_1_1FriendsServiceProvider_a2d6ff7101ca6389c00e298f2d594a1df}{registerFriendsLog}();
-27         $this->registerNotifications();
-28     \}
+26     \{
+27         $this->\hyperlink{classDMA_1_1Friends_1_1FriendsServiceProvider_a2d6ff7101ca6389c00e298f2d594a1df}{registerFriendsLog}();
+28         $this->registerNotifications();
+29         $this->registerAPI();
+30     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1FriendsServiceProvider_a2d6ff7101ca6389c00e298f2d594a1df}{}\index{D\+M\+A\+::\+Friends\+::\+Friends\+Service\+Provider@{D\+M\+A\+::\+Friends\+::\+Friends\+Service\+Provider}!register\+Friends\+Log@{register\+Friends\+Log}}
 \index{register\+Friends\+Log@{register\+Friends\+Log}!D\+M\+A\+::\+Friends\+::\+Friends\+Service\+Provider@{D\+M\+A\+::\+Friends\+::\+Friends\+Service\+Provider}}
@@ -80,13 +83,13 @@ void
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-36     \{
-37         $this->app[\textcolor{stringliteral}{'FriendsLog'}] = $this->app->share(\textcolor{keyword}{function}($app) \{
-38             \textcolor{keywordflow}{return} \textcolor{keyword}{new} FriendsLog;
-39         \});
-40 
-41         $this->\hyperlink{classDMA_1_1Friends_1_1FriendsServiceProvider_acad52dc5020c640afed3c4fe82243051}{createAlias}(\textcolor{stringliteral}{'FriendsLog'}, \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Classes\(\backslash\)FriendsLog'});
-42     \}
+38     \{
+39         $this->app[\textcolor{stringliteral}{'FriendsLog'}] = $this->app->share(\textcolor{keyword}{function}($app) \{
+40             \textcolor{keywordflow}{return} \textcolor{keyword}{new} FriendsLog;
+41         \});
+42 
+43         $this->\hyperlink{classDMA_1_1Friends_1_1FriendsServiceProvider_acad52dc5020c640afed3c4fe82243051}{createAlias}(\textcolor{stringliteral}{'FriendsLog'}, \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Classes\(\backslash\)FriendsLog'});
+44     \}
 \end{DoxyCode}
 
 

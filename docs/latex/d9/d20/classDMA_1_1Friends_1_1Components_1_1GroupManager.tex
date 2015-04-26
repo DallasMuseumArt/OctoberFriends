@@ -70,14 +70,14 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Components
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-77     \{
-78         \textcolor{keywordflow}{if}($user = $this->\hyperlink{classDMA_1_1Friends_1_1Components_1_1GroupManager_abc2316e8087752f7e5530e10af5eb538}{getUser}())\{
-79             $groups = UserGroup::where(\textcolor{stringliteral}{'owner\_id'}, $user->getKey())
-80                                 ->isActive()->get();
-81             \textcolor{keywordflow}{return} $groups;   
-82         \}
-83         \textcolor{keywordflow}{return} [];
-84     \}
+75     \{
+76         \textcolor{keywordflow}{if}($user = $this->\hyperlink{classDMA_1_1Friends_1_1Components_1_1GroupManager_abc2316e8087752f7e5530e10af5eb538}{getUser}())\{
+77             $groups = UserGroup::where(\textcolor{stringliteral}{'owner\_id'}, $user->getKey())
+78                                 ->isActive()->get();
+79             \textcolor{keywordflow}{return} $groups;   
+80         \}
+81         \textcolor{keywordflow}{return} [];
+82     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Components_1_1GroupManager_abc2316e8087752f7e5530e10af5eb538}{}\index{D\+M\+A\+::\+Friends\+::\+Components\+::\+Group\+Manager@{D\+M\+A\+::\+Friends\+::\+Components\+::\+Group\+Manager}!get\+User@{get\+User}}
 \index{get\+User@{get\+User}!D\+M\+A\+::\+Friends\+::\+Components\+::\+Group\+Manager@{D\+M\+A\+::\+Friends\+::\+Components\+::\+Group\+Manager}}
@@ -91,12 +91,12 @@ Rain\+Lab
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-66     \{
-67         \textcolor{keywordflow}{if}(is\_null($this->user))\{
-68             $this->user = Auth::getUser();
-69         \}
-70         \textcolor{keywordflow}{return} $this->user;
-71     \}
+64     \{
+65         \textcolor{keywordflow}{if}(is\_null($this->user))\{
+66             $this->user = Auth::getUser();
+67         \}
+68         \textcolor{keywordflow}{return} $this->user;
+69     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Components_1_1GroupManager_ac0784d39e4fe94f792bec571cec1b202}{}\index{D\+M\+A\+::\+Friends\+::\+Components\+::\+Group\+Manager@{D\+M\+A\+::\+Friends\+::\+Components\+::\+Group\+Manager}!on\+Add\+Member@{on\+Add\+Member}}
 \index{on\+Add\+Member@{on\+Add\+Member}!D\+M\+A\+::\+Friends\+::\+Components\+::\+Group\+Manager@{D\+M\+A\+::\+Friends\+::\+Components\+::\+Group\+Manager}}
@@ -107,43 +107,43 @@ Rain\+Lab
 )}\label{classDMA_1_1Friends_1_1Components_1_1GroupManager_ac0784d39e4fe94f792bec571cec1b202}
 Ajax handler for adding members 
 \begin{DoxyCode}
-238                                  \{
-239         
-240         \textcolor{comment}{// refresh current step}
-241         $this->currentStep = self::STEP\_MEMBERS;
+236                                  \{
+237         
+238         \textcolor{comment}{// refresh current step}
+239         $this->currentStep = self::STEP\_MEMBERS;
+240         
+241         \textcolor{keywordflow}{if} (($groupId = post(\textcolor{stringliteral}{'groupId'})) != \textcolor{stringliteral}{''})\{
 242         
-243         \textcolor{keywordflow}{if} (($groupId = post(\textcolor{stringliteral}{'groupId'})) != \textcolor{stringliteral}{''})\{
-244         
-245             \textcolor{comment}{// Add to group}
-246             $group = $this->getGroup($groupId);
-247     
-248             \textcolor{keywordflow}{if} (($username = post(\textcolor{stringliteral}{'username'})) != \textcolor{stringliteral}{''})\{
-249                 $user = User::where($this->getLoginAttr(), \textcolor{charliteral}{'='}, $username)->first();
-250                 \textcolor{keywordflow}{if} ($user)\{
-251                     \(\backslash\)Log::info(\hyperlink{classDMA_1_1Friends_1_1Models_1_1UserGroup_a224d129818f1ab0831ddb054dff1f514}{UserGroup::getActiveMembershipsCount}(
+243             \textcolor{comment}{// Add to group}
+244             $group = $this->getGroup($groupId);
+245     
+246             \textcolor{keywordflow}{if} (($username = post(\textcolor{stringliteral}{'username'})) != \textcolor{stringliteral}{''})\{
+247                 $user = User::where($this->getLoginAttr(), \textcolor{charliteral}{'='}, $username)->first();
+248                 \textcolor{keywordflow}{if} ($user)\{
+249                     \(\backslash\)Log::info(\hyperlink{classDMA_1_1Friends_1_1Models_1_1UserGroup_a224d129818f1ab0831ddb054dff1f514}{UserGroup::getActiveMembershipsCount}(
       $user));
-252                     \textcolor{keywordflow}{try}\{
-253                         $added = $group->addUser($user);
-254                         \textcolor{keywordflow}{if}(!$added)\{
-255                             \textcolor{keywordflow}{if}($user->getKey() == $group->owner->getKey()) \{
-256                                 $message = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.groups.ownerCanBeMember'});
-257                                 Flash::error($message);
-258                             \}
-259                         \}
-260                     \}\textcolor{keywordflow}{catch}(\(\backslash\)\hyperlink{namespaceException}{Exception} $e)\{
-261                         Flash::error($e->getMessage());
-262                     \}
-263                 \}\textcolor{keywordflow}{else}\{
-264                     $message = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.exceptions.userNotFound'});
-265                     Flash::error($message);
-266                 \}
+250                     \textcolor{keywordflow}{try}\{
+251                         $added = $group->addUser($user);
+252                         \textcolor{keywordflow}{if}(!$added)\{
+253                             \textcolor{keywordflow}{if}($user->getKey() == $group->owner->getKey()) \{
+254                                 $message = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.groups.ownerCanBeMember'});
+255                                 Flash::error($message);
+256                             \}
+257                         \}
+258                     \}\textcolor{keywordflow}{catch}(\(\backslash\)\hyperlink{namespaceException}{Exception} $e)\{
+259                         Flash::error($e->getMessage());
+260                     \}
+261                 \}\textcolor{keywordflow}{else}\{
+262                     $message = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.exceptions.userNotFound'});
+263                     Flash::error($message);
+264                 \}
+265         
+266             \}
 267         
-268             \}
-269         
-270             \textcolor{comment}{// Updated list of users and other vars}
-271             $this->prepareVars($group);
-272         \}
-273     \}    
+268             \textcolor{comment}{// Updated list of users and other vars}
+269             $this->prepareVars($group);
+270         \}
+271     \}    
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Components_1_1GroupManager_a7cec31625dfe221d62d620a078883815}{}\index{D\+M\+A\+::\+Friends\+::\+Components\+::\+Group\+Manager@{D\+M\+A\+::\+Friends\+::\+Components\+::\+Group\+Manager}!on\+Cancel\+Group@{on\+Cancel\+Group}}
 \index{on\+Cancel\+Group@{on\+Cancel\+Group}!D\+M\+A\+::\+Friends\+::\+Components\+::\+Group\+Manager@{D\+M\+A\+::\+Friends\+::\+Components\+::\+Group\+Manager}}
@@ -154,28 +154,28 @@ Ajax handler for adding members
 )}\label{classDMA_1_1Friends_1_1Components_1_1GroupManager_a7cec31625dfe221d62d620a078883815}
 Ajax handler for closing groups 
 \begin{DoxyCode}
-212                                    \{
-213         \textcolor{comment}{// refresh current step}
-214         $this->currentStep = self::STEP\_GROUPS;
-215         
-216         \textcolor{keywordflow}{if} (($groupId = post(\textcolor{stringliteral}{'groupId'})) != \textcolor{stringliteral}{''})\{
-217             \textcolor{keywordflow}{if}($group = UserGroup::find($groupId))\{
-218                 \textcolor{comment}{// mark as inactive  group}
-219                 $group->is\_active = \textcolor{keyword}{false};
-220                 $group->save();
-221     
-222                 \textcolor{comment}{// Updated page variables}
-223                 $this->prepareVars();
-224                 
-225                 $message = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.groups.groupCanceled'});
-226                 Flash::info($message);
-227                 
-228             \}\textcolor{keywordflow}{else}\{
-229                 $message = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.exceptions.groupNotFound'});
-230                 Flash::error($message);
-231             \}
-232         \}
-233     \}
+210                                    \{
+211         \textcolor{comment}{// refresh current step}
+212         $this->currentStep = self::STEP\_GROUPS;
+213         
+214         \textcolor{keywordflow}{if} (($groupId = post(\textcolor{stringliteral}{'groupId'})) != \textcolor{stringliteral}{''})\{
+215             \textcolor{keywordflow}{if}($group = UserGroup::find($groupId))\{
+216                 \textcolor{comment}{// mark as inactive  group}
+217                 $group->is\_active = \textcolor{keyword}{false};
+218                 $group->save();
+219     
+220                 \textcolor{comment}{// Updated page variables}
+221                 $this->prepareVars();
+222                 
+223                 $message = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.groups.groupCanceled'});
+224                 Flash::info($message);
+225                 
+226             \}\textcolor{keywordflow}{else}\{
+227                 $message = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.exceptions.groupNotFound'});
+228                 Flash::error($message);
+229             \}
+230         \}
+231     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Components_1_1GroupManager_a1022b6c4b9d4a31cf1b41d15ba13ab1f}{}\index{D\+M\+A\+::\+Friends\+::\+Components\+::\+Group\+Manager@{D\+M\+A\+::\+Friends\+::\+Components\+::\+Group\+Manager}!on\+Create\+Group@{on\+Create\+Group}}
 \index{on\+Create\+Group@{on\+Create\+Group}!D\+M\+A\+::\+Friends\+::\+Components\+::\+Group\+Manager@{D\+M\+A\+::\+Friends\+::\+Components\+::\+Group\+Manager}}
@@ -186,23 +186,23 @@ Ajax handler for closing groups
 )}\label{classDMA_1_1Friends_1_1Components_1_1GroupManager_a1022b6c4b9d4a31cf1b41d15ba13ab1f}
 Ajax handler for creating groups 
 \begin{DoxyCode}
-190     \{
-191         \textcolor{comment}{// refresh current step}
-192         $this->currentStep = self::STEP\_GROUPS;
-193         
-194         \textcolor{keywordflow}{if}( $user = $this->\hyperlink{classDMA_1_1Friends_1_1Components_1_1GroupManager_abc2316e8087752f7e5530e10af5eb538}{getUser}() )\{
-195             \textcolor{keywordflow}{if}( !empty( $name = post(\textcolor{stringliteral}{'name'})))\{
-196                 \textcolor{keywordflow}{try}\{
-197                     $group = \hyperlink{classDMA_1_1Friends_1_1Models_1_1UserGroup_aad51304db18c13520b9753e2380089bb}{UserGroup::createGroup}($user, $name);
-198                 \}\textcolor{keywordflow}{catch}(\(\backslash\)\hyperlink{namespaceException}{Exception} $e)\{
-199                     Flash::error($e->getMessage());
-200                 \}
-201             \}
-202         \}
-203         
-204         \textcolor{comment}{// Updated list of grous and other vars}
-205         $this->prepareVars();
-206     \}
+188     \{
+189         \textcolor{comment}{// refresh current step}
+190         $this->currentStep = self::STEP\_GROUPS;
+191         
+192         \textcolor{keywordflow}{if}( $user = $this->\hyperlink{classDMA_1_1Friends_1_1Components_1_1GroupManager_abc2316e8087752f7e5530e10af5eb538}{getUser}() )\{
+193             \textcolor{keywordflow}{if}( !empty( $name = post(\textcolor{stringliteral}{'name'})))\{
+194                 \textcolor{keywordflow}{try}\{
+195                     $group = \hyperlink{classDMA_1_1Friends_1_1Models_1_1UserGroup_aad51304db18c13520b9753e2380089bb}{UserGroup::createGroup}($user, $name);
+196                 \}\textcolor{keywordflow}{catch}(\(\backslash\)\hyperlink{namespaceException}{Exception} $e)\{
+197                     Flash::error($e->getMessage());
+198                 \}
+199             \}
+200         \}
+201         
+202         \textcolor{comment}{// Updated list of grous and other vars}
+203         $this->prepareVars();
+204     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Components_1_1GroupManager_a852933111a787d927fc27d3f9465cd07}{}\index{D\+M\+A\+::\+Friends\+::\+Components\+::\+Group\+Manager@{D\+M\+A\+::\+Friends\+::\+Components\+::\+Group\+Manager}!on\+Go\+To\+Step@{on\+Go\+To\+Step}}
 \index{on\+Go\+To\+Step@{on\+Go\+To\+Step}!D\+M\+A\+::\+Friends\+::\+Components\+::\+Group\+Manager@{D\+M\+A\+::\+Friends\+::\+Components\+::\+Group\+Manager}}
@@ -213,19 +213,19 @@ Ajax handler for creating groups
 )}\label{classDMA_1_1Friends_1_1Components_1_1GroupManager_a852933111a787d927fc27d3f9465cd07}
 Ajax handler to access membership group tools 
 \begin{DoxyCode}
-313                                 \{
-314         \textcolor{keywordflow}{if} (($step = post(\textcolor{stringliteral}{'step'})) != \textcolor{stringliteral}{''})\{
-315 
-316             $this->currentStep    = $step;
-317             $this->currentGroupId = post(\textcolor{stringliteral}{'groupId'});
-318             
-319             $this->prepareVars();
-320 
-321             \textcolor{keywordflow}{return} [
-322                 \textcolor{stringliteral}{"#step"} => $this->renderPartial($step)
-323             ];
-324         \}
-325     \}
+311                                 \{
+312         \textcolor{keywordflow}{if} (($step = post(\textcolor{stringliteral}{'step'})) != \textcolor{stringliteral}{''})\{
+313 
+314             $this->currentStep    = $step;
+315             $this->currentGroupId = post(\textcolor{stringliteral}{'groupId'});
+316             
+317             $this->prepareVars();
+318 
+319             \textcolor{keywordflow}{return} [
+320                 \textcolor{stringliteral}{"#step"} => $this->renderPartial($step)
+321             ];
+322         \}
+323     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Components_1_1GroupManager_a66ab56b50c4bc943aad47bc5fdd33789}{}\index{D\+M\+A\+::\+Friends\+::\+Components\+::\+Group\+Manager@{D\+M\+A\+::\+Friends\+::\+Components\+::\+Group\+Manager}!on\+Remove\+Member@{on\+Remove\+Member}}
 \index{on\+Remove\+Member@{on\+Remove\+Member}!D\+M\+A\+::\+Friends\+::\+Components\+::\+Group\+Manager@{D\+M\+A\+::\+Friends\+::\+Components\+::\+Group\+Manager}}
@@ -236,35 +236,35 @@ Ajax handler to access membership group tools
 )}\label{classDMA_1_1Friends_1_1Components_1_1GroupManager_a66ab56b50c4bc943aad47bc5fdd33789}
 Ajax handler for removing members 
 \begin{DoxyCode}
-279                                     \{
-280         \textcolor{comment}{// refresh current step}
-281         $this->currentStep = self::STEP\_MEMBERS;
-282         
-283         \textcolor{keywordflow}{if} ( (($memberId = post(\textcolor{stringliteral}{'memberId'})) != \textcolor{stringliteral}{''}) &&
-284              (($groupId  = post(\textcolor{stringliteral}{'groupId'}))  != \textcolor{stringliteral}{''}) ) \{
-285                  
-286             $user = User::find($memberId);
-287             \textcolor{keywordflow}{if} ($user)\{
-288                 \textcolor{keywordflow}{if}($group = $this->getGroup($groupId)) \{
-289                     \textcolor{comment}{// remove from group}
-290                     $group->removeUser($user);
-291                     
-292                     \textcolor{comment}{// Refresh current groupid}
-293                     $this->currentGroupId = $groupId;
-294                     
-295                     \textcolor{comment}{// Updated list of users and other vars}
-296                     $this->prepareVars();
-297                     
-298                     $message = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.groups.memberRemoved'});
-299                     Flash::info($message);
-300                 \}
-301     
-302             \}\textcolor{keywordflow}{else}\{
-303                 $message = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.exceptions.userNotFound'});
-304                 Flash::info($message);
-305             \}
-306         \}
-307     \}
+277                                     \{
+278         \textcolor{comment}{// refresh current step}
+279         $this->currentStep = self::STEP\_MEMBERS;
+280         
+281         \textcolor{keywordflow}{if} ( (($memberId = post(\textcolor{stringliteral}{'memberId'})) != \textcolor{stringliteral}{''}) &&
+282              (($groupId  = post(\textcolor{stringliteral}{'groupId'}))  != \textcolor{stringliteral}{''}) ) \{
+283                  
+284             $user = User::find($memberId);
+285             \textcolor{keywordflow}{if} ($user)\{
+286                 \textcolor{keywordflow}{if}($group = $this->getGroup($groupId)) \{
+287                     \textcolor{comment}{// remove from group}
+288                     $group->removeUser($user);
+289                     
+290                     \textcolor{comment}{// Refresh current groupid}
+291                     $this->currentGroupId = $groupId;
+292                     
+293                     \textcolor{comment}{// Updated list of users and other vars}
+294                     $this->prepareVars();
+295                     
+296                     $message = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.groups.memberRemoved'});
+297                     Flash::info($message);
+298                 \}
+299     
+300             \}\textcolor{keywordflow}{else}\{
+301                 $message = Lang::get(\textcolor{stringliteral}{'dma.friends::lang.exceptions.userNotFound'});
+302                 Flash::info($message);
+303             \}
+304         \}
+305     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Components_1_1GroupManager_ab676c63165e8a5ac01b8c7e6630f187f}{}\index{D\+M\+A\+::\+Friends\+::\+Components\+::\+Group\+Manager@{D\+M\+A\+::\+Friends\+::\+Components\+::\+Group\+Manager}!on\+Submit@{on\+Submit}}
 \index{on\+Submit@{on\+Submit}!D\+M\+A\+::\+Friends\+::\+Components\+::\+Group\+Manager@{D\+M\+A\+::\+Friends\+::\+Components\+::\+Group\+Manager}}
@@ -275,22 +275,22 @@ Ajax handler for removing members
 )}\label{classDMA_1_1Friends_1_1Components_1_1GroupManager_ab676c63165e8a5ac01b8c7e6630f187f}
 Common Ajax handler for forms using form\+\_\+ajax tag. 
 \begin{DoxyCode}
-169                               \{
-170         \textcolor{keywordflow}{if}( !empty( $step = post(\textcolor{stringliteral}{'step'})))\{
-171             $this->currentStep = $step;
-172             
-173             \textcolor{keywordflow}{switch} ($step)\{
-174                 \textcolor{keywordflow}{case} self::STEP\_GROUPS:
-175                     $this->\hyperlink{classDMA_1_1Friends_1_1Components_1_1GroupManager_a1022b6c4b9d4a31cf1b41d15ba13ab1f}{onCreateGroup}();
-176                     \textcolor{keywordflow}{break};
-177                 \textcolor{keywordflow}{case} self::STEP\_MEMBERS;
-178                     $this->\hyperlink{classDMA_1_1Friends_1_1Components_1_1GroupManager_ac0784d39e4fe94f792bec571cec1b202}{onAddMember}();
-179                     \textcolor{keywordflow}{break};  
-180             \}
-181             
-182         \}
-183 
-184     \}
+167                               \{
+168         \textcolor{keywordflow}{if}( !empty( $step = post(\textcolor{stringliteral}{'step'})))\{
+169             $this->currentStep = $step;
+170             
+171             \textcolor{keywordflow}{switch} ($step)\{
+172                 \textcolor{keywordflow}{case} self::STEP\_GROUPS:
+173                     $this->\hyperlink{classDMA_1_1Friends_1_1Components_1_1GroupManager_a1022b6c4b9d4a31cf1b41d15ba13ab1f}{onCreateGroup}();
+174                     \textcolor{keywordflow}{break};
+175                 \textcolor{keywordflow}{case} self::STEP\_MEMBERS;
+176                     $this->\hyperlink{classDMA_1_1Friends_1_1Components_1_1GroupManager_ac0784d39e4fe94f792bec571cec1b202}{onAddMember}();
+177                     \textcolor{keywordflow}{break};  
+178             \}
+179             
+180         \}
+181 
+182     \}
 \end{DoxyCode}
 
 

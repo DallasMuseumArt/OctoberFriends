@@ -1,0 +1,85 @@
+\hypertarget{classDMA_1_1Friends_1_1Components_1_1ActivityFilters}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Components\textbackslash{}Activity\+Filters Class Reference}
+\label{classDMA_1_1Friends_1_1Components_1_1ActivityFilters}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Components\textbackslash{}\+Activity\+Filters@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Components\textbackslash{}\+Activity\+Filters}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Components\textbackslash{}Activity\+Filters\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{df/da9/classDMA_1_1Friends_1_1Components_1_1ActivityFilters}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Components_1_1ActivityFilters_abcf75786104d9c47ac8ec4ec7171f5a1}{component\+Details} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Components_1_1ActivityFilters_ac56986e963c03665e1835e29bf71feb7}{define\+Properties} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Components_1_1ActivityFilters_a5a8fc78cd25b9c2dbc5ad3e050d98591}{on\+Run} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Components_1_1ActivityFilters_abcf75786104d9c47ac8ec4ec7171f5a1}{}\index{D\+M\+A\+::\+Friends\+::\+Components\+::\+Activity\+Filters@{D\+M\+A\+::\+Friends\+::\+Components\+::\+Activity\+Filters}!component\+Details@{component\+Details}}
+\index{component\+Details@{component\+Details}!D\+M\+A\+::\+Friends\+::\+Components\+::\+Activity\+Filters@{D\+M\+A\+::\+Friends\+::\+Components\+::\+Activity\+Filters}}
+\subsubsection[{component\+Details}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Components\textbackslash{}\+Activity\+Filters\+::component\+Details (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Components_1_1ActivityFilters_abcf75786104d9c47ac8ec4ec7171f5a1}
+
+\begin{DoxyCode}
+24     \{
+25         \textcolor{keywordflow}{return} [
+26             \textcolor{stringliteral}{'name'} => \textcolor{stringliteral}{'Activity Filters'},
+27             \textcolor{stringliteral}{'description'} => \textcolor{stringliteral}{'Provides an interface for filtering a list of activities'}
+28         ];
+29     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Components_1_1ActivityFilters_ac56986e963c03665e1835e29bf71feb7}{}\index{D\+M\+A\+::\+Friends\+::\+Components\+::\+Activity\+Filters@{D\+M\+A\+::\+Friends\+::\+Components\+::\+Activity\+Filters}!define\+Properties@{define\+Properties}}
+\index{define\+Properties@{define\+Properties}!D\+M\+A\+::\+Friends\+::\+Components\+::\+Activity\+Filters@{D\+M\+A\+::\+Friends\+::\+Components\+::\+Activity\+Filters}}
+\subsubsection[{define\+Properties}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Components\textbackslash{}\+Activity\+Filters\+::define\+Properties (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Components_1_1ActivityFilters_ac56986e963c03665e1835e29bf71feb7}
+
+\begin{DoxyCode}
+35     \{
+36         \textcolor{keywordflow}{return} [
+37             \textcolor{stringliteral}{'target\_component'}  => [
+38                  \textcolor{stringliteral}{'title'}             => \textcolor{stringliteral}{'Target Component'},
+39                  \textcolor{stringliteral}{'description'}       => \textcolor{stringliteral}{'The component producing the activity list to be filtered'},
+40                  \textcolor{stringliteral}{'default'}           => \textcolor{stringliteral}{''},
+41                  \textcolor{stringliteral}{'type'}              => \textcolor{stringliteral}{'string'},
+42                  \textcolor{stringliteral}{'validationPattern'} => \textcolor{stringliteral}{'^[a-zA-Z\_]*$'},
+43                  \textcolor{stringliteral}{'validationMessage'} => \textcolor{stringliteral}{'The target component must be a string reference to a valid
+       component.'},
+44             ],
+45         ];
+46     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Components_1_1ActivityFilters_a5a8fc78cd25b9c2dbc5ad3e050d98591}{}\index{D\+M\+A\+::\+Friends\+::\+Components\+::\+Activity\+Filters@{D\+M\+A\+::\+Friends\+::\+Components\+::\+Activity\+Filters}!on\+Run@{on\+Run}}
+\index{on\+Run@{on\+Run}!D\+M\+A\+::\+Friends\+::\+Components\+::\+Activity\+Filters@{D\+M\+A\+::\+Friends\+::\+Components\+::\+Activity\+Filters}}
+\subsubsection[{on\+Run}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Components\textbackslash{}\+Activity\+Filters\+::on\+Run (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Components_1_1ActivityFilters_a5a8fc78cd25b9c2dbc5ad3e050d98591}
+
+\begin{DoxyCode}
+52     \{
+53         \textcolor{comment}{// Inject JS}
+54         $this->addJs(\textcolor{stringliteral}{'components/activityfilters/assets/js/filter-activities.js'});
+55 
+56         \textcolor{comment}{// Get category list for filters}
+57         $filters = $this->getCategories();
+58         $this->page[\textcolor{stringliteral}{'categories'}] = $filters;
+59 
+60         \textcolor{comment}{// Pass through component property to partial}
+61         $this->page[\textcolor{stringliteral}{'component'}] = $this->property(\textcolor{stringliteral}{'target\_component'}) . \textcolor{stringliteral}{'::onUpdate'};
+62     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+components/Activity\+Filters.\+php\end{DoxyCompactItemize}

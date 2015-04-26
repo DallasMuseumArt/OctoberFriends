@@ -1,0 +1,126 @@
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityLogResource}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\textbackslash{}Resources\textbackslash{}Activity\+Log\+Resource Class Reference}
+\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityLogResource}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Activity\+Log\+Resource@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Activity\+Log\+Resource}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\textbackslash{}Resources\textbackslash{}Activity\+Log\+Resource\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{d3/d22/classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityLogResource}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityLogResource_ab093e778e404042eac0e06e0d8148a49}{index\+By\+User} (\$user=null)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityLogResource_a34b4b73d1baf95a90e7337e32385fe07}{index\+By\+Type\+And\+User} (\$types=null, \$user=null)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityLogResource_ad0eb6db8bc19747e30a2b94658492680}{}{\bfseries \$model} = \textquotesingle{}\textbackslash{}\hyperlink{classDMA_1_1Friends_1_1Models_1_1ActivityLog}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Models\textbackslash{}\+Activity\+Log}\textquotesingle{}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityLogResource_ad0eb6db8bc19747e30a2b94658492680}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityLogResource_a0e3565f8171750f0576c51bd8771f793}{}{\bfseries \$transformer} = \textquotesingle{}\textbackslash{}\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityLogTransformer}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Activity\+Log\+Transformer}\textquotesingle{}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityLogResource_a0e3565f8171750f0576c51bd8771f793}
+
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityLogResource_a34b4b73d1baf95a90e7337e32385fe07}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Log\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Log\+Resource}!index\+By\+Type\+And\+User@{index\+By\+Type\+And\+User}}
+\index{index\+By\+Type\+And\+User@{index\+By\+Type\+And\+User}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Log\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Log\+Resource}}
+\subsubsection[{index\+By\+Type\+And\+User}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Activity\+Log\+Resource\+::index\+By\+Type\+And\+User (
+\begin{DoxyParamCaption}
+\item[{}]{\$types = {\ttfamily null}, }
+\item[{}]{\$user = {\ttfamily null}}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityLogResource_a34b4b73d1baf95a90e7337e32385fe07}
+Provide aliases to object\+\_\+type and user\+\_\+id filters 
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$types} & comma separted strings \\
+\hline
+string & {\em \$user} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Response 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+42     \{
+43         
+44         $filters = [];
+45         \textcolor{keywordflow}{if} (!is\_null($types)) \{
+46             
+47             $relModel = [
+48                     \textcolor{stringliteral}{'reward'}   => \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Reward'},
+49                     \textcolor{stringliteral}{'activity'} => \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Activity'},
+50                     \textcolor{stringliteral}{'badge'}    => \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Badge'},
+51                     \textcolor{stringliteral}{'step'}     => \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Step'},
+52             ];
+53             
+54             $types = !is\_null($types) ? explode(\textcolor{charliteral}{','}, $types): $types;
+55 
+56             \textcolor{keywordflow}{try}\{
+57                 
+58                 $object\_types = array\_map(\textcolor{keyword}{function}($t) use ($relModel) \{
+59                     $t = strtolower(trim($t));
+60                     \textcolor{keywordflow}{return} $relModel[$t];
+61                 \}, $types);
+62                 
+63             \} \textcolor{keywordflow}{catch} (\(\backslash\)\hyperlink{namespaceException}{Exception} $e) \{
+64                 Log::error(\textcolor{stringliteral}{'API endpoint '} . get\_class($this) . \textcolor{stringliteral}{' : '} . $e->getMessage());
+65                 $message = \textcolor{stringliteral}{'One of the given types is not valid. Valid types are [ '} . implode(\textcolor{stringliteral}{', '}, 
+      array\_keys($relModel)) .\textcolor{stringliteral}{' ]'};
+66                 \textcolor{keywordflow}{return} Response::api()->errorInternalError($message);
+67             \}
+68             
+69             \textcolor{keywordflow}{if}( count($object\_types) > 0 ) \{
+70                 $filters[\textcolor{stringliteral}{'object\_type\_\_in'}] = $object\_types;
+71             \}
+72         \}
+73         
+74 
+75         \textcolor{keywordflow}{if} (!is\_null($user)) \{
+76             \textcolor{comment}{// Find user if exists}
+77             $user = User::find($user);
+78             \textcolor{keywordflow}{if} ($user) \{
+79                 $filters[\textcolor{stringliteral}{'user\_id'}] = $user->getKey();
+80             \} \textcolor{keywordflow}{else} \{
+81                 \textcolor{keywordflow}{return} Response::api()->errorNotFound(\textcolor{stringliteral}{'User not found'});
+82             \}
+83         \}
+84         
+85         
+86         \textcolor{comment}{// Update or inject Input filters}
+87         Input::merge($filters);
+88 
+89         \textcolor{comment}{// Call index and the filters will do the magic}
+90         \textcolor{keywordflow}{return} parent::index();
+91     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityLogResource_ab093e778e404042eac0e06e0d8148a49}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Log\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Log\+Resource}!index\+By\+User@{index\+By\+User}}
+\index{index\+By\+User@{index\+By\+User}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Log\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Log\+Resource}}
+\subsubsection[{index\+By\+User}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Activity\+Log\+Resource\+::index\+By\+User (
+\begin{DoxyParamCaption}
+\item[{}]{\$user = {\ttfamily null}}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityLogResource_ab093e778e404042eac0e06e0d8148a49}
+Provide aliases to user\+\_\+id filters 
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$user} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Response 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+31     \{
+32         \textcolor{keywordflow}{return} $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityLogResource_a34b4b73d1baf95a90e7337e32385fe07}{indexByTypeAndUser}(null, $user);
+33     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+api/resources/Activity\+Log\+Resource.\+php\end{DoxyCompactItemize}

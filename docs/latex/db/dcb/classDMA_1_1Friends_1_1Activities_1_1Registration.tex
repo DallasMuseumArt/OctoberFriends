@@ -1,0 +1,96 @@
+\hypertarget{classDMA_1_1Friends_1_1Activities_1_1Registration}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Activities\textbackslash{}Registration Class Reference}
+\label{classDMA_1_1Friends_1_1Activities_1_1Registration}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Activities\textbackslash{}\+Registration@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Activities\textbackslash{}\+Registration}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Activities\textbackslash{}Registration\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{db/dcb/classDMA_1_1Friends_1_1Activities_1_1Registration}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Activities_1_1Registration_abe3b5a62acda2c624e0231c8c07ab6d6}{details} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Activities_1_1Registration_a3b6c1af40898032cceb29135da6cf283}{get\+Form\+Default\+Values} (\$model)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classDMA_1_1Friends_1_1Activities_1_1Registration_a19479293c2e231e6e9723f87c8a9b159}{process} (User \$user, \$params=\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Activities_1_1Registration_abe3b5a62acda2c624e0231c8c07ab6d6}{}\index{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Registration@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Registration}!details@{details}}
+\index{details@{details}!D\+M\+A\+::\+Friends\+::\+Activities\+::\+Registration@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Registration}}
+\subsubsection[{details}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Activities\textbackslash{}\+Registration\+::details (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Activities_1_1Registration_abe3b5a62acda2c624e0231c8c07ab6d6}
+
+
+Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInterface}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Type\+Base\+Interface}.
+
+
+\begin{DoxyCode}
+15     \{
+16         \textcolor{keywordflow}{return} [
+17             \textcolor{stringliteral}{'name'}          => \textcolor{stringliteral}{'Award activity on registration'},
+18             \textcolor{stringliteral}{'description'}   => \textcolor{stringliteral}{'Activity is processed when a user registers for an account'},
+19         ];
+20     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Activities_1_1Registration_a3b6c1af40898032cceb29135da6cf283}{}\index{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Registration@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Registration}!get\+Form\+Default\+Values@{get\+Form\+Default\+Values}}
+\index{get\+Form\+Default\+Values@{get\+Form\+Default\+Values}!D\+M\+A\+::\+Friends\+::\+Activities\+::\+Registration@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Registration}}
+\subsubsection[{get\+Form\+Default\+Values}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Activities\textbackslash{}\+Registration\+::get\+Form\+Default\+Values (
+\begin{DoxyParamCaption}
+\item[{}]{\$model}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Activities_1_1Registration_a3b6c1af40898032cceb29135da6cf283}
+
+
+Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInterface}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Type\+Base\+Interface}.
+
+
+\begin{DoxyCode}
+26     \{
+27         \textcolor{keywordflow}{return} [
+28             \textcolor{stringliteral}{'event'} => (isset($model->event)) ? $model->event : null,
+29         ];
+30     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Activities_1_1Registration_a19479293c2e231e6e9723f87c8a9b159}{}\index{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Registration@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Registration}!process@{process}}
+\index{process@{process}!D\+M\+A\+::\+Friends\+::\+Activities\+::\+Registration@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Registration}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}static D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Activities\textbackslash{}\+Registration\+::process (
+\begin{DoxyParamCaption}
+\item[{User}]{\$user, }
+\item[{}]{\$params = {\ttfamily \mbox{[}\mbox{]}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classDMA_1_1Friends_1_1Activities_1_1Registration_a19479293c2e231e6e9723f87c8a9b159}
+
+
+Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInterface}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Type\+Base\+Interface}.
+
+
+\begin{DoxyCode}
+36     \{
+37 
+38         $activities = Activity::where(\textcolor{stringliteral}{'activity\_type'}, \textcolor{charliteral}{'='}, \textcolor{stringliteral}{'Registration'})->get();
+39 
+40         \textcolor{keywordflow}{if} (!$activities) \textcolor{keywordflow}{return};
+41 
+42         \textcolor{keywordflow}{foreach}($activities as $activity) \{
+43             parent::process($user, [\textcolor{stringliteral}{'activity'} => $activity]);
+44         \}
+45 
+46         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+47 
+48     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+activities/Registration.\+php\end{DoxyCompactItemize}

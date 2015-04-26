@@ -1,12 +1,8 @@
 var searchData=
 [
-  ['settings',['Settings',['../d1/d8a/classDMA_1_1Friends_1_1Models_1_1Settings.html',1,'DMA::Friends::Models']]],
-  ['step',['Step',['../d0/d87/classDMA_1_1Friends_1_1Wordpress_1_1Step.html',1,'DMA::Friends::Wordpress']]],
-  ['step',['Step',['../d9/d03/classDMA_1_1Friends_1_1Models_1_1Step.html',1,'DMA::Friends::Models']]],
-  ['stepresource',['StepResource',['../d8/da8/classDMA_1_1Friends_1_1Api_1_1StepResource.html',1,'DMA::Friends::Api']]],
-  ['steps',['Steps',['../d0/d0f/classDMA_1_1Friends_1_1Controllers_1_1Steps.html',1,'DMA::Friends::Controllers']]],
-  ['steptransformer',['StepTransformer',['../d0/dbc/classDMA_1_1Friends_1_1Api_1_1StepTransformer.html',1,'DMA::Friends::Api']]],
-  ['syncfriendsdatacommand',['SyncFriendsDataCommand',['../d1/d1d/classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand.html',1,'DMA::Friends::Commands']]],
-  ['syncfriendsimagescommand',['SyncFriendsImagesCommand',['../d0/da8/classDMA_1_1Friends_1_1Commands_1_1SyncFriendsImagesCommand.html',1,'DMA::Friends::Commands']]],
-  ['syncfriendsrelationscommand',['SyncFriendsRelationsCommand',['../d1/dd5/classDMA_1_1Friends_1_1Commands_1_1SyncFriendsRelationsCommand.html',1,'DMA::Friends::Commands']]]
+  ['taxonomy',['Taxonomy',['../dc/d06/classDMA_1_1Friends_1_1Wordpress_1_1Taxonomy.html',1,'DMA::Friends::Wordpress']]],
+  ['templatenotfoundexception',['TemplateNotFoundException',['../d6/dc3/classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Exceptions_1_1TemplateNotFoundException.html',1,'DMA::Friends::Classes::Notifications::Exceptions']]],
+  ['templateparser',['TemplateParser',['../db/d74/classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Templates_1_1TemplateParser.html',1,'DMA::Friends::Classes::Notifications::Templates']]],
+  ['timerestrictions',['TimeRestrictions',['../dc/d09/classDMA_1_1Friends_1_1FormWidgets_1_1TimeRestrictions.html',1,'DMA::Friends::FormWidgets']]],
+  ['ttfparser',['TTFParser',['../d4/d26/classTTFParser.html',1,'']]]
 ];

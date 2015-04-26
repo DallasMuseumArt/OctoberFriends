@@ -1,0 +1,137 @@
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityMetadataTransformer}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\textbackslash{}Transformers\textbackslash{}Activity\+Metadata\+Transformer Class Reference}
+\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityMetadataTransformer}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Activity\+Metadata\+Transformer@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Activity\+Metadata\+Transformer}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\textbackslash{}Transformers\textbackslash{}Activity\+Metadata\+Transformer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{dd/d8c/classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityMetadataTransformer}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityMetadataTransformer_af1bd0fda73868743295a18510d0b507c}{get\+Data} (\$instance)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityMetadataTransformer_a699e499e8abef3facc46bb99e4ceacf3}{get\+Metadata} (Model \$instance)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityMetadataTransformer_a38bfe7aab17cf0599631c2c6c1b3fca7}{include\+Activity} (Model \$instance)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityMetadataTransformer_a863325b774ddcfde7616686a3e0527bb}{include\+User} (Model \$instance)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries \$default\+Includes}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityMetadataTransformer_af1bd0fda73868743295a18510d0b507c}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer}!get\+Data@{get\+Data}}
+\index{get\+Data@{get\+Data}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer}}
+\subsubsection[{get\+Data}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Activity\+Metadata\+Transformer\+::get\+Data (
+\begin{DoxyParamCaption}
+\item[{}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityMetadataTransformer_af1bd0fda73868743295a18510d0b507c}
+\begin{DoxySeeAlso}{See also}
+\+::get\+Data() 
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+28     \{
+29         \textcolor{keywordflow}{return} [
+30             \textcolor{stringliteral}{'id'}           => (int)$instance->id,
+31             \textcolor{stringliteral}{'user'}         => null,
+32             \textcolor{stringliteral}{'activity'}     => null,
+33             \textcolor{stringliteral}{'metadata'}     => $this->getMetadata($instance),   
+34             \textcolor{stringliteral}{'created\_at'}   => $this->carbonToIso($instance->created\_at)
+35             \textcolor{comment}{//'session\_id'   => $instance->session\_id,}
+36             
+37         ];
+38     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityMetadataTransformer_a699e499e8abef3facc46bb99e4ceacf3}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer}!get\+Metadata@{get\+Metadata}}
+\index{get\+Metadata@{get\+Metadata}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer}}
+\subsubsection[{get\+Metadata}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Activity\+Metadata\+Transformer\+::get\+Metadata (
+\begin{DoxyParamCaption}
+\item[{Model}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityMetadataTransformer_a699e499e8abef3facc46bb99e4ceacf3}
+Get metadata values \begin{DoxyReturn}{Returns}
+array 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+45     \{
+46         \textcolor{comment}{// TODO : this method needs to be improved }
+47         \textcolor{comment}{// This method generates one extra query per row }
+48         \textcolor{comment}{// transformed.}
+49         
+50         $class = get\_class($instance);
+51         $query = $class::where(\textcolor{stringliteral}{'session\_id'}, $instance->session\_id)->get();
+52          
+53         $data = [];
+54         \textcolor{keywordflow}{foreach}($query as $r)\{
+55             $data[$r->key] = $r->value;
+56         \}
+57     
+58         \textcolor{keywordflow}{return} $data;
+59     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityMetadataTransformer_a38bfe7aab17cf0599631c2c6c1b3fca7}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer}!include\+Activity@{include\+Activity}}
+\index{include\+Activity@{include\+Activity}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer}}
+\subsubsection[{include\+Activity}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Activity\+Metadata\+Transformer\+::include\+Activity (
+\begin{DoxyParamCaption}
+\item[{Model}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityMetadataTransformer_a38bfe7aab17cf0599631c2c6c1b3fca7}
+Include Activity
+
+\begin{DoxyReturn}{Returns}
+League 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+68     \{
+69  
+70         $activity = $instance->activity;
+71         \textcolor{keywordflow}{return} $this->item($activity, \textcolor{keyword}{new} ActivityTransformer(\textcolor{keyword}{false}));
+72     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityMetadataTransformer_a863325b774ddcfde7616686a3e0527bb}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer}!include\+User@{include\+User}}
+\index{include\+User@{include\+User}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer}}
+\subsubsection[{include\+User}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Activity\+Metadata\+Transformer\+::include\+User (
+\begin{DoxyParamCaption}
+\item[{Model}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityMetadataTransformer_a863325b774ddcfde7616686a3e0527bb}
+Include User
+
+\begin{DoxyReturn}{Returns}
+League 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+80     \{
+81     
+82         $instance = $instance->user;
+83         \textcolor{keywordflow}{return} $this->item($instance, \textcolor{keyword}{new} UserTransformer(\textcolor{keyword}{false}));
+84     \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityMetadataTransformer_ad9605adbc0b9d413715acf40ab083715}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer}!\$default\+Includes@{\$default\+Includes}}
+\index{\$default\+Includes@{\$default\+Includes}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer}}
+\subsubsection[{\$default\+Includes}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Activity\+Metadata\+Transformer\+::\$default\+Includes\hspace{0.3cm}{\ttfamily [protected]}}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityMetadataTransformer_ad9605adbc0b9d413715acf40ab083715}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= [
+            \textcolor{stringliteral}{'user'},
+            \textcolor{stringliteral}{'activity'}
+    ]
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+api/transformers/Activity\+Metadata\+Transformer.\+php\end{DoxyCompactItemize}

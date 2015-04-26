@@ -9,8 +9,6 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Commands\t
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classDMA_1_1Friends_1_1Commands_1_1ReadChannels_ad59b45e072cbdfee43b099f9606acba6}{schedule} (Schedulable \$scheduler)
-\item 
 \hyperlink{classDMA_1_1Friends_1_1Commands_1_1ReadChannels_a58b88a3a6874a74c05e11c028462e8a5}{fire} ()
 \end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
@@ -34,31 +32,9 @@ void
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-39     \{
-40         Postman::readChannels();
-41     \}
-\end{DoxyCode}
-\hypertarget{classDMA_1_1Friends_1_1Commands_1_1ReadChannels_ad59b45e072cbdfee43b099f9606acba6}{}\index{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Read\+Channels@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Read\+Channels}!schedule@{schedule}}
-\index{schedule@{schedule}!D\+M\+A\+::\+Friends\+::\+Commands\+::\+Read\+Channels@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Read\+Channels}}
-\subsubsection[{schedule}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Commands\textbackslash{}\+Read\+Channels\+::schedule (
-\begin{DoxyParamCaption}
-\item[{Schedulable}]{\$scheduler}
-\end{DoxyParamCaption}
-)}\label{classDMA_1_1Friends_1_1Commands_1_1ReadChannels_ad59b45e072cbdfee43b099f9606acba6}
-When a command should run 
-\begin{DoxyParams}[1]{Parameters}
-Scheduler & {\em \$scheduler} & \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-
-\end{DoxyReturn}
-
-\begin{DoxyCode}
-29     \{
-30         \textcolor{comment}{// Run every 5 minutes}
-31         \textcolor{keywordflow}{return} $scheduler->everyMinutes(5);
-32     \}
+27     \{
+28         Postman::readChannels();
+29     \}
 \end{DoxyCode}
 
 

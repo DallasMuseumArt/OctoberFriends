@@ -20,9 +20,11 @@ var searchData=
   ['onregistersubmit',['onRegisterSubmit',['../df/d81/classDMA_1_1Friends_1_1Components_1_1UserLogin.html#adb35ec3a5460d1a197337104a54b55b1',1,'DMA::Friends::Components::UserLogin']]],
   ['onremovemember',['onRemoveMember',['../d9/d20/classDMA_1_1Friends_1_1Components_1_1GroupManager.html#a66ab56b50c4bc943aad47bc5fdd33789',1,'DMA::Friends::Components::GroupManager']]],
   ['onrewardredeemed',['onRewardRedeemed',['../d1/d89/classDMA_1_1Friends_1_1Classes_1_1FriendsEventHandler.html#aeb8499a09334c87311a7f5840c43685a',1,'DMA::Friends::Classes::FriendsEventHandler']]],
+  ['onrun',['onRun',['../d2/ddd/classDMA_1_1Friends_1_1Components_1_1ActivityCatalog.html#a0fe286368eec900c0a6c77ea7905a8ad',1,'DMA\Friends\Components\ActivityCatalog\onRun()'],['../df/da9/classDMA_1_1Friends_1_1Components_1_1ActivityFilters.html#a5a8fc78cd25b9c2dbc5ad3e050d98591',1,'DMA\Friends\Components\ActivityFilters\onRun()']]],
   ['onsave',['onSave',['../de/dfc/classDMA_1_1Friends_1_1Components_1_1UserProfile.html#aeb1223b998f0e1e5eff79d84bda27011',1,'DMA::Friends::Components::UserProfile']]],
   ['onsearchuser',['onSearchUser',['../de/dd1/classDMA_1_1Friends_1_1Components_1_1GroupFormCreation.html#a8cc5c8e020c44811c6ccdd75c7375940',1,'DMA::Friends::Components::GroupFormCreation']]],
   ['onstepcompleted',['onStepCompleted',['../d1/d89/classDMA_1_1Friends_1_1Classes_1_1FriendsEventHandler.html#a3a99cae5eaa37efa395ef4fe8eb30c11',1,'DMA::Friends::Classes::FriendsEventHandler']]],
   ['onsubmit',['onSubmit',['../d7/df7/classDMA_1_1Friends_1_1Components_1_1GroupJoinCodeForm.html#a973e8781fba9d6310f07af9463fa8c58',1,'DMA\Friends\Components\GroupJoinCodeForm\onSubmit()'],['../d9/d20/classDMA_1_1Friends_1_1Components_1_1GroupManager.html#ab676c63165e8a5ac01b8c7e6630f187f',1,'DMA\Friends\Components\GroupManager\onSubmit()']]],
+  ['onupdate',['onUpdate',['../d2/ddd/classDMA_1_1Friends_1_1Components_1_1ActivityCatalog.html#a71ebda8105f758b9fa868b31f36da108',1,'DMA::Friends::Components::ActivityCatalog']]],
   ['onuserlogin',['onUserLogin',['../df/d81/classDMA_1_1Friends_1_1Components_1_1UserLogin.html#a9f64120e2a98aca7bb6ad628d9a72844',1,'DMA::Friends::Components::UserLogin']]]
 ];

@@ -116,6 +116,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a56951946e166c46353910da4a5c399a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5fb3de1ff5dd5186e068dcf8c5e8d154"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d8c/classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar.html#a5fb3de1ff5dd5186e068dcf8c5e8d154">render</a> ()</td></tr>
 <tr class="separator:a5fb3de1ff5dd5186e068dcf8c5e8d154"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f0b603938f9468c37716f2aab808e62"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6f0b603938f9468c37716f2aab808e62"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>getAverageFriends</b> ()</td></tr>
+<tr class="separator:a6f0b603938f9468c37716f2aab808e62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -136,18 +139,19 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    {</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        $today = date(<span class="stringliteral">&#39;Y-m-d&#39;</span>);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        $thisWeek = date(<span class="stringliteral">&#39;Y-m-d&#39;</span>, strtotime(<span class="stringliteral">&#39;last monday&#39;</span>));</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        $this-&gt;addCss(<span class="stringliteral">&#39;css/friendstoolbar.css&#39;</span>);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        $this-&gt;vars[<span class="stringliteral">&#39;numFriends&#39;</span>] = number_format(User::count());</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        $this-&gt;vars[<span class="stringliteral">&#39;todayFriends&#39;</span>] = number_format(User::where(<span class="stringliteral">&#39;created_at&#39;</span>, <span class="stringliteral">&#39;&gt;=&#39;</span>, $today)-&gt;count());</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        $this-&gt;vars[<span class="stringliteral">&#39;weekFriends&#39;</span>] = number_format(User::where(<span class="stringliteral">&#39;created_at&#39;</span>, <span class="stringliteral">&#39;&gt;=&#39;</span>, $thisWeek)-&gt;count());</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordflow">return</span> $this-&gt;makePartial(<span class="stringliteral">&#39;widget&#39;</span>);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        $today = date(<span class="stringliteral">&#39;Y-m-d&#39;</span>);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        $thisWeek = date(<span class="stringliteral">&#39;Y-m-d&#39;</span>, strtotime(<span class="stringliteral">&#39;last monday&#39;</span>));</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        $this-&gt;addCss(<span class="stringliteral">&#39;css/friendstoolbar.css&#39;</span>);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        $this-&gt;vars[<span class="stringliteral">&#39;numFriends&#39;</span>]       = number_format(User::count());</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        $this-&gt;vars[<span class="stringliteral">&#39;todayFriends&#39;</span>]     = number_format(User::where(<span class="stringliteral">&#39;created_at&#39;</span>, <span class="stringliteral">&#39;&gt;=&#39;</span>, $today)-&gt;count());</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        $this-&gt;vars[<span class="stringliteral">&#39;weekFriends&#39;</span>]      = number_format(User::where(<span class="stringliteral">&#39;created_at&#39;</span>, <span class="stringliteral">&#39;&gt;=&#39;</span>, $thisWeek)-&gt;count());</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        $this-&gt;vars[<span class="stringliteral">&#39;averageFriends&#39;</span>]   = number_format($this-&gt;getAverageFriends());</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordflow">return</span> $this-&gt;makePartial(<span class="stringliteral">&#39;widget&#39;</span>);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -163,12 +167,12 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="fragment"><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    {</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keywordflow">return</span> [</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            <span class="stringliteral">&#39;name&#39;</span>        =&gt; <span class="stringliteral">&#39;Friends Toolbar&#39;</span>,</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            <span class="stringliteral">&#39;description&#39;</span> =&gt; <span class="stringliteral">&#39;Show some basic statistics on friends&#39;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        ];</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keywordflow">return</span> [</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            <span class="stringliteral">&#39;name&#39;</span>        =&gt; <span class="stringliteral">&#39;Friends Toolbar&#39;</span>,</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            <span class="stringliteral">&#39;description&#39;</span> =&gt; <span class="stringliteral">&#39;Show some basic statistics on friends&#39;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        ];</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -179,7 +183,7 @@ Public Attributes</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 12 2015 13:36:14 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 27 2015 11:30:56 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

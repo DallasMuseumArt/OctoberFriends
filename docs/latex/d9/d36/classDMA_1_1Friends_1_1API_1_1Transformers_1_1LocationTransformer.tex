@@ -1,0 +1,53 @@
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1LocationTransformer}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\textbackslash{}Transformers\textbackslash{}Location\+Transformer Class Reference}
+\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1LocationTransformer}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Location\+Transformer@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Location\+Transformer}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\textbackslash{}Transformers\textbackslash{}Location\+Transformer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{d9/d36/classDMA_1_1Friends_1_1API_1_1Transformers_1_1LocationTransformer}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1LocationTransformer_a1c6afa02557796e620042cd23acc4ab5}{}{\bfseries get\+Data} (\$instance)\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1LocationTransformer_a1c6afa02557796e620042cd23acc4ab5}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1LocationTransformer_a455fe5c1c50b13141cc07410b2e80992}{get\+Image\+Url} (Model \$instance)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1LocationTransformer_a455fe5c1c50b13141cc07410b2e80992}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Location\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Location\+Transformer}!get\+Image\+Url@{get\+Image\+Url}}
+\index{get\+Image\+Url@{get\+Image\+Url}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Location\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Location\+Transformer}}
+\subsubsection[{get\+Image\+Url}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Location\+Transformer\+::get\+Image\+Url (
+\begin{DoxyParamCaption}
+\item[{Model}]{\$instance}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1LocationTransformer_a455fe5c1c50b13141cc07410b2e80992}
+Get Image U\+R\+L of the reward 
+\begin{DoxyParams}[1]{Parameters}
+unknown & {\em \$instance} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+34     \{
+35         \textcolor{keywordflow}{try}\{
+36             \textcolor{keywordflow}{if} (!is\_null($instance->image)) \{
+37                 \textcolor{keywordflow}{return} $instance->image->getPath();
+38             \}
+39         \}\textcolor{keywordflow}{catch}(\(\backslash\)\hyperlink{namespaceException}{Exception} $e)\{
+40             \textcolor{comment}{// Do nothing}
+41         \}
+42         \textcolor{keywordflow}{return} null;
+43     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+api/transformers/Location\+Transformer.\+php\end{DoxyCompactItemize}
