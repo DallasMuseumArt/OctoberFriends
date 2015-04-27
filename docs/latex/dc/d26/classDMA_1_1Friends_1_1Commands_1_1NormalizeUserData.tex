@@ -49,37 +49,37 @@ void
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-43     \{
-44         
-45         \textcolor{comment}{// Long run queries fill memory pretty quickly due to a default}
-46         \textcolor{comment}{// behavior of Laravel where all queries are log in memory. Disabling}
-47         \textcolor{comment}{// this log fix the issue. See http://laravel.com/docs/4.2/database#query-logging}
-48         DB::connection()->disableQueryLog();
-49         
-50         
-51         User::chunk(200, \textcolor{keyword}{function}($users)
-52         \{
-53 
-54             \textcolor{keywordflow}{foreach} ($users as $user)
-55             \{
-56                 $this->increaseCounter(\textcolor{stringliteral}{'total\_users'});
-57                 
-58                 $data = $this->normalize($user);                
-59 
-60                 \textcolor{keywordflow}{foreach}($data as $attr => $value) \{
-61                     $user->\{$attr\} = $value;
-62                 \}
+41     \{
+42         
+43         \textcolor{comment}{// Long run queries fill memory pretty quickly due to a default}
+44         \textcolor{comment}{// behavior of Laravel where all queries are log in memory. Disabling}
+45         \textcolor{comment}{// this log fix the issue. See http://laravel.com/docs/4.2/database#query-logging}
+46         DB::connection()->disableQueryLog();
+47         
+48         
+49         User::chunk(200, \textcolor{keyword}{function}($users)
+50         \{
+51 
+52             \textcolor{keywordflow}{foreach} ($users as $user)
+53             \{
+54                 $this->increaseCounter(\textcolor{stringliteral}{'total\_users'});
+55                 
+56                 $data = $this->normalize($user);                
+57 
+58                 \textcolor{keywordflow}{foreach}($data as $attr => $value) \{
+59                     $user->\{$attr\} = $value;
+60                 \}
+61                 
+62                 $user->forceSave();
 63                 
-64                 $user->forceSave();
-65                 
-66             \}
-67         \});
-68         
-69         
-70         var\_dump($this->counters);
-71         var\_dump($this->writeReport());
-72 
-73     \}
+64             \}
+65         \});
+66         
+67         
+68         var\_dump($this->counters);
+69         var\_dump($this->writeReport());
+70 
+71     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Commands_1_1NormalizeUserData_a19288b02592b7e02e667651f3de20d2a}{}\index{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Normalize\+User\+Data@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Normalize\+User\+Data}!normalize\+Phone@{normalize\+Phone}}
 \index{normalize\+Phone@{normalize\+Phone}!D\+M\+A\+::\+Friends\+::\+Commands\+::\+Normalize\+User\+Data@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Normalize\+User\+Data}}
@@ -98,47 +98,37 @@ Ambigous $<$N\+U\+L\+L, string, unknown, string$>$
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-91     \{
-92         $cleanPhone = null;
-93         $key = \textcolor{stringliteral}{'valid\_phone'};
-94         
-95         $phoneUtil = PhoneNumberUtil::getInstance();
-96         \textcolor{keywordflow}{try} \{
-97             \textcolor{comment}{// Get country code using configure timezone}
-98             $tz = Carbon::now()->getTimezone();
-99             $country\_code = array\_get($tz->getLocation(), \textcolor{stringliteral}{'country\_code'}, \textcolor{stringliteral}{'US'});
-100             
-101             \textcolor{comment}{// Parse phone number}
-102             $numberProto = $phoneUtil->parse($user->phone, $country\_code);
-103             
-104             \textcolor{keywordflow}{if} ($phoneUtil->isValidNumber($numberProto))\{
-105                 $cleanPhone = $phoneUtil->format($numberProto, PhoneNumberFormat::E164);
-106                 
-107             \}\textcolor{keywordflow}{else}\{
-108                                
-109                 \textcolor{comment}{// Emails that contain numbers can be mistaken as a vanity number ( 800 GODMA )}
-110                 \textcolor{comment}{// so just for reporting purpose I check if the phone containts '@' is more likely it is an
+89     \{
+90         $cleanPhone = null;
+91         $key = \textcolor{stringliteral}{'valid\_phone'};
+92         
+93         \textcolor{keywordflow}{try} \{
+94 
+95             \textcolor{keywordflow}{if} (!$cleanPhone = UserExtend::parsePhone($user->phone)) \{
+96                          
+97                 \textcolor{comment}{// Emails that contain numbers can be mistaken as a vanity number ( 800 GODMA )}
+98                 \textcolor{comment}{// so just for reporting purpose I check if the phone containts '@' is more likely it is an
        email }
-111                 $isEmail = preg\_match(\textcolor{stringliteral}{'/@/'}, $user->phone);
-112                 $key = ($isEmail) ? \textcolor{stringliteral}{'not\_a\_phone'} : \textcolor{stringliteral}{'invalid\_phone'}; 
-113                 $this->addToReport($user, $key, $user->phone);
-114                 
-115             \}
-116             
-117         \} \textcolor{keywordflow}{catch} (\(\backslash\)libphonenumber\(\backslash\)NumberParseException $e) \{
-118            
-119             $key = \textcolor{stringliteral}{'phone\_empty'};
-120             \textcolor{keywordflow}{if}(!empty($user->phone))\{
-121                 $key = \textcolor{stringliteral}{'not\_a\_phone'};
-122                 $this->addToReport($user, $key, $user->phone);
-123             \}
-124             
-125         \}
-126         
-127         $this->increaseCounter($key);
-128         
-129         \textcolor{keywordflow}{return} $cleanPhone;
-130     \}
+99                 $isEmail = preg\_match(\textcolor{stringliteral}{'/@/'}, $user->phone);
+100                 $key = ($isEmail) ? \textcolor{stringliteral}{'not\_a\_phone'} : \textcolor{stringliteral}{'invalid\_phone'}; 
+101                 $this->addToReport($user, $key, $user->phone);
+102                 
+103             \}
+104             
+105         \} \textcolor{keywordflow}{catch} (\(\backslash\)libphonenumber\(\backslash\)NumberParseException $e) \{
+106            
+107             $key = \textcolor{stringliteral}{'phone\_empty'};
+108             \textcolor{keywordflow}{if}(!empty($user->phone))\{
+109                 $key = \textcolor{stringliteral}{'not\_a\_phone'};
+110                 $this->addToReport($user, $key, $user->phone);
+111             \}
+112             
+113         \}
+114         
+115         $this->increaseCounter($key);
+116         
+117         \textcolor{keywordflow}{return} $cleanPhone;
+118     \}
 \end{DoxyCode}
 
 

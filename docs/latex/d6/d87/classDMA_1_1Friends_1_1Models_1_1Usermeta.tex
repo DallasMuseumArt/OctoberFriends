@@ -37,6 +37,9 @@ static \hyperlink{classDMA_1_1Friends_1_1Models_1_1Usermeta_a1acccb846d0ba68fcc9
 \item 
 \hyperlink{classDMA_1_1Friends_1_1Models_1_1Usermeta_a085486010d2c88f8676ac2e4fdbc257d}{\$timestamps} = false
 \item 
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1Usermeta_a664f37df5630b8a17b65b5d95192780b}{}{\bfseries \$primary\+Key} = \textquotesingle{}user\+\_\+id\textquotesingle{}\label{classDMA_1_1Friends_1_1Models_1_1Usermeta_a664f37df5630b8a17b65b5d95192780b}
+
+\item 
 {\bfseries \$belongs\+To}
 \end{DoxyCompactItemize}
 \subsection*{Static Public Attributes}
@@ -53,7 +56,7 @@ static \hyperlink{classDMA_1_1Friends_1_1Models_1_1Usermeta_a2d958b56be7414a58e8
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classDMA_1_1Friends_1_1Models_1_1Usermeta_aa56e4c0a56649d707f5ccf13670e838c}{}{\bfseries \$primary\+Key} = \textquotesingle{}user\+\_\+id\textquotesingle{}\label{classDMA_1_1Friends_1_1Models_1_1Usermeta_aa56e4c0a56649d707f5ccf13670e838c}
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1Usermeta_a39190deb0a2302c8edab3b5eaa70b78f}{}{\bfseries \$key} = \textquotesingle{}user\+\_\+id\textquotesingle{}\label{classDMA_1_1Friends_1_1Models_1_1Usermeta_a39190deb0a2302c8edab3b5eaa70b78f}
 
 \item 
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Usermeta_a95d74f02cd302db9566b8da29154e82d}{}{\bfseries \$guarded} = \mbox{[}\textquotesingle{}$\ast$\textquotesingle{}\mbox{]}\label{classDMA_1_1Friends_1_1Models_1_1Usermeta_a95d74f02cd302db9566b8da29154e82d}
@@ -85,20 +88,20 @@ Rain\+Lab\textbackslash{}\+User\textbackslash{}\+Models\textbackslash{}\+User & 
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-109     \{
-110         \textcolor{keywordflow}{if} (!$user)
-111             \textcolor{keywordflow}{return} null;
-112 
-113         \textcolor{keywordflow}{if} (!$user->metadata) \{
+111     \{
+112         \textcolor{keywordflow}{if} (!$user)
+113             \textcolor{keywordflow}{return} null;
 114 
-115             $meta = \textcolor{keyword}{new} \textcolor{keyword}{static};            
-116             User::find($user->getKey())->metadata()->save($meta);
-117             $user = User::find($user->getKey());
-118             
-119         \}
-120 
-121         \textcolor{keywordflow}{return} $user->metadata;
-122     \}
+115         \textcolor{keywordflow}{if} (!$user->metadata) \{
+116 
+117             $meta = \textcolor{keyword}{new} \textcolor{keyword}{static};            
+118             User::find($user->getKey())->metadata()->save($meta);
+119             $user = User::find($user->getKey());
+120             
+121         \}
+122 
+123         \textcolor{keywordflow}{return} $user->metadata;
+124     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Usermeta_a1acccb846d0ba68fcc9694cc0b1c4006}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta}!get\+Options@{get\+Options}}
 \index{get\+Options@{get\+Options}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta}}
@@ -112,17 +115,17 @@ array Return all demographic options
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-145     \{
-146         $states = State::where(\textcolor{stringliteral}{'country\_id'}, \textcolor{charliteral}{'='}, 1)->get();
-147 
-148         \textcolor{keywordflow}{return} [
-149             \textcolor{stringliteral}{'gender'}            => self::$genderOptions,
-150             \textcolor{stringliteral}{'states'}            => $states,
-151             \textcolor{stringliteral}{'race'}              => self::$raceOptions,
-152             \textcolor{stringliteral}{'household\_income'}  => self::$householdIncomeOptions,
-153             \textcolor{stringliteral}{'education'}         => self::$educationOptions,
-154         ];
-155     \}
+147     \{
+148         $states = State::where(\textcolor{stringliteral}{'country\_id'}, \textcolor{charliteral}{'='}, 1)->get();
+149 
+150         \textcolor{keywordflow}{return} [
+151             \textcolor{stringliteral}{'gender'}            => self::$genderOptions,
+152             \textcolor{stringliteral}{'states'}            => $states,
+153             \textcolor{stringliteral}{'race'}              => self::$raceOptions,
+154             \textcolor{stringliteral}{'household\_income'}  => self::$householdIncomeOptions,
+155             \textcolor{stringliteral}{'education'}         => self::$educationOptions,
+156         ];
+157     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Usermeta_ae00ecaf0d62b1ac7adc77184ae2fcbfa}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta}!scope\+By\+Points@{scope\+By\+Points}}
 \index{scope\+By\+Points@{scope\+By\+Points}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta}}
@@ -133,9 +136,9 @@ array Return all demographic options
 )}\label{classDMA_1_1Friends_1_1Models_1_1Usermeta_ae00ecaf0d62b1ac7adc77184ae2fcbfa}
 Return users that are not staff and order them by points descending 
 \begin{DoxyCode}
-128     \{
-129         \textcolor{keywordflow}{return} $query->excludeStaff()->orderBy(\textcolor{stringliteral}{'points'}, \textcolor{stringliteral}{'desc'});
-130     \}
+130     \{
+131         \textcolor{keywordflow}{return} $query->excludeStaff()->orderBy(\textcolor{stringliteral}{'points'}, \textcolor{stringliteral}{'desc'});
+132     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Usermeta_a9b2ffa9c768ce6346269295d54d5cf4b}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta}!scope\+Exclude\+Staff@{scope\+Exclude\+Staff}}
 \index{scope\+Exclude\+Staff@{scope\+Exclude\+Staff}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta}}
@@ -146,9 +149,9 @@ Return users that are not staff and order them by points descending
 )}\label{classDMA_1_1Friends_1_1Models_1_1Usermeta_a9b2ffa9c768ce6346269295d54d5cf4b}
 Exclude staff members from results 
 \begin{DoxyCode}
-136     \{
-137         \textcolor{keywordflow}{return} $query->where(\textcolor{stringliteral}{'current\_member'}, \textcolor{stringliteral}{'!='}, self::IS\_STAFF);
-138     \}
+138     \{
+139         \textcolor{keywordflow}{return} $query->where(\textcolor{stringliteral}{'current\_member'}, \textcolor{stringliteral}{'!='}, self::IS\_STAFF);
+140     \}
 \end{DoxyCode}
 
 
@@ -159,8 +162,8 @@ Exclude staff members from results
 {\bfseries Initial value\+:}
 \begin{DoxyCode}
 = [
-        \textcolor{stringliteral}{'user'}          => [\textcolor{stringliteral}{'RainLab\(\backslash\)User\(\backslash\)Models\(\backslash\)User'},
-            \textcolor{stringliteral}{'foreignKey'}    => \textcolor{stringliteral}{'user\_id'}
+        \textcolor{stringliteral}{'user'} => [\textcolor{stringliteral}{'RainLab\(\backslash\)User\(\backslash\)Models\(\backslash\)User'},
+            \textcolor{stringliteral}{'key'} => \textcolor{stringliteral}{'user\_id'}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Usermeta_a2d958b56be7414a58e8db11ce8b636ae}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta}!\$education\+Options@{\$education\+Options}}
 \index{\$education\+Options@{\$education\+Options}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta}}

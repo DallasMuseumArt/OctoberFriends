@@ -21,6 +21,8 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Models\tex
 \item 
 \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity_a5a533a3f638f99d1dd0a8e0550def49e}{scopefind\+Wordpress} (\$query, \$id)
 \item 
+\hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity_a0a9c5c7c4e86787534d2cbcbe5b03234}{scope\+By\+Category} (\$query, \$categories)
+\item 
 \hyperlink{classDMA_1_1Friends_1_1Models_1_1Activity_a03415578b3f688ecd26d27d9254d23ab}{get\+Time\+Ago\+Attribute} (\$value)
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
@@ -79,12 +81,12 @@ string The time since the badge was earned
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-137     \{
-138         \textcolor{keywordflow}{if} (!isset($this->pivot->created\_at)) \textcolor{keywordflow}{return} null;
-139 
-140         $timeAgo = \textcolor{keyword}{new} TimeAgo;
-141         \textcolor{keywordflow}{return} $timeAgo->get($this->pivot->created\_at);
-142     \}
+170     \{
+171         \textcolor{keywordflow}{if} (!isset($this->pivot->created\_at)) \textcolor{keywordflow}{return} null;
+172 
+173         $timeAgo = \textcolor{keyword}{new} TimeAgo;
+174         \textcolor{keywordflow}{return} $timeAgo->get($this->pivot->created\_at);
+175     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Activity_a98a904c739aca30f2a26152a481164b6}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}!get\+Time\+Restriction\+Data\+Attribute@{get\+Time\+Restriction\+Data\+Attribute}}
 \index{get\+Time\+Restriction\+Data\+Attribute@{get\+Time\+Restriction\+Data\+Attribute}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}}
@@ -95,9 +97,49 @@ string The time since the badge was earned
 )}\label{classDMA_1_1Friends_1_1Models_1_1Activity_a98a904c739aca30f2a26152a481164b6}
 Accessor to unserialize time\+\_\+restriction\+\_\+data attribute 
 \begin{DoxyCode}
-93     \{
-94         \textcolor{keywordflow}{return} unserialize($value);
-95     \}
+97     \{
+98         \textcolor{keywordflow}{return} unserialize($value);
+99     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1Activity_a0a9c5c7c4e86787534d2cbcbe5b03234}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}!scope\+By\+Category@{scope\+By\+Category}}
+\index{scope\+By\+Category@{scope\+By\+Category}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}}
+\subsubsection[{scope\+By\+Category}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Models\textbackslash{}\+Activity\+::scope\+By\+Category (
+\begin{DoxyParamCaption}
+\item[{}]{\$query, }
+\item[{}]{\$categories}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Models_1_1Activity_a0a9c5c7c4e86787534d2cbcbe5b03234}
+Find activities by category 
+\begin{DoxyParams}[1]{Parameters}
+string | array & {\em \$categories} & string or array of strings of category name(s) \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+140                                                          \{
+141         \textcolor{keywordflow}{if} (is\_array($categories)) \{
+142             \textcolor{comment}{// Get first category in list to begin query with whereHas}
+143             $firstcategory = array\_shift($categories);
+144             $query = $query->whereHas(\textcolor{stringliteral}{'categories'}, \textcolor{keyword}{function}($q) use ($firstcategory) \{
+145                 $q->where(\textcolor{stringliteral}{'name'}, $firstcategory);
+146             \});
+147 
+148             \textcolor{comment}{// if any categories left in list, iterate over for orWhereHas}
+149             \textcolor{keywordflow}{foreach} ($categories as $category) \{
+150                 $query = $query->orWhereHas(\textcolor{stringliteral}{'categories'}, \textcolor{keyword}{function}($q) use ($category) \{
+151                     $q->where(\textcolor{stringliteral}{'name'}, $category);
+152                 \});
+153             \}
+154             
+155             \textcolor{keywordflow}{return} $query;
+156         \}
+157         \textcolor{keywordflow}{else} \{
+158             \textcolor{comment}{// if $categories is a string, only one category to filter against}
+159             \textcolor{keywordflow}{return} $query->whereHas(\textcolor{stringliteral}{'categories'}, \textcolor{keyword}{function}($q) use ($categories) \{
+160                 $q->where(\textcolor{stringliteral}{'name'}, $categories);
+161             \});
+162         \}
+163     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Activity_aa17825817b73d3073e37d5e2c0933003}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}!scope\+Find\+Activity\+Type@{scope\+Find\+Activity\+Type}}
 \index{scope\+Find\+Activity\+Type@{scope\+Find\+Activity\+Type}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}}
@@ -109,10 +151,10 @@ Accessor to unserialize time\+\_\+restriction\+\_\+data attribute
 )}\label{classDMA_1_1Friends_1_1Models_1_1Activity_aa17825817b73d3073e37d5e2c0933003}
 Find activities by activity type 
 \begin{DoxyCode}
-119     \{
-120         \textcolor{keywordflow}{return} $query->where(\textcolor{stringliteral}{'activity\_type'}, $type)
-121             ->isActive();
-122     \}
+123     \{
+124         \textcolor{keywordflow}{return} $query->where(\textcolor{stringliteral}{'activity\_type'}, $type)
+125             ->isActive();
+126     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Activity_a9bb36aab36ff22a29b2a594617dd591c}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}!scopefind\+Code@{scopefind\+Code}}
 \index{scopefind\+Code@{scopefind\+Code}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}}
@@ -124,10 +166,10 @@ Find activities by activity type
 )}\label{classDMA_1_1Friends_1_1Models_1_1Activity_a9bb36aab36ff22a29b2a594617dd591c}
 Find an activity by its activity code 
 \begin{DoxyCode}
-110     \{
-111         \textcolor{keywordflow}{return} $query->where(\textcolor{stringliteral}{'activity\_code'}, $code)
-112             ->isActive();
-113     \}
+114     \{
+115         \textcolor{keywordflow}{return} $query->where(\textcolor{stringliteral}{'activity\_code'}, $code)
+116             ->isActive();
+117     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Activity_a5a533a3f638f99d1dd0a8e0550def49e}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}!scopefind\+Wordpress@{scopefind\+Wordpress}}
 \index{scopefind\+Wordpress@{scopefind\+Wordpress}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}}
@@ -139,9 +181,9 @@ Find an activity by its activity code
 )}\label{classDMA_1_1Friends_1_1Models_1_1Activity_a5a533a3f638f99d1dd0a8e0550def49e}
 Find activities by a wordpress id if they where imported 
 \begin{DoxyCode}
-128     \{   
-129         \textcolor{keywordflow}{return} $query->where(\textcolor{stringliteral}{'wordpress\_id'}, $id);
-130     \}  
+132     \{   
+133         \textcolor{keywordflow}{return} $query->where(\textcolor{stringliteral}{'wordpress\_id'}, $id);
+134     \}  
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Activity_acd3f12824d95be07b5221cdc9d64abf7}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}!scope\+Is\+Active@{scope\+Is\+Active}}
 \index{scope\+Is\+Active@{scope\+Is\+Active}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}}
@@ -152,10 +194,10 @@ Find activities by a wordpress id if they where imported
 )}\label{classDMA_1_1Friends_1_1Models_1_1Activity_acd3f12824d95be07b5221cdc9d64abf7}
 Return only activities that are active 
 \begin{DoxyCode}
-101     \{
-102         \textcolor{keywordflow}{return} $query->where(\textcolor{stringliteral}{'is\_published'}, \textcolor{charliteral}{'='}, 1)
-103             ->where(\textcolor{stringliteral}{'is\_archived'}, \textcolor{stringliteral}{'<>'}, 1);
-104     \}
+105     \{
+106         \textcolor{keywordflow}{return} $query->where(\textcolor{stringliteral}{'is\_published'}, \textcolor{charliteral}{'='}, 1)
+107             ->where(\textcolor{stringliteral}{'is\_archived'}, \textcolor{stringliteral}{'<>'}, 1);
+108     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Activity_ade0ffca24448c217def365d104e52866}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}!set\+Time\+Restriction\+Data\+Attribute@{set\+Time\+Restriction\+Data\+Attribute}}
 \index{set\+Time\+Restriction\+Data\+Attribute@{set\+Time\+Restriction\+Data\+Attribute}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}}
@@ -166,13 +208,13 @@ Return only activities that are active
 )}\label{classDMA_1_1Friends_1_1Models_1_1Activity_ade0ffca24448c217def365d104e52866}
 Mutator to ensure time\+\_\+restriction\+\_\+data is serialized 
 \begin{DoxyCode}
-81     \{
-82         \textcolor{keywordflow}{if} (is\_array($value)) \{
-83             $value = serialize($value);
-84         \}
-85 
-86         $this->attributes[\textcolor{stringliteral}{'time\_restriction\_data'}] = $value;
-87     \}
+85     \{
+86         \textcolor{keywordflow}{if} (is\_array($value)) \{
+87             $value = serialize($value);
+88         \}
+89 
+90         $this->attributes[\textcolor{stringliteral}{'time\_restriction\_data'}] = $value;
+91     \}
 \end{DoxyCode}
 
 
@@ -217,7 +259,8 @@ Mutator to ensure time\+\_\+restriction\+\_\+data is serialized
 {\bfseries Initial value\+:}
 \begin{DoxyCode}
 = [
-        \textcolor{stringliteral}{'categories'}    => [\textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Category'}, \textcolor{stringliteral}{'name'} => \textcolor{stringliteral}{'object'}
+        \textcolor{stringliteral}{'categories'}    => [\textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Category'}, 
+            \textcolor{stringliteral}{'name'}  => \textcolor{stringliteral}{'object'}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Activity_a0b92e75aa8d92e2d3c9b24f54cd813bc}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}!\$rules@{\$rules}}
 \index{\$rules@{\$rules}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}}

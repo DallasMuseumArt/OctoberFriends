@@ -1,0 +1,81 @@
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1MediaTransformer}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\textbackslash{}Transformers\textbackslash{}Media\+Transformer Class Reference}
+\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1MediaTransformer}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Media\+Transformer@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Media\+Transformer}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\textbackslash{}Transformers\textbackslash{}Media\+Transformer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{d8/d43/classDMA_1_1Friends_1_1API_1_1Transformers_1_1MediaTransformer}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1MediaTransformer_ae95306d52270bf068bfccb87a537fdf0}{get\+Data} (\$instance)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1MediaTransformer_aac92b6cb041d5de2336218c380e7c787}{get\+Image\+Url} (Model \$instance, \$size=null)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1MediaTransformer_ae95306d52270bf068bfccb87a537fdf0}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Media\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Media\+Transformer}!get\+Data@{get\+Data}}
+\index{get\+Data@{get\+Data}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Media\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Media\+Transformer}}
+\subsubsection[{get\+Data}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Media\+Transformer\+::get\+Data (
+\begin{DoxyParamCaption}
+\item[{}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1MediaTransformer_ae95306d52270bf068bfccb87a537fdf0}
+\begin{DoxySeeAlso}{See also}
+\+::get\+Data() 
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+15     \{
+16         \textcolor{keywordflow}{return} [
+17                 \textcolor{stringliteral}{'thumbnail'}      => $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1MediaTransformer_aac92b6cb041d5de2336218c380e7c787}{getImageUrl}($instance, [50, 50]),
+18                 \textcolor{stringliteral}{'medium'}         => $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1MediaTransformer_aac92b6cb041d5de2336218c380e7c787}{getImageUrl}($instance, [300, 300]),
+19                 \textcolor{stringliteral}{'large'}          => $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1MediaTransformer_aac92b6cb041d5de2336218c380e7c787}{getImageUrl}($instance),
+20         ];
+21     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1MediaTransformer_aac92b6cb041d5de2336218c380e7c787}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Media\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Media\+Transformer}!get\+Image\+Url@{get\+Image\+Url}}
+\index{get\+Image\+Url@{get\+Image\+Url}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Media\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Media\+Transformer}}
+\subsubsection[{get\+Image\+Url}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Media\+Transformer\+::get\+Image\+Url (
+\begin{DoxyParamCaption}
+\item[{Model}]{\$instance, }
+\item[{}]{\$size = {\ttfamily null}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1MediaTransformer_aac92b6cb041d5de2336218c380e7c787}
+Get Image U\+R\+L of the reward 
+\begin{DoxyParams}[1]{Parameters}
+October\textbackslash{}\+Rain\textbackslash{}\+Database\textbackslash{}\+Model & {\em \$instance} & \\
+\hline
+array & {\em \$size} & use the following format \mbox{[}\$width, \$height\mbox{]} \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+30     \{
+31         \textcolor{keywordflow}{try}\{
+32             \textcolor{keywordflow}{if} (!is\_null($instance->image)) \{
+33                 \textcolor{keywordflow}{if} (!is\_null($size) && is\_array($size)) \{
+34                     \textcolor{keywordflow}{return} $instance->image->getThumb($size[0], $size[1], [\textcolor{stringliteral}{'extension'} => \textcolor{stringliteral}{'png'}]);
+35                 \}\textcolor{keywordflow}{else}\{
+36 \textcolor{preprocessor}{                    # Force original image to be a PNG. I am doing this for consistency with other }
+37 \textcolor{preprocessor}{                    # images derivatives. But it my not necessary and getPath() will be enough}
+38                     \textcolor{keywordflow}{return} $instance->image->getThumb(\textcolor{stringliteral}{'auto'}, \textcolor{stringliteral}{'auto'}, [\textcolor{stringliteral}{'extension'} => \textcolor{stringliteral}{'png'}]);
+39                 \}
+40             \}
+41         \}\textcolor{keywordflow}{catch}(\(\backslash\)\hyperlink{namespaceException}{Exception} $e)\{
+42             \textcolor{comment}{// Do nothing}
+43         \}
+44         \textcolor{keywordflow}{return} null;
+45     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+api/transformers/Media\+Transformer.\+php\end{DoxyCompactItemize}

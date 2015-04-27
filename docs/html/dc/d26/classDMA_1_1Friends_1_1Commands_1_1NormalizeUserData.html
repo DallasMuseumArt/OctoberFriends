@@ -153,37 +153,37 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Read and process incomming data from listenable channels </p><dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<div class="fragment"><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="comment">// Long run queries fill memory pretty quickly due to a default</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="comment">// behavior of Laravel where all queries are log in memory. Disabling</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="comment">// this log fix the issue. See http://laravel.com/docs/4.2/database#query-logging</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        DB::connection()-&gt;disableQueryLog();</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        User::chunk(200, <span class="keyword">function</span>($users)</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keywordflow">foreach</span> ($users as $user)</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                $this-&gt;increaseCounter(<span class="stringliteral">&#39;total_users&#39;</span>);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                $data = $this-&gt;normalize($user);                </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                <span class="keywordflow">foreach</span>($data as $attr =&gt; $value) {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                    $user-&gt;{$attr} = $value;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                }</div>
+<div class="fragment"><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="comment">// Long run queries fill memory pretty quickly due to a default</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="comment">// behavior of Laravel where all queries are log in memory. Disabling</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="comment">// this log fix the issue. See http://laravel.com/docs/4.2/database#query-logging</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        DB::connection()-&gt;disableQueryLog();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        User::chunk(200, <span class="keyword">function</span>($users)</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="keywordflow">foreach</span> ($users as $user)</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                $this-&gt;increaseCounter(<span class="stringliteral">&#39;total_users&#39;</span>);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                $data = $this-&gt;normalize($user);                </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                <span class="keywordflow">foreach</span>($data as $attr =&gt; $value) {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                    $user-&gt;{$attr} = $value;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                }</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                $user-&gt;forceSave();</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                $user-&gt;forceSave();</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            }</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        });</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        var_dump($this-&gt;counters);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        var_dump($this-&gt;writeReport());</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            }</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        });</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        var_dump($this-&gt;counters);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        var_dump($this-&gt;writeReport());</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -215,46 +215,36 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Ambigous &lt;NULL, string, unknown, string&gt; </dd></dl>
-<div class="fragment"><div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    {</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        $cleanPhone = null;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        $key = <span class="stringliteral">&#39;valid_phone&#39;</span>;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        $phoneUtil = PhoneNumberUtil::getInstance();</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keywordflow">try</span> {</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            <span class="comment">// Get country code using configure timezone</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            $tz = Carbon::now()-&gt;getTimezone();</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            $country_code = array_get($tz-&gt;getLocation(), <span class="stringliteral">&#39;country_code&#39;</span>, <span class="stringliteral">&#39;US&#39;</span>);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            <span class="comment">// Parse phone number</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            $numberProto = $phoneUtil-&gt;parse($user-&gt;phone, $country_code);</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <span class="keywordflow">if</span> ($phoneUtil-&gt;isValidNumber($numberProto)){</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                $cleanPhone = $phoneUtil-&gt;format($numberProto, PhoneNumberFormat::E164);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            }<span class="keywordflow">else</span>{</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                               </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                <span class="comment">// Emails that contain numbers can be mistaken as a vanity number ( 800 GODMA )</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                <span class="comment">// so just for reporting purpose I check if the phone containts &#39;@&#39; is more likely it is an email </span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                $isEmail = preg_match(<span class="stringliteral">&#39;/@/&#39;</span>, $user-&gt;phone);</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                $key = ($isEmail) ? <span class="stringliteral">&#39;not_a_phone&#39;</span> : <span class="stringliteral">&#39;invalid_phone&#39;</span>; </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                $this-&gt;addToReport($user, $key, $user-&gt;phone);</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            }</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            </div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        } <span class="keywordflow">catch</span> (\libphonenumber\NumberParseException $e) {</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;           </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            $key = <span class="stringliteral">&#39;phone_empty&#39;</span>;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            <span class="keywordflow">if</span>(!empty($user-&gt;phone)){</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                $key = <span class="stringliteral">&#39;not_a_phone&#39;</span>;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                $this-&gt;addToReport($user, $key, $user-&gt;phone);</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            }</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            </div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        }</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        $this-&gt;increaseCounter($key);</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        </div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <span class="keywordflow">return</span> $cleanPhone;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    {</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        $cleanPhone = null;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        $key = <span class="stringliteral">&#39;valid_phone&#39;</span>;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordflow">try</span> {</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            <span class="keywordflow">if</span> (!$cleanPhone = UserExtend::parsePhone($user-&gt;phone)) {</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                         </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                <span class="comment">// Emails that contain numbers can be mistaken as a vanity number ( 800 GODMA )</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                <span class="comment">// so just for reporting purpose I check if the phone containts &#39;@&#39; is more likely it is an email </span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                $isEmail = preg_match(<span class="stringliteral">&#39;/@/&#39;</span>, $user-&gt;phone);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                $key = ($isEmail) ? <span class="stringliteral">&#39;not_a_phone&#39;</span> : <span class="stringliteral">&#39;invalid_phone&#39;</span>; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                $this-&gt;addToReport($user, $key, $user-&gt;phone);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            }</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        } <span class="keywordflow">catch</span> (\libphonenumber\NumberParseException $e) {</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;           </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            $key = <span class="stringliteral">&#39;phone_empty&#39;</span>;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            <span class="keywordflow">if</span>(!empty($user-&gt;phone)){</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                $key = <span class="stringliteral">&#39;not_a_phone&#39;</span>;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                $this-&gt;addToReport($user, $key, $user-&gt;phone);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            }</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        }</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        $this-&gt;increaseCounter($key);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="keywordflow">return</span> $cleanPhone;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -265,7 +255,7 @@ Protected Attributes</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 12 2015 13:36:14 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 27 2015 11:30:56 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

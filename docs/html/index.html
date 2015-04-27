@@ -86,9 +86,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="el" href="d2/d01/namespaceDMA.html">DMA</a> Friends is an open source plugin for <a href="http://octobercms.com">October CMS</a> that encourages and recognizes visitor participation as an essential ingredient of the museum experience.</p>
-<h3>NOTE</h3>
-<p>The friends plugin is currently designed to work with builds no later then 186 of October CMS</p>
-<h1>Installation</h1>
+<h1>Installation (manual)</h1>
 <ul>
 <li>Download and complete the installation for October CMS (<a href="http://octobercms.com">http://octobercms.com</a>)</li>
 <li>Install the Rainlab "User" Plugin</li>
@@ -97,13 +95,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>Then run: <code>php artisan october:up</code>.</li>
 <li>Go to the <a href="https://github.com/DallasMuseumArt/OctoberFriendsTheme">Friends Theme Repository</a> for instructions on downloading and installing the companion theme.</li>
 </ul>
+<h3>Installing Rainlab plugin:</h3>
+<p>Log into to the OctoberCMS backend (default <a href="http://HOSTNAME/backend">http://HOSTNAME/backend</a>) site. Click Settings. Select System / Updates from the left menu. Type rainlab.user and click Install Plugin on this page.</p>
+<h1>Installation via Makefile</h1>
+<ul>
+<li>Download the makefile in this repository installer/Makefile (e.g. curl -O <a href="https://raw.githubusercontent.com/artsmia/OctoberFriends/master/installer/Makefile">https://raw.githubusercontent.com/artsmia/OctoberFriends/master/installer/Makefile</a>)</li>
+<li>Uncomment and set the lines for your Github username and the OctoberCMS database details.</li>
+<li>Run <code>make install</code> in your chosen install directory.</li>
+</ul>
 <h1>Documentation</h1>
 <p><a class="el" href="df/d06/md_docs_ACTIVITY-TYPES.html">Developing custom activity types</a></p>
 <p><a class="el" href="df/d0e/md_docs_EVENTS.html">Using custom events</a></p>
 <p>PHP API Documentation is available at <a href="http://developer.dma.org/friends/">http://developer.dma.org/friends/</a></p>
 <p>OctoberCMS Documentation is available at <a href="https://octobercms.com/docs/">https://octobercms.com/docs/</a></p>
-<h3>Installing Rainlab plugin:</h3>
-<p>Log into to the OctoberCMS backend (default <a href="http://HOSTNAME/backent">http://HOSTNAME/backent</a>) site. Click Settings. Select System / Updates from the left menu. Type rainlab.user and click Install Plugin on this page.</p>
 <h3>(LEGACY) Wordpress Migrations</h3>
 <p>If you are migrating from a wordpress/badgeos installation of friends you will also need to provide database configuration in order to migrate your data</p>
 <ul>
@@ -125,7 +129,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 12 2015 13:36:15 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 27 2015 11:30:56 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

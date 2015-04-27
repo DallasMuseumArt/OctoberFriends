@@ -12,6 +12,9 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Report\+Wi
 \hyperlink{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a56951946e166c46353910da4a5c399a1}{widget\+Details} ()
 \item 
 \hyperlink{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a5fb3de1ff5dd5186e068dcf8c5e8d154}{render} ()
+\item 
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a6f0b603938f9468c37716f2aab808e62}{}{\bfseries get\+Average\+Friends} ()\label{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a6f0b603938f9468c37716f2aab808e62}
+
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -31,18 +34,20 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Report\+Wi
 )}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a5fb3de1ff5dd5186e068dcf8c5e8d154}
 
 \begin{DoxyCode}
-27     \{
-28         $today = date(\textcolor{stringliteral}{'Y-m-d'});
-29         $thisWeek = date(\textcolor{stringliteral}{'Y-m-d'}, strtotime(\textcolor{stringliteral}{'last monday'}));
-30 
-31         $this->addCss(\textcolor{stringliteral}{'css/friendstoolbar.css'});
-32 
-33         $this->vars[\textcolor{stringliteral}{'numFriends'}] = number\_format(User::count());
-34         $this->vars[\textcolor{stringliteral}{'todayFriends'}] = number\_format(User::where(\textcolor{stringliteral}{'created\_at'}, \textcolor{stringliteral}{'>='}, $today)->count());
-35         $this->vars[\textcolor{stringliteral}{'weekFriends'}] = number\_format(User::where(\textcolor{stringliteral}{'created\_at'}, \textcolor{stringliteral}{'>='}, $thisWeek)->count());
-36 
-37         \textcolor{keywordflow}{return} $this->makePartial(\textcolor{stringliteral}{'widget'});
-38     \}
+28     \{
+29         $today = date(\textcolor{stringliteral}{'Y-m-d'});
+30         $thisWeek = date(\textcolor{stringliteral}{'Y-m-d'}, strtotime(\textcolor{stringliteral}{'last monday'}));
+31 
+32         $this->addCss(\textcolor{stringliteral}{'css/friendstoolbar.css'});
+33 
+34         $this->vars[\textcolor{stringliteral}{'numFriends'}]       = number\_format(User::count());
+35         $this->vars[\textcolor{stringliteral}{'todayFriends'}]     = number\_format(User::where(\textcolor{stringliteral}{'created\_at'}, \textcolor{stringliteral}{'>='}, $today)->count());
+36         $this->vars[\textcolor{stringliteral}{'weekFriends'}]      = number\_format(User::where(\textcolor{stringliteral}{'created\_at'}, \textcolor{stringliteral}{'>='}, $thisWeek)->count()
+      );
+37         $this->vars[\textcolor{stringliteral}{'averageFriends'}]   = number\_format($this->getAverageFriends());
+38 
+39         \textcolor{keywordflow}{return} $this->makePartial(\textcolor{stringliteral}{'widget'});
+40     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a56951946e166c46353910da4a5c399a1}{}\index{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Toolbar@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Toolbar}!widget\+Details@{widget\+Details}}
 \index{widget\+Details@{widget\+Details}!D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Toolbar@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Toolbar}}
@@ -53,12 +58,12 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Report\+Wi
 )}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a56951946e166c46353910da4a5c399a1}
 
 \begin{DoxyCode}
-16     \{
-17         \textcolor{keywordflow}{return} [
-18             \textcolor{stringliteral}{'name'}        => \textcolor{stringliteral}{'Friends Toolbar'},
-19             \textcolor{stringliteral}{'description'} => \textcolor{stringliteral}{'Show some basic statistics on friends'}
-20         ];
-21     \}
+17     \{
+18         \textcolor{keywordflow}{return} [
+19             \textcolor{stringliteral}{'name'}        => \textcolor{stringliteral}{'Friends Toolbar'},
+20             \textcolor{stringliteral}{'description'} => \textcolor{stringliteral}{'Show some basic statistics on friends'}
+21         ];
+22     \}
 \end{DoxyCode}
 
 

@@ -1,0 +1,235 @@
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\textbackslash{}Transformers\textbackslash{}User\+Transformer Class Reference}
+\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+User\+Transformer@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+User\+Transformer}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\textbackslash{}Transformers\textbackslash{}User\+Transformer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{d3/dfe/classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_a00a7549e59791ab776f1acc1b1da204f}{get\+Data} (\$instance)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_abb4a5b87721f5caca79874bc98147e69}{get\+Extended\+Data} (\$instance)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_a0c0f66cc4dd01370a28522286c1b06cb}{include\+Profile} (Model \$instance)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_ac6526f06acc7cb08fc9818a8c18f3f8c}{include\+Rewards} (Model \$instance)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_a4a7b717ef0fbf0ad65f32f716e7b1ca8}{include\+Activities} (Model \$instance)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_aea162dae412a9207f5ccbf217992df4d}{include\+Badges} (Model \$instance)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_a94d6de2a7dbec85211fa761d585187e6}{get\+Avatar} (Model \$instance)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_adfc877db1daa2c1344cb5137862a5be3}{get\+Metadata\+Value} (Model \$instance, \$fieldname)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_a0234856f6f29ea6812ce84c382e556d4}{}{\bfseries \$use\+Extended\+Data} = false\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_a0234856f6f29ea6812ce84c382e556d4}
+
+\item 
+{\bfseries \$available\+Includes}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_a94d6de2a7dbec85211fa761d585187e6}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}!get\+Avatar@{get\+Avatar}}
+\index{get\+Avatar@{get\+Avatar}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}}
+\subsubsection[{get\+Avatar}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+User\+Transformer\+::get\+Avatar (
+\begin{DoxyParamCaption}
+\item[{Model}]{\$instance}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_a94d6de2a7dbec85211fa761d585187e6}
+Get U\+R\+L path to user avatar 
+\begin{DoxyParams}[1]{Parameters}
+unknown & {\em \$instance} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+69     \{
+70         \textcolor{keywordflow}{try}\{
+71             \textcolor{keywordflow}{if} (!is\_null($instance->avatar)) \{
+72                 \textcolor{keywordflow}{return} $instance->avatar->getThumb(\textcolor{stringliteral}{'auto'}, \textcolor{stringliteral}{'auto'}, [\textcolor{stringliteral}{'extension'} => \textcolor{stringliteral}{'png'}]);
+73             \}
+74         \}\textcolor{keywordflow}{catch}(\(\backslash\)\hyperlink{namespaceException}{Exception} $e)\{
+75             \textcolor{comment}{// Do nothing}
+76         \}
+77         \textcolor{keywordflow}{return} null;
+78     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_a00a7549e59791ab776f1acc1b1da204f}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}!get\+Data@{get\+Data}}
+\index{get\+Data@{get\+Data}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}}
+\subsubsection[{get\+Data}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+User\+Transformer\+::get\+Data (
+\begin{DoxyParamCaption}
+\item[{}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_a00a7549e59791ab776f1acc1b1da204f}
+\begin{DoxySeeAlso}{See also}
+\+::get\+Data() 
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+39     \{
+40         $data = [
+41             \textcolor{stringliteral}{'id'} => (int)$instance->id, 
+42             \textcolor{comment}{// first\_name and last\_name are stored in usermetadata model. }
+43             \textcolor{comment}{// not sure why were are not using name and surname of the User model     }
+44             \textcolor{stringliteral}{'first\_name'} => $this->getMetadataValue($instance, \textcolor{stringliteral}{'first\_name'}),
+45             \textcolor{stringliteral}{'last\_name'} => $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_adfc877db1daa2c1344cb5137862a5be3}{getMetadataValue}($instance, \textcolor{stringliteral}{'last\_name'}),
+46             \textcolor{stringliteral}{'username'} => $instance->username,
+47             \textcolor{stringliteral}{'avatar\_url'} => $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_a94d6de2a7dbec85211fa761d585187e6}{getAvatar}($instance),
+48         ];
+49         
+50         \textcolor{keywordflow}{return} $data;
+51     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_abb4a5b87721f5caca79874bc98147e69}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}!get\+Extended\+Data@{get\+Extended\+Data}}
+\index{get\+Extended\+Data@{get\+Extended\+Data}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}}
+\subsubsection[{get\+Extended\+Data}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+User\+Transformer\+::get\+Extended\+Data (
+\begin{DoxyParamCaption}
+\item[{}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_abb4a5b87721f5caca79874bc98147e69}
+\begin{DoxySeeAlso}{See also}
+\+::get\+Extended\+Data() 
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+58     \{
+59         \textcolor{comment}{// Adding full user profile by the Fractal embeding system}
+60         $this->setDefaultIncludes([\textcolor{stringliteral}{'profile'}, \textcolor{stringliteral}{'rewards'}, \textcolor{stringliteral}{'activities'}, \textcolor{stringliteral}{'badges'}]);
+61         
+62     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_adfc877db1daa2c1344cb5137862a5be3}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}!get\+Metadata\+Value@{get\+Metadata\+Value}}
+\index{get\+Metadata\+Value@{get\+Metadata\+Value}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}}
+\subsubsection[{get\+Metadata\+Value}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+User\+Transformer\+::get\+Metadata\+Value (
+\begin{DoxyParamCaption}
+\item[{Model}]{\$instance, }
+\item[{}]{\$fieldname}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_adfc877db1daa2c1344cb5137862a5be3}
+Helper method to get User metadata fields 
+\begin{DoxyParams}[1]{Parameters}
+Model & {\em \$instance} & \\
+\hline
+string & {\em \$fieldname} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+mixed 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+87     \{
+88         \textcolor{keywordflow}{if} (!is\_null($instance->metadata)) \{
+89             \textcolor{keywordflow}{return} $instance->metadata->\{$fieldname\};
+90         \}
+91         \textcolor{keywordflow}{return} null;
+92     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_a4a7b717ef0fbf0ad65f32f716e7b1ca8}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}!include\+Activities@{include\+Activities}}
+\index{include\+Activities@{include\+Activities}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}}
+\subsubsection[{include\+Activities}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+User\+Transformer\+::include\+Activities (
+\begin{DoxyParamCaption}
+\item[{Model}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_a4a7b717ef0fbf0ad65f32f716e7b1ca8}
+Include User activites
+
+\begin{DoxyReturn}{Returns}
+League 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+125     \{
+126         $rewards = $instance->rewards;
+127         \textcolor{keywordflow}{return} $this->collection($rewards, \textcolor{keyword}{new} ActivityTransformer(\textcolor{keyword}{false}));    
+128     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_aea162dae412a9207f5ccbf217992df4d}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}!include\+Badges@{include\+Badges}}
+\index{include\+Badges@{include\+Badges}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}}
+\subsubsection[{include\+Badges}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+User\+Transformer\+::include\+Badges (
+\begin{DoxyParamCaption}
+\item[{Model}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_aea162dae412a9207f5ccbf217992df4d}
+Include User badges
+
+\begin{DoxyReturn}{Returns}
+League 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+137     \{
+138         $badges = $instance->badges;
+139         \textcolor{keywordflow}{return} $this->collection($badges, \textcolor{keyword}{new} BadgeTransformer(\textcolor{keyword}{false}));
+140     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_a0c0f66cc4dd01370a28522286c1b06cb}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}!include\+Profile@{include\+Profile}}
+\index{include\+Profile@{include\+Profile}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}}
+\subsubsection[{include\+Profile}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+User\+Transformer\+::include\+Profile (
+\begin{DoxyParamCaption}
+\item[{Model}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_a0c0f66cc4dd01370a28522286c1b06cb}
+Include Users profile data from other models
+
+\begin{DoxyReturn}{Returns}
+League 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+101     \{
+102         \textcolor{keywordflow}{return} $this->item($instance, \textcolor{keyword}{new} UserProfileTransformer);
+103     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_ac6526f06acc7cb08fc9818a8c18f3f8c}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}!include\+Rewards@{include\+Rewards}}
+\index{include\+Rewards@{include\+Rewards}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}}
+\subsubsection[{include\+Rewards}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+User\+Transformer\+::include\+Rewards (
+\begin{DoxyParamCaption}
+\item[{Model}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_ac6526f06acc7cb08fc9818a8c18f3f8c}
+Include User rewards
+
+\begin{DoxyReturn}{Returns}
+League 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+111     \{
+112     
+113         $rewards = $instance->rewards;
+114         $item = $this->collection($rewards, \textcolor{keyword}{new} RewardTransformer(\textcolor{keyword}{false}));
+115         \textcolor{keywordflow}{return} $item;
+116     
+117     \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_aa77a950bb8a66a7454ffae02e7e5982c}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}!\$available\+Includes@{\$available\+Includes}}
+\index{\$available\+Includes@{\$available\+Includes}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}}
+\subsubsection[{\$available\+Includes}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+User\+Transformer\+::\$available\+Includes\hspace{0.3cm}{\ttfamily [protected]}}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_aa77a950bb8a66a7454ffae02e7e5982c}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= [
+            \textcolor{stringliteral}{'profile'},
+            \textcolor{stringliteral}{'rewards'},
+            \textcolor{stringliteral}{'activities'},
+            \textcolor{stringliteral}{'badges'}
+    ]
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+api/transformers/User\+Transformer.\+php\end{DoxyCompactItemize}

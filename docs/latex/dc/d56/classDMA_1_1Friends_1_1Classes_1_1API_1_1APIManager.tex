@@ -1,0 +1,158 @@
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}A\+P\+I\textbackslash{}A\+P\+I\+Manager Class Reference}
+\label{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+A\+P\+I\textbackslash{}\+A\+P\+I\+Manager@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+A\+P\+I\textbackslash{}\+A\+P\+I\+Manager}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager_a7f1a8fb5292558288b627ca0d05939ab}{register\+Resources} (array \$resources)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager_a4840b21b124bdd3640f33d52511defdf}{register\+Resource} (\$url, \$resource\+Class\+Name)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager_aeafe3f85b5ab18331264fb4ce04085c0}{get\+Resources} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager_a38dc407ea186640c86b96caf7b908df3}{get\+Routes} (\$include\+Namespaces=false)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager_a03303291e15aa07cb42c99f051a319c5}{load\+Registered\+Resources} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager_aeafe3f85b5ab18331264fb4ce04085c0}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+A\+P\+I\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+A\+P\+I\+Manager}!get\+Resources@{get\+Resources}}
+\index{get\+Resources@{get\+Resources}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+A\+P\+I\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+A\+P\+I\+Manager}}
+\subsubsection[{get\+Resources}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+A\+P\+I\textbackslash{}\+A\+P\+I\+Manager\+::get\+Resources (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager_aeafe3f85b5ab18331264fb4ce04085c0}
+Get all register resources \begin{DoxyReturn}{Returns}
+array 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+53     \{
+54         $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager_a03303291e15aa07cb42c99f051a319c5}{loadRegisteredResources}();
+55         \textcolor{keywordflow}{return} $this->resources;
+56     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager_a38dc407ea186640c86b96caf7b908df3}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+A\+P\+I\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+A\+P\+I\+Manager}!get\+Routes@{get\+Routes}}
+\index{get\+Routes@{get\+Routes}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+A\+P\+I\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+A\+P\+I\+Manager}}
+\subsubsection[{get\+Routes}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+A\+P\+I\textbackslash{}\+A\+P\+I\+Manager\+::get\+Routes (
+\begin{DoxyParamCaption}
+\item[{}]{\$include\+Namespaces = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager_a38dc407ea186640c86b96caf7b908df3}
+Register Laravel routes of each registered resources 
+\begin{DoxyParams}[1]{Parameters}
+bool & {\em \$include\+Namespaces} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+63     \{
+64         \textcolor{keywordflow}{foreach}($this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager_aeafe3f85b5ab18331264fb4ce04085c0}{getResources}() as $url => $class)\{
+65             \textcolor{keywordflow}{try}\{
+66                 $resource = App::make($class);
+67                 
+68                 \textcolor{comment}{// Register additional routes first}
+69                 \textcolor{keywordflow}{if}(method\_exists($resource, \textcolor{stringliteral}{'getAdditionalRoutes'}))\{
+70                     $extra = $resource->getAdditionalRoutes();
+71                     \textcolor{keywordflow}{foreach} ($extra as $u => $args) \{
+72                         $verbs = $args[\textcolor{stringliteral}{'verbs'}];
+73                         \textcolor{keywordflow}{foreach}($verbs as $v) \{
+74                             \hyperlink{namespaceRoute}{Route}::\{$v\}($url . \textcolor{charliteral}{'/'} . $u, $class . \textcolor{stringliteral}{"@"} . $args[\textcolor{stringliteral}{'handler'}]);
+75                         \}
+76                     \}
+77                 \}
+78                 
+79                 \textcolor{keywordflow}{if}(is\_subclass\_of($resource, \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Classes\(\backslash\)API\(\backslash\)BaseResource'}))\{
+80                     \textcolor{comment}{// Register resource}
+81                     Route::resource($url, $class);
+82                 \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (is\_subclass\_of($resource, \textcolor{stringliteral}{'\(\backslash\)Controller'})) \{
+83                     \textcolor{comment}{// Register controller}
+84                     Route::controller($url, $class);
+85                 \}
+86 
+87             \}\textcolor{keywordflow}{catch}(\hyperlink{namespaceException}{Exception} $e)\{
+88                Log::error(\textcolor{stringliteral}{"API : Resource endpoint fail to register due to '"} . $e->getMessage() . \textcolor{stringliteral}{"'"});
+89             \}
+90         \}
+91         
+92         \textcolor{comment}{// Catch all}
+93         Route::any(\textcolor{stringliteral}{'\{all?\}'}, \textcolor{keyword}{function}($path) \{ 
+94             \textcolor{keywordflow}{return} Response::api()->errorNotFound(); 
+95         \})->where(\textcolor{stringliteral}{'all'}, \textcolor{stringliteral}{'.+'});
+96         
+97 
+98     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager_a03303291e15aa07cb42c99f051a319c5}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+A\+P\+I\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+A\+P\+I\+Manager}!load\+Registered\+Resources@{load\+Registered\+Resources}}
+\index{load\+Registered\+Resources@{load\+Registered\+Resources}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+A\+P\+I\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+A\+P\+I\+Manager}}
+\subsubsection[{load\+Registered\+Resources}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+A\+P\+I\textbackslash{}\+A\+P\+I\+Manager\+::load\+Registered\+Resources (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager_a03303291e15aa07cb42c99f051a319c5}
+Loads registered Friend\+A\+P\+I resources from modules and plugins \begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+106     \{
+107         $plugins = PluginManager::instance()->getPlugins();
+108         \textcolor{keywordflow}{foreach} ($plugins as $pluginId => $pluginObj) \{
+109             $resources = null;
+110             \textcolor{keywordflow}{if}(method\_exists($pluginObj, \textcolor{stringliteral}{'registerFriendAPIResources'})) \{
+111                 $resources = $pluginObj->registerFriendAPIResources();
+112             \}
+113             \textcolor{keywordflow}{if} (!is\_array($resources)) \{
+114                 \textcolor{keywordflow}{continue};
+115             \}
+116     
+117             $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager_a7f1a8fb5292558288b627ca0d05939ab}{registerResources}($resources);
+118         \}
+119     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager_a4840b21b124bdd3640f33d52511defdf}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+A\+P\+I\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+A\+P\+I\+Manager}!register\+Resource@{register\+Resource}}
+\index{register\+Resource@{register\+Resource}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+A\+P\+I\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+A\+P\+I\+Manager}}
+\subsubsection[{register\+Resource}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+A\+P\+I\textbackslash{}\+A\+P\+I\+Manager\+::register\+Resource (
+\begin{DoxyParamCaption}
+\item[{}]{\$url, }
+\item[{}]{\$resource\+Class\+Name}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager_a4840b21b124bdd3640f33d52511defdf}
+Register a single A\+P\+I resource 
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$url} & \\
+\hline
+string & {\em \$resource\+Class\+Name} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+44     \{
+45         $this->resources[$url] = $resourceClassName;
+46     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager_a7f1a8fb5292558288b627ca0d05939ab}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+A\+P\+I\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+A\+P\+I\+Manager}!register\+Resources@{register\+Resources}}
+\index{register\+Resources@{register\+Resources}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+A\+P\+I\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+A\+P\+I\+Manager}}
+\subsubsection[{register\+Resources}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+A\+P\+I\textbackslash{}\+A\+P\+I\+Manager\+::register\+Resources (
+\begin{DoxyParamCaption}
+\item[{array}]{\$resources}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager_a7f1a8fb5292558288b627ca0d05939ab}
+Regiter multiple A\+P\+I Resources using the following array structure\+:
+
+\mbox{[} $<$endpoint\+\_\+url$>$ =$>$ $<$classname\+\_\+resource$>$, $<$endpoint\+\_\+url$>$ =$>$ $<$classname\+\_\+resource$>$, ...\mbox{]}
+
+eg.
+
+\mbox{[} \textquotesingle{}activity\textquotesingle{} =$>$ \textquotesingle{}\hyperlink{namespaceDMA}{D\+M\+A}\textquotesingle{} \mbox{]} 
+\begin{DoxyCode}
+33     \{
+34         $this->resources = array\_merge($this->resources, $resources);
+35     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+classes/api/A\+P\+I\+Manager.\+php\end{DoxyCompactItemize}

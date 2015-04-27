@@ -12,7 +12,7 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\te
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_afcb45ea0cd733979ad0429595a497223}{}{\bfseries \+\_\+\+\_\+construct} (\hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityManager}{Activity\+Manager} \$manager, \$model, \$field\+Name)\label{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_afcb45ea0cd733979ad0429595a497223}
 
 \item 
-\hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_afac6868b7400de0a27bd9940db9bb43d}{render} ()
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_a63f9588fb768954aa6e792841ef7a798}{render} (\$options=\mbox{[}$\,$\mbox{]})
 \item 
 \hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_a67f1c67ad0885f8ade7cc055db01d36a}{get\+View\+Path} (\$file\+Name, \$view\+Path=null)
 \item 
@@ -29,7 +29,13 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\te
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_afa057e497b595e91ff28b7d82d453a19}{}{\bfseries \$model}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_afa057e497b595e91ff28b7d82d453a19}
+
+\item 
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_ab9f1445590940a3564581d3481b942c5}{}{\bfseries \$fields} = \mbox{[}$\,$\mbox{]}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_ab9f1445590940a3564581d3481b942c5}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_a7bba50ae9e6c7fe7fd5cbaa8dcf7a976}{}{\bfseries \$data} = \mbox{[}$\,$\mbox{]}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_a7bba50ae9e6c7fe7fd5cbaa8dcf7a976}
 
 \item 
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_ac7ba33a73e3e8269a24e2b1b37b8778a}{}{\bfseries \$preview\+Mode} = false\label{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_ac7ba33a73e3e8269a24e2b1b37b8778a}
@@ -46,13 +52,7 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\te
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_a6625f7f805756ad348523c8efc7eaba2}{}{\bfseries \$manager}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_a6625f7f805756ad348523c8efc7eaba2}
 
 \item 
-\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_afa057e497b595e91ff28b7d82d453a19}{}{\bfseries \$model}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_afa057e497b595e91ff28b7d82d453a19}
-
-\item 
-\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_a661164febcd7fafdb40b95f4fceb0539}{}{\bfseries \$partials\+Dir} = \textquotesingle{}@/modules/backend/widgets/form/partials/\textquotesingle{}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_a661164febcd7fafdb40b95f4fceb0539}
-
-\item 
-\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_a7bba50ae9e6c7fe7fd5cbaa8dcf7a976}{}{\bfseries \$data} = \mbox{[}$\,$\mbox{]}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_a7bba50ae9e6c7fe7fd5cbaa8dcf7a976}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_a661164febcd7fafdb40b95f4fceb0539}{}{\bfseries \$partials\+Dir} = \textquotesingle{}$\sim$/modules/backend/widgets/form/partials/\textquotesingle{}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_a661164febcd7fafdb40b95f4fceb0539}
 
 \item 
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_ae59dff70c79843060bc487578fae0846}{}{\bfseries \$field\+Name}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_ae59dff70c79843060bc487578fae0846}
@@ -127,7 +127,7 @@ Looks up the column
 196     \{
 197         \textcolor{keywordflow}{if} (is\_string($field)) \{
 198             \textcolor{keywordflow}{if} (!isset($this->fields[$field])) \{
-199                 \textcolor{keywordflow}{throw} \textcolor{keyword}{new} ApplicationException(Lang::get(
+199                 \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceApplicationException}{ApplicationException}(Lang::get(
 200                     \textcolor{stringliteral}{'backend::lang.form.missing\_definition'},
 201                     compact(\textcolor{stringliteral}{'field'})
 202                 ));
@@ -143,7 +143,7 @@ Looks up the column
 212         \textcolor{comment}{/*}
 213 \textcolor{comment}{         * Array field name, eg: field[key][key2][key3]}
 214 \textcolor{comment}{         */}
-215         $keyParts   = Str::evalHtmlArray($fieldName);
+215         $keyParts   = Helper::nameToArray($fieldName);
 216         $lastField  = end($keyParts);
 217         $result     = $this->data;
 218 
@@ -216,7 +216,7 @@ Creates a form field object from name and configuration.
 155 
 156             $fieldType = isset($config[\textcolor{stringliteral}{'type'}]) ? $config[\textcolor{stringliteral}{'type'}] : null;
 157             \textcolor{keywordflow}{if} (!is\_string($fieldType) && !is\_null($fieldType)) \{
-158                 \textcolor{keywordflow}{throw} \textcolor{keyword}{new} ApplicationException(Lang::get(
+158                 \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceApplicationException}{ApplicationException}(Lang::get(
 159                     \textcolor{stringliteral}{'backend::lang.field.invalid\_type'},
 160                     [\textcolor{stringliteral}{'type'}=>gettype($fieldType)]
 161                 ));
@@ -250,13 +250,13 @@ Creates a form field object from name and configuration.
 189         \textcolor{keywordflow}{return} $field;
 190     \}
 \end{DoxyCode}
-\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_afac6868b7400de0a27bd9940db9bb43d}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form}!render@{render}}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_a63f9588fb768954aa6e792841ef7a798}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form}!render@{render}}
 \index{render@{render}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Form}}
 \subsubsection[{render}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Form\+::render (
 \begin{DoxyParamCaption}
-{}
+\item[{}]{\$options = {\ttfamily \mbox{[}\mbox{]}}}
 \end{DoxyParamCaption}
-)}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_afac6868b7400de0a27bd9940db9bb43d}
+)}\label{classDMA_1_1Friends_1_1Classes_1_1ActivityForm_a63f9588fb768954aa6e792841ef7a798}
 Render a group of form elements 
 \begin{DoxyCode}
 71     \{
@@ -291,7 +291,7 @@ Renders a single form field
 111     \{
 112         \textcolor{keywordflow}{if} (is\_string($field)) \{
 113             \textcolor{keywordflow}{if} (!isset($this->fields[$field])) \{
-114                 \textcolor{keywordflow}{throw} \textcolor{keyword}{new} ApplicationException(Lang::get(
+114                 \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceApplicationException}{ApplicationException}(Lang::get(
 115                     \textcolor{stringliteral}{'backend::lang.form.missing\_definition'},
 116                     compact(\textcolor{stringliteral}{'field'})
 117                 ));

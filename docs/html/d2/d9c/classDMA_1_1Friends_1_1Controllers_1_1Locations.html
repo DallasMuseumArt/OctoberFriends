@@ -150,37 +150,47 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Resource to login user via barcode scanner for authorized kiosks </p>
-<div class="fragment"><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        $barcodeId = post(<span class="stringliteral">&#39;barcodeId&#39;</span>);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        $location = LocationManager::getLocation();</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordflow">if</span> (!$location || empty($barcodeId)) {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            App::abort(403, <span class="stringliteral">&#39;Unauthorized access&#39;</span>);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        }</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordflow">if</span> ($location-&gt;is_authorized) {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            $user = User::where(<span class="stringliteral">&#39;barcode_id&#39;</span>, $barcodeId)-&gt;first();</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="comment">// Attempt to lookup membership if a user isnt present</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="keywordflow">if</span> (!$user) {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                $usermeta = Usermeta::where(<span class="stringliteral">&#39;current_member_number&#39;</span>, $barcodeId)-&gt;first();</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                $user = $usermeta-&gt;user;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            }</div>
+<div class="fragment"><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    {</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        $barcodeId = <span class="keyword">get</span>(<span class="stringliteral">&#39;barcodeId&#39;</span>);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        $barcodeId = trim($barcodeId);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        $location = LocationManager::getLocation();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordflow">if</span> (!$location || empty($barcodeId)) {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <span class="comment">//App::abort(403, &#39;Unauthorized access&#39;);</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="keywordflow">return</span> Redirect::to(<span class="charliteral">&#39;/&#39;</span>);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        }</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordflow">if</span> ($location-&gt;is_authorized) {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            $user = User::where(<span class="stringliteral">&#39;barcode_id&#39;</span>, $barcodeId)-&gt;first();</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keywordflow">if</span> (!$user) {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                <span class="comment">// The user does not exist, so flash an error</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                Flash::error(Lang::get(<span class="stringliteral">&#39;dma.friends::lang.app.loginFailed&#39;</span>));</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                <span class="comment">//The user exists so log them in</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                Auth::login($user);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                Event::fire(<span class="stringliteral">&#39;auth.login&#39;</span>, [$user]);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            }</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        }</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">return</span> Redirect::to(<span class="charliteral">&#39;/&#39;</span>);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    }</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="comment">// Attempt to lookup membership if a user isnt present</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keywordflow">if</span> (!$user) {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                $usermeta = Usermeta::where(<span class="stringliteral">&#39;current_member_number&#39;</span>, <span class="charliteral">&#39;=&#39;</span>, $barcodeId)-&gt;first();</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                <span class="keywordflow">try</span> {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                    $user = $usermeta-&gt;user;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                } <span class="keywordflow">catch</span>(<a class="code" href="../../df/d42/namespaceSystemException.html">SystemException</a> $e) {</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                    Log::error($e);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                }</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            }</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <span class="keywordflow">if</span> (!$user) {</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                Log::debug(<span class="stringliteral">&quot;Failed to login user&quot;</span>, [<span class="stringliteral">&#39;barcodeId&#39;</span> =&gt; $barcodeId, <span class="stringliteral">&#39;user&#39;</span> =&gt; $user]);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                <span class="comment">// The user does not exist, so flash an error</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                Flash::error(Lang::get(<span class="stringliteral">&#39;dma.friends::lang.app.loginFailed&#39;</span>));</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                Log::debug(<span class="stringliteral">&quot;Logged in user&quot;</span>, [<span class="stringliteral">&#39;barcodeId&#39;</span> =&gt; $barcodeId, <span class="stringliteral">&#39;user&#39;</span> =&gt; $user]);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                <span class="comment">//The user exists so log them in</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                Auth::login($user);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                Event::fire(<span class="stringliteral">&#39;auth.login&#39;</span>, [$user]);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            }</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordflow">return</span> Redirect::to(<span class="charliteral">&#39;/&#39;</span>);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div>
+<div class="ttc" id="namespaceSystemException_html"><div class="ttname"><a href="../../df/d42/namespaceSystemException.html">SystemException</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -208,7 +218,7 @@ Public Attributes</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 12 2015 13:36:14 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 27 2015 11:30:56 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

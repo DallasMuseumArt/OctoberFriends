@@ -37,37 +37,46 @@ static \hyperlink{classDMA_1_1Friends_1_1Controllers_1_1Locations_a9b6fce6b3f0cf
 )\hspace{0.3cm}{\ttfamily [static]}}\label{classDMA_1_1Friends_1_1Controllers_1_1Locations_a9b6fce6b3f0cf4fe6671fe110b0c8791}
 Resource to login user via barcode scanner for authorized kiosks 
 \begin{DoxyCode}
-39     \{
-40         $barcodeId = post(\textcolor{stringliteral}{'barcodeId'});
-41         $location = LocationManager::getLocation();
-42 
-43         \textcolor{keywordflow}{if} (!$location || empty($barcodeId)) \{
-44             App::abort(403, \textcolor{stringliteral}{'Unauthorized access'});
-45             \textcolor{keywordflow}{return};
-46         \}
-47         
-48         \textcolor{keywordflow}{if} ($location->is\_authorized) \{
-49             $user = User::where(\textcolor{stringliteral}{'barcode\_id'}, $barcodeId)->first();
-50 
-51             \textcolor{comment}{// Attempt to lookup membership if a user isnt present}
-52             \textcolor{keywordflow}{if} (!$user) \{
-53                 $usermeta = Usermeta::where(\textcolor{stringliteral}{'current\_member\_number'}, $barcodeId)->first();
-54                 $user = $usermeta->user;
-55             \}
+42     \{
+43         $barcodeId = \textcolor{keyword}{get}(\textcolor{stringliteral}{'barcodeId'});
+44         $barcodeId = trim($barcodeId);
+45 
+46         $location = LocationManager::getLocation();
+47 
+48         \textcolor{keywordflow}{if} (!$location || empty($barcodeId)) \{
+49             \textcolor{comment}{//App::abort(403, 'Unauthorized access');}
+50             \textcolor{keywordflow}{return} Redirect::to(\textcolor{charliteral}{'/'});
+51         \}
+52 
+53         \textcolor{keywordflow}{if} ($location->is\_authorized) \{
+54 
+55             $user = User::where(\textcolor{stringliteral}{'barcode\_id'}, $barcodeId)->first();
 56 
-57             \textcolor{keywordflow}{if} (!$user) \{
-58                 \textcolor{comment}{// The user does not exist, so flash an error}
-59                 Flash::error(Lang::get(\textcolor{stringliteral}{'dma.friends::lang.app.loginFailed'}));
-60             \} \textcolor{keywordflow}{else} \{
-61                 \textcolor{comment}{//The user exists so log them in}
-62                 Auth::login($user);
-63                 Event::fire(\textcolor{stringliteral}{'auth.login'}, [$user]);
-64             \}
-65 
-66         \}
-67 
-68         \textcolor{keywordflow}{return} Redirect::to(\textcolor{charliteral}{'/'});
-69     \}
+57             \textcolor{comment}{// Attempt to lookup membership if a user isnt present}
+58             \textcolor{keywordflow}{if} (!$user) \{
+59                 $usermeta = Usermeta::where(\textcolor{stringliteral}{'current\_member\_number'}, \textcolor{charliteral}{'='}, $barcodeId)->first();
+60                 \textcolor{keywordflow}{try} \{
+61                     $user = $usermeta->user;
+62                 \} \textcolor{keywordflow}{catch}(\hyperlink{namespaceSystemException}{SystemException} $e) \{
+63                     Log::error($e);
+64                 \}
+65             \}
+66 
+67             \textcolor{keywordflow}{if} (!$user) \{
+68                 Log::debug(\textcolor{stringliteral}{"Failed to login user"}, [\textcolor{stringliteral}{'barcodeId'} => $barcodeId, \textcolor{stringliteral}{'user'} => $user]);
+69                 \textcolor{comment}{// The user does not exist, so flash an error}
+70                 Flash::error(Lang::get(\textcolor{stringliteral}{'dma.friends::lang.app.loginFailed'}));
+71             \} \textcolor{keywordflow}{else} \{
+72                 Log::debug(\textcolor{stringliteral}{"Logged in user"}, [\textcolor{stringliteral}{'barcodeId'} => $barcodeId, \textcolor{stringliteral}{'user'} => $user]);
+73                 \textcolor{comment}{//The user exists so log them in}
+74                 Auth::login($user);
+75                 Event::fire(\textcolor{stringliteral}{'auth.login'}, [$user]);
+76             \}
+77 
+78         \}
+79 
+80         \textcolor{keywordflow}{return} Redirect::to(\textcolor{charliteral}{'/'});
+81     \}
 \end{DoxyCode}
 
 

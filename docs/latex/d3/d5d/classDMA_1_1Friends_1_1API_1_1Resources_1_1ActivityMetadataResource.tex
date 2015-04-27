@@ -1,0 +1,130 @@
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\textbackslash{}Resources\textbackslash{}Activity\+Metadata\+Resource Class Reference}
+\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Activity\+Metadata\+Resource@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Activity\+Metadata\+Resource}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\textbackslash{}Resources\textbackslash{}Activity\+Metadata\+Resource\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{d3/d5d/classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_ae6a01ce9c7882d3c741f471557d5a8f2}{index\+By\+User} (\$user\+Id=null)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_a489377740bd451341a243ba778b65e68}{index\+By\+Type\+And\+User} (\$types=null, \$user\+Id=null)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_add571e6be47126c2bee474f570c566ab}{apply\+Filters} (\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1ModelRepository}{Model\+Repository} \$model=null)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_a2d8840084ab4089cd0be441fa95b9357}{}{\bfseries \$model} = \textquotesingle{}\textbackslash{}\hyperlink{classDMA_1_1Friends_1_1Models_1_1ActivityMetadata}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Models\textbackslash{}\+Activity\+Metadata}\textquotesingle{}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_a2d8840084ab4089cd0be441fa95b9357}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_a4aef74cbec209367d4eb75887f9dfedb}{}{\bfseries \$transformer} = \textquotesingle{}\textbackslash{}\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityMetadataTransformer}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Activity\+Metadata\+Transformer}\textquotesingle{}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_a4aef74cbec209367d4eb75887f9dfedb}
+
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_add571e6be47126c2bee474f570c566ab}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Metadata\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Metadata\+Resource}!apply\+Filters@{apply\+Filters}}
+\index{apply\+Filters@{apply\+Filters}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Metadata\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Metadata\+Resource}}
+\subsubsection[{apply\+Filters}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Activity\+Metadata\+Resource\+::apply\+Filters (
+\begin{DoxyParamCaption}
+\item[{{\bf Model\+Repository}}]{\$model = {\ttfamily null}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_add571e6be47126c2bee474f570c566ab}
+\begin{DoxySeeAlso}{See also}
+\+::apply\+Filters() 
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+80     \{
+81         $query = parent::applyFilters($model);
+82         \textcolor{comment}{// TODO : is better to transpode the data rows to columns}
+83         \textcolor{comment}{// but for now the getMetadata method on ActivityMetadataTransformer}
+84         \textcolor{comment}{// and the following groupBy would work.}
+85          
+86         \textcolor{comment}{// Is necessary group by session\_id, otherwise }
+87         \textcolor{comment}{// the response will include duplicates. }
+88         $query = $query->groupBy(\textcolor{stringliteral}{'session\_id'});
+89 
+90         \textcolor{keywordflow}{return} $query;
+91     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_a489377740bd451341a243ba778b65e68}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Metadata\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Metadata\+Resource}!index\+By\+Type\+And\+User@{index\+By\+Type\+And\+User}}
+\index{index\+By\+Type\+And\+User@{index\+By\+Type\+And\+User}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Metadata\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Metadata\+Resource}}
+\subsubsection[{index\+By\+Type\+And\+User}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Activity\+Metadata\+Resource\+::index\+By\+Type\+And\+User (
+\begin{DoxyParamCaption}
+\item[{}]{\$types = {\ttfamily null}, }
+\item[{}]{\$user\+Id = {\ttfamily null}}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_a489377740bd451341a243ba778b65e68}
+Return activity metadata by the given user filtered by activities types 
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$types} & comma separted strings \\
+\hline
+string & {\em \$user} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Response 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+49     \{
+50         \textcolor{comment}{// Apply query filters and sort parameters}
+51         $query = $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_add571e6be47126c2bee474f570c566ab}{applyFilters}();
+52         
+53         \textcolor{keywordflow}{if}(!is\_null($userId))\{
+54             \textcolor{keywordflow}{if}(is\_null($user = User::find($userId)))\{
+55                 \textcolor{keywordflow}{return} Response::api()->errorNotFound(\textcolor{stringliteral}{'User not found'});
+56             \}
+57             
+58             \textcolor{comment}{// Filter query by user}
+59             $query = $query->where(\textcolor{stringliteral}{'user\_id'}, $user->getKey());
+60         \}
+61 
+62     
+63         \textcolor{comment}{// Filter by activity type}
+64         $types = !is\_null($types) ? explode(\textcolor{charliteral}{','}, $types): $types;
+65         \textcolor{keywordflow}{if}(!is\_null($types)) \{
+66             $query = $query->whereHas(\textcolor{stringliteral}{'activity'}, \textcolor{keyword}{function}($q) use ($types) \{
+67                 $q->whereIn(\textcolor{stringliteral}{'activity\_type'}, $types);
+68             \});
+69         \}
+70         
+71         \textcolor{keywordflow}{return} $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseResource_aed3811d426c80763855a43280f822f97}{paginateResult}($query);
+72 
+73     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_ae6a01ce9c7882d3c741f471557d5a8f2}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Metadata\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Metadata\+Resource}!index\+By\+User@{index\+By\+User}}
+\index{index\+By\+User@{index\+By\+User}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Metadata\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Metadata\+Resource}}
+\subsubsection[{index\+By\+User}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Activity\+Metadata\+Resource\+::index\+By\+User (
+\begin{DoxyParamCaption}
+\item[{}]{\$user\+Id = {\ttfamily null}}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_ae6a01ce9c7882d3c741f471557d5a8f2}
+Return activity metadata by the given user 
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$user\+Id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Response 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+36     \{
+37         \textcolor{keywordflow}{return} $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_a489377740bd451341a243ba778b65e68}{indexByTypeAndUser}(null, $userId);
+38     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+api/resources/Activity\+Metadata\+Resource.\+php\end{DoxyCompactItemize}

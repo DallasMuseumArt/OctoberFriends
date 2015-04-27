@@ -112,8 +112,6 @@ Inheritance diagram for DMA\Friends\Commands\ResetGroups:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a39d5f7e4bd63574e523fb41a392b529e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d80/classDMA_1_1Friends_1_1Commands_1_1ResetGroups.html#a39d5f7e4bd63574e523fb41a392b529e">schedule</a> (Schedulable $scheduler)</td></tr>
-<tr class="separator:a39d5f7e4bd63574e523fb41a392b529e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1671243f4b929d299357d08490661732"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d80/classDMA_1_1Friends_1_1Commands_1_1ResetGroups.html#a1671243f4b929d299357d08490661732">fire</a> ()</td></tr>
 <tr class="separator:a1671243f4b929d299357d08490661732"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -137,63 +135,36 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Read and process incomming data from listenable channels </p><dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<div class="fragment"><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    {</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        $today = Carbon::today();</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        $lastRun = Settings::get(<span class="stringliteral">&#39;reset_group_last_run&#39;</span>);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordflow">if</span> ($lastRun != $today-&gt;toDateTimeString()) {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            $day = strtolower($today-&gt;format(<span class="charliteral">&#39;l&#39;</span>));</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            $reset_groups_every_day = Settings::get(<span class="stringliteral">&#39;reset_groups_every_day&#39;</span>);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            $reset_groups_time = Settings::get(<span class="stringliteral">&#39;reset_groups_time&#39;</span>);</div>
+<div class="fragment"><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        $today = Carbon::today();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        $lastRun = Settings::get(<span class="stringliteral">&#39;reset_group_last_run&#39;</span>);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordflow">if</span> ($lastRun != $today-&gt;toDateTimeString()) {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            $day = strtolower($today-&gt;format(<span class="charliteral">&#39;l&#39;</span>));</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            $reset_groups_every_day = Settings::get(<span class="stringliteral">&#39;reset_groups_every_day&#39;</span>);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            $reset_groups_time = Settings::get(<span class="stringliteral">&#39;reset_groups_time&#39;</span>);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <span class="keywordflow">if</span> (in_array($day, $reset_groups_every_day)) {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                $reset_at = Carbon::parse($reset_groups_time);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                <span class="keywordflow">if</span> ( $reset_at-&gt;lte(Carbon::now()) ) {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                    </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                    <a class="code" href="../../d2/daf/classDMA_1_1Friends_1_1Models_1_1UserGroup.html#aab4ef6fdd0f8d9d18ca905250c7e00c5">UserGroup::markInactiveGroups</a>();</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                    Settings::set(<span class="stringliteral">&#39;reset_group_last_run&#39;</span>, $today-&gt;toDateTimeString());</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                }</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            }</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="keywordflow">if</span> (in_array($day, $reset_groups_every_day)) {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                $reset_at = Carbon::parse($reset_groups_time);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                <span class="keywordflow">if</span> ( $reset_at-&gt;lte(Carbon::now()) ) {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                    </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                    <a class="code" href="../../d2/daf/classDMA_1_1Friends_1_1Models_1_1UserGroup.html#aab4ef6fdd0f8d9d18ca905250c7e00c5">UserGroup::markInactiveGroups</a>();</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                    Settings::set(<span class="stringliteral">&#39;reset_group_last_run&#39;</span>, $today-&gt;toDateTimeString());</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                }</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            }</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        }<span class="keywordflow">else</span>{</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;           <span class="comment">// \Log::info(&#39;Has already run&#39;);</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        }</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    }</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        }<span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;           <span class="comment">// \Log::info(&#39;Has already run&#39;);</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div>
 <div class="ttc" id="classDMA_1_1Friends_1_1Models_1_1UserGroup_html_aab4ef6fdd0f8d9d18ca905250c7e00c5"><div class="ttname"><a href="../../d2/daf/classDMA_1_1Friends_1_1Models_1_1UserGroup.html#aab4ef6fdd0f8d9d18ca905250c7e00c5">DMA\Friends\Models\UserGroup\markInactiveGroups</a></div><div class="ttdeci">static markInactiveGroups()</div><div class="ttdef"><b>Definition:</b> UserGroup.php:127</div></div>
-</div><!-- fragment -->
-</div>
-</div>
-<a class="anchor" id="a39d5f7e4bd63574e523fb41a392b529e"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">DMA\Friends\Commands\ResetGroups::schedule </td>
-          <td>(</td>
-          <td class="paramtype">Schedulable&#160;</td>
-          <td class="paramname"><em>$scheduler</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>When a command should run </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramtype">Scheduler</td><td class="paramname">$scheduler</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd></dd></dl>
-<div class="fragment"><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="comment">// Run every 5 minutes</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordflow">return</span> $scheduler-&gt;everyMinutes(5);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -204,7 +175,7 @@ Protected Attributes</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 12 2015 13:36:14 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 27 2015 11:30:56 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

@@ -175,10 +175,10 @@ Static Protected Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Get the path to the theme's partials</p>
 <dl class="section return"><dt>Returns</dt><dd>string $path </dd></dl>
-<div class="fragment"><div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;    {</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;        $theme = Theme::getActiveTheme();</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;        <span class="keywordflow">return</span> $theme-&gt;getPath();</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;    {</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;        $theme = Theme::getActiveTheme();</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;        <span class="keywordflow">return</span> $theme-&gt;getPath();</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -204,9 +204,9 @@ Static Protected Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Get the path to the theme's partials</p>
 <dl class="section return"><dt>Returns</dt><dd>string $path </dd></dl>
-<div class="fragment"><div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    {</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        <span class="keywordflow">return</span> self::getThemeDir() . <span class="stringliteral">&#39;/partials/&#39;</span>;</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;    {</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        <span class="keywordflow">return</span> self::getThemeDir() . <span class="stringliteral">&#39;/partials/&#39;</span>;</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -249,23 +249,23 @@ Static Protected Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>string $content A rendered partial </dd></dl>
-<div class="fragment"><div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    {   </div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        $partialsDir = self::getThemePartialsDir();</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;        $partialPath = $partialsDir . $partial . <span class="stringliteral">&#39;.htm&#39;</span>;</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;        <span class="keywordflow">if</span> (!File::isFile($partialPath)) {</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;            $partialPath = $this-&gt;getViewPath($partial) . <span class="stringliteral">&#39;.htm&#39;</span>;</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;        }</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;        <span class="keywordflow">if</span> (!File::isFile($partialPath)) {</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;            <span class="keywordflow">if</span> ($throwException)</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;                <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="../../df/d42/namespaceSystemException.html">SystemException</a>(Lang::get(<span class="stringliteral">&#39;backend::lang.partial.not_found&#39;</span>, [<span class="stringliteral">&#39;name&#39;</span> =&gt; $partialPath]));</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;            <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;        }   </div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;        <span class="keywordflow">return</span> $this-&gt;makeFileContents($partialPath, $params);</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    }   </div>
+<div class="fragment"><div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    {   </div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;        $partialsDir = self::getThemePartialsDir();</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        $partialPath = $partialsDir . $partial . <span class="stringliteral">&#39;.htm&#39;</span>;</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        <span class="keywordflow">if</span> (!File::isFile($partialPath)) {</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;            $partialPath = $this-&gt;getViewPath($partial) . <span class="stringliteral">&#39;.htm&#39;</span>;</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;        }</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        <span class="keywordflow">if</span> (!File::isFile($partialPath)) {</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;            <span class="keywordflow">if</span> ($throwException)</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;                <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="../../df/d42/namespaceSystemException.html">SystemException</a>(Lang::get(<span class="stringliteral">&#39;backend::lang.partial.not_found&#39;</span>, [<span class="stringliteral">&#39;name&#39;</span> =&gt; $partialPath]));</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        }   </div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;        <span class="keywordflow">return</span> $this-&gt;makeFileContents($partialPath, $params);</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    }   </div>
 <div class="ttc" id="namespaceSystemException_html"><div class="ttname"><a href="../../df/d42/namespaceSystemException.html">SystemException</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -313,7 +313,7 @@ Static Protected Member Functions</h2></td></tr>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;            <span class="stringliteral">&#39;content&#39;</span>   =&gt; $this-&gt;<a class="code" href="../../df/d81/classDMA_1_1Friends_1_1Components_1_1UserLogin.html#a5845beab2a28f2a742da61b23a680eda">makePartial</a>(<span class="stringliteral">&#39;forgot-password&#39;</span>),</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        ]);</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    }    </div>
-<div class="ttc" id="classDMA_1_1Friends_1_1Components_1_1UserLogin_html_a5845beab2a28f2a742da61b23a680eda"><div class="ttname"><a href="../../df/d81/classDMA_1_1Friends_1_1Components_1_1UserLogin.html#a5845beab2a28f2a742da61b23a680eda">DMA\Friends\Components\UserLogin\makePartial</a></div><div class="ttdeci">makePartial($partial, $params=[], $throwException=true)</div><div class="ttdef"><b>Definition:</b> UserLogin.php:317</div></div>
+<div class="ttc" id="classDMA_1_1Friends_1_1Components_1_1UserLogin_html_a5845beab2a28f2a742da61b23a680eda"><div class="ttname"><a href="../../df/d81/classDMA_1_1Friends_1_1Components_1_1UserLogin.html#a5845beab2a28f2a742da61b23a680eda">DMA\Friends\Components\UserLogin\makePartial</a></div><div class="ttdeci">makePartial($partial, $params=[], $throwException=true)</div><div class="ttdef"><b>Definition:</b> UserLogin.php:320</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -336,7 +336,7 @@ Static Protected Member Functions</h2></td></tr>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="stringliteral">&#39;content&#39;</span>   =&gt; $this-&gt;<a class="code" href="../../df/d81/classDMA_1_1Friends_1_1Components_1_1UserLogin.html#a5845beab2a28f2a742da61b23a680eda">makePartial</a>(<span class="stringliteral">&#39;login-form&#39;</span>),</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        ]);</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    }</div>
-<div class="ttc" id="classDMA_1_1Friends_1_1Components_1_1UserLogin_html_a5845beab2a28f2a742da61b23a680eda"><div class="ttname"><a href="../../df/d81/classDMA_1_1Friends_1_1Components_1_1UserLogin.html#a5845beab2a28f2a742da61b23a680eda">DMA\Friends\Components\UserLogin\makePartial</a></div><div class="ttdeci">makePartial($partial, $params=[], $throwException=true)</div><div class="ttdef"><b>Definition:</b> UserLogin.php:317</div></div>
+<div class="ttc" id="classDMA_1_1Friends_1_1Components_1_1UserLogin_html_a5845beab2a28f2a742da61b23a680eda"><div class="ttname"><a href="../../df/d81/classDMA_1_1Friends_1_1Components_1_1UserLogin.html#a5845beab2a28f2a742da61b23a680eda">DMA\Friends\Components\UserLogin\makePartial</a></div><div class="ttdeci">makePartial($partial, $params=[], $throwException=true)</div><div class="ttdef"><b>Definition:</b> UserLogin.php:320</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -361,8 +361,8 @@ Static Protected Member Functions</h2></td></tr>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            <span class="stringliteral">&#39;content&#39;</span>   =&gt; $this-&gt;<a class="code" href="../../df/d81/classDMA_1_1Friends_1_1Components_1_1UserLogin.html#a5845beab2a28f2a742da61b23a680eda">makePartial</a>(<span class="stringliteral">&#39;register-form&#39;</span>, [ <span class="stringliteral">&#39;options&#39;</span> =&gt; $options ]),</div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        ]);</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    }</div>
-<div class="ttc" id="classDMA_1_1Friends_1_1Components_1_1UserLogin_html_a5845beab2a28f2a742da61b23a680eda"><div class="ttname"><a href="../../df/d81/classDMA_1_1Friends_1_1Components_1_1UserLogin.html#a5845beab2a28f2a742da61b23a680eda">DMA\Friends\Components\UserLogin\makePartial</a></div><div class="ttdeci">makePartial($partial, $params=[], $throwException=true)</div><div class="ttdef"><b>Definition:</b> UserLogin.php:317</div></div>
-<div class="ttc" id="classDMA_1_1Friends_1_1Models_1_1Usermeta_html_a1acccb846d0ba68fcc9694cc0b1c4006"><div class="ttname"><a href="../../d6/d87/classDMA_1_1Friends_1_1Models_1_1Usermeta.html#a1acccb846d0ba68fcc9694cc0b1c4006">DMA\Friends\Models\Usermeta\getOptions</a></div><div class="ttdeci">static getOptions()</div><div class="ttdef"><b>Definition:</b> Usermeta.php:144</div></div>
+<div class="ttc" id="classDMA_1_1Friends_1_1Components_1_1UserLogin_html_a5845beab2a28f2a742da61b23a680eda"><div class="ttname"><a href="../../df/d81/classDMA_1_1Friends_1_1Components_1_1UserLogin.html#a5845beab2a28f2a742da61b23a680eda">DMA\Friends\Components\UserLogin\makePartial</a></div><div class="ttdeci">makePartial($partial, $params=[], $throwException=true)</div><div class="ttdef"><b>Definition:</b> UserLogin.php:320</div></div>
+<div class="ttc" id="classDMA_1_1Friends_1_1Models_1_1Usermeta_html_a1acccb846d0ba68fcc9694cc0b1c4006"><div class="ttname"><a href="../../d6/d87/classDMA_1_1Friends_1_1Models_1_1Usermeta.html#a1acccb846d0ba68fcc9694cc0b1c4006">DMA\Friends\Models\Usermeta\getOptions</a></div><div class="ttdeci">static getOptions()</div><div class="ttdef"><b>Definition:</b> Usermeta.php:146</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -393,7 +393,7 @@ Static Protected Member Functions</h2></td></tr>
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;</div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        $validation = Validator::make($data, $rules);</div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        <span class="keywordflow">if</span> ($validation-&gt;fails())</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;            <span class="keywordflow">throw</span> <span class="keyword">new</span> ValidationException($validation);</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;            <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="../../d1/de8/namespaceValidationException.html">ValidationException</a>($validation);</div>
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;</div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        <span class="comment">/*</span></div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="comment">         * Register user</span></div>
@@ -412,7 +412,7 @@ Static Protected Member Functions</h2></td></tr>
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;            <span class="stringliteral">&#39;city&#39;</span>                  =&gt; $data[<span class="stringliteral">&#39;city&#39;</span>],</div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;            <span class="stringliteral">&#39;state&#39;</span>                 =&gt; $data[<span class="stringliteral">&#39;state&#39;</span>],</div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;            <span class="stringliteral">&#39;zip&#39;</span>                   =&gt; $data[<span class="stringliteral">&#39;zip&#39;</span>],</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            <span class="stringliteral">&#39;phone&#39;</span>                 =&gt; $data[<span class="stringliteral">&#39;phone&#39;</span>],</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            <span class="stringliteral">&#39;phone&#39;</span>                 =&gt; UserExtend::parsePhone($data[<span class="stringliteral">&#39;phone&#39;</span>]),</div>
 <div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        ];</div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;</div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        $user = Auth::register($userData, $automaticActivation);</div>
@@ -426,45 +426,49 @@ Static Protected Member Functions</h2></td></tr>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        $usermeta = <span class="keyword">new</span> Usermeta;</div>
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        $usermeta-&gt;first_name       = $data[<span class="stringliteral">&#39;first_name&#39;</span>];</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        $usermeta-&gt;last_name        = $data[<span class="stringliteral">&#39;last_name&#39;</span>];</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        $usermeta-&gt;gender           = $data[<span class="stringliteral">&#39;gender&#39;</span>];</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        $usermeta-&gt;birth_date       = $birth_date;</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        $usermeta-&gt;race             = $data[<span class="stringliteral">&#39;race&#39;</span>];</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        $usermeta-&gt;household_income = $data[<span class="stringliteral">&#39;household_income&#39;</span>];</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        $usermeta-&gt;household_size   = $data[<span class="stringliteral">&#39;household_size&#39;</span>];</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        $usermeta-&gt;education        = $data[<span class="stringliteral">&#39;education&#39;</span>];</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        $usermeta-&gt;email_optin      = isset($data[<span class="stringliteral">&#39;email_optin&#39;</span>]) ? $data[<span class="stringliteral">&#39;email_optin&#39;</span>] : <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        $user-&gt;metadata()-&gt;save($usermeta);</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        $usermeta-&gt;birth_date       = $birth_date;</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        $usermeta-&gt;email_optin      = isset($data[<span class="stringliteral">&#39;email_optin&#39;</span>]) ? $data[<span class="stringliteral">&#39;email_optin&#39;</span>] : <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        <span class="comment">// Uncomment to enable demographics in registration form;</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        <span class="comment">// $usermeta-&gt;gender           = $data[&#39;gender&#39;];</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        <span class="comment">// $usermeta-&gt;race             = $data[&#39;race&#39;];</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        <span class="comment">// $usermeta-&gt;household_income = $data[&#39;household_income&#39;];</span></div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        <span class="comment">// $usermeta-&gt;household_size   = $data[&#39;household_size&#39;];</span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        <span class="comment">// $usermeta-&gt;education        = $data[&#39;education&#39;];</span></div>
 <div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        UserExtend::uploadAvatar($user, $data[<span class="stringliteral">&#39;avatar&#39;</span>]);</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        $user-&gt;metadata()-&gt;save($usermeta);</div>
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        <span class="comment">/*</span></div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment">         * Activation is by the user, send the email</span></div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment">         */</span></div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;        <span class="keywordflow">if</span> ($userActivation) {</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;            $this-&gt;sendActivationEmail($user);</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        }</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        <span class="comment">/*</span></div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="comment">         * Automatically activated or not required, log the user in</span></div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="comment">         */</span></div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        <span class="keywordflow">if</span> ($automaticActivation || !$requireActivation) {</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;            Auth::login($user);</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        }</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        <span class="comment">/*</span></div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment">         * Fire event that user has registered</span></div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment">         */</span></div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        Event::fire(<span class="stringliteral">&#39;auth.register&#39;</span>, [$user]);</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <span class="comment">/*</span></div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment">         * Redirect to the intended page after successful sign in</span></div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment">         */</span></div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        $redirectUrl = $this-&gt;pageUrl($this-&gt;property(<span class="stringliteral">&#39;redirect&#39;</span>));</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        <span class="keywordflow">if</span> ($redirectUrl = post(<span class="stringliteral">&#39;redirect&#39;</span>, $redirectUrl))</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;            <span class="keywordflow">return</span> Redirect::intended($redirectUrl);</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    }</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        <span class="keywordflow">if</span> (isset($data[<span class="stringliteral">&#39;avatar&#39;</span>])) {</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;            UserExtend::uploadAvatar($user, $data[<span class="stringliteral">&#39;avatar&#39;</span>]);</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;        }</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;        <span class="comment">/*</span></div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">         * Activation is by the user, send the email</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment">         */</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        <span class="keywordflow">if</span> ($userActivation) {</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;            $this-&gt;sendActivationEmail($user);</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        }</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        <span class="comment">/*</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="comment">         * Automatically activated or not required, log the user in</span></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<span class="comment">         */</span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        <span class="keywordflow">if</span> ($automaticActivation || !$requireActivation) {</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;            Auth::login($user);</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        }</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        <span class="comment">/*</span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment">         * Fire event that user has registered</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="comment">         */</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        Event::fire(<span class="stringliteral">&#39;auth.register&#39;</span>, [$user]);</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        <span class="comment">/*</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="comment">         * Redirect to the intended page after successful sign in</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment">         */</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        $redirectUrl = $this-&gt;pageUrl($this-&gt;property(<span class="stringliteral">&#39;redirect&#39;</span>));</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        <span class="keywordflow">if</span> ($redirectUrl = post(<span class="stringliteral">&#39;redirect&#39;</span>, $redirectUrl))</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;            <span class="keywordflow">return</span> Redirect::intended($redirectUrl);</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    }</div>
+<div class="ttc" id="namespaceValidationException_html"><div class="ttname"><a href="../../d1/de8/namespaceValidationException.html">ValidationException</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -510,7 +514,7 @@ Static Protected Member Functions</h2></td></tr>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">             */</span></div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            $validation = Validator::make($data, $rules);</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            <span class="keywordflow">if</span> ($validation-&gt;fails())</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                <span class="keywordflow">throw</span> <span class="keyword">new</span> ValidationException($validation);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="../../d1/de8/namespaceValidationException.html">ValidationException</a>($validation);</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        </div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <span class="comment">/*  </span></div>
@@ -558,6 +562,7 @@ Static Protected Member Functions</h2></td></tr>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        }</div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        </div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    }</div>
+<div class="ttc" id="namespaceValidationException_html"><div class="ttname"><a href="../../d1/de8/namespaceValidationException.html">ValidationException</a></div></div>
 <div class="ttc" id="namespaceException_html"><div class="ttname"><a href="../../d6/d65/namespaceException.html">Exception</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -569,7 +574,7 @@ Static Protected Member Functions</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 12 2015 13:36:14 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 27 2015 11:30:56 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

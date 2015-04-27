@@ -112,8 +112,6 @@ Inheritance diagram for DMA\Friends\Commands\WeeklyPoints:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3610e0fd1a7e2e91dd70a05bfb7f94e8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d03/classDMA_1_1Friends_1_1Commands_1_1WeeklyPoints.html#a3610e0fd1a7e2e91dd70a05bfb7f94e8">schedule</a> (Schedulable $scheduler)</td></tr>
-<tr class="separator:a3610e0fd1a7e2e91dd70a05bfb7f94e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3fb80cfeb37ba525e9b24e7362e35daf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d03/classDMA_1_1Friends_1_1Commands_1_1WeeklyPoints.html#a3fb80cfeb37ba525e9b24e7362e35daf">fire</a> ()</td></tr>
 <tr class="separator:a3fb80cfeb37ba525e9b24e7362e35daf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -137,37 +135,10 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Set the number of points set per week back to zero on sunday morning </p><dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<div class="fragment"><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        DB::table(<span class="stringliteral">&#39;users&#39;</span>)</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            -&gt;update([<span class="stringliteral">&#39;points_this_week&#39;</span> =&gt; 0]);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    }</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a class="anchor" id="a3610e0fd1a7e2e91dd70a05bfb7f94e8"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">DMA\Friends\Commands\WeeklyPoints::schedule </td>
-          <td>(</td>
-          <td class="paramtype">Schedulable&#160;</td>
-          <td class="paramname"><em>$scheduler</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>When a command should run </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramtype">Scheduler</td><td class="paramname">$scheduler</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd></dd></dl>
-<div class="fragment"><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="comment">// Run every 5 minutes</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordflow">return</span> $scheduler-&gt;weekly();</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        DB::table(<span class="stringliteral">&#39;users&#39;</span>)</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            -&gt;update([<span class="stringliteral">&#39;points_this_week&#39;</span> =&gt; 0]);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -178,7 +149,7 @@ Protected Attributes</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 12 2015 13:36:14 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 27 2015 11:30:56 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

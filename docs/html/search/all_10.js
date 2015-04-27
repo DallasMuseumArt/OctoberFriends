@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['paginateresult',['paginateResult',['../dc/d47/classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseResource.html#aed3811d426c80763855a43280f822f97',1,'DMA::Friends::Classes::API::BaseResource']]],
   ['parse',['parse',['../db/d74/classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Templates_1_1TemplateParser.html#a9979e7218aa198939d99e9ebbc654327',1,'DMA\Friends\Classes\Notifications\Templates\TemplateParser\parse()'],['../d7/d2c/classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Twig_1_1FlashMultipleTokenParser.html#a73e24854cc05f744decb4d0769b2dd84',1,'DMA\Friends\Classes\Notifications\Twig\FlashMultipleTokenParser\parse()']]],
   ['passwordhash',['PasswordHash',['../d8/d56/classDMA_1_1Friends_1_1Wordpress_1_1PasswordHash.html',1,'DMA::Friends::Wordpress']]],
   ['pdf_5fcode39',['PDF_Code39',['../d1/d2e/classPDF__Code39.html',1,'']]],
@@ -15,5 +16,6 @@ var searchData=
   ['printidcard',['printIdCard',['../df/d0e/classDMA_1_1Friends_1_1Classes_1_1PrintManager.html#a036da54763a007f23c7f477562c47783',1,'DMA::Friends::Classes::PrintManager']]],
   ['printmanager',['PrintManager',['../df/d0e/classDMA_1_1Friends_1_1Classes_1_1PrintManager.html',1,'DMA::Friends::Classes']]],
   ['printmembershipcard',['PrintMembershipCard',['../dd/daf/classDMA_1_1Friends_1_1FormWidgets_1_1PrintMembershipCard.html',1,'DMA::Friends::FormWidgets']]],
-  ['process',['process',['../d2/d5d/classDMA_1_1Friends_1_1Activities_1_1ActivityCode.html#a3de9ef142396ba94532566598b508d58',1,'DMA\Friends\Activities\ActivityCode\process()'],['../de/d31/classDMA_1_1Friends_1_1Activities_1_1EventTrigger.html#a45956c83b20db41db895e61b4a13ebd6',1,'DMA\Friends\Activities\EventTrigger\process()'],['../d2/d05/classDMA_1_1Friends_1_1Activities_1_1LikeWorkOfArt.html#a814a0bc1a22cc72f91dac635c871b43c',1,'DMA\Friends\Activities\LikeWorkOfArt\process()'],['../d3/d35/classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase.html#a772667f95a25c6aa44e31ce9c6903384',1,'DMA\Friends\Classes\ActivityTypeBase\process()']]]
+  ['process',['process',['../d2/d5d/classDMA_1_1Friends_1_1Activities_1_1ActivityCode.html#a07ea7959f4707fe2228204c5ff3e51ae',1,'DMA\Friends\Activities\ActivityCode\process()'],['../d2/d05/classDMA_1_1Friends_1_1Activities_1_1LikeWorkOfArt.html#a88d1a454b4389e3116cc1f8a365747cd',1,'DMA\Friends\Activities\LikeWorkOfArt\process()'],['../db/dcb/classDMA_1_1Friends_1_1Activities_1_1Registration.html#a19479293c2e231e6e9723f87c8a9b159',1,'DMA\Friends\Activities\Registration\process()'],['../d3/d35/classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase.html#a27c11920b4815a809e7a2e62eae26094',1,'DMA\Friends\Classes\ActivityTypeBase\process()']]],
+  ['processincludedresources',['processIncludedResources',['../d6/d13/classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer.html#ab219fbf7518a5a42d20583206ab454a7',1,'DMA::Friends::Classes::API::BaseTransformer']]]
 ];
