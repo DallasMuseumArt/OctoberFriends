@@ -190,6 +190,8 @@ class UserExtend
 
     public static function parsePhone($phone)
     {
+        if (empty($phone)) return null;
+
         $phoneUtil = PhoneNumberUtil::getInstance();
         
         // Get country code using configure timezone
