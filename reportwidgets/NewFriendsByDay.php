@@ -24,12 +24,6 @@ class NewFriendsByDay extends GraphReport
         return $this->makePartial('widget', ['data' => $data]);
     }
 
-    public function addAssets()
-    {
-        $this->addJs('newfriendsbyday.js');
-        parent::addAssets();
-    }
-
     public function onGenerateData()
     {
         $data = DB::select(

@@ -47,4 +47,5 @@ Route::group(['prefix'=>'webhooks'], function(){
 	});
 });
 
+// TODO: add ajax route
 

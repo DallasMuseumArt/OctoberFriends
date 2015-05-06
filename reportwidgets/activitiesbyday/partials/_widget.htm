@@ -6,8 +6,10 @@
     <div class="clearfix"></div>
 
     <script type="text/javascript">
-    window.graphActivitiesByDay = <?php print json_encode($data) ?>;
-    $(document).trigger('ActivitiesDataReady');
+    friendsReports.ActivitiesByDay.data = <?php print json_encode($data) ?>;
+    $(document).ready(function() {
+        $(document).trigger('ActivitiesByDay');
+    });
     </script>
 
 </div>

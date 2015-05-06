@@ -496,8 +496,12 @@ class Plugin extends PluginBase
                 'label'     => 'Friends Leaderboard',
                 'context'   => 'dashboard',
             ],
-            'DMA\Friends\ReportWidgets\NewFriendsByDay' => [
-                'label'     => 'Chart - New Friends By Day',
+            'DMA\Friends\ReportWidgets\UserReport' => [
+                'label'     => 'Chart - User Report',
+                'context'   => 'dashboard',
+            ],
+            'DMA\Friends\ReportWidgets\RewardReport' => [
+                'label'     => 'Chart - RewardReport',
                 'context'   => 'dashboard',
             ],
             'DMA\Friends\ReportWidgets\ActivitiesByDay' => [

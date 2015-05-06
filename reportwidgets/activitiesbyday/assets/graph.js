@@ -1,10 +1,11 @@
 (function($) {
-    $(document).on('ActivitiesDataReady', function() {
+
+    friendsReports.ActivitiesByDay.chart = function() {
         var chart = c3.generate({
             bindto: '#ActivitiesByDay',
             data: {
                 x: 'x',
-                columns: window.graphActivitiesByDay,
+                columns: this.data,
                 names: {
                     data: '# of Activities Completed',
                 },
@@ -28,6 +29,6 @@
                 }
             }
         });
-    });
+    };
 
 })(window.jQuery);

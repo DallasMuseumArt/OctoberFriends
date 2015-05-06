@@ -1,0 +1,13 @@
+<div class="report-widget <?= $id ?>">
+    <h3><?= $title ?></h3>
+    
+    <div id="<?= $id ?>"></div>
+
+    <div class="clearfix"></div>
+
+    <script type="text/javascript">
+        friendsReports.<?= $id ?> = {};
+        friendsReports.<?= $id ?>.ajaxPath = "<?= $ajaxPath ?>";
+    </script>
+
+</div>

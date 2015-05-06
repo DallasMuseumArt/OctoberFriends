@@ -17,19 +17,6 @@ class ActivitiesByDay extends GraphReport
         ];
     }
 
-    public function render()
-    {
-        $this->addAssets();
-        $data = $this->onGenerateData();
-        return $this->makePartial('widget', ['data' => $data]);
-    }
-
-    public function addAssets()
-    {
-        $this->addJs('activitiesbyday.js');
-        parent::addAssets();
-    }
-
     public function onGenerateData()
     {
         $data = DB::select(
