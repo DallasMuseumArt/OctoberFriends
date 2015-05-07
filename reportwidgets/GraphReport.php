@@ -1,6 +1,7 @@
 <?php namespace DMA\Friends\ReportWidgets;
 
 use Backend\Classes\ReportWidgetBase;
+use URL;
 
 /**
  * Helper class to instantiate assets for all report widgets that use c3
@@ -30,16 +31,18 @@ class GraphReport extends ReportWidgetBase {
     {
         $this->addAssets();
         return $this->makePartial('@' . $this->partialPath . '_widget.htm', [
+            'title'         => $this->widgetTitle,
             'id'            => $this->defaultAlias,
             'ajaxPath'      => $this->getAjaxPath(),
         ]);
-        // $data = $this->onGenerateData();
-        // return $this->makePartial('widget', ['data' => $data]);
     }
 
     protected function getAjaxPath()
     {
-        return base_path() . $this->ajaxPath . get_class($this) . '@generateData';
+        $class = get_class($this);
+        // forward slashes do not get preserved in javascript so lets replace them
+        $class = str_replace('\\', '@', $class);
+        return URL::to('/') . $this->ajaxPath . $class;
     }
 
 }

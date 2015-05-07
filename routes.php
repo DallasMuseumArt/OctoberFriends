@@ -49,3 +49,7 @@ Route::group(['prefix'=>'webhooks'], function(){
 
 // TODO: add ajax route
 
+Route::get('friends/reports/ajax/{controllingMethod}', function($controllingMethod) {
+    return \DMA\Friends\Controllers\Ajax::report($controllingMethod);
+});
+

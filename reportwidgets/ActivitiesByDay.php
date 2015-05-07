@@ -6,6 +6,8 @@ class ActivitiesByDay extends GraphReport
 {
     public $defaultAlias = 'ActivitiesByDay';
 
+    protected $widgetTitle = "Activities By Day";
+
     /**
      * {@inheritDoc}
      */
@@ -17,7 +19,7 @@ class ActivitiesByDay extends GraphReport
         ];
     }
 
-    public function onGenerateData()
+    static public function generateData()
     {
         $data = DB::select(
             DB::raw("
