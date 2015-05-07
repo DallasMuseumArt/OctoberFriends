@@ -1,4 +1,8 @@
 (function($) {
+    $(document).ready(function() {
+        $('.ActivitiesByDay').height("350");
+    });
+
     friendsReports.ActivitiesByDay = {
         chart: function() {
             var chart = c3.generate({
@@ -25,7 +29,7 @@
                 },
                 bar: {
                     width: {
-                        ratio: 0.7
+                        ratio: 0.2
                     }
                 }
             });
