@@ -12,7 +12,6 @@ class Ajax extends Controller
     {
         $class = self::getClass($class);
         $data = $class::generateData();
-\Debugbar::info($data);
         return response()->json($data);
     }
 
