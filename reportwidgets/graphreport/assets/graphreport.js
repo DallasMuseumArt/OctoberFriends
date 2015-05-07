@@ -4,21 +4,25 @@ var friendsReports = {};
 
     $(document).ready(function() {
         for (var key in friendsReports) {
-
-            $.ajax({
-                url: friendsReports[key].ajaxPath,
-                dataType: 'json',
-                type: 'GET',
-                error: function() {
-                    alert('something went wrong');
-                },
-                success: function(data) {
-                    friendsReports[key].data = data;
-                    friendsReports[key].chart();
-                }
-            });
-
+            processRequest(friendsReports[key]);
         }
     });
+
+    function processRequest(obj)
+    {
+        $.ajax({
+            url: obj.ajaxPath,
+            dataType: 'json',
+            type: 'GET',
+            error: function() {
+                alert('something went wrong');
+            },
+            success: function(data) {
+                console.log(obj.chart);
+                obj.data = data;
+                obj.chart();
+            }
+        });
+    }
 
 })(window.jQuery);

@@ -16,11 +16,19 @@ class GraphReport extends ReportWidgetBase {
      */
     public function addAssets()
     {
-        $this->addJs('../../graphreport/assets/d3.js');
-        $this->addJs('../../graphreport/assets/c3.js');
-        $this->addJs('../../graphreport/assets/graphreport.js');
+        global $primaryAssetsLoaded;
+
+        if (!$primaryAssetsLoaded) {
+            $this->addJs('../../graphreport/assets/d3.js');
+            $this->addJs('../../graphreport/assets/c3.js');
+            $this->addJs('../../graphreport/assets/graphreport.js');
+            $this->addCss('../../graphreport/assets/c3.css'); 
+            
+            // Only load these assets the first time
+            $primaryAssetsLoaded = true;
+        }
+
         $this->addJs('graph.js');
-        $this->addCss('../../graphreport/assets/c3.css'); 
     }
 
     /**
