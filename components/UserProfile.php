@@ -94,7 +94,7 @@ class UserProfile extends ComponentBase
      */
     public function onPassword()
     {
-        return $this->makePartial('changepassword');
+        return $this->renderPartial('@changepassword');
     }
 
     /**
