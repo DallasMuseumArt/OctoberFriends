@@ -187,6 +187,11 @@ class Plugin extends PluginBase
 
         // Register ServiceProviders
         App::register('DMA\Friends\FriendsServiceProvider');
+        App::register('Maatwebsite\Excel\ExcelServiceProvider');
+
+        // Register aliases
+        $alias = AliasLoader::getInstance();
+        $alias->alias('Excel', 'Maatwebsite\Excel\Facades\Excel');
         
         // Register Event Subscribers
         $subscriber = new FriendsEventHandler;
