@@ -501,7 +501,7 @@ class Plugin extends PluginBase
                 'context'   => 'dashboard',
             ],
             'DMA\Friends\ReportWidgets\RewardReport' => [
-                'label'     => 'Chart - RewardReport',
+                'label'     => 'Chart - Reward Report',
                 'context'   => 'dashboard',
             ],
             'DMA\Friends\ReportWidgets\ActivitiesByDay' => [

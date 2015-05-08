@@ -6,31 +6,46 @@ class RewardReport extends GraphReport
 {
     public $defaultAlias = 'RewardReport';
 
+    protected $widgetTitle = "Reward Report";
+
     /**
      * {@inheritDoc}
      */
     public function widgetDetails()
     {
         return [
-            'name'        => 'Activities By Day',
-            'description' => 'Show some basic statistics on friends'
+            'name'        => 'Reward Report',
+            'description' => 'Show the number of rewards redeemed by day'
         ];
     }
 
-    public function render()
+    static public function generateData()
     {
-        $this->addAssets();
-        $data = $this->onGenerateData();
-        return $this->makePartial('widget', ['data' => $data]);
-    }
+        $rewards = DB::select(
+            DB::raw("
+                SELECT 
+                    DATE_FORMAT(created_at, '%Y-%m-%d') AS Day,
+                    COUNT('user_id') AS Count
+                FROM 
+                    dma_friends_reward_user
+                WHERE 
+                    created_at BETWEEN DATE_SUB(NOW(), INTERVAL 60 DAY) AND NOW()
+                GROUP BY DATE_FORMAT(created_at, '%Y-%m-%d')
+            ")
+        );
 
-    public function addAssets()
-    {
-        $this->addJs('activitiesbyday.js');
-        parent::addAssets();
-    }
+        $time = ['x'];
+        $data = ['count'];
 
-    public function onGenerateData()
-    {
+        foreach($rewards as $value) {
+            $time[] = $value->Day;
+            $data[] = $value->Count;
+        }
+
+        return [
+            $time,
+            $data,
+        ];
+
     }
 }
