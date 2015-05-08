@@ -11,9 +11,13 @@
                     x: 'x',
                     columns: this.data,
                     names: {
-                        data: '# of new users',
+                        totalUsers: '# of Total Users',
+                        newUsers: '# of New Users',
                     },
-                    type: 'line',
+                    types: {
+                        totalUsers: 'area',
+                        newUsers: 'line',   
+                    },
                 },
                 axis: {
                     x: {
