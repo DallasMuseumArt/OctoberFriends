@@ -169,7 +169,7 @@ class UserLogin extends ComponentBase
 
         return $this->renderPartial('@modalDisplay', [
             'title'     => Lang::get('dma.friends::lang.userLogin.registerTitle'),
-            'content'   => $this->makePartial('register-form', [ 'options' => $options ]),
+            'content'   => $this->renderPartial('register-form', [ 'options' => $options ]),
         ]);
     }
     

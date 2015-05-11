@@ -81,6 +81,6 @@ class ActivityCatalog extends ComponentBase
         }
 
         $this->page['activities'] = $results;
-        $this->page['links'] = $results->links();
+        $this->page['links'] = $results['links'];
     }
 }
