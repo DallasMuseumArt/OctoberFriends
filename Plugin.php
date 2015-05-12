@@ -520,6 +520,10 @@ class Plugin extends PluginBase
                 'label'     => 'Chart- # Users with email optin',
                 'context'   => 'dashboard',
             ],
+            'DMA\Friends\ReportWidgets\FriendsMembers'=>[
+                'label'   => 'Chart - Friends/Partners Ratio',
+                'context' => 'dashboard'
+            ],
         ];  
     } 
    
