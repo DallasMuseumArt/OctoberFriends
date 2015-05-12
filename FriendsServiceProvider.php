@@ -101,7 +101,6 @@ class FriendsServiceProvider extends ServiceProvider
      */
     protected function createAlias($alias, $class)
     {
-
         $loader = \Illuminate\Foundation\AliasLoader::getInstance();
         $loader->alias($alias, $class);
 

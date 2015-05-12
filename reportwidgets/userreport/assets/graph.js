@@ -15,9 +15,12 @@
                         newUsers: '# of New Users',
                     },
                     types: {
-                        totalUsers: 'area',
-                        newUsers: 'line',   
+                        totalUsers: 'bar',
+                        newUsers: 'bar',   
                     },
+                    groups: [
+                        ['totalUsers', 'newUsers']
+                    ]
                 },
                 axis: {
                     x: {
