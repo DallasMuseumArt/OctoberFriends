@@ -491,7 +491,7 @@ class Plugin extends PluginBase
             'DMA\Friends\ReportWidgets\FriendsToolbar' => [
                 'label'     => 'Friends Toolbar',
                 'context'   => 'dashboard'
-            ],  
+            ],
             'DMA\Friends\ReportWidgets\FriendsLeaderboard' => [
                 'label'     => 'Table - Friends Leaderboard',
                 'context'   => 'dashboard',
@@ -510,6 +510,10 @@ class Plugin extends PluginBase
             ],
             'DMA\Friends\ReportWidgets\ActivitiesByDay' => [
                 'label'     => 'Graph - Activities By Day',
+                'context'   => 'dashboard',
+            ],
+            'DMA\Friends\ReportWidgets\EmailOptin' => [
+                'label'     => 'Chart- # Users with email optin',
                 'context'   => 'dashboard',
             ],
         ];  

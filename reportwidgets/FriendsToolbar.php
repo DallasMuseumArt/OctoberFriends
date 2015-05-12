@@ -39,7 +39,6 @@ class FriendsToolbar extends ReportWidgetBase
         $this->vars['todayFriends']     = number_format(User::where('created_at', '>=', $today)->count());
         $this->vars['weekFriends']      = number_format(User::where('created_at', '>=', $thisWeek)->count());
         $this->vars['averageFriends']   = number_format($this->getAverageFriends());
-        $this->vars['optinFriends']     = $this->getOptinFriends() . "%";
 
         return $this->makePartial('widget');
     }
@@ -71,12 +70,5 @@ class FriendsToolbar extends ReportWidgetBase
             return $average[0]->avgNum;
         }
         return 0;
-    }
-
-    public function getOptinFriends()
-    {
-        $numWithOptin = Usermeta::where('email_optin', 1)->count();
-
-        return round($numWithOptin / User::count() * 100);
     }
 }
