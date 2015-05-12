@@ -516,6 +516,10 @@ class Plugin extends PluginBase
                 'label'     => 'Table - Top Activities',
                 'context'   => 'dashboard',
             ],
+            'DMA\Friends\ReportWidgets\TopBadges' => [
+                'label'     => 'Table - Top Badges',
+                'context'   => 'dashboard',
+            ],
             'DMA\Friends\ReportWidgets\ActivitiesByDay' => [
                 'label'     => 'Graph - Activities By Day',
                 'context'   => 'dashboard',

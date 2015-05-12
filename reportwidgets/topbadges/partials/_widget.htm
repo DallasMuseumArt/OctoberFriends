@@ -1,0 +1,22 @@
+<div class="report-widget top-rewards">
+    <h3>Top Badges</h3>
+    <table class="table data">
+        <thead>
+            <tr>
+                <th class="sort-desc active list-cell-name-title">
+                    Name
+                </th>
+                <th>
+                    Earned
+                </th>
+
+            </tr>
+        </thead>
+    <?php foreach($badges as $badge) { ?>
+        <tr>
+            <td><?php print $badge->title ?></td>
+            <td><?php print number_format($badge->count) ?></td>
+        </tr>
+    <?php } ?>
+    </table>
+</div>
