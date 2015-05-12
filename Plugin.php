@@ -512,16 +512,20 @@ class Plugin extends PluginBase
                 'label'     => 'Table - Top Rewards',
                 'context'   => 'dashboard',
             ],
+            'DMA\Friends\ReportWidgets\TopActivities' => [
+                'label'     => 'Table - Top Activities',
+                'context'   => 'dashboard',
+            ],
             'DMA\Friends\ReportWidgets\ActivitiesByDay' => [
                 'label'     => 'Graph - Activities By Day',
                 'context'   => 'dashboard',
             ],
             'DMA\Friends\ReportWidgets\EmailOptin' => [
-                'label'     => 'Chart- # Users with email optin',
+                'label'     => 'Chart - % Users with email optin',
                 'context'   => 'dashboard',
             ],
             'DMA\Friends\ReportWidgets\FriendsMembers'=>[
-                'label'   => 'Chart - Friends/Partners Ratio',
+                'label'   => 'Chart - % of Users with partnership',
                 'context' => 'dashboard'
             ],
         ];  

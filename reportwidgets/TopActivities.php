@@ -3,13 +3,12 @@
 namespace DMA\Friends\ReportWidgets;
 
 use Backend\Classes\ReportWidgetBase;
-use DMA\Friends\Models\Reward;
 use DB;
 use Cache;
 
-class TopRewards extends ReportWidgetBase
+class TopActivities extends ReportWidgetBase
 {
-    public $defaultAlias = 'TopRewards';
+    public $defaultAlias = 'TopActivities';
 
     /**
      * {@inheritDoc}
@@ -17,8 +16,8 @@ class TopRewards extends ReportWidgetBase
     public function widgetDetails()
     {   
         return [
-            'name'        => 'Top Rewards',
-            'description' => 'Show highest ranking rewards'
+            'name'        => 'Top Activities',
+            'description' => 'Show highest ranking activities'
         ];  
     }   
 
@@ -44,24 +43,24 @@ class TopRewards extends ReportWidgetBase
     {   
         $limit = $this->property('limit');
 
-        $rewards = Cache::remember('friends.report.topreward', GraphReport::getCacheTime(), function() use ($limit) {
+        $activities = Cache::remember('friends.report.topactivities', GraphReport::getCacheTime(), function() use ($limit) {
             return DB::select(
                 DB::raw("
                     SELECT 
-                        reward.title, 
+                        activity.title, 
                         count(pivot.user_id) as count
-                    FROM dma_friends_rewards reward
-                    LEFT JOIN dma_friends_reward_user pivot ON reward.id = pivot.reward_id
+                    FROM dma_friends_activities activity
+                    LEFT JOIN dma_friends_activity_user pivot ON activity.id = pivot.activity_id
                     WHERE
                         pivot.created_at BETWEEN DATE_SUB(NOW(), INTERVAL 60 DAY) AND NOW()
-                    GROUP BY pivot.reward_id
+                    GROUP BY pivot.activity_id
                     ORDER BY count DESC
                     LIMIT " . $limit
                 )
             );
         });
 
-        $this->vars['rewards'] = $rewards;
+        $this->vars['activities'] = $activities;
 
         return $this->makePartial('widget');
     }   
