@@ -492,6 +492,10 @@ class Plugin extends PluginBase
                 'label'     => 'Friends Toolbar',
                 'context'   => 'dashboard'
             ],
+            // 'DMA\Friends\ReportWidgets\DatePicker' => [
+            //     'label'     => 'Friends Date Picker',
+            //     'context'   => 'dashboard',
+            // ],
             'DMA\Friends\ReportWidgets\FriendsLeaderboard' => [
                 'label'     => 'Table - Friends Leaderboard',
                 'context'   => 'dashboard',

@@ -1,0 +1,14 @@
+.report-widget.date-picker ul,
+.report-widget.date-picker ul li {
+    display: inline;
+}
+
+.report-widget.date-picker ul {
+    margin-top: -11px;
+    margin-left: -50px;
+    float: left;
+}
+
+.report-widget.date-picker ul li {
+    padding: 0 10px;
+}
