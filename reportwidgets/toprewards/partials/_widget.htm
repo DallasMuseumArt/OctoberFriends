@@ -1,0 +1,22 @@
+<div class="report-widget top-rewards">
+    <h3>Top Rewards</h3>
+    <table class="table data">
+        <thead>
+            <tr>
+                <th class="sort-desc active list-cell-name-title">
+                    Name
+                </th>
+                <th>
+                    Redemptions
+                </th>
+
+            </tr>
+        </thead>
+    <?php foreach($rewards as $reward) { ?>
+        <tr>
+            <td><?php print $reward->title ?></td>
+            <td><?php print number_format($reward->count) ?></td>
+        </tr>
+    <?php } ?>
+    </table>
+</div>

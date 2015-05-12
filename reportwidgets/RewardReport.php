@@ -6,7 +6,7 @@ class RewardReport extends GraphReport
 {
     public $defaultAlias = 'RewardReport';
 
-    protected $widgetTitle = "Reward Report";
+    protected $widgetTitle = "Rewards By Day";
 
     /**
      * {@inheritDoc}
@@ -14,7 +14,7 @@ class RewardReport extends GraphReport
     public function widgetDetails()
     {
         return [
-            'name'        => 'Reward Report',
+            'name'        => 'Rewards By Day',
             'description' => 'Show the number of rewards redeemed by day'
         ];
     }

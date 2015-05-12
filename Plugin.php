@@ -493,19 +493,23 @@ class Plugin extends PluginBase
                 'context'   => 'dashboard'
             ],  
             'DMA\Friends\ReportWidgets\FriendsLeaderboard' => [
-                'label'     => 'Friends Leaderboard',
+                'label'     => 'Table - Friends Leaderboard',
                 'context'   => 'dashboard',
             ],
             'DMA\Friends\ReportWidgets\UserReport' => [
-                'label'     => 'Chart - User Report',
+                'label'     => 'Graph - # Users by day',
                 'context'   => 'dashboard',
             ],
             'DMA\Friends\ReportWidgets\RewardReport' => [
-                'label'     => 'Chart - Reward Report',
+                'label'     => 'Graph - # Rewards redeemed by day',
+                'context'   => 'dashboard',
+            ],
+            'DMA\Friends\ReportWidgets\TopRewards' => [
+                'label'     => 'Table - Top Rewards',
                 'context'   => 'dashboard',
             ],
             'DMA\Friends\ReportWidgets\ActivitiesByDay' => [
-                'label'     => 'Chart - Activities By Day',
+                'label'     => 'Graph - Activities By Day',
                 'context'   => 'dashboard',
             ],
         ];  

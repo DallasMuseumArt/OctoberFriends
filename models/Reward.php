@@ -40,7 +40,9 @@ class Reward extends Model
      * @var array Relations
      */
     public $belongsToMany = [
-        'users' => ['Rainlab\User\Models\User', 'dma_friends_reward_user'],
+        'users' => ['Rainlab\User\Models\User', [
+            'table' => 'dma_friends_reward_user'
+        ]]
     ];
 
     public $attachOne = [
