@@ -5,7 +5,10 @@ namespace DMA\Friends\ReportWidgets;
 use Backend\Classes\ReportWidgetBase;
 use Rainlab\User\Models\User;
 use DMA\Friends\Models\Usermeta;
+use DMA\Friends\ReportWidgets\GraphReport;
+use DMA\Friends\Models\Settings as FriendsSettings;
 use DB;
+use Cache;
 
 class FriendsToolbar extends ReportWidgetBase
 {
@@ -43,23 +46,26 @@ class FriendsToolbar extends ReportWidgetBase
 
     public function getAverageFriends()
     {
-        $average = DB::select(
-            DB::raw("
-                SELECT 
-                    AVG(numFriends) as avgNum
-                FROM
-                    (
-                        SELECT 
-                            DAYOFWEEK(created_at) AS dow,
-                            DATE(created_at) AS d,
-                            COUNT(*) AS numFriends
-                        FROM users
-                        GROUP BY d
-                    ) AS countFriends
-                WHERE dow = DAYOFWEEK(NOW())
-                GROUP BY dow
-            ")
-        );
+        
+        $average = Cache::remember('friends.reports.toolbar', GraphReport::getCacheTime(), function() {
+            return DB::select(
+                DB::raw("
+                    SELECT 
+                        AVG(numFriends) as avgNum
+                    FROM
+                        (
+                            SELECT 
+                                DAYOFWEEK(created_at) AS dow,
+                                DATE(created_at) AS d,
+                                COUNT(*) AS numFriends
+                            FROM users
+                            GROUP BY d
+                        ) AS countFriends
+                    WHERE dow = DAYOFWEEK(NOW())
+                    GROUP BY dow
+                ")
+            );
+        });
 
         if (!empty($average)) {
             return $average[0]->avgNum;

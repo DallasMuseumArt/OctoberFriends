@@ -1,6 +1,7 @@
 <?php namespace DMA\Friends\ReportWidgets;
 
 use DB;
+use Cache;
 
 class UserReport extends GraphReport
 {
@@ -21,31 +22,36 @@ class UserReport extends GraphReport
 
     static public function generateData()
     {
-       $newUsers = DB::select(
-            DB::raw("
-                SELECT 
-                    DATE_FORMAT(created_at, '%Y-%m-%d') AS Day,
-                    COUNT('id') AS newUsers
-                FROM 
-                    users
-                WHERE 
-                    created_at BETWEEN DATE_SUB(NOW(), INTERVAL 60 DAY) AND NOW()
-                GROUP BY DATE_FORMAT(created_at, '%Y-%m-%d')
-            ")
-        );
 
-        $totalUsers = DB::select(
-            DB::raw("
-                SELECT 
-                    DATE_FORMAT(created_at, '%Y-%m-%d') AS Day,
-                    count(DISTINCT(user_id)) AS totalUsers
-                FROM 
-                    dma_friends_activity_user
-                WHERE 
-                    created_at BETWEEN DATE_SUB(NOW(), INTERVAL 60 DAY) AND NOW()
-                GROUP BY DATE_FORMAT(created_at, '%Y-%m-%d')
-            ")
-        );
+        $newUsers = Cache::remember('friends.reports.newUsers', GraphReport::getCacheTime(), function() {
+            return DB::select(
+                DB::raw("
+                    SELECT 
+                        DATE_FORMAT(created_at, '%Y-%m-%d') AS Day,
+                        COUNT('id') AS newUsers
+                    FROM 
+                        users
+                    WHERE 
+                        created_at BETWEEN DATE_SUB(NOW(), INTERVAL 60 DAY) AND NOW()
+                    GROUP BY DATE_FORMAT(created_at, '%Y-%m-%d')
+                ")
+            );
+        });
+
+        $totalUsers = Cache::remember('friends.reports.totalUsers', GraphReport::getCacheTime(), function() { 
+            return DB::select(
+                DB::raw("
+                    SELECT 
+                        DATE_FORMAT(created_at, '%Y-%m-%d') AS Day,
+                        count(DISTINCT(user_id)) AS totalUsers
+                    FROM 
+                        dma_friends_activity_user
+                    WHERE 
+                        created_at BETWEEN DATE_SUB(NOW(), INTERVAL 60 DAY) AND NOW()
+                    GROUP BY DATE_FORMAT(created_at, '%Y-%m-%d')
+                ")
+            );
+        });
 
         // Organize the data into the proper format for C3.js
         $time               = ['x'];

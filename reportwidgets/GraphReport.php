@@ -2,6 +2,7 @@
 
 use Backend\Classes\ReportWidgetBase;
 use URL;
+use DMA\Friends\Models\Settings as FriendsSettings;
 
 /**
  * Helper class to instantiate assets for all report widgets that use c3
@@ -50,6 +51,11 @@ class GraphReport extends ReportWidgetBase {
         // forward slashes do not get preserved in javascript so lets replace them
         $class = str_replace('\\', '@', $class);
         return URL::to('/') . $this->ajaxPath . $class;
+    }
+
+    static public function getCacheTime()
+    {
+        return FriendsSettings::get('report_cache', 60);
     }
 
 }

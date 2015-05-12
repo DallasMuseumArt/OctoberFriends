@@ -5,6 +5,7 @@ namespace DMA\Friends\ReportWidgets;
 use Backend\Classes\ReportWidgetBase;
 use DMA\Friends\Models\Reward;
 use DB;
+use Cache;
 
 class TopRewards extends ReportWidgetBase
 {
@@ -43,26 +44,28 @@ class TopRewards extends ReportWidgetBase
     {   
         $limit = $this->property('limit');
 
-        $rewards = DB::select(
-            DB::raw("
-                SELECT 
-                    reward.title, 
-                    (
-                        SELECT count(user_id)
-                        FROM 
-                            dma_friends_reward_user pivot
-                        WHERE
-                            pivot.reward_id = reward.id
-                    ) as count
-                FROM dma_friends_rewards reward
-                LEFT JOIN dma_friends_reward_user pivot ON reward.id = pivot.reward_id
-                WHERE
-                    pivot.created_at BETWEEN DATE_SUB(NOW(), INTERVAL 60 DAY) AND NOW()
-                GROUP BY pivot.reward_id
-                ORDER BY count DESC
-                LIMIT " . $limit
-            )
-        )->remember(60);
+        $rewards = Cache::remember('friends.report.topreward', GraphReport::getCacheTime(), function() use ($limit) {
+            return DB::select(
+                DB::raw("
+                    SELECT 
+                        reward.title, 
+                        (
+                            SELECT count(user_id)
+                            FROM 
+                                dma_friends_reward_user pivot
+                            WHERE
+                                pivot.reward_id = reward.id
+                        ) as count
+                    FROM dma_friends_rewards reward
+                    LEFT JOIN dma_friends_reward_user pivot ON reward.id = pivot.reward_id
+                    WHERE
+                        pivot.created_at BETWEEN DATE_SUB(NOW(), INTERVAL 60 DAY) AND NOW()
+                    GROUP BY pivot.reward_id
+                    ORDER BY count DESC
+                    LIMIT " . $limit
+                )
+            );
+        });
 
         $this->vars['rewards'] = $rewards;
 

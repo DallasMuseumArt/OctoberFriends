@@ -19,6 +19,10 @@ tabs:
             span: left
             type: dropdown
             tab: General
+        report_cache:
+            label: Cache report data for X minutes
+            span: left
+            tab: General
 
         # Kiosk
         kiosk_idle_time:

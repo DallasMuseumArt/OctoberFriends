@@ -1,6 +1,7 @@
 <?php namespace DMA\Friends\ReportWidgets;
 
 use DB;
+use Cache;
 
 class RewardReport extends GraphReport
 {
@@ -21,18 +22,21 @@ class RewardReport extends GraphReport
 
     static public function generateData()
     {
-        $rewards = DB::select(
-            DB::raw("
-                SELECT 
-                    DATE_FORMAT(created_at, '%Y-%m-%d') AS Day,
-                    COUNT('user_id') AS Count
-                FROM 
-                    dma_friends_reward_user
-                WHERE 
-                    created_at BETWEEN DATE_SUB(NOW(), INTERVAL 60 DAY) AND NOW()
-                GROUP BY DATE_FORMAT(created_at, '%Y-%m-%d')
-            ")
-        );
+
+        $rewards = Cache::remember('friends.reports.rewardReport', GraphReport::getCacheTime(), function() {
+            return DB::select(
+                DB::raw("
+                    SELECT 
+                        DATE_FORMAT(created_at, '%Y-%m-%d') AS Day,
+                        COUNT('user_id') AS Count
+                    FROM 
+                        dma_friends_reward_user
+                    WHERE 
+                        created_at BETWEEN DATE_SUB(NOW(), INTERVAL 60 DAY) AND NOW()
+                    GROUP BY DATE_FORMAT(created_at, '%Y-%m-%d')
+                ")
+            );
+        });
 
         $time = ['x'];
         $data = ['count'];
