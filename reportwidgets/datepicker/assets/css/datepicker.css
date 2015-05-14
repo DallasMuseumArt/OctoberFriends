@@ -12,3 +12,15 @@
 .report-widget.date-picker ul li {
     padding: 0 10px;
 }
+
+#date-picker {
+    display: inline;
+}
+#date-picker input {
+    width: 90px;
+    height: 37px;
+}
+
+.date-range.active {
+    color: #7e8c8d;
+}

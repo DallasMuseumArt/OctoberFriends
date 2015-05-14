@@ -24,6 +24,7 @@ class GraphReport extends ReportWidgetBase {
             $this->addJs('../../graphreport/assets/c3.js');
             $this->addJs('../../graphreport/assets/graphreport.js');
             $this->addCss('../../graphreport/assets/c3.css'); 
+            $this->addCss('../../graphreport/assets/graphreport.css'); 
             
             // Only load these assets the first time
             $primaryAssetsLoaded = true;

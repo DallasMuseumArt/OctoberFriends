@@ -3,13 +3,8 @@ friendsReports.graphs = {};
 
 (function($) {
 
-    $(document).ready(function() {
-        friendsReports.init();  
-    });
-
     friendsReports.init = function() {
         for (var key in friendsReports.graphs) {
-            console.log(key);
             this.processRequest(friendsReports.graphs[key]);
         }
     }
@@ -18,6 +13,10 @@ friendsReports.graphs = {};
         $.ajax({
             url: obj.ajaxPath,
             dataType: 'json',
+            data: {
+                to: friendsReports.toDate,
+                from: friendsReports.fromDate,
+            },
             type: 'GET',
             error: function() {
                 alert('something went wrong');

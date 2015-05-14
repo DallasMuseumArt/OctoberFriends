@@ -24,10 +24,22 @@ class DatePicker extends ReportWidgetBase
      */
     public function render()
     {   
-        $this->addJs('/modules/backend/formwidgets/datepicker/assets/js/datepicker.js');
+        $this->addJs('js/pikaday.js');
         $this->addJs('js/date-picker.js');
         $this->addCss('css/datepicker.css');
-        return $this->makePartial('widget');
-    }   
+        $this->addCss('css/pikaday.css');
+
+        return $this->makePartial('widget', [
+            'current'   => date('Y-m-d'),
+            'week'      => $this->dateAgo('-1 week'),
+            'month'     => $this->dateAgo('-1 month'),
+            'year'      => $this->dateAgo('-1 year'),
+        ]);
+    }
+
+    private function dateAgo($string)
+    {
+        return date('Y-m-d', strtotime($string));
+    }
 }
 

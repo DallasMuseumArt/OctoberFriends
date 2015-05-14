@@ -2,14 +2,36 @@
     <h3>Choose a date range</h3>
 
     <ul>
-        <li><a href="#" class="week" data-type="week">Week</a></li>
-        <li><a href="#" class="month" data-type="month">Month</a></li>
-        <li><a href="#" class="year" data-type="year">Year</a></li>
-        <li><a href="#" class="all-time" data-type="alltime">All Time</a></li>
+        <li><a href="#" 
+                class="date-range week" 
+                data-from="<?= $week ?>"
+                data-to="<?= $current ?>"
+            >Week</a></li>
+        <li><a href="#" 
+                class="date-range month" 
+                data-from="<?= $month ?>"
+                data-to="<?= $current ?>"
+            >Month</a></li>
+        <li><a href="#" 
+                class="date-range year" 
+                data-from="<?= $year ?>"
+                data-to="<?= $current ?>"
+            >Year</a></li>
+        <li><a href="#" 
+                class="date-range all-time" 
+                data-from="0000-00-00"
+                data-to="<?= $current ?>"
+            >All Time</a></li>
+        <li>Custom:
+            <div id="date-picker">
+                <label for="datepicker-from">From:</label>
+                <input type="text" id="datepicker-from"></input>
 
-        <form id="date-picker" action="#">
+                <label for="datepicker-from">To:</label>
+                <input type="text" id="datepicker-to"></input>
 
-        </form>
+                <button class="btn btn-default apply-dates">Apply</button>
+            </div>
     </ul>
 
     <div class="clearfix"></div>
