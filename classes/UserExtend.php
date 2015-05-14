@@ -10,6 +10,7 @@ use System\Models\File;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\PhoneNumberFormat;
 use Carbon\Carbon;
+use October\Rain\Database\Attach\Resizer;
 
 /**
  * Custom class to add additional functionality based on the Rainlab User model
@@ -144,29 +145,36 @@ class UserExtend
         try{
             // Validated is a JPG or PNG
             $imageType = exif_imagetype($dst);
-            $validImage = in_array($imageType, [IMAGETYPE_JPEG, IMAGETYPE_PNG]);
+            $validImage = in_array($imageType, [IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_GIF]);
             // Validated is not bigger that xx by xx
             if($validImage){
+                // Test if image is corrupted if OctoberCMS Resizer can open it
+                // is more likely the image is ok
+                Resizer::open($dst);
+                
+                // Test image dimensions
                 list($width, $height, $type, $attr) = getimagesize($dst);
                 $validImage = ($width <= 400 && $height <= 400);
+
             }
             // Add right file extension to the upload file
             if($validImage){
-                $extension = [ IMAGETYPE_JPEG => 'jpg', IMAGETYPE_PNG => 'png'][$imageType];
+                
+                // Save image with correct image extension
+                $extension = [ IMAGETYPE_JPEG => 'jpg', IMAGETYPE_PNG => 'png', IMAGETYPE_GIF => 'gif'][$imageType];
                 $newDst = $dst . '.' . $extension;
                 rename($dst, $newDst);
                 $dst = $newDst;
+                
             }
         } catch(\Exception $e){
-            //throw $e;
             $validImage = false;
         }
         
         if(!$validImage){
-            throw new \Exception('Must be a valid JPG, or PNG. And not bigger that 400x400 pixels.');
+            throw new \Exception('Must be a valid JPG, GIF or PNG. And not bigger that 400x400 pixels.');
         }
-  
-        
+
         $file = new File;
         $file->data = $dst;
         $file->is_public = true;

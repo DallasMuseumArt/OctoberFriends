@@ -65,7 +65,7 @@ class ActivityCatalog extends ComponentBase
      */
     private function getResults($filterstr = null)
     {
-        $perpage = 10;
+        $perpage = 12;
 
         if ($filterstr && $filterstr != 'all') {
             $filters = json_decode($filterstr, true);
@@ -81,6 +81,7 @@ class ActivityCatalog extends ComponentBase
         }
 
         $this->page['activities'] = $results;
-        $this->page['links'] = $results['links'];
+        $this->page['hasLinks'] = $results->hasMorePages() || $results->currentPage() > 1;
+        $this->page['links'] = $results->render(); 
     }
 }
