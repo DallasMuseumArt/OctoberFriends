@@ -4,7 +4,7 @@
 }
 
 .report-widget.date-picker ul {
-    margin-top: -11px;
+    margin-top: -28px;
     margin-left: -50px;
     float: left;
 }
@@ -19,6 +19,7 @@
 #date-picker input {
     width: 90px;
     height: 37px;
+    padding-left: 6px;
 }
 
 .date-range.active {
