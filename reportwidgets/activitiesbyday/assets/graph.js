@@ -3,7 +3,7 @@
         $('.ActivitiesByDay').height("350");
     });
 
-    friendsReports.ActivitiesByDay = {
+    friendsReports.graphs.ActivitiesByDay = {
         chart: function() {
             var chart = c3.generate({
                 bindto: '#ActivitiesByDay',

@@ -3,7 +3,7 @@
         $('.UsersReport').height("350");
     });
 
-    friendsReports.UsersReport = {
+    friendsReports.graphs.UsersReport = {
         chart: function() {
             var chart = c3.generate({
                 bindto: '#UsersReport',

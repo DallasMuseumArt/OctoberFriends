@@ -3,7 +3,7 @@
         $('.RewardReport').height("350");
     });
 
-    friendsReports.RewardReport = {
+    friendsReports.graphs.RewardReport = {
         chart: function() {
             var chart = c3.generate({
                 bindto: '#RewardReport',

@@ -24,6 +24,7 @@ class DatePicker extends ReportWidgetBase
      */
     public function render()
     {   
+        $this->addJs('/modules/backend/formwidgets/datepicker/assets/js/datepicker.js');
         $this->addJs('js/date-picker.js');
         $this->addCss('css/datepicker.css');
         return $this->makePartial('widget');

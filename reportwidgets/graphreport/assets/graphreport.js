@@ -1,15 +1,20 @@
 var friendsReports = {};
+friendsReports.graphs = {};
 
 (function($) {
 
     $(document).ready(function() {
-        for (var key in friendsReports) {
-            processRequest(friendsReports[key]);
-        }
+        friendsReports.init();  
     });
 
-    function processRequest(obj)
-    {
+    friendsReports.init = function() {
+        for (var key in friendsReports.graphs) {
+            console.log(key);
+            this.processRequest(friendsReports.graphs[key]);
+        }
+    }
+
+    friendsReports.processRequest = function(obj) {
         $.ajax({
             url: obj.ajaxPath,
             dataType: 'json',
@@ -18,7 +23,6 @@ var friendsReports = {};
                 alert('something went wrong');
             },
             success: function(data) {
-                console.log(obj.chart);
                 obj.data = data;
                 obj.chart();
             }
