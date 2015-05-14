@@ -169,7 +169,11 @@ class UserLogin extends ComponentBase
 
         return $this->renderPartial('@modalDisplay', [
             'title'     => Lang::get('dma.friends::lang.userLogin.registerTitle'),
-            'content'   => $this->renderPartial('register-form', [ 'options' => $options ]),
+            'content'   => $this->renderPartial('register-form', [ 
+                'options'   => $options, 
+                'avatars'   => $this->getAvatars(),
+                'terms'     => $this->renderPartial('terms-and-conditions.htm'),
+            ]),
         ]);
     }
     
@@ -215,7 +219,7 @@ class UserLogin extends ComponentBase
 
         // Split the data into whats required for the user and usermeta models
         $userData = [
-            'name'                  => $data['email'],
+            'name'                  => $data['first_name'] . ' ' . $data['last_name'],
             'password'              => $data['password'],
             'password_confirmation' => $data['password_confirmation'],
             'email'                 => $data['email'],
