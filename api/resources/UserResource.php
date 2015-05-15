@@ -118,7 +118,7 @@ class UserResource extends BaseResource
     {
         // TODO : This logic may need to be in the Extend User model
         try{
-            $data = post();
+            $data = Request::all();
             $rules = [
                     'first_name'            => 'required|min:2',
                     'last_name'             => 'required|min:2',
