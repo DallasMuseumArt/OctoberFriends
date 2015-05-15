@@ -22,7 +22,7 @@
                         type: 'timeseries',
                         tick: {
                             count: 15,
-                            format: '%m/%d'
+                            format: '%m/%d/%Y'
                         }
                     },
                     y: {
