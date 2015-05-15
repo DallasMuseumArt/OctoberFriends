@@ -14,19 +14,22 @@
         });
 
         // Custom dates and picker
-        var format = 'YYYY-MM-DD'
-        var fromDate = new Pikaday({ 
-            field: document.getElementById('datepicker-from'),
-            format: format, 
+        var format = 'yy-mm-dd'
+
+        $('#datepicker-from').datepicker({
+            dateFormat: format,
+            maxDate: 'now',
         });
 
-        var toDate = new Pikaday({ 
-            field: document.getElementById('datepicker-to'),
-            format: format, 
+        $('#datepicker-to').datepicker({
+            dateFormat: format,
+            maxDate: 'now',
         });
 
         $('.apply-dates').on('click', function(e) {
             e.preventDefault();
+
+            $('.graphreport').html('<img class="graphreport-loading" src="/plugins/dma/friends/reportwidgets/graphreport/assets/images/loading.gif"/>');
 
             var from = $('#datepicker-from').val();
             var to = $('#datepicker-to').val();

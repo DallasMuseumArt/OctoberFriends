@@ -24,10 +24,11 @@ class DatePicker extends ReportWidgetBase
      */
     public function render()
     {   
-        $this->addJs('js/pikaday.js');
+        $this->addJs('jquery-ui/jquery-ui.js');
+        $this->addCss('jquery-ui/jquery-ui.css');
+        $this->addCss('jquery-ui/jquery-ui.theme.css');
         $this->addJs('js/date-picker.js');
         $this->addCss('css/datepicker.css');
-        $this->addCss('css/pikaday.css');
 
         return $this->makePartial('widget', [
             'current'   => date('Y-m-d'),
