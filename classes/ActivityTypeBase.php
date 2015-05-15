@@ -69,7 +69,7 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
      */
     public function getConfig()
     {
-        return $this->dirName . '/' . $this->fieldConfig;
+        return '/plugins/' . $this->dirName . '/' . $this->fieldConfig;
     }
 
     /**
