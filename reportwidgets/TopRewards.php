@@ -55,6 +55,6 @@ class TopRewards extends ReportWidgetBase
         $this->vars['rewards'] = $rewards;
 
         return $this->makePartial('widget');
-    }   
+    }
 }
 

@@ -54,6 +54,7 @@ class TopActivities extends ReportWidgetBase
         $this->vars['activities'] = $activities;
 
         return $this->makePartial('widget');
-    }   
+    }  
+
 }
 

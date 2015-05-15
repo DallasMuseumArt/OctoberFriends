@@ -42,7 +42,7 @@
         });
 
         // Default to week view
-        $('.date-picker .week').click();
+        $('.date-picker .month').click();
     });
 
 })(window.jQuery);
