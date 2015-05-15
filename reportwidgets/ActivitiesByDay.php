@@ -1,7 +1,6 @@
 <?php namespace DMA\Friends\ReportWidgets;
 
 use DB;
-use Cache;
 
 class ActivitiesByDay extends GraphReport
 {
@@ -22,22 +21,13 @@ class ActivitiesByDay extends GraphReport
 
     static public function generateData()
     {
-        $data = Cache::remember('friends.reports.activitiesByDay', GraphReport::getCacheTime(), function() {
-            return DB::select(
-                DB::raw("
-                    SELECT 
-                        DATE_FORMAT(created_at, '%Y-%m-%d') AS Day,
-                        COUNT('id') AS Count
-                    FROM
-                        dma_friends_activity_user
-                    WHERE
-                        created_at BETWEEN DATE_SUB(NOW(), INTERVAL 60 DAY) AND NOW()
-                    GROUP BY DATE_FORMAT(created_at, '%Y-%m-%d')
-                    ORDER BY Day ASC
-                    LIMIT 1000;
-                ")
-            );
-        });
+
+        $query = DB::table('dma_friends_activity_user')
+                ->select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS Day"), DB::raw("COUNT('id') AS Count"))
+                ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+                ->orderBy('Day', 'ASC');
+
+        $data = self::processQuery($query, 'created_at', 1000, 'friends.reports.activitiesByDay');
 
         // Organize the data into the proper format for C3.js
         $time = ['x'];

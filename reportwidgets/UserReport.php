@@ -22,36 +22,27 @@ class UserReport extends GraphReport
 
     static public function generateData()
     {
+        // New users
+        $query = DB::table('users')
+                ->select(
+                    DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS Day"), 
+                    DB::raw("COUNT('id') AS newUsers")
+                )
+                ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+                ->orderBy('Day', 'ASC');
 
-        $newUsers = Cache::remember('friends.reports.newUsers', GraphReport::getCacheTime(), function() {
-            return DB::select(
-                DB::raw("
-                    SELECT 
-                        DATE_FORMAT(created_at, '%Y-%m-%d') AS Day,
-                        COUNT('id') AS newUsers
-                    FROM 
-                        users
-                    WHERE 
-                        created_at BETWEEN DATE_SUB(NOW(), INTERVAL 60 DAY) AND NOW()
-                    GROUP BY DATE_FORMAT(created_at, '%Y-%m-%d')
-                ")
-            );
-        });
+        $newUsers = self::processQuery($query, 'created_at', 1000, 'friends.reports.newUsers');
 
-        $totalUsers = Cache::remember('friends.reports.totalUsers', GraphReport::getCacheTime(), function() { 
-            return DB::select(
-                DB::raw("
-                    SELECT 
-                        DATE_FORMAT(created_at, '%Y-%m-%d') AS Day,
-                        count(DISTINCT(user_id)) AS totalUsers
-                    FROM 
-                        dma_friends_activity_user
-                    WHERE 
-                        created_at BETWEEN DATE_SUB(NOW(), INTERVAL 60 DAY) AND NOW()
-                    GROUP BY DATE_FORMAT(created_at, '%Y-%m-%d')
-                ")
-            );
-        });
+        // Total users
+        $query = DB::table('dma_friends_activity_user')
+                ->select(
+                    DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS Day"), 
+                    DB::raw("count(DISTINCT(user_id)) AS totalUsers")
+                )
+                ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+                ->orderBy('Day', 'ASC');
+
+        $totalUsers = self::processQuery($query, 'created_at', 1000, 'friends.reports.totalUsers');
 
         // Organize the data into the proper format for C3.js
         $time               = ['x'];

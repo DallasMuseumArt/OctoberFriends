@@ -23,20 +23,12 @@ class RewardReport extends GraphReport
     static public function generateData()
     {
 
-        $rewards = Cache::remember('friends.reports.rewardReport', GraphReport::getCacheTime(), function() {
-            return DB::select(
-                DB::raw("
-                    SELECT 
-                        DATE_FORMAT(created_at, '%Y-%m-%d') AS Day,
-                        COUNT('user_id') AS Count
-                    FROM 
-                        dma_friends_reward_user
-                    WHERE 
-                        created_at BETWEEN DATE_SUB(NOW(), INTERVAL 60 DAY) AND NOW()
-                    GROUP BY DATE_FORMAT(created_at, '%Y-%m-%d')
-                ")
-            );
-        });
+        $query = DB::table('dma_friends_reward_user')
+                ->select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS Day"), DB::raw("COUNT('user_id') AS Count"))
+                ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"))
+                ->orderBy('Day', 'ASC');
+
+        $rewards = self::processQuery($query, 'created_at', 1000, 'friends.reports.rewardReport');
 
         $time = ['x'];
         $data = ['count'];

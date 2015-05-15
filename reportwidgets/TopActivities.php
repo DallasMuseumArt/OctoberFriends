@@ -43,6 +43,14 @@ class TopActivities extends ReportWidgetBase
     {   
         $limit = $this->property('limit');
 
+        // $query = DB::table('dma_friends_activities activity')
+        //         ->select("activity.title", DB::raw("count(pivot.user_id) as count"))
+        //         ->join("dma_friends_activity_user pivot", 'activity.id', '=', 'pivot.activity_id')
+        //         ->groupBy("pivot.activity_id")
+        //         ->orderBy('count', 'DESC');
+
+        // $activities = GraphReport::processQuery($query, 'pivot.created_at', $limit, 'friends.reports.topActivities');
+
         $activities = Cache::remember('friends.report.topactivities', GraphReport::getCacheTime(), function() use ($limit) {
             return DB::select(
                 DB::raw("

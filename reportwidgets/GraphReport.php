@@ -2,6 +2,8 @@
 
 use Backend\Classes\ReportWidgetBase;
 use URL;
+use Cache;
+use Request;
 use DMA\Friends\Models\Settings as FriendsSettings;
 
 /**
@@ -44,6 +46,25 @@ class GraphReport extends ReportWidgetBase {
             'id'            => $this->defaultAlias,
             'ajaxPath'      => $this->getAjaxPath(),
         ]);
+    }
+
+    static public function processQuery($query, $timestamp, $limit, $cacheKey, $reset = false)
+    {
+        $get = Request::all();
+
+        $cacheKey .= $get['from'] . $get['to'];
+
+        if ($reset) {
+            Cache::forget($cacheKey);
+        }
+
+        return Cache::remember($cacheKey, GraphReport::getCacheTime(), function() use($query, $timestamp, $limit, $get) {
+            return $query
+                ->where($timestamp, '<=', $get['to'])
+                ->where($timestamp, '>=', $get['from'])
+                ->take($limit)
+                ->get();
+        });
     }
 
     protected function getAjaxPath()
