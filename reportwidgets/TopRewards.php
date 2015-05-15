@@ -44,22 +44,13 @@ class TopRewards extends ReportWidgetBase
     {   
         $limit = $this->property('limit');
 
-        $rewards = Cache::remember('friends.report.topreward', GraphReport::getCacheTime(), function() use ($limit) {
-            return DB::select(
-                DB::raw("
-                    SELECT 
-                        reward.title, 
-                        count(pivot.user_id) as count
-                    FROM dma_friends_rewards reward
-                    LEFT JOIN dma_friends_reward_user pivot ON reward.id = pivot.reward_id
-                    WHERE
-                        pivot.created_at BETWEEN DATE_SUB(NOW(), INTERVAL 60 DAY) AND NOW()
-                    GROUP BY pivot.reward_id
-                    ORDER BY count DESC
-                    LIMIT " . $limit
-                )
-            );
-        });
+        $query = DB::table('dma_friends_rewards')
+                ->select("title", DB::raw("count(dma_friends_reward_user.user_id) as count"))
+                ->join("dma_friends_reward_user", 'dma_friends_rewards.id', '=', 'dma_friends_reward_user.reward_id')
+                ->groupBy("dma_friends_reward_user.reward_id")
+                ->orderBy('count', 'DESC');
+
+        $rewards = GraphReport::processQuery($query, 'dma_friends_reward_user.created_at', $limit, 'friends.reports.topRewards');
 
         $this->vars['rewards'] = $rewards;
 

@@ -43,22 +43,13 @@ class TopBadges extends ReportWidgetBase
     {   
         $limit = $this->property('limit');
 
-        $badges = Cache::remember('friends.report.topbadges', GraphReport::getCacheTime(), function() use ($limit) {
-            return DB::select(
-                DB::raw("
-                    SELECT 
-                        badge.title, 
-                        count(pivot.user_id) as count
-                    FROM dma_friends_badges badge
-                    LEFT JOIN dma_friends_badge_user pivot ON badge.id = pivot.badge_id
-                    WHERE
-                        pivot.created_at BETWEEN DATE_SUB(NOW(), INTERVAL 60 DAY) AND NOW()
-                    GROUP BY pivot.badge_id
-                    ORDER BY count DESC
-                    LIMIT " . $limit
-                )
-            );
-        });
+        $query = DB::table('dma_friends_badges')
+                ->select("title", DB::raw("count(dma_friends_badge_user.user_id) as count"))
+                ->join("dma_friends_badge_user", 'dma_friends_badges.id', '=', 'dma_friends_badge_user.badge_id')
+                ->groupBy("dma_friends_badge_user.badge_id")
+                ->orderBy('count', 'DESC');
+
+        $badges = GraphReport::processQuery($query, 'dma_friends_badge_user.created_at', $limit, 'friends.reports.topBadges');
 
         $this->vars['badges'] = $badges;
 

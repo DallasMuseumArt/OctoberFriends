@@ -32,13 +32,13 @@ class DatePicker extends ReportWidgetBase
 
         return $this->makePartial('widget', [
             'current'   => date('Y-m-d'),
-            'week'      => $this->dateAgo('-1 week'),
-            'month'     => $this->dateAgo('-1 month'),
-            'year'      => $this->dateAgo('-1 year'),
+            'week'      => DatePicker::dateAgo('-1 week'),
+            'month'     => DatePicker::dateAgo('-1 month'),
+            'year'      => DatePicker::dateAgo('-1 year'),
         ]);
     }
 
-    private function dateAgo($string)
+    public static function dateAgo($string)
     {
         return date('Y-m-d', strtotime($string));
     }

@@ -43,30 +43,13 @@ class TopActivities extends ReportWidgetBase
     {   
         $limit = $this->property('limit');
 
-        // $query = DB::table('dma_friends_activities activity')
-        //         ->select("activity.title", DB::raw("count(pivot.user_id) as count"))
-        //         ->join("dma_friends_activity_user pivot", 'activity.id', '=', 'pivot.activity_id')
-        //         ->groupBy("pivot.activity_id")
-        //         ->orderBy('count', 'DESC');
+        $query = DB::table('dma_friends_activities')
+                ->select("title", DB::raw("count(dma_friends_activity_user.user_id) as count"))
+                ->join("dma_friends_activity_user", 'id', '=', 'dma_friends_activity_user.activity_id')
+                ->groupBy("dma_friends_activity_user.activity_id")
+                ->orderBy('count', 'DESC');
 
-        // $activities = GraphReport::processQuery($query, 'pivot.created_at', $limit, 'friends.reports.topActivities');
-
-        $activities = Cache::remember('friends.report.topactivities', GraphReport::getCacheTime(), function() use ($limit) {
-            return DB::select(
-                DB::raw("
-                    SELECT 
-                        activity.title, 
-                        count(pivot.user_id) as count
-                    FROM dma_friends_activities activity
-                    LEFT JOIN dma_friends_activity_user pivot ON activity.id = pivot.activity_id
-                    WHERE
-                        pivot.created_at BETWEEN DATE_SUB(NOW(), INTERVAL 60 DAY) AND NOW()
-                    GROUP BY pivot.activity_id
-                    ORDER BY count DESC
-                    LIMIT " . $limit
-                )
-            );
-        });
+        $activities = GraphReport::processQuery($query, 'dma_friends_activity_user.created_at', $limit, 'friends.reports.topActivities');
 
         $this->vars['activities'] = $activities;
 

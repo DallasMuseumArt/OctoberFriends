@@ -51,6 +51,13 @@ class GraphReport extends ReportWidgetBase {
     static public function processQuery($query, $timestamp, $limit, $cacheKey, $reset = false)
     {
         $get = Request::all();
+        
+        if (empty($get)) {
+            $get = [
+                'from'  => DatePicker::dateAgo('-1 week'),
+                'to'    => date('Y-m-d'),
+            ];
+        }
 
         $cacheKey .= $get['from'] . $get['to'];
 
