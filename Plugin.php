@@ -69,7 +69,8 @@ class Plugin extends PluginBase
                 'icon'        => 'icon-cog',
                 'class'       => 'DMA\Friends\Models\Settings',
                 'order'       => 500,
-                'keywords'    => 'friends system settings'
+                'keywords'    => 'friends system settings',
+                'permissions' => ['dma.friends.*'],
             ],
         ];
     }
