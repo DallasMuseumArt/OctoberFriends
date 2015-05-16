@@ -59,6 +59,9 @@
                 var parentId = $(this).parents('.graph').data('graphid');
 
                 $this.graphs[parentId].renderedGraph.transform(type);
+
+                $('.graph .controls a.active').removeClass('active');
+                $(this).addClass('active');
             });
         }
     };
