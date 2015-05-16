@@ -58,9 +58,7 @@
                 var type = $(this).data('type');
                 var parentId = $(this).parents('.graph').data('graphid');
 
-console.log($this);
                 $this.graphs[parentId].renderedGraph.transform(type);
-                console.log(parentId);
             });
         }
     };
