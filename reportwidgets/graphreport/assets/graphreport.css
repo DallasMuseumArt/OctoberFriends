@@ -2,3 +2,12 @@
     text-align: center;
     vertical-align: middle;
 }
+
+.report-widget.graph .controls {
+    float: right;
+    margin-top: -20px;
+}
+
+.report-widget.graph .controls a.active {
+    color: #7e8c8d;
+}
