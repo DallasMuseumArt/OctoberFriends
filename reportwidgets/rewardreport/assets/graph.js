@@ -5,11 +5,8 @@
 
     friendsReports.graphs.RewardReport = {
         chart: function() {
-            var chart = c3.generate({
+            var settings = {
                 bindto: '#RewardReport',
-                color: {
-                    pattern: ['#95B753', '#CC3300'],
-                },
                 data: {
                     x: 'x',
                     columns: this.data,
@@ -37,7 +34,9 @@
                         ratio: 0.2
                     }
                 }
-            });
+            };
+
+            friendsReports.initGraph(this, settings);
         }
     };
 
