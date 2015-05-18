@@ -537,6 +537,10 @@ class Plugin extends PluginBase
                 'label'     => 'Chart - Gender Breakdown',
                 'context'   => 'dashboard',
             ],
+            'DMA\Friends\ReportWidgets\DemographicRace' => [
+                'label'     => 'Chart - Race Breakdown',
+                'context'   => 'dashboard',
+            ],
         ];  
     } 
    
