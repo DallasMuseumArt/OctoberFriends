@@ -43,6 +43,7 @@ return [
         'noGender'              => 'No Answer',
         'noRace'                => 'No Answer',
         'noIncome'              => 'No Answer',
+        'noEducation'           => 'No Answer',
     ],
     'userLogin' => [
         'loginTitle'            => 'Scan Membership Card',
