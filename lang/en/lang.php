@@ -42,6 +42,7 @@ return [
         'memberPhoneNotFound'   => 'Phone not found. Please update your Friends profile',
         'noGender'              => 'No Answer',
         'noRace'                => 'No Answer',
+        'noIncome'              => 'No Answer',
     ],
     'userLogin' => [
         'loginTitle'            => 'Scan Membership Card',

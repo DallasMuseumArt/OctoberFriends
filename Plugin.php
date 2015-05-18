@@ -541,6 +541,10 @@ class Plugin extends PluginBase
                 'label'     => 'Chart - Race Breakdown',
                 'context'   => 'dashboard',
             ],
+            'DMA\Friends\ReportWidgets\DemographicIncome' => [
+                'label'     => 'Chart - Income Breakdown',
+                'context'   => 'dashboard',
+            ],
         ];  
     } 
    
