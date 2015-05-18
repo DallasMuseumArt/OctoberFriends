@@ -40,6 +40,7 @@ return [
         'memberCard'            => 'The card has been sent to the designated membership printer for ":title"',
         'memberCardLocation'    => 'Select a location to print the membership card',
         'memberPhoneNotFound'   => 'Phone not found. Please update your Friends profile',
+        'noGender'              => 'Do not disclose',
     ],
     'userLogin' => [
         'loginTitle'            => 'Scan Membership Card',

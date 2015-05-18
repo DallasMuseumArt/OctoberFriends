@@ -533,6 +533,10 @@ class Plugin extends PluginBase
                 'label'   => 'Chart - % of Users with partnership',
                 'context' => 'dashboard'
             ],
+            'DMA\Friends\ReportWidgets\DemographicGender' => [
+                'label'     => 'Chart - Gender Breakdown',
+                'context'   => 'dashboard',
+            ],
         ];  
     } 
    
