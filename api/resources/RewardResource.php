@@ -40,12 +40,12 @@ class RewardResource extends BaseResource {
             $type    = ($message) ? 'info' : 'error'; 
             
             $success = true;
-            $httpCode = 200;
+            $httpCode = 201;
             
             
             if($type == 'error'){
                 $success = false;
-                $httpCode = 201;
+                $httpCode = 200;
                 $message = Session::pull('rewardError');
             }
             
