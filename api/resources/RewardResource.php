@@ -5,6 +5,7 @@ use Response;
 use DMA\Friends\Models\Reward;
 use DMA\Friends\Classes\RewardManager;
 use DMA\Friends\Classes\API\BaseResource;
+use DMA\Friends\API\Transformers\UserProfileTransformer;
 
 use RainLab\User\Models\User;
 
@@ -49,21 +50,18 @@ class RewardResource extends BaseResource {
                 $message = Session::pull('rewardError');
             }
             
-    
+            
+            // Get common user points format via UserProfileTransformer
+            $userTransformer = new UserProfileTransformer();
+            $points = $userTransformer->getUserPoints($user);
     
             $payload = [
                     'data' => [
                             'success' => $success,
                             'message' => $message,
                             'user' => [
-                                'id'                 => $user->getKey(),
-                                'points'             => [
-                                        // Total points needs to be convert to Int because after redeem reward
-                                        // $user->points are been returned as string
-                                        'total'      => intval($user->points), 
-                                        'this_week'  => $user->points_this_week,
-                                        'today'      => $user->points_today,
-                                ],
+                                'id'      => $user->getKey(),
+                                'points'  => $points
                             ]
                     ]
             ];
