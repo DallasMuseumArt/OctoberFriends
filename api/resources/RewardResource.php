@@ -50,10 +50,21 @@ class RewardResource extends BaseResource {
             }
             
     
+    
             $payload = [
                     'data' => [
                             'success' => $success,
-                            'message' => $message
+                            'message' => $message,
+                            'user' => [
+                                'id'                 => $user->getKey(),
+                                'points'             => [
+                                        // Total points needs to be convert to Int because after redeem reward
+                                        // $user->points are been returned as string
+                                        'total'      => intval($user->points), 
+                                        'this_week'  => $user->points_this_week,
+                                        'today'      => $user->points_today,
+                                ],
+                            ]
                     ]
             ];
             
