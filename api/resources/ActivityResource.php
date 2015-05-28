@@ -6,6 +6,7 @@ use RainLab\User\Models\User;
 use DMA\Friends\Classes\API\BaseResource;
 use DMA\Friends\Activities\ActivityCode;
 use DMA\Friends\Activities\LikeWorkOfArt;
+use DMA\Friends\API\Transformers\UserProfileTransformer;
 
 class ActivityResource extends BaseResource {
 
@@ -42,10 +43,19 @@ class ActivityResource extends BaseResource {
                 $holder = ( $activity ) ? 'activityMessage' : 'activityError';
                 $message = Session::pull($holder);
                 
+                // Get common user points format via UserProfileTransformer
+                $userTransformer = new UserProfileTransformer();
+                $points = $userTransformer->getUserPoints($user);
+                
+                
                 $payload = [
                     'data' => [
                         'success' => ($activity) ? true : false,    
-                        'message' => $message
+                        'message' => $message,
+                        'user' => [
+                                'id'      => $user->getKey(),
+                                'points'  => $points
+                        ]
                     ]
                 ];
                 
@@ -61,6 +71,7 @@ class ActivityResource extends BaseResource {
                         $payload['data']['artwork'] = $objectData;
                     }
                 }
+
                 
                 return Response::api()->setStatusCode($httpCode)->withArray($payload);
 

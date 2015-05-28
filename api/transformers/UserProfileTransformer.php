@@ -29,12 +29,7 @@ class UserProfileTransformer extends BaseTransformer {
             'address'            => $instance->street_addr,  
             'city'               => $instance->city,
             'zip'                => $instance->zip,
-            'points'             => [
-                    'total'      => $instance->points,
-                    'this_week'  => $instance->points_this_week,
-                    'today'      => $instance->points_today,
-            ],
-                
+            'points'             => $this->getUserPoints($instance)
         ];
         
         // Add to profile user metadata
@@ -88,6 +83,15 @@ class UserProfileTransformer extends BaseTransformer {
         
         return [];
         
+    }
+    
+    public function getUserPoints(Model $instance)
+    {
+        return [
+            'total'      => intval($instance->points),
+            'this_week'  => intval($instance->points_this_week),
+            'today'      => intval($instance->points_today)
+        ];
     }
     
     
