@@ -35,14 +35,19 @@ class FriendsToolbar extends ReportWidgetBase
 
         $this->addCss('css/friendstoolbar.css');
 
-        $users = User::with(['metadata' => function($query) {
-            $query->where('current_member', '<>', Usermeta::IS_STAFF);
-        }]);
+        $meta = new Usermeta;
+        $meta_table = $meta->getTable();
 
-        $this->vars['numFriends']       = number_format($users->count());
-        $this->vars['todayFriends']     = number_format($users->where('created_at', '>=', $today)->count());
-        $this->vars['weekFriends']      = number_format($users->where('created_at', '>=', $thisWeek)->count());
-        $this->vars['averageFriends']   = number_format($this->getAverageFriends());
+        $this->vars['numFriends']       = Usermeta::where('current_member', '!=', Usermeta::IS_STAFF)->count();
+        $this->vars['todayFriends']     = User::join($meta_table, 'users.id', '=', $meta_table . '.user_id')
+            ->where('current_member', '!=', Usermeta::IS_STAFF) 
+            ->where('created_at', '>=', $today)->count();
+
+        $this->vars['weekFriends']      = User::join($meta_table, 'users.id', '=', $meta_table . '.user_id') 
+            ->where('current_member', '!=', Usermeta::IS_STAFF)
+            ->where('created_at', '>=', $thisWeek)->count();
+
+        $this->vars['averageFriends']   = $this->getAverageFriends();
 
         return $this->makePartial('widget');
     }
