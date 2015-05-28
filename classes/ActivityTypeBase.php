@@ -136,7 +136,11 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
                 // Hand everything off to the badges
                 BadgeManager::applyActivityToBadges($user, $activity);
 
-                Session::put('activityMessage', Lang::get('dma.friends::lang.activities.codeSuccess', ['title' => $activity->title]));
+                Session::put('activityMessage', 
+                    Lang::get('dma.friends::lang.activities.codeSuccess', 
+                        ['title' => $activity->title]
+                    )
+                );
 
                 return $activity;
             }

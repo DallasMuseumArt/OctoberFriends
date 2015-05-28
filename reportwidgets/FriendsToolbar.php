@@ -35,9 +35,13 @@ class FriendsToolbar extends ReportWidgetBase
 
         $this->addCss('css/friendstoolbar.css');
 
-        $this->vars['numFriends']       = number_format(User::count());
-        $this->vars['todayFriends']     = number_format(User::where('created_at', '>=', $today)->count());
-        $this->vars['weekFriends']      = number_format(User::where('created_at', '>=', $thisWeek)->count());
+        $users = User::with(['metadata' => function($query) {
+            $query->where('current_member', '<>', Usermeta::IS_STAFF);
+        }]);
+
+        $this->vars['numFriends']       = number_format($users->count());
+        $this->vars['todayFriends']     = number_format($users->where('created_at', '>=', $today)->count());
+        $this->vars['weekFriends']      = number_format($users->where('created_at', '>=', $thisWeek)->count());
         $this->vars['averageFriends']   = number_format($this->getAverageFriends());
 
         return $this->makePartial('widget');
