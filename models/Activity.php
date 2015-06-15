@@ -2,6 +2,7 @@
 
 use Model;
 use DateTime;
+use DB;
 use Smirik\PHPDateTimeAgo\DateTimeAgo as TimeAgo;
 
 
@@ -160,6 +161,35 @@ class Activity extends Model
                 $q->where('name', $categories);
             });
         }
+    }
+
+    /**
+     * Find activities whose end dates have not passed (or which do not have end dates)
+     */
+    public function scopeNotExpired($query) {
+        $query = $query->where(function($q) {
+            $q->where('time_restriction', '!=', 2)
+              ->orWhere('date_end', '>', date('Y-m-d H:i:s'));
+        });
+
+        return $query;
+    }
+
+    /**
+     * Find activities whose end dates have not passed,
+     * AND whose begin dates have passed 
+     * (or which do not have begin and end dates)
+     */
+    public function scopeStartedNotExpired($query) {
+        $query = $query->where(function($q) {
+            $q->where('time_restriction', '!=', 2)
+              ->orWhere(function($q) {
+                $q->where('date_end', '>', date('Y-m-d H:i:s'))
+                  ->where('date_begin', '<', date('Y-m-d H:i:s'));
+              });
+        });
+
+        return $query;
     }
 
     /**
