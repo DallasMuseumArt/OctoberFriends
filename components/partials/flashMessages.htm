@@ -1,6 +1,6 @@
     {% flashMessages %}
         {% set class = ( type == 'error') ? 'danger' : type %}
-        <div class="alert alert-{{ class }}">{{ message }}</div>
+        <div class="alert alert-{{ class }}">{{ message|raw }}</div>
     {% endflashMessages %}
     <script type="text/javascript">
         window.scrollTo(0, 0);

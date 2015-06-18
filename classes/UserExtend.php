@@ -63,7 +63,7 @@ class UserExtend
 
         if ($this->user->forceSave()) {
 
-            // Process any activities awarded on points achievements
+            // Process any activities awarded on points achievement
             Points::process($this->user);
             
             Event::fire('dma.friends.user.pointsEarned', [$this->user, $points]);
