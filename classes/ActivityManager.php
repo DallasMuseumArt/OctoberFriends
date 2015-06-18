@@ -172,7 +172,7 @@ class ActivityManager
 
         $formConfig = $this->activityType->getConfig();
         $formConfig = $this->getConfigPath($formConfig);
-      
+      \Debugbar::info($formConfig);
         if (File::isFile($formConfig)) {
             return $this->makeConfig($formConfig);
         } else {

@@ -11,6 +11,7 @@ use libphonenumber\PhoneNumberUtil;
 use libphonenumber\PhoneNumberFormat;
 use Carbon\Carbon;
 use October\Rain\Database\Attach\Resizer;
+use DMA\Friends\Activities\Points;
 
 /**
  * Custom class to add additional functionality based on the Rainlab User model
@@ -61,6 +62,9 @@ class UserExtend
         $this->user->points_today += $points;
 
         if ($this->user->forceSave()) {
+
+            // Process any activities awarded on points achievements
+            Points::process($this->user);
             
             Event::fire('dma.friends.user.pointsEarned', [$this->user, $points]);
 

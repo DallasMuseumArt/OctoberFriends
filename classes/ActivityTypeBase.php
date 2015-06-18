@@ -69,7 +69,7 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
      */
     public function getConfig()
     {
-        return '/plugins/' . $this->dirName . '/' . $this->fieldConfig;
+        return $this->dirName . '/' . $this->fieldConfig;
     }
 
     /**
@@ -120,8 +120,6 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
         $activity = $params['activity'];
 
         if (self::canComplete($activity, $user)) {
-            $userExtend = new UserExtend($user);
-            $userExtend->addPoints($activity->points);
 
             if ($user->activities()->save($activity)) {
 
@@ -132,6 +130,10 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
                     'user'          => $user,
                     'object'        => $activity,
                 ]); 
+
+                // Award points
+                $userExtend = new UserExtend($user);
+                $userExtend->addPoints($activity->points);
 
                 // Hand everything off to the badges
                 BadgeManager::applyActivityToBadges($user, $activity);
