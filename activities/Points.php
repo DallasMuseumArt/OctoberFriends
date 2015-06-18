@@ -57,10 +57,8 @@ class Points extends ActivityTypeBase
                 if ($user->activities->contains($activity->id)) continue;
 
                 if ($user->points >= $activity->points) {
-                    \Debugbar::info('doesnt have activity');
                     parent::process($user, ['activity' => $activity]);
                 }
-                else { \Debugbar::info('has activity'); }
             }
 
             $is_running = false;
