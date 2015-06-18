@@ -458,7 +458,6 @@ class Plugin extends PluginBase
         $this->registerConsoleCommand('friends.points-daily', 'DMA\Friends\Commands\DailyPoints');
         $this->registerConsoleCommand('friends.read-channels', 'DMA\Friends\Commands\ReadChannels');
         $this->registerConsoleCommand('friends.reset-groups', 'DMA\Friends\Commands\ResetGroups');
-        $this->registerConsoleCommand('friends.census', 'DMA\Friends\Commands\ImportCensus');
 
     } 
     
