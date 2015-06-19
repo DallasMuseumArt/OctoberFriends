@@ -68,7 +68,7 @@ class RatingResource extends BaseResource {
                                  $instance->getRatingStats(),
                                  [
                                          'object_type' => $objectType,
-                                         'object_id'   => $objectId
+                                         'object_id'   => intval($objectId)
                                  ]
                          )
                  ];
@@ -86,7 +86,7 @@ class RatingResource extends BaseResource {
          }
     }
 
-    public function addObjectRating($objectType, $objectId, $user, $rateValue)
+    public function addObjectRating($objectType, $objectId, $user, $rateValue, $comment = null)
     {
 
         try{
@@ -94,7 +94,7 @@ class RatingResource extends BaseResource {
 
                 if($instance = $this->getObject($objectType, $objectId)){
 
-                    list($success, $rating) = $instance->addRating($user, $rateValue, 'bla');
+                    list($success, $rating) = $instance->addRating($user, $rateValue, $comment);
                     
                     // Get common user points format via UserProfileTransformer
                     $userTransformer = new UserProfileTransformer();
@@ -112,7 +112,7 @@ class RatingResource extends BaseResource {
                                         $instance->getRatingStats(),
                                         [
                                             'object_type' => $objectType,
-                                            'object_id'   => $objectId
+                                            'object_id'   => intVal($objectId)
                                         ]
                                      )
                             ]
