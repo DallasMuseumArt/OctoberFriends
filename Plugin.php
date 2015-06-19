@@ -214,6 +214,7 @@ class Plugin extends PluginBase
             $model->hasMany['activityLogs']     = ['DMA\Friends\Models\ActivityLog'];
             $model->hasMany['bookmarks']        = ['DMA\Friends\Models\Bookmark'];
             $model->hasMany['notifications']    = ['DMA\Friends\Models\Notification'];
+            $model->hasMany['rates']            = ['DMA\Friends\Models\UserRate'];
             $model->belongsToMany['activities'] = ['DMA\Friends\Models\Activity',
                 'table' => 'dma_friends_activity_user', 
                 'user_id', 
@@ -480,6 +481,7 @@ class Plugin extends PluginBase
             'users'                 => '\DMA\Friends\API\Resources\UserResource',
             'countries'             => '\DMA\Friends\API\Resources\CountryResource',   
             'countries.states'      => '\DMA\Friends\API\Resources\StateResource',
+            'ratings'               => '\DMA\Friends\API\Resources\RatingResource',
         ];
     }
     

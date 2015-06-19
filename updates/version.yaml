@@ -95,3 +95,7 @@
 2.5.0:
     - Release v2.5
     - add_activity_points_to_complete.php
+2.5.1:
+    - Create Ratings table
+    - create_ratings_table.php
+    - create_user_rates_table.php

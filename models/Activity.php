@@ -5,7 +5,6 @@ use DateTime;
 use DB;
 use Smirik\PHPDateTimeAgo\DateTimeAgo as TimeAgo;
 
-
 /**
  * Activity Model
  *
@@ -16,6 +15,7 @@ class Activity extends Model
 {
 
     use \October\Rain\Database\Traits\Validation;
+    use \DMA\Friends\Traits\Rateable;
 
     /**
      * @const No time restriction set

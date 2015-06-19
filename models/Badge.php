@@ -14,6 +14,7 @@ class Badge extends Model
 {
 
     use \October\Rain\Database\Traits\Validation;
+    use \DMA\Friends\Traits\Rateable;
 
     /**
      * @var string The database table used by the model.
