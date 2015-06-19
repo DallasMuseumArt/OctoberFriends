@@ -69,7 +69,9 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
      */
     public function getConfig()
     {
-        return $this->dirName . '/' . $this->fieldConfig;
+        // TODO figure out this inconcistency between installations
+        //return $this->dirName . '/' . $this->fieldConfig;
+        return '/plugins/' . $this->dirName . '/' . $this->fieldConfig;
     }
 
     /**
@@ -139,6 +141,9 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
                 BadgeManager::applyActivityToBadges($user, $activity);
 
                 $messages = Session::get('activityMessage');
+                if (!is_array($messages)) {
+                    $messages = [$messages];
+                }
                 $messages[] = Lang::get('dma.friends::lang.activities.codeSuccess', 
                     ['title' => $activity->title]
                 );
