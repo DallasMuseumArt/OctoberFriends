@@ -36,7 +36,8 @@ class RateTransformer extends BaseTransformer {
      */
     public function includeUser(Model $instance)
     {
-        return $this->item($instance, new UserTransformer);
+        $user = $instance->user;
+        return $this->item($user, new UserTransformer);
     }
     
 }
