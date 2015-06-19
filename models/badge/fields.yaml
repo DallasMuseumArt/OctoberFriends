@@ -80,8 +80,14 @@ secondaryTabs:
             required: true
             default: 0
         maximum_earnings:
-            label: Maximum Earnings
+            label: Maximum earnings per user
             description: The number of times an individual can earn this badge
+            span: left
+            tab: Configuration
+            type: number
+        maximum_earnings_global:
+            label: Maxium earnings per badge
+            description: The number of times a badge can be earned
             span: right
             tab: Configuration
             type: number

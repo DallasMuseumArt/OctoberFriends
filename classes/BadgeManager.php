@@ -112,6 +112,13 @@ class BadgeManager
     {
         $badge = $step->badge;
 
+        // Check badge global limit
+        if ($badge->maximum_earnings_global > 0
+            && count($badge->users) > $badge->maximum_earnings_global) {
+
+            return false;
+        }
+
         // Complete step
         try {
             $user->steps()->save($step);

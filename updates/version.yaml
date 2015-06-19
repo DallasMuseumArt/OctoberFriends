@@ -99,3 +99,6 @@
     - Create Ratings table
     - create_ratings_table.php
     - create_user_rates_table.php
+2.5.2:
+    - Added global badge limit
+    - add_badge_global_max.php
