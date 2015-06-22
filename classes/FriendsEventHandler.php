@@ -196,8 +196,15 @@ class FriendsEventHandler {
                      // Determine the content of the message
                      $holder = ( $activity ) ? 'activityMessage' : 'activityError';
                      $message = Session::pull($holder);
+
+                     if (is_array($message)) {
+                        foreach($message as $m) {
+                            $notification->message($m);
+                        }
+                    } else {
                                           
                      $notification->message($message);
+                    }
                      
                 }, ['sms', 'kiosk']);
                 
