@@ -63,8 +63,10 @@ class ActivityCodeForm extends ComponentBase
             $notification->to($user, $user->name);
              
             // Send code and activity just in case we want to use in the template
-            $notification->addData(['code' => $code,
-                                    'activity' => $activity]);
+            $notification->addData([
+                'code' => $code,
+                'activity' => $activity
+            ]);
             
             // Set type of flash
             //$notification->addViewSettings(['type' =>  ( $activity ) ? 'info' : 'error']);
@@ -78,6 +80,7 @@ class ActivityCodeForm extends ComponentBase
             }
 
             $notification->message($messages);
+       
              
         }, ['flash', 'kiosk']);
         
