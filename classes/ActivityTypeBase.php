@@ -174,10 +174,9 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
         if ($activity->activity_lockout && $pivot = $user->activities()->where('activity_id', $activity->id)->first()) {
             $time       = Carbon::now();
             $lastTime   = $pivot->pivot->created_at;
-            $lastTime->addMinutes($activity->activity_lockout);
 
-            if ($time->diffInMinutes($lastTime) && $time->diffInMinutes($lastTime) < $activity->activity_lockout) {
-                $x = $time->diffInMinutes($lastTime);
+            if ($time->diffInMinutes($lastTime) < $activity->activity_lockout) {
+                $x = $time->diffInMinutes($lastTime->addMinutes($activity->activity_lockout));
 
                 $message = self::convertToHoursMins($x, '%d hours and %02d minutes');
 
