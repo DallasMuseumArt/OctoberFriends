@@ -102,3 +102,6 @@
 2.5.2:
     - Added global badge limit
     - add_badge_global_max.php
+2.5.3:
+    - Add primary index to user activity pivot table
+    - add_activity_primary_index.php
