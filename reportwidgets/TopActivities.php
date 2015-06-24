@@ -45,7 +45,7 @@ class TopActivities extends ReportWidgetBase
 
         $query = DB::table('dma_friends_activities')
                 ->select("title", DB::raw("count(dma_friends_activity_user.user_id) as count"))
-                ->join("dma_friends_activity_user", 'id', '=', 'dma_friends_activity_user.activity_id')
+                ->join("dma_friends_activity_user", 'dma_friends_activities.id', '=', 'dma_friends_activity_user.activity_id')
                 ->groupBy("dma_friends_activity_user.activity_id")
                 ->orderBy('count', 'DESC');
 
