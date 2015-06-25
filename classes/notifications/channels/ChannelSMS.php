@@ -125,7 +125,7 @@ class ChannelSMS implements Channel, Listenable, Webhook
 	    // TODO : add validation to control the size of the message.
 	    $toUser  = $message->getTo();
 	    $data    = $message->getData();
-	    $txt     = $message->getContent();
+	    $txt     = strip_tags($message->getContent());
 
 	    // Clean phone user
 	    $toPhone = $this->cleanPhone($toUser->phone);
