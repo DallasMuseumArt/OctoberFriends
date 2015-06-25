@@ -75,8 +75,10 @@ class ActivityCodeForm extends ComponentBase
             $holder = ( $activity ) ? 'activityMessage' : 'activityError';
             $messages = Session::pull($holder);
 
-            if (is_array($messages)) {
+            if (is_array($messages) && count($messages) > 1) {
                 $messages = implode("<hr/>", $messages);
+            } else if (is_array($messages)) {
+                $messages = $messages[0];
             }
 
             $notification->message($messages);
