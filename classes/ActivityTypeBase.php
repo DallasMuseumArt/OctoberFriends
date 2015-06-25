@@ -146,7 +146,7 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
                     $messages = [$messages];
                 }
 
-                $message = ($activity->complete_message) ? 
+                $message = (!empty(trim(strip_tags($activity->complete_message)))) ? 
                     $activity->complete_message :
                     Lang::get('dma.friends::lang.activities.codeSuccess', 
                         ['title' => $activity->title]
