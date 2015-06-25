@@ -2,6 +2,17 @@
 
     var ActivityFilters = {};
 
+    ActivityFilters.setCookie = function(value) {
+        var expires = new Date();
+        expires.setHours(24,0,0,0);
+        document.cookie = 'activityfilters=' + encodeURIComponent(value) + '; path=/; expires=' + expires.toUTCString();
+    };
+
+    ActivityFilters.getCookie = function() {
+        var value = document.cookie.match('(^|;) ?activityfilters=([^;]*)(;|$)' );
+        return value ? decodeURIComponent(value[2]) : null;
+    };
+
     ActivityFilters.list = $('.friends-activity-filters-list');
 
     ActivityFilters.isAllSelected = function() {
@@ -25,9 +36,13 @@
                                             .get();
         }
 
+        active_filters = JSON.stringify(active_filters);
+
+        this.setCookie(active_filters);
+
         // initialize options for AJAX request
         var options = {
-            data: { filters: JSON.stringify(active_filters) }
+            data: { filters: active_filters }
         };
 
         // Send the AJAX request to update the page
@@ -43,7 +58,29 @@
         }
     };
 
+    ActivityFilters.updateState = function() {
+        var active_filters = JSON.parse(this.getCookie());
+
+        if (!active_filters) return;
+
+        if (active_filters.categories == 'all') return;
+
+        if (active_filters.categories instanceof Array) {
+            // update list state
+            $('a.friends-activity-filter').each(function() {
+                var link = $(this);
+                if ($.inArray(link.data('filter-name'), active_filters.categories) > -1) {
+                    link.removeClass('inactive').addClass('active');
+                }
+                else {
+                    link.removeClass('active').addClass('inactive');
+                }
+            });
+        }
+    };
+
     ActivityFilters.listen = function() {
+        this.updateState();
         this.updateSelectAll();
 
         $('a.friends-activity-filter-all').click(function() {
