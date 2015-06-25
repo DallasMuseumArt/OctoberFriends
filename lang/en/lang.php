@@ -19,10 +19,11 @@ return [
         'noBadges'      => 'You have no badges',
     ],
     'rewards' => [
-        'redeemed'      => 'Congratulations, you have redeemed the reward ":title"',
-        'noPoints'      => 'Sorry you do not have enough points to redeem this reward',
-        'noInventory'   => 'Sorry this reward is no longer available',
-        'couponText'    => 'Thank you for being a DMA Friend!',
+        'redeemed'          => 'Congratulations, you have redeemed the reward ":title"',
+        'noPoints'          => 'Sorry you do not have enough points to redeem this reward',
+        'noInventory'       => 'Sorry this reward is no longer available',
+        'alreadyRedeemed'   => 'You have already redeemed this reward',
+        'couponText'        => 'Thank you for being a DMA Friend!',
     ],
     'log' => [
         'activity'  => ':name just completed the activity of ":title"',

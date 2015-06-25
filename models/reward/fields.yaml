@@ -57,14 +57,19 @@ secondaryTabs:
             label: Barcode Value
             description: The value of the barcode printed on the coupon.
             tab: Configuration
-            span: left
+            span: right
         inventory:
             label: Inventory
             description: Number of reward items in inventory
             tab: Configuration
             span: left
             type: number
-            span: left
+        user_redeem_limit:
+            label: User Redemption Limit 
+            description: The number of times a user can redeem this reward
+            tab: Configuration
+            span: right
+            type: number
         enable_email:
             label: Email upon redemption
             description: If checked send an email to the user if they redeem this reward

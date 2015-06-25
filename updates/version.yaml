@@ -108,3 +108,6 @@
 2.5.4:
     - Add custom activity and feedback messages
     - add_custom_activity_message.php
+2.5.5:
+    - Add user redemption limit
+    - add_reward_user_limit.php
