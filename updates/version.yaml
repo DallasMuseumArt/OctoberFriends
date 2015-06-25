@@ -105,3 +105,6 @@
 2.5.3:
     - Add primary index to user activity pivot table
     - add_activity_primary_index.php
+2.5.4:
+    - Add custom activity and feedback messages
+    - add_custom_activity_messages.php

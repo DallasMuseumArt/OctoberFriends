@@ -1,4 +1,4 @@
-    <?php namespace DMA\Friends\Updates;
+<?php namespace DMA\Friends\Updates;
 
 use Schema;
 use October\Rain\Database\Updates\Migration;

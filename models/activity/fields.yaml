@@ -38,6 +38,18 @@ secondaryTabs:
             span: left
             type: richeditor
             size: huge
+        complete_message:
+            label: Custom Activity Complete Message 
+            description: a custom message to apply when an activity is completed
+            tab: Content
+            span: left
+            type: richeditor
+        feedback_message:
+            label: Custom Feedback Message
+            description: override the default feedback message
+            tab: Content
+            span: right
+            type: richeditor
         # ===================================
         #  Categories tab 
         # ===================================

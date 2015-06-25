@@ -18,22 +18,13 @@ class AddActivityPrimaryIndex extends Migration {
             $table->index('id');
         });
 
-    }   
-
+    }
 
     /** 
      * Reverse the migrations.
      *
      * @return void
      */
-    public function down()
-    {   
-        Schema::table('dma_friends_activity_user', function($table)
-        {
-            $table->dropIndex('id');
-            $table->dropColumn('id');
-        });
-
-    }   
+    public function down() {}    
 
 }
