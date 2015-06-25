@@ -107,4 +107,4 @@
     - add_activity_primary_index.php
 2.5.4:
     - Add custom activity and feedback messages
-    - add_custom_activity_messages.php
+    - add_custom_activity_message.php

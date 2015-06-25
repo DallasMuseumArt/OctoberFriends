@@ -3,7 +3,7 @@
 use Schema;
 use October\Rain\Database\Updates\Migration;
 
-class AddACustomActivityMessageIndex extends Migration {
+class AddCustomActivityMessage extends Migration {
 
     /** 
      * Run the migrations.
@@ -32,7 +32,6 @@ class AddACustomActivityMessageIndex extends Migration {
             $table->dropColumn('complete_message');
             $table->dropColumn('feedback_message');
         });
-
     }   
 
 }
