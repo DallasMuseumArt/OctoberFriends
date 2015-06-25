@@ -4,6 +4,7 @@ use Model;
 use DMA\Friends\Classes\API\BaseTransformer;
 use DMA\Friends\API\Transformers\MediaTransformer;
 use DMA\Friends\API\Transformers\StepTransformer;
+use DMA\Friends\API\Transformers\CategoryTransformer;
 use DMA\Friends\API\Transformers\DateTimeTransformerTrait;
 
 class BadgeTransformer extends BaseTransformer {
@@ -16,7 +17,8 @@ class BadgeTransformer extends BaseTransformer {
       * @var array
       */
      protected $defaultIncludes = [
-             'media'
+             'media',
+             'categories'
      ];     
         
     /**
@@ -114,5 +116,16 @@ class BadgeTransformer extends BaseTransformer {
     {
         return $this->item($instance, new MediaTransformer);
     }
+    
+    /**
+     * Include Media
+     *
+     * @return League\Fractal\CollectionResource
+     */
+    public function includeCategories(Model $instance)
+    {
+        return $this->collection($instance->categories, new CategoryTransformer);
+    }
+    
     
 }

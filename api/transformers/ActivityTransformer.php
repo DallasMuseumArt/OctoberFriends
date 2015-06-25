@@ -3,7 +3,9 @@
 use Model;
 use DMA\Friends\Classes\API\BaseTransformer;
 use DMA\Friends\API\Transformers\MediaTransformer;
+use DMA\Friends\API\Transformers\CategoryTransformer;
 use DMA\Friends\API\Transformers\DateTimeTransformerTrait;
+
 
 class ActivityTransformer extends BaseTransformer {
     
@@ -16,7 +18,8 @@ class ActivityTransformer extends BaseTransformer {
      * @var array
      */
     protected $defaultIncludes = [
-            'media'
+            'media',
+            'categories'
     ];
     
     /**
@@ -39,7 +42,7 @@ class ActivityTransformer extends BaseTransformer {
                 'id'                => (int)$instance->id,
                 'title'             => $instance->title,
                 'activity_code'     => $instance->activity_code,
-                'activity_type'     => $instance->activity_type,   
+                'activity_type'     => $instance->activity_type
         ];
     }
 
@@ -146,6 +149,16 @@ class ActivityTransformer extends BaseTransformer {
     public function includeMedia(Model $instance)
     {
         return $this->item($instance, new MediaTransformer);
+    }
+
+    /**
+     * Include Media
+     *
+     * @return League\Fractal\CollectionResource
+     */
+    public function includeCategories(Model $instance)
+    {
+        return $this->collection($instance->categories, new CategoryTransformer);
     }
     
     
