@@ -60,7 +60,8 @@ class StepTransformer extends BaseTransformer {
     public function includeActivity(Model $instance)
     {
         if($activity = $instance->activity){   
-            $resource = $this->item($activity, new ActivityTransformer(false));
+            $excludeEmbeds = ['categories'];
+            $resource = $this->item($activity, new ActivityTransformer(false, $excludeEmbeds));
             return $resource;
         }
     }
