@@ -2,6 +2,8 @@
 
     var ActivityFilters = {};
 
+    ActivityFilters.list = $('.friends-activity-filters-list');
+
     ActivityFilters.setCookie = function(value) {
         var expires = new Date();
         expires.setHours(24,0,0,0);
@@ -13,13 +15,15 @@
         return value ? decodeURIComponent(value[2]) : null;
     };
 
-    ActivityFilters.list = $('.friends-activity-filters-list');
-
     ActivityFilters.isAllSelected = function() {
         return this.list.find('.friends-activity-filter.inactive').length == 0;
     };
 
-    ActivityFilters.sendUpdate = function() {
+    ActivityFilters.sendUpdate = function(page) {
+        if (typeof page == 'undefined') {
+            page = 1;
+        }
+
         // Initialize filters array with default values
         var active_filters = {
             categories: 'all',
@@ -39,9 +43,12 @@
         active_filters = JSON.stringify(active_filters);
 
         this.setCookie(active_filters);
+        var url = window.location.pathname;
+        url = url + (page > 1 ? '?page=' + page : '');
 
         // initialize options for AJAX request
         var options = {
+            url: url,
             data: { filters: active_filters }
         };
 
@@ -49,21 +56,10 @@
         $.request(this.list.data('filter-component'), options);
     };
 
-    ActivityFilters.updateSelectAll = function() {
-        if (this.isAllSelected()) {
-            $('a.friends-activity-filter-all').removeClass('select').addClass('deselect');
-        }
-        else {
-            $('a.friends-activity-filter-all').removeClass('deselect').addClass('select');
-        }
-    };
-
     ActivityFilters.updateState = function() {
         var active_filters = JSON.parse(this.getCookie());
 
-        if (!active_filters) return;
-
-        if (active_filters.categories == 'all') return;
+        if (!active_filters || active_filters.categories == 'all') return false;
 
         if (active_filters.categories instanceof Array) {
             // update list state
@@ -76,12 +72,25 @@
                     link.removeClass('active').addClass('inactive');
                 }
             });
+            return true;
         }
+        return false;
+    };
+
+    ActivityFilters.listenToPageButtons = function() {
+        $('.pagination a').click(function() {
+            var page = $(this).attr('href').match(/(\?|&)page=(\d+)/);
+            page = page ? page[2] : 1;
+
+            ActivityFilters.sendUpdate(page);
+
+            return false;
+        });
     };
 
     ActivityFilters.listen = function() {
-        this.updateState();
-        this.updateSelectAll();
+        // If we have a saved filter state, update the newly loaded list to reflect it
+        if (this.updateState()) this.sendUpdate();
 
         $('a.friends-activity-filter-all').click(function() {
             if (ActivityFilters.isAllSelected()) {
@@ -89,12 +98,10 @@
                 ActivityFilters.list.find('a.active').removeClass('active').addClass('inactive');
             }
             else {
-                // make sure all categories are flagged active when view all chosen
+                // Select all
                 ActivityFilters.list.find('a.inactive').removeClass('inactive').addClass('active');
             }
             
-            ActivityFilters.updateSelectAll();
-
             ActivityFilters.sendUpdate();
             return false;
         });
@@ -110,11 +117,12 @@
                 filter.removeClass('inactive').addClass('active');
             }
 
-            ActivityFilters.updateSelectAll();
-
             ActivityFilters.sendUpdate();
             return false;
         });
+
+        this.listenToPageButtons();
+        $('.filtered-activity-list').on('ajaxUpdate', function(e) { ActivityFilters.listenToPageButtons(); });
     };
 
     ActivityFilters.listen();
