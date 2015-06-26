@@ -145,7 +145,9 @@ class ActivityResource extends BaseResource {
         $payload = [
             'success'           => ($activity) ? true : false,
             'activity_code'     => $code,
-            'message'           => $message
+            'message'           => $message,
+            'feedback_message'  => $activity->feedback_message,
+            'complete_message'  => $activity->complete_message
         ];
         
         $httpCode = 200;

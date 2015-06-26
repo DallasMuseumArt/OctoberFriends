@@ -42,7 +42,9 @@ class ActivityTransformer extends BaseTransformer {
                 'id'                => (int)$instance->id,
                 'title'             => $instance->title,
                 'activity_code'     => $instance->activity_code,
-                'activity_type'     => $instance->activity_type
+                'activity_type'     => $instance->activity_type,
+                //'feedback_message'  => $instance->feedback_message,
+                //'complete_message'  => $instance->complete_message
         ];
     }
 
