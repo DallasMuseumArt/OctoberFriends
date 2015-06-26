@@ -8,5 +8,8 @@ var searchData=
   ['time_5frestrict_5fnone',['TIME_RESTRICT_NONE',['../dc/d8c/classDMA_1_1Friends_1_1Models_1_1Activity.html#ab9dd8b18c4810beabdcf8e45039913c8',1,'DMA::Friends::Models::Activity']]],
   ['timerestrictions',['TimeRestrictions',['../dc/d09/classDMA_1_1Friends_1_1FormWidgets_1_1TimeRestrictions.html',1,'DMA::Friends::FormWidgets']]],
   ['to',['to',['../d2/d68/classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1NotificationMessage.html#aa06665480e18b8c67f44d540d40de056',1,'DMA::Friends::Classes::Notifications::NotificationMessage']]],
+  ['topactivities',['TopActivities',['../d5/dcb/classDMA_1_1Friends_1_1ReportWidgets_1_1TopActivities.html',1,'DMA::Friends::ReportWidgets']]],
+  ['topbadges',['TopBadges',['../d4/d08/classDMA_1_1Friends_1_1ReportWidgets_1_1TopBadges.html',1,'DMA::Friends::ReportWidgets']]],
+  ['toprewards',['TopRewards',['../d8/db3/classDMA_1_1Friends_1_1ReportWidgets_1_1TopRewards.html',1,'DMA::Friends::ReportWidgets']]],
   ['ttfparser',['TTFParser',['../d4/d26/classTTFParser.html',1,'']]]
 ];

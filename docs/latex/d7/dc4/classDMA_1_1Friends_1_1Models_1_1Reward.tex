@@ -76,12 +76,12 @@ string The time since the badge was earned
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-77     \{
-78         \textcolor{keywordflow}{if} (!isset($this->pivot->created\_at)) \textcolor{keywordflow}{return} null;
-79 
-80         $timeAgo = \textcolor{keyword}{new} TimeAgo;
-81         \textcolor{keywordflow}{return} $timeAgo->get($this->pivot->created\_at);
-82     \}
+79     \{
+80         \textcolor{keywordflow}{if} (!isset($this->pivot->created\_at)) \textcolor{keywordflow}{return} null;
+81 
+82         $timeAgo = \textcolor{keyword}{new} TimeAgo;
+83         \textcolor{keywordflow}{return} $timeAgo->get($this->pivot->created\_at);
+84     \}
 \end{DoxyCode}
 
 
@@ -101,7 +101,10 @@ string The time since the badge was earned
 {\bfseries Initial value\+:}
 \begin{DoxyCode}
 = [
-        \textcolor{stringliteral}{'users'} => [\textcolor{stringliteral}{'Rainlab\(\backslash\)User\(\backslash\)Models\(\backslash\)User'}, \textcolor{stringliteral}{'dma\_friends\_reward\_user'}]
+        \textcolor{stringliteral}{'users'} => [\textcolor{stringliteral}{'Rainlab\(\backslash\)User\(\backslash\)Models\(\backslash\)User'}, [
+            \textcolor{stringliteral}{'table'} => \textcolor{stringliteral}{'dma\_friends\_reward\_user'}
+        ]]
+    ]
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Reward_a471e1042553519781408b0ebe6133397}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Reward@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Reward}!\$morph\+Many@{\$morph\+Many}}
 \index{\$morph\+Many@{\$morph\+Many}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Reward@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Reward}}

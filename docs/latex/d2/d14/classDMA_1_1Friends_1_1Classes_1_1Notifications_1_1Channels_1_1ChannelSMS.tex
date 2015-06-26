@@ -216,7 +216,7 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Cha
 125         \textcolor{comment}{// TODO : add validation to control the size of the message.}
 126         $toUser  = $message->getTo();
 127         $data    = $message->getData();
-128         $txt     = $message->getContent();
+128         $txt     = strip\_tags($message->getContent());
 129 
 130         \textcolor{comment}{// Clean phone user}
 131         $toPhone = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_aafb8c47b6e382d41069e13c3362b33fd}{cleanPhone}($toUser->phone);

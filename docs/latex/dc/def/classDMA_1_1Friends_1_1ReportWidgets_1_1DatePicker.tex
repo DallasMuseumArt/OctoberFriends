@@ -1,0 +1,75 @@
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1DatePicker}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Report\+Widgets\textbackslash{}Date\+Picker Class Reference}
+\label{classDMA_1_1Friends_1_1ReportWidgets_1_1DatePicker}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Date\+Picker@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Date\+Picker}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Report\+Widgets\textbackslash{}Date\+Picker\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{dc/def/classDMA_1_1Friends_1_1ReportWidgets_1_1DatePicker}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1ReportWidgets_1_1DatePicker_a81ffeceeda18e18464689c36a03f541e}{widget\+Details} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1ReportWidgets_1_1DatePicker_a3e9aff77509da20c6ba324e3ccdd3e9f}{render} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1DatePicker_a29f13e22b1bc28d919639ad7dcebaaa6}{}static {\bfseries date\+Ago} (\$string)\label{classDMA_1_1Friends_1_1ReportWidgets_1_1DatePicker_a29f13e22b1bc28d919639ad7dcebaaa6}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1DatePicker_aeba192f2a81177dc062a0858e94b4875}{}{\bfseries \$default\+Alias} = \textquotesingle{}\hyperlink{classDMA_1_1Friends_1_1ReportWidgets_1_1DatePicker}{Date\+Picker}\textquotesingle{}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1DatePicker_aeba192f2a81177dc062a0858e94b4875}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1DatePicker_a3e9aff77509da20c6ba324e3ccdd3e9f}{}\index{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Date\+Picker@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Date\+Picker}!render@{render}}
+\index{render@{render}!D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Date\+Picker@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Date\+Picker}}
+\subsubsection[{render}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Date\+Picker\+::render (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1DatePicker_a3e9aff77509da20c6ba324e3ccdd3e9f}
+
+\begin{DoxyCode}
+26     \{   
+27         $this->addJs(\textcolor{stringliteral}{'jquery-ui/jquery-ui.js'});
+28         $this->addCss(\textcolor{stringliteral}{'jquery-ui/jquery-ui.css'});
+29         $this->addCss(\textcolor{stringliteral}{'jquery-ui/jquery-ui.theme.css'});
+30         $this->addJs(\textcolor{stringliteral}{'js/date-picker.js'});
+31         $this->addCss(\textcolor{stringliteral}{'css/datepicker.css'});
+32 
+33         \textcolor{keywordflow}{return} $this->makePartial(\textcolor{stringliteral}{'widget'}, [
+34             \textcolor{stringliteral}{'current'}   => date(\textcolor{stringliteral}{'Y-m-d'}),
+35             \textcolor{stringliteral}{'week'}      => DatePicker::dateAgo(\textcolor{stringliteral}{'-1 week'}),
+36             \textcolor{stringliteral}{'month'}     => DatePicker::dateAgo(\textcolor{stringliteral}{'-1 month'}),
+37             \textcolor{stringliteral}{'year'}      => DatePicker::dateAgo(\textcolor{stringliteral}{'-1 year'}),
+38         ]);
+39     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1DatePicker_a81ffeceeda18e18464689c36a03f541e}{}\index{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Date\+Picker@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Date\+Picker}!widget\+Details@{widget\+Details}}
+\index{widget\+Details@{widget\+Details}!D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Date\+Picker@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Date\+Picker}}
+\subsubsection[{widget\+Details}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Date\+Picker\+::widget\+Details (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1DatePicker_a81ffeceeda18e18464689c36a03f541e}
+
+\begin{DoxyCode}
+15     \{   
+16         \textcolor{keywordflow}{return} [
+17             \textcolor{stringliteral}{'name'}        => \textcolor{stringliteral}{'Date Picker'},
+18             \textcolor{stringliteral}{'description'} => \textcolor{stringliteral}{'A Date picker to work with friends analytical reports'}
+19         ];  
+20     \}   
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+reportwidgets/Date\+Picker.\+php\end{DoxyCompactItemize}

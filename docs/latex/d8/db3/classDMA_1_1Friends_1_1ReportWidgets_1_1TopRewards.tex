@@ -1,0 +1,94 @@
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1TopRewards}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Report\+Widgets\textbackslash{}Top\+Rewards Class Reference}
+\label{classDMA_1_1Friends_1_1ReportWidgets_1_1TopRewards}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Top\+Rewards@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Top\+Rewards}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Report\+Widgets\textbackslash{}Top\+Rewards\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d8/db3/classDMA_1_1Friends_1_1ReportWidgets_1_1TopRewards}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1ReportWidgets_1_1TopRewards_ae3d8d1fcd25016f4232b6c965be611c5}{widget\+Details} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1ReportWidgets_1_1TopRewards_a182c195bbe5766e556e5a11a26aebd7b}{define\+Properties} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1ReportWidgets_1_1TopRewards_ab25e73c885c18caacd88320a748b1547}{render} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1TopRewards_a9c1bd5a3cd12153d2fbba5ff75777c43}{}{\bfseries \$default\+Alias} = \textquotesingle{}\hyperlink{classDMA_1_1Friends_1_1ReportWidgets_1_1TopRewards}{Top\+Rewards}\textquotesingle{}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1TopRewards_a9c1bd5a3cd12153d2fbba5ff75777c43}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1TopRewards_a182c195bbe5766e556e5a11a26aebd7b}{}\index{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Rewards@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Rewards}!define\+Properties@{define\+Properties}}
+\index{define\+Properties@{define\+Properties}!D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Rewards@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Rewards}}
+\subsubsection[{define\+Properties}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Top\+Rewards\+::define\+Properties (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1TopRewards_a182c195bbe5766e556e5a11a26aebd7b}
+
+\begin{DoxyCode}
+29     \{
+30         \textcolor{keywordflow}{return} [
+31             \textcolor{stringliteral}{'limit'} => [
+32                 \textcolor{stringliteral}{'title'}             => \textcolor{stringliteral}{'Number of results'},
+33                 \textcolor{stringliteral}{'default'}           => 10,
+34                 \textcolor{stringliteral}{'type'}              => \textcolor{stringliteral}{'string'},
+35                 \textcolor{stringliteral}{'validationPattern'} => \textcolor{stringliteral}{'^[0-9]+$'}
+36             ],
+37         ];
+38     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1TopRewards_ab25e73c885c18caacd88320a748b1547}{}\index{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Rewards@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Rewards}!render@{render}}
+\index{render@{render}!D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Rewards@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Rewards}}
+\subsubsection[{render}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Top\+Rewards\+::render (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1TopRewards_ab25e73c885c18caacd88320a748b1547}
+
+\begin{DoxyCode}
+44     \{   
+45         $limit = $this->property(\textcolor{stringliteral}{'limit'});
+46 
+47         $query = DB::table(\textcolor{stringliteral}{'dma\_friends\_rewards'})
+48                 ->select(\textcolor{stringliteral}{"title"}, DB::raw(\textcolor{stringliteral}{"count(dma\_friends\_reward\_user.user\_id) as count"}))
+49                 ->join(\textcolor{stringliteral}{"dma\_friends\_reward\_user"}, \textcolor{stringliteral}{'dma\_friends\_rewards.id'}, \textcolor{charliteral}{'='}, \textcolor{stringliteral}{'
+      dma\_friends\_reward\_user.reward\_id'})
+50                 ->groupBy(\textcolor{stringliteral}{"dma\_friends\_reward\_user.reward\_id"})
+51                 ->orderBy(\textcolor{stringliteral}{'count'}, \textcolor{stringliteral}{'DESC'});
+52 
+53         $rewards = GraphReport::processQuery($query, \textcolor{stringliteral}{'dma\_friends\_reward\_user.created\_at'}, $limit, \textcolor{stringliteral}{'
+      friends.reports.topRewards'});
+54 
+55         $this->vars[\textcolor{stringliteral}{'rewards'}] = $rewards;
+56 
+57         \textcolor{keywordflow}{return} $this->makePartial(\textcolor{stringliteral}{'widget'});
+58     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1TopRewards_ae3d8d1fcd25016f4232b6c965be611c5}{}\index{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Rewards@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Rewards}!widget\+Details@{widget\+Details}}
+\index{widget\+Details@{widget\+Details}!D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Rewards@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Rewards}}
+\subsubsection[{widget\+Details}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Top\+Rewards\+::widget\+Details (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1TopRewards_ae3d8d1fcd25016f4232b6c965be611c5}
+
+\begin{DoxyCode}
+18     \{   
+19         \textcolor{keywordflow}{return} [
+20             \textcolor{stringliteral}{'name'}        => \textcolor{stringliteral}{'Top Rewards'},
+21             \textcolor{stringliteral}{'description'} => \textcolor{stringliteral}{'Show highest ranking rewards'}
+22         ];  
+23     \}   
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+reportwidgets/Top\+Rewards.\+php\end{DoxyCompactItemize}

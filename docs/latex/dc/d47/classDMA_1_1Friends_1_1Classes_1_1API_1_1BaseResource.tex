@@ -3,7 +3,7 @@
 Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}A\+P\+I\textbackslash{}Base\+Resource\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=10.833334cm]{dc/d47/classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseResource}
+\includegraphics[height=11.666667cm]{dc/d47/classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseResource}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
@@ -124,9 +124,9 @@ Response
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-218     \{
-219         \textcolor{keywordflow}{return} Response::api()->errorForbidden();
-220     \}
+221     \{
+222         \textcolor{keywordflow}{return} Response::api()->errorForbidden();
+223     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseResource_a9a2d363ffd9c70ee237a4e865c09ec15}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource}!destroy@{destroy}}
 \index{destroy@{destroy}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource}}
@@ -147,10 +147,10 @@ Response
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-281     \{
-282         \textcolor{keywordflow}{return} Response::api()->errorForbidden();
-283 
-284     \}
+288     \{
+289         \textcolor{keywordflow}{return} Response::api()->errorForbidden();
+290 
+291     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseResource_a865e74786986a18608d6e6c2881cc150}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource}!edit@{edit}}
 \index{edit@{edit}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource}}
@@ -171,9 +171,9 @@ Response
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-258     \{
-259         \textcolor{keywordflow}{return} Response::api()->errorForbidden();
-260     \}
+265     \{
+266         \textcolor{keywordflow}{return} Response::api()->errorForbidden();
+267     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseResource_a939517c4026ec51cd9e001c78aa5617d}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource}!error\+Data\+Validation@{error\+Data\+Validation}}
 \index{error\+Data\+Validation@{error\+Data\+Validation}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource}}
@@ -197,16 +197,16 @@ mixed
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-313     \{
-314         \textcolor{keywordflow}{return} Response::api()->setStatusCode(422)->withArray([
-315                 \textcolor{stringliteral}{'error'} => [
-316                         \textcolor{stringliteral}{'code'} => 422,
-317                         \textcolor{stringliteral}{'http\_code'} => \textcolor{stringliteral}{'GEN-UNPROCESSABLE'},
-318                         \textcolor{stringliteral}{'message'} => $message,
-319                         \textcolor{stringliteral}{'errors'} => $errors
-320                 ]
-321         ]);
-322     \}
+320     \{
+321         \textcolor{keywordflow}{return} Response::api()->setStatusCode(422)->withArray([
+322                 \textcolor{stringliteral}{'error'} => [
+323                         \textcolor{stringliteral}{'code'} => 422,
+324                         \textcolor{stringliteral}{'http\_code'} => \textcolor{stringliteral}{'GEN-UNPROCESSABLE'},
+325                         \textcolor{stringliteral}{'message'} => $message,
+326                         \textcolor{stringliteral}{'errors'} => $errors
+327                 ]
+328         ]);
+329     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseResource_a03c357cd8b591ae2b1b915d14a3f3d9f}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource}!get\+Filters@{get\+Filters}}
 \index{get\+Filters@{get\+Filters}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource}}
@@ -343,11 +343,14 @@ Response
 203             \textcolor{comment}{// Paginate result}
 204             \textcolor{keywordflow}{return} $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseResource_aed3811d426c80763855a43280f822f97}{paginateResult}($query);
 205         \} \textcolor{keywordflow}{catch}(\(\backslash\)\hyperlink{namespaceException}{Exception} $e) \{
-206             
-207             $message = $e->getMessage();
-208             \textcolor{keywordflow}{return} Response::api()->errorInternalError($message);
-209         \}
-210     \}
+206             \textcolor{comment}{// Send exception to log}
+207             Log::error($e->getMessage());
+208             Log::error($e->getTraceAsString());
+209             
+210             $message = $e->getMessage();
+211             \textcolor{keywordflow}{return} Response::api()->errorInternalError($message);
+212         \}
+213     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseResource_aed3811d426c80763855a43280f822f97}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource}!paginate\+Result@{paginate\+Result}}
 \index{paginate\+Result@{paginate\+Result}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource}}
@@ -410,17 +413,21 @@ Response
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-239     \{
-240         \textcolor{keywordflow}{try} \{
-241             $model = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseResource_acff925772bdea0601cc8c926ca11d51e}{getModel}();
-242             $instance = $model->findOrFail($id);
-243             \textcolor{keywordflow}{return} Response::api()->withItem($instance, $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseResource_a35abd35dbcf2d6cdafc569bb4a574756}{getTransformer}());
-244         \}\textcolor{keywordflow}{catch}(ModelNotFoundException $e) \{
-245             \textcolor{keywordflow}{return} Response::api()->errorNotFound();
-246         \}\textcolor{keywordflow}{catch}(\hyperlink{namespaceException}{Exception} $e)\{
-247             \textcolor{keywordflow}{return} Response::api()->errorInternalError();
-248         \}
-249     \}
+242     \{
+243         \textcolor{keywordflow}{try} \{
+244             $model = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseResource_acff925772bdea0601cc8c926ca11d51e}{getModel}();
+245             $instance = $model->findOrFail($id);
+246             \textcolor{keywordflow}{return} Response::api()->withItem($instance, $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseResource_a35abd35dbcf2d6cdafc569bb4a574756}{getTransformer}());
+247         \}\textcolor{keywordflow}{catch}(ModelNotFoundException $e) \{
+248             \textcolor{keywordflow}{return} Response::api()->errorNotFound();
+249         \}\textcolor{keywordflow}{catch}(\hyperlink{namespaceException}{Exception} $e)\{
+250             \textcolor{comment}{// Send exception to log}
+251             Log::error($e->getMessage());
+252             Log::error($e->getTraceAsString());
+253             
+254             \textcolor{keywordflow}{return} Response::api()->errorInternalError($e->getMessage());
+255         \}
+256     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseResource_ad7d43d3d9f020cf95b9da13ed8644cdb}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource}!store@{store}}
 \index{store@{store}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource}}
@@ -436,9 +443,9 @@ Response
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-228     \{
-229         \textcolor{keywordflow}{return} Response::api()->errorForbidden();
-230     \}
+231     \{
+232         \textcolor{keywordflow}{return} Response::api()->errorForbidden();
+233     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseResource_af371caf5658c4f4017536ffffa87a754}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource}!update@{update}}
 \index{update@{update}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource}}
@@ -459,10 +466,10 @@ Response
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-269     \{
-270         \textcolor{keywordflow}{return} Response::api()->errorForbidden();
-271 
-272     \}
+276     \{
+277         \textcolor{keywordflow}{return} Response::api()->errorForbidden();
+278 
+279     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseResource_a14f6d0add80bab42202323d70e3c645f}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource}!update\+Model\+Data@{update\+Model\+Data}}
 \index{update\+Model\+Data@{update\+Model\+Data}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Resource}}
@@ -487,15 +494,15 @@ unknown
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-295     \{
-296         \textcolor{keywordflow}{foreach} ($attrsToUpdate as $attr) \{
-297             $new\_value = array\_get($data, $attr, null);
-298             \textcolor{keywordflow}{if}(!is\_null($new\_value)) \{
-299                 $model->\{$attr\} = $new\_value;
-300             \}
-301         \}
-302         \textcolor{keywordflow}{return} $model;
-303     \}
+302     \{
+303         \textcolor{keywordflow}{foreach} ($attrsToUpdate as $attr) \{
+304             $new\_value = array\_get($data, $attr, null);
+305             \textcolor{keywordflow}{if}(!is\_null($new\_value)) \{
+306                 $model->\{$attr\} = $new\_value;
+307             \}
+308         \}
+309         \textcolor{keywordflow}{return} $model;
+310     \}
 \end{DoxyCode}
 
 

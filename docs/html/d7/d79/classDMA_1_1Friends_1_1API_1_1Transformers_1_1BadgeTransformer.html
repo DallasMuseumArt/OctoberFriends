@@ -123,6 +123,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af14a3d805e9bdd81d5c9e5e334ab3617"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3b6235d12b9c07bf3e3126b493a9885"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d79/classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer.html#aa3b6235d12b9c07bf3e3126b493a9885">includeMedia</a> (Model $instance)</td></tr>
 <tr class="separator:aa3b6235d12b9c07bf3e3126b493a9885"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4d31e1a597aa42ef473882961c7c149"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d79/classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer.html#aa4d31e1a597aa42ef473882961c7c149">includeCategories</a> (Model $instance)</td></tr>
+<tr class="separator:aa4d31e1a597aa42ef473882961c7c149"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer')"><img src="../../closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="../../d6/d13/classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer.html">DMA\Friends\Classes\API\BaseTransformer</a></td></tr>
 <tr class="memitem:a7a7324551796970ba6285f8aaef675b7 inherit pub_methods_classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d13/classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer.html#a7a7324551796970ba6285f8aaef675b7">__construct</a> ($useExtendedData=null, $excludeEmbededs=[])</td></tr>
 <tr class="separator:a7a7324551796970ba6285f8aaef675b7 inherit pub_methods_classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -172,30 +174,30 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <dl class="section see"><dt>See also</dt><dd>::getExtendedData() </dd></dl>
-<div class="fragment"><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    {</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="comment">// Adding steps by the Fractal embeding system</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        $this-&gt;setDefaultIncludes( array_merge($this-&gt;getDefaultIncludes(), [<span class="stringliteral">&#39;steps&#39;</span>]));</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordflow">return</span> [</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                <span class="stringliteral">&#39;description&#39;</span>               =&gt; $instance-&gt;description,</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                <span class="stringliteral">&#39;excerpt&#39;</span>                   =&gt; $instance-&gt;excerpt,</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                <span class="stringliteral">&#39;congratulations_text&#39;</span>      =&gt; $instance-&gt;congratulations_text,</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                <span class="stringliteral">&#39;maximum_earnings&#39;</span>          =&gt; $instance-&gt;maximum_earnings,</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                <span class="stringliteral">&#39;points&#39;</span>                    =&gt; $instance-&gt;points,</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                <span class="stringliteral">&#39;is_published&#39;</span>              =&gt; ($instance-&gt;is_published)?<span class="keyword">true</span>:<span class="keyword">false</span>,</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                <span class="stringliteral">&#39;is_archived&#39;</span>               =&gt; ($instance-&gt;is_archived)?<span class="keyword">true</span>:<span class="keyword">false</span>,</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                <span class="stringliteral">&#39;is_sequential&#39;</span>             =&gt; ($instance-&gt;is_sequential)?<span class="keyword">true</span>:<span class="keyword">false</span>,</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                <span class="stringliteral">&#39;show_earners&#39;</span>              =&gt; ($instance-&gt;show_earners)?<span class="keyword">true</span>:<span class="keyword">false</span>,</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                <span class="stringliteral">&#39;is_hidden&#39;</span>                 =&gt; ($instance-&gt;is_hidden)?<span class="keyword">true</span>:<span class="keyword">false</span>,</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                <span class="stringliteral">&#39;time_between_steps_min&#39;</span>    =&gt; $instance-&gt;time_between_steps_min,</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                <span class="stringliteral">&#39;time_between_steps_max&#39;</span>    =&gt; $instance-&gt;time_between_steps_max,</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                <span class="stringliteral">&#39;maximium_time&#39;</span>             =&gt; $instance-&gt;maximium_time,</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                <span class="stringliteral">&#39;special&#39;</span>                   =&gt; ($instance-&gt;special)?<span class="keyword">true</span>:<span class="keyword">false</span>,</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                <span class="stringliteral">&#39;time_restrictions&#39;</span>         =&gt; $this-&gt;<a class="code" href="../../d7/d79/classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer.html#aeacba533330faa46396ce280e27f0fee">getTimeRestrictions</a>($instance),</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        ];</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    }</div>
-<div class="ttc" id="classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_html_aeacba533330faa46396ce280e27f0fee"><div class="ttname"><a href="../../d7/d79/classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer.html#aeacba533330faa46396ce280e27f0fee">DMA\Friends\API\Transformers\BadgeTransformer\getTimeRestrictions</a></div><div class="ttdeci">getTimeRestrictions(Model $instance)</div><div class="ttdef"><b>Definition:</b> BadgeTransformer.php:76</div></div>
+<div class="fragment"><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="comment">// Adding steps by the Fractal embeding system</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        $this-&gt;setDefaultIncludes( array_merge($this-&gt;getDefaultIncludes(), [<span class="stringliteral">&#39;steps&#39;</span>]));</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordflow">return</span> [</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                <span class="stringliteral">&#39;description&#39;</span>               =&gt; $instance-&gt;description,</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                <span class="stringliteral">&#39;excerpt&#39;</span>                   =&gt; $instance-&gt;excerpt,</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                <span class="stringliteral">&#39;congratulations_text&#39;</span>      =&gt; $instance-&gt;congratulations_text,</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                <span class="stringliteral">&#39;maximum_earnings&#39;</span>          =&gt; $instance-&gt;maximum_earnings,</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                <span class="stringliteral">&#39;points&#39;</span>                    =&gt; $instance-&gt;points,</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                <span class="stringliteral">&#39;is_published&#39;</span>              =&gt; ($instance-&gt;is_published)?<span class="keyword">true</span>:<span class="keyword">false</span>,</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                <span class="stringliteral">&#39;is_archived&#39;</span>               =&gt; ($instance-&gt;is_archived)?<span class="keyword">true</span>:<span class="keyword">false</span>,</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                <span class="stringliteral">&#39;is_sequential&#39;</span>             =&gt; ($instance-&gt;is_sequential)?<span class="keyword">true</span>:<span class="keyword">false</span>,</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                <span class="stringliteral">&#39;show_earners&#39;</span>              =&gt; ($instance-&gt;show_earners)?<span class="keyword">true</span>:<span class="keyword">false</span>,</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                <span class="stringliteral">&#39;is_hidden&#39;</span>                 =&gt; ($instance-&gt;is_hidden)?<span class="keyword">true</span>:<span class="keyword">false</span>,</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                <span class="stringliteral">&#39;time_between_steps_min&#39;</span>    =&gt; $instance-&gt;time_between_steps_min,</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                <span class="stringliteral">&#39;time_between_steps_max&#39;</span>    =&gt; $instance-&gt;time_between_steps_max,</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                <span class="stringliteral">&#39;maximium_time&#39;</span>             =&gt; $instance-&gt;maximium_time,</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                <span class="stringliteral">&#39;special&#39;</span>                   =&gt; ($instance-&gt;special)?<span class="keyword">true</span>:<span class="keyword">false</span>,</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                <span class="stringliteral">&#39;time_restrictions&#39;</span>         =&gt; $this-&gt;<a class="code" href="../../d7/d79/classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer.html#aeacba533330faa46396ce280e27f0fee">getTimeRestrictions</a>($instance),</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        ];</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    }</div>
+<div class="ttc" id="classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_html_aeacba533330faa46396ce280e27f0fee"><div class="ttname"><a href="../../d7/d79/classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer.html#aeacba533330faa46396ce280e27f0fee">DMA\Friends\API\Transformers\BadgeTransformer\getTimeRestrictions</a></div><div class="ttdeci">getTimeRestrictions(Model $instance)</div><div class="ttdef"><b>Definition:</b> BadgeTransformer.php:78</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -227,21 +229,42 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>array </dd></dl>
-<div class="fragment"><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    {</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        $restrictions = [];</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        $keys         = [<span class="stringliteral">&#39;date_begin&#39;</span>, <span class="stringliteral">&#39;date_end&#39;</span>];</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="comment">// Reset values</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keywordflow">foreach</span>($keys as $key){</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            $restrictions[$key] = null;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        }</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        $restrictions[<span class="stringliteral">&#39;date_begin&#39;</span>] = $this-&gt;carbonToIso($instance-&gt;date_begin);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        $restrictions[<span class="stringliteral">&#39;date_end&#39;</span>]   = $this-&gt;carbonToIso($instance-&gt;date_end);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keywordflow">return</span> $restrictions;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    {</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        $restrictions = [];</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        $keys         = [<span class="stringliteral">&#39;date_begin&#39;</span>, <span class="stringliteral">&#39;date_end&#39;</span>];</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="comment">// Reset values</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keywordflow">foreach</span>($keys as $key){</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            $restrictions[$key] = null;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        }</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        $restrictions[<span class="stringliteral">&#39;date_begin&#39;</span>] = $this-&gt;carbonToIso($instance-&gt;date_begin);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        $restrictions[<span class="stringliteral">&#39;date_end&#39;</span>]   = $this-&gt;carbonToIso($instance-&gt;date_end);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keywordflow">return</span> $restrictions;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="aa4d31e1a597aa42ef473882961c7c149"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DMA\Friends\API\Transformers\BadgeTransformer::includeCategories </td>
+          <td>(</td>
+          <td class="paramtype">Model&#160;</td>
+          <td class="paramname"><em>$instance</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Include Media</p>
+<dl class="section return"><dt>Returns</dt><dd>League </dd></dl>
+<div class="fragment"><div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    {</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        <span class="keywordflow">return</span> $this-&gt;collection($instance-&gt;categories, <span class="keyword">new</span> CategoryTransformer);</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -260,9 +283,9 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Include Media</p>
 <dl class="section return"><dt>Returns</dt><dd>League </dd></dl>
-<div class="fragment"><div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    {</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="keywordflow">return</span> $this-&gt;item($instance, <span class="keyword">new</span> MediaTransformer);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    {</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="keywordflow">return</span> $this-&gt;item($instance, <span class="keyword">new</span> MediaTransformer);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -281,12 +304,12 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Include Steps</p>
 <dl class="section return"><dt>Returns</dt><dd>League </dd></dl>
-<div class="fragment"><div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    {</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        $steps = $instance-&gt;steps;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="comment">// No necessary to show steps activities given that the parent is an activity</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        $exclude = [<span class="stringliteral">&#39;badge&#39;</span>];</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="keywordflow">return</span> $this-&gt;collection($steps, <span class="keyword">new</span> StepTransformer(<span class="keyword">true</span>, $exclude));</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    {</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        $steps = $instance-&gt;steps;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="comment">// No necessary to show steps activities given that the parent is an activity</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        $exclude = [<span class="stringliteral">&#39;badge&#39;</span>];</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="keywordflow">return</span> $this-&gt;collection($steps, <span class="keyword">new</span> StepTransformer(<span class="keyword">true</span>, $exclude));</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -332,7 +355,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= [</div>
-<div class="line">             <span class="stringliteral">&#39;media&#39;</span></div>
+<div class="line">             <span class="stringliteral">&#39;media&#39;</span>,</div>
+<div class="line">             <span class="stringliteral">&#39;categories&#39;</span></div>
 <div class="line">     ]</div>
 </div><!-- fragment -->
 </div>
@@ -344,7 +368,7 @@ Protected Attributes</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 27 2015 11:30:55 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jun 26 2015 13:24:10 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

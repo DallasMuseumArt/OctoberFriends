@@ -175,14 +175,13 @@ Protected Attributes</h2></td></tr>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;</div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        $formConfig = $this-&gt;activityType-&gt;getConfig();</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        $formConfig = $this-&gt;getConfigPath($formConfig);</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;      </div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        <span class="keywordflow">if</span> (File::isFile($formConfig)) {</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;            <span class="keywordflow">return</span> $this-&gt;makeConfig($formConfig);</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        }</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    }</div>
-<div class="ttc" id="classDMA_1_1Friends_1_1Classes_1_1ActivityManager_html_a7e70e998e7e5fa750f02d8249d11f816"><div class="ttname"><a href="../../d0/d48/classDMA_1_1Friends_1_1Classes_1_1ActivityManager.html#a7e70e998e7e5fa750f02d8249d11f816">DMA\Friends\Classes\ActivityManager\loadActivity</a></div><div class="ttdeci">loadActivity($alias)</div><div class="ttdef"><b>Definition:</b> ActivityManager.php:223</div></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        <span class="keywordflow">if</span> (File::isFile($formConfig)) {</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            <span class="keywordflow">return</span> $this-&gt;makeConfig($formConfig);</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        }</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    }</div>
+<div class="ttc" id="classDMA_1_1Friends_1_1Classes_1_1ActivityManager_html_a7e70e998e7e5fa750f02d8249d11f816"><div class="ttname"><a href="../../d0/d48/classDMA_1_1Friends_1_1Classes_1_1ActivityManager.html#a7e70e998e7e5fa750f02d8249d11f816">DMA\Friends\Classes\ActivityManager\loadActivity</a></div><div class="ttdeci">loadActivity($alias)</div><div class="ttdef"><b>Definition:</b> ActivityManager.php:222</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -207,12 +206,12 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>array An array of default form values </dd></dl>
-<div class="fragment"><div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    {</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        <span class="keywordflow">if</span> (!$this-&gt;activityType)</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;                <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="../../df/d42/namespaceSystemException.html">SystemException</a>(Lang::get(<span class="stringliteral">&#39;dma.friends::lang.exceptions.activityTypeNotInitiated&#39;</span>));</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        <span class="keywordflow">return</span> $this-&gt;activityType-&gt;getFormDefaultValues($model);</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    {</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        <span class="keywordflow">if</span> (!$this-&gt;activityType)</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="../../df/d42/namespaceSystemException.html">SystemException</a>(Lang::get(<span class="stringliteral">&#39;dma.friends::lang.exceptions.activityTypeNotInitiated&#39;</span>));</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        <span class="keywordflow">return</span> $this-&gt;activityType-&gt;getFormDefaultValues($model);</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    }</div>
 <div class="ttc" id="namespaceSystemException_html"><div class="ttname"><a href="../../df/d42/namespaceSystemException.html">SystemException</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -321,18 +320,18 @@ Protected Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<div class="fragment"><div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    {</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;        <span class="keywordflow">if</span> (!$alias) <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        <span class="keywordflow">if</span> (!$this-&gt;activityType) {</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;            $className = $this-&gt;<a class="code" href="../../d0/d48/classDMA_1_1Friends_1_1Classes_1_1ActivityManager.html#aff2ab3684ac9cc2714fd1d7957890584">resolve</a>($alias);</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;            <span class="keywordflow">if</span> (!$className)</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="../../df/d42/namespaceSystemException.html">SystemException</a>(Lang::get(<span class="stringliteral">&#39;dma.friends::lang.exceptions.missingActivityClass&#39;</span>, [<span class="stringliteral">&#39;class&#39;</span> =&gt; $alias]));</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;            $this-&gt;activityType = <span class="keyword">new</span> $className;</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        }</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    {</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        <span class="keywordflow">if</span> (!$alias) <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        <span class="keywordflow">if</span> (!$this-&gt;activityType) {</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;            $className = $this-&gt;<a class="code" href="../../d0/d48/classDMA_1_1Friends_1_1Classes_1_1ActivityManager.html#aff2ab3684ac9cc2714fd1d7957890584">resolve</a>($alias);</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;            <span class="keywordflow">if</span> (!$className)</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="../../df/d42/namespaceSystemException.html">SystemException</a>(Lang::get(<span class="stringliteral">&#39;dma.friends::lang.exceptions.missingActivityClass&#39;</span>, [<span class="stringliteral">&#39;class&#39;</span> =&gt; $alias]));</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;            $this-&gt;activityType = <span class="keyword">new</span> $className;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        }</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    }</div>
 <div class="ttc" id="classDMA_1_1Friends_1_1Classes_1_1ActivityManager_html_aff2ab3684ac9cc2714fd1d7957890584"><div class="ttname"><a href="../../d0/d48/classDMA_1_1Friends_1_1Classes_1_1ActivityManager.html#aff2ab3684ac9cc2714fd1d7957890584">DMA\Friends\Classes\ActivityManager\resolve</a></div><div class="ttdeci">resolve($name)</div><div class="ttdef"><b>Definition:</b> ActivityManager.php:144</div></div>
 <div class="ttc" id="namespaceSystemException_html"><div class="ttname"><a href="../../df/d42/namespaceSystemException.html">SystemException</a></div></div>
 </div><!-- fragment -->
@@ -469,13 +468,13 @@ Protected Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<div class="fragment"><div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    {</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        <span class="keywordflow">if</span> (!$this-&gt;activityType)</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;            $this-&gt;<a class="code" href="../../d0/d48/classDMA_1_1Friends_1_1Classes_1_1ActivityManager.html#a7e70e998e7e5fa750f02d8249d11f816">loadActivity</a>($values[<span class="stringliteral">&#39;activity_type&#39;</span>]);</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        $this-&gt;activityType-&gt;saveData($model, $values);</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    }</div>
-<div class="ttc" id="classDMA_1_1Friends_1_1Classes_1_1ActivityManager_html_a7e70e998e7e5fa750f02d8249d11f816"><div class="ttname"><a href="../../d0/d48/classDMA_1_1Friends_1_1Classes_1_1ActivityManager.html#a7e70e998e7e5fa750f02d8249d11f816">DMA\Friends\Classes\ActivityManager\loadActivity</a></div><div class="ttdeci">loadActivity($alias)</div><div class="ttdef"><b>Definition:</b> ActivityManager.php:223</div></div>
+<div class="fragment"><div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    {</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        <span class="keywordflow">if</span> (!$this-&gt;activityType)</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;            $this-&gt;<a class="code" href="../../d0/d48/classDMA_1_1Friends_1_1Classes_1_1ActivityManager.html#a7e70e998e7e5fa750f02d8249d11f816">loadActivity</a>($values[<span class="stringliteral">&#39;activity_type&#39;</span>]);</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        $this-&gt;activityType-&gt;saveData($model, $values);</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    }</div>
+<div class="ttc" id="classDMA_1_1Friends_1_1Classes_1_1ActivityManager_html_a7e70e998e7e5fa750f02d8249d11f816"><div class="ttname"><a href="../../d0/d48/classDMA_1_1Friends_1_1Classes_1_1ActivityManager.html#a7e70e998e7e5fa750f02d8249d11f816">DMA\Friends\Classes\ActivityManager\loadActivity</a></div><div class="ttdeci">loadActivity($alias)</div><div class="ttdef"><b>Definition:</b> ActivityManager.php:222</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -486,7 +485,7 @@ Protected Attributes</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 27 2015 11:30:55 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jun 26 2015 13:24:10 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

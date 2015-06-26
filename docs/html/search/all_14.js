@@ -19,6 +19,8 @@ var searchData=
   ['userprofile',['UserProfile',['../d6/dc9/classDMA_1_1Friends_1_1Controllers_1_1UserProfile.html',1,'DMA::Friends::Controllers']]],
   ['userprofile',['UserProfile',['../de/dfc/classDMA_1_1Friends_1_1Components_1_1UserProfile.html',1,'DMA::Friends::Components']]],
   ['userprofiletransformer',['UserProfileTransformer',['../d6/d08/classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserProfileTransformer.html',1,'DMA::Friends::API::Transformers']]],
+  ['userrate',['UserRate',['../da/d23/classDMA_1_1Friends_1_1Models_1_1UserRate.html',1,'DMA::Friends::Models']]],
+  ['userreport',['UserReport',['../da/df6/classDMA_1_1Friends_1_1ReportWidgets_1_1UserReport.html',1,'DMA::Friends::ReportWidgets']]],
   ['userresource',['UserResource',['../dd/d80/classDMA_1_1Friends_1_1API_1_1Resources_1_1UserResource.html',1,'DMA::Friends::API::Resources']]],
   ['usertimeout',['UserTimeout',['../d7/d5c/classDMA_1_1Friends_1_1Components_1_1UserTimeout.html',1,'DMA::Friends::Components']]],
   ['usertransformer',['UserTransformer',['../d3/dfe/classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer.html',1,'DMA::Friends::API::Transformers']]]

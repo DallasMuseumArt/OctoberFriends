@@ -1,0 +1,117 @@
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\textbackslash{}Resources\textbackslash{}Rating\+Resource Class Reference}
+\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Rating\+Resource@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Rating\+Resource}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\textbackslash{}Resources\textbackslash{}Rating\+Resource\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{d7/de0/classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a6cb4a4bb619ebf9cf82fda96892de587}{ratings\+By\+Object} (\$object\+Type, \$object\+Id)
+\item 
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a5a3342dbcaa4eda48599922fca2dca97}{}{\bfseries add\+Object\+Rating} (\$object\+Type, \$object\+Id, \$user, \$rate\+Value, \$comment=null)\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a5a3342dbcaa4eda48599922fca2dca97}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a5f73df541d7ca7a1fa30b30278e38b67}{}{\bfseries add\+Object\+Rate\+Json} (\$object\+Type)\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a5f73df541d7ca7a1fa30b30278e38b67}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a4a39636d2b996936fddfeeb7329ab143}{}{\bfseries index} ()\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a4a39636d2b996936fddfeeb7329ab143}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_af5e4c42c24fa134bf9de2dd6d0223e92}{get\+Object} (\$object\+Type, \$object\+Id)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a62f43e96144be5b5a6a7b423582cc9a1}{}{\bfseries \$model} = \textquotesingle{}\textbackslash{}\hyperlink{classDMA_1_1Friends_1_1Models_1_1Rating}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Models\textbackslash{}\+Rating}\textquotesingle{}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a62f43e96144be5b5a6a7b423582cc9a1}
+
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_af5e4c42c24fa134bf9de2dd6d0223e92}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Rating\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Rating\+Resource}!get\+Object@{get\+Object}}
+\index{get\+Object@{get\+Object}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Rating\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Rating\+Resource}}
+\subsubsection[{get\+Object}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Rating\+Resource\+::get\+Object (
+\begin{DoxyParamCaption}
+\item[{}]{\$object\+Type, }
+\item[{}]{\$object\+Id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_af5e4c42c24fa134bf9de2dd6d0223e92}
+Get instance of the object 
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$object\+Type} & \\
+\hline
+string & {\em \$object\+Id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+mixed 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+37     \{
+38         $registry = [
+39             \textcolor{stringliteral}{'activity'} => \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Activity'},        
+40             \textcolor{stringliteral}{'badge'}    => \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Badge'},
+41         ];
+42         
+43         $model = array\_get($registry, $objectType);
+44         \textcolor{keywordflow}{if} ($model)\{
+45             \textcolor{keywordflow}{return} call\_user\_func\_array(\textcolor{stringliteral}{"\{$model\}::find"}, [$objectId]);
+46         \}\textcolor{keywordflow}{else}\{
+47             $options = implode(\textcolor{stringliteral}{', '}, array\_keys($registry));
+48             \textcolor{keywordflow}{throw} new \(\backslash\)Exception(\textcolor{stringliteral}{"$objectType is not register as rateable. Options are $options"});
+49         \}
+50     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a6cb4a4bb619ebf9cf82fda96892de587}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Rating\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Rating\+Resource}!ratings\+By\+Object@{ratings\+By\+Object}}
+\index{ratings\+By\+Object@{ratings\+By\+Object}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Rating\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Rating\+Resource}}
+\subsubsection[{ratings\+By\+Object}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Rating\+Resource\+::ratings\+By\+Object (
+\begin{DoxyParamCaption}
+\item[{}]{\$object\+Type, }
+\item[{}]{\$object\+Id}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a6cb4a4bb619ebf9cf82fda96892de587}
+Get ratings by object 
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$object\+Type} & \\
+\hline
+int & {\em \$object\+Id} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+60     \{
+61          \textcolor{keywordflow}{if}($instance = $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_af5e4c42c24fa134bf9de2dd6d0223e92}{getObject}($objectType, $objectId))\{
+62              
+63              $pageSize  = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseResource_a2df6de75ae3dd493df1434ce3d873d6a}{getPageSize}();
+64              $paginator = $instance->getRates()->paginate($pageSize);
+65              $meta      = [
+66                      \textcolor{stringliteral}{'rating'} => array\_merge(
+67                              $instance->getRatingStats(),
+68                              [
+69                                      \textcolor{stringliteral}{'object\_type'} => $objectType,
+70                                      \textcolor{stringliteral}{'object\_id'}   => intval($objectId)
+71                              ]
+72                      )
+73              ];
+74              
+75              $transformer = new \(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Transformers\(\backslash\)RateTransformer;
+76              \textcolor{keywordflow}{return} Response::api()->withPaginator($paginator, $transformer, null, $meta);
+77              
+78          \} \textcolor{keywordflow}{else} \{
+79             \textcolor{keywordflow}{return} Response::api()->errorNotFound(\textcolor{stringliteral}{"$objectType not found"});
+80          \}
+81     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+api/resources/Rating\+Resource.\+php\end{DoxyCompactItemize}

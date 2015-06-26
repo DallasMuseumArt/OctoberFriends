@@ -1,0 +1,64 @@
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1ImportCensus}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Commands\textbackslash{}Import\+Census Class Reference}
+\label{classDMA_1_1Friends_1_1Commands_1_1ImportCensus}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Commands\textbackslash{}\+Import\+Census@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Commands\textbackslash{}\+Import\+Census}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Commands\textbackslash{}Import\+Census\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{df/d2f/classDMA_1_1Friends_1_1Commands_1_1ImportCensus}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Commands_1_1ImportCensus_a36a88f2276966118b82a7e3ab03ac1c3}{fire} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1ImportCensus_aa1a9476de7e922b2ec8dc9927984f205}{}{\bfseries \$name} = \textquotesingle{}friends\+:census\textquotesingle{}\label{classDMA_1_1Friends_1_1Commands_1_1ImportCensus_aa1a9476de7e922b2ec8dc9927984f205}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1ImportCensus_a74d7d4ded09edd25f3df35f83a3c05e0}{}{\bfseries \$description} = \textquotesingle{}Import U.\+S. census data for zipcodes\textquotesingle{}\label{classDMA_1_1Friends_1_1Commands_1_1ImportCensus_a74d7d4ded09edd25f3df35f83a3c05e0}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1ImportCensus_a45e98b52dec99786659ae0b6dcdb4fa8}{}{\bfseries \$file} = \textquotesingle{}us-\/zipcodes.\+json\textquotesingle{}\label{classDMA_1_1Friends_1_1Commands_1_1ImportCensus_a45e98b52dec99786659ae0b6dcdb4fa8}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1ImportCensus_a36a88f2276966118b82a7e3ab03ac1c3}{}\index{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Import\+Census@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Import\+Census}!fire@{fire}}
+\index{fire@{fire}!D\+M\+A\+::\+Friends\+::\+Commands\+::\+Import\+Census@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Import\+Census}}
+\subsubsection[{fire}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Commands\textbackslash{}\+Import\+Census\+::fire (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Commands_1_1ImportCensus_a36a88f2276966118b82a7e3ab03ac1c3}
+Set the number of points set per week back to zero on sunday morning \begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+37     \{
+38         $this->path = base\_path() . \textcolor{stringliteral}{'/plugins/dma/friends/data/'} . $this->file;
+39 
+40 var\_dump($this->path);
+41         $file = fopen($this->path, \textcolor{charliteral}{'r'});
+42 
+43         \textcolor{keywordflow}{while} (($line = fgets($file)) !== \textcolor{keyword}{false}) \{
+44             $line = json\_decode($line);
+45             var\_dump($line);
+46         \}
+47         \textcolor{comment}{//$data = fread($file, filesize($this->path));}
+48         fclose($file);
+49         \textcolor{comment}{//$data = json\_decode(file\_get\_contents($this->path));}
+50         \textcolor{comment}{//$data = json\_decode($data);}
+51         \textcolor{comment}{// foreach($data as $row) \{}
+52         \textcolor{comment}{//     var\_dump($row);}
+53         \textcolor{comment}{// \}}
+54     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+commands/Import\+Census.\+php\end{DoxyCompactItemize}

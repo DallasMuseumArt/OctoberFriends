@@ -1,0 +1,82 @@
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1Rating}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Models\textbackslash{}Rating Class Reference}
+\label{classDMA_1_1Friends_1_1Models_1_1Rating}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Models\textbackslash{}\+Rating@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Models\textbackslash{}\+Rating}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Models\textbackslash{}Rating\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d5/d4a/classDMA_1_1Friends_1_1Models_1_1Rating}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Models_1_1Rating_a1d30c619da71a91528a7dcee5411304a}{re\+Calculate\+Rating} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1Rating_a2f46a2d8d8a552ad56ec1f51f48943aa}{}{\bfseries \$table} = \textquotesingle{}dma\+\_\+friends\+\_\+ratings\textquotesingle{}\label{classDMA_1_1Friends_1_1Models_1_1Rating_a2f46a2d8d8a552ad56ec1f51f48943aa}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1Rating_a6fcd508e1b61205e9e123df22631b629}{}{\bfseries \$rules} = \mbox{[}$\,$\mbox{]}\label{classDMA_1_1Friends_1_1Models_1_1Rating_a6fcd508e1b61205e9e123df22631b629}
+
+\item 
+{\bfseries \$morph\+To}
+\item 
+{\bfseries \$has\+Many}
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1Rating_a0f6441bed3f479168d33a72571540d0e}{}{\bfseries \$guarded} = \mbox{[}\textquotesingle{}$\ast$\textquotesingle{}\mbox{]}\label{classDMA_1_1Friends_1_1Models_1_1Rating_a0f6441bed3f479168d33a72571540d0e}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1Rating_a2d89757d909462ff4e025a49d1492db3}{}{\bfseries \$fillable} = \mbox{[}$\,$\mbox{]}\label{classDMA_1_1Friends_1_1Models_1_1Rating_a2d89757d909462ff4e025a49d1492db3}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Activity\+Rating Model 
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1Rating_a1d30c619da71a91528a7dcee5411304a}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Rating@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Rating}!re\+Calculate\+Rating@{re\+Calculate\+Rating}}
+\index{re\+Calculate\+Rating@{re\+Calculate\+Rating}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Rating@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Rating}}
+\subsubsection[{re\+Calculate\+Rating}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Models\textbackslash{}\+Rating\+::re\+Calculate\+Rating (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Models_1_1Rating_a1d30c619da71a91528a7dcee5411304a}
+Recalculate ratings stats ( total and average ) 
+\begin{DoxyCode}
+48     \{
+49         $this->total = $this->rates()->count();
+50         $this->average = $this->rates()->avg(\textcolor{stringliteral}{'rate'});
+51         $this->save();
+52     \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1Rating_adc22040709ec725978418fe64ef1e23c}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Rating@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Rating}!\$has\+Many@{\$has\+Many}}
+\index{\$has\+Many@{\$has\+Many}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Rating@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Rating}}
+\subsubsection[{\$has\+Many}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Models\textbackslash{}\+Rating\+::\$has\+Many}\label{classDMA_1_1Friends_1_1Models_1_1Rating_adc22040709ec725978418fe64ef1e23c}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= [
+            \textcolor{stringliteral}{'rates'} => [\textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)UserRate'}, \textcolor{stringliteral}{'table'} => \textcolor{stringliteral}{'dma\_friends\_user\_rates'}],
+    ]
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1Rating_ac69646e8796da963eda8ff715ea52593}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Rating@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Rating}!\$morph\+To@{\$morph\+To}}
+\index{\$morph\+To@{\$morph\+To}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Rating@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Rating}}
+\subsubsection[{\$morph\+To}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Models\textbackslash{}\+Rating\+::\$morph\+To}\label{classDMA_1_1Friends_1_1Models_1_1Rating_ac69646e8796da963eda8ff715ea52593}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= [
+            \textcolor{stringliteral}{'object'} => [\textcolor{stringliteral}{'id'} => \textcolor{stringliteral}{'object\_id'}],
+    ]
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+models/Rating.\+php\end{DoxyCompactItemize}

@@ -150,9 +150,10 @@ League
 
 \begin{DoxyCode}
 125     \{
-126         $rewards = $instance->rewards;
-127         \textcolor{keywordflow}{return} $this->collection($rewards, \textcolor{keyword}{new} ActivityTransformer(\textcolor{keyword}{false}));    
-128     \}
+126         $activities = $instance->activities;
+127         $excludeEmbeds = [\textcolor{stringliteral}{'categories'}];
+128         \textcolor{keywordflow}{return} $this->collection($activities, \textcolor{keyword}{new} ActivityTransformer(\textcolor{keyword}{false}, $excludeEmbeds));    
+129     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_aea162dae412a9207f5ccbf217992df4d}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}!include\+Badges@{include\+Badges}}
 \index{include\+Badges@{include\+Badges}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}}
@@ -168,10 +169,11 @@ League
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-137     \{
-138         $badges = $instance->badges;
-139         \textcolor{keywordflow}{return} $this->collection($badges, \textcolor{keyword}{new} BadgeTransformer(\textcolor{keyword}{false}));
-140     \}
+138     \{
+139         $badges = $instance->badges;
+140         $excludeEmbeds = [\textcolor{stringliteral}{'categories'}];
+141         \textcolor{keywordflow}{return} $this->collection($badges, \textcolor{keyword}{new} BadgeTransformer(\textcolor{keyword}{false}, $excludeEmbeds));
+142     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_a0c0f66cc4dd01370a28522286c1b06cb}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}!include\+Profile@{include\+Profile}}
 \index{include\+Profile@{include\+Profile}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}}

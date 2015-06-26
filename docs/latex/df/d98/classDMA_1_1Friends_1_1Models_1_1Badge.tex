@@ -74,12 +74,12 @@ string The time since the badge was earned
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-93     \{
-94         \textcolor{keywordflow}{if} (!isset($this->pivot->created\_at)) \textcolor{keywordflow}{return} null;
-95 
-96         $timeAgo = \textcolor{keyword}{new} TimeAgo;
-97         \textcolor{keywordflow}{return} $timeAgo->get($this->pivot->created\_at);
-98     \}
+94     \{
+95         \textcolor{keywordflow}{if} (!isset($this->pivot->created\_at)) \textcolor{keywordflow}{return} null;
+96 
+97         $timeAgo = \textcolor{keyword}{new} TimeAgo;
+98         \textcolor{keywordflow}{return} $timeAgo->get($this->pivot->created\_at);
+99     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Badge_a5e5972aaa2bf8b8458bd6ddff8ebc576}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Badge@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Badge}!get\+User\+Count\+Attribute@{get\+User\+Count\+Attribute}}
 \index{get\+User\+Count\+Attribute@{get\+User\+Count\+Attribute}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Badge@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Badge}}
@@ -93,12 +93,12 @@ int The number of times the authenticated user has earned the badge
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-106     \{
-107         $user   = Auth::getUser();
-108         $count  = $user->badges()->where(\textcolor{stringliteral}{'badge\_id'}, \textcolor{charliteral}{'='}, $this->\textcolor{keywordtype}{id})->count();
-109 
-110         \textcolor{keywordflow}{return} $count;
-111     \}
+107     \{
+108         $user   = Auth::getUser();
+109         $count  = $user->badges()->where(\textcolor{stringliteral}{'badge\_id'}, \textcolor{charliteral}{'='}, $this->\textcolor{keywordtype}{id})->count();
+110 
+111         \textcolor{keywordflow}{return} $count;
+112     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Badge_a3deecf172b12b43e2f0c0bb7c15a00c3}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Badge@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Badge}!get\+User\+Progress\+Attribute@{get\+User\+Progress\+Attribute}}
 \index{get\+User\+Progress\+Attribute@{get\+User\+Progress\+Attribute}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Badge@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Badge}}
@@ -112,29 +112,29 @@ int percentage of steps complete
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-119     \{
-120         $user = Auth::getUser();
-121         $ids = [];
-122         $stepCount = 0;
-123 
-124         \textcolor{keywordflow}{foreach}($this->steps as $step) \{
-125             $ids[] = $step->id;
-126         \}
-127 
-128         \textcolor{keywordflow}{if} ($ids && $this->userCount) \{
-129             $stepCount = DB::table(\textcolor{stringliteral}{'dma\_friends\_step\_user'})
-130                 ->whereIn(\textcolor{stringliteral}{'step\_id'}, $ids)
-131                 ->where(\textcolor{stringliteral}{'user\_id'}, $user->id)
-132                 ->count();
-133 
-134             $stepCount = $stepCount / $this->userCount;
-135         \}
-136         
-137         \textcolor{keywordflow}{if} ($stepCount)
-138             \textcolor{keywordflow}{return} (count($this->steps) / $stepCount) * 100;
-139         
-140         \textcolor{keywordflow}{return} 0;
-141     \}
+120     \{
+121         $user = Auth::getUser();
+122         $ids = [];
+123         $stepCount = 0;
+124 
+125         \textcolor{keywordflow}{foreach}($this->steps as $step) \{
+126             $ids[] = $step->id;
+127         \}
+128 
+129         \textcolor{keywordflow}{if} ($ids && $this->userCount) \{
+130             $stepCount = DB::table(\textcolor{stringliteral}{'dma\_friends\_step\_user'})
+131                 ->whereIn(\textcolor{stringliteral}{'step\_id'}, $ids)
+132                 ->where(\textcolor{stringliteral}{'user\_id'}, $user->id)
+133                 ->count();
+134 
+135             $stepCount = $stepCount / $this->userCount;
+136         \}
+137         
+138         \textcolor{keywordflow}{if} ($stepCount)
+139             \textcolor{keywordflow}{return} (count($this->steps) / $stepCount) * 100;
+140         
+141         \textcolor{keywordflow}{return} 0;
+142     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Badge_a77dd406d08ff5c6727ee497e7e7ea5ed}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Badge@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Badge}!scope\+Is\+Active@{scope\+Is\+Active}}
 \index{scope\+Is\+Active@{scope\+Is\+Active}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Badge@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Badge}}
@@ -145,10 +145,10 @@ int percentage of steps complete
 )}\label{classDMA_1_1Friends_1_1Models_1_1Badge_a77dd406d08ff5c6727ee497e7e7ea5ed}
 Return only badage that are active 
 \begin{DoxyCode}
-81     \{
-82         \textcolor{keywordflow}{return} $query->where(\textcolor{stringliteral}{'is\_published'}, \textcolor{keyword}{true})
-83                      ->where(\textcolor{stringliteral}{'is\_archived'},  \textcolor{keyword}{false});
-84     \}
+82     \{
+83         \textcolor{keywordflow}{return} $query->where(\textcolor{stringliteral}{'is\_published'}, \textcolor{keyword}{true})
+84                      ->where(\textcolor{stringliteral}{'is\_archived'},  \textcolor{keyword}{false});
+85     \}
 \end{DoxyCode}
 
 

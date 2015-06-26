@@ -72,15 +72,15 @@ Quick hack until Fractal support embeded data without the use of the data-\/key
 \end{DoxySeeAlso}
 
 \begin{DoxyCode}
-94     \{
-95         $embeded = parent::processIncludedResources($scope, $data);
-96         \textcolor{keywordflow}{if} (!is\_null($embeded) && !is\_bool($embeded)) \{
-97             $embeded = array\_map(\textcolor{keyword}{function}($d)\{
-98                 \textcolor{keywordflow}{return} current($d);
-99             \}, $embeded);
-100         \}
-101         \textcolor{keywordflow}{return} $embeded;
-102     \}
+104     \{
+105         $embeded = parent::processIncludedResources($scope, $data);
+106         \textcolor{keywordflow}{if} (!is\_null($embeded) && !is\_bool($embeded)) \{
+107             $embeded = array\_map(\textcolor{keyword}{function}($d)\{
+108                 \textcolor{keywordflow}{return} current($d);
+109             \}, $embeded);
+110         \}
+111         \textcolor{keywordflow}{return} $embeded;
+112     \}
 \end{DoxyCode}
 
 

@@ -59,10 +59,11 @@ League
 \begin{DoxyCode}
 61     \{
 62         \textcolor{keywordflow}{if}($activity = $instance->activity)\{   
-63             $resource = $this->item($activity, \textcolor{keyword}{new} ActivityTransformer(\textcolor{keyword}{false}));
-64             \textcolor{keywordflow}{return} $resource;
-65         \}
-66     \}
+63             $excludeEmbeds = [\textcolor{stringliteral}{'categories'}];
+64             $resource = $this->item($activity, \textcolor{keyword}{new} ActivityTransformer(\textcolor{keyword}{false}, $excludeEmbeds));
+65             \textcolor{keywordflow}{return} $resource;
+66         \}
+67     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1StepTransformer_a5658c6eb2bff831cd21c37037b3b4978}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Step\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Step\+Transformer}!include\+Badge@{include\+Badge}}
 \index{include\+Badge@{include\+Badge}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Step\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Step\+Transformer}}
@@ -78,11 +79,11 @@ League
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-74     \{
-75         \textcolor{keywordflow}{if}($badge = $instance->badge)\{
-76             \textcolor{keywordflow}{return} $this->item($badge, \textcolor{keyword}{new} BadgeTransformer(\textcolor{keyword}{false}));
-77         \}
-78     \}
+75     \{
+76         \textcolor{keywordflow}{if}($badge = $instance->badge)\{
+77             \textcolor{keywordflow}{return} $this->item($badge, \textcolor{keyword}{new} BadgeTransformer(\textcolor{keyword}{false}));
+78         \}
+79     \}
 \end{DoxyCode}
 
 

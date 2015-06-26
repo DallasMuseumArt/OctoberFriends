@@ -56,115 +56,121 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Plugin\+:\
 )}\label{classDMA_1_1Friends_1_1Plugin_a8ff526c557ed7081a1f4c04194994305}
 
 \begin{DoxyCode}
-180     \{
-181         
-182         \textcolor{comment}{// Handle locations upon login}
-183         $this->\hyperlink{classDMA_1_1Friends_1_1Plugin_a4db89cce1a087a7635d5f6b1134854df}{registerLocation}();
-184 
-185         \textcolor{comment}{// Register timezone settings}
-186         date\_default\_timezone\_set( Settings::get(\textcolor{stringliteral}{'timezone'}, Config::get(\textcolor{stringliteral}{'app.timezone'})) );
-187 
-188         \textcolor{comment}{// Register ServiceProviders}
-189         App::register(\textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)FriendsServiceProvider'});
-190         
-191         \textcolor{comment}{// Register Event Subscribers}
-192         $subscriber = \textcolor{keyword}{new} FriendsEventHandler;
-193         Event::subscribe($subscriber);
-194 
-195         \textcolor{comment}{// Generate barcode\_id when a user object is created}
-196         \textcolor{comment}{// TODO: Migrate when user plugin is forked}
-197         User::creating(\textcolor{keyword}{function}($user)
-198         \{
-199             \textcolor{keywordflow}{if} (empty($user->barcode\_id)) \{
-200                 $user->barcode\_id = substr(md5($user->email), 0, 9); 
-201             \}
-202         \});
-203         
-204         \textcolor{comment}{// Extend the user model to support our custom metadata        }
-205         User::extend(\textcolor{keyword}{function}($model) \{        
-206             $model->hasOne[\textcolor{stringliteral}{'metadata'}]          = [\textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Usermeta'}, \textcolor{stringliteral}{'key'} => \textcolor{stringliteral}{'user\_id'}];     
-207             $model->hasMany[\textcolor{stringliteral}{'activityLogs'}]     = [\textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)ActivityLog'}];
-208             $model->hasMany[\textcolor{stringliteral}{'bookmarks'}]        = [\textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Bookmark'}];
-209             $model->hasMany[\textcolor{stringliteral}{'notifications'}]    = [\textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Notification'}];
-210             $model->belongsToMany[\textcolor{stringliteral}{'activities'}] = [\textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Activity'},
-211                 \textcolor{stringliteral}{'table'} => \textcolor{stringliteral}{'dma\_friends\_activity\_user'}, 
-212                 \textcolor{stringliteral}{'user\_id'}, 
-213                 \textcolor{stringliteral}{'activity\_id'},   
-214                 \textcolor{stringliteral}{'timestamps'} => \textcolor{keyword}{true}, 
-215                 \textcolor{stringliteral}{'order'} => \textcolor{stringliteral}{'dma\_friends\_activity\_user.created\_at desc'}
-216             ];     
-217             $model->belongsToMany[\textcolor{stringliteral}{'steps'}]      = [\textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Step'},
-218                 \textcolor{stringliteral}{'table'} => \textcolor{stringliteral}{'dma\_friends\_step\_user'},     
-219                 \textcolor{stringliteral}{'user\_id'}, 
-220                 \textcolor{stringliteral}{'step\_id'},       
-221                 \textcolor{stringliteral}{'timestamps'} => \textcolor{keyword}{true}, 
-222                 \textcolor{stringliteral}{'order'} => \textcolor{stringliteral}{'dma\_friends\_step\_user.created\_at desc'}
-223             ];     
-224             $model->belongsToMany[\textcolor{stringliteral}{'badges'}]     = [\textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Badge'},      
-225                 \textcolor{stringliteral}{'table'} => \textcolor{stringliteral}{'dma\_friends\_badge\_user'},    
-226                 \textcolor{stringliteral}{'user\_id'}, 
-227                 \textcolor{stringliteral}{'badge\_id'},      
-228                 \textcolor{stringliteral}{'timestamps'} => \textcolor{keyword}{true}, 
-229                 \textcolor{stringliteral}{'order'} => \textcolor{stringliteral}{'dma\_friends\_badge\_user.created\_at desc'}
-230             ];        
-231             $model->belongsToMany[\textcolor{stringliteral}{'rewards'}]    = [\textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Reward'},     
-232                 \textcolor{stringliteral}{'table'} => \textcolor{stringliteral}{'dma\_friends\_reward\_user'},   
-233                 \textcolor{stringliteral}{'user\_id'}, 
-234                 \textcolor{stringliteral}{'reward\_id'},     
-235                 \textcolor{stringliteral}{'timestamps'} => \textcolor{keyword}{true}, 
-236                 \textcolor{stringliteral}{'order'} => \textcolor{stringliteral}{'dma\_friends\_reward\_user.created\_at desc'}
-237             ];       
-238             $model->belongsToMany[\textcolor{stringliteral}{'groups'}]     = [\textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)UserGroup'},  
-239                 \textcolor{stringliteral}{'table'} => \textcolor{stringliteral}{'dma\_friends\_users\_groups'},  
-240                 \textcolor{stringliteral}{'key'} => \textcolor{stringliteral}{'user\_id'},  
-241                 \textcolor{stringliteral}{'foreignKey'} => \textcolor{stringliteral}{'group\_id'}, 
-242                 \textcolor{stringliteral}{'pivot'} => [\textcolor{stringliteral}{'membership\_status'}]
-243             ];        
-244         \});
-245         
-246         \textcolor{comment}{// Extend User fields}
-247         $context = $this;
-248         Event::listen(\textcolor{stringliteral}{'backend.form.extendFields'}, \textcolor{keyword}{function}($widget) use ($context)\{
-249             $context->extendedUserFields($widget);
-250             $context->extendedSettingFields($widget);
-251         \}); 
-252 
-253         Event::listen(\textcolor{stringliteral}{'backend.list.extendColumns'}, \textcolor{keyword}{function}($widget) \{
-254             \textcolor{keywordflow}{if} (!$widget->getController() instanceof \(\backslash\)RainLab\(\backslash\)User\(\backslash\)Controllers\(\backslash\)Users) \textcolor{keywordflow}{return};
-255 
-256             $widget->addColumns([
-257                 \textcolor{stringliteral}{'barcode\_id'} => [
-258                     \textcolor{stringliteral}{'label'}     => \textcolor{stringliteral}{'Barcode ID'},
-259                 ],
-260                 \textcolor{stringliteral}{'full\_name'} => [
-261                     \textcolor{stringliteral}{'label'}         => \textcolor{stringliteral}{'Full Name'},
-262                     \textcolor{stringliteral}{'relation'}      => \textcolor{stringliteral}{'metadata'},
-263                     \textcolor{stringliteral}{'sortable'}   => \textcolor{keyword}{false},
-264                     \textcolor{stringliteral}{'select'}        => \textcolor{stringliteral}{"concat(first\_name, ' ', last\_name)"}, 
-265                     \textcolor{stringliteral}{'searchable'}    => \textcolor{keyword}{true},
-266                 ],
-267                 \textcolor{stringliteral}{'first\_name'} => [
-268                     \textcolor{stringliteral}{'label'}         => \textcolor{stringliteral}{'First Name'},
-269                     \textcolor{stringliteral}{'relation'}      => \textcolor{stringliteral}{'metadata'},
-270                     \textcolor{stringliteral}{'select'}        => \textcolor{stringliteral}{'@first\_name'},
-271                     \textcolor{stringliteral}{'searchable'}    => \textcolor{keyword}{true},
-272                 ],  
-273                 \textcolor{stringliteral}{'last\_name'} => [
-274                     \textcolor{stringliteral}{'label'}         => \textcolor{stringliteral}{'Last Name'},
-275                     \textcolor{stringliteral}{'relation'}      => \textcolor{stringliteral}{'metadata'},
-276                     \textcolor{stringliteral}{'select'}        => \textcolor{stringliteral}{'@last\_name'},
-277                     \textcolor{stringliteral}{'searchable'}    => \textcolor{keyword}{true},
-278                 ], 
-279                 \textcolor{stringliteral}{'points'} => [
-280                     \textcolor{stringliteral}{'label'}     => \textcolor{stringliteral}{'Points'}
-281                 ], 
-282                 \textcolor{stringliteral}{'zip'} => [
-283                     \textcolor{stringliteral}{'label'} => \textcolor{stringliteral}{'Zip'},
-284                 ],            
-285             ]); 
-286         \});
-287 
-288     \}
+182     \{
+183         
+184         \textcolor{comment}{// Handle locations upon login}
+185         $this->\hyperlink{classDMA_1_1Friends_1_1Plugin_a4db89cce1a087a7635d5f6b1134854df}{registerLocation}();
+186 
+187         \textcolor{comment}{// Register timezone settings}
+188         date\_default\_timezone\_set( Settings::get(\textcolor{stringliteral}{'timezone'}, Config::get(\textcolor{stringliteral}{'app.timezone'})) );
+189 
+190         \textcolor{comment}{// Register ServiceProviders}
+191         App::register(\textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)FriendsServiceProvider'});
+192         App::register(\textcolor{stringliteral}{'Maatwebsite\(\backslash\)Excel\(\backslash\)ExcelServiceProvider'});
+193 
+194         \textcolor{comment}{// Register aliases}
+195         $alias = AliasLoader::getInstance();
+196         $alias->alias(\textcolor{stringliteral}{'Excel'}, \textcolor{stringliteral}{'Maatwebsite\(\backslash\)Excel\(\backslash\)Facades\(\backslash\)Excel'});
+197         
+198         \textcolor{comment}{// Register Event Subscribers}
+199         $subscriber = \textcolor{keyword}{new} FriendsEventHandler;
+200         Event::subscribe($subscriber);
+201 
+202         \textcolor{comment}{// Generate barcode\_id when a user object is created}
+203         \textcolor{comment}{// TODO: Migrate when user plugin is forked}
+204         User::creating(\textcolor{keyword}{function}($user)
+205         \{
+206             \textcolor{keywordflow}{if} (empty($user->barcode\_id)) \{
+207                 $user->barcode\_id = substr(md5($user->email), 0, 9); 
+208             \}
+209         \});
+210         
+211         \textcolor{comment}{// Extend the user model to support our custom metadata        }
+212         User::extend(\textcolor{keyword}{function}($model) \{        
+213             $model->hasOne[\textcolor{stringliteral}{'metadata'}]          = [\textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Usermeta'}, \textcolor{stringliteral}{'key'} => \textcolor{stringliteral}{'user\_id'}];     
+214             $model->hasMany[\textcolor{stringliteral}{'activityLogs'}]     = [\textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)ActivityLog'}];
+215             $model->hasMany[\textcolor{stringliteral}{'bookmarks'}]        = [\textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Bookmark'}];
+216             $model->hasMany[\textcolor{stringliteral}{'notifications'}]    = [\textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Notification'}];
+217             $model->hasMany[\textcolor{stringliteral}{'rates'}]            = [\textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)UserRate'}];
+218             $model->belongsToMany[\textcolor{stringliteral}{'activities'}] = [\textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Activity'},
+219                 \textcolor{stringliteral}{'table'} => \textcolor{stringliteral}{'dma\_friends\_activity\_user'}, 
+220                 \textcolor{stringliteral}{'user\_id'}, 
+221                 \textcolor{stringliteral}{'activity\_id'},   
+222                 \textcolor{stringliteral}{'timestamps'} => \textcolor{keyword}{true}, 
+223                 \textcolor{stringliteral}{'order'} => \textcolor{stringliteral}{'dma\_friends\_activity\_user.created\_at desc'}
+224             ];     
+225             $model->belongsToMany[\textcolor{stringliteral}{'steps'}]      = [\textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Step'},
+226                 \textcolor{stringliteral}{'table'} => \textcolor{stringliteral}{'dma\_friends\_step\_user'},     
+227                 \textcolor{stringliteral}{'user\_id'}, 
+228                 \textcolor{stringliteral}{'step\_id'},       
+229                 \textcolor{stringliteral}{'timestamps'} => \textcolor{keyword}{true}, 
+230                 \textcolor{stringliteral}{'order'} => \textcolor{stringliteral}{'dma\_friends\_step\_user.created\_at desc'}
+231             ];     
+232             $model->belongsToMany[\textcolor{stringliteral}{'badges'}]     = [\textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Badge'},      
+233                 \textcolor{stringliteral}{'table'} => \textcolor{stringliteral}{'dma\_friends\_badge\_user'},    
+234                 \textcolor{stringliteral}{'user\_id'}, 
+235                 \textcolor{stringliteral}{'badge\_id'},      
+236                 \textcolor{stringliteral}{'timestamps'} => \textcolor{keyword}{true}, 
+237                 \textcolor{stringliteral}{'order'} => \textcolor{stringliteral}{'dma\_friends\_badge\_user.created\_at desc'}
+238             ];        
+239             $model->belongsToMany[\textcolor{stringliteral}{'rewards'}]    = [\textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Reward'},     
+240                 \textcolor{stringliteral}{'table'} => \textcolor{stringliteral}{'dma\_friends\_reward\_user'},   
+241                 \textcolor{stringliteral}{'user\_id'}, 
+242                 \textcolor{stringliteral}{'reward\_id'},     
+243                 \textcolor{stringliteral}{'timestamps'} => \textcolor{keyword}{true}, 
+244                 \textcolor{stringliteral}{'order'} => \textcolor{stringliteral}{'dma\_friends\_reward\_user.created\_at desc'}
+245             ];       
+246             $model->belongsToMany[\textcolor{stringliteral}{'groups'}]     = [\textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)UserGroup'},  
+247                 \textcolor{stringliteral}{'table'} => \textcolor{stringliteral}{'dma\_friends\_users\_groups'},  
+248                 \textcolor{stringliteral}{'key'} => \textcolor{stringliteral}{'user\_id'},  
+249                 \textcolor{stringliteral}{'foreignKey'} => \textcolor{stringliteral}{'group\_id'}, 
+250                 \textcolor{stringliteral}{'pivot'} => [\textcolor{stringliteral}{'membership\_status'}]
+251             ];        
+252         \});
+253         
+254         \textcolor{comment}{// Extend User fields}
+255         $context = $this;
+256         Event::listen(\textcolor{stringliteral}{'backend.form.extendFields'}, \textcolor{keyword}{function}($widget) use ($context)\{
+257             $context->extendedUserFields($widget);
+258             $context->extendedSettingFields($widget);
+259         \}); 
+260 
+261         Event::listen(\textcolor{stringliteral}{'backend.list.extendColumns'}, \textcolor{keyword}{function}($widget) \{
+262             \textcolor{keywordflow}{if} (!$widget->getController() instanceof \(\backslash\)RainLab\(\backslash\)User\(\backslash\)Controllers\(\backslash\)Users) \textcolor{keywordflow}{return};
+263 
+264             $widget->addColumns([
+265                 \textcolor{stringliteral}{'barcode\_id'} => [
+266                     \textcolor{stringliteral}{'label'}     => \textcolor{stringliteral}{'Barcode ID'},
+267                 ],
+268                 \textcolor{stringliteral}{'full\_name'} => [
+269                     \textcolor{stringliteral}{'label'}         => \textcolor{stringliteral}{'Full Name'},
+270                     \textcolor{stringliteral}{'relation'}      => \textcolor{stringliteral}{'metadata'},
+271                     \textcolor{stringliteral}{'sortable'}   => \textcolor{keyword}{false},
+272                     \textcolor{stringliteral}{'select'}        => \textcolor{stringliteral}{"concat(first\_name, ' ', last\_name)"}, 
+273                     \textcolor{stringliteral}{'searchable'}    => \textcolor{keyword}{true},
+274                 ],
+275                 \textcolor{stringliteral}{'first\_name'} => [
+276                     \textcolor{stringliteral}{'label'}         => \textcolor{stringliteral}{'First Name'},
+277                     \textcolor{stringliteral}{'relation'}      => \textcolor{stringliteral}{'metadata'},
+278                     \textcolor{stringliteral}{'select'}        => \textcolor{stringliteral}{'@first\_name'},
+279                     \textcolor{stringliteral}{'searchable'}    => \textcolor{keyword}{true},
+280                 ],  
+281                 \textcolor{stringliteral}{'last\_name'} => [
+282                     \textcolor{stringliteral}{'label'}         => \textcolor{stringliteral}{'Last Name'},
+283                     \textcolor{stringliteral}{'relation'}      => \textcolor{stringliteral}{'metadata'},
+284                     \textcolor{stringliteral}{'select'}        => \textcolor{stringliteral}{'@last\_name'},
+285                     \textcolor{stringliteral}{'searchable'}    => \textcolor{keyword}{true},
+286                 ], 
+287                 \textcolor{stringliteral}{'points'} => [
+288                     \textcolor{stringliteral}{'label'}     => \textcolor{stringliteral}{'Points'}
+289                 ], 
+290                 \textcolor{stringliteral}{'zip'} => [
+291                     \textcolor{stringliteral}{'label'} => \textcolor{stringliteral}{'Zip'},
+292                 ],            
+293             ]); 
+294         \});
+295 
+296     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Plugin_abcae4983c18bdb7b266c6aaa7a081d68}{}\index{D\+M\+A\+::\+Friends\+::\+Plugin@{D\+M\+A\+::\+Friends\+::\+Plugin}!plugin\+Details@{plugin\+Details}}
 \index{plugin\+Details@{plugin\+Details}!D\+M\+A\+::\+Friends\+::\+Plugin@{D\+M\+A\+::\+Friends\+::\+Plugin}}
@@ -198,32 +204,32 @@ array
 )}\label{classDMA_1_1Friends_1_1Plugin_adfd39323d7e2724cdacdb41d590b32e2}
 
 \begin{DoxyCode}
-433     \{
-434         $db = \textcolor{keyword}{false};
-435 
-436         \textcolor{keywordflow}{try} \{
-437             $db = DB::connection(\textcolor{stringliteral}{'friends\_wordpress'});
-438         \} \textcolor{keywordflow}{catch} (\(\backslash\)\hyperlink{namespaceInvalidArgumentException}{InvalidArgumentException} $e) \{
-439             \textcolor{comment}{//Log::info('Missing configuration for wordpress migration');}
-440         \}
-441 
-442         \textcolor{keywordflow}{if} ($db) \{
-443             \textcolor{comment}{// Commands for syncing wordpress data}
-444             $this->registerConsoleCommand(\textcolor{stringliteral}{'friends.sync-data'}, \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Commands\(\backslash\)SyncFriendsDataCommand
+441     \{
+442         $db = \textcolor{keyword}{false};
+443 
+444         \textcolor{keywordflow}{try} \{
+445             $db = DB::connection(\textcolor{stringliteral}{'friends\_wordpress'});
+446         \} \textcolor{keywordflow}{catch} (\(\backslash\)\hyperlink{namespaceInvalidArgumentException}{InvalidArgumentException} $e) \{
+447             \textcolor{comment}{//Log::info('Missing configuration for wordpress migration');}
+448         \}
+449 
+450         \textcolor{keywordflow}{if} ($db) \{
+451             \textcolor{comment}{// Commands for syncing wordpress data}
+452             $this->registerConsoleCommand(\textcolor{stringliteral}{'friends.sync-data'}, \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Commands\(\backslash\)SyncFriendsDataCommand
       '});
-445             $this->registerConsoleCommand(\textcolor{stringliteral}{'friends.sync-relations'}, \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Commands\(\backslash\)S
+453             $this->registerConsoleCommand(\textcolor{stringliteral}{'friends.sync-relations'}, \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Commands\(\backslash\)S
       yncFriendsRelationsCommand'});
-446             $this->registerConsoleCommand(\textcolor{stringliteral}{'friends.sync-images'}, \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Commands\(\backslash\)S
+454             $this->registerConsoleCommand(\textcolor{stringliteral}{'friends.sync-images'}, \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Commands\(\backslash\)S
       yncFriendsImagesCommand'});
-447         \}
-448 
-449         $this->registerConsoleCommand(\textcolor{stringliteral}{'friends.normalize-users'}, \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Commands\(\backslash\)NormalizeUserData'});
-450         $this->registerConsoleCommand(\textcolor{stringliteral}{'friends.points-weekly'}, \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Commands\(\backslash\)WeeklyPoints'});
-451         $this->registerConsoleCommand(\textcolor{stringliteral}{'friends.points-daily'}, \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Commands\(\backslash\)DailyPoints'});
-452         $this->registerConsoleCommand(\textcolor{stringliteral}{'friends.read-channels'}, \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Commands\(\backslash\)ReadChannels'});
-453         $this->registerConsoleCommand(\textcolor{stringliteral}{'friends.reset-groups'}, \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Commands\(\backslash\)ResetGroups'});
-454 
-455     \} 
+455         \}
+456 
+457         $this->registerConsoleCommand(\textcolor{stringliteral}{'friends.normalize-users'}, \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Commands\(\backslash\)NormalizeUserData'});
+458         $this->registerConsoleCommand(\textcolor{stringliteral}{'friends.points-weekly'}, \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Commands\(\backslash\)WeeklyPoints'});
+459         $this->registerConsoleCommand(\textcolor{stringliteral}{'friends.points-daily'}, \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Commands\(\backslash\)DailyPoints'});
+460         $this->registerConsoleCommand(\textcolor{stringliteral}{'friends.read-channels'}, \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Commands\(\backslash\)ReadChannels'});
+461         $this->registerConsoleCommand(\textcolor{stringliteral}{'friends.reset-groups'}, \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Commands\(\backslash\)ResetGroups'});
+462 
+463     \} 
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Plugin_aba0ea6e404e36aaba19174560d3781ac}{}\index{D\+M\+A\+::\+Friends\+::\+Plugin@{D\+M\+A\+::\+Friends\+::\+Plugin}!register\+Components@{register\+Components}}
 \index{register\+Components@{register\+Components}!D\+M\+A\+::\+Friends\+::\+Plugin@{D\+M\+A\+::\+Friends\+::\+Plugin}}
@@ -234,27 +240,27 @@ array
 )}\label{classDMA_1_1Friends_1_1Plugin_aba0ea6e404e36aaba19174560d3781ac}
 
 \begin{DoxyCode}
-141     \{
-142         \textcolor{keywordflow}{return} [
-143             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)ActivityCatalog'}            => \textcolor{stringliteral}{'ActivityCatalog'},
-144             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)ActivityCodeForm'}           => \textcolor{stringliteral}{'ActivityCodeForm'},
-145             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)ActivityFilters'}            => \textcolor{stringliteral}{'ActivityFilters'},
-146             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)ActivityStream'}             => \textcolor{stringliteral}{'ActivityStream'},
-147             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)GetRewards'}                 => \textcolor{stringliteral}{'GetRewards'},
-148             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)Modal'}                      => \textcolor{stringliteral}{'Modal'},
-149             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)Leaderboard'}                => \textcolor{stringliteral}{'Leaderboard'},
-150             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)UserBadges'}                 => \textcolor{stringliteral}{'UserBadges'},
-151             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)UserMostRecentBadge'}        => \textcolor{stringliteral}{'UserMostRecentBadge'},
-152             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)NotificationCounter'}        => \textcolor{stringliteral}{'NotificationCounter'},
-153             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)NotificationList'}           => \textcolor{stringliteral}{'NotificationList'},
-154             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)GroupManager'}               => \textcolor{stringliteral}{'GroupManager'},               
-155             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)GroupRequest'}               => \textcolor{stringliteral}{'GroupRequest'},
-156             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)GroupJoinCodeForm'}          => \textcolor{stringliteral}{'GroupJoinCodeForm'},
-157             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)UserProfile'}                => \textcolor{stringliteral}{'UserProfile'},
-158             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)UserLogin'}                  => \textcolor{stringliteral}{'UserLogin'},
-159             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)UserTimeout'}                => \textcolor{stringliteral}{'UserTimeout'},                  
-160         ];
-161     \}
+142     \{
+143         \textcolor{keywordflow}{return} [
+144             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)ActivityCatalog'}            => \textcolor{stringliteral}{'ActivityCatalog'},
+145             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)ActivityCodeForm'}           => \textcolor{stringliteral}{'ActivityCodeForm'},
+146             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)ActivityFilters'}            => \textcolor{stringliteral}{'ActivityFilters'},
+147             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)ActivityStream'}             => \textcolor{stringliteral}{'ActivityStream'},
+148             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)GetRewards'}                 => \textcolor{stringliteral}{'GetRewards'},
+149             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)Modal'}                      => \textcolor{stringliteral}{'Modal'},
+150             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)Leaderboard'}                => \textcolor{stringliteral}{'Leaderboard'},
+151             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)UserBadges'}                 => \textcolor{stringliteral}{'UserBadges'},
+152             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)UserMostRecentBadge'}        => \textcolor{stringliteral}{'UserMostRecentBadge'},
+153             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)NotificationCounter'}        => \textcolor{stringliteral}{'NotificationCounter'},
+154             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)NotificationList'}           => \textcolor{stringliteral}{'NotificationList'},
+155             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)GroupManager'}               => \textcolor{stringliteral}{'GroupManager'},               
+156             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)GroupRequest'}               => \textcolor{stringliteral}{'GroupRequest'},
+157             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)GroupJoinCodeForm'}          => \textcolor{stringliteral}{'GroupJoinCodeForm'},
+158             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)UserProfile'}                => \textcolor{stringliteral}{'UserProfile'},
+159             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)UserLogin'}                  => \textcolor{stringliteral}{'UserLogin'},
+160             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Components\(\backslash\)UserTimeout'}                => \textcolor{stringliteral}{'UserTimeout'},                  
+161         ];
+162     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Plugin_a900bf22951ffe9e109d1c14afdd261d5}{}\index{D\+M\+A\+::\+Friends\+::\+Plugin@{D\+M\+A\+::\+Friends\+::\+Plugin}!register\+Form\+Widgets@{register\+Form\+Widgets}}
 \index{register\+Form\+Widgets@{register\+Form\+Widgets}!D\+M\+A\+::\+Friends\+::\+Plugin@{D\+M\+A\+::\+Friends\+::\+Plugin}}
@@ -265,26 +271,26 @@ array
 )}\label{classDMA_1_1Friends_1_1Plugin_a900bf22951ffe9e109d1c14afdd261d5}
 
 \begin{DoxyCode}
-395     \{
-396         \textcolor{keywordflow}{return} [
-397             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)FormWidgets\(\backslash\)ActivityType'} => [
-398                 \textcolor{stringliteral}{'label'} => \textcolor{stringliteral}{'ActivityType'},
-399                 \textcolor{stringliteral}{'code'}  => \textcolor{stringliteral}{'activitytype'},
-400             ],
-401             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)FormWidgets\(\backslash\)TimeRestrictions'} => [
-402                 \textcolor{stringliteral}{'label'} => \textcolor{stringliteral}{'Time Restrictions'},
-403                 \textcolor{stringliteral}{'code'}  => \textcolor{stringliteral}{'timerestrictions'},
-404             ],
-405             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)FormWidgets\(\backslash\)UserPoints'} => [
-406                 \textcolor{stringliteral}{'label'} => \textcolor{stringliteral}{'Points'},
-407                 \textcolor{stringliteral}{'code'}  => \textcolor{stringliteral}{'points'},
+403     \{
+404         \textcolor{keywordflow}{return} [
+405             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)FormWidgets\(\backslash\)ActivityType'} => [
+406                 \textcolor{stringliteral}{'label'} => \textcolor{stringliteral}{'ActivityType'},
+407                 \textcolor{stringliteral}{'code'}  => \textcolor{stringliteral}{'activitytype'},
 408             ],
-409             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)FormWidgets\(\backslash\)PrintMembershipCard'} => [
-410                 \textcolor{stringliteral}{'label'} => \textcolor{stringliteral}{'Print Membership Card'},
-411                 \textcolor{stringliteral}{'code'}  => \textcolor{stringliteral}{'printmembershipcard'},
+409             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)FormWidgets\(\backslash\)TimeRestrictions'} => [
+410                 \textcolor{stringliteral}{'label'} => \textcolor{stringliteral}{'Time Restrictions'},
+411                 \textcolor{stringliteral}{'code'}  => \textcolor{stringliteral}{'timerestrictions'},
 412             ],
-413         ];   
-414     \}
+413             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)FormWidgets\(\backslash\)UserPoints'} => [
+414                 \textcolor{stringliteral}{'label'} => \textcolor{stringliteral}{'Points'},
+415                 \textcolor{stringliteral}{'code'}  => \textcolor{stringliteral}{'points'},
+416             ],
+417             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)FormWidgets\(\backslash\)PrintMembershipCard'} => [
+418                 \textcolor{stringliteral}{'label'} => \textcolor{stringliteral}{'Print Membership Card'},
+419                 \textcolor{stringliteral}{'code'}  => \textcolor{stringliteral}{'printmembershipcard'},
+420             ],
+421         ];   
+422     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Plugin_a7fd72bd73f0dbe5e7200a0b1fa3e2bcf}{}\index{D\+M\+A\+::\+Friends\+::\+Plugin@{D\+M\+A\+::\+Friends\+::\+Plugin}!register\+Friend\+A\+P\+I\+Resources@{register\+Friend\+A\+P\+I\+Resources}}
 \index{register\+Friend\+A\+P\+I\+Resources@{register\+Friend\+A\+P\+I\+Resources}!D\+M\+A\+::\+Friends\+::\+Plugin@{D\+M\+A\+::\+Friends\+::\+Plugin}}
@@ -300,21 +306,22 @@ array
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-463     \{
-464         \textcolor{keywordflow}{return} [
-465             \textcolor{stringliteral}{'activities'}            => \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Resources\(\backslash\)ActivityResource'},
-466             \textcolor{stringliteral}{'activity-logs'}         => \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Resources\(\backslash\)ActivityLogResource'},
-467             \textcolor{stringliteral}{'activity-metadata'}     => \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Resources\(\backslash\)ActivityMetadataResource'},
-468             \textcolor{stringliteral}{'badges'}                => \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Resources\(\backslash\)BadgeResource'},
-469             \textcolor{stringliteral}{'steps'}                 => \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Resources\(\backslash\)StepResource'},
-470             \textcolor{stringliteral}{'categories'}            => \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Resources\(\backslash\)CategoryResource'},
-471             \textcolor{stringliteral}{'locations'}             => \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Resources\(\backslash\)LocationResource'},
-472             \textcolor{stringliteral}{'rewards'}               => \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Resources\(\backslash\)RewardResource'},
-473             \textcolor{stringliteral}{'users'}                 => \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Resources\(\backslash\)UserResource'},
-474             \textcolor{stringliteral}{'countries'}             => \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Resources\(\backslash\)CountryResource'},   
-475             \textcolor{stringliteral}{'countries.states'}      => \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Resources\(\backslash\)StateResource'},
-476         ];
-477     \}
+471     \{
+472         \textcolor{keywordflow}{return} [
+473             \textcolor{stringliteral}{'activities'}            => \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Resources\(\backslash\)ActivityResource'},
+474             \textcolor{stringliteral}{'activity-logs'}         => \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Resources\(\backslash\)ActivityLogResource'},
+475             \textcolor{stringliteral}{'activity-metadata'}     => \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Resources\(\backslash\)ActivityMetadataResource'},
+476             \textcolor{stringliteral}{'badges'}                => \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Resources\(\backslash\)BadgeResource'},
+477             \textcolor{stringliteral}{'steps'}                 => \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Resources\(\backslash\)StepResource'},
+478             \textcolor{stringliteral}{'categories'}            => \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Resources\(\backslash\)CategoryResource'},
+479             \textcolor{stringliteral}{'locations'}             => \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Resources\(\backslash\)LocationResource'},
+480             \textcolor{stringliteral}{'rewards'}               => \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Resources\(\backslash\)RewardResource'},
+481             \textcolor{stringliteral}{'users'}                 => \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Resources\(\backslash\)UserResource'},
+482             \textcolor{stringliteral}{'countries'}             => \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Resources\(\backslash\)CountryResource'},   
+483             \textcolor{stringliteral}{'countries.states'}      => \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Resources\(\backslash\)StateResource'},
+484             \textcolor{stringliteral}{'ratings'}               => \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Resources\(\backslash\)RatingResource'},
+485         ];
+486     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Plugin_aee1fcfd6978df90e396e75223e24080a}{}\index{D\+M\+A\+::\+Friends\+::\+Plugin@{D\+M\+A\+::\+Friends\+::\+Plugin}!register\+Friends\+Activities@{register\+Friends\+Activities}}
 \index{register\+Friends\+Activities@{register\+Friends\+Activities}!D\+M\+A\+::\+Friends\+::\+Plugin@{D\+M\+A\+::\+Friends\+::\+Plugin}}
@@ -325,13 +332,14 @@ array
 )}\label{classDMA_1_1Friends_1_1Plugin_aee1fcfd6978df90e396e75223e24080a}
 Register additional friends activity types 
 \begin{DoxyCode}
-167     \{
-168         \textcolor{keywordflow}{return} [
-169             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Activities\(\backslash\)ActivityCode'}   => \textcolor{stringliteral}{'ActivityCode'},
-170             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Activities\(\backslash\)LikeWorkOfArt'}  => \textcolor{stringliteral}{'LikeWorkOfArt'},
-171             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Activities\(\backslash\)Registration'}   => \textcolor{stringliteral}{'Registration'},
-172         ];
-173     \}
+168     \{
+169         \textcolor{keywordflow}{return} [
+170             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Activities\(\backslash\)ActivityCode'}   => \textcolor{stringliteral}{'ActivityCode'},
+171             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Activities\(\backslash\)LikeWorkOfArt'}  => \textcolor{stringliteral}{'LikeWorkOfArt'},
+172             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Activities\(\backslash\)Registration'}   => \textcolor{stringliteral}{'Registration'},
+173             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Activities\(\backslash\)Points'}         => \textcolor{stringliteral}{'Points'},
+174         ];
+175     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Plugin_a4db89cce1a087a7635d5f6b1134854df}{}\index{D\+M\+A\+::\+Friends\+::\+Plugin@{D\+M\+A\+::\+Friends\+::\+Plugin}!register\+Location@{register\+Location}}
 \index{register\+Location@{register\+Location}!D\+M\+A\+::\+Friends\+::\+Plugin@{D\+M\+A\+::\+Friends\+::\+Plugin}}
@@ -342,13 +350,13 @@ Register additional friends activity types
 )}\label{classDMA_1_1Friends_1_1Plugin_a4db89cce1a087a7635d5f6b1134854df}
 register the location of a kiosk with the browser session 
 \begin{DoxyCode}
-534     \{
-535         \textcolor{keywordflow}{if} (!isset($\_SERVER[\textcolor{stringliteral}{'HTTP\_X\_DEVICE\_UUID'}])) \textcolor{keywordflow}{return};
-536 
-537         $uuid = $\_SERVER[\textcolor{stringliteral}{'HTTP\_X\_DEVICE\_UUID'}];
-538 
-539         $manager = \textcolor{keyword}{new} LocationManager($uuid);
-540     \}
+587     \{
+588         \textcolor{keywordflow}{if} (!isset($\_SERVER[\textcolor{stringliteral}{'HTTP\_X\_DEVICE\_UUID'}])) \textcolor{keywordflow}{return};
+589 
+590         $uuid = $\_SERVER[\textcolor{stringliteral}{'HTTP\_X\_DEVICE\_UUID'}];
+591 
+592         $manager = \textcolor{keyword}{new} LocationManager($uuid);
+593     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Plugin_aaab460ba502e3b45284785c291e39bf9}{}\index{D\+M\+A\+::\+Friends\+::\+Plugin@{D\+M\+A\+::\+Friends\+::\+Plugin}!register\+Mail\+Templates@{register\+Mail\+Templates}}
 \index{register\+Mail\+Templates@{register\+Mail\+Templates}!D\+M\+A\+::\+Friends\+::\+Plugin@{D\+M\+A\+::\+Friends\+::\+Plugin}}
@@ -359,15 +367,15 @@ register the location of a kiosk with the browser session
 )}\label{classDMA_1_1Friends_1_1Plugin_aaab460ba502e3b45284785c291e39bf9}
 
 \begin{DoxyCode}
-521     \{
-522         \textcolor{keywordflow}{return} [
-523             \textcolor{stringliteral}{'dma.friends::mail.invite'}      => \textcolor{stringliteral}{'Invitation email to join a group sent when a user is added
+574     \{
+575         \textcolor{keywordflow}{return} [
+576             \textcolor{stringliteral}{'dma.friends::mail.invite'}      => \textcolor{stringliteral}{'Invitation email to join a group sent when a user is added
        to a group.'},
-524             \textcolor{stringliteral}{'dma.friends::mail.badge'}       => \textcolor{stringliteral}{'Email to send to a user when a badge is awarded'},
-525             \textcolor{stringliteral}{'dma.friends::mail.reward'}      => \textcolor{stringliteral}{'Email to send to a user when a reward is redeemed'},
-526             \textcolor{stringliteral}{'dma.friends::mail.adminReward'} => \textcolor{stringliteral}{'Administrative email to send when a reward is redeemed'},
-527         ];
-528     \}    
+577             \textcolor{stringliteral}{'dma.friends::mail.badge'}       => \textcolor{stringliteral}{'Email to send to a user when a badge is awarded'},
+578             \textcolor{stringliteral}{'dma.friends::mail.reward'}      => \textcolor{stringliteral}{'Email to send to a user when a reward is redeemed'},
+579             \textcolor{stringliteral}{'dma.friends::mail.adminReward'} => \textcolor{stringliteral}{'Administrative email to send when a reward is redeemed'},
+580         ];
+581     \}    
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Plugin_acc1be499ecb2966c300f002f94b9e261}{}\index{D\+M\+A\+::\+Friends\+::\+Plugin@{D\+M\+A\+::\+Friends\+::\+Plugin}!register\+Markup\+Tags@{register\+Markup\+Tags}}
 \index{register\+Markup\+Tags@{register\+Markup\+Tags}!D\+M\+A\+::\+Friends\+::\+Plugin@{D\+M\+A\+::\+Friends\+::\+Plugin}}
@@ -378,13 +386,13 @@ register the location of a kiosk with the browser session
 )}\label{classDMA_1_1Friends_1_1Plugin_acc1be499ecb2966c300f002f94b9e261}
 
 \begin{DoxyCode}
-509     \{   
-510         \textcolor{keywordflow}{return} [
-511             \textcolor{stringliteral}{'tokens'} => [
-512                  \textcolor{stringliteral}{'flashMessages'} =>  new \(\backslash\)DMA\(\backslash\)Friends\(\backslash\)Classes\(\backslash\)Notifications\(\backslash\)Twig\(\backslash\)FlashMultipleTokenParser()
-513              ]
-514         ];
-515     \}
+562     \{   
+563         \textcolor{keywordflow}{return} [
+564             \textcolor{stringliteral}{'tokens'} => [
+565                  \textcolor{stringliteral}{'flashMessages'} =>  new \(\backslash\)DMA\(\backslash\)Friends\(\backslash\)Classes\(\backslash\)Notifications\(\backslash\)Twig\(\backslash\)FlashMultipleTokenParser()
+566              ]
+567         ];
+568     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Plugin_aaca6d71040b99d2151b2760c93f3e61c}{}\index{D\+M\+A\+::\+Friends\+::\+Plugin@{D\+M\+A\+::\+Friends\+::\+Plugin}!register\+Navigation@{register\+Navigation}}
 \index{register\+Navigation@{register\+Navigation}!D\+M\+A\+::\+Friends\+::\+Plugin@{D\+M\+A\+::\+Friends\+::\+Plugin}}
@@ -395,61 +403,61 @@ register the location of a kiosk with the browser session
 )}\label{classDMA_1_1Friends_1_1Plugin_aaca6d71040b99d2151b2760c93f3e61c}
 
 \begin{DoxyCode}
-81     \{
-82         \textcolor{keywordflow}{return} [
-83             \textcolor{stringliteral}{'friends'} => [
-84                 \textcolor{stringliteral}{'label'}         => \textcolor{stringliteral}{'Friends Content'},
-85                 \textcolor{stringliteral}{'url'}           => Backend::url(\textcolor{stringliteral}{'dma/friends/activities'}),
-86                 \textcolor{stringliteral}{'icon'}          => \textcolor{stringliteral}{'icon-users'},
-87                 \textcolor{stringliteral}{'permissions'}   => [\textcolor{stringliteral}{'dma.friends.*'}],
-88                 \textcolor{stringliteral}{'order'}         => 500,
-89                 \textcolor{stringliteral}{'sideMenu'}  => [
-90                     \textcolor{stringliteral}{'activities'}   => [
-91                         \textcolor{stringliteral}{'label'}         => \textcolor{stringliteral}{'Activities'},
-92                         \textcolor{stringliteral}{'icon'}          => \textcolor{stringliteral}{'icon-child'},
-93                         \textcolor{stringliteral}{'url'}           => Backend::url(\textcolor{stringliteral}{'dma/friends/activities'}),
-94                         \textcolor{stringliteral}{'permissions'}   => [\textcolor{stringliteral}{'dma.friends.access\_admin'}],
-95                     ],  
-96                     \textcolor{stringliteral}{'badges'}    => [
-97                         \textcolor{stringliteral}{'label'}         => \textcolor{stringliteral}{'Badges'},
-98                         \textcolor{stringliteral}{'icon'}          => \textcolor{stringliteral}{'icon-shield'},
-99                         \textcolor{stringliteral}{'url'}           => Backend::url(\textcolor{stringliteral}{'dma/friends/badges'}),
-100                         \textcolor{stringliteral}{'permissions'}   => [\textcolor{stringliteral}{'dma.friends.access\_admin'}],
-101                     ],
-102                     \textcolor{stringliteral}{'rewards'}   => [
-103                         \textcolor{stringliteral}{'label'}         => \textcolor{stringliteral}{'Rewards'},
-104                         \textcolor{stringliteral}{'icon'}          => \textcolor{stringliteral}{'icon-money'},
-105                         \textcolor{stringliteral}{'url'}           => Backend::url(\textcolor{stringliteral}{'dma/friends/rewards'}),
-106                         \textcolor{stringliteral}{'permissions'}   => [\textcolor{stringliteral}{'dma.friends.access\_admin'}],
-107                     ],
-108                     \textcolor{stringliteral}{'categories'} => [
-109                         \textcolor{stringliteral}{'label'}         => \textcolor{stringliteral}{'Categories'},
-110                         \textcolor{stringliteral}{'icon'}          => \textcolor{stringliteral}{'icon-list-ul'},
-111                         \textcolor{stringliteral}{'url'}           => Backend::url(\textcolor{stringliteral}{'dma/friends/categories'}),
-112                         \textcolor{stringliteral}{'permissions'}   => [\textcolor{stringliteral}{'dma.friends.access\_admin'}],
-113                     ],  
-114                     \textcolor{stringliteral}{'activitylogs'}   => [
-115                         \textcolor{stringliteral}{'label'}         => \textcolor{stringliteral}{'Activity Logs'},
-116                         \textcolor{stringliteral}{'icon'}          => \textcolor{stringliteral}{'icon-rocket'},
-117                         \textcolor{stringliteral}{'url'}           => Backend::url(\textcolor{stringliteral}{'dma/friends/activitylogs'}),
-118                         \textcolor{stringliteral}{'permissions'}   => [\textcolor{stringliteral}{'dma.friends.access\_admin'}],
-119                     ],
-120                     \textcolor{stringliteral}{'groups'}   => [
-121                         \textcolor{stringliteral}{'label'}         => \textcolor{stringliteral}{'Groups'},
-122                         \textcolor{stringliteral}{'icon'}          => \textcolor{stringliteral}{'icon-users'},
-123                         \textcolor{stringliteral}{'url'}           => Backend::url(\textcolor{stringliteral}{'dma/friends/groups'}),
-124                         \textcolor{stringliteral}{'permissions'}   => [\textcolor{stringliteral}{'dma.friends.access\_admin'}],
-125                     ],
-126                     \textcolor{stringliteral}{'locations'} => [
-127                         \textcolor{stringliteral}{'label'}         => \textcolor{stringliteral}{'Locations'},
-128                         \textcolor{stringliteral}{'icon'}          => \textcolor{stringliteral}{'icon-location-arrow'},
-129                         \textcolor{stringliteral}{'url'}           => Backend::url(\textcolor{stringliteral}{'dma/friends/locations'}),
-130                         \textcolor{stringliteral}{'permissions'}   => [\textcolor{stringliteral}{'dma.friends.access\_admin'}],
-131                     ],                
-132                 ]
-133             ]
-134         ];
-135     \}
+82     \{
+83         \textcolor{keywordflow}{return} [
+84             \textcolor{stringliteral}{'friends'} => [
+85                 \textcolor{stringliteral}{'label'}         => \textcolor{stringliteral}{'Friends Content'},
+86                 \textcolor{stringliteral}{'url'}           => Backend::url(\textcolor{stringliteral}{'dma/friends/activities'}),
+87                 \textcolor{stringliteral}{'icon'}          => \textcolor{stringliteral}{'icon-users'},
+88                 \textcolor{stringliteral}{'permissions'}   => [\textcolor{stringliteral}{'dma.friends.*'}],
+89                 \textcolor{stringliteral}{'order'}         => 500,
+90                 \textcolor{stringliteral}{'sideMenu'}  => [
+91                     \textcolor{stringliteral}{'activities'}   => [
+92                         \textcolor{stringliteral}{'label'}         => \textcolor{stringliteral}{'Activities'},
+93                         \textcolor{stringliteral}{'icon'}          => \textcolor{stringliteral}{'icon-child'},
+94                         \textcolor{stringliteral}{'url'}           => Backend::url(\textcolor{stringliteral}{'dma/friends/activities'}),
+95                         \textcolor{stringliteral}{'permissions'}   => [\textcolor{stringliteral}{'dma.friends.access\_admin'}],
+96                     ],  
+97                     \textcolor{stringliteral}{'badges'}    => [
+98                         \textcolor{stringliteral}{'label'}         => \textcolor{stringliteral}{'Badges'},
+99                         \textcolor{stringliteral}{'icon'}          => \textcolor{stringliteral}{'icon-shield'},
+100                         \textcolor{stringliteral}{'url'}           => Backend::url(\textcolor{stringliteral}{'dma/friends/badges'}),
+101                         \textcolor{stringliteral}{'permissions'}   => [\textcolor{stringliteral}{'dma.friends.access\_admin'}],
+102                     ],
+103                     \textcolor{stringliteral}{'rewards'}   => [
+104                         \textcolor{stringliteral}{'label'}         => \textcolor{stringliteral}{'Rewards'},
+105                         \textcolor{stringliteral}{'icon'}          => \textcolor{stringliteral}{'icon-money'},
+106                         \textcolor{stringliteral}{'url'}           => Backend::url(\textcolor{stringliteral}{'dma/friends/rewards'}),
+107                         \textcolor{stringliteral}{'permissions'}   => [\textcolor{stringliteral}{'dma.friends.access\_admin'}],
+108                     ],
+109                     \textcolor{stringliteral}{'categories'} => [
+110                         \textcolor{stringliteral}{'label'}         => \textcolor{stringliteral}{'Categories'},
+111                         \textcolor{stringliteral}{'icon'}          => \textcolor{stringliteral}{'icon-list-ul'},
+112                         \textcolor{stringliteral}{'url'}           => Backend::url(\textcolor{stringliteral}{'dma/friends/categories'}),
+113                         \textcolor{stringliteral}{'permissions'}   => [\textcolor{stringliteral}{'dma.friends.access\_admin'}],
+114                     ],  
+115                     \textcolor{stringliteral}{'activitylogs'}   => [
+116                         \textcolor{stringliteral}{'label'}         => \textcolor{stringliteral}{'Activity Logs'},
+117                         \textcolor{stringliteral}{'icon'}          => \textcolor{stringliteral}{'icon-rocket'},
+118                         \textcolor{stringliteral}{'url'}           => Backend::url(\textcolor{stringliteral}{'dma/friends/activitylogs'}),
+119                         \textcolor{stringliteral}{'permissions'}   => [\textcolor{stringliteral}{'dma.friends.access\_admin'}],
+120                     ],
+121                     \textcolor{stringliteral}{'groups'}   => [
+122                         \textcolor{stringliteral}{'label'}         => \textcolor{stringliteral}{'Groups'},
+123                         \textcolor{stringliteral}{'icon'}          => \textcolor{stringliteral}{'icon-users'},
+124                         \textcolor{stringliteral}{'url'}           => Backend::url(\textcolor{stringliteral}{'dma/friends/groups'}),
+125                         \textcolor{stringliteral}{'permissions'}   => [\textcolor{stringliteral}{'dma.friends.access\_admin'}],
+126                     ],
+127                     \textcolor{stringliteral}{'locations'} => [
+128                         \textcolor{stringliteral}{'label'}         => \textcolor{stringliteral}{'Locations'},
+129                         \textcolor{stringliteral}{'icon'}          => \textcolor{stringliteral}{'icon-location-arrow'},
+130                         \textcolor{stringliteral}{'url'}           => Backend::url(\textcolor{stringliteral}{'dma/friends/locations'}),
+131                         \textcolor{stringliteral}{'permissions'}   => [\textcolor{stringliteral}{'dma.friends.access\_admin'}],
+132                     ],                
+133                 ]
+134             ]
+135         ];
+136     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Plugin_a1f5f007ec6f0f3f16516cf1a2e19d296}{}\index{D\+M\+A\+::\+Friends\+::\+Plugin@{D\+M\+A\+::\+Friends\+::\+Plugin}!register\+Permissions@{register\+Permissions}}
 \index{register\+Permissions@{register\+Permissions}!D\+M\+A\+::\+Friends\+::\+Plugin@{D\+M\+A\+::\+Friends\+::\+Plugin}}
@@ -475,26 +483,70 @@ register the location of a kiosk with the browser session
 )}\label{classDMA_1_1Friends_1_1Plugin_af4c0877dc0c5067f527fa414bc70de57}
 
 \begin{DoxyCode}
-484     \{   
-485         \textcolor{keywordflow}{return} [
-486             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)ReportWidgets\(\backslash\)FriendsToolbar'} => [
-487                 \textcolor{stringliteral}{'label'}     => \textcolor{stringliteral}{'Friends Toolbar'},
-488                 \textcolor{stringliteral}{'context'}   => \textcolor{stringliteral}{'dashboard'}
-489             ],  
-490             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)ReportWidgets\(\backslash\)FriendsLeaderboard'} => [
-491                 \textcolor{stringliteral}{'label'}     => \textcolor{stringliteral}{'Friends Leaderboard'},
-492                 \textcolor{stringliteral}{'context'}   => \textcolor{stringliteral}{'dashboard'},
-493             ],
-494             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)ReportWidgets\(\backslash\)NewFriendsByDay'} => [
-495                 \textcolor{stringliteral}{'label'}     => \textcolor{stringliteral}{'Chart - New Friends By Day'},
-496                 \textcolor{stringliteral}{'context'}   => \textcolor{stringliteral}{'dashboard'},
-497             ],
-498             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)ReportWidgets\(\backslash\)ActivitiesByDay'} => [
-499                 \textcolor{stringliteral}{'label'}     => \textcolor{stringliteral}{'Chart - Activities By Day'},
-500                 \textcolor{stringliteral}{'context'}   => \textcolor{stringliteral}{'dashboard'},
-501             ],
-502         ];  
-503     \} 
+493     \{   
+494         \textcolor{keywordflow}{return} [
+495             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)ReportWidgets\(\backslash\)FriendsToolbar'} => [
+496                 \textcolor{stringliteral}{'label'}     => \textcolor{stringliteral}{'Friends Toolbar'},
+497                 \textcolor{stringliteral}{'context'}   => \textcolor{stringliteral}{'dashboard'}
+498             ],
+499             \textcolor{comment}{// 'DMA\(\backslash\)Friends\(\backslash\)ReportWidgets\(\backslash\)DatePicker' => [}
+500             \textcolor{comment}{//     'label'     => 'Friends Date Picker',}
+501             \textcolor{comment}{//     'context'   => 'dashboard',}
+502             \textcolor{comment}{// ],}
+503             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)ReportWidgets\(\backslash\)FriendsLeaderboard'} => [
+504                 \textcolor{stringliteral}{'label'}     => \textcolor{stringliteral}{'Table - Friends Leaderboard'},
+505                 \textcolor{stringliteral}{'context'}   => \textcolor{stringliteral}{'dashboard'},
+506             ],
+507             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)ReportWidgets\(\backslash\)UserReport'} => [
+508                 \textcolor{stringliteral}{'label'}     => \textcolor{stringliteral}{'Graph - # Users by day'},
+509                 \textcolor{stringliteral}{'context'}   => \textcolor{stringliteral}{'dashboard'},
+510             ],
+511             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)ReportWidgets\(\backslash\)RewardReport'} => [
+512                 \textcolor{stringliteral}{'label'}     => \textcolor{stringliteral}{'Graph - # Rewards redeemed by day'},
+513                 \textcolor{stringliteral}{'context'}   => \textcolor{stringliteral}{'dashboard'},
+514             ],
+515             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)ReportWidgets\(\backslash\)TopRewards'} => [
+516                 \textcolor{stringliteral}{'label'}     => \textcolor{stringliteral}{'Table - Top Rewards'},
+517                 \textcolor{stringliteral}{'context'}   => \textcolor{stringliteral}{'dashboard'},
+518             ],
+519             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)ReportWidgets\(\backslash\)TopActivities'} => [
+520                 \textcolor{stringliteral}{'label'}     => \textcolor{stringliteral}{'Table - Top Activities'},
+521                 \textcolor{stringliteral}{'context'}   => \textcolor{stringliteral}{'dashboard'},
+522             ],
+523             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)ReportWidgets\(\backslash\)TopBadges'} => [
+524                 \textcolor{stringliteral}{'label'}     => \textcolor{stringliteral}{'Table - Top Badges'},
+525                 \textcolor{stringliteral}{'context'}   => \textcolor{stringliteral}{'dashboard'},
+526             ],
+527             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)ReportWidgets\(\backslash\)ActivitiesByDay'} => [
+528                 \textcolor{stringliteral}{'label'}     => \textcolor{stringliteral}{'Graph - Activities By Day'},
+529                 \textcolor{stringliteral}{'context'}   => \textcolor{stringliteral}{'dashboard'},
+530             ],
+531             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)ReportWidgets\(\backslash\)EmailOptin'} => [
+532                 \textcolor{stringliteral}{'label'}     => \textcolor{stringliteral}{'Chart - % Users with email optin'},
+533                 \textcolor{stringliteral}{'context'}   => \textcolor{stringliteral}{'dashboard'},
+534             ],
+535             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)ReportWidgets\(\backslash\)FriendsMembers'}=>[
+536                 \textcolor{stringliteral}{'label'}   => \textcolor{stringliteral}{'Chart - % of Users with partnership'},
+537                 \textcolor{stringliteral}{'context'} => \textcolor{stringliteral}{'dashboard'}
+538             ],
+539             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)ReportWidgets\(\backslash\)DemographicGender'} => [
+540                 \textcolor{stringliteral}{'label'}     => \textcolor{stringliteral}{'Chart - Gender Breakdown'},
+541                 \textcolor{stringliteral}{'context'}   => \textcolor{stringliteral}{'dashboard'},
+542             ],
+543             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)ReportWidgets\(\backslash\)DemographicRace'} => [
+544                 \textcolor{stringliteral}{'label'}     => \textcolor{stringliteral}{'Chart - Race Breakdown'},
+545                 \textcolor{stringliteral}{'context'}   => \textcolor{stringliteral}{'dashboard'},
+546             ],
+547             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)ReportWidgets\(\backslash\)DemographicIncome'} => [
+548                 \textcolor{stringliteral}{'label'}     => \textcolor{stringliteral}{'Chart - Income Breakdown'},
+549                 \textcolor{stringliteral}{'context'}   => \textcolor{stringliteral}{'dashboard'},
+550             ],
+551             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)ReportWidgets\(\backslash\)DemographicEducation'} => [
+552                 \textcolor{stringliteral}{'label'}     => \textcolor{stringliteral}{'Chart - Education Breakdown'},
+553                 \textcolor{stringliteral}{'context'}   => \textcolor{stringliteral}{'dashboard'},
+554             ],
+555         ];  
+556     \} 
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Plugin_a325d26dd168b48639619da76610957f0}{}\index{D\+M\+A\+::\+Friends\+::\+Plugin@{D\+M\+A\+::\+Friends\+::\+Plugin}!register\+Schedule@{register\+Schedule}}
 \index{register\+Schedule@{register\+Schedule}!D\+M\+A\+::\+Friends\+::\+Plugin@{D\+M\+A\+::\+Friends\+::\+Plugin}}
@@ -505,14 +557,14 @@ register the location of a kiosk with the browser session
 )}\label{classDMA_1_1Friends_1_1Plugin_a325d26dd168b48639619da76610957f0}
 
 \begin{DoxyCode}
-420     \{
-421 
-422         $schedule->command(\textcolor{stringliteral}{"friends.points-weekly"})->weekly();
-423         $schedule->command(\textcolor{stringliteral}{"friends.points-daily"})->daily();
-424         $schedule->command(\textcolor{stringliteral}{"friends.read-channels"})->everyFiveMinutes();
-425         $schedule->command(\textcolor{stringliteral}{"friends.reset-groups"})->everyFiveMinutes();
-426 
-427     \}
+428     \{
+429 
+430         $schedule->command(\textcolor{stringliteral}{"friends.points-weekly"})->weekly();
+431         $schedule->command(\textcolor{stringliteral}{"friends.points-daily"})->daily();
+432         $schedule->command(\textcolor{stringliteral}{"friends.read-channels"})->everyFiveMinutes();
+433         $schedule->command(\textcolor{stringliteral}{"friends.reset-groups"})->everyFiveMinutes();
+434 
+435     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Plugin_ad494274bdd3480e4623b5fec196352b3}{}\index{D\+M\+A\+::\+Friends\+::\+Plugin@{D\+M\+A\+::\+Friends\+::\+Plugin}!register\+Settings@{register\+Settings}}
 \index{register\+Settings@{register\+Settings}!D\+M\+A\+::\+Friends\+::\+Plugin@{D\+M\+A\+::\+Friends\+::\+Plugin}}
@@ -532,10 +584,11 @@ register the location of a kiosk with the browser session
 69                 \textcolor{stringliteral}{'icon'}        => \textcolor{stringliteral}{'icon-cog'},
 70                 \textcolor{stringliteral}{'class'}       => \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Settings'},
 71                 \textcolor{stringliteral}{'order'}       => 500,
-72                 \textcolor{stringliteral}{'keywords'}    => \textcolor{stringliteral}{'friends system settings'}
-73             ],
-74         ];
-75     \}
+72                 \textcolor{stringliteral}{'keywords'}    => \textcolor{stringliteral}{'friends system settings'},
+73                 \textcolor{stringliteral}{'permissions'} => [\textcolor{stringliteral}{'dma.friends.*'}],
+74             ],
+75         ];
+76     \}
 \end{DoxyCode}
 
 

@@ -15,6 +15,9 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 \hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserProfileTransformer_aaea113bbd8cf8bd53b6ef3530d3fc07a}{include\+Country} (Model \$instance)
 \item 
 \hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserProfileTransformer_accd7c7ec420193cbaa6077b26aa8d292}{include\+State} (Model \$instance)
+\item 
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserProfileTransformer_a8e0d4c0e3e2f424792f857292abb0710}{}{\bfseries get\+User\+Points} (Model \$instance)\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserProfileTransformer_a8e0d4c0e3e2f424792f857292abb0710}
+
 \end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -38,18 +41,18 @@ League
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-54     \{
-55     
-56         \textcolor{keywordflow}{if} (is\_null($country = $instance->country))\{
-57             \textcolor{comment}{// Check if state is been set}
-58             \textcolor{keywordflow}{if}(!is\_null($state = $instance->state))\{
-59                 $country = $state->country;
-60             \}
-61         \}
-62         $item = $this->item($country, \textcolor{keyword}{new} CountryTransformer);
-63         \textcolor{keywordflow}{return} $item;
-64         
-65     \}
+49     \{
+50     
+51         \textcolor{keywordflow}{if} (is\_null($country = $instance->country))\{
+52             \textcolor{comment}{// Check if state is been set}
+53             \textcolor{keywordflow}{if}(!is\_null($state = $instance->state))\{
+54                 $country = $state->country;
+55             \}
+56         \}
+57         $item = $this->item($country, \textcolor{keyword}{new} CountryTransformer);
+58         \textcolor{keywordflow}{return} $item;
+59         
+60     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserProfileTransformer_accd7c7ec420193cbaa6077b26aa8d292}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Profile\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Profile\+Transformer}!include\+State@{include\+State}}
 \index{include\+State@{include\+State}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Profile\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Profile\+Transformer}}
@@ -65,11 +68,11 @@ League
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-74     \{
-75     
-76         $state = $instance->state;
-77         \textcolor{keywordflow}{return} $this->item($state, \textcolor{keyword}{new} StateTransformer);
-78     \}
+69     \{
+70     
+71         $state = $instance->state;
+72         \textcolor{keywordflow}{return} $this->item($state, \textcolor{keyword}{new} StateTransformer);
+73     \}
 \end{DoxyCode}
 
 

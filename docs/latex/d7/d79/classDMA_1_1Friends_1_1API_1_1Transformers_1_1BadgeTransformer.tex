@@ -17,6 +17,8 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 \hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_af14a3d805e9bdd81d5c9e5e334ab3617}{include\+Steps} (Model \$instance)
 \item 
 \hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_aa3b6235d12b9c07bf3e3126b493a9885}{include\+Media} (Model \$instance)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_aa4d31e1a597aa42ef473882961c7c149}{include\+Categories} (Model \$instance)
 \end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -45,29 +47,29 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 \end{DoxySeeAlso}
 
 \begin{DoxyCode}
-47     \{
-48         \textcolor{comment}{// Adding steps by the Fractal embeding system}
-49         $this->setDefaultIncludes( array\_merge($this->getDefaultIncludes(), [\textcolor{stringliteral}{'steps'}]));
-50     
-51         \textcolor{keywordflow}{return} [
-52                 \textcolor{stringliteral}{'description'}               => $instance->description,
-53                 \textcolor{stringliteral}{'excerpt'}                   => $instance->excerpt,
-54                 \textcolor{stringliteral}{'congratulations\_text'}      => $instance->congratulations\_text,
-55                 \textcolor{stringliteral}{'maximum\_earnings'}          => $instance->maximum\_earnings,
-56                 \textcolor{stringliteral}{'points'}                    => $instance->points,
-57                 \textcolor{stringliteral}{'is\_published'}              => ($instance->is\_published)?\textcolor{keyword}{true}:\textcolor{keyword}{false},
-58                 \textcolor{stringliteral}{'is\_archived'}               => ($instance->is\_archived)?\textcolor{keyword}{true}:\textcolor{keyword}{false},
-59                 \textcolor{stringliteral}{'is\_sequential'}             => ($instance->is\_sequential)?\textcolor{keyword}{true}:\textcolor{keyword}{false},
-60                 \textcolor{stringliteral}{'show\_earners'}              => ($instance->show\_earners)?\textcolor{keyword}{true}:\textcolor{keyword}{false},
-61                 \textcolor{stringliteral}{'is\_hidden'}                 => ($instance->is\_hidden)?\textcolor{keyword}{true}:\textcolor{keyword}{false},
-62                 \textcolor{stringliteral}{'time\_between\_steps\_min'}    => $instance->time\_between\_steps\_min,
-63                 \textcolor{stringliteral}{'time\_between\_steps\_max'}    => $instance->time\_between\_steps\_max,
-64                 \textcolor{stringliteral}{'maximium\_time'}             => $instance->maximium\_time,
-65                 \textcolor{stringliteral}{'special'}                   => ($instance->special)?\textcolor{keyword}{true}:\textcolor{keyword}{false},
-66                 \textcolor{stringliteral}{'time\_restrictions'}         => $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_aeacba533330faa46396ce280e27f0fee}{getTimeRestrictions}($instance),
-67         ];
-68     
-69     \}
+49     \{
+50         \textcolor{comment}{// Adding steps by the Fractal embeding system}
+51         $this->setDefaultIncludes( array\_merge($this->getDefaultIncludes(), [\textcolor{stringliteral}{'steps'}]));
+52     
+53         \textcolor{keywordflow}{return} [
+54                 \textcolor{stringliteral}{'description'}               => $instance->description,
+55                 \textcolor{stringliteral}{'excerpt'}                   => $instance->excerpt,
+56                 \textcolor{stringliteral}{'congratulations\_text'}      => $instance->congratulations\_text,
+57                 \textcolor{stringliteral}{'maximum\_earnings'}          => $instance->maximum\_earnings,
+58                 \textcolor{stringliteral}{'points'}                    => $instance->points,
+59                 \textcolor{stringliteral}{'is\_published'}              => ($instance->is\_published)?\textcolor{keyword}{true}:\textcolor{keyword}{false},
+60                 \textcolor{stringliteral}{'is\_archived'}               => ($instance->is\_archived)?\textcolor{keyword}{true}:\textcolor{keyword}{false},
+61                 \textcolor{stringliteral}{'is\_sequential'}             => ($instance->is\_sequential)?\textcolor{keyword}{true}:\textcolor{keyword}{false},
+62                 \textcolor{stringliteral}{'show\_earners'}              => ($instance->show\_earners)?\textcolor{keyword}{true}:\textcolor{keyword}{false},
+63                 \textcolor{stringliteral}{'is\_hidden'}                 => ($instance->is\_hidden)?\textcolor{keyword}{true}:\textcolor{keyword}{false},
+64                 \textcolor{stringliteral}{'time\_between\_steps\_min'}    => $instance->time\_between\_steps\_min,
+65                 \textcolor{stringliteral}{'time\_between\_steps\_max'}    => $instance->time\_between\_steps\_max,
+66                 \textcolor{stringliteral}{'maximium\_time'}             => $instance->maximium\_time,
+67                 \textcolor{stringliteral}{'special'}                   => ($instance->special)?\textcolor{keyword}{true}:\textcolor{keyword}{false},
+68                 \textcolor{stringliteral}{'time\_restrictions'}         => $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_aeacba533330faa46396ce280e27f0fee}{getTimeRestrictions}($instance),
+69         ];
+70     
+71     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_aeacba533330faa46396ce280e27f0fee}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer}!get\+Time\+Restrictions@{get\+Time\+Restrictions}}
 \index{get\+Time\+Restrictions@{get\+Time\+Restrictions}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer}}
@@ -86,21 +88,39 @@ array
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-77     \{
-78     
-79         $restrictions = [];
-80         $keys         = [\textcolor{stringliteral}{'date\_begin'}, \textcolor{stringliteral}{'date\_end'}];
-81     
-82         \textcolor{comment}{// Reset values}
-83         \textcolor{keywordflow}{foreach}($keys as $key)\{
-84             $restrictions[$key] = null;
-85         \}
-86     
-87         $restrictions[\textcolor{stringliteral}{'date\_begin'}] = $this->carbonToIso($instance->date\_begin);
-88         $restrictions[\textcolor{stringliteral}{'date\_end'}]   = $this->carbonToIso($instance->date\_end);
-89     
-90         \textcolor{keywordflow}{return} $restrictions;
-91     \}
+79     \{
+80     
+81         $restrictions = [];
+82         $keys         = [\textcolor{stringliteral}{'date\_begin'}, \textcolor{stringliteral}{'date\_end'}];
+83     
+84         \textcolor{comment}{// Reset values}
+85         \textcolor{keywordflow}{foreach}($keys as $key)\{
+86             $restrictions[$key] = null;
+87         \}
+88     
+89         $restrictions[\textcolor{stringliteral}{'date\_begin'}] = $this->carbonToIso($instance->date\_begin);
+90         $restrictions[\textcolor{stringliteral}{'date\_end'}]   = $this->carbonToIso($instance->date\_end);
+91     
+92         \textcolor{keywordflow}{return} $restrictions;
+93     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_aa4d31e1a597aa42ef473882961c7c149}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer}!include\+Categories@{include\+Categories}}
+\index{include\+Categories@{include\+Categories}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer}}
+\subsubsection[{include\+Categories}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Badge\+Transformer\+::include\+Categories (
+\begin{DoxyParamCaption}
+\item[{Model}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_aa4d31e1a597aa42ef473882961c7c149}
+Include Media
+
+\begin{DoxyReturn}{Returns}
+League 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+126     \{
+127         \textcolor{keywordflow}{return} $this->collection($instance->categories, \textcolor{keyword}{new} CategoryTransformer);
+128     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_aa3b6235d12b9c07bf3e3126b493a9885}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer}!include\+Media@{include\+Media}}
 \index{include\+Media@{include\+Media}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer}}
@@ -116,9 +136,9 @@ League
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-114     \{
-115         \textcolor{keywordflow}{return} $this->item($instance, \textcolor{keyword}{new} MediaTransformer);
-116     \}
+116     \{
+117         \textcolor{keywordflow}{return} $this->item($instance, \textcolor{keyword}{new} MediaTransformer);
+118     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_af14a3d805e9bdd81d5c9e5e334ab3617}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer}!include\+Steps@{include\+Steps}}
 \index{include\+Steps@{include\+Steps}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer}}
@@ -134,12 +154,12 @@ League
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-100     \{
-101         $steps = $instance->steps;
-102         \textcolor{comment}{// No necessary to show steps activities given that the parent is an activity}
-103         $exclude = [\textcolor{stringliteral}{'badge'}];
-104         \textcolor{keywordflow}{return} $this->collection($steps, \textcolor{keyword}{new} StepTransformer(\textcolor{keyword}{true}, $exclude));
-105     \}
+102     \{
+103         $steps = $instance->steps;
+104         \textcolor{comment}{// No necessary to show steps activities given that the parent is an activity}
+105         $exclude = [\textcolor{stringliteral}{'badge'}];
+106         \textcolor{keywordflow}{return} $this->collection($steps, \textcolor{keyword}{new} StepTransformer(\textcolor{keyword}{true}, $exclude));
+107     \}
 \end{DoxyCode}
 
 
@@ -159,7 +179,8 @@ League
 {\bfseries Initial value\+:}
 \begin{DoxyCode}
 = [
-             \textcolor{stringliteral}{'media'}
+             \textcolor{stringliteral}{'media'},
+             \textcolor{stringliteral}{'categories'}
      ]
 \end{DoxyCode}
 

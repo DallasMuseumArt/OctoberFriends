@@ -1,0 +1,94 @@
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1TopBadges}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Report\+Widgets\textbackslash{}Top\+Badges Class Reference}
+\label{classDMA_1_1Friends_1_1ReportWidgets_1_1TopBadges}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Top\+Badges@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Top\+Badges}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Report\+Widgets\textbackslash{}Top\+Badges\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d4/d08/classDMA_1_1Friends_1_1ReportWidgets_1_1TopBadges}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1ReportWidgets_1_1TopBadges_a656b065ab496d17f53bb3d6f72829839}{widget\+Details} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1ReportWidgets_1_1TopBadges_ada143ab79b674f6a5d78f01c4e0d23d2}{define\+Properties} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1ReportWidgets_1_1TopBadges_a5f2ad462247e773176db74bf211a9d7d}{render} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1TopBadges_a3cb9c481cd865661bc3c58fd65f144fe}{}{\bfseries \$default\+Alias} = \textquotesingle{}\hyperlink{classDMA_1_1Friends_1_1ReportWidgets_1_1TopBadges}{Top\+Badges}\textquotesingle{}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1TopBadges_a3cb9c481cd865661bc3c58fd65f144fe}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1TopBadges_ada143ab79b674f6a5d78f01c4e0d23d2}{}\index{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Badges@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Badges}!define\+Properties@{define\+Properties}}
+\index{define\+Properties@{define\+Properties}!D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Badges@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Badges}}
+\subsubsection[{define\+Properties}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Top\+Badges\+::define\+Properties (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1TopBadges_ada143ab79b674f6a5d78f01c4e0d23d2}
+
+\begin{DoxyCode}
+28     \{
+29         \textcolor{keywordflow}{return} [
+30             \textcolor{stringliteral}{'limit'} => [
+31                 \textcolor{stringliteral}{'title'}             => \textcolor{stringliteral}{'Number of results'},
+32                 \textcolor{stringliteral}{'default'}           => 10,
+33                 \textcolor{stringliteral}{'type'}              => \textcolor{stringliteral}{'string'},
+34                 \textcolor{stringliteral}{'validationPattern'} => \textcolor{stringliteral}{'^[0-9]+$'}
+35             ],
+36         ];
+37     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1TopBadges_a5f2ad462247e773176db74bf211a9d7d}{}\index{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Badges@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Badges}!render@{render}}
+\index{render@{render}!D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Badges@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Badges}}
+\subsubsection[{render}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Top\+Badges\+::render (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1TopBadges_a5f2ad462247e773176db74bf211a9d7d}
+
+\begin{DoxyCode}
+43     \{   
+44         $limit = $this->property(\textcolor{stringliteral}{'limit'});
+45 
+46         $query = DB::table(\textcolor{stringliteral}{'dma\_friends\_badges'})
+47                 ->select(\textcolor{stringliteral}{"title"}, DB::raw(\textcolor{stringliteral}{"count(dma\_friends\_badge\_user.user\_id) as count"}))
+48                 ->join(\textcolor{stringliteral}{"dma\_friends\_badge\_user"}, \textcolor{stringliteral}{'dma\_friends\_badges.id'}, \textcolor{charliteral}{'='}, \textcolor{stringliteral}{'
+      dma\_friends\_badge\_user.badge\_id'})
+49                 ->groupBy(\textcolor{stringliteral}{"dma\_friends\_badge\_user.badge\_id"})
+50                 ->orderBy(\textcolor{stringliteral}{'count'}, \textcolor{stringliteral}{'DESC'});
+51 
+52         $badges = GraphReport::processQuery($query, \textcolor{stringliteral}{'dma\_friends\_badge\_user.created\_at'}, $limit, \textcolor{stringliteral}{'
+      friends.reports.topBadges'});
+53 
+54         $this->vars[\textcolor{stringliteral}{'badges'}] = $badges;
+55 
+56         \textcolor{keywordflow}{return} $this->makePartial(\textcolor{stringliteral}{'widget'});
+57     \}   
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1TopBadges_a656b065ab496d17f53bb3d6f72829839}{}\index{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Badges@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Badges}!widget\+Details@{widget\+Details}}
+\index{widget\+Details@{widget\+Details}!D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Badges@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Badges}}
+\subsubsection[{widget\+Details}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Top\+Badges\+::widget\+Details (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1TopBadges_a656b065ab496d17f53bb3d6f72829839}
+
+\begin{DoxyCode}
+17     \{   
+18         \textcolor{keywordflow}{return} [
+19             \textcolor{stringliteral}{'name'}        => \textcolor{stringliteral}{'Top Badges'},
+20             \textcolor{stringliteral}{'description'} => \textcolor{stringliteral}{'Show highest ranking Badges'}
+21         ];  
+22     \}   
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+reportwidgets/Top\+Badges.\+php\end{DoxyCompactItemize}

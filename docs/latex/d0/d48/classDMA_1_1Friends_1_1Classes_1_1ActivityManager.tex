@@ -72,13 +72,12 @@ an array representing the field configuration
 172 
 173         $formConfig = $this->activityType->getConfig();
 174         $formConfig = $this->getConfigPath($formConfig);
-175       
-176         \textcolor{keywordflow}{if} (File::isFile($formConfig)) \{
-177             \textcolor{keywordflow}{return} $this->makeConfig($formConfig);
-178         \} \textcolor{keywordflow}{else} \{
-179             \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-180         \}
-181     \}
+175         \textcolor{keywordflow}{if} (File::isFile($formConfig)) \{
+176             \textcolor{keywordflow}{return} $this->makeConfig($formConfig);
+177         \} \textcolor{keywordflow}{else} \{
+178             \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+179         \}
+180     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityManager_a9d4d128c4b663b4a80dec5994e3af001}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Manager}!get\+Form\+Default\+Values@{get\+Form\+Default\+Values}}
 \index{get\+Form\+Default\+Values@{get\+Form\+Default\+Values}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Manager}}
@@ -99,13 +98,13 @@ array An array of default form values
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-193     \{
-194         \textcolor{keywordflow}{if} (!$this->activityType)
-195                 \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceSystemException}{SystemException}(Lang::get(\textcolor{stringliteral}{'
+192     \{
+193         \textcolor{keywordflow}{if} (!$this->activityType)
+194                 \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceSystemException}{SystemException}(Lang::get(\textcolor{stringliteral}{'
       dma.friends::lang.exceptions.activityTypeNotInitiated'}));
-196 
-197         \textcolor{keywordflow}{return} $this->activityType->getFormDefaultValues($model);
-198     \}
+195 
+196         \textcolor{keywordflow}{return} $this->activityType->getFormDefaultValues($model);
+197     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityManager_ad340ffbbfee36d2253adcd61af8f98c4}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Manager}!list\+Activities@{list\+Activities}}
 \index{list\+Activities@{list\+Activities}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Manager}}
@@ -180,19 +179,19 @@ string & {\em \$alias} & An activity type class alias \\
 \end{DoxyParams}
 
 \begin{DoxyCode}
-224     \{
-225         \textcolor{keywordflow}{if} (!$alias) \textcolor{keywordflow}{return};
-226 
-227         \textcolor{keywordflow}{if} (!$this->activityType) \{
-228             $className = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityManager_aff2ab3684ac9cc2714fd1d7957890584}{resolve}($alias);
-229 
-230             \textcolor{keywordflow}{if} (!$className)
-231                 \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceSystemException}{SystemException}(Lang::get(\textcolor{stringliteral}{'
+223     \{
+224         \textcolor{keywordflow}{if} (!$alias) \textcolor{keywordflow}{return};
+225 
+226         \textcolor{keywordflow}{if} (!$this->activityType) \{
+227             $className = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityManager_aff2ab3684ac9cc2714fd1d7957890584}{resolve}($alias);
+228 
+229             \textcolor{keywordflow}{if} (!$className)
+230                 \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceSystemException}{SystemException}(Lang::get(\textcolor{stringliteral}{'
       dma.friends::lang.exceptions.missingActivityClass'}, [\textcolor{stringliteral}{'class'} => $alias]));
-232 
-233             $this->activityType = \textcolor{keyword}{new} $className;
-234         \}
-235     \}
+231 
+232             $this->activityType = \textcolor{keyword}{new} $className;
+233         \}
+234     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1ActivityManager_a59854358f0903314c27c9add5d151221}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Manager}!register\+Activity@{register\+Activity}}
 \index{register\+Activity@{register\+Activity}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Activity\+Manager}}
@@ -290,12 +289,12 @@ array & {\em \$values} & An array of values to be saved \\
 \end{DoxyParams}
 
 \begin{DoxyCode}
-210     \{
-211         \textcolor{keywordflow}{if} (!$this->activityType)
-212             $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityManager_a7e70e998e7e5fa750f02d8249d11f816}{loadActivity}($values[\textcolor{stringliteral}{'activity\_type'}]);
-213 
-214         $this->activityType->saveData($model, $values);
-215     \}
+209     \{
+210         \textcolor{keywordflow}{if} (!$this->activityType)
+211             $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1ActivityManager_a7e70e998e7e5fa750f02d8249d11f816}{loadActivity}($values[\textcolor{stringliteral}{'activity\_type'}]);
+212 
+213         $this->activityType->saveData($model, $values);
+214     \}
 \end{DoxyCode}
 
 

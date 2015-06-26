@@ -65,10 +65,10 @@ string \$path
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-355     \{
-356         $theme = Theme::getActiveTheme();
-357         \textcolor{keywordflow}{return} $theme->getPath();
-358     \}
+359     \{
+360         $theme = Theme::getActiveTheme();
+361         \textcolor{keywordflow}{return} $theme->getPath();
+362     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Components_1_1UserLogin_a88372af498e2b89424acdab1537b0210}{}\index{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Login@{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Login}!get\+Theme\+Partials\+Dir@{get\+Theme\+Partials\+Dir}}
 \index{get\+Theme\+Partials\+Dir@{get\+Theme\+Partials\+Dir}!D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Login@{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Login}}
@@ -84,9 +84,9 @@ string \$path
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-345     \{
-346         \textcolor{keywordflow}{return} self::getThemeDir() . \textcolor{stringliteral}{'/partials/'};
-347     \}
+349     \{
+350         \textcolor{keywordflow}{return} self::getThemeDir() . \textcolor{stringliteral}{'/partials/'};
+351     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Components_1_1UserLogin_a5845beab2a28f2a742da61b23a680eda}{}\index{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Login@{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Login}!make\+Partial@{make\+Partial}}
 \index{make\+Partial@{make\+Partial}!D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Login@{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Login}}
@@ -113,24 +113,24 @@ string \$content A rendered partial
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-321     \{   
-322         $partialsDir = self::getThemePartialsDir();
-323         $partialPath = $partialsDir . $partial . \textcolor{stringliteral}{'.htm'};
-324 
-325         \textcolor{keywordflow}{if} (!File::isFile($partialPath)) \{
-326             $partialPath = $this->getViewPath($partial) . \textcolor{stringliteral}{'.htm'};
-327         \}
+325     \{   
+326         $partialsDir = self::getThemePartialsDir();
+327         $partialPath = $partialsDir . $partial . \textcolor{stringliteral}{'.htm'};
 328 
 329         \textcolor{keywordflow}{if} (!File::isFile($partialPath)) \{
-330             \textcolor{keywordflow}{if} ($throwException)
-331                 \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceSystemException}{SystemException}(Lang::get(\textcolor{stringliteral}{'backend::lang.partial.not\_found'}, [\textcolor{stringliteral}{'
+330             $partialPath = $this->getViewPath($partial) . \textcolor{stringliteral}{'.htm'};
+331         \}
+332 
+333         \textcolor{keywordflow}{if} (!File::isFile($partialPath)) \{
+334             \textcolor{keywordflow}{if} ($throwException)
+335                 \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceSystemException}{SystemException}(Lang::get(\textcolor{stringliteral}{'backend::lang.partial.not\_found'}, [\textcolor{stringliteral}{'
       name'} => $partialPath]));
-332             \textcolor{keywordflow}{else}
-333                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-334         \}   
-335 
-336         \textcolor{keywordflow}{return} $this->makeFileContents($partialPath, $params);
-337     \}   
+336             \textcolor{keywordflow}{else}
+337                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+338         \}   
+339 
+340         \textcolor{keywordflow}{return} $this->makeFileContents($partialPath, $params);
+341     \}   
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Components_1_1UserLogin_a49b72261eed4c7750ca24e23ebecc945}{}\index{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Login@{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Login}!on\+Available\+User@{on\+Available\+User}}
 \index{on\+Available\+User@{on\+Available\+User}!D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Login@{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Login}}
@@ -141,14 +141,14 @@ string \$content A rendered partial
 )}\label{classDMA_1_1Friends_1_1Components_1_1UserLogin_a49b72261eed4c7750ca24e23ebecc945}
 Verify if the given user mail is not already register 
 \begin{DoxyCode}
-180     \{
-181         $email = post(\textcolor{stringliteral}{'email'});
-182         $data = [\textcolor{stringliteral}{'available'} =>  \textcolor{keyword}{true}];
-183         \textcolor{keywordflow}{if} ( User::where(\textcolor{stringliteral}{'email'}, $email)->count() > 0 ) \{
-184             $data[\textcolor{stringliteral}{'available'}] = \textcolor{keyword}{false};
-185         \}
-186         \textcolor{keywordflow}{return} $data;
-187     \}
+184     \{
+185         $email = post(\textcolor{stringliteral}{'email'});
+186         $data = [\textcolor{stringliteral}{'available'} =>  \textcolor{keyword}{true}];
+187         \textcolor{keywordflow}{if} ( User::where(\textcolor{stringliteral}{'email'}, $email)->count() > 0 ) \{
+188             $data[\textcolor{stringliteral}{'available'}] = \textcolor{keyword}{false};
+189         \}
+190         \textcolor{keywordflow}{return} $data;
+191     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Components_1_1UserLogin_a232f43a38ed3fcdb7ebf6c774b031496}{}\index{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Login@{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Login}!on\+Forgot\+Password@{on\+Forgot\+Password}}
 \index{on\+Forgot\+Password@{on\+Forgot\+Password}!D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Login@{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Login}}
@@ -196,9 +196,13 @@ Render the registration form. Override the partial \char`\"{}register-\/form\cha
 169 
 170         \textcolor{keywordflow}{return} $this->renderPartial(\textcolor{stringliteral}{'@modalDisplay'}, [
 171             \textcolor{stringliteral}{'title'}     => Lang::get(\textcolor{stringliteral}{'dma.friends::lang.userLogin.registerTitle'}),
-172             \textcolor{stringliteral}{'content'}   => $this->\hyperlink{classDMA_1_1Friends_1_1Components_1_1UserLogin_a5845beab2a28f2a742da61b23a680eda}{makePartial}(\textcolor{stringliteral}{'register-form'}, [ \textcolor{stringliteral}{'options'} => $options ]),
-173         ]);
-174     \}
+172             \textcolor{stringliteral}{'content'}   => $this->renderPartial(\textcolor{stringliteral}{'register-form'}, [ 
+173                 \textcolor{stringliteral}{'options'}   => $options, 
+174                 \textcolor{stringliteral}{'avatars'}   => $this->getAvatars(),
+175                 \textcolor{stringliteral}{'terms'}     => $this->renderPartial(\textcolor{stringliteral}{'terms-and-conditions.htm'}),
+176             ]),
+177         ]);
+178     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Components_1_1UserLogin_adb35ec3a5460d1a197337104a54b55b1}{}\index{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Login@{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Login}!on\+Register\+Submit@{on\+Register\+Submit}}
 \index{on\+Register\+Submit@{on\+Register\+Submit}!D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Login@{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Login}}
@@ -209,95 +213,95 @@ Render the registration form. Override the partial \char`\"{}register-\/form\cha
 )}\label{classDMA_1_1Friends_1_1Components_1_1UserLogin_adb35ec3a5460d1a197337104a54b55b1}
 Submit handler for registration 
 \begin{DoxyCode}
-193     \{
-194         $data = post();
-195 
-196         $rules = [
-197             \textcolor{stringliteral}{'first\_name'}            => \textcolor{stringliteral}{'required|min:2'},
-198             \textcolor{stringliteral}{'last\_name'}             => \textcolor{stringliteral}{'required|min:2'},
-199             \textcolor{comment}{//'username'              => 'required|min:6',}
-200             \textcolor{stringliteral}{'email'}                 => \textcolor{stringliteral}{'required|email|between:2,64'},
-201             \textcolor{stringliteral}{'password'}              => \textcolor{stringliteral}{'required|min:6'},
-202             \textcolor{stringliteral}{'password\_confirmation'} => \textcolor{stringliteral}{'required|min:6'},
-203         ];
-204 
-205         $validation = Validator::make($data, $rules);
-206         \textcolor{keywordflow}{if} ($validation->fails())
-207             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceValidationException}{ValidationException}($validation);
+197     \{
+198         $data = post();
+199 
+200         $rules = [
+201             \textcolor{stringliteral}{'first\_name'}            => \textcolor{stringliteral}{'required|min:2'},
+202             \textcolor{stringliteral}{'last\_name'}             => \textcolor{stringliteral}{'required|min:2'},
+203             \textcolor{comment}{//'username'              => 'required|min:6',}
+204             \textcolor{stringliteral}{'email'}                 => \textcolor{stringliteral}{'required|email|between:2,64'},
+205             \textcolor{stringliteral}{'password'}              => \textcolor{stringliteral}{'required|min:6'},
+206             \textcolor{stringliteral}{'password\_confirmation'} => \textcolor{stringliteral}{'required|min:6'},
+207         ];
 208 
-209         \textcolor{comment}{/*}
-210 \textcolor{comment}{         * Register user}
-211 \textcolor{comment}{         */}
-212         $requireActivation = UserSettings::get(\textcolor{stringliteral}{'require\_activation'}, \textcolor{keyword}{true});
-213         $automaticActivation = UserSettings::get(\textcolor{stringliteral}{'activate\_mode'}) == UserSettings::ACTIVATE\_AUTO;
-214         $userActivation = UserSettings::get(\textcolor{stringliteral}{'activate\_mode'}) == UserSettings::ACTIVATE\_USER;
-215 
-216         \textcolor{comment}{// Split the data into whats required for the user and usermeta models}
-217         $userData = [
-218             \textcolor{stringliteral}{'name'}                  => $data[\textcolor{stringliteral}{'email'}],
-219             \textcolor{stringliteral}{'password'}              => $data[\textcolor{stringliteral}{'password'}],
-220             \textcolor{stringliteral}{'password\_confirmation'} => $data[\textcolor{stringliteral}{'password\_confirmation'}],
-221             \textcolor{stringliteral}{'email'}                 => $data[\textcolor{stringliteral}{'email'}],
-222             \textcolor{stringliteral}{'street\_addr'}           => $data[\textcolor{stringliteral}{'street\_addr'}],
-223             \textcolor{stringliteral}{'city'}                  => $data[\textcolor{stringliteral}{'city'}],
-224             \textcolor{stringliteral}{'state'}                 => $data[\textcolor{stringliteral}{'state'}],
-225             \textcolor{stringliteral}{'zip'}                   => $data[\textcolor{stringliteral}{'zip'}],
-226             \textcolor{stringliteral}{'phone'}                 => UserExtend::parsePhone($data[\textcolor{stringliteral}{'phone'}]),
-227         ];
-228 
-229         $user = Auth::register($userData, $automaticActivation);
-230 
-231         $birth\_date = $data[\textcolor{stringliteral}{'birthday'}][\textcolor{stringliteral}{'year'}] 
-232             . \textcolor{charliteral}{'-'} .  sprintf(\textcolor{stringliteral}{"%02s"}, $data[\textcolor{stringliteral}{'birthday'}][\textcolor{stringliteral}{'month'}]) 
-233             . \textcolor{charliteral}{'-'} .  sprintf(\textcolor{stringliteral}{"%02s"}, $data[\textcolor{stringliteral}{'birthday'}][\textcolor{stringliteral}{'day'}])
-234             . \textcolor{stringliteral}{' 00:00:00'};
-235 
-236         \textcolor{comment}{// Save user metadata}
-237         $usermeta = \textcolor{keyword}{new} Usermeta;
-238         $usermeta->first\_name       = $data[\textcolor{stringliteral}{'first\_name'}];
-239         $usermeta->last\_name        = $data[\textcolor{stringliteral}{'last\_name'}];
-240         $usermeta->birth\_date       = $birth\_date;
-241         $usermeta->email\_optin      = isset($data[\textcolor{stringliteral}{'email\_optin'}]) ? $data[\textcolor{stringliteral}{'email\_optin'}] : \textcolor{keyword}{false};
-242 
-243         \textcolor{comment}{// Uncomment to enable demographics in registration form;}
-244         \textcolor{comment}{// $usermeta->gender           = $data['gender'];}
-245         \textcolor{comment}{// $usermeta->race             = $data['race'];}
-246         \textcolor{comment}{// $usermeta->household\_income = $data['household\_income'];}
-247         \textcolor{comment}{// $usermeta->household\_size   = $data['household\_size'];}
-248         \textcolor{comment}{// $usermeta->education        = $data['education'];}
-249 
-250         $user->metadata()->save($usermeta);
-251 
-252         \textcolor{keywordflow}{if} (isset($data[\textcolor{stringliteral}{'avatar'}])) \{
-253             UserExtend::uploadAvatar($user, $data[\textcolor{stringliteral}{'avatar'}]);
-254         \}
-255         \textcolor{comment}{/*}
-256 \textcolor{comment}{         * Activation is by the user, send the email}
-257 \textcolor{comment}{         */}
-258         \textcolor{keywordflow}{if} ($userActivation) \{
-259             $this->sendActivationEmail($user);
-260         \}
-261 
-262         \textcolor{comment}{/*}
-263 \textcolor{comment}{         * Automatically activated or not required, log the user in}
-264 \textcolor{comment}{         */}
-265         \textcolor{keywordflow}{if} ($automaticActivation || !$requireActivation) \{
-266             Auth::login($user);
-267         \}
-268 
-269         \textcolor{comment}{/*}
-270 \textcolor{comment}{         * Fire event that user has registered}
-271 \textcolor{comment}{         */}
-272         Event::fire(\textcolor{stringliteral}{'auth.register'}, [$user]);
-273 
-274         \textcolor{comment}{/*}
-275 \textcolor{comment}{         * Redirect to the intended page after successful sign in}
-276 \textcolor{comment}{         */}
-277         $redirectUrl = $this->pageUrl($this->property(\textcolor{stringliteral}{'redirect'}));
-278 
-279         \textcolor{keywordflow}{if} ($redirectUrl = post(\textcolor{stringliteral}{'redirect'}, $redirectUrl))
-280             \textcolor{keywordflow}{return} Redirect::intended($redirectUrl);
-281     \}
+209         $validation = Validator::make($data, $rules);
+210         \textcolor{keywordflow}{if} ($validation->fails())
+211             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceValidationException}{ValidationException}($validation);
+212 
+213         \textcolor{comment}{/*}
+214 \textcolor{comment}{         * Register user}
+215 \textcolor{comment}{         */}
+216         $requireActivation = UserSettings::get(\textcolor{stringliteral}{'require\_activation'}, \textcolor{keyword}{true});
+217         $automaticActivation = UserSettings::get(\textcolor{stringliteral}{'activate\_mode'}) == UserSettings::ACTIVATE\_AUTO;
+218         $userActivation = UserSettings::get(\textcolor{stringliteral}{'activate\_mode'}) == UserSettings::ACTIVATE\_USER;
+219 
+220         \textcolor{comment}{// Split the data into whats required for the user and usermeta models}
+221         $userData = [
+222             \textcolor{stringliteral}{'name'}                  => $data[\textcolor{stringliteral}{'first\_name'}] . \textcolor{charliteral}{' '} . $data[\textcolor{stringliteral}{'last\_name'}],
+223             \textcolor{stringliteral}{'password'}              => $data[\textcolor{stringliteral}{'password'}],
+224             \textcolor{stringliteral}{'password\_confirmation'} => $data[\textcolor{stringliteral}{'password\_confirmation'}],
+225             \textcolor{stringliteral}{'email'}                 => $data[\textcolor{stringliteral}{'email'}],
+226             \textcolor{stringliteral}{'street\_addr'}           => $data[\textcolor{stringliteral}{'street\_addr'}],
+227             \textcolor{stringliteral}{'city'}                  => $data[\textcolor{stringliteral}{'city'}],
+228             \textcolor{stringliteral}{'state'}                 => $data[\textcolor{stringliteral}{'state'}],
+229             \textcolor{stringliteral}{'zip'}                   => $data[\textcolor{stringliteral}{'zip'}],
+230             \textcolor{stringliteral}{'phone'}                 => UserExtend::parsePhone($data[\textcolor{stringliteral}{'phone'}]),
+231         ];
+232 
+233         $user = Auth::register($userData, $automaticActivation);
+234 
+235         $birth\_date = $data[\textcolor{stringliteral}{'birthday'}][\textcolor{stringliteral}{'year'}] 
+236             . \textcolor{charliteral}{'-'} .  sprintf(\textcolor{stringliteral}{"%02s"}, $data[\textcolor{stringliteral}{'birthday'}][\textcolor{stringliteral}{'month'}]) 
+237             . \textcolor{charliteral}{'-'} .  sprintf(\textcolor{stringliteral}{"%02s"}, $data[\textcolor{stringliteral}{'birthday'}][\textcolor{stringliteral}{'day'}])
+238             . \textcolor{stringliteral}{' 00:00:00'};
+239 
+240         \textcolor{comment}{// Save user metadata}
+241         $usermeta = \textcolor{keyword}{new} Usermeta;
+242         $usermeta->first\_name       = $data[\textcolor{stringliteral}{'first\_name'}];
+243         $usermeta->last\_name        = $data[\textcolor{stringliteral}{'last\_name'}];
+244         $usermeta->birth\_date       = $birth\_date;
+245         $usermeta->email\_optin      = isset($data[\textcolor{stringliteral}{'email\_optin'}]) ? $data[\textcolor{stringliteral}{'email\_optin'}] : \textcolor{keyword}{false};
+246 
+247         \textcolor{comment}{// Uncomment to enable demographics in registration form;}
+248         \textcolor{comment}{// $usermeta->gender           = $data['gender'];}
+249         \textcolor{comment}{// $usermeta->race             = $data['race'];}
+250         \textcolor{comment}{// $usermeta->household\_income = $data['household\_income'];}
+251         \textcolor{comment}{// $usermeta->household\_size   = $data['household\_size'];}
+252         \textcolor{comment}{// $usermeta->education        = $data['education'];}
+253 
+254         $user->metadata()->save($usermeta);
+255 
+256         \textcolor{keywordflow}{if} (isset($data[\textcolor{stringliteral}{'avatar'}])) \{
+257             UserExtend::uploadAvatar($user, $data[\textcolor{stringliteral}{'avatar'}]);
+258         \}
+259         \textcolor{comment}{/*}
+260 \textcolor{comment}{         * Activation is by the user, send the email}
+261 \textcolor{comment}{         */}
+262         \textcolor{keywordflow}{if} ($userActivation) \{
+263             $this->sendActivationEmail($user);
+264         \}
+265 
+266         \textcolor{comment}{/*}
+267 \textcolor{comment}{         * Automatically activated or not required, log the user in}
+268 \textcolor{comment}{         */}
+269         \textcolor{keywordflow}{if} ($automaticActivation || !$requireActivation) \{
+270             Auth::login($user);
+271         \}
+272 
+273         \textcolor{comment}{/*}
+274 \textcolor{comment}{         * Fire event that user has registered}
+275 \textcolor{comment}{         */}
+276         Event::fire(\textcolor{stringliteral}{'auth.register'}, [$user]);
+277 
+278         \textcolor{comment}{/*}
+279 \textcolor{comment}{         * Redirect to the intended page after successful sign in}
+280 \textcolor{comment}{         */}
+281         $redirectUrl = $this->pageUrl($this->property(\textcolor{stringliteral}{'redirect'}));
+282 
+283         \textcolor{keywordflow}{if} ($redirectUrl = post(\textcolor{stringliteral}{'redirect'}, $redirectUrl))
+284             \textcolor{keywordflow}{return} Redirect::intended($redirectUrl);
+285     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Components_1_1UserLogin_a9f64120e2a98aca7bb6ad628d9a72844}{}\index{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Login@{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Login}!on\+User\+Login@{on\+User\+Login}}
 \index{on\+User\+Login@{on\+User\+Login}!D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Login@{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Login}}

@@ -34,20 +34,31 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Report\+Wi
 )}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a5fb3de1ff5dd5186e068dcf8c5e8d154}
 
 \begin{DoxyCode}
-28     \{
-29         $today = date(\textcolor{stringliteral}{'Y-m-d'});
-30         $thisWeek = date(\textcolor{stringliteral}{'Y-m-d'}, strtotime(\textcolor{stringliteral}{'last monday'}));
-31 
-32         $this->addCss(\textcolor{stringliteral}{'css/friendstoolbar.css'});
-33 
-34         $this->vars[\textcolor{stringliteral}{'numFriends'}]       = number\_format(User::count());
-35         $this->vars[\textcolor{stringliteral}{'todayFriends'}]     = number\_format(User::where(\textcolor{stringliteral}{'created\_at'}, \textcolor{stringliteral}{'>='}, $today)->count());
-36         $this->vars[\textcolor{stringliteral}{'weekFriends'}]      = number\_format(User::where(\textcolor{stringliteral}{'created\_at'}, \textcolor{stringliteral}{'>='}, $thisWeek)->count()
-      );
-37         $this->vars[\textcolor{stringliteral}{'averageFriends'}]   = number\_format($this->getAverageFriends());
-38 
-39         \textcolor{keywordflow}{return} $this->makePartial(\textcolor{stringliteral}{'widget'});
-40     \}
+32     \{
+33         $today = date(\textcolor{stringliteral}{'Y-m-d'});
+34         $thisWeek = date(\textcolor{stringliteral}{'Y-m-d'}, strtotime(\textcolor{stringliteral}{'last monday'}));
+35 
+36         $this->addCss(\textcolor{stringliteral}{'css/friendstoolbar.css'});
+37 
+38         $meta = \textcolor{keyword}{new} Usermeta;
+39         $meta\_table = $meta->getTable();
+40 
+41         $this->vars[\textcolor{stringliteral}{'numFriends'}]       = Usermeta::where(\textcolor{stringliteral}{'current\_member'}, \textcolor{stringliteral}{'!='}, Usermeta::IS\_STAFF)->
+      count();
+42         $this->vars[\textcolor{stringliteral}{'todayFriends'}]     = User::join($meta\_table, \textcolor{stringliteral}{'users.id'}, \textcolor{charliteral}{'='}, $meta\_table . \textcolor{stringliteral}{'.user\_id'}
+      )
+43             ->where(\textcolor{stringliteral}{'current\_member'}, \textcolor{stringliteral}{'!='}, Usermeta::IS\_STAFF) 
+44             ->where(\textcolor{stringliteral}{'created\_at'}, \textcolor{stringliteral}{'>='}, $today)->count();
+45 
+46         $this->vars[\textcolor{stringliteral}{'weekFriends'}]      = User::join($meta\_table, \textcolor{stringliteral}{'users.id'}, \textcolor{charliteral}{'='}, $meta\_table . \textcolor{stringliteral}{'.user\_id'}
+      ) 
+47             ->where(\textcolor{stringliteral}{'current\_member'}, \textcolor{stringliteral}{'!='}, Usermeta::IS\_STAFF)
+48             ->where(\textcolor{stringliteral}{'created\_at'}, \textcolor{stringliteral}{'>='}, $thisWeek)->count();
+49 
+50         $this->vars[\textcolor{stringliteral}{'averageFriends'}]   = $this->getAverageFriends();
+51 
+52         \textcolor{keywordflow}{return} $this->makePartial(\textcolor{stringliteral}{'widget'});
+53     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a56951946e166c46353910da4a5c399a1}{}\index{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Toolbar@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Toolbar}!widget\+Details@{widget\+Details}}
 \index{widget\+Details@{widget\+Details}!D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Toolbar@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Toolbar}}
@@ -58,12 +69,12 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Report\+Wi
 )}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a56951946e166c46353910da4a5c399a1}
 
 \begin{DoxyCode}
-17     \{
-18         \textcolor{keywordflow}{return} [
-19             \textcolor{stringliteral}{'name'}        => \textcolor{stringliteral}{'Friends Toolbar'},
-20             \textcolor{stringliteral}{'description'} => \textcolor{stringliteral}{'Show some basic statistics on friends'}
-21         ];
-22     \}
+21     \{
+22         \textcolor{keywordflow}{return} [
+23             \textcolor{stringliteral}{'name'}        => \textcolor{stringliteral}{'Friends Toolbar'},
+24             \textcolor{stringliteral}{'description'} => \textcolor{stringliteral}{'Show some basic statistics on friends'}
+25         ];
+26     \}
 \end{DoxyCode}
 
 

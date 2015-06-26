@@ -9,8 +9,18 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_aac66e5a0f9d705f2ff25aa53374de1d1}{}{\bfseries checkin} (\$user, \$code)\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_aac66e5a0f9d705f2ff25aa53374de1d1}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_a4eccb55dc505bfc92562fe37db80eda6}{}{\bfseries checkin} (\$user, \$code=null)\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_a4eccb55dc505bfc92562fe37db80eda6}
 
+\item 
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_ab69cc3a390f04db714de20bf7d131eac}{}{\bfseries bulk\+Checkins} (\$user, \$codes=null)\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_ab69cc3a390f04db714de20bf7d131eac}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_a671a3b78b007929728a958a3d1c1973f}{process\+Activity\+Code} (\$user, \$code)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_a6e69dac62efaef2226446bcb4a9537d4}{get\+User\+Info} (\$user)
 \end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -22,6 +32,103 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_a6e69dac62efaef2226446bcb4a9537d4}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource}!get\+User\+Info@{get\+User\+Info}}
+\index{get\+User\+Info@{get\+User\+Info}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource}}
+\subsubsection[{get\+User\+Info}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Activity\+Resource\+::get\+User\+Info (
+\begin{DoxyParamCaption}
+\item[{}]{\$user}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_a6e69dac62efaef2226446bcb4a9537d4}
+Get user information 
+\begin{DoxyParams}[1]{Parameters}
+Rain\+Lab\textbackslash{}\+User\textbackslash{}\+Models\textbackslash{}\+User & {\em \$user} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+176     \{
+177 
+178         \textcolor{comment}{// Get common user points format via UserProfileTransformer}
+179         $userTransformer = \textcolor{keyword}{new} UserProfileTransformer();
+180         $points = $userTransformer->getUserPoints($user);
+181         
+182         \textcolor{keywordflow}{return} [ 
+183             \textcolor{stringliteral}{'id'}        => $user->getKey(),
+184             \textcolor{stringliteral}{'points'}    => $points
+185         ];
+186     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_a671a3b78b007929728a958a3d1c1973f}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource}!process\+Activity\+Code@{process\+Activity\+Code}}
+\index{process\+Activity\+Code@{process\+Activity\+Code}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource}}
+\subsubsection[{process\+Activity\+Code}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Activity\+Resource\+::process\+Activity\+Code (
+\begin{DoxyParamCaption}
+\item[{}]{\$user, }
+\item[{}]{\$code}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_a671a3b78b007929728a958a3d1c1973f}
+
+\begin{DoxyParams}[1]{Parameters}
+Rain\+Lab\textbackslash{}\+User\textbackslash{}\+Models\textbackslash{}\+User & {\em \$user} & \\
+\hline
+string & {\em \$code} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Array Return an associative code with a intended H\+T\+T\+P Code and an Array with information of the activity code 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+125     \{
+126         $params = [];
+127         \textcolor{comment}{// Get code from message}
+128         $params[\textcolor{stringliteral}{'code'}] = $code;
+129         
+130         \textcolor{comment}{// process Activity code first}
+131         \textcolor{keywordflow}{if} (!$activity = \hyperlink{classDMA_1_1Friends_1_1Activities_1_1ActivityCode_a07ea7959f4707fe2228204c5ff3e51ae}{ActivityCode::process}($user, $params)) \{
+132             \textcolor{comment}{// Not found activity with that code.}
+133             \textcolor{comment}{// Trying if is a object assession number}
+134             $activity = \hyperlink{classDMA_1_1Friends_1_1Activities_1_1LikeWorkOfArt_a88d1a454b4389e3116cc1f8a365747cd}{LikeWorkOfArt::process}($user, $params);
+135         \}
+136         
+137         \textcolor{comment}{// Determine the content of the message}
+138         $holder = ( $activity ) ? \textcolor{stringliteral}{'activityMessage'} : \textcolor{stringliteral}{'activityError'};
+139         $message = Session::pull($holder);
+140         
+141         \textcolor{keywordflow}{if} (is\_array($message)) \{
+142             $message = implode(\textcolor{charliteral}{'\(\backslash\)n'}, array\_filter($message));
+143         \}
+144         
+145         $payload = [
+146             \textcolor{stringliteral}{'success'}           => ($activity) ? \textcolor{keyword}{true} : \textcolor{keyword}{false},
+147             \textcolor{stringliteral}{'activity\_code'}     => $code,
+148             \textcolor{stringliteral}{'message'}           => $message,
+149             \textcolor{stringliteral}{'feedback\_message'}  => $activity->feedback\_message,
+150             \textcolor{stringliteral}{'complete\_message'}  => $activity->complete\_message
+151         ];
+152         
+153         $httpCode = 200;
+154         
+155         \textcolor{comment}{// Check if is not a boolean if not is because is an intance of an activity}
+156         \textcolor{keywordflow}{if}( !is\_bool($activity) ) \{
+157             \textcolor{comment}{// Check if and artwork is attached to the activity}
+158             \textcolor{comment}{// if so this activity is a LikeWorkOfArt}
+159             $objectData = (array\_get($activity, \textcolor{stringliteral}{'objectData'}, null));
+160             \textcolor{keywordflow}{if}(!is\_null($objectData)) \{
+161                 $httpCode = 201;
+162                 $payload[\textcolor{stringliteral}{'data'}][\textcolor{stringliteral}{'artwork'}] = $objectData;
+163             \}
+164         \}
+165         
+166         \textcolor{keywordflow}{return} [ \textcolor{stringliteral}{'http\_code'} => $httpCode, \textcolor{stringliteral}{'payload'} => $payload ];
+167         
+168     \}
+\end{DoxyCode}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

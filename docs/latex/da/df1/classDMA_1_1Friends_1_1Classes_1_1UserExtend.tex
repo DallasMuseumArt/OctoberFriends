@@ -48,12 +48,12 @@ Extended functionality against user objects This is a really ugly way to extend 
 \end{DoxyParams}
 
 \begin{DoxyCode}
-40     \{
-41         \textcolor{keywordflow}{if} (!$user)
-42             $user = \textcolor{keyword}{new} \hyperlink{namespaceRainlab_1_1User_1_1Models_1_1User}{User};
-43 
-44         $this->user = $user;
-45     \}
+42     \{
+43         \textcolor{keywordflow}{if} (!$user)
+44             $user = \textcolor{keyword}{new} \hyperlink{namespaceRainlab_1_1User_1_1Models_1_1User}{User};
+45 
+46         $this->user = $user;
+47     \}
 \end{DoxyCode}
 
 
@@ -74,25 +74,28 @@ integer & {\em \$points} & The amount of points to add to a user \\
 \end{DoxyParams}
 
 \begin{DoxyCode}
-54     \{
-55         \textcolor{keywordflow}{if} (!is\_numeric($points))
-56             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceSystemException}{SystemException}(\textcolor{stringliteral}{'Points must be an integer'});
-57 
-58         $this->user->points += $points;
-59         $this->user->points\_this\_week += $points;
-60         $this->user->points\_today += $points;
-61 
-62         \textcolor{keywordflow}{if} ($this->user->forceSave()) \{
-63             
-64             Event::fire(\textcolor{stringliteral}{'dma.friends.user.pointsEarned'}, [$this->user, $points]);
+56     \{
+57         \textcolor{keywordflow}{if} (!is\_numeric($points))
+58             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceSystemException}{SystemException}(\textcolor{stringliteral}{'Points must be an integer'});
+59 
+60         $this->user->points += $points;
+61         $this->user->points\_this\_week += $points;
+62         $this->user->points\_today += $points;
+63 
+64         \textcolor{keywordflow}{if} ($this->user->forceSave()) \{
 65 
-66             $params = [
-67                 \textcolor{stringliteral}{'user'}          => $this->user,
-68                 \textcolor{stringliteral}{'points\_earned'} => $points,
-69             ];
-70             \hyperlink{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_a083fa01b3e143ca77bdbb1562db724de}{FriendsLog::points}($params);
-71         \}
-72     \}
+66             \textcolor{comment}{// Process any activities awarded on points achievement}
+67             \hyperlink{classDMA_1_1Friends_1_1Activities_1_1Points_a5822192344843b5a1948a8cbc737223d}{Points::process}($this->user);
+68             
+69             Event::fire(\textcolor{stringliteral}{'dma.friends.user.pointsEarned'}, [$this->user, $points]);
+70 
+71             $params = [
+72                 \textcolor{stringliteral}{'user'}          => $this->user,
+73                 \textcolor{stringliteral}{'points\_earned'} => $points,
+74             ];
+75             \hyperlink{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_a083fa01b3e143ca77bdbb1562db724de}{FriendsLog::points}($params);
+76         \}
+77     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1UserExtend_a72299c6e170b749617a262f18a8d7d67}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+User\+Extend@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+User\+Extend}!remove\+Points@{remove\+Points}}
 \index{remove\+Points@{remove\+Points}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+User\+Extend@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+User\+Extend}}
@@ -116,27 +119,27 @@ boolean returns true if points where removed
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-87     \{
-88         \textcolor{keywordflow}{if} (!is\_numeric($points))
-89             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceSystemException}{SystemException}(\textcolor{stringliteral}{'Points must be an integer'});
-90 
-91         \textcolor{keywordflow}{if} ($this->user->points < $points) \{
-92             \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-93         \}
-94 
-95         $this->user->points -= $points;    
-96 
-97         \textcolor{keywordflow}{if} ($deduct) \{    
-98             $this->user->points\_this\_week -= $points;
-99             $this->user->points\_today -= $points;
-100         \}
-101         
-102         \textcolor{keywordflow}{if} ($this->user->forceSave()) \{
-103             Event::fire(\textcolor{stringliteral}{'dma.friends.user.pointsRemoved'}, [$this->user, $points]);
-104         \}
-105 
-106         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-107     \}
+92     \{
+93         \textcolor{keywordflow}{if} (!is\_numeric($points))
+94             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceSystemException}{SystemException}(\textcolor{stringliteral}{'Points must be an integer'});
+95 
+96         \textcolor{keywordflow}{if} ($this->user->points < $points) \{
+97             \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+98         \}
+99 
+100         $this->user->points -= $points;    
+101 
+102         \textcolor{keywordflow}{if} ($deduct) \{    
+103             $this->user->points\_this\_week -= $points;
+104             $this->user->points\_today -= $points;
+105         \}
+106         
+107         \textcolor{keywordflow}{if} ($this->user->forceSave()) \{
+108             Event::fire(\textcolor{stringliteral}{'dma.friends.user.pointsRemoved'}, [$this->user, $points]);
+109         \}
+110 
+111         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+112     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1UserExtend_afdb44d04557d6679074fa0399f0ce843}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+User\+Extend@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+User\+Extend}!upload\+Avatar\+From\+String@{upload\+Avatar\+From\+String}}
 \index{upload\+Avatar\+From\+String@{upload\+Avatar\+From\+String}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+User\+Extend@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+User\+Extend}}
@@ -157,48 +160,56 @@ string & {\em \$source} & string contend of an image on Base64 enconding \\
 \end{DoxyParams}
 
 \begin{DoxyCode}
-138     \{
-139         $dst = \textcolor{stringliteral}{'/tmp/avatar\_'} . $user->getKey() . \textcolor{charliteral}{'\_'} . uniqid();
-140         
-141         FileHelper::put($dst, base64\_decode($source));
-142         
-143         $validImage = \textcolor{keyword}{true};
-144         \textcolor{keywordflow}{try}\{
-145             \textcolor{comment}{// Validated is a JPG or PNG}
-146             $imageType = exif\_imagetype($dst);
-147             $validImage = in\_array($imageType, [IMAGETYPE\_JPEG, IMAGETYPE\_PNG]);
-148             \textcolor{comment}{// Validated is not bigger that xx by xx}
-149             \textcolor{keywordflow}{if}($validImage)\{
-150                 list($width, $height, $type, $attr) = getimagesize($dst);
-151                 $validImage = ($width <= 400 && $height <= 400);
-152             \}
-153             \textcolor{comment}{// Add right file extension to the upload file}
+143     \{
+144         $dst = \textcolor{stringliteral}{'/tmp/avatar\_'} . $user->getKey() . \textcolor{charliteral}{'\_'} . uniqid();
+145         
+146         FileHelper::put($dst, base64\_decode($source));
+147         
+148         $validImage = \textcolor{keyword}{true};
+149         \textcolor{keywordflow}{try}\{
+150             \textcolor{comment}{// Validated is a JPG or PNG}
+151             $imageType = exif\_imagetype($dst);
+152             $validImage = in\_array($imageType, [IMAGETYPE\_JPEG, IMAGETYPE\_PNG, IMAGETYPE\_GIF]);
+153             \textcolor{comment}{// Validated is not bigger that xx by xx}
 154             \textcolor{keywordflow}{if}($validImage)\{
-155                 $extension = [ IMAGETYPE\_JPEG => \textcolor{stringliteral}{'jpg'}, IMAGETYPE\_PNG => \textcolor{stringliteral}{'png'}][$imageType];
-156                 $newDst = $dst . \textcolor{charliteral}{'.'} . $extension;
-157                 rename($dst, $newDst);
-158                 $dst = $newDst;
-159             \}
-160         \} \textcolor{keywordflow}{catch}(\(\backslash\)\hyperlink{namespaceException}{Exception} $e)\{
-161             \textcolor{comment}{//throw $e;}
-162             $validImage = \textcolor{keyword}{false};
-163         \}
-164         
-165         \textcolor{keywordflow}{if}(!$validImage)\{
-166             \textcolor{keywordflow}{throw} new \(\backslash\)Exception(\textcolor{stringliteral}{'Must be a valid JPG, or PNG. And not bigger that 400x400 pixels.'});
-167         \}
-168   
-169         
-170         $file = \textcolor{keyword}{new} \hyperlink{namespaceFile}{File};
-171         $file->data = $dst;
-172         $file->is\_public = \textcolor{keyword}{true};
-173         $file->save();
-174     
-175         \textcolor{keywordflow}{if} ($file) \{
-176             $user->avatar()->add($file);
-177         \}
-178         
-179     \}
+155                 \textcolor{comment}{// Test if image is corrupted if OctoberCMS Resizer can open it}
+156                 \textcolor{comment}{// is more likely the image is ok}
+157                 Resizer::open($dst);
+158                 
+159                 \textcolor{comment}{// Test image dimensions}
+160                 list($width, $height, $type, $attr) = getimagesize($dst);
+161                 $validImage = ($width <= 400 && $height <= 400);
+162 
+163             \}
+164             \textcolor{comment}{// Add right file extension to the upload file}
+165             \textcolor{keywordflow}{if}($validImage)\{
+166                 
+167                 \textcolor{comment}{// Save image with correct image extension}
+168                 $extension = [ IMAGETYPE\_JPEG => \textcolor{stringliteral}{'jpg'}, IMAGETYPE\_PNG => \textcolor{stringliteral}{'png'}, IMAGETYPE\_GIF => \textcolor{stringliteral}{'gif'}][
+      $imageType];
+169                 $newDst = $dst . \textcolor{charliteral}{'.'} . $extension;
+170                 rename($dst, $newDst);
+171                 $dst = $newDst;
+172                 
+173             \}
+174         \} \textcolor{keywordflow}{catch}(\(\backslash\)\hyperlink{namespaceException}{Exception} $e)\{
+175             $validImage = \textcolor{keyword}{false};
+176         \}
+177         
+178         \textcolor{keywordflow}{if}(!$validImage)\{
+179             \textcolor{keywordflow}{throw} new \(\backslash\)Exception(\textcolor{stringliteral}{'Must be a valid JPG, GIF or PNG. And not bigger that 400x400 pixels.'});
+180         \}
+181 
+182         $file = \textcolor{keyword}{new} \hyperlink{namespaceFile}{File};
+183         $file->data = $dst;
+184         $file->is\_public = \textcolor{keyword}{true};
+185         $file->save();
+186     
+187         \textcolor{keywordflow}{if} ($file) \{
+188             $user->avatar()->add($file);
+189         \}
+190         
+191     \}
 \end{DoxyCode}
 
 

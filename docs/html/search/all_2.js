@@ -32,6 +32,7 @@ var searchData=
   ['adduser',['addUser',['../d2/daf/classDMA_1_1Friends_1_1Models_1_1UserGroup.html#a13eaffc2b414fe5dfd42aa6ac5fe75ca',1,'DMA::Friends::Models::UserGroup']]],
   ['adduseractivity',['addUserActivity',['../de/d4f/classDMA_1_1Friends_1_1Models_1_1ActivityMetadata.html#ae65caa4e45de84ab2518f465d328fc24',1,'DMA::Friends::Models::ActivityMetadata']]],
   ['addviewsettings',['addViewSettings',['../d2/d68/classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1NotificationMessage.html#a10b64f976c368ca55e03b0b81c45432b',1,'DMA::Friends::Classes::Notifications::NotificationMessage']]],
+  ['ajax',['Ajax',['../d0/d19/classDMA_1_1Friends_1_1Controllers_1_1Ajax.html',1,'DMA::Friends::Controllers']]],
   ['apimanager',['APIManager',['../dc/d56/classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager.html',1,'DMA::Friends::Classes::API']]],
   ['applyactivitytobadges',['applyActivityToBadges',['../df/d1f/classDMA_1_1Friends_1_1Classes_1_1BadgeManager.html#aecab9f0ae063c6bd484857abda4252bd',1,'DMA::Friends::Classes::BadgeManager']]],
   ['applyfilters',['applyFilters',['../d3/d5d/classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource.html#add571e6be47126c2bee474f570c566ab',1,'DMA\Friends\API\Resources\ActivityMetadataResource\applyFilters()'],['../dc/d47/classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseResource.html#a98884c60fd1cd6a4b22b6b549c97e1e1',1,'DMA\Friends\Classes\API\BaseResource\applyFilters()']]],

@@ -5,7 +5,7 @@
 %%For: 
 %Magnification: 1.00
 %%Orientation: Portrait
-%%BoundingBox: 0 0 500 386.904762
+%%BoundingBox: 0 0 500 416.666667
 %%Pages: 0
 %%BeginSetup
 %%EndSetup
@@ -19,12 +19,12 @@
 /marginwidth 10 def
 /distx 20 def
 /disty 40 def
-/boundaspect 1.292308 def  % aspect ratio of the BoundingBox (width/height)
+/boundaspect 1.200000 def  % aspect ratio of the BoundingBox (width/height)
 /boundx 500 def
 /boundy boundx boundaspect div def
 /xspacing 0 def
 /yspacing 0 def
-/rows 13 def
+/rows 14 def
 /cols 2 def
 /scalefactor 0 def
 /boxfont /Times-Roman findfont fontheight scalefont def
@@ -182,6 +182,7 @@ boxfont setfont
 (DMA\Friends\API\Resources\CategoryResource) cw
 (DMA\Friends\API\Resources\CountryResource) cw
 (DMA\Friends\API\Resources\LocationResource) cw
+(DMA\Friends\API\Resources\RatingResource) cw
 (DMA\Friends\API\Resources\RewardResource) cw
 (DMA\Friends\API\Resources\StateResource) cw
 (DMA\Friends\API\Resources\StepResource) cw
@@ -197,15 +198,16 @@ boundx scalefactor div boundy scalefactor div scale
 
 % ----- classes -----
 
- (DMA\Friends\Classes\API\BaseResource) 0.000000 11.000000 box
- (Controller) 0.000000 12.000000 box
- (DMA\Friends\API\Resources\ActivityLogResource) 1.000000 10.000000 box
- (DMA\Friends\API\Resources\ActivityMetadataResource) 1.000000 9.000000 box
- (DMA\Friends\API\Resources\ActivityResource) 1.000000 8.000000 box
- (DMA\Friends\API\Resources\BadgeResource) 1.000000 7.000000 box
- (DMA\Friends\API\Resources\CategoryResource) 1.000000 6.000000 box
- (DMA\Friends\API\Resources\CountryResource) 1.000000 5.000000 box
- (DMA\Friends\API\Resources\LocationResource) 1.000000 4.000000 box
+ (DMA\Friends\Classes\API\BaseResource) 0.000000 12.000000 box
+ (Controller) 0.000000 13.000000 box
+ (DMA\Friends\API\Resources\ActivityLogResource) 1.000000 11.000000 box
+ (DMA\Friends\API\Resources\ActivityMetadataResource) 1.000000 10.000000 box
+ (DMA\Friends\API\Resources\ActivityResource) 1.000000 9.000000 box
+ (DMA\Friends\API\Resources\BadgeResource) 1.000000 8.000000 box
+ (DMA\Friends\API\Resources\CategoryResource) 1.000000 7.000000 box
+ (DMA\Friends\API\Resources\CountryResource) 1.000000 6.000000 box
+ (DMA\Friends\API\Resources\LocationResource) 1.000000 5.000000 box
+ (DMA\Friends\API\Resources\RatingResource) 1.000000 4.000000 box
  (DMA\Friends\API\Resources\RewardResource) 1.000000 3.000000 box
  (DMA\Friends\API\Resources\StateResource) 1.000000 2.000000 box
  (DMA\Friends\API\Resources\StepResource) 1.000000 1.000000 box
@@ -214,11 +216,13 @@ boundx scalefactor div boundy scalefactor div scale
 % ----- relations -----
 
 solid
-0 0.000000 11.000000 out
+0 0.000000 12.000000 out
 solid
-1 0.000000 12.000000 in
+1 0.000000 13.000000 in
 solid
-1 0.000000 10.250000 out
+1 0.000000 11.250000 out
+solid
+0 0.000000 11.500000 hedge
 solid
 0 0.000000 10.500000 hedge
 solid
@@ -242,4 +246,4 @@ solid
 solid
 0 0.000000 0.500000 hedge
 solid
-0.000000 11.000000 0.500000 vedge
+0.000000 12.000000 0.500000 vedge
