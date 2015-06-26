@@ -158,7 +158,7 @@ class ActivityTransformer extends BaseTransformer {
      */
     public function includeCategories(Model $instance)
     {
-        return $this->collection($instance->categories, new CategoryTransformer);
+        return $this->collection($instance->categories, new CategoryTransformer(false));
     }
     
     

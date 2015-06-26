@@ -1,10 +1,10 @@
 <?php namespace DMA\Friends\Classes\API;
 
+use Log;
 use Model;
 use Response;
 use League\Fractal\TransformerAbstract;
 use League\Fractal\Scope;
-use MyProject\Proxies\__CG__\OtherProject\Proxies\__CG__\stdClass;
 
 
 class BaseTransformer extends TransformerAbstract
@@ -42,24 +42,34 @@ class BaseTransformer extends TransformerAbstract
      */
     public function transform($instance)
     {
-        if(!is_null($instance)) {
-            $data = $this->getData($instance);
-            if($this->useExtendedData) {
-                $extended = $this->getExtendedData($instance);
-                if(is_array($extended)) {
-                    $data = array_merge($data, $extended);
+        try{
+            if(!is_null($instance)) {
+                $data = $this->getData($instance);
+                if($this->useExtendedData) {
+                    $extended = $this->getExtendedData($instance);
+                    if(is_array($extended)) {
+                        $data = array_merge($data, $extended);
+                    }
                 }
+                
+                // Remove exclude embeds 
+                $includes = array_diff($this->getDefaultIncludes(), $this->excludeEmbededs);
+                $includes = array_unique($includes);
+                
+                $this->setDefaultIncludes( $includes);
+                
+                return $data;
             }
+            return [];
+        }catch( Exception $e){
+            // Send exception to log
+            Log::error( get_class($this) . ' : ' .  $e->getMessage());
+            Log::error($e->getTraceAsString());
             
-            // Remove exclude embeds 
-            $includes = array_diff($this->getDefaultIncludes(), $this->excludeEmbededs);
-            $includes = array_unique($includes);
+            // Re-throw exception
+            throw $e;
             
-            $this->setDefaultIncludes( $includes);
-            
-            return $data;
         }
-        return [];
     }
 
     /**

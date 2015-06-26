@@ -203,6 +203,9 @@ class BaseResource extends Controller {
             // Paginate result
             return $this->paginateResult($query);
         } catch(\Exception $e) {
+            // Send exception to log
+            Log::error($e->getMessage());
+            Log::error($e->getTraceAsString());
             
             $message = $e->getMessage();
             return Response::api()->errorInternalError($message);
@@ -244,7 +247,11 @@ class BaseResource extends Controller {
         }catch(ModelNotFoundException $e) {
             return Response::api()->errorNotFound();
         }catch(Exception $e){
-            return Response::api()->errorInternalError();
+            // Send exception to log
+            Log::error($e->getMessage());
+            Log::error($e->getTraceAsString());
+            
+            return Response::api()->errorInternalError($e->getMessage());
         }
     }
 

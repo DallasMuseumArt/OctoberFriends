@@ -21,5 +21,5 @@ class CategoryTransformer extends BaseTransformer {
         return $data;
     }
 
-    
+   
 }

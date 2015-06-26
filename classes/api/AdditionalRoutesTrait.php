@@ -1,6 +1,8 @@
 <?php namespace DMA\Friends\Classes\API;
 
 use Response;
+use Exception;
+use Log;
 
 trait AdditionalRoutesTrait
 {
@@ -53,7 +55,11 @@ trait AdditionalRoutesTrait
     {
         try{
             return parent::callAction($method, $parameters);
-        } catch(\Exception $e) {
+        } catch(Exception $e) {
+            // Send exception to log 
+            Log::error($e->getMessage());
+            Log::error($e->getTraceAsString());
+            
             $message = $e->getMessage();
             return Response::api()->errorInternalError($message);
         }

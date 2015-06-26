@@ -28,93 +28,88 @@ class ActivityResource extends BaseResource {
 
     public function checkin($user, $code=null)
     {
-        try{
-            $user = User::find($user);
-            if (!is_null($user)){
-                
-                // Check if code is given in the URL  or is part of the body request
-                if ( is_null($code) ){
-                    // Check if code is in the body of the request
-                    $data = Request::all();
-                    $code = array_get($data, 'code');
-                }
-                
-                if ( is_null($code) ){
-                    $message = "'code' argument is required";
-                    return Response::api()->errorWrongArgs($message);
-                }
-                
-                // Process activity code
-                $response  = $this->processActivityCode($user, $code);
-                $payload = [];
-                
-                $httpCode = array_get($response, 'http_code');
-                $payload['data'] = array_get($response, 'payload');
-                
 
-                // Get user info
-                $payload['data']['user'] = $this->getUserInfo($user);
-                
-                return Response::api()->setStatusCode($httpCode)->withArray($payload);
-
+        $user = User::find($user);
+        if (!is_null($user)){
+            
+            // Check if code is given in the URL  or is part of the body request
+            if ( is_null($code) ){
+                // Check if code is in the body of the request
+                $data = Request::all();
+                $code = array_get($data, 'code');
             }
             
-            return Response::api()->errorNotFound('User not found');
-        } catch(Exception $e) {
-            return Response::api()->errorInternalError($e->getMessage());   
+            if ( is_null($code) ){
+                $message = "'code' argument is required";
+                return Response::api()->errorWrongArgs($message);
+            }
+            
+            // Process activity code
+            $response  = $this->processActivityCode($user, $code);
+            $payload = [];
+            
+            $httpCode = array_get($response, 'http_code');
+            $payload['data'] = array_get($response, 'payload');
+            
+
+            // Get user info
+            $payload['data']['user'] = $this->getUserInfo($user);
+            
+            return Response::api()->setStatusCode($httpCode)->withArray($payload);
+
         }
+        
+        return Response::api()->errorNotFound('User not found');
+
     }
 
     public function bulkCheckins($user, $codes=null)
     {
-        //$data = Request::all();
-        try{
-            $user = User::find($user);
-            if (!is_null($user)){
 
-                // Check if codes are given in the URL or are part of the body request
-                if (is_null($codes)){
-                    // Check if codes are in the body of the request
-                    $data = Request::all();
-                    $codes = array_get($data, 'codes');
-                }
+        $user = User::find($user);
+        if (!is_null($user)){
 
-                if ( is_null($codes) ){
-                    $message = "'codes' argument is required";
-                    return Response::api()->errorWrongArgs($message);
-                }
-                
-                
-                // Convert into array if necessary
-                if (is_string($codes)){
-                    $codes = explode(',',$codes);
-                }
-                
-                
-                $payload = [];
-                foreach ($codes as $code){
-                    // Process activity code
-                    $code      = trim($code); 
-                    $response  = $this->processActivityCode($user, $code);
-    
-                    $httpCode = array_get($response, 'http_code');
-                    $activity = array_get($response, 'payload');
-                    
-                    $payload['data']['checkins'][] = array_merge(['http_code' => $httpCode] , $activity);;
-                }        
-        
-                // Get user info
-                $payload['data']['user'] = $this->getUserInfo($user);
-                 
-                $httpCode = 200;
-                return Response::api()->setStatusCode($httpCode)->withArray($payload);
-        
+            // Check if codes are given in the URL or are part of the body request
+            if (is_null($codes)){
+                // Check if codes are in the body of the request
+                $data = Request::all();
+                $codes = array_get($data, 'codes');
             }
-        
-            return Response::api()->errorNotFound('User not found');
-        } catch(Exception $e) {
-            return Response::api()->errorInternalError($e->getMessage());
-        }        
+
+            if ( is_null($codes) ){
+                $message = "'codes' argument is required";
+                return Response::api()->errorWrongArgs($message);
+            }
+            
+            
+            // Convert into array if necessary
+            if (is_string($codes)){
+                $codes = explode(',',$codes);
+            }
+            
+            
+            $payload = [];
+            foreach ($codes as $code){
+                // Process activity code
+                $code      = trim($code); 
+                $response  = $this->processActivityCode($user, $code);
+
+                $httpCode = array_get($response, 'http_code');
+                $activity = array_get($response, 'payload');
+                
+                $payload['data']['checkins'][] = array_merge(['http_code' => $httpCode] , $activity);;
+            }        
+    
+            // Get user info
+            $payload['data']['user'] = $this->getUserInfo($user);
+             
+            $httpCode = 200;
+            return Response::api()->setStatusCode($httpCode)->withArray($payload);
+    
+        }
+    
+        return Response::api()->errorNotFound('User not found');
+       
     }
     
     /**

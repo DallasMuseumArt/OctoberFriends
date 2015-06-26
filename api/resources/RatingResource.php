@@ -59,28 +59,22 @@ class RatingResource extends BaseResource {
     public function ratingsByObject($objectType, $objectId)
     {
          if($instance = $this->getObject($objectType, $objectId)){
-             try {
-
-                 $pageSize  = $this->getPageSize();
-                 $paginator = $instance->getRates()->paginate($pageSize);
-                 $meta      = [
-                         'rating' => array_merge(
-                                 $instance->getRatingStats(),
-                                 [
-                                         'object_type' => $objectType,
-                                         'object_id'   => intval($objectId)
-                                 ]
-                         )
-                 ];
-                 
-                 $transformer = new \DMA\Friends\API\Transformers\RateTransformer;
-                 return Response::api()->withPaginator($paginator, $transformer, null, $meta);
-
-             } catch(\Exception $e) {
              
-                 $message = $e->getMessage();
-                 return Response::api()->errorInternalError($message);
-             }
+             $pageSize  = $this->getPageSize();
+             $paginator = $instance->getRates()->paginate($pageSize);
+             $meta      = [
+                     'rating' => array_merge(
+                             $instance->getRatingStats(),
+                             [
+                                     'object_type' => $objectType,
+                                     'object_id'   => intval($objectId)
+                             ]
+                     )
+             ];
+             
+             $transformer = new \DMA\Friends\API\Transformers\RateTransformer;
+             return Response::api()->withPaginator($paginator, $transformer, null, $meta);
+             
          } else {
             return Response::api()->errorNotFound("$objectType not found");
          }
@@ -89,55 +83,52 @@ class RatingResource extends BaseResource {
     public function addObjectRating($objectType, $objectId, $user, $rateValue, $comment = null)
     {
 
-        try{
-            if($user = User::find($user)){
+        if($user = User::find($user)){
 
-                if($instance = $this->getObject($objectType, $objectId)){
+            if($instance = $this->getObject($objectType, $objectId)){
 
-                    list($success, $rating) = $instance->addRating($user, $rateValue, $comment);
-                    
-                    // Get common user points format via UserProfileTransformer
-                    $userTransformer = new UserProfileTransformer();
-                    $points = $userTransformer->getUserPoints($user);
+                list($success, $rating) = $instance->addRating($user, $rateValue, $comment);
+                
+                // Get common user points format via UserProfileTransformer
+                $userTransformer = new UserProfileTransformer();
+                $points = $userTransformer->getUserPoints($user);
 
-                    $payload = [
-                            'data' => [
-                                    'success' => $success,
-                                    'message' => "$objectType has been rate succesfully.",
-                                    'user' => [
-                                            'id'      => $user->getKey(),
-                                            'points'  => $points
-                                    ],
-                                    'rating' => array_merge(
-                                        $instance->getRatingStats(),
-                                        [
-                                            'object_type' => $objectType,
-                                            'object_id'   => intVal($objectId)
-                                        ]
-                                     )
-                            ]
-                    ];
-                    
-                    
-                    $httpCode = 201;
-                    
-                    if( !$success ) {
-                        $httpCode = 200;
-                        $payload['data']['message'] = "User has already rate this $objectType";
-                    }
-                    
-                    return Response::api()->setStatusCode($httpCode)->withArray($payload);
-
-                } else {
-                    return Response::api()->errorNotFound("$object not found");
+                $payload = [
+                        'data' => [
+                                'success' => $success,
+                                'message' => "$objectType has been rate succesfully.",
+                                'user' => [
+                                        'id'      => $user->getKey(),
+                                        'points'  => $points
+                                ],
+                                'rating' => array_merge(
+                                    $instance->getRatingStats(),
+                                    [
+                                        'object_type' => $objectType,
+                                        'object_id'   => intVal($objectId)
+                                    ]
+                                 )
+                        ]
+                ];
+                
+                
+                $httpCode = 201;
+                
+                if( !$success ) {
+                    $httpCode = 200;
+                    $payload['data']['message'] = "User has already rate this $objectType";
                 }
+                
+                return Response::api()->setStatusCode($httpCode)->withArray($payload);
 
-            }else{
-                return Response::api()->errorNotFound('User not found');
+            } else {
+                return Response::api()->errorNotFound("$object not found");
             }
-        } catch(\Exception $e) {
-            return Response::api()->errorInternalError($e->getMessage());
+
+        }else{
+            return Response::api()->errorNotFound('User not found');
         }
+
          
         
     }

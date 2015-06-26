@@ -24,54 +24,49 @@ class RewardResource extends BaseResource {
     
     public function redeem($rewardId, $userId)
     {
-        try{
-            
-            if(is_null($user = User::find($userId))){
-                return Response::api()->errorNotFound('User not found');
-            }
-            
-            if(is_null($reward = Reward::find($rewardId))){
-                return Response::api()->errorNotFound('Reward not found');
-            }
-            
-            RewardManager::redeem($rewardId, $user);
-            
-            // Check if redeem was successful 
-            $message = Session::pull('rewardMessage');
-            $type    = ($message) ? 'info' : 'error'; 
-            
-            $success = true;
-            $httpCode = 201;
-            
-            
-            if($type == 'error'){
-                $success = false;
-                $httpCode = 200;
-                $message = Session::pull('rewardError');
-            }
-            
-            
-            // Get common user points format via UserProfileTransformer
-            $userTransformer = new UserProfileTransformer();
-            $points = $userTransformer->getUserPoints($user);
-    
-            $payload = [
-                    'data' => [
-                            'success' => $success,
-                            'message' => $message,
-                            'user' => [
-                                'id'      => $user->getKey(),
-                                'points'  => $points
-                            ]
-                    ]
-            ];
-            
-            return Response::api()->setStatusCode($httpCode)->withArray($payload);
-            
-             
-        } catch(Exception $e) {
-            return Response::api()->errorInternalError($e->getMessage());
+
+        if(is_null($user = User::find($userId))){
+            return Response::api()->errorNotFound('User not found');
         }
+        
+        if(is_null($reward = Reward::find($rewardId))){
+            return Response::api()->errorNotFound('Reward not found');
+        }
+        
+        RewardManager::redeem($rewardId, $user);
+        
+        // Check if redeem was successful 
+        $message = Session::pull('rewardMessage');
+        $type    = ($message) ? 'info' : 'error'; 
+        
+        $success = true;
+        $httpCode = 201;
+        
+        
+        if($type == 'error'){
+            $success = false;
+            $httpCode = 200;
+            $message = Session::pull('rewardError');
+        }
+        
+        
+        // Get common user points format via UserProfileTransformer
+        $userTransformer = new UserProfileTransformer();
+        $points = $userTransformer->getUserPoints($user);
+
+        $payload = [
+                'data' => [
+                        'success' => $success,
+                        'message' => $message,
+                        'user' => [
+                            'id'      => $user->getKey(),
+                            'points'  => $points
+                        ]
+                ]
+        ];
+        
+        return Response::api()->setStatusCode($httpCode)->withArray($payload);
+
     }
     
     
