@@ -79,6 +79,16 @@ secondaryTabs:
             type: number
             required: true
             default: 0
+        special:
+            label: Special Badge
+            commentAbove: Provide a label if the badge is special
+            span: right
+            tab: Configuration 
+            type: dropdown
+            options:
+                no: None
+                featured: Featured
+                limited_edition: Limited Edition
         maximum_earnings:
             label: Maximum earnings per user
             commentAbove: The number of times an individual can earn this badge
@@ -91,15 +101,6 @@ secondaryTabs:
             span: right
             tab: Configuration
             type: number
-        special:
-            label: Special Badge:
-            span: right
-            tab: Configuration 
-            type: dropdown
-            options:
-                no: None
-                featured: Featured
-                limited_edition: Limited Edition
         # is_sequential:
         #     label: Sequential Steps
         #     commentAbove: If checked, steps must be created in sequentual order
