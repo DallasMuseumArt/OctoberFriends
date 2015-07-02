@@ -33,20 +33,20 @@ secondaryTabs:
             imageWidth: 500 
         excerpt:
             label: Excerpt
-            description: a short amount of text about this badge.  This will be displayed in badge listings
+            commentAbove: a short amount of text about this badge.  This will be displayed in badge listings
             tab: Content
             span: left
             type: richeditor
             size: huge
         complete_message:
             label: Custom Activity Complete Message 
-            description: a custom message to apply when an activity is completed
+            commentAbove: a custom message to apply when an activity is completed
             tab: Content
             span: left
             type: richeditor
         feedback_message:
             label: Custom Feedback Message
-            description: override the default feedback message
+            commentAbove: override the default feedback message
             tab: Content
             span: right
             type: richeditor
@@ -77,7 +77,7 @@ secondaryTabs:
         # ===================================
         points:
             label: Points Awarded
-            description: The number of points awarded for completing the activity
+            commentAbove: The number of points awarded for completing the activity
             tab: Configuration
             span: left
             type: number
@@ -85,7 +85,7 @@ secondaryTabs:
             default: 0
         activity_lockout:
             label: Check-in Lockout (minutes)
-            description: Allow only check-in with same activity code once per X minutes.
+            commentAbove: Allow only check-in with same activity code once per X minutes.
             tab: Configuration
             type: number
             span: right
@@ -115,7 +115,7 @@ secondaryTabs:
                 data-trigger-condition: value[1]
         date_begin:
             label: Beginning Date
-            description: If set, Reward can only be redeemed after this date.
+            commentAbove: If set, Reward can only be redeemed after this date.
             tab: Publishing Options 
             required: true
             span: left
@@ -127,7 +127,7 @@ secondaryTabs:
                 data-trigger-condition: value[2]
         date_end:
             label: Ending Date
-            description: If set, Reward can only be redeemed before this date.
+            commentAbove: If set, Reward can only be redeemed before this date.
             tab: Publishing Options 
             required: true
             span: right 
