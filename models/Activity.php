@@ -48,8 +48,9 @@ class Activity extends Model
     protected $dates = ['date_begin', 'date_end'];
 
     public $rules = [ 
-        'title'         => 'required',
-        'activity_code' => 'unique:dma_friends_activities',
+        'title'             => 'required',
+        'activity_code'     => 'unique:dma_friends_activities',
+        'complete_message'  => 'max:159'
     ]; 
 
     /**
