@@ -43,13 +43,13 @@ secondaryTabs:
             commentAbove: a custom message to apply when an activity is completed
             tab: Content
             span: left
-            type: richeditor
+            type: textarea
         feedback_message:
             label: Custom Feedback Message
             commentAbove: override the default feedback message
             tab: Content
             span: right
-            type: richeditor
+            type: textarea
         # ===================================
         #  Categories tab 
         # ===================================
