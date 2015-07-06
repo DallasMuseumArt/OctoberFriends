@@ -73,8 +73,8 @@ class UserTimeout extends ComponentBase
 
     public function addAssets()
     {
-        $this->addJs('/modules/system/assets/vendor/bootstrap/js/modal.js');
-        $this->addJs('/modules/backend/assets/js/october.popup.js');
+        $this->addJs('/modules/system/assets/ui/vendor/bootstrap/js/modal.js');
+        $this->addJs('/modules/system/assets/ui/js/popup.js');
         $this->addJs('components/usertimeout/assets/user-timeout.js');
         $this->addCss('components/usertimeout/assets/user-timeout.css');
     }

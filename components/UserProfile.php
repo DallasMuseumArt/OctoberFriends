@@ -185,8 +185,8 @@ class UserProfile extends ComponentBase
      */
     public function addAssets()
     {
-        $this->addJs('/modules/system/assets/vendor/bootstrap/js/modal.js');
-        $this->addJs('/modules/backend/assets/js/october.popup.js');
+        $this->addJs('/modules/system/assets/ui/vendor/bootstrap/js/modal.js');
+        $this->addJs('/modules/system/assets/ui/js/popup.js');
     }
 
     /**
