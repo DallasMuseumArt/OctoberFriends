@@ -61,6 +61,10 @@ class APIManager
      */
     public function getRoutes($includeNamespaces=false)
     {
+        // API Documentation
+        // Document API using Swagger-PHP notation. The following router is for swagger-ui
+        $this->addRouteApiDocs();
+        
         foreach($this->getResources() as $url => $class){
             try{
                 $resource = App::make($class);
@@ -94,9 +98,25 @@ class APIManager
             return Response::api()->errorNotFound(); 
         })->where('all', '.+');
         
-
     }
     
+    protected function addRouteApiDocs(){
+
+        // API Docs
+        Route::get('docs', 'DMA\Friends\Classes\API\APIDocsController@swaggerDocs');
+        
+        /*
+        $app->after(function ($request, $response) use($app)
+        {
+            // Update asset URLs for October
+            $content = $response->getContent();
+            $content = $this->updateAssetUrls($content);
+            $response->setContent($content);
+        });
+        */
+    }
+    
+      
     
     /**
      * Loads registered FriendAPI resources from modules and plugins
