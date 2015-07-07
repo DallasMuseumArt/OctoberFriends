@@ -4,20 +4,32 @@
 
 users:
     label: Users
-    list: ~/plugins/dma/friends/controllers/groups/user_columns.yaml
+    #list: $/rainlab/user/models/user/columns.yaml
+    view:
+        list: $/dma/friends/controllers/groups/user_columns.yaml
+        toolbarButtons: add|delete
     manage:
+        list: $/dma/friends/controllers/groups/user_columns.yaml
+        form: $/dma/friends/controllers/groups/membership_fields.yaml   
         recordsPerPage: 10
-        showSearch: true    
+        showSorting: false
         
-    # pivot:
-    #     fields:
-    #         membership_status:
-    #             label: Membership status
-    #             type: dropdown
-    #             options:
-    #                 PENDING   : PENDING
-    #                 ACCEPTED  : ACCEPTED
-    #                 REJECTED  : REJECTED
-    #                 CANCELLED : CANCELLED
-                
+    pivot:
+        form:
+            fields:
+                pivot[membership_status]:
+                    label: Membership status
+                    type: dropdown
+                    options:
+                        PENDING   : PENDING
+                        ACCEPTED  : ACCEPTED
+                        REJECTED  : REJECTED
+                        CANCELLED : CANCELLED
+
         
+# steps:
+#     label: Steps
+#     list: ~/plugins/dma/friends/models/step/columns.yaml
+#     form: ~/plugins/dma/friends/models/step/fields.yaml
+#     defaultSort: title
+#     showSorting: false

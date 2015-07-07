@@ -6,21 +6,22 @@ fields:
     is_active:
         label: Group is active
         type: checkbox
-        default: True        
+        default: True
+                
     owner:
         label: Owner / Creator of the group
         type: recordfinder
-        list:  ~/plugins/rainlab/user/models/user/columns.yaml
+        list:  $/rainlab/user/models/user/columns.yaml
         prompt: Click the %s button to find an Owner / Creator group
-        valueFrom: name
-        descriptionFrom: name
+        nameFrom: name
+        descriptionFrom: email
         span: left
-        placeholder: -- select owner --  
-
+        placeholder: -- select owner -- 
+            
     code:
         label: Code for join this group
         type: partial
-        path: ~/plugins/dma/friends/models/usergroup/_code_field.htm
+        path: $/dma/friends/models/usergroup/_code_field.htm
         span: right
 
     name:
