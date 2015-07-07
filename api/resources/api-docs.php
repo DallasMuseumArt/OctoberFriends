@@ -41,6 +41,28 @@
  *     )
  *     
  *     @SWG\Definition(
+ *         definition="UserError404",
+ *         required={"code", "http_code", "message"},
+ *         @SWG\Property(
+ *             property="code",
+ *             type="string",
+ *             default="GEN-NOT-FOUND"
+ *         ),
+ *         @SWG\Property(
+ *             property="http_code",
+ *             type="integer",
+ *             format="int32",
+ *             default=404
+ *         ),
+ *         @SWG\Property(
+ *             property="message",
+ *             type="string",
+ *             default="User not found"
+ *         )
+ *     )
+ *     
+ *     
+ *     @SWG\Definition(
  *         definition="error500",
  *         required={"code", "http_code", "message"},
  *         @SWG\Property(

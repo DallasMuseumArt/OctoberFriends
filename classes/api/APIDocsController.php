@@ -1,28 +1,17 @@
 <?php namespace DMA\Friends\Classes\API;
 
+use View;
+use Response;
 use Illuminate\Routing\Controller;
 
 
 class APIDocsController extends Controller {
     
-    public function swaggerDocs()
+    public function index()
     {
-        return 'now';
+        // Temporal solution
+        $content = View::make('dma.friends::api-docs', [])->render();
+        return Response::make($content, 200);
+    }
         
-    }
-    
-    
-    protected function addRouteApiDocs(){
-
-        /*
-        $app->after(function ($request, $response) use($app)
-        {
-            // Update asset URLs for October
-            $content = $response->getContent();
-            $content = $this->updateAssetUrls($content);
-            $response->setContent($content);
-        });
-        */
-    }
-    
 }

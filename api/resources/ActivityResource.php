@@ -26,7 +26,99 @@ class ActivityResource extends BaseResource {
         $this->addAdditionalRoute('bulkCheckins',  'bulk-checkin/{user}/{codes}', ['GET']);
     }
 
-
+  
+    /**
+     * @SWG\Definition(
+     *     definition="request.checkin",
+     *     type="object",
+     *     required={"code"},
+     *     @SWG\Property(
+     *         property="code",
+     *         type="string"
+     *     )
+     * )
+     * 
+     * @SWG\Post(
+     *     path="activities/checkin/{user}",
+     *     description="Checking user activities",
+     *     tags={ "activity"},
+     *
+     *     @SWG\Parameter(
+     *         description="ID of the user checking the activity",
+     *         format="int64",
+     *         in="path",
+     *         name="user",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *
+     *     @SWG\Parameter(
+     *         description="Activity code or accessioned number",
+     *         in="body",
+     *         required=true,
+     *         schema=@SWG\Schema(ref="#/definitions/request.checkin")
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/activity.extended", type="array")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="User not found",
+     *         @SWG\Schema(ref="#/definitions/UserError404")
+     *    )
+     * )
+     */    
+    
+    /**
+     * @SWG\Get(
+     *     path="activities/checkin/{user}/{code}",
+     *     description="Checking user activities",
+     *     tags={ "activity"},
+     *
+     *     @SWG\Parameter(
+     *         description="ID of the user checking the activity",
+     *         format="int64",
+     *         in="path",
+     *         name="user",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *
+     *     @SWG\Parameter(
+     *         description="Activity code or accessioned number",
+     *         in="path",
+     *         name="code",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/activity.extended", type="array")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="User not found",
+     *         @SWG\Schema(ref="#/definitions/UserError404")
+     *    )
+     * )
+     */
+    
+    
     public function checkin($user, $code=null)
     {
 
@@ -139,6 +231,7 @@ class ActivityResource extends BaseResource {
         $holder = ( $activity ) ? 'activityMessage' : 'activityError';
         $message = Session::pull($holder);
         
+        
         if (is_array($message)) {
             $message = implode('\n', array_filter($message));
         }
@@ -147,8 +240,8 @@ class ActivityResource extends BaseResource {
             'success'           => ($activity) ? true : false,
             'activity_code'     => $code,
             'message'           => $message,
-            'feedback_message'  => $activity->feedback_message,
-            'complete_message'  => $activity->complete_message
+            'feedback_message'  => ( $activity ) ? $activity->feedback_message : null,
+            'complete_message'  => ( $activity ) ? $activity->complete_message : null
         ];
         
         $httpCode = 200;

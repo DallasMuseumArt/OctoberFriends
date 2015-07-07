@@ -30,6 +30,6 @@
         "hashids/hashids": "1.0.5",
         "giggsey/libphonenumber-for-php": "~7.0",
         "maatwebsite/excel": "~2.0",
-        "zircote/swagger-php": "2.*@dev"       
+        "zircote/swagger-php": "2.*"       
     }
 }

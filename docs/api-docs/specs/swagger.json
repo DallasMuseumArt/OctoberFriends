@@ -385,6 +385,99 @@
                 }
             }
         },
+        "activities/checkin/{user}": {
+            "post": {
+                "tags": [
+                    "activity"
+                ],
+                "description": "Checking user activities",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID of the user checking the activity",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "in": "body",
+                        "description": "Activity code or accessioned number",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.checkin"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "array",
+                            "$ref": "#/definitions/activity.extended"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "$ref": "#/definitions/UserError404"
+                        }
+                    }
+                }
+            }
+        },
+        "activities/checkin/{user}/{code}": {
+            "get": {
+                "tags": [
+                    "activity"
+                ],
+                "description": "Checking user activities",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID of the user checking the activity",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "code",
+                        "in": "path",
+                        "description": "Activity code or accessioned number",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "array",
+                            "$ref": "#/definitions/activity.extended"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "$ref": "#/definitions/UserError404"
+                        }
+                    }
+                }
+            }
+        },
         "activities": {
             "get": {
                 "tags": [
@@ -931,6 +1024,17 @@
         }
     },
     "definitions": {
+        "request.checkin": {
+            "required": [
+                "code"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "error404": {
             "required": [
                 "code",
@@ -950,6 +1054,28 @@
                 "message": {
                     "type": "string",
                     "default": "Resource Not Found"
+                }
+            }
+        },
+        "UserError404": {
+            "required": [
+                "code",
+                "http_code",
+                "message"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "default": "GEN-NOT-FOUND"
+                },
+                "http_code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "default": 404
+                },
+                "message": {
+                    "type": "string",
+                    "default": "User not found"
                 }
             }
         },
@@ -1294,20 +1420,16 @@
             ],
             "properties": {
                 "id": {
-                    "description": "Badge definition",
                     "type": "integer",
                     "format": "int32"
                 },
                 "name": {
-                    "description": "Badge definition",
                     "type": "string"
                 },
                 "code": {
-                    "description": "Badge definition",
                     "type": "string"
                 },
                 "is_enabled": {
-                    "description": "Badge definition",
                     "type": "boolean"
                 }
             }

@@ -103,17 +103,8 @@ class APIManager
     protected function addRouteApiDocs(){
 
         // API Docs
-        Route::get('docs', 'DMA\Friends\Classes\API\APIDocsController@swaggerDocs');
-        
-        /*
-        $app->after(function ($request, $response) use($app)
-        {
-            // Update asset URLs for October
-            $content = $response->getContent();
-            $content = $this->updateAssetUrls($content);
-            $response->setContent($content);
-        });
-        */
+        Route::get('docs', 'DMA\Friends\Classes\API\APIDocsController@index');
+
     }
     
       
