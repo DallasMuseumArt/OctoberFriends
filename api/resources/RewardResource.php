@@ -69,5 +69,69 @@ class RewardResource extends BaseResource {
 
     }
     
+
+    /**
+     * @SWG\Get(
+     *     path="rewards",
+     *     description="Returns all rewards",
+     *     tags={ "rewards"},
+     *
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/reward.extended", type="array")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Not Found",
+     *         @SWG\Schema(ref="#/definitions/error404")
+     *    )
+     * )
+     */
+    public function index()
+    {
+        return parent::index();
+    }
     
+    /**
+     * @SWG\Get(
+     *     path="rewards/{id}",
+     *     description="Returns a reward by id",
+     *     tags={ "rewards"},
+     *
+     *     @SWG\Parameter(
+     *         description="ID of reward to fetch",
+     *         format="int64",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/reward.extended")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Not Found",
+     *         @SWG\Schema(ref="#/definitions/error404")
+     *     )
+     * )
+     */
+    public function show($id)
+    {
+        return parent::show($id);
+    }
 }

@@ -1,0 +1,1578 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "DMA Friends",
+        "description": "A platform for users to earn badges and redeem rewards",
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "2.5.1"
+    },
+    "basePath": "/friends/api/",
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json",
+        "application/x-www-form-urlencoded"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "activity-logs/user/{user}": {
+            "get": {
+                "tags": [
+                    "activity"
+                ],
+                "description": "Returns all activity logs of a user",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID of user activity logs to fetch",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "array",
+                            "$ref": "#/definitions/activity.log"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "activity-logs/{types}": {
+            "get": {
+                "tags": [
+                    "activity"
+                ],
+                "description": "Returns all activity logs of a user",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/activity_log_types"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "array",
+                            "$ref": "#/definitions/activity.log"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "activity-logs/{types}/user/{user}": {
+            "get": {
+                "tags": [
+                    "activity"
+                ],
+                "description": "Returns all activity logs of a user",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/activity_log_types"
+                    },
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID of user activity medatadata to fetch",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "array",
+                            "$ref": "#/definitions/activity.log"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "activity-logs": {
+            "get": {
+                "tags": [
+                    "activity"
+                ],
+                "description": "Returns all activity logs",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "array",
+                            "$ref": "#/definitions/activity.log"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "activity-logs/{id}": {
+            "get": {
+                "tags": [
+                    "activity"
+                ],
+                "description": "Returns an activity logs by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of activity log to fetch",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/activity.log"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "activity-metadata/user/{user}": {
+            "get": {
+                "tags": [
+                    "activity"
+                ],
+                "description": "Returns all activity medatadata of a user",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID of user activity medatadata to fetch",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "array",
+                            "$ref": "#/definitions/activity.metadata"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "activity-metadata/{types}": {
+            "get": {
+                "tags": [
+                    "activity"
+                ],
+                "description": "Returns all activity medatadata of a user",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/activity_metadata_types"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "array",
+                            "$ref": "#/definitions/activity.metadata"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "activity-metadata/{types}/user/{user}": {
+            "get": {
+                "tags": [
+                    "activity"
+                ],
+                "description": "Returns all activity medatadata of a user",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/activity_metadata_types"
+                    },
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID of user activity medatadata to fetch",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "array",
+                            "$ref": "#/definitions/activity.metadata"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "activity-metadata": {
+            "get": {
+                "tags": [
+                    "activity"
+                ],
+                "description": "Returns all activity medatadata",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "array",
+                            "$ref": "#/definitions/activity.metadata"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "activity-metadata/{id}": {
+            "get": {
+                "tags": [
+                    "activity"
+                ],
+                "description": "Returns an activity metadata by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of activity metadata to fetch",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/activity.metadata"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "activities": {
+            "get": {
+                "tags": [
+                    "activity"
+                ],
+                "description": "Returns all activities",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "array",
+                            "$ref": "#/definitions/activity.extended"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "activities/{id}": {
+            "get": {
+                "tags": [
+                    "activity"
+                ],
+                "description": "Returns an activity by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of activity to fetch",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/activity.extended"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "badges": {
+            "get": {
+                "tags": [
+                    "badges"
+                ],
+                "description": "Returns all badges",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "array",
+                            "$ref": "#/definitions/badge"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "badges/{id}": {
+            "get": {
+                "tags": [
+                    "badges"
+                ],
+                "description": "Returns a badge by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of badge to fetch",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/badge"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "categories": {
+            "get": {
+                "tags": [
+                    "categories"
+                ],
+                "description": "Returns all categories",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "array",
+                            "$ref": "#/definitions/category"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "categories/{id}": {
+            "get": {
+                "tags": [
+                    "categories"
+                ],
+                "description": "Returns a category by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of category to fetch",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/category"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "countries": {
+            "get": {
+                "tags": [
+                    "countries"
+                ],
+                "description": "Returns all countries",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "array",
+                            "$ref": "#/definitions/country"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "countries/{id}": {
+            "get": {
+                "tags": [
+                    "countries"
+                ],
+                "description": "Returns a country by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of country to fetch",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/country"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "locations": {
+            "get": {
+                "tags": [
+                    "locations"
+                ],
+                "description": "Returns all locations",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "array",
+                            "$ref": "#/definitions/location"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "locations/{id}": {
+            "get": {
+                "tags": [
+                    "locations"
+                ],
+                "description": "Returns a location by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of location to fetch",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/location"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "rewards": {
+            "get": {
+                "tags": [
+                    "rewards"
+                ],
+                "description": "Returns all rewards",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "array",
+                            "$ref": "#/definitions/reward.extended"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "rewards/{id}": {
+            "get": {
+                "tags": [
+                    "rewards"
+                ],
+                "description": "Returns a reward by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of reward to fetch",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/reward.extended"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "countries/{id}/states": {
+            "get": {
+                "tags": [
+                    "countries"
+                ],
+                "description": "Returns all states of given country",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/country_id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "array",
+                            "$ref": "#/definitions/state"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "countires/{id}/states/{state_id}": {
+            "get": {
+                "tags": [
+                    "countries"
+                ],
+                "description": "Returns a state by id",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/country_id"
+                    },
+                    {
+                        "name": "state_id",
+                        "in": "path",
+                        "description": "ID of state to fetch",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/state"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "steps": {
+            "get": {
+                "tags": [
+                    "steps"
+                ],
+                "description": "Returns all activity steps",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "array",
+                            "$ref": "#/definitions/step"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "steps/{id}": {
+            "get": {
+                "tags": [
+                    "steps"
+                ],
+                "description": "Returns a step by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of step to fetch",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/step"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "error404": {
+            "required": [
+                "code",
+                "http_code",
+                "message"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "default": "GEN-NOT-FOUND"
+                },
+                "http_code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "default": 404
+                },
+                "message": {
+                    "type": "string",
+                    "default": "Resource Not Found"
+                }
+            }
+        },
+        "error500": {
+            "required": [
+                "code",
+                "http_code",
+                "message"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "default": "GEN-INTERNAL-ERROR"
+                },
+                "http_code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "default": 500
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "activity.log": {
+            "description": "Activity Log definition",
+            "required": [
+                "id",
+                "action",
+                "message",
+                "points_earned",
+                "total_points",
+                "object_type",
+                "timestamp"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "action": {
+                    "type": "string",
+                    "enum": [
+                        "activity",
+                        "artwork",
+                        "checkin",
+                        "points",
+                        "reward",
+                        "unlocked"
+                    ]
+                },
+                "message": {
+                    "type": "string"
+                },
+                "user": {
+                    "type": "object",
+                    "$ref": "#/definitions/user"
+                },
+                "points_earned": {
+                    "description": "User earned points",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "total_points": {
+                    "description": "User total points",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "object_type": {
+                    "description": "Classname and Namespace of the generic polymorphic relationship",
+                    "type": "string"
+                },
+                "timestamp": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "activity.metadata": {
+            "description": "Activity Metadata definition",
+            "required": [
+                "id",
+                "user",
+                "activity",
+                "metadata",
+                "created_at"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "user": {
+                    "type": "object",
+                    "$ref": "#/definitions/user"
+                },
+                "activity": {
+                    "type": "object",
+                    "$ref": "#/definitions/activity"
+                },
+                "metadata": {
+                    "type": "object"
+                },
+                "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "activity": {
+            "required": [
+                "id",
+                "title",
+                "activity_code",
+                "activity_type",
+                "media",
+                "categories"
+            ],
+            "properties": {
+                "id": {
+                    "description": "Activity definition",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "title": {
+                    "description": "Activity definition",
+                    "type": "string"
+                },
+                "activity_code": {
+                    "description": "Activity definition",
+                    "type": "string"
+                },
+                "activity_type": {
+                    "description": "Activity definition",
+                    "type": "string"
+                },
+                "media": {
+                    "description": "Activity definition",
+                    "type": "object",
+                    "$ref": "#/definitions/media"
+                },
+                "categories": {
+                    "description": "Activity definition",
+                    "type": "array",
+                    "items": "#/definitions/category"
+                }
+            },
+            "type": "object"
+        },
+        "activity.extended": {
+            "required": [
+                "id",
+                "title",
+                "activity_code",
+                "activity_type",
+                "media",
+                "categories",
+                "is_published",
+                "is_archived",
+                "steps"
+            ],
+            "properties": {
+                "id": {
+                    "description": "Activity definition",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "title": {
+                    "description": "Activity definition",
+                    "type": "string"
+                },
+                "activity_code": {
+                    "description": "Activity definition",
+                    "type": "string"
+                },
+                "activity_type": {
+                    "description": "Activity definition",
+                    "type": "string"
+                },
+                "media": {
+                    "description": "Activity definition",
+                    "type": "object",
+                    "$ref": "#/definitions/media"
+                },
+                "categories": {
+                    "description": "Activity definition",
+                    "type": "array",
+                    "items": "#/definitions/category"
+                },
+                "is_published": {
+                    "description": "Activity definition",
+                    "type": "boolean"
+                },
+                "is_archived": {
+                    "description": "Activity definition",
+                    "type": "boolean"
+                },
+                "time_restrictions": {
+                    "description": "Activity definition",
+                    "type": "object",
+                    "$ref": "#/definitions/activity.restrictions"
+                },
+                "steps": {
+                    "description": "Activity definition",
+                    "type": "array",
+                    "items": "#/definitions/step"
+                }
+            },
+            "type": "object"
+        },
+        "week_days": {
+            "required": [
+                "monday",
+                "tuesday",
+                "wednesday",
+                "thursday",
+                "friday",
+                "saturday",
+                "sunday"
+            ],
+            "properties": {
+                "monday": {
+                    "type": "boolean"
+                },
+                "tuesday": {
+                    "type": "boolean"
+                },
+                "wednesday": {
+                    "type": "boolean"
+                },
+                "thursday": {
+                    "type": "boolean"
+                },
+                "friday": {
+                    "type": "boolean"
+                },
+                "saturday": {
+                    "type": "boolean"
+                },
+                "sunday": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "activity.restrictions": {
+            "required": [
+                "date_begin",
+                "date_end",
+                "start_time",
+                "end_time",
+                "days",
+                "type_range",
+                "type_day"
+            ],
+            "properties": {
+                "date_begin": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "date_end": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "start_time": {
+                    "type": "string"
+                },
+                "end_time": {
+                    "type": "string"
+                },
+                "days": {
+                    "type": "object",
+                    "$ref": "#/definitions/week_days"
+                },
+                "type_range": {
+                    "type": "boolean"
+                },
+                "type_day": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "badge": {
+            "required": [
+                "id",
+                "title",
+                "steps"
+            ],
+            "properties": {
+                "id": {
+                    "description": "Badge definition",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "title": {
+                    "description": "Badge definition",
+                    "type": "string"
+                },
+                "steps": {
+                    "description": "Badge definition",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/step"
+                    }
+                }
+            }
+        },
+        "category": {
+            "required": [
+                "id",
+                "name",
+                "description",
+                "slug"
+            ],
+            "properties": {
+                "id": {
+                    "description": "Category definition",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "name": {
+                    "description": "Category definition",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "Category definition",
+                    "type": "string"
+                },
+                "slug": {
+                    "description": "Category definition",
+                    "type": "string"
+                }
+            }
+        },
+        "country": {
+            "required": [
+                "id",
+                "name",
+                "code",
+                "is_enabled"
+            ],
+            "properties": {
+                "id": {
+                    "description": "Badge definition",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "name": {
+                    "description": "Badge definition",
+                    "type": "string"
+                },
+                "code": {
+                    "description": "Badge definition",
+                    "type": "string"
+                },
+                "is_enabled": {
+                    "description": "Badge definition",
+                    "type": "boolean"
+                }
+            }
+        },
+        "location": {
+            "required": [
+                "id",
+                "title",
+                "description",
+                "printer_reward",
+                "printer_membership",
+                "uuid",
+                "boolean",
+                "image_url"
+            ],
+            "properties": {
+                "id": {
+                    "description": "Location definition",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "title": {
+                    "description": "Location definition",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "Location definition",
+                    "type": "string"
+                },
+                "printer_reward": {
+                    "description": "Location definition",
+                    "type": "string"
+                },
+                "printer_membership": {
+                    "description": "Location definition",
+                    "type": "string"
+                },
+                "uuid": {
+                    "description": "Location definition",
+                    "type": "string"
+                },
+                "is_authorized": {
+                    "description": "Location definition",
+                    "type": "boolean"
+                },
+                "image_url": {
+                    "description": "Location definition",
+                    "type": "string"
+                }
+            }
+        },
+        "media": {
+            "required": [
+                "thumbnail",
+                "medium",
+                "large"
+            ],
+            "properties": {
+                "thumbnail": {
+                    "description": "Media definition",
+                    "type": "string"
+                },
+                "medium": {
+                    "description": "Media definition",
+                    "type": "string"
+                },
+                "large": {
+                    "description": "Media definition",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "reward": {
+            "description": "Reward definition",
+            "required": [
+                "id",
+                "title",
+                "media"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "media": {
+                    "type": "object",
+                    "$ref": "#/definitions/media"
+                }
+            },
+            "type": "object"
+        },
+        "reward.extended": {
+            "description": "Full reward definition",
+            "required": [
+                "id",
+                "title",
+                "description",
+                "excerpt",
+                "is_published",
+                "is_archived",
+                "is_hidden",
+                "points",
+                "barcode",
+                "date_begin",
+                "date_end",
+                "days_valid",
+                "fine_print",
+                "inventory",
+                "media"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "excerpt": {
+                    "type": "string"
+                },
+                "is_published": {
+                    "type": "boolean"
+                },
+                "is_archived": {
+                    "type": "boolean"
+                },
+                "is_hidden": {
+                    "type": "boolean"
+                },
+                "points": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "barcode": {
+                    "type": "string"
+                },
+                "date_begin": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "date_end": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "days_valid": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "fine_print": {
+                    "type": "string"
+                },
+                "inventory": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "media": {
+                    "type": "object",
+                    "$ref": "#/definitions/media"
+                }
+            },
+            "type": "object"
+        },
+        "state": {
+            "required": [
+                "id",
+                "name",
+                "code"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                }
+            }
+        },
+        "step": {
+            "required": [
+                "id",
+                "title",
+                "count"
+            ],
+            "properties": {
+                "id": {
+                    "description": "Step definition",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "title": {
+                    "description": "Step definition",
+                    "type": "string"
+                },
+                "count": {
+                    "description": "Step definition",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "activity": {
+                    "description": "Step definition",
+                    "type": "object",
+                    "$ref": "#/definitions/activity"
+                },
+                "badge": {
+                    "description": "Step definition",
+                    "type": "object",
+                    "$ref": "#/definitions/badge"
+                }
+            }
+        }
+    },
+    "parameters": {
+        "activity_log_types": {
+            "name": "types",
+            "in": "path",
+            "description": "One or Multiple activity log object types",
+            "required": true,
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "collectionFormat": "csv",
+            "enum": [
+                "reward",
+                "activity",
+                "badge",
+                "step"
+            ]
+        },
+        "activity_metadata_types": {
+            "name": "types",
+            "in": "path",
+            "description": "One or Multiple activity types",
+            "required": true,
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "collectionFormat": "csv",
+            "enum": [
+                "ActivityCode",
+                "LikeWorkOfArt",
+                "Points",
+                "Registration"
+            ]
+        },
+        "country_id": {
+            "name": "id",
+            "in": "path",
+            "description": "ID of country to fetch",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+        }
+    }
+}

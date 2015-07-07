@@ -18,7 +18,7 @@ class APIManager
      */
     private $resources = [];
     
-
+        
     /**
      * Regiter multiple API Resources using the following array 
      * structure:

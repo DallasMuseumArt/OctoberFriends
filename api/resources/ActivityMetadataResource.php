@@ -28,6 +28,39 @@ class ActivityMetadataResource extends BaseResource {
     }
     
     /**
+     * @SWG\Get(
+     *     path="activity-metadata/user/{user}",
+     *     description="Returns all activity medatadata of a user",
+     *     tags={"activity"},
+     *
+     *     @SWG\Parameter(
+     *         description="ID of user activity medatadata to fetch",
+     *         format="int64",
+     *         in="path",
+     *         name="user",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/activity.metadata", type="array")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Not Found",
+     *         @SWG\Schema(ref="#/definitions/error404")
+     *    )
+     * )
+     */
+    
+    /**
      * Return activity metadata by the given user
      * @param string $userId
      * @return Response
@@ -37,6 +70,82 @@ class ActivityMetadataResource extends BaseResource {
         return $this->indexByTypeAndUser(null, $userId);
     }
 
+    
+    /**
+     * @SWG\Parameter(
+     *    parameter="activity_metadata_types",
+     *    description="One or Multiple activity types",
+     *    in="path",
+     *    name="types",
+     *    type="array",
+     *    required=true,
+     *    items=@SWG\Schema(type="string"),
+     *    collectionFormat="csv",
+     *    enum={"ActivityCode", "LikeWorkOfArt", "Points", "Registration"},
+     * )
+     *
+     * 
+     * @SWG\Get(
+     *     path="activity-metadata/{types}",
+     *     description="Returns all activity medatadata of a user",
+     *     tags={ "activity"},
+     *
+     *     @SWG\Parameter(
+     *         ref="#/parameters/activity_metadata_types"    
+     *     ),
+     *     
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/activity.metadata", type="array")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Not Found",
+     *         @SWG\Schema(ref="#/definitions/error404")
+     *    )
+     * )
+     *
+     * @SWG\Get(
+     *     path="activity-metadata/{types}/user/{user}",
+     *     description="Returns all activity medatadata of a user",
+     *     tags={ "activity"},
+     *
+     *     @SWG\Parameter(
+     *         ref="#/parameters/activity_metadata_types"     
+     *     ),
+     *
+     *     @SWG\Parameter(
+     *         description="ID of user activity medatadata to fetch",
+     *         format="int64",
+     *         in="path",
+     *         name="user",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/activity.metadata", type="array")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Not Found",
+     *         @SWG\Schema(ref="#/definitions/error404")
+     *    )
+     * )
+     */
 
     /**
      * Return activity metadata by the given user filtered
@@ -89,5 +198,74 @@ class ActivityMetadataResource extends BaseResource {
 
         return $query;
     }
+    
+    
+    /**
+     * @SWG\Get(
+     *     path="activity-metadata",
+     *     description="Returns all activity medatadata",
+     *     tags={ "activity"},
+     *
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/activity.metadata", type="array")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Not Found",
+     *         @SWG\Schema(ref="#/definitions/error404")
+     *    )
+     * )
+     */
+    public function index()
+    {
+        return parent::index();
+    }
+    
+    
+   /**
+     * @SWG\Get(
+     *     path="activity-metadata/{id}",
+     *     description="Returns an activity metadata by id",
+     *     tags={ "activity"},
+     *      
+     *     @SWG\Parameter(
+     *         description="ID of activity metadata to fetch",
+     *         format="int64",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/activity.metadata")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Not Found",
+     *         @SWG\Schema(ref="#/definitions/error404")
+     *     )
+     * )
+     */
+    
+    public function show($id)
+    {
+        return parent::show($id);
+    }
+    
     
 }

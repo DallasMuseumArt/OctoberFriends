@@ -154,7 +154,7 @@ class RatingResource extends BaseResource {
    
     public function index()
     {
-        # TODO : stop defaul behaviour of the base resoure and 
+        # TODO : stop default behaviour of the base resoure and 
         # return and error
         return Response::api()->errorForbidden();
         #return parent::index();

@@ -9,6 +9,7 @@ use DMA\Friends\Activities\ActivityCode;
 use DMA\Friends\Activities\LikeWorkOfArt;
 use DMA\Friends\API\Transformers\UserProfileTransformer;
 
+
 class ActivityResource extends BaseResource {
 
     protected $model        = '\DMA\Friends\Models\Activity';
@@ -183,6 +184,71 @@ class ActivityResource extends BaseResource {
             'id'        => $user->getKey(),
             'points'    => $points
         ];
+    }
+    
+    /**
+     * @SWG\Get(
+     *     path="activities",
+     *     description="Returns all activities",
+     *     tags={ "activity"},
+     *
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/activity.extended", type="array")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Not Found",
+     *         @SWG\Schema(ref="#/definitions/error404")
+     *    )
+     * )
+     */
+    public function index()
+    {
+        return parent::index();
+    }
+    
+    /**
+     * @SWG\Get(
+     *     path="activities/{id}",
+     *     description="Returns an activity by id",
+     *     tags={ "activity"},
+     *
+     *     @SWG\Parameter(
+     *         description="ID of activity to fetch",
+     *         format="int64",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/activity.extended")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Not Found",
+     *         @SWG\Schema(ref="#/definitions/error404")
+     *     )
+     * )
+     */
+    public function show($id)
+    {
+        return parent::show($id);
     }
     
 }

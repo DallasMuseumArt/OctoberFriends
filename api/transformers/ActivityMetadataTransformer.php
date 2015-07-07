@@ -21,6 +21,38 @@ class ActivityMetadataTransformer extends BaseTransformer {
     ];
     
     /**
+     * @SWG\Definition(
+     *    definition="activity.metadata",
+     *    description="Activity Metadata definition",
+     *    required={"id", "user", "activity", "metadata", "created_at"},
+     *    @SWG\Property(
+     *         property="id",
+     *         type="integer",
+     *         format="int32"
+     *    ),
+     *    @SWG\Property(
+     *         property="user",
+     *         type="object",
+     *         ref="#/definitions/user"
+     *    ),
+     *    @SWG\Property(
+     *         property="activity",
+     *         type="object",
+     *         ref="#/definitions/activity"
+     *    ),
+     *    @SWG\Property(
+     *         property="metadata",
+     *         type="object",
+     *    ),
+     *    @SWG\Property(
+     *         property="created_at",
+     *         type="string",
+     *         format="date-time"
+     *    )
+     * )
+     */
+    
+    /**
      * {@inheritDoc}
      * @see \DMA\Friends\Classes\API\BaseTransformer::getData()
      */
@@ -36,7 +68,7 @@ class ActivityMetadataTransformer extends BaseTransformer {
             
         ];
     }
-    
+        
     /**
      * Get metadata values
      * @return array

@@ -8,7 +8,47 @@ use DMA\Friends\API\Transformers\UserMetadataTransformer;
 
 class LocationTransformer extends BaseTransformer {
     
-   
+    /**
+     * Location definition
+     * @SWG\Definition(
+     *    definition="location",
+     *    required={"id", "title", "description", "printer_reward", "printer_membership","uuid", "boolean", "image_url"},
+     *    @SWG\Property(
+     *         property="id",
+     *         type="integer",
+     *         format="int32"
+     *    ),
+     *    @SWG\Property(
+     *         property="title",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="description",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="printer_reward",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="printer_membership",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="uuid",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="is_authorized",
+     *         type="boolean",
+     *    ),
+     *    @SWG\Property(
+     *         property="image_url",
+     *         type="string",
+     *    )
+     * )
+     */
+    
     public function getData($instance)
     {
         $data = [

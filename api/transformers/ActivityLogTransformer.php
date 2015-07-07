@@ -19,6 +19,64 @@ class ActivityLogTransformer extends BaseTransformer {
             'object'
     ];
     
+    /**
+     * @SWG\Definition(
+     *    definition="activity.log",
+     *    description="Activity Log definition",
+     *    required={"id", "action", "message", "points_earned", "total_points", "object_type", "timestamp"},
+     *    @SWG\Property(
+     *         property="id",
+     *         type="integer",
+     *         format="int32"
+     *    ),
+     *    @SWG\Property(
+     *         property="action",
+     *         type="string",
+     *         enum={"activity","artwork","checkin","points","reward","unlocked"}
+     *    ),
+     *    @SWG\Property(
+     *         property="message",
+     *         type="string",
+     *    ),    
+     *    @SWG\Property(
+     *         property="user",
+     *         type="object",
+     *         ref="#/definitions/user"
+     *    ),
+     *    @SWG\Property(
+     *         description="User earned points",
+     *         property="points_earned",
+     *         type="integer",
+     *         format="int32"
+     *    ),
+     *    @SWG\Property(
+     *         description="User total points",
+     *         property="total_points",
+     *         type="integer",
+     *         format="int32"
+     *    ),
+     *    @SWG\Property(
+     *         description="Classname and Namespace of the generic polymorphic relationship",
+     *         property="object_type",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="timestamp",
+     *         type="string",
+     *         format="date-time"
+     *    ),
+     *    @SWG\Property(
+     *         property="user",
+     *         type="object",
+     *         ref="#/definitions/user"
+     *    ),
+     * )
+     */
+    
+    /**
+     * {@inheritDoc}
+     * @see \DMA\Friends\Classes\API\BaseTransformer::getData()
+     */
     public function getData($instance)
     {
         return [

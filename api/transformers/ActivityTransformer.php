@@ -30,7 +30,43 @@ class ActivityTransformer extends BaseTransformer {
     protected $avilableIncludes = [
             'steps'
     ];
-        
+
+    /**
+     * Activity definition
+     * @SWG\Definition(
+     *    definition="activity",
+     *    type="object",
+     *    required={"id", "title", "activity_code", "activity_type", "media", "categories"},
+     *    @SWG\Property(
+     *         property="id",
+     *         type="integer",
+     *         format="int32"
+     *    ),
+     *    @SWG\Property(
+     *         property="title",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="activity_code",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="activity_type",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="media",
+     *         type="object",
+     *         ref="#/definitions/media"
+     *    ),
+     *    @SWG\Property(
+     *         property="categories",
+     *         type="array",
+     *         items="#/definitions/category"
+     *    )
+     * )
+     */
+   
       
     /**
      * {@inheritDoc}
@@ -48,6 +84,64 @@ class ActivityTransformer extends BaseTransformer {
         ];
     }
 
+    
+    // TODO : The swagger notation should be done using JSON Schema Polymorphism. 
+    
+    /**
+     * Activity definition
+     * @SWG\Definition(
+     *    definition="activity.extended",
+     *    type="object",
+     *    required={"id", "title", "activity_code", "activity_type", "media", 
+     *              "categories", "is_published", "is_archived", "steps"},
+     *    @SWG\Property(
+     *         property="id",
+     *         type="integer",
+     *         format="int32"
+     *    ),
+     *    @SWG\Property(
+     *         property="title",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="activity_code",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="activity_type",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="media",
+     *         type="object",
+     *         ref="#/definitions/media"
+     *    ),
+     *    @SWG\Property(
+     *         property="categories",
+     *         type="array",
+     *         items="#/definitions/category",
+     *    ),
+     *    @SWG\Property(
+     *         property="is_published",
+     *         type="boolean",
+     *    ),
+     *    @SWG\Property(
+     *         property="is_archived",
+     *         type="boolean",
+     *    ),
+     *    @SWG\Property(
+     *         property="time_restrictions",
+     *         type="object",
+     *         ref="#/definitions/activity.restrictions"
+     *    ),
+     *    @SWG\Property(
+     *         property="steps",
+     *         type="array",
+     *         items="#/definitions/step"
+     *    ) 
+     * )
+     */
+        
     /**
      * {@inheritDoc}
      * @see \DMA\Friends\Classes\API\BaseTransformer::getExtendedData()
@@ -64,6 +158,84 @@ class ActivityTransformer extends BaseTransformer {
         ];
     }
     
+    
+    /**
+     * 
+     * @SWG\Definition(
+     *     definition="week_days",
+     *     type="object",
+     *     required={"monday","tuesday","wednesday", "thursday", "friday", "saturday", "sunday"},
+     *     @SWG\Property(
+     *          property="monday",
+     *          type="boolean",
+     *     ),
+     *     @SWG\Property(
+     *          property="tuesday",
+     *          type="boolean",
+     *     ),
+     *     @SWG\Property(
+     *          property="wednesday",
+     *          type="boolean",
+     *     ),
+     *     @SWG\Property(
+     *          property="thursday",
+     *          type="boolean",
+     *     ),  
+     *     @SWG\Property(
+     *          property="friday",
+     *          type="boolean",
+     *     ),        
+     *     @SWG\Property(
+     *          property="saturday",
+     *          type="boolean",
+     *     ),     
+     *     @SWG\Property(
+     *          property="sunday",
+     *          type="boolean",
+     *     )
+     * )  
+     * 
+ 
+     * Activity definition
+     * @SWG\Definition(
+     *    definition="activity.restrictions",
+     *    type="object",
+     *    required={"date_begin", "date_end", "start_time", "end_time", "days",
+     *              "type_range", "type_day"},
+     *    @SWG\Property(
+     *         property="date_begin",
+     *         type="string",
+     *         format="date-time",
+     *    ),
+     *    @SWG\Property(
+     *         property="date_end",
+     *         type="string",
+     *         format="date-time",
+     *    ),
+     *    @SWG\Property(
+     *         property="start_time",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="end_time",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="days",
+     *         type="object",
+     *         ref="#/definitions/week_days"
+     *    ),
+     *    @SWG\Property(
+     *         property="type_range",
+     *         type="boolean",
+     *    ),
+     *    @SWG\Property(
+     *         property="type_day",
+     *         type="boolean",
+     *    )
+     * )    
+     */
+        
     
     /**
      * Helper method to deserialize time_restiction data

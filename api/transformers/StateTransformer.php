@@ -17,6 +17,32 @@ class StateTransformer extends BaseTransformer {
             //'country'
     ];
     
+    /**
+     * @SWG\Definition(
+     *    definition="state",
+     *    required={"id", "name", "code"},
+     *    @SWG\Property(
+     *         property="id",
+     *         type="integer",
+     *         format="int32"
+     *    ),
+     *    @SWG\Property(
+     *         property="name",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="code",
+     *         type="string",
+     *    ),
+     * )
+     */
+    
+
+    /**
+     * {@inheritDoc}
+     * @see \DMA\Friends\Classes\API\BaseTransformer::getData()
+     */
+    
     public function getData($instance)
     {
         $data = [

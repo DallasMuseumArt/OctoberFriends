@@ -188,7 +188,8 @@ class BaseResource extends Controller {
         }
     }
     
-    
+
+
     /**
      * Display a listing of items
      *
@@ -232,12 +233,14 @@ class BaseResource extends Controller {
         return Response::api()->errorForbidden();
     }
 
+   
     /**
      * Display the specified item.
      *
      * @param  int  $id
      * @return Response
-     */
+     *
+     */    
     public function show($id)
     {
         try {

@@ -470,18 +470,18 @@ class Plugin extends PluginBase
     public function registerFriendAPIResources()
     {
         return [
-            'activities'            => '\DMA\Friends\API\Resources\ActivityResource',
-            'activity-logs'         => '\DMA\Friends\API\Resources\ActivityLogResource',
-            'activity-metadata'     => '\DMA\Friends\API\Resources\ActivityMetadataResource',
-            'badges'                => '\DMA\Friends\API\Resources\BadgeResource',
-            'steps'                 => '\DMA\Friends\API\Resources\StepResource',
-            'categories'            => '\DMA\Friends\API\Resources\CategoryResource',
-            'locations'             => '\DMA\Friends\API\Resources\LocationResource',
-            'rewards'               => '\DMA\Friends\API\Resources\RewardResource',
-            'users'                 => '\DMA\Friends\API\Resources\UserResource',
-            'countries'             => '\DMA\Friends\API\Resources\CountryResource',   
-            'countries.states'      => '\DMA\Friends\API\Resources\StateResource',
-            'ratings'               => '\DMA\Friends\API\Resources\RatingResource',
+            'activities'            => 'DMA\Friends\API\Resources\ActivityResource',
+            'activity-logs'         => 'DMA\Friends\API\Resources\ActivityLogResource',
+            'activity-metadata'     => 'DMA\Friends\API\Resources\ActivityMetadataResource',
+            'badges'                => 'DMA\Friends\API\Resources\BadgeResource',
+            'steps'                 => 'DMA\Friends\API\Resources\StepResource',
+            'categories'            => 'DMA\Friends\API\Resources\CategoryResource',
+            'locations'             => 'DMA\Friends\API\Resources\LocationResource',
+            'rewards'               => 'DMA\Friends\API\Resources\RewardResource',
+            'users'                 => 'DMA\Friends\API\Resources\UserResource',
+            'countries'             => 'DMA\Friends\API\Resources\CountryResource',   
+            'countries.states'      => 'DMA\Friends\API\Resources\StateResource',
+            'ratings'               => 'DMA\Friends\API\Resources\RatingResource',
         ];
     }
     

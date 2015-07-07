@@ -124,7 +124,7 @@ class UserTransformer extends BaseTransformer {
     public function includeActivities(Model $instance)
     {
         $activities = $instance->activities;
-        $excludeEmbeds = ['categories'];
+        $excludeEmbeds = [];//['categories'];
         return $this->collection($activities, new ActivityTransformer(false, $excludeEmbeds));    
     }
     
@@ -137,7 +137,7 @@ class UserTransformer extends BaseTransformer {
     public function includeBadges(Model $instance)
     {
         $badges = $instance->badges;
-        $excludeEmbeds = ['categories'];
+        $excludeEmbeds = [];//['categories'];
         return $this->collection($badges, new BadgeTransformer(false, $excludeEmbeds));
     }
 }

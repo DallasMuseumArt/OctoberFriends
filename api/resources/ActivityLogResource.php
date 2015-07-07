@@ -23,6 +23,39 @@ class ActivityLogResource extends BaseResource {
     }
     
     /**
+     * @SWG\Get(
+     *     path="activity-logs/user/{user}",
+     *     description="Returns all activity logs of a user",
+     *     tags={"activity"},
+     *
+     *     @SWG\Parameter(
+     *         description="ID of user activity logs to fetch",
+     *         format="int64",
+     *         in="path",
+     *         name="user",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/activity.log", type="array")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Not Found",
+     *         @SWG\Schema(ref="#/definitions/error404")
+     *    )
+     * )
+     */
+    
+    /**
      * Provide aliases to user_id filters
      * @param string $user
      * @return Response
@@ -31,6 +64,82 @@ class ActivityLogResource extends BaseResource {
     {
         return $this->indexByTypeAndUser(null, $user);
     }
+    
+    /**
+     * @SWG\Parameter(
+     *    parameter="activity_log_types",
+     *    description="One or Multiple activity log object types",
+     *    in="path",
+     *    name="types",
+     *    type="array",
+     *    required=true,
+     *    items=@SWG\Schema(type="string"),
+     *    collectionFormat="csv",
+     *    enum={"reward", "activity", "badge", "step"},
+     * )
+     *
+     *
+     * @SWG\Get(
+     *     path="activity-logs/{types}",
+     *     description="Returns all activity logs of a user",
+     *     tags={ "activity"},
+     *
+     *     @SWG\Parameter(
+     *         ref="#/parameters/activity_log_types"
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/activity.log", type="array")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Not Found",
+     *         @SWG\Schema(ref="#/definitions/error404")
+     *    )
+     * )
+     *
+     * @SWG\Get(
+     *     path="activity-logs/{types}/user/{user}",
+     *     description="Returns all activity logs of a user",
+     *     tags={ "activity"},
+     *
+     *     @SWG\Parameter(
+     *         ref="#/parameters/activity_log_types"
+     *     ),
+     *
+     *     @SWG\Parameter(
+     *         description="ID of user activity medatadata to fetch",
+     *         format="int64",
+     *         in="path",
+     *         name="user",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/activity.log", type="array")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Not Found",
+     *         @SWG\Schema(ref="#/definitions/error404")
+     *    )
+     * )
+     */
     
     /**
      * Provide aliases to object_type and user_id filters
@@ -90,7 +199,71 @@ class ActivityLogResource extends BaseResource {
         return parent::index();
     }
 
-
+    /**
+     * @SWG\Get(
+     *     path="activity-logs",
+     *     description="Returns all activity logs",
+     *     tags={ "activity"},
+     *
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/activity.log", type="array")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Not Found",
+     *         @SWG\Schema(ref="#/definitions/error404")
+     *    )
+     * )
+     */
+    public function index()
+    {
+        return parent::index();
+    }
+    
+    /**
+     * @SWG\Get(
+     *     path="activity-logs/{id}",
+     *     description="Returns an activity logs by id",
+     *     tags={ "activity"},
+     *      
+     *     @SWG\Parameter(
+     *         description="ID of activity log to fetch",
+     *         format="int64",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/activity.log")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Not Found",
+     *         @SWG\Schema(ref="#/definitions/error404")
+     *     )
+     * )
+     */    
+    public function show($id)
+    {
+        return parent::show($id);
+    }
+    
     
  
 }

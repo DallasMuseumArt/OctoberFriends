@@ -5,7 +5,26 @@ use DMA\Friends\Classes\API\BaseTransformer;
 
 class MediaTransformer extends BaseTransformer {
     
-    
+    /**
+     * Media definition
+     * @SWG\Definition(
+     *    definition="media",
+     *    type="object",
+     *    required={"thumbnail", "medium", "large"},
+     *    @SWG\Property(
+     *         property="thumbnail",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="medium",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="large",
+     *         type="string",
+     *    )
+     * )
+     */
 
     /**
      * {@inheritDoc}

@@ -19,6 +19,29 @@ class RewardTransformer extends BaseTransformer {
     protected $defaultIncludes = [
             'media'
     ];
+    
+    /**
+     * @SWG\Definition(
+     *    definition="reward",
+     *    description="Reward definition",
+     *    type="object",
+     *    required={"id", "title", "media"},
+     *    @SWG\Property(
+     *         property="id",
+     *         type="integer",
+     *         format="int32"
+     *    ),
+     *    @SWG\Property(
+     *         property="title",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="media",
+     *         type="object",
+     *         ref="#/definitions/media"
+     *    )
+     * )
+     */    
      
     /**
      * {@inheritDoc}
@@ -34,6 +57,86 @@ class RewardTransformer extends BaseTransformer {
         return $data;
     }
 
+    /**
+     * @SWG\Definition(
+     *    definition="reward.extended",
+     *    description="Full reward definition",
+     *    type="object",
+     *    required={"id", "title", "description", "excerpt", "is_published", "is_archived", "is_hidden", 
+     *              "points", "barcode", "date_begin", "date_end", "days_valid", "fine_print", "inventory", "media"},
+     *    @SWG\Property(
+     *         property="id",
+     *         type="integer",
+     *         format="int32"
+     *    ),
+     *    @SWG\Property(
+     *         property="title",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="description",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="excerpt",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="is_published",
+     *         type="boolean",
+     *    ),
+     *    @SWG\Property(
+     *         property="is_published",
+     *         type="boolean",
+     *    ),
+     *    @SWG\Property(
+     *         property="is_archived",
+     *         type="boolean",
+     *    ),
+     *    @SWG\Property(
+     *         property="is_hidden",
+     *         type="boolean",
+     *    ),
+     *    @SWG\Property(
+     *         property="points",
+     *         type="integer",
+     *         format="int32"
+     *    ),
+     *    @SWG\Property(
+     *         property="barcode",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="date_begin",
+     *         type="string",
+     *         format="date-time"
+     *    ),
+     *    @SWG\Property(
+     *         property="date_end",
+     *         type="string",
+     *         format="date-time"
+     *    ),
+     *    @SWG\Property(
+     *         property="days_valid",
+     *         type="integer",
+     *         format="int32"
+     *    ),
+     *    @SWG\Property(
+     *         property="fine_print",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="inventory",
+     *         type="integer",
+     *         format="int32"
+     *    ),
+     *    @SWG\Property(
+     *         property="media",
+     *         type="object",
+     *         ref="#/definitions/media"
+     *    )
+     * )
+     */
 
     /**
      * {@inheritDoc}
