@@ -427,10 +427,10 @@ class Plugin extends PluginBase
     public function registerSchedule($schedule)
     {
 
-        $schedule->command("friends.points-weekly")->weekly();
-        $schedule->command("friends.points-daily")->daily();
-        $schedule->command("friends.read-channels")->everyFiveMinutes();
-        $schedule->command("friends.reset-groups")->everyFiveMinutes();
+        $schedule->command("friends:points-weekly")->weekly();
+        $schedule->command("friends:points-daily")->daily();
+        $schedule->command("friends:read-channels")->everyFiveMinutes();
+        $schedule->command("friends:reset-groups")->everyFiveMinutes();
 
     }
 

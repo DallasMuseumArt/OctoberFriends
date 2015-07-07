@@ -19,7 +19,7 @@ secondaryTabs:
         #  Content tab 
         # ===================================
         description:
-            label: Description
+            label: Description 
             span: left
             tab: Content
             type: richeditor
@@ -34,14 +34,14 @@ secondaryTabs:
             imageWidth: 500
         excerpt:
             label: Excerpt
-            description: a short amount of text about this badge.  This will be displayed in badge listings
+            commentAbove: a short amount of text about this badge.  This will be displayed in badge listings
             tab: Content
             span: left
             type: richeditor
             size: huge
         congratulations_text:
             label: Congratulations Text
-            description: Text to display to a user that has just been awarded this badge
+            commentAbove: Text to display to a user that has just been awarded this badge
             tab: Content
             span: right
             type: richeditor
@@ -73,26 +73,15 @@ secondaryTabs:
         # ===================================
         points:
             label: Points
-            description: Points earned when awarded this badge
+            commentAbove: Points earned when awarded this badge
             span: left
             tab: Configuration
             type: number
             required: true
             default: 0
-        maximum_earnings:
-            label: Maximum earnings per user
-            description: The number of times an individual can earn this badge
-            span: left
-            tab: Configuration
-            type: number
-        maximum_earnings_global:
-            label: Maxium earnings per badge
-            description: The number of times a badge can be earned
-            span: right
-            tab: Configuration
-            type: number
         special:
-            label: Special Badge:
+            label: Special Badge
+            commentAbove: Provide a label if the badge is special
             span: right
             tab: Configuration 
             type: dropdown
@@ -100,33 +89,45 @@ secondaryTabs:
                 no: None
                 featured: Featured
                 limited_edition: Limited Edition
+        maximum_earnings:
+            label: Maximum earnings per user
+            commentAbove: The number of times an individual can earn this badge
+            span: left
+            tab: Configuration
+            type: number
+        maximum_earnings_global:
+            label: Maxium earnings per badge
+            commentAbove: The number of times a badge can be earned
+            span: right
+            tab: Configuration
+            type: number
         # is_sequential:
         #     label: Sequential Steps
-        #     description: If checked, steps must be created in sequentual order
+        #     commentAbove: If checked, steps must be created in sequentual order
         #     span: left
         #     type: checkbox
         #     tab: Configuration
         # show_earners:
         #     label: Show earners
-        #     description: If checked, people who have earned this badge will be displayed publicly
+        #     commentAbove: If checked, people who have earned this badge will be displayed publicly
         #     span: left 
         #     tab: Configuration
         #     type: checkbox
         # time_between_steps_min:
         #     label: Minimum Time Between Steps (minutes)
-        #     description: The minimum number of minutes that must pass before earning a step.
+        #     commentAbove: The minimum number of minutes that must pass before earning a step.
         #     span: left
         #     tab: Configuration 
         #     type: number
         # time_between_steps_max:
         #     label: Maximum Time Between Steps (minutes)
-        #     description: The maximum number of minutes that must pass before failing the badge.
+        #     commentAbove: The maximum number of minutes that must pass before failing the badge.
         #     span: right
         #     tab: Configuration 
         #     type: number
         # maximium_time:
         #     label: Maximum Time to Complete Badge (days)
-        #     description: The maximum amount of time to complete all steps after the first has been awarded
+        #     commentAbove: The maximum amount of time to complete all steps after the first has been awarded
         #     tab: Configuration 
         #     type: number
         # ===================================
@@ -134,21 +135,21 @@ secondaryTabs:
         # ===================================
         date_begin:
             label: Beginning Date
-            description: The first day this badge can be earned (if blank: no limit).
+            commentAbove: The first day this badge can be earned (if blank: no limit).
             span: left
             tab: Publishing Options
             type: datepicker
             mode: datetime
         date_end:
             label: Ending Date
-            description: The last day this badge may be earned (if blank: no limit).
+            commentAbove: The last day this badge may be earned (if blank: no limit).
             span: right
             tab: Publishing Options
             type: datepicker
             mode: datetime
             is_hidden:
                 label: Hide
-                description: If checked, a user will not see that they have earned this badge in their listings
+                commentAbove: If checked, a user will not see that they have earned this badge in their listings
                 tab: Publishing Options
                 type: checkbox
         is_published:

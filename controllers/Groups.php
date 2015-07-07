@@ -25,6 +25,7 @@ class Groups extends Controller
         BackendMenu::setContext('DMA.Friends', 'friends', 'groups');
     }
     
+ 
     public function relationExtendQuery($query, $field, $manageMode=null)
     {
         # Extend relation query to exclude owner of the group
@@ -34,8 +35,8 @@ class Groups extends Controller
 
         
     }
-
-
+    
+    
     public function update_onSave($recordId = null, $context = null)
     {
    
@@ -65,5 +66,7 @@ class Groups extends Controller
         }
           
     }
+   
+            
 }
 
