@@ -2,6 +2,12 @@
 
     var ActivityFilters = {};
 
+    ActivityFilters.filters = {
+        categories: 'all',
+        search: '',
+        sort: ''
+    };
+
     ActivityFilters.list = $('.friends-activity-filters-list');
 
     ActivityFilters.setCookie = function(value) {
@@ -24,23 +30,20 @@
             page = 1;
         }
 
-        // Initialize filters array with default values
-        var active_filters = {
-            categories: 'all',
-            search: ''
-        };
-
         // generate a list of active categories if not all categories are active
         if (!this.isAllSelected()) {
-            active_filters.categories = this.list
+            this.filters.categories = this.list
                                             .find('.friends-activity-filter.active')
                                             .map(function(i, e) {
                                                 return $(e).data('filter-name');
                                             })
                                             .get();
         }
+        else {
+            this.filters.categories = 'all';
+        }
 
-        active_filters = JSON.stringify(active_filters);
+        var active_filters = JSON.stringify(this.filters);
 
         this.setCookie(active_filters);
         var url = window.location.pathname;
