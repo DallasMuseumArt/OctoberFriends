@@ -1,6 +1,6 @@
-(function($) {
+var ActivityFilters = {};
 
-    var ActivityFilters = {};
+(function($) {
 
     ActivityFilters.filters = {
         categories: 'all',
