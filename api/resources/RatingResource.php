@@ -12,7 +12,7 @@ use RainLab\User\Models\User;
 class RatingResource extends BaseResource {
 
     protected $model        = '\DMA\Friends\Models\Rating';
-    //protected $transformer  = '\DMA\Friends\API\Transformers\ActivityTransformer';
+    protected $transformer  = '\DMA\Friends\API\Transformers\RatingTransformer';
     
    
     
@@ -52,6 +52,46 @@ class RatingResource extends BaseResource {
     
     
     /**
+     * @SWG\GET(
+     *     path="ratings/{object}/{objectId}",
+     *     description="Get all object ratings",
+     *     tags={ "ratings"},
+     *     
+     *     @SWG\Parameter(
+     *         description="Object",
+     *         in="path",
+     *         name="object",
+     *         required=true,
+     *         type="string",
+     *         enum={"activity", "badge"}
+     *     ),
+     *     @SWG\Parameter(
+     *         description="ID of object to fetch",
+     *         format="int64",
+     *         in="path",
+     *         name="objectId",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/rate")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="User not found",
+     *         @SWG\Schema(ref="#/definitions/UserError404")
+     *     )
+     * )
+     */
+    
+    /**
      * Get ratings by object
      * @param string $objectType
      * @param int $objectId
@@ -79,6 +119,124 @@ class RatingResource extends BaseResource {
             return Response::api()->errorNotFound("$objectType not found");
          }
     }
+    
+    
+
+    /**
+     * @SWG\Definition(
+     *      definition="response.rate",
+     *      required={"data"},
+     *      @SWG\Property(
+     *          property="data",
+     *          type="object",
+     *          ref="#/definitions/rate.payload"
+     *      )
+     * )
+     * 
+     * @SWG\Definition(
+     *      definition="rate.payload",
+     *      required={"success", "message", "user", "rating"},
+     *      @SWG\Property(
+     *          property="success",
+     *          type="boolean"
+     *      ),
+     *      @SWG\Property(
+     *          property="message",
+     *          type="string"
+     *      ),
+     *      @SWG\Property(
+     *          property="user",
+     *          type="object",
+     *          ref="#/definitions/user.info.points"
+     *      ),
+     *      @SWG\Property(
+     *          property="rating",
+     *          type="object",
+     *          ref="#/definitions/rating.stats"
+     *      )   
+     * )
+     * 
+     * @SWG\Definition(
+     *      definition="rating.stats",
+     *      required={"total", "average", "object_type", "object_id"},
+     *      @SWG\Property(
+     *          property="total",
+     *          type="number",
+     *          format="float"
+     *      ),
+     *      @SWG\Property(
+     *          property="average",
+     *          type="number",
+     *          format="float"
+     *      ),
+     *      @SWG\Property(
+     *          property="object_type",
+     *          type="string"
+     *      ),
+     *      @SWG\Property(
+     *          property="object_id",
+     *          type="integer",
+     *          format="int32"
+     *      )  
+     * )
+     * 
+     * 
+     * @SWG\GET(
+     *     path="ratings/rate/{object}/{objectId}/user/{user}/{rate}",
+     *     description="Get all object ratings",
+     *     tags={ "ratings"},
+     *
+     *     @SWG\Parameter(
+     *         description="Object to rate",
+     *         in="path",
+     *         name="object",
+     *         required=true,
+     *         type="string",
+     *         enum={"activity", "badge"}
+     *     ),
+     *     @SWG\Parameter(
+     *         description="ID of object to rate",
+     *         format="int64",
+     *         in="path",
+     *         name="objectId",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         description="ID of user",
+     *         format="int64",
+     *         in="path",
+     *         name="user",
+     *         required=true,
+     *         type="integer"
+     *     ),     
+     *     @SWG\Parameter(
+     *         description="Rate value",
+     *         format="float",
+     *         in="path",
+     *         name="rate",
+     *         required=true,
+     *         type="number",
+     *         minimum=1,
+     *         maximum=5
+     *     ),  
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/response.rate")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="User not found",
+     *         @SWG\Schema(ref="#/definitions/UserError404")
+     *     )
+     * )
+     */
 
     public function addObjectRating($objectType, $objectId, $user, $rateValue, $comment = null)
     {
@@ -133,7 +291,65 @@ class RatingResource extends BaseResource {
         
     }
     
-    
+    /**
+     * @SWG\Definition(
+     *      definition="request.rate",
+     *      required={"id", "rate", "user_id"},
+     *      @SWG\Property(
+     *          property="id",
+     *          type="integer",
+     *          format="int32"
+     *      ),
+     *      @SWG\Property(
+     *          property="rate",
+     *          type="number",
+     *          format="float"
+     *      ),
+     *      @SWG\Property(
+     *          property="user_id",
+     *          type="integer",
+     *          format="int32"
+     *      )  
+     * )
+     * 
+     * 
+     * @SWG\Post(
+     *     path="ratings/rate/{object}/",
+     *     description="Get all object ratings",
+     *     tags={ "ratings"},
+     *
+     *     @SWG\Parameter(
+     *         description="Object to rate",
+     *         in="path",
+     *         name="object",
+     *         required=true,
+     *         type="string",
+     *         enum={"activity", "badge"}
+     *     ),
+     *     @SWG\Parameter(
+     *         in="body",
+     *         name="body",
+     *         required=true,
+     *         type="object",
+     *         schema=@SWG\Schema(ref="#/definitions/request.rate")
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/response.rate")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="User not found",
+     *         @SWG\Schema(ref="#/definitions/UserError404")
+     *     )
+     * )
+     */
     public function addObjectRateJson($objectType){
         $data = Request::all();
         $rules = [
@@ -154,10 +370,47 @@ class RatingResource extends BaseResource {
    
     public function index()
     {
-        # TODO : stop default behaviour of the base resoure and 
+        # TODO : stop default behaviour of the base resource and 
         # return and error
         return Response::api()->errorForbidden();
         #return parent::index();
+    }
+    
+    /**
+     * @SWG\Get(
+     *     path="ratings/{id}",
+     *     description="Returns an rating by id",
+     *     tags={ "ratings"},
+     *
+     *     @SWG\Parameter(
+     *         description="ID of rating to fetch",
+     *         format="int64",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/rate")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Not Found",
+     *         @SWG\Schema(ref="#/definitions/error404")
+     *     )
+     * )
+     */
+    public function show($id)
+    {
+        return parent::show($id);
     }
     
     

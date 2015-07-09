@@ -15,6 +15,40 @@ class RateTransformer extends BaseTransformer {
             'user'
     ];
       
+  /**
+     * @SWG\Definition(
+     *    definition="rate",
+     *    description="Rate definition",
+     *    required={"id", "rate", "comment", "create_at"},
+     *    @SWG\Property(
+     *         property="id",
+     *         type="integer",
+     *         format="int32"
+     *    ),
+     *    @SWG\Property(
+     *         property="rate",
+     *         type="number",
+     *         format="float",
+     *         maximum=5,
+     *         minimum=1 
+     *    ),
+     *    @SWG\Property(
+     *         property="comment",
+     *         type="string",
+     *    ),    
+     *    @SWG\Property(
+     *         property="create_at",
+     *         type="string",
+     *         format="date-time"
+     *    ),
+     *    @SWG\Property(
+     *         property="user",
+     *         type="object",
+     *         ref="#/definitions/user"
+     *    )
+     * )
+     */
+    
     /**
      * {@inheritDoc}
      * @see \DMA\Friends\Classes\API\BaseTransformer::getData()

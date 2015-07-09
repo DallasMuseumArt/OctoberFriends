@@ -32,7 +32,7 @@
       window.swaggerUi = new SwaggerUi({
         url: url,
         dom_id: "swagger-ui-container",
-        supportedSubmitMethods: ['get', 'post'],
+        supportedSubmitMethods: ['get', 'post', 'put', 'patch'],
         onComplete: function(swaggerApi, swaggerUi){
           /*
           if(typeof initOAuth == "function") {
@@ -48,7 +48,7 @@
             hljs.highlightBlock(e)
           });
 
-          addApiKeyAuthorization();
+          //addApiKeyAuthorization();
         },
         onFailure: function(data) {
           log("Unable to Load SwaggerUI");
@@ -67,7 +67,7 @@
         }
       }
 
-      $('#input_apiKey').change(addApiKeyAuthorization);
+      //$('#input_apiKey').change(addApiKeyAuthorization);
 
       // if you have an apiKey you would like to pre-populate on the page for demonstration purposes...
       /*

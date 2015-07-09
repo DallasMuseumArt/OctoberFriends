@@ -39,14 +39,26 @@ class ActivityResource extends BaseResource {
      * )
      * 
      * @SWG\Definition(
-     *     definition="response.single.checkin",
+     *     definition="response.ok.single.checkin",
      *     description="Single response checking",
      *     type="object",
      *     required={"data"},
      *     @SWG\Property(
      *        property="data",
      *        type="object",
-     *        ref="#/definitions/response.activity.code.user"
+     *        ref="#/definitions/response.ok.activity.code.user"
+     *     ),
+     * )
+     *     
+     * @SWG\Definition(
+     *     definition="response.failed.single.checkin",
+     *     description="Single response checking",
+     *     type="object",
+     *     required={"data"},
+     *     @SWG\Property(
+     *        property="data",
+     *        type="object",
+     *        ref="#/definitions/response.failed.activity.code.user"
      *     ),
      * )
      * 
@@ -66,15 +78,21 @@ class ActivityResource extends BaseResource {
      *
      *     @SWG\Parameter(
      *         description="Activity code or accessioned number",
+     *         name="body",
      *         in="body",
      *         required=true,
      *         schema=@SWG\Schema(ref="#/definitions/request.checkin")
      *     ),
      *
      *     @SWG\Response(
+     *         response=201,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/response.ok.single.checkin")
+     *     ),
+     *     @SWG\Response(
      *         response=200,
      *         description="Successful response",
-     *         @SWG\Schema(ref="#/definitions/response.single.checkin", type="array")
+     *         @SWG\Schema(ref="#/definitions/response.failed.single.checkin")
      *     ),
      *     @SWG\Response(
      *         response=500,
@@ -110,12 +128,16 @@ class ActivityResource extends BaseResource {
      *         required=true,
      *         type="string"
      *     ),
-     *
+     *     @SWG\Response(
+     *         response=201,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/response.ok.single.checkin")
+     *     ),
      *     @SWG\Response(
      *         response=200,
      *         description="Successful response",
-     *         @SWG\Schema(ref="#/definitions/response.single.checkin", type="array")
-     *     ),
+     *         @SWG\Schema(ref="#/definitions/response.failed.single.checkin")
+     *     ),   
      *     @SWG\Response(
      *         response=500,
      *         description="Unexpected error",
@@ -219,6 +241,7 @@ class ActivityResource extends BaseResource {
      *
      *     @SWG\Parameter(
      *         description="Activity codes and/or accessioned number",
+     *         name="body",
      *         in="body",
      *         required=true,
      *         schema=@SWG\Schema(ref="#/definitions/request.bulk.checkin")
@@ -336,18 +359,20 @@ class ActivityResource extends BaseResource {
     
     /**
      * @SWG\Definition(
-     *     definition="response.activity.code",
+     *     definition="response.ok.activity.code",
      *     type="object",
-     *     required={"success", "activity_code", "message", "feedback_message", "complete_message"},
+     *     required={"success", "activity_code", "message", "feedback_message", "complete_message", "data"},
      *     @SWG\Property(
      *         property="success",
-     *         type="boolean"
+     *         type="boolean",
+     *         default="true"
      *     ), 
      *     @SWG\Property(
      *         property="http_code",
      *         type="integer",
      *         format="int32",
-     *         enum={200, 201}
+     *         enum={200, 201},
+     *         default=201
      *     ),  
      *      
      *     @SWG\Property(
@@ -365,17 +390,59 @@ class ActivityResource extends BaseResource {
      *     @SWG\Property(
      *         property="complete_message",
      *         type="string"
-     *     )     
+     *     ),
+     *     @SWG\Property(
+     *         description="Extra activity data send back when the activity is successful",
+     *         property="data",
+     *         type="object"
+     *     )        
      * )
      * 
      */
+    
+    /**
+     * @SWG\Definition(
+     *     definition="response.failed.activity.code",
+     *     type="object",
+     *     required={"success", "activity_code", "message", "feedback_message", "complete_message"},
+     *     @SWG\Property(
+     *         property="success",
+     *         type="boolean"
+     *     ),
+     *     @SWG\Property(
+     *         property="http_code",
+     *         type="integer",
+     *         format="int32",
+     *         enum={200, 201},
+     *         default=200
+     *     ),
+     *
+     *     @SWG\Property(
+     *         property="activity_code",
+     *         type="string"
+     *     ),
+     *     @SWG\Property(
+     *         property="message",
+     *         type="string"
+     *     ),
+     *     @SWG\Property(
+     *         property="feedback_message",
+     *         type="string"
+     *     ),
+     *     @SWG\Property(
+     *         property="complete_message",
+     *         type="string"
+     *     )
+     * )
+     *
+     */
      
-    // TODO: This model definition should extend from "response.activity.code" 
+    // TODO: This model definition should extend from "response.ok.activity.code" 
     // But it seems model extension is not working correclty swagger-ui  
     /**
      * 
      * @SWG\Definition(
-     *     definition="response.activity.code.user",
+     *     definition="response.failed.activity.code.user",
      *     type="object",
      *     required={"success", "activity_code", "message", "feedback_message", "complete_message", "user"},
      *     @SWG\Property(
@@ -386,7 +453,8 @@ class ActivityResource extends BaseResource {
      *         property="http_code",
      *         type="integer",
      *         format="int32",
-     *         enum={200, 201}
+     *         enum={200, 201},
+     *         default=200
      *     ),  
      *     @SWG\Property(
      *         property="activity_code",
@@ -406,9 +474,55 @@ class ActivityResource extends BaseResource {
      *     ),     
      *     @SWG\Property(
      *         property="user",
-     *         ref="#/definitions/response.user.checkin"
+     *         ref="#/definitions/user.info.points"
      *     )    
      * 
+     * )
+     *
+     */
+    
+    /**
+     *
+     * @SWG\Definition(
+     *     definition="response.ok.activity.code.user",
+     *     type="object",
+     *     required={"success", "activity_code", "message", "feedback_message", "complete_message", "user", "data"},
+     *     @SWG\Property(
+     *         property="success",
+     *         type="boolean"
+     *     ),
+     *     @SWG\Property(
+     *         property="http_code",
+     *         type="integer",
+     *         format="int32",
+     *         enum={200, 201},
+     *         default=201
+     *     ),
+     *     @SWG\Property(
+     *         property="activity_code",
+     *         type="string"
+     *     ),
+     *     @SWG\Property(
+     *         property="message",
+     *         type="string"
+     *     ),
+     *     @SWG\Property(
+     *         property="feedback_message",
+     *         type="string"
+     *     ),
+     *     @SWG\Property(
+     *         property="complete_message",
+     *         type="string"
+     *     ),
+     *     @SWG\Property(
+     *         property="user",
+     *         ref="#/definitions/user.info.points"
+     *     ),
+     *     @SWG\Property(
+     *         description="Extra activity data send back when the activity is successful",
+     *         property="data",
+     *         type="object"
+     *     )  
      * )
      *
      */
@@ -421,11 +535,11 @@ class ActivityResource extends BaseResource {
      *     @SWG\Property(
      *        type="array",
      *        property="checkins",
-     *        items=@SWG\Schema(ref="#/definitions/response.activity.code")  
+     *        items=@SWG\Schema(ref="#/definitions/response.ok.activity.code")  
      *     ),
      *     @SWG\Property(
      *        property="user",
-     *        ref="#/definitions/response.user.checkin"   
+     *        ref="#/definitions/user.info.points"   
      *     )         
      *
      * )
@@ -486,25 +600,7 @@ class ActivityResource extends BaseResource {
         return [ 'http_code' => $httpCode, 'payload' => $payload ];
         
     }
-    
-    /**
-     * @SWG\Definition(
-     *     definition="response.user.checkin",
-     *     type="object",
-     *     required={"id", "points"},
-
-     *     @SWG\Property(
-     *         property="id",
-     *         type="integer",
-     *         format="int32"
-     *     ),
-     *     @SWG\Property(
-     *         property="points",
-     *         type="object",
-     *         ref="#/definitions/user.points"
-     *     )
-     * )
-     */    
+ 
     
     /**
      * Get user  information

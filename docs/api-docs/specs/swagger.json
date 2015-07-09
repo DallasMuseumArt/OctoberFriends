@@ -401,6 +401,7 @@
                         "format": "int64"
                     },
                     {
+                        "name": "body",
                         "in": "body",
                         "description": "Activity code or accessioned number",
                         "required": true,
@@ -410,11 +411,16 @@
                     }
                 ],
                 "responses": {
+                    "201": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/response.ok.single.checkin"
+                        }
+                    },
                     "200": {
                         "description": "Successful response",
                         "schema": {
-                            "type": "array",
-                            "$ref": "#/definitions/response.single.checkin"
+                            "$ref": "#/definitions/response.failed.single.checkin"
                         }
                     },
                     "500": {
@@ -456,11 +462,16 @@
                     }
                 ],
                 "responses": {
+                    "201": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/response.ok.single.checkin"
+                        }
+                    },
                     "200": {
                         "description": "Successful response",
                         "schema": {
-                            "type": "array",
-                            "$ref": "#/definitions/response.single.checkin"
+                            "$ref": "#/definitions/response.failed.single.checkin"
                         }
                     },
                     "500": {
@@ -494,6 +505,7 @@
                         "format": "int64"
                     },
                     {
+                        "name": "body",
                         "in": "body",
                         "description": "Activity codes and/or accessioned number",
                         "required": true,
@@ -910,6 +922,210 @@
                 }
             }
         },
+        "ratings/{object}/{objectId}": {
+            "get": {
+                "tags": [
+                    "ratings"
+                ],
+                "description": "Get all object ratings",
+                "parameters": [
+                    {
+                        "name": "object",
+                        "in": "path",
+                        "description": "Object",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "activity",
+                            "badge"
+                        ]
+                    },
+                    {
+                        "name": "objectId",
+                        "in": "path",
+                        "description": "ID of object to fetch",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/rate"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "$ref": "#/definitions/UserError404"
+                        }
+                    }
+                }
+            }
+        },
+        "ratings/rate/{object}/{objectId}/user/{user}/{rate}": {
+            "get": {
+                "tags": [
+                    "ratings"
+                ],
+                "description": "Get all object ratings",
+                "parameters": [
+                    {
+                        "name": "object",
+                        "in": "path",
+                        "description": "Object to rate",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "activity",
+                            "badge"
+                        ]
+                    },
+                    {
+                        "name": "objectId",
+                        "in": "path",
+                        "description": "ID of object to rate",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID of user",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "rate",
+                        "in": "path",
+                        "description": "Rate value",
+                        "required": true,
+                        "type": "number",
+                        "format": "float",
+                        "maximum": 5,
+                        "minimum": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/response.rate"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "$ref": "#/definitions/UserError404"
+                        }
+                    }
+                }
+            }
+        },
+        "ratings/rate/{object}/": {
+            "post": {
+                "tags": [
+                    "ratings"
+                ],
+                "description": "Get all object ratings",
+                "parameters": [
+                    {
+                        "name": "object",
+                        "in": "path",
+                        "description": "Object to rate",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "activity",
+                            "badge"
+                        ]
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.rate"
+                        },
+                        "type": "object"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/response.rate"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "$ref": "#/definitions/UserError404"
+                        }
+                    }
+                }
+            }
+        },
+        "ratings/{id}": {
+            "get": {
+                "tags": [
+                    "ratings"
+                ],
+                "description": "Returns an rating by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of rating to fetch",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/rate"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
         "rewards": {
             "get": {
                 "tags": [
@@ -1127,6 +1343,7 @@
                 "description": "User login",
                 "parameters": [
                     {
+                        "name": "body",
                         "in": "body",
                         "description": "User credentials payload",
                         "required": true,
@@ -1194,7 +1411,7 @@
                     }
                 }
             },
-            "post": {
+            "put": {
                 "tags": [
                     "user"
                 ],
@@ -1209,6 +1426,7 @@
                         "format": "int64"
                     },
                     {
+                        "name": "body",
                         "in": "body",
                         "description": "User payload",
                         "required": true,
@@ -1274,6 +1492,7 @@
                 "description": "Create a new user",
                 "parameters": [
                     {
+                        "name": "body",
                         "in": "body",
                         "description": "User payload",
                         "required": true,
@@ -1314,6 +1533,7 @@
                         "format": "int64"
                     },
                     {
+                        "name": "body",
                         "in": "body",
                         "description": "Avatar payload",
                         "required": true,
@@ -1392,6 +1612,120 @@
                     }
                 }
             }
+        },
+        "users/{id}/activities": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "description": "Returns an user by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of user to fetch",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/activity"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "users/{id}/rewards": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "description": "Returns an user by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of user to fetch",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/reward"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "users/{id}/badges": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "description": "Returns an user by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of user to fetch",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/badge"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -1406,7 +1740,7 @@
             },
             "type": "object"
         },
-        "response.single.checkin": {
+        "response.ok.single.checkin": {
             "description": "Single response checking",
             "required": [
                 "data"
@@ -1414,7 +1748,20 @@
             "properties": {
                 "data": {
                     "type": "object",
-                    "$ref": "#/definitions/response.activity.code.user"
+                    "$ref": "#/definitions/response.ok.activity.code.user"
+                }
+            },
+            "type": "object"
+        },
+        "response.failed.single.checkin": {
+            "description": "Single response checking",
+            "required": [
+                "data"
+            ],
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/response.failed.activity.code.user"
                 }
             },
             "type": "object"
@@ -1457,7 +1804,49 @@
             },
             "type": "object"
         },
-        "response.activity.code": {
+        "response.ok.activity.code": {
+            "required": [
+                "success",
+                "activity_code",
+                "message",
+                "feedback_message",
+                "complete_message",
+                "data"
+            ],
+            "properties": {
+                "success": {
+                    "type": "boolean",
+                    "default": "true"
+                },
+                "http_code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "default": 201,
+                    "enum": [
+                        200,
+                        201
+                    ]
+                },
+                "activity_code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "feedback_message": {
+                    "type": "string"
+                },
+                "complete_message": {
+                    "type": "string"
+                },
+                "data": {
+                    "description": "Extra activity data send back when the activity is successful",
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "response.failed.activity.code": {
             "required": [
                 "success",
                 "activity_code",
@@ -1472,6 +1861,7 @@
                 "http_code": {
                     "type": "integer",
                     "format": "int32",
+                    "default": 200,
                     "enum": [
                         200,
                         201
@@ -1492,7 +1882,7 @@
             },
             "type": "object"
         },
-        "response.activity.code.user": {
+        "response.failed.activity.code.user": {
             "required": [
                 "success",
                 "activity_code",
@@ -1508,6 +1898,7 @@
                 "http_code": {
                     "type": "integer",
                     "format": "int32",
+                    "default": 200,
                     "enum": [
                         200,
                         201
@@ -1526,7 +1917,52 @@
                     "type": "string"
                 },
                 "user": {
-                    "$ref": "#/definitions/response.user.checkin"
+                    "$ref": "#/definitions/user.info.points"
+                }
+            },
+            "type": "object"
+        },
+        "response.ok.activity.code.user": {
+            "required": [
+                "success",
+                "activity_code",
+                "message",
+                "feedback_message",
+                "complete_message",
+                "user",
+                "data"
+            ],
+            "properties": {
+                "success": {
+                    "type": "boolean"
+                },
+                "http_code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "default": 201,
+                    "enum": [
+                        200,
+                        201
+                    ]
+                },
+                "activity_code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "feedback_message": {
+                    "type": "string"
+                },
+                "complete_message": {
+                    "type": "string"
+                },
+                "user": {
+                    "$ref": "#/definitions/user.info.points"
+                },
+                "data": {
+                    "description": "Extra activity data send back when the activity is successful",
+                    "type": "object"
                 }
             },
             "type": "object"
@@ -1540,28 +1976,11 @@
                 "checkins": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/response.activity.code"
+                        "$ref": "#/definitions/response.ok.activity.code"
                     }
                 },
                 "user": {
-                    "$ref": "#/definitions/response.user.checkin"
-                }
-            },
-            "type": "object"
-        },
-        "response.user.checkin": {
-            "required": [
-                "id",
-                "points"
-            ],
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "points": {
-                    "type": "object",
-                    "$ref": "#/definitions/user.points"
+                    "$ref": "#/definitions/user.info.points"
                 }
             },
             "type": "object"
@@ -1628,6 +2047,87 @@
                 },
                 "message": {
                     "type": "string"
+                }
+            }
+        },
+        "response.rate": {
+            "required": [
+                "data"
+            ],
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/rate.payload"
+                }
+            }
+        },
+        "rate.payload": {
+            "required": [
+                "success",
+                "message",
+                "user",
+                "rating"
+            ],
+            "properties": {
+                "success": {
+                    "type": "boolean"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "user": {
+                    "type": "object",
+                    "$ref": "#/definitions/user.info.points"
+                },
+                "rating": {
+                    "type": "object",
+                    "$ref": "#/definitions/rating.stats"
+                }
+            }
+        },
+        "rating.stats": {
+            "required": [
+                "total",
+                "average",
+                "object_type",
+                "object_id"
+            ],
+            "properties": {
+                "total": {
+                    "type": "number",
+                    "format": "float"
+                },
+                "average": {
+                    "type": "number",
+                    "format": "float"
+                },
+                "object_type": {
+                    "type": "string"
+                },
+                "object_id": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "request.rate": {
+            "required": [
+                "id",
+                "rate",
+                "user_id"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "rate": {
+                    "type": "number",
+                    "format": "float"
+                },
+                "user_id": {
+                    "type": "integer",
+                    "format": "int32"
                 }
             }
         },
@@ -2206,6 +2706,38 @@
             },
             "type": "object"
         },
+        "rate": {
+            "description": "Rate definition",
+            "required": [
+                "id",
+                "rate",
+                "comment",
+                "create_at"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "rate": {
+                    "type": "number",
+                    "format": "float",
+                    "maximum": 5,
+                    "minimum": 1
+                },
+                "comment": {
+                    "type": "string"
+                },
+                "create_at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "user": {
+                    "type": "object",
+                    "$ref": "#/definitions/user"
+                }
+            }
+        },
         "reward": {
             "description": "Reward definition",
             "required": [
@@ -2496,6 +3028,23 @@
                     "$ref": "#/definitions/state"
                 }
             }
+        },
+        "user.info.points": {
+            "required": [
+                "id",
+                "points"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "points": {
+                    "type": "object",
+                    "$ref": "#/definitions/user.points"
+                }
+            },
+            "type": "object"
         },
         "user.points": {
             "required": [

@@ -76,6 +76,7 @@ class UserResource extends BaseResource
      *     
      *     @SWG\Parameter(
      *         description="User credentials payload",
+     *         name="body",
      *         in="body",
      *         required=true,
      *         schema=@SWG\Schema(ref="#/definitions/request.user.credentials")
@@ -132,7 +133,7 @@ class UserResource extends BaseResource
         */
         $validation = Validator::make($data, $rules);
         if ($validation->fails()){
-            return $this->errorDataValidation('User credantials fail to validate', $validation->errors());
+            return $this->errorDataValidation('User credentials fail to validate', $validation->errors());
         }
         
         /*
@@ -314,6 +315,7 @@ class UserResource extends BaseResource
      *     
      *     @SWG\Parameter(
      *         description="User payload",
+     *         name="body",
      *         in="body",
      *         required=true,
      *         schema=@SWG\Schema(ref="#/definitions/request.user")
@@ -422,11 +424,10 @@ class UserResource extends BaseResource
     }
     
     /**
-     * @SWG\Post(
+     * @SWG\Put(
      *     path="users/{id}",
      *     description="Update a given user",
      *     tags={ "user"},
-     *     
      *     @SWG\Parameter(
      *         description="ID of user to fetch",
      *         format="int64",
@@ -435,9 +436,9 @@ class UserResource extends BaseResource
      *         required=true,
      *         type="integer"
      *     ),
-     *     
      *     @SWG\Parameter(
      *         description="User payload",
+     *         name="body",
      *         in="body",
      *         required=true,
      *         schema=@SWG\Schema(ref="#/definitions/request.user")
@@ -473,16 +474,25 @@ class UserResource extends BaseResource
                 return Response::api()->errorNotFound('User not found'); 
             }
             
-            
-            $data = Request::all();
+            $data =  Request::all();
+            if(Request::isJson() && $data == ''){
+                // Is JSON and data is empty, By default PHP
+                // blocks PUT/PATCH methods. So as workaround 
+                // get get the content and decode it manually
+                // if required
+                $data = Request::getContent();
+                if (!is_array($data)){
+                    $data = json_decode($data);
+                }
+            }
+
             $rules = [
-                    'first_name'            => 'required|min:2',
-                    'last_name'             => 'required|min:2',
+                    'first_name'            => 'min:2',
+                    'last_name'             => 'min:2',
                     //'username'              => 'required|min:6',
-                    'email'                 => 'required|email|between:2,64',
+                    'email'                 => 'email|between:2,64',
                     'password'              => 'sometimes|required|confirmed|min:6',
-                    'password_confirmation' => 'min:6',
-                    'birthday'
+                    'password_confirmation' => 'min:6'
             ];
             
             $validation = Validator::make($data, $rules);
@@ -501,6 +511,7 @@ class UserResource extends BaseResource
 
             $user = $this->updateModelData($user, $data, $userAttrs);
             
+            \Log::debug($data);
 
             if($user->save()) {
                 // If user save ok them we update usermetadata
@@ -526,22 +537,8 @@ class UserResource extends BaseResource
                     $usermeta->save();
                 }
                
-                /*
-                $avatar = array_get($data,'avatar', null);
-                if (!is_null($avatar)) {
-                    UserExtend::uploadAvatar($user, $avatar);
-                }
-                */
-                
-                
-                // TODO : Do we need to re-authenticate?
-                /*
-                // Re-authenticate the user
-                $user = Auth::authenticate([
-                        'email'     => $user->email,
-                        'password'  => $data['password'],
-                ], true);
-                */
+            }else{
+                throw new Exception('Failed to update user data');
             }
             
           
@@ -587,6 +584,7 @@ class UserResource extends BaseResource
      *
      *     @SWG\Parameter(
      *         description="Avatar payload",
+     *         name="body",
      *         in="body",
      *         required=true,
      *         schema=@SWG\Schema(ref="#/definitions/request.avatar")
@@ -743,6 +741,142 @@ class UserResource extends BaseResource
         
         return $opts;
     }
+    
+    /**
+     * @SWG\Get(
+     *     path="users/{id}/activities",
+     *     description="Returns an user by id",
+     *     tags={ "user"},
+     *
+     *     @SWG\Parameter(
+     *         description="ID of user to fetch",
+     *         format="int64",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/activity")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Not Found",
+     *         @SWG\Schema(ref="#/definitions/error404")
+     *     )
+     * )
+     */
+    public function userActivities($userId)
+    {
+        $transformer  = '\DMA\Friends\API\Transformers\ActivityTransformer';
+        $attrRelation = 'activities';
+        return $this->genericUserRelationResource($userId, $attrRelation, $transformer);
+    }
+    
+    /**
+     * @SWG\Get(
+     *     path="users/{id}/rewards",
+     *     description="Returns an user by id",
+     *     tags={ "user"},
+     *
+     *     @SWG\Parameter(
+     *         description="ID of user to fetch",
+     *         format="int64",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/reward")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Not Found",
+     *         @SWG\Schema(ref="#/definitions/error404")
+     *     )
+     * )
+     */
+    public function userRewards($userId)
+    {
+        $transformer  = '\DMA\Friends\API\Transformers\RewardTransformer';
+        $attrRelation = 'rewards';
+        return $this->genericUserRelationResource($userId, $attrRelation, $transformer);
+    }
+    
+    /**
+     * @SWG\Get(
+     *     path="users/{id}/badges",
+     *     description="Returns an user by id",
+     *     tags={ "user"},
+     *
+     *     @SWG\Parameter(
+     *         description="ID of user to fetch",
+     *         format="int64",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/badge")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Not Found",
+     *         @SWG\Schema(ref="#/definitions/error404")
+     *     )
+     * )
+     */
+    public function userBadges($userId)
+    {
+        $transformer  = '\DMA\Friends\API\Transformers\BadgeTransformer';
+        $attrRelation = 'badges';
+        return $this->genericUserRelationResource($userId, $attrRelation, $transformer);
+    }
+    
+    private function genericUserRelationResource($userId, $attrRelation, $transformer)
+    {
+        if(is_null($user = User::find($userId))){
+            return Response::api()->errorNotFound('User not found');
+        }
+    
+        $pageSize   = $this->getPageSize();
+        $transformer = new $transformer;
+    
+        if ($pageSize > 0){
+            $paginator = $user->{$attrRelation}()->paginate($pageSize);
+            return Response::api()->withPaginator($paginator, $transformer);
+        }else{
+            return Response::api()->withCollection($user->{$attrRelation}, $transformer);
+        }
+    
+    }
+    
     
     private function getThemeAvatarOptions()
     {

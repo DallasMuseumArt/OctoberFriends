@@ -147,6 +147,26 @@ class UserProfileTransformer extends BaseTransformer {
         
     }
     
+    
+    /**
+     * @SWG\Definition(
+     *     definition="user.info.points",
+     *     type="object",
+     *     required={"id", "points"},
+    
+     *     @SWG\Property(
+     *         property="id",
+     *         type="integer",
+     *         format="int32"
+     *     ),
+     *     @SWG\Property(
+     *         property="points",
+     *         type="object",
+     *         ref="#/definitions/user.points"
+     *     )
+     * )
+     */
+    
     /**
      * @SWG\Definition(
      *     definition="user.points",
