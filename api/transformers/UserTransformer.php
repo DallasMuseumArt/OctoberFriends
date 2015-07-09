@@ -32,6 +32,35 @@ class UserTransformer extends BaseTransformer {
     ];
     
     /**
+     * @SWG\Definition(
+     *    definition="user",
+     *    description="User profile definition",
+     *    required={"id", "first_name", "last_name", "username", "avatar_url"},
+     *    @SWG\Property(
+     *         property="id",
+     *         type="integer",
+     *         format="int32"
+     *    ),
+     *    @SWG\Property(
+     *         property="first_name",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="last_name",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="username",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="avatar_url",
+     *         type="string",
+     *    )
+     * )
+     */
+        
+    /**
      * {@inheritDoc}
      * @see \DMA\Friends\Classes\API\BaseTransformer::getData()
      */        
@@ -49,6 +78,41 @@ class UserTransformer extends BaseTransformer {
         
         return $data;
     }
+
+    /**
+     * @SWG\Definition(
+     *    definition="user.extended",
+     *    description="User extended definition",
+     *    required={"id", "first_name", "last_name", "username", "avatar_url", "profile"},
+     *    @SWG\Property(
+     *         property="id",
+     *         type="integer",
+     *         format="int32"
+     *    ),
+     *    @SWG\Property(
+     *         property="first_name",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="last_name",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="username",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="avatar_url",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="profile",
+     *         type="object",
+     *         ref="#/definitions/user.profile"
+     *    )
+     * )
+     */
+    
 
     /**
      * {@inheritDoc}

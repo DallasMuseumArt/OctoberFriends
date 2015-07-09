@@ -19,6 +19,68 @@ class UserProfileTransformer extends BaseTransformer {
             'state',
     ];
 
+    /**
+     * @SWG\Definition(
+     *    definition="user.profile",
+     *    description="User profile definition",
+     *    required={"barcode_id", "is_activated", "phone", "address", "city", "zip", "points", "country", "state"},
+     *    @SWG\Property(
+     *         property="barcode_id",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="is_activated",
+     *         type="boolean",
+     *    ),
+     *    @SWG\Property(
+     *         property="phone",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="address",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="city",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="zip",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         description="Classname and Namespace of the generic polymorphic relationship",
+     *         property="object_type",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="timestamp",
+     *         type="string",
+     *         format="date-time"
+     *    ),
+     *    @SWG\Property(
+     *         property="points",
+     *         type="object",
+     *         ref="#/definitions/user.points"
+     *    ),
+     *    @SWG\Property(
+     *         property="country",
+     *         type="object",
+     *         ref="#/definitions/country"
+     *    ),
+     *    @SWG\Property(
+     *         property="state",
+     *         type="object",
+     *         ref="#/definitions/state"
+     *    ),
+     * )
+     */
+    
+    /**
+     * {@inheritDoc}
+     * @see \DMA\Friends\Classes\API\BaseTransformer::getData()
+     */
+    
     public function getData($instance)
     {
         $data = [
@@ -84,6 +146,29 @@ class UserProfileTransformer extends BaseTransformer {
         return [];
         
     }
+    
+    /**
+     * @SWG\Definition(
+     *     definition="user.points",
+     *     type="object",
+     *     required={"total", "this_week", "today"},
+     *     @SWG\Property(
+     *         property="total",
+     *         type="integer",
+     *         format="int32"
+     *     ),
+     *     @SWG\Property(
+     *         property="this_week",
+     *         type="integer",
+     *         format="int32"
+     *     ),
+     *     @SWG\Property(
+     *         property="today",
+     *         type="integer",
+     *         format="int32"
+     *     )
+     * )
+     */
     
     public function getUserPoints(Model $instance)
     {

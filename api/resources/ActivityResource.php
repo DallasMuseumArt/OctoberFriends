@@ -38,6 +38,18 @@ class ActivityResource extends BaseResource {
      *     )
      * )
      * 
+     * @SWG\Definition(
+     *     definition="response.single.checkin",
+     *     description="Single response checking",
+     *     type="object",
+     *     required={"data"},
+     *     @SWG\Property(
+     *        property="data",
+     *        type="object",
+     *        ref="#/definitions/response.activity.code.user"
+     *     ),
+     * )
+     * 
      * @SWG\Post(
      *     path="activities/checkin/{user}",
      *     description="Checking user activities",
@@ -62,7 +74,7 @@ class ActivityResource extends BaseResource {
      *     @SWG\Response(
      *         response=200,
      *         description="Successful response",
-     *         @SWG\Schema(ref="#/definitions/activity.extended", type="array")
+     *         @SWG\Schema(ref="#/definitions/response.single.checkin", type="array")
      *     ),
      *     @SWG\Response(
      *         response=500,
@@ -75,9 +87,8 @@ class ActivityResource extends BaseResource {
      *         @SWG\Schema(ref="#/definitions/UserError404")
      *    )
      * )
-     */    
-    
-    /**
+     *
+     *
      * @SWG\Get(
      *     path="activities/checkin/{user}/{code}",
      *     description="Checking user activities",
@@ -103,7 +114,7 @@ class ActivityResource extends BaseResource {
      *     @SWG\Response(
      *         response=200,
      *         description="Successful response",
-     *         @SWG\Schema(ref="#/definitions/activity.extended", type="array")
+     *         @SWG\Schema(ref="#/definitions/response.single.checkin", type="array")
      *     ),
      *     @SWG\Response(
      *         response=500,
@@ -156,6 +167,124 @@ class ActivityResource extends BaseResource {
 
     }
 
+        
+    /**
+     * @SWG\Definition(
+     *     definition="request.bulk.checkin",
+     *     type="object",
+     *     required={"codes"},
+     *     @SWG\Property(
+     *          type="array",
+     *          items=@SWG\Schema(type="string"),
+     *          property="codes",
+     *     )
+     * )
+     * 
+     * @SWG\Definition(
+     *     definition="response.bulk.checkin",
+     *     type="object",
+     *     required={"data"},
+     *     @SWG\Property(
+     *        property="data",
+     *        ref="#/definitions/response.bulk.activity.code.user"
+     *     )
+     * )
+     *
+     *
+     * @SWG\Definition(
+     *     definition="response.bulks.checkin",
+     *     description="Single response checking",
+     *     type="object",
+     *     required={"data"},
+     *     @SWG\Property(
+     *        property="data",
+     *        type="object",
+     *        ref="#/definitions/response.activity.code.user"
+     *     ),
+     * )
+     *
+     * @SWG\Post(
+     *     path="activities/bulk-checkin/{user}",
+     *     description="Checking user activities",
+     *     tags={ "activity"},
+     *
+     *     @SWG\Parameter(
+     *         description="ID of the user checking the activity",
+     *         format="int64",
+     *         in="path",
+     *         name="user",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *
+     *     @SWG\Parameter(
+     *         description="Activity codes and/or accessioned number",
+     *         in="body",
+     *         required=true,
+     *         schema=@SWG\Schema(ref="#/definitions/request.bulk.checkin")
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/response.bulk.checkin", type="array")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="User not found",
+     *         @SWG\Schema(ref="#/definitions/UserError404")
+     *    )
+     * )
+     *
+     *
+     * @SWG\Get(
+     *     path="activities/bulk-checkin/{user}/{codes}",
+     *     description="Checking user activities",
+     *     tags={ "activity"},
+     *
+     *     @SWG\Parameter(
+     *         description="ID of the user checking the activity",
+     *         format="int64",
+     *         in="path",
+     *         name="user",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *
+     *     @SWG\Parameter(
+     *         description="Activity codes and/or accessioned numbers",
+     *         in="path",
+     *         name="codes",
+     *         type="array",
+     *         required=true,
+     *         items=@SWG\Schema(type="string"),
+     *         collectionFormat="csv",
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/response.bulk.checkin", type="array")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="User not found",
+     *         @SWG\Schema(ref="#/definitions/UserError404")
+     *    )
+     * )
+     */
+    
+    
     public function bulkCheckins($user, $codes=null)
     {
 
@@ -205,6 +334,103 @@ class ActivityResource extends BaseResource {
        
     }
     
+    /**
+     * @SWG\Definition(
+     *     definition="response.activity.code",
+     *     type="object",
+     *     required={"success", "activity_code", "message", "feedback_message", "complete_message"},
+     *     @SWG\Property(
+     *         property="success",
+     *         type="boolean"
+     *     ), 
+     *     @SWG\Property(
+     *         property="http_code",
+     *         type="integer",
+     *         format="int32",
+     *         enum={200, 201}
+     *     ),  
+     *      
+     *     @SWG\Property(
+     *         property="activity_code",
+     *         type="string"
+     *     ),  
+     *     @SWG\Property(
+     *         property="message",
+     *         type="string"
+     *     ),  
+     *     @SWG\Property(
+     *         property="feedback_message",
+     *         type="string"
+     *     ),  
+     *     @SWG\Property(
+     *         property="complete_message",
+     *         type="string"
+     *     )     
+     * )
+     * 
+     */
+     
+    // TODO: This model definition should extend from "response.activity.code" 
+    // But it seems model extension is not working correclty swagger-ui  
+    /**
+     * 
+     * @SWG\Definition(
+     *     definition="response.activity.code.user",
+     *     type="object",
+     *     required={"success", "activity_code", "message", "feedback_message", "complete_message", "user"},
+     *     @SWG\Property(
+     *         property="success",
+     *         type="boolean"
+     *     ), 
+     *     @SWG\Property(
+     *         property="http_code",
+     *         type="integer",
+     *         format="int32",
+     *         enum={200, 201}
+     *     ),  
+     *     @SWG\Property(
+     *         property="activity_code",
+     *         type="string"
+     *     ),  
+     *     @SWG\Property(
+     *         property="message",
+     *         type="string"
+     *     ),  
+     *     @SWG\Property(
+     *         property="feedback_message",
+     *         type="string"
+     *     ),  
+     *     @SWG\Property(
+     *         property="complete_message",
+     *         type="string"
+     *     ),     
+     *     @SWG\Property(
+     *         property="user",
+     *         ref="#/definitions/response.user.checkin"
+     *     )    
+     * 
+     * )
+     *
+     */
+    
+    /**
+     * @SWG\Definition(
+     *     definition="response.bulk.activity.code.user",
+     *     type="object",
+     *     required={"checkins", "user"},
+     *     @SWG\Property(
+     *        type="array",
+     *        property="checkins",
+     *        items=@SWG\Schema(ref="#/definitions/response.activity.code")  
+     *     ),
+     *     @SWG\Property(
+     *        property="user",
+     *        ref="#/definitions/response.user.checkin"   
+     *     )         
+     *
+     * )
+     */
+
     /**
      * 
      * @param RainLab\User\Models\User  $user
@@ -260,6 +486,25 @@ class ActivityResource extends BaseResource {
         return [ 'http_code' => $httpCode, 'payload' => $payload ];
         
     }
+    
+    /**
+     * @SWG\Definition(
+     *     definition="response.user.checkin",
+     *     type="object",
+     *     required={"id", "points"},
+
+     *     @SWG\Property(
+     *         property="id",
+     *         type="integer",
+     *         format="int32"
+     *     ),
+     *     @SWG\Property(
+     *         property="points",
+     *         type="object",
+     *         ref="#/definitions/user.points"
+     *     )
+     * )
+     */    
     
     /**
      * Get user  information

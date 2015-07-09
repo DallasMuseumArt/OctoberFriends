@@ -26,7 +26,7 @@ class ActivityLogResource extends BaseResource {
      * @SWG\Get(
      *     path="activity-logs/user/{user}",
      *     description="Returns all activity logs of a user",
-     *     tags={"activity"},
+     *     tags={"activity-logs"},
      *
      *     @SWG\Parameter(
      *         description="ID of user activity logs to fetch",
@@ -82,7 +82,7 @@ class ActivityLogResource extends BaseResource {
      * @SWG\Get(
      *     path="activity-logs/{types}",
      *     description="Returns all activity logs of a user",
-     *     tags={ "activity"},
+     *     tags={ "activity-logs"},
      *
      *     @SWG\Parameter(
      *         ref="#/parameters/activity_log_types"
@@ -108,7 +108,7 @@ class ActivityLogResource extends BaseResource {
      * @SWG\Get(
      *     path="activity-logs/{types}/user/{user}",
      *     description="Returns all activity logs of a user",
-     *     tags={ "activity"},
+     *     tags={ "activity-logs"},
      *
      *     @SWG\Parameter(
      *         ref="#/parameters/activity_log_types"
@@ -203,7 +203,7 @@ class ActivityLogResource extends BaseResource {
      * @SWG\Get(
      *     path="activity-logs",
      *     description="Returns all activity logs",
-     *     tags={ "activity"},
+     *     tags={ "activity-logs"},
      *
      *     @SWG\Response(
      *         response=200,
@@ -231,7 +231,7 @@ class ActivityLogResource extends BaseResource {
      * @SWG\Get(
      *     path="activity-logs/{id}",
      *     description="Returns an activity logs by id",
-     *     tags={ "activity"},
+     *     tags={ "activity-logs"},
      *      
      *     @SWG\Parameter(
      *         description="ID of activity log to fetch",

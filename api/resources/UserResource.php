@@ -38,6 +38,10 @@ class UserResource extends BaseResource
         $this->addAdditionalRoute('uploadAvatar',   '{user}/upload-avatar',     ['POST', 'PUT']);
         $this->addAdditionalRoute('profileOptions', 'profile-options/{field}',  ['GET']);
         $this->addAdditionalRoute('profileOptions', 'profile-options',          ['GET']);
+        $this->addAdditionalRoute('userActivities', '{user}/activities',        ['GET']);
+        $this->addAdditionalRoute('userRewards',    '{user}/rewards',           ['GET']);
+        $this->addAdditionalRoute('userBadges',     '{user}/badges',            ['GET']);
+        
     }
     
     
@@ -50,6 +54,52 @@ class UserResource extends BaseResource
         
     }
 
+    /**
+     * 
+     * @SWG\Definition(
+     *      definition="request.user.credentials",
+     *      required={"username", "password"},
+     *      @SWG\Property(
+     *         property="username",
+     *         type="string"
+     *      ),
+     *      @SWG\Property(
+     *         property="password",
+     *         type="string"
+     *      )     
+     * )
+     * 
+     * @SWG\Post(
+     *     path="users/login",
+     *     description="User login",
+     *     tags={ "user"},
+     *     
+     *     @SWG\Parameter(
+     *         description="User credentials payload",
+     *         in="body",
+     *         required=true,
+     *         schema=@SWG\Schema(ref="#/definitions/request.user.credentials")
+     *     ), 
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/user.extended")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="User not found",
+     *         @SWG\Schema(ref="#/definitions/UserError404")
+     *     )     
+     * )
+     */
+    
+    
+    
     public function login()
     {
 
@@ -102,7 +152,38 @@ class UserResource extends BaseResource
         
     }
     
-
+    /**
+     * @SWG\Get(
+     *     path="users/{id}",
+     *     description="Returns an user by id",
+     *     tags={ "user"},
+     *
+     *     @SWG\Parameter(
+     *         description="ID of user to fetch",
+     *         format="int64",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/user")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Not Found",
+     *         @SWG\Schema(ref="#/definitions/error404")
+     *     )
+     * )
+     */
     public function show($id)
     {
         // Hacky variable to make the user transformer 
@@ -111,6 +192,144 @@ class UserResource extends BaseResource
         return parent::show($id);
     }
     
+    
+    /** 
+     * @SWG\Get(
+     *     path="users",
+     *     description="Returns all users",
+     *     tags={ "user"},
+     *     
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/user", type="array")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Not Found",
+     *         @SWG\Schema(ref="#/definitions/error404")
+     *    )
+     * )
+     */
+    public function index()
+    {
+        return parent::index();
+    }
+    
+    /**
+     * 
+     * @SWG\Definition(
+     *     definition="request.user",
+     *     type="object",
+     *     required={"first_name", "last_name", "email", "address", "city", "state", "zip", "phone"},
+     *     @SWG\Property(
+     *         property="first_name",
+     *         type="string"
+     *     ),
+     *     @SWG\Property(
+     *         property="last_name",
+     *         type="string"
+     *     ),
+     *     @SWG\Property(
+     *         property="email",
+     *         type="string"
+     *     ),
+     *     @SWG\Property(
+     *         property="email_optin",
+     *         type="boolean"
+     *     ),
+     *     @SWG\Property(
+     *         property="password",
+     *         type="string"
+     *     ),
+     *     @SWG\Property(
+     *         property="password_confirmation",
+     *         type="string"
+     *     ),
+     *     @SWG\Property(
+     *         property="address",
+     *         type="string"
+     *     ),
+     *     @SWG\Property(
+     *         description="State id. Get state using countries/{id}/states",
+     *         property="state",
+     *         type="integer",
+     *         format="int32"
+     *     ),
+     *     @SWG\Property(
+     *         property="zip",
+     *         type="string"
+     *     ),
+     *     @SWG\Property(
+     *         property="phone",
+     *         type="string"
+     *     ),
+     *     @SWG\Property(
+     *         property="birthday_year",
+     *         type="string"
+     *     ),
+     *     @SWG\Property(
+     *         property="birthday_month",
+     *         type="string"
+     *     ),
+     *     @SWG\Property(
+     *         property="birthday_day",
+     *         type="string"
+     *     ),
+     *    @SWG\Property(
+     *         description="Get an update list from endpoint users/profile-options/gender",  
+     *         property="gender",
+     *         type="string",
+     *         enum={"Male", "Female", "Non Binary/Other"}
+     *    ),    
+     *    @SWG\Property(
+     *         description="Get an update list from endpoint users/profile-options/race",
+     *         property="race",
+     *         type="string",
+     *         enum={"White", "Hispanic", "Black or African American", "American Indian or Alaska Native", "Asian", "Native Hawaiian or Other Pacific Islander", "Two or more races", "Other"}
+     *    ),
+     *    @SWG\Property(
+     *         description="Get an update list from endpoint users/profile-options/household_income",  
+     *         property="household_income",
+     *         type="string",
+     *         enum={"Less then $25,000", "$25,000 - $50,000", "$50,000 - $75,000", "$75,000 - $150,000", "$150,000 - $500,000", "$500,000 or more"}
+     *    ),
+     *    @SWG\Property(
+     *         description="Get an update list from endpoint users/profile-options/education", 
+     *         property="education",
+     *         type="string",
+     *         enum={"K-12", "High School/GED", "Some College", "Vocational or Trade School", "Bachelors Degree", "Masters Degree", "PhD"}
+     *    )
+     * )
+     * 
+     * @SWG\Post(
+     *     path="users",
+     *     description="Create a new user",
+     *     tags={ "user"},
+     *     
+     *     @SWG\Parameter(
+     *         description="User payload",
+     *         in="body",
+     *         required=true,
+     *         schema=@SWG\Schema(ref="#/definitions/request.user")
+     *     ), 
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/user.extended")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     )
+     * )
+     */
     public function store()
     {
         // TODO : This logic may need to be in the Extend User model
@@ -201,6 +420,51 @@ class UserResource extends BaseResource
         }
         
     }
+    
+    /**
+     * @SWG\Post(
+     *     path="users/{id}",
+     *     description="Update a given user",
+     *     tags={ "user"},
+     *     
+     *     @SWG\Parameter(
+     *         description="ID of user to fetch",
+     *         format="int64",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     
+     *     @SWG\Parameter(
+     *         description="User payload",
+     *         in="body",
+     *         required=true,
+     *         schema=@SWG\Schema(ref="#/definitions/request.user")
+     *     ), 
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/user.extended")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="User not found",
+     *         @SWG\Schema(ref="#/definitions/UserError404")
+     *     )
+     *     
+     * )
+     */
+    
+    /**
+     * (non-PHPdoc)
+     * @see \DMA\Friends\Classes\API\BaseResource::update()
+     */
     
     public function update($id)
     {
@@ -295,6 +559,61 @@ class UserResource extends BaseResource
     }
     
     
+    /**
+     * @SWG\Definition(
+     *     definition="request.avatar",
+     *     type="object",
+     *     required={"source"},
+     *     @SWG\Property(
+     *         description="Source can be one of the URLs returned by  users/profile-options/avatar endpoint or by uploading a Base64 encode string of a JPG, PNG or GIF",
+     *         property="source",
+     *         type="string"
+     *     )
+     * )
+     * 
+     * @SWG\Post(
+     *     path="users/{id}/upload-avatar",
+     *     description="Change user avatar. Avatar must be a valid JPG, GIF or PNG. And not bigger that 400x400 pixels.",
+     *     tags={ "user"},
+     *
+     *     @SWG\Parameter(
+     *         description="ID of user to fetch",
+     *         format="int64",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *
+     *     @SWG\Parameter(
+     *         description="Avatar payload",
+     *         in="body",
+     *         required=true,
+     *         schema=@SWG\Schema(ref="#/definitions/request.avatar")
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              )
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="User not found",
+     *         @SWG\Schema(ref="#/definitions/UserError404")
+     *     )
+     * )
+     */
+    
     public function uploadAvatar($userId)
     {
 
@@ -331,7 +650,75 @@ class UserResource extends BaseResource
     }
   
     
-        
+    /**
+     * @SWG\Definition(
+     *     definition="response.profile.options",
+     *     type="object",
+     *     @SWG\Property(
+     *          property="gender",
+     *          type="array",
+     *          items=@SWG\Schema(type="string")
+     *     ),     
+     *     @SWG\Property(
+     *          property="race",
+     *          type="array",
+     *          items=@SWG\Schema(type="string")
+     *     ),     
+     *     @SWG\Property(
+     *          description="Currently hardcode to return only USA states",
+     *          property="states",
+     *          type="array",
+     *          items=@SWG\Schema(ref="#/definitions/state")
+     *     ),     
+     *     @SWG\Property(
+     *          property="household_income",
+     *          type="array",
+     *          items=@SWG\Schema(type="string")
+     *     ),     
+     *     @SWG\Property(
+     *          property="education",
+     *          type="array",
+     *          items=@SWG\Schema(type="string")
+     *     ),     
+     *     @SWG\Property(
+     *          property="avatars",
+     *          type="array",
+     *          items=@SWG\Schema(type="string")
+     *     ) 
+     * )
+     * 
+     * 
+     * @SWG\Get(
+     *     path="users/profile-options/{field}",
+     *     description="Returns an user by id",
+     *     tags={ "user"},
+     *
+     *     @SWG\Parameter(
+     *         description="Return options only for the given field",
+     *         in="path",
+     *         name="field",
+     *         required=false,
+     *         type="string",
+     *         enum={"gender", "race", "states", "household_income", "education", "avatars"}
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/response.profile.options")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Not Found",
+     *         @SWG\Schema(ref="#/definitions/error404")
+     *     )
+     * )
+     */
     public function profileOptions($field=null)
     {
         $opts = null;
