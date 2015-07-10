@@ -15,7 +15,18 @@ class StepResource extends BaseResource {
      * @SWG\Get(
      *     path="steps",
      *     description="Returns all activity steps",
+     *     summary="Return all steps",
      *     tags={ "steps"},
+     *         
+     *     @SWG\Parameter(
+     *         ref="#/parameters/per_page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/sort"
+     *     ),       
      *       
      *     @SWG\Response(
      *         response=200,
@@ -43,6 +54,7 @@ class StepResource extends BaseResource {
      * @SWG\Get(
      *     path="steps/{id}",
      *     description="Returns a step by id",
+     *     summary="Find a step by id",
      *     tags={ "steps"},
      *      
      *     @SWG\Parameter(

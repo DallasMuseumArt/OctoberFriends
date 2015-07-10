@@ -31,7 +31,18 @@ class ActivityMetadataResource extends BaseResource {
      * @SWG\Get(
      *     path="activity-metadata/user/{user}",
      *     description="Returns all activity medatadata of a user",
+     *     summary="Returns all activity medatadata by user id",
      *     tags={ "activity-metadata"},
+     *
+     *     @SWG\Parameter(
+     *         ref="#/parameters/per_page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/sort"
+     *     ),
      *
      *     @SWG\Parameter(
      *         description="ID of user activity medatadata to fetch",
@@ -87,8 +98,20 @@ class ActivityMetadataResource extends BaseResource {
      * 
      * @SWG\Get(
      *     path="activity-metadata/{types}",
-     *     description="Returns all activity medatadata of a user",
+     *     description="Returns all activity medatadata of activity type",
+     *     summary="Return activity metadata by activity type",
      *     tags={ "activity-metadata"},
+     *
+     *     @SWG\Parameter(
+     *         ref="#/parameters/per_page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/sort"
+     *     ),
+     *
      *
      *     @SWG\Parameter(
      *         ref="#/parameters/activity_metadata_types"    
@@ -114,7 +137,18 @@ class ActivityMetadataResource extends BaseResource {
      * @SWG\Get(
      *     path="activity-metadata/{types}/user/{user}",
      *     description="Returns all activity medatadata of a user",
+     *     summary="Return activity metadata by activity type and user id",
      *     tags={ "activity-metadata"},
+     *
+     *     @SWG\Parameter(
+     *         ref="#/parameters/per_page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/sort"
+     *     ),
      *
      *     @SWG\Parameter(
      *         ref="#/parameters/activity_metadata_types"     
@@ -204,8 +238,19 @@ class ActivityMetadataResource extends BaseResource {
      * @SWG\Get(
      *     path="activity-metadata",
      *     description="Returns all activity medatadata",
+     *     summary="Return all activity metadata",
      *     tags={ "activity-metadata"},
-     *
+     *     
+     *     @SWG\Parameter(
+     *         ref="#/parameters/per_page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/sort"
+     *     ),
+     *     
      *     @SWG\Response(
      *         response=200,
      *         description="Successful response",
@@ -233,6 +278,7 @@ class ActivityMetadataResource extends BaseResource {
      * @SWG\Get(
      *     path="activity-metadata/{id}",
      *     description="Returns an activity metadata by id",
+     *     summary="Find an activity metadata by id",
      *     tags={ "activity-metadata"},
      *      
      *     @SWG\Parameter(

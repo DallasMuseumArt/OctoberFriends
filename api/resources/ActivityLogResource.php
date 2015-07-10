@@ -26,7 +26,18 @@ class ActivityLogResource extends BaseResource {
      * @SWG\Get(
      *     path="activity-logs/user/{user}",
      *     description="Returns all activity logs of a user",
+     *     summary="Return activity logs by user",
      *     tags={"activity-logs"},
+     *
+     *     @SWG\Parameter(
+     *         ref="#/parameters/per_page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/sort"
+     *     ),
      *
      *     @SWG\Parameter(
      *         description="ID of user activity logs to fetch",
@@ -81,8 +92,19 @@ class ActivityLogResource extends BaseResource {
      *
      * @SWG\Get(
      *     path="activity-logs/{types}",
-     *     description="Returns all activity logs of a user",
+     *     description="Returns all activity logs by type",
+     *     summary="Return activity log by type", 
      *     tags={ "activity-logs"},
+     *
+     *     @SWG\Parameter(
+     *         ref="#/parameters/per_page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/sort"
+     *     ),
      *
      *     @SWG\Parameter(
      *         ref="#/parameters/activity_log_types"
@@ -107,9 +129,19 @@ class ActivityLogResource extends BaseResource {
      *
      * @SWG\Get(
      *     path="activity-logs/{types}/user/{user}",
-     *     description="Returns all activity logs of a user",
+     *     description="Returns a single activity type log of a given user",
+     *     summary="Return users activity log by type",
      *     tags={ "activity-logs"},
-     *
+     *    
+     *     @SWG\Parameter(
+     *         ref="#/parameters/per_page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/sort"
+     *     ),
      *     @SWG\Parameter(
      *         ref="#/parameters/activity_log_types"
      *     ),
@@ -203,8 +235,19 @@ class ActivityLogResource extends BaseResource {
      * @SWG\Get(
      *     path="activity-logs",
      *     description="Returns all activity logs",
-     *     tags={ "activity-logs"},
-     *
+     *     summary="Return all activity logs",
+     *     tags={ "activity-logs"}, 
+     *     
+     *     @SWG\Parameter(
+     *         ref="#/parameters/per_page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/sort"
+     *     ),
+     *          
      *     @SWG\Response(
      *         response=200,
      *         description="Successful response",
@@ -231,6 +274,7 @@ class ActivityLogResource extends BaseResource {
      * @SWG\Get(
      *     path="activity-logs/{id}",
      *     description="Returns an activity logs by id",
+     *     summary="Find an activity logs by id",
      *     tags={ "activity-logs"},
      *      
      *     @SWG\Parameter(

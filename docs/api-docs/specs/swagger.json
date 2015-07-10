@@ -26,8 +26,18 @@
                 "tags": [
                     "activity-logs"
                 ],
+                "summary": "Return activity logs by user",
                 "description": "Returns all activity logs of a user",
                 "parameters": [
+                    {
+                        "$ref": "#/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/parameters/page"
+                    },
+                    {
+                        "$ref": "#/parameters/sort"
+                    },
                     {
                         "name": "user",
                         "in": "path",
@@ -65,8 +75,18 @@
                 "tags": [
                     "activity-logs"
                 ],
-                "description": "Returns all activity logs of a user",
+                "summary": "Return activity log by type",
+                "description": "Returns all activity logs by type",
                 "parameters": [
+                    {
+                        "$ref": "#/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/parameters/page"
+                    },
+                    {
+                        "$ref": "#/parameters/sort"
+                    },
                     {
                         "$ref": "#/parameters/activity_log_types"
                     }
@@ -99,8 +119,18 @@
                 "tags": [
                     "activity-logs"
                 ],
-                "description": "Returns all activity logs of a user",
+                "summary": "Return users activity log by type",
+                "description": "Returns a single activity type log of a given user",
                 "parameters": [
+                    {
+                        "$ref": "#/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/parameters/page"
+                    },
+                    {
+                        "$ref": "#/parameters/sort"
+                    },
                     {
                         "$ref": "#/parameters/activity_log_types"
                     },
@@ -141,7 +171,19 @@
                 "tags": [
                     "activity-logs"
                 ],
+                "summary": "Return all activity logs",
                 "description": "Returns all activity logs",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/parameters/page"
+                    },
+                    {
+                        "$ref": "#/parameters/sort"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -170,6 +212,7 @@
                 "tags": [
                     "activity-logs"
                 ],
+                "summary": "Find an activity logs by id",
                 "description": "Returns an activity logs by id",
                 "parameters": [
                     {
@@ -208,8 +251,18 @@
                 "tags": [
                     "activity-metadata"
                 ],
+                "summary": "Returns all activity medatadata by user id",
                 "description": "Returns all activity medatadata of a user",
                 "parameters": [
+                    {
+                        "$ref": "#/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/parameters/page"
+                    },
+                    {
+                        "$ref": "#/parameters/sort"
+                    },
                     {
                         "name": "user",
                         "in": "path",
@@ -247,8 +300,18 @@
                 "tags": [
                     "activity-metadata"
                 ],
-                "description": "Returns all activity medatadata of a user",
+                "summary": "Return activity metadata by activity type",
+                "description": "Returns all activity medatadata of activity type",
                 "parameters": [
+                    {
+                        "$ref": "#/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/parameters/page"
+                    },
+                    {
+                        "$ref": "#/parameters/sort"
+                    },
                     {
                         "$ref": "#/parameters/activity_metadata_types"
                     }
@@ -281,8 +344,18 @@
                 "tags": [
                     "activity-metadata"
                 ],
+                "summary": "Return activity metadata by activity type and user id",
                 "description": "Returns all activity medatadata of a user",
                 "parameters": [
+                    {
+                        "$ref": "#/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/parameters/page"
+                    },
+                    {
+                        "$ref": "#/parameters/sort"
+                    },
                     {
                         "$ref": "#/parameters/activity_metadata_types"
                     },
@@ -323,7 +396,19 @@
                 "tags": [
                     "activity-metadata"
                 ],
+                "summary": "Return all activity metadata",
                 "description": "Returns all activity medatadata",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/parameters/page"
+                    },
+                    {
+                        "$ref": "#/parameters/sort"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -352,6 +437,7 @@
                 "tags": [
                     "activity-metadata"
                 ],
+                "summary": "Find an activity metadata by id",
                 "description": "Returns an activity metadata by id",
                 "parameters": [
                     {
@@ -390,7 +476,8 @@
                 "tags": [
                     "activity"
                 ],
-                "description": "Checking user activities",
+                "summary": "Checkin an activity",
+                "description": "Checkin user activities",
                 "parameters": [
                     {
                         "name": "user",
@@ -443,7 +530,8 @@
                 "tags": [
                     "activity"
                 ],
-                "description": "Checking user activities",
+                "summary": "Checkin an activity",
+                "description": "Checkin user activities",
                 "parameters": [
                     {
                         "name": "user",
@@ -494,7 +582,8 @@
                 "tags": [
                     "activity"
                 ],
-                "description": "Checking user activities",
+                "summary": "Bulk activity checkin",
+                "description": "Bulk checkin user activities",
                 "parameters": [
                     {
                         "name": "user",
@@ -542,7 +631,8 @@
                 "tags": [
                     "activity"
                 ],
-                "description": "Checking user activities",
+                "summary": "Bulk activity checkin",
+                "description": "Bulk checkin user activities",
                 "parameters": [
                     {
                         "name": "user",
@@ -592,7 +682,19 @@
                 "tags": [
                     "activity"
                 ],
+                "summary": "Returns all activities",
                 "description": "Returns all activities",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/parameters/page"
+                    },
+                    {
+                        "$ref": "#/parameters/sort"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -621,6 +723,7 @@
                 "tags": [
                     "activity"
                 ],
+                "summary": "Find activity by id",
                 "description": "Returns an activity by id",
                 "parameters": [
                     {
@@ -659,7 +762,19 @@
                 "tags": [
                     "badges"
                 ],
+                "summary": "Return all badges",
                 "description": "Returns all badges",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/parameters/page"
+                    },
+                    {
+                        "$ref": "#/parameters/sort"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -688,6 +803,7 @@
                 "tags": [
                     "badges"
                 ],
+                "summary": "Find a badge by id",
                 "description": "Returns a badge by id",
                 "parameters": [
                     {
@@ -726,7 +842,19 @@
                 "tags": [
                     "categories"
                 ],
+                "summary": "Return all categories",
                 "description": "Returns all categories",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/parameters/page"
+                    },
+                    {
+                        "$ref": "#/parameters/sort"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -755,6 +883,7 @@
                 "tags": [
                     "categories"
                 ],
+                "summary": "Find a category by id",
                 "description": "Returns a category by id",
                 "parameters": [
                     {
@@ -793,7 +922,19 @@
                 "tags": [
                     "countries"
                 ],
+                "summary": "Return all countries",
                 "description": "Returns all countries",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/parameters/page"
+                    },
+                    {
+                        "$ref": "#/parameters/sort"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -822,6 +963,7 @@
                 "tags": [
                     "countries"
                 ],
+                "summary": "Find a country by id",
                 "description": "Returns a country by id",
                 "parameters": [
                     {
@@ -860,7 +1002,19 @@
                 "tags": [
                     "locations"
                 ],
+                "summary": "Return all locations",
                 "description": "Returns all locations",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/parameters/page"
+                    },
+                    {
+                        "$ref": "#/parameters/sort"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -889,6 +1043,7 @@
                 "tags": [
                     "locations"
                 ],
+                "summary": "Find a location by id",
                 "description": "Returns a location by id",
                 "parameters": [
                     {
@@ -927,6 +1082,7 @@
                 "tags": [
                     "ratings"
                 ],
+                "summary": "Get all ratings by object type",
                 "description": "Get all object ratings",
                 "parameters": [
                     {
@@ -939,6 +1095,12 @@
                             "activity",
                             "badge"
                         ]
+                    },
+                    {
+                        "$ref": "#/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/parameters/page"
                     },
                     {
                         "name": "objectId",
@@ -976,7 +1138,8 @@
                 "tags": [
                     "ratings"
                 ],
-                "description": "Get all object ratings",
+                "summary": "Rate an object",
+                "description": "Rate an object",
                 "parameters": [
                     {
                         "name": "object",
@@ -1043,7 +1206,8 @@
                 "tags": [
                     "ratings"
                 ],
-                "description": "Get all object ratings",
+                "summary": "Rate an object",
+                "description": "Rate an object",
                 "parameters": [
                     {
                         "name": "object",
@@ -1093,7 +1257,8 @@
                 "tags": [
                     "ratings"
                 ],
-                "description": "Returns an rating by id",
+                "summary": "Find a rate by id",
+                "description": "Returns an rate by id",
                 "parameters": [
                     {
                         "name": "id",
@@ -1126,12 +1291,123 @@
                 }
             }
         },
+        "rewards/redeem/{reward}/user/{user}": {
+            "get": {
+                "tags": [
+                    "rewards"
+                ],
+                "summary": "Redeem a reward",
+                "description": "Redeem user points for rewards",
+                "parameters": [
+                    {
+                        "name": "reward",
+                        "in": "path",
+                        "description": "ID of reward to redeem",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID of user",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Unsuccessful response",
+                        "schema": {
+                            "$ref": "#/definitions/response.redeem"
+                        }
+                    },
+                    "201": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/response.redeem"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "$ref": "#/definitions/UserError404"
+                        }
+                    }
+                }
+            }
+        },
+        "rewards/redeem": {
+            "post": {
+                "tags": [
+                    "rewards"
+                ],
+                "summary": "Redeem a reward",
+                "description": "Redeem user points for rewards",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.redeem"
+                        },
+                        "type": "object"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Unsuccessful response",
+                        "schema": {
+                            "$ref": "#/definitions/response.redeem"
+                        }
+                    },
+                    "201": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/response.redeem"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "$ref": "#/definitions/UserError404"
+                        }
+                    }
+                }
+            }
+        },
         "rewards": {
             "get": {
                 "tags": [
                     "rewards"
                 ],
+                "summary": "Returns all rewards",
                 "description": "Returns all rewards",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/parameters/page"
+                    },
+                    {
+                        "$ref": "#/parameters/sort"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -1160,6 +1436,7 @@
                 "tags": [
                     "rewards"
                 ],
+                "summary": "Find a reward by id",
                 "description": "Returns a reward by id",
                 "parameters": [
                     {
@@ -1198,8 +1475,18 @@
                 "tags": [
                     "countries"
                 ],
+                "summary": "Return all states by country",
                 "description": "Returns all states of given country",
                 "parameters": [
+                    {
+                        "$ref": "#/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/parameters/page"
+                    },
+                    {
+                        "$ref": "#/parameters/sort"
+                    },
                     {
                         "$ref": "#/parameters/country_id"
                     }
@@ -1232,6 +1519,7 @@
                 "tags": [
                     "countries"
                 ],
+                "summary": "Find a state id",
                 "description": "Returns a state by id",
                 "parameters": [
                     {
@@ -1273,7 +1561,19 @@
                 "tags": [
                     "steps"
                 ],
+                "summary": "Return all steps",
                 "description": "Returns all activity steps",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/parameters/page"
+                    },
+                    {
+                        "$ref": "#/parameters/sort"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -1302,6 +1602,7 @@
                 "tags": [
                     "steps"
                 ],
+                "summary": "Find a step by id",
                 "description": "Returns a step by id",
                 "parameters": [
                     {
@@ -1467,6 +1768,17 @@
                 ],
                 "summary": "Returns all users",
                 "description": "Returns all users",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/parameters/page"
+                    },
+                    {
+                        "$ref": "#/parameters/sort"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -1629,6 +1941,12 @@
                 "description": "Returns an user activities",
                 "parameters": [
                     {
+                        "$ref": "#/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/parameters/page"
+                    },
+                    {
                         "name": "id",
                         "in": "path",
                         "description": "ID of user to fetch",
@@ -1668,6 +1986,12 @@
                 "description": "Returns user rewards",
                 "parameters": [
                     {
+                        "$ref": "#/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/parameters/page"
+                    },
+                    {
                         "name": "id",
                         "in": "path",
                         "description": "ID of user to fetch",
@@ -1706,6 +2030,12 @@
                 "summary": "Find user earned badges",
                 "description": "Returns user badges",
                 "parameters": [
+                    {
+                        "$ref": "#/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/parameters/page"
+                    },
                     {
                         "name": "id",
                         "in": "path",
@@ -2134,6 +2464,52 @@
                 "rate": {
                     "type": "number",
                     "format": "float"
+                },
+                "user_id": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "response.redeem": {
+            "required": [
+                "data"
+            ],
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/redeem.payload"
+                }
+            }
+        },
+        "redeem.payload": {
+            "required": [
+                "success",
+                "message",
+                "user"
+            ],
+            "properties": {
+                "success": {
+                    "type": "boolean"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "user": {
+                    "type": "object",
+                    "$ref": "#/definitions/user.info.points"
+                }
+            }
+        },
+        "request.redeem": {
+            "required": [
+                "reward_id",
+                "user_id"
+            ],
+            "properties": {
+                "reward_id": {
+                    "type": "integer",
+                    "format": "int32"
                 },
                 "user_id": {
                     "type": "integer",
@@ -3182,6 +3558,35 @@
                 "Points",
                 "Registration"
             ]
+        },
+        "per_page": {
+            "name": "per_page",
+            "in": "query",
+            "description": "Control the number of items per page. When set as zero all items are return witout pagination.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": "50"
+        },
+        "page": {
+            "name": "page",
+            "in": "query",
+            "description": "Page to display",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": "1"
+        },
+        "sort": {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort by this field. for DESC order prepend '-'. eg. -id",
+            "required": false,
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "collectionFormat": "csv"
         },
         "country_id": {
             "name": "id",

@@ -64,7 +64,8 @@ class ActivityResource extends BaseResource {
      * 
      * @SWG\Post(
      *     path="activities/checkin/{user}",
-     *     description="Checking user activities",
+     *     description="Checkin user activities",
+     *     summary="Checkin an activity",
      *     tags={ "activity"},
      *
      *     @SWG\Parameter(
@@ -109,7 +110,8 @@ class ActivityResource extends BaseResource {
      *
      * @SWG\Get(
      *     path="activities/checkin/{user}/{code}",
-     *     description="Checking user activities",
+     *     description="Checkin user activities",
+     *     summary="Checkin an activity",
      *     tags={ "activity"},
      *
      *     @SWG\Parameter(
@@ -227,7 +229,8 @@ class ActivityResource extends BaseResource {
      *
      * @SWG\Post(
      *     path="activities/bulk-checkin/{user}",
-     *     description="Checking user activities",
+     *     description="Bulk checkin user activities",
+     *     summary="Bulk activity checkin",
      *     tags={ "activity"},
      *
      *     @SWG\Parameter(
@@ -267,7 +270,8 @@ class ActivityResource extends BaseResource {
      *
      * @SWG\Get(
      *     path="activities/bulk-checkin/{user}/{codes}",
-     *     description="Checking user activities",
+     *     description="Bulk checkin user activities",
+     *     summary="Bulk activity checkin",
      *     tags={ "activity"},
      *
      *     @SWG\Parameter(
@@ -624,8 +628,19 @@ class ActivityResource extends BaseResource {
      * @SWG\Get(
      *     path="activities",
      *     description="Returns all activities",
+     *     summary="Returns all activities",
      *     tags={ "activity"},
-     *
+     *     
+     *     @SWG\Parameter(
+     *         ref="#/parameters/per_page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/sort"
+     *     ),
+     *     
      *     @SWG\Response(
      *         response=200,
      *         description="Successful response",
@@ -652,6 +667,7 @@ class ActivityResource extends BaseResource {
      * @SWG\Get(
      *     path="activities/{id}",
      *     description="Returns an activity by id",
+     *     summary="Find activity by id",
      *     tags={ "activity"},
      *
      *     @SWG\Parameter(

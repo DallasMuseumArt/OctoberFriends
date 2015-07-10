@@ -12,7 +12,18 @@ class CategoryResource extends BaseResource {
      * @SWG\Get(
      *     path="categories",
      *     description="Returns all categories",
+     *     summary="Return all categories",
      *     tags={ "categories"},
+     *        
+     *     @SWG\Parameter(
+     *         ref="#/parameters/per_page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/sort"
+     *     ),
      *     
      *     @SWG\Response(
      *         response=200,
@@ -40,6 +51,7 @@ class CategoryResource extends BaseResource {
      * @SWG\Get(
      *     path="categories/{id}",
      *     description="Returns a category by id",
+     *     summary="Find a category by id",
      *     tags={ "categories"},
      *     
      *     @SWG\Parameter(

@@ -12,8 +12,19 @@ class BadgeResource extends BaseResource {
      * @SWG\Get(
      *     path="badges",
      *     description="Returns all badges",
+     *     summary="Return all badges",
      *     tags={ "badges"},
-     *
+     *     
+     *     @SWG\Parameter(
+     *         ref="#/parameters/per_page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/sort"
+     *     ),
+     *          
      *     @SWG\Response(
      *         response=200,
      *         description="Successful response",
@@ -40,6 +51,7 @@ class BadgeResource extends BaseResource {
      * @SWG\Get(
      *     path="badges/{id}",
      *     description="Returns a badge by id",
+     *     summary="Find a badge by id",
      *     tags={ "badges"},
      *
      *     @SWG\Parameter(

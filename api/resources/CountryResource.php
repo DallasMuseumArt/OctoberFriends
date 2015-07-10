@@ -13,7 +13,19 @@ class CountryResource extends BaseResource
      * @SWG\Get(
      *     path="countries",
      *     description="Returns all countries",
+     *     summary="Return all countries",
      *     tags={ "countries"},
+     *  
+     *     @SWG\Parameter(
+     *         ref="#/parameters/per_page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/sort"
+     *     ),
+     *     
      *
      *     @SWG\Response(
      *         response=200,
@@ -41,6 +53,7 @@ class CountryResource extends BaseResource
      * @SWG\Get(
      *     path="countries/{id}",
      *     description="Returns a country by id",
+     *     summary="Find a country by id",  
      *     tags={ "countries"},
      *
      *     @SWG\Parameter(

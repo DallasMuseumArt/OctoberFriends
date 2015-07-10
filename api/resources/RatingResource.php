@@ -55,6 +55,7 @@ class RatingResource extends BaseResource {
      * @SWG\GET(
      *     path="ratings/{object}/{objectId}",
      *     description="Get all object ratings",
+     *     summary="Get all ratings by object type",
      *     tags={ "ratings"},
      *     
      *     @SWG\Parameter(
@@ -65,6 +66,14 @@ class RatingResource extends BaseResource {
      *         type="string",
      *         enum={"activity", "badge"}
      *     ),
+     *      
+     *     @SWG\Parameter(
+     *         ref="#/parameters/per_page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/page"
+     *     ),
+     *     
      *     @SWG\Parameter(
      *         description="ID of object to fetch",
      *         format="int64",
@@ -183,7 +192,8 @@ class RatingResource extends BaseResource {
      * 
      * @SWG\GET(
      *     path="ratings/rate/{object}/{objectId}/user/{user}/{rate}",
-     *     description="Get all object ratings",
+     *     description="Rate an object",
+     *     summary="Rate an object",
      *     tags={ "ratings"},
      *
      *     @SWG\Parameter(
@@ -315,7 +325,8 @@ class RatingResource extends BaseResource {
      * 
      * @SWG\Post(
      *     path="ratings/rate/{object}/",
-     *     description="Get all object ratings",
+     *     description="Rate an object",
+     *     summary="Rate an object",    
      *     tags={ "ratings"},
      *
      *     @SWG\Parameter(
@@ -379,7 +390,8 @@ class RatingResource extends BaseResource {
     /**
      * @SWG\Get(
      *     path="ratings/{id}",
-     *     description="Returns an rating by id",
+     *     description="Returns an rate by id",
+     *     summary="Find a rate by id",
      *     tags={ "ratings"},
      *
      *     @SWG\Parameter(

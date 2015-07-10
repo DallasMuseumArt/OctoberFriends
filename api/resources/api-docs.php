@@ -82,3 +82,41 @@
  *         )
  *     )
  */
+ 
+// TODO : Swagger don't support yet dynamic query parameters
+// see https://github.com/swagger-api/swagger-spec/issues/367
+
+/**
+ * // Common parameters
+ * 
+ * @SWG\Parameter(
+ *      description="Control the number of items per page. When set as zero all items are return witout pagination.",
+ *      name="per_page",
+ *      in="query",
+ *      type="integer",
+ *      format="int32",
+ *      default="50",
+ *      required=false
+ * )
+ * 
+ * @SWG\Parameter(
+ *      description="Page to display",
+ *      name="page",
+ *      in="query",
+ *      type="integer",
+ *      format="int32",
+ *      default="1",
+ *      required=false
+ * )
+ * 
+ * @SWG\Parameter(
+ *      description="Sort by this field. for DESC order prepend '-'. eg. -id",
+ *      name="sort",
+ *      in="query",
+ *      type="array",
+ *      required=false,
+ *      items=@SWG\Schema(type="string"),
+ *      collectionFormat="csv"
+ * ) 
+ *
+ */

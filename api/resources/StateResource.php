@@ -23,7 +23,19 @@ class StateResource extends BaseResource
      * @SWG\Get(
      *     path="countries/{id}/states",
      *     description="Returns all states of given country",
+     *     summary="Return all states by country",
      *     tags={ "countries"},
+     *      
+     *     @SWG\Parameter(
+     *         ref="#/parameters/per_page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/sort"
+     *     ),
+     *     
      *    
      *    @SWG\Parameter(
      *         ref="#/parameters/country_id"
@@ -55,6 +67,7 @@ class StateResource extends BaseResource
      * @SWG\Get(
      *     path="countires/{id}/states/{state_id}",
      *     description="Returns a state by id",
+     *     summary="Find a state id", 
      *     tags={ "countries"},
      *     
      *     @SWG\Parameter(

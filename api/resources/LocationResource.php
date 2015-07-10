@@ -12,8 +12,19 @@ class LocationResource extends BaseResource {
      * @SWG\Get(
      *     path="locations",
      *     description="Returns all locations",
+     *     summary="Return all locations", 
      *     tags={ "locations"},
      *
+     *     @SWG\Parameter(
+     *         ref="#/parameters/per_page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/sort"
+     *     ),
+     *    
      *     @SWG\Response(
      *         response=200,
      *         description="Successful response",
@@ -40,6 +51,7 @@ class LocationResource extends BaseResource {
      * @SWG\Get(
      *     path="locations/{id}",
      *     description="Returns a location by id",
+     *     summary="Find a location by id",
      *     tags={ "locations"},
      *
      *     @SWG\Parameter(

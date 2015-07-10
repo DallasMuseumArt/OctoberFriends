@@ -203,6 +203,16 @@ class UserResource extends BaseResource
      *     description="Returns all users",
      *     tags={ "user"},
      *     
+     *     @SWG\Parameter(
+     *         ref="#/parameters/per_page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/sort"
+     *     ), 
+     *     
      *     @SWG\Response(
      *         response=200,
      *         description="Successful response",
@@ -755,7 +765,14 @@ class UserResource extends BaseResource
      *     description="Returns an user activities",
      *     summary="Find user completed activities",
      *     tags={ "user"},
-     *
+     *     
+     *     @SWG\Parameter(
+     *         ref="#/parameters/per_page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/page"
+     *     ),
+     *     
      *     @SWG\Parameter(
      *         description="ID of user to fetch",
      *         format="int64",
@@ -795,7 +812,14 @@ class UserResource extends BaseResource
      *     description="Returns user rewards",
      *     summary="Find user redeem rewards",
      *     tags={ "user"},
-     *
+     *     
+     *     @SWG\Parameter(
+     *         ref="#/parameters/per_page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/page"
+     *     ),
+     *     
      *     @SWG\Parameter(
      *         description="ID of user to fetch",
      *         format="int64",
@@ -835,7 +859,14 @@ class UserResource extends BaseResource
      *     description="Returns user badges",
      *     summary="Find user earned badges",
      *     tags={ "user"},
-     *
+     *     
+     *     @SWG\Parameter(
+     *         ref="#/parameters/per_page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/page"
+     *     ),
+     *     
      *     @SWG\Parameter(
      *         description="ID of user to fetch",
      *         format="int64",
@@ -876,13 +907,16 @@ class UserResource extends BaseResource
         }
     
         $pageSize   = $this->getPageSize();
+        $sortBy     = $this->getSortBy();
+        $query      = $user->{$attrRelation}();       
+        
         $transformer = new $transformer;
     
         if ($pageSize > 0){
-            $paginator = $user->{$attrRelation}()->paginate($pageSize);
+            $paginator = $query->paginate($pageSize);
             return Response::api()->withPaginator($paginator, $transformer);
         }else{
-            return Response::api()->withCollection($user->{$attrRelation}, $transformer);
+            return Response::api()->withCollection($query->get(), $transformer);
         }
     
     }
