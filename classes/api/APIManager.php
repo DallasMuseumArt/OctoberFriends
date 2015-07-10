@@ -20,7 +20,7 @@ class APIManager
     
         
     /**
-     * Regiter multiple API Resources using the following array 
+     * Register multiple API Resources using the following array 
      * structure:
      * 
      * [ <endpoint_url> => <classname_resource>,  <endpoint_url> => <classname_resource>, ...]
@@ -54,7 +54,8 @@ class APIManager
         $this->loadRegisteredResources();
         return $this->resources;
     }
-
+    
+    
     /**
      * Register Laravel routes of each registered resources
      * @param bool $includeNamespaces
