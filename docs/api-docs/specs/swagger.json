@@ -2066,6 +2066,56 @@
                     }
                 }
             }
+        },
+        "recommendations/suggest/{item}/{user}": {
+            "get": {
+                "tags": [
+                    "recommendations"
+                ],
+                "summary": "Return user recommendations by user",
+                "description": "Returns user recomendations",
+                "parameters": [
+                    {
+                        "name": "item",
+                        "in": "path",
+                        "description": "Items to recommend",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "badge",
+                            "activity"
+                        ]
+                    },
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID of user to make recommendations",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/badge"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
