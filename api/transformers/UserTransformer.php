@@ -1,5 +1,6 @@
 <?php namespace DMA\Friends\API\Transformers;
 
+use URL;
 use Model;
 use Response;
 
@@ -25,10 +26,7 @@ class UserTransformer extends BaseTransformer {
      * @var array
      */
     protected $availableIncludes = [
-            'profile',
-            'rewards',
-            'activities',
-            'badges'
+            'profile'
     ];
     
     /**
@@ -103,7 +101,23 @@ class UserTransformer extends BaseTransformer {
      *    ),
      *    @SWG\Property(
      *         property="avatar_url",
-     *         type="string",
+     *         type="integer",
+     *         format="int32"
+     *    ),
+     *    @SWG\Property(
+     *         property="num_rewards",
+     *         type="integer",
+     *         format="int32"
+     *    ),
+     *    @SWG\Property(
+     *         property="num_activities",
+     *         type="integer",
+     *         format="int32"
+     *    ),
+     *    @SWG\Property(
+     *         property="num_badges",
+     *         type="integer",
+     *         format="int32"
      *    ),
      *    @SWG\Property(
      *         property="profile",
@@ -121,7 +135,18 @@ class UserTransformer extends BaseTransformer {
     public function getExtendedData($instance)
     {
         // Adding full user profile by the Fractal embeding system
-        $this->setDefaultIncludes(['profile', 'rewards', 'activities', 'badges']);
+        $this->setDefaultIncludes(['profile']);
+        
+        return [
+
+                "num_rewards"    => $instance->rewards()->count(),            
+                "num_activities" => $instance->activities()->count(),
+                "num_badges"     => $instance->badges()->count(),
+                
+                "rewards_url"    => URL::route('friends.api.users.userrewards',    ['user' => $instance->getKey()]),
+                "activities_url" => URL::route('friends.api.users.useractivities', ['user' => $instance->getKey()]),
+                "badges_url"     => URL::route('friends.api.users.userbadges',     ['user' => $instance->getKey()]),
+        ];
         
     }
     

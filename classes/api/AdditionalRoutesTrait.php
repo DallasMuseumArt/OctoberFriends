@@ -25,14 +25,18 @@ trait AdditionalRoutesTrait
      * 
      * @param array $verbs
      * HTTP verb methods. Default is ['GET']
+     * 
+     * @param string $name
+     * Name of the url. If not name is given the string representation of the handler will be used.
      */
-    public function addAdditionalRoute($handler, $url=Null, array $verbs=['GET'])
+    public function addAdditionalRoute($handler, $url=Null, array $verbs=['GET'], $name=Null)
     {
         if( method_exists( $this, $handler ) ) {
             $url = ($url) ? $url : $handler;
             $this->additionalRoutes[$url] = [
                 'handler' => $handler,
-                'verbs' => $verbs
+                'verbs' => $verbs,
+                'nane'  => $name    
             ];
         }
     }

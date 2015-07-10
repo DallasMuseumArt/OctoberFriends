@@ -1340,7 +1340,8 @@
                 "tags": [
                     "user"
                 ],
-                "description": "User login",
+                "summary": "User authentication",
+                "description": "Authenticate user using username and password",
                 "parameters": [
                     {
                         "name": "body",
@@ -1379,6 +1380,7 @@
                 "tags": [
                     "user"
                 ],
+                "summary": "Find user by id",
                 "description": "Returns an user by id",
                 "parameters": [
                     {
@@ -1394,7 +1396,7 @@
                     "200": {
                         "description": "Successful response",
                         "schema": {
-                            "$ref": "#/definitions/user"
+                            "$ref": "#/definitions/user.extended"
                         }
                     },
                     "500": {
@@ -1415,7 +1417,8 @@
                 "tags": [
                     "user"
                 ],
-                "description": "Update a given user",
+                "summary": "Update an existing user",
+                "description": "Update an existing user",
                 "parameters": [
                     {
                         "name": "id",
@@ -1462,6 +1465,7 @@
                 "tags": [
                     "user"
                 ],
+                "summary": "Returns all users",
                 "description": "Returns all users",
                 "responses": {
                     "200": {
@@ -1489,7 +1493,8 @@
                 "tags": [
                     "user"
                 ],
-                "description": "Create a new user",
+                "summary": "Register a new user",
+                "description": "Register a new user",
                 "parameters": [
                     {
                         "name": "body",
@@ -1522,6 +1527,7 @@
                 "tags": [
                     "user"
                 ],
+                "summary": "Change user avatar",
                 "description": "Change user avatar. Avatar must be a valid JPG, GIF or PNG. And not bigger that 400x400 pixels.",
                 "parameters": [
                     {
@@ -1573,7 +1579,8 @@
                 "tags": [
                     "user"
                 ],
-                "description": "Returns an user by id",
+                "summary": "Get profile options",
+                "description": "Returns user profile options",
                 "parameters": [
                     {
                         "name": "field",
@@ -1618,7 +1625,8 @@
                 "tags": [
                     "user"
                 ],
-                "description": "Returns an user by id",
+                "summary": "Find user completed activities",
+                "description": "Returns an user activities",
                 "parameters": [
                     {
                         "name": "id",
@@ -1656,7 +1664,8 @@
                 "tags": [
                     "user"
                 ],
-                "description": "Returns an user by id",
+                "summary": "Find user redeem rewards",
+                "description": "Returns user rewards",
                 "parameters": [
                     {
                         "name": "id",
@@ -1694,7 +1703,8 @@
                 "tags": [
                     "user"
                 ],
-                "description": "Returns an user by id",
+                "summary": "Find user earned badges",
+                "description": "Returns user badges",
                 "parameters": [
                     {
                         "name": "id",
@@ -2147,14 +2157,9 @@
         },
         "request.user": {
             "required": [
-                "first_name",
-                "last_name",
                 "email",
-                "address",
-                "city",
-                "state",
-                "zip",
-                "phone"
+                "password",
+                "password_confirm"
             ],
             "properties": {
                 "first_name": {
@@ -2179,7 +2184,7 @@
                     "type": "string"
                 },
                 "state": {
-                    "description": "State id. Get state using countries/{id}/states",
+                    "description": "State id. Get state using users/profile-options/states",
                     "type": "integer",
                     "format": "int32"
                 },
@@ -3121,7 +3126,20 @@
                     "type": "string"
                 },
                 "avatar_url": {
-                    "type": "string"
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "num_rewards": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "num_activities": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "num_badges": {
+                    "type": "integer",
+                    "format": "int32"
                 },
                 "profile": {
                     "type": "object",

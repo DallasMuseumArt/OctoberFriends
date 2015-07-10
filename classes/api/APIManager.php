@@ -64,7 +64,7 @@ class APIManager
         // API Documentation
         // Document API using Swagger-PHP notation. The following router is for swagger-ui
         $this->addRouteApiDocs();
-        
+
         foreach($this->getResources() as $url => $class){
             try{
                 $resource = App::make($class);
@@ -75,7 +75,23 @@ class APIManager
                     foreach ($extra as $u => $args) {
                         $verbs = $args['verbs'];
                         foreach($verbs as $v) {
-                            Route::{$v}($url . '/' . $u, $class . "@" . $args['handler']);
+                            //Route::{$v}($url . '/' . $u, $class . "@" . $args['handler']);
+                            
+                            
+                            // TODO : Find how to get current router group prefix
+                            $baseName  = 'friends.api.' . str_replace('/', '.', strtolower($url));
+                            if (!$routeName = array_get($args, 'name')){
+                                $routeName = strtolower($args['handler']);
+                            }
+                            
+                            $routeName = $baseName . '.' . $routeName;
+                            
+                            Route::{$v}($url . '/' . $u, [
+                                    'as'   => $routeName,
+                                    'uses' => $class . "@" . $args['handler']
+                            ]);
+                            
+                            
                         }
                     }
                 }
@@ -103,7 +119,10 @@ class APIManager
     protected function addRouteApiDocs(){
 
         // API Docs
-        Route::get('docs', 'DMA\Friends\Classes\API\APIDocsController@index');
+        Route::get('docs', [
+            'as'   => 'friends.api.docs.index',
+            'uses' => 'DMA\Friends\Classes\API\APIDocsController@index'
+        ]);
 
     }
     

@@ -71,7 +71,8 @@ class UserResource extends BaseResource
      * 
      * @SWG\Post(
      *     path="users/login",
-     *     description="User login",
+     *     description="Authenticate user using username and password",
+     *     summary="User authentication",
      *     tags={ "user"},
      *     
      *     @SWG\Parameter(
@@ -157,6 +158,7 @@ class UserResource extends BaseResource
      * @SWG\Get(
      *     path="users/{id}",
      *     description="Returns an user by id",
+     *     summary="Find user by id",
      *     tags={ "user"},
      *
      *     @SWG\Parameter(
@@ -171,7 +173,7 @@ class UserResource extends BaseResource
      *     @SWG\Response(
      *         response=200,
      *         description="Successful response",
-     *         @SWG\Schema(ref="#/definitions/user")
+     *         @SWG\Schema(ref="#/definitions/user.extended")
      *     ),
      *     @SWG\Response(
      *         response=500,
@@ -197,6 +199,7 @@ class UserResource extends BaseResource
     /** 
      * @SWG\Get(
      *     path="users",
+     *     summary="Returns all users",
      *     description="Returns all users",
      *     tags={ "user"},
      *     
@@ -227,7 +230,7 @@ class UserResource extends BaseResource
      * @SWG\Definition(
      *     definition="request.user",
      *     type="object",
-     *     required={"first_name", "last_name", "email", "address", "city", "state", "zip", "phone"},
+     *     required={"email", "password", "password_confirm"},
      *     @SWG\Property(
      *         property="first_name",
      *         type="string"
@@ -257,7 +260,7 @@ class UserResource extends BaseResource
      *         type="string"
      *     ),
      *     @SWG\Property(
-     *         description="State id. Get state using countries/{id}/states",
+     *         description="State id. Get state using users/profile-options/states",
      *         property="state",
      *         type="integer",
      *         format="int32"
@@ -310,7 +313,8 @@ class UserResource extends BaseResource
      * 
      * @SWG\Post(
      *     path="users",
-     *     description="Create a new user",
+     *     description="Register a new user",
+     *     summary="Register a new user",
      *     tags={ "user"},
      *     
      *     @SWG\Parameter(
@@ -338,8 +342,8 @@ class UserResource extends BaseResource
         try{
             $data = Request::all();
             $rules = [
-                    'first_name'            => 'required|min:2',
-                    'last_name'             => 'required|min:2',
+                    //'first_name'            => 'required|min:2',
+                    //'last_name'             => 'required|min:2',
                     //'username'              => 'required|min:6',
                     'email'                 => 'required|email|between:2,64',
                     'password'              => 'required|confirmed|min:6',
@@ -426,7 +430,8 @@ class UserResource extends BaseResource
     /**
      * @SWG\Put(
      *     path="users/{id}",
-     *     description="Update a given user",
+     *     description="Update an existing user",
+     *     summary="Update an existing user",
      *     tags={ "user"},
      *     @SWG\Parameter(
      *         description="ID of user to fetch",
@@ -570,6 +575,7 @@ class UserResource extends BaseResource
      * 
      * @SWG\Post(
      *     path="users/{id}/upload-avatar",
+     *     summary="Change user avatar",
      *     description="Change user avatar. Avatar must be a valid JPG, GIF or PNG. And not bigger that 400x400 pixels.",
      *     tags={ "user"},
      *
@@ -688,7 +694,8 @@ class UserResource extends BaseResource
      * 
      * @SWG\Get(
      *     path="users/profile-options/{field}",
-     *     description="Returns an user by id",
+     *     description="Returns user profile options",
+     *     summary="Get profile options",
      *     tags={ "user"},
      *
      *     @SWG\Parameter(
@@ -745,7 +752,8 @@ class UserResource extends BaseResource
     /**
      * @SWG\Get(
      *     path="users/{id}/activities",
-     *     description="Returns an user by id",
+     *     description="Returns an user activities",
+     *     summary="Find user completed activities",
      *     tags={ "user"},
      *
      *     @SWG\Parameter(
@@ -784,7 +792,8 @@ class UserResource extends BaseResource
     /**
      * @SWG\Get(
      *     path="users/{id}/rewards",
-     *     description="Returns an user by id",
+     *     description="Returns user rewards",
+     *     summary="Find user redeem rewards",
      *     tags={ "user"},
      *
      *     @SWG\Parameter(
@@ -823,7 +832,8 @@ class UserResource extends BaseResource
     /**
      * @SWG\Get(
      *     path="users/{id}/badges",
-     *     description="Returns an user by id",
+     *     description="Returns user badges",
+     *     summary="Find user earned badges",
      *     tags={ "user"},
      *
      *     @SWG\Parameter(
