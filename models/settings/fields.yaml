@@ -25,10 +25,6 @@ tabs:
             tab: General
 
         # Kiosk
-        kiosk_idle_time:
-            label: Kiosk Idle Logout Time (in seconds)
-            span: left
-            tab: Kiosk
         send_badge_email:
             label: Send email upon badge completion
             span: left
