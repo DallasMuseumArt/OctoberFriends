@@ -70,7 +70,7 @@ class UserLogin extends ComponentBase
      */
     public function onUserLogin()
     {
-        try{
+        try {
             
             // Update wordpress passwords if necessary
             WordpressAuth::verifyFromEmail(post('email'), post('password'));
@@ -99,8 +99,7 @@ class UserLogin extends ComponentBase
             $validation = Validator::make($data, $rules);
             if ($validation->fails())
                 throw new ValidationException($validation);
-
-        
+ 
             /*  
              * Authenticate user
              */
