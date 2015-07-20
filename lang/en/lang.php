@@ -40,7 +40,7 @@ return [
         'passwordFail'          => 'The password you entered is incorrect',
         'memberCard'            => 'The card has been sent to the designated membership printer for ":title"',
         'memberCardLocation'    => 'Select a location to print the membership card',
-        'memberPhoneNotFound'   => 'Phone not found.  Please visit Friends.DMA.org to update your profile or register',
+        'memberPhoneNotFound'   => 'Phone not found. Please visit a DMAFriends Kiosk to update your profile or register', #'Phone not found.  Please visit Friends.DMA.org to update your profile or register',
         'noGender'              => 'No Answer',
         'noRace'                => 'No Answer',
         'noIncome'              => 'No Answer',
