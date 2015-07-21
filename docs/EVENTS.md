@@ -3,6 +3,8 @@
 Friends provides the following events that developers can listen on
 to extend functionality of the Friends platform in your own plugin
 
+* auth.prelogin
+* auth.login
 * dma.friends.activity.completed
 * dma.friends.badge.completed
 * dma.friends.reward.redeemed

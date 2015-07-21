@@ -120,10 +120,7 @@ class FriendsEventHandler {
      * @param User $user
      * The user that completed the step
      */
-    public function onStepCompleted($step, $user)
-    {   
-        
-    }   
+    public function onStepCompleted($step, $user) {}  
 
     public function onAuthLogin($event)
     {   
@@ -140,6 +137,18 @@ class FriendsEventHandler {
             FriendsLog::checkin($data);
         }
     }
+
+    /**
+     * Example implementation of auth.prelogin event
+     *
+     * @param array $data
+     * An array of data that can be processed
+     *
+     * @param array $rules
+     * An array of validation rules
+     * see http://laravel.com/docs/5.1/validation
+     */
+    public function onAuthPreLogin($data, $rules) {}
 
     public function onAuthRegister($user)
     {
@@ -229,6 +238,7 @@ class FriendsEventHandler {
         $events->listen('dma.friends.badge.completed', 'DMA\Friends\Classes\FriendsEventHandler@onBadgeCompleted');
         $events->listen('dma.friends.reward.redeemed', 'DMA\Friends\Classes\FriendsEventHandler@onRewardRedeemed');
         $events->listen('dma.friends.step.completed', 'DMA\Friends\Classes\FriendsEventHandler@onStepCompleted');
+        $events->listen('auth.prelogin', 'DMA\Friends\Classes\FriendsEventHandler@onAuthPreLogin');
         $events->listen('auth.login', 'DMA\Friends\Classes\FriendsEventHandler@onAuthLogin');
         $events->listen('auth.register', 'DMA\Friends\Classes\FriendsEventHandler@onAuthRegister');
         

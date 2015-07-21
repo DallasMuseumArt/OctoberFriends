@@ -39,6 +39,9 @@ class AuthManager
     {
         $user = false;
 
+        // Fire prelogin event before we start processing the user
+        Event::fire('auth.prelogin', $data, $rules);
+
         if (!isset($data['no_password'])) {
             $data['no_password'] = false;
         }
@@ -86,6 +89,15 @@ class AuthManager
         return false;
     }
 
+    /**
+     * Lookup user by member id
+     *
+     * @param string $id
+     * An id to lookup by member id
+     *
+     * @return User $user
+     * A RainLab\User\Model\User object
+     */
     private static function isMember($id)
     {
         $usermeta = Usermeta::with('user')->where('current_member_number', '=', $id)->first();
@@ -98,6 +110,15 @@ class AuthManager
         return false;
     }
 
+    /**
+     * Lookup user by barcode id
+     *
+     * @param string $id
+     * An id to lookup by barcode id
+     *
+     * @return User $user
+     * A RainLab\User\Model\User object
+     */
     private static function isBarcode($id)
     {
         $user = User::where('barcode_id', $id)->first();
@@ -109,6 +130,18 @@ class AuthManager
         return false;
     }
 
+    /**
+     * Attempt to authenticate a user with a password
+     *
+     * @param User $user
+     * A RainLab\User\Model\User object
+     * 
+     * @param array $data
+     * An array of paramaters for authenticating.
+     *
+     * @return User $user
+     * A RainLab\User\Model\User object of the authenticated user
+     */
     private static function loginUser($user, $data)
     {
         $loginAttribute = UserSettings::get('login_attribute', UserSettings::LOGIN_EMAIL);
