@@ -6,17 +6,16 @@ use Validator;
 use ValidationException;
 use RainLab\User\Models\Settings as UserSettings;
 use RainLab\User\Models\User;
+use DMA\Friends\wordpress\Auth as WordpressAuth;
 use DMA\Friends\Classes\UserExtend;
+use DMA\Friends\Classes\AuthManager;
 use DMA\Friends\Models\Usermeta;
-use DMA\Friends\Wordpress\Auth as WordpressAuth;
 use Cms\Classes\Theme;
 use SystemException;
 use Cms\Classes\Page;
 use File;
 use Lang;
-use Auth;
 use Flash;
-use Event;
 
 class UserLogin extends ComponentBase
 {
@@ -71,51 +70,17 @@ class UserLogin extends ComponentBase
     public function onUserLogin()
     {
         try {
-            
+
             // Update wordpress passwords if necessary
             WordpressAuth::verifyFromEmail(post('email'), post('password'));
-      
-            /*  
-             * Validate input
-             */
-            $data = post();
-            $rules = [ 
-                'password' => 'required|min:2'
-            ];  
-    
-            $loginAttribute = UserSettings::get('login_attribute', UserSettings::LOGIN_EMAIL);
-    
-            if ($loginAttribute == UserSettings::LOGIN_USERNAME)
-                $rules['login'] = 'required|between:2,64';
-            else
-                $rules['login'] = 'required|email|between:2,64';
-    
-            if (!in_array('login', $data))
-                $data['login'] = post('username', post('email'));
 
-            /*
-             * Validate user credentials
-             */
-            $validation = Validator::make($data, $rules);
-            if ($validation->fails())
-                throw new ValidationException($validation);
- 
-            /*  
-             * Authenticate user
-             */
-            $user = Auth::authenticate([
-                'login' => array_get($data, 'login'),
-                'password' => array_get($data, 'password')
-            ], true);
-    
-            /*
-             * Fire event that user has logged in
-             */
-            Event::fire('auth.login', $user);
-    
-            /*  
-             * Redirect to the intended page after successful sign in
-             */
+            $data = [
+                'login'     => post('login'),
+                'password'  => post('password'),
+            ];
+
+            AuthManager::auth($data);
+            
             $redirectUrl = $this->pageUrl($this->property('redirect'));
     
             if ($redirectUrl = post('redirect', $redirectUrl))
