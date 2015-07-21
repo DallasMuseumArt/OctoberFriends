@@ -23,6 +23,10 @@ tabs:
             label: Cache report data for X minutes
             span: left
             tab: General
+        artwork_api_template:
+            label: The REST end point for looking up artwork information
+            span: left
+            tab: General
 
         # Kiosk
         send_badge_email:

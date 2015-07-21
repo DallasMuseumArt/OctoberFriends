@@ -8,6 +8,7 @@ use DMA\Friends\Models\Activity;
 use DMA\Friends\Models\ActivityMetadata;
 use DMA\Friends\Classes\ActivityTypeBase;
 use DMA\Friends\Classes\FriendsLog;
+use DMA\Friends\Models\Settings as FriendsSettings;
 
 class LikeWorkOfArt extends ActivityTypeBase
 {
@@ -87,8 +88,8 @@ class LikeWorkOfArt extends ActivityTypeBase
     public static function isAssessionNumber($code)
     {
         // Brain API request template URL
-        $template = 'http://brain.dma.org/api/v1/collection/object/?fields=id,number,title&format=json&number=%s';
-        
+        $template = FriendsSettings::get('artwork_api_template', false);
+
         // Clean code from spaces in case user miss type it
         $code     = str_replace(' ', '', $code);
         
