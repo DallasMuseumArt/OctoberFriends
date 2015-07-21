@@ -6,6 +6,13 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 \includegraphics[height=3.000000cm]{d7/db1/classDMA_1_1Friends_1_1API_1_1Resources_1_1StateResource}
 \end{center}
 \end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1StateResource_a8acd31884c7184e218a8d0801dc02b7d}{index} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1StateResource_a84f2ee0e89681bdc1c5bee4ce26e3e85}{show} (\$id)
+\end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -16,6 +23,49 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1StateResource_a8acd31884c7184e218a8d0801dc02b7d}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+State\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+State\+Resource}!index@{index}}
+\index{index@{index}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+State\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+State\+Resource}}
+\subsubsection[{index}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+State\+Resource\+::index (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1StateResource_a8acd31884c7184e218a8d0801dc02b7d}
+( parameter=\char`\"{}country\+\_\+id\char`\"{}, description=\char`\"{}\+I\+D of country to fetch\char`\"{}, format=\char`\"{}int64\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}id\char`\"{}, required=true, type=\char`\"{}integer\char`\"{} ),
+
+( path=\char`\"{}countries/\{id\}/states\char`\"{}, description=\char`\"{}\+Returns all states of given country\char`\"{}, summary=\char`\"{}\+Return all states by country\char`\"{}, tags=\{ \char`\"{}countries\char`\"{}\},
+
+( ref=\char`\"{}\#/parameters/per\+\_\+page\char`\"{} ), ( ref=\char`\"{}\#/parameters/page\char`\"{} ), ( ref=\char`\"{}\#/parameters/sort\char`\"{} ),
+
+( ref=\char`\"{}\#/parameters/country\+\_\+id\char`\"{} ),
+
+( response=200, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/state\char`\"{}, type=\char`\"{}array\char`\"{}) ), ( response=500, description=\char`\"{}\+Unexpected error\char`\"{}, (ref=\char`\"{}\#/definitions/error500\char`\"{}) ), ( response=404, description=\char`\"{}\+Not Found\char`\"{}, (ref=\char`\"{}\#/definitions/error404\char`\"{}) ) ) 
+\begin{DoxyCode}
+62     \{
+63         \textcolor{keywordflow}{return} parent::index();
+64     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1StateResource_a84f2ee0e89681bdc1c5bee4ce26e3e85}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+State\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+State\+Resource}!show@{show}}
+\index{show@{show}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+State\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+State\+Resource}}
+\subsubsection[{show}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+State\+Resource\+::show (
+\begin{DoxyParamCaption}
+\item[{}]{\$id}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1StateResource_a84f2ee0e89681bdc1c5bee4ce26e3e85}
+( path=\char`\"{}countires/\{id\}/states/\{state\+\_\+id\}\char`\"{}, description=\char`\"{}\+Returns a state by id\char`\"{}, summary=\char`\"{}\+Find a state id\char`\"{}, tags=\{ \char`\"{}countries\char`\"{}\},
+
+( ref=\char`\"{}\#/parameters/country\+\_\+id\char`\"{} ),
+
+( description=\char`\"{}\+I\+D of state to fetch\char`\"{}, format=\char`\"{}int64\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}state\+\_\+id\char`\"{}, required=true, type=\char`\"{}integer\char`\"{} ),
+
+( response=200, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/state\char`\"{}) ), ( response=500, description=\char`\"{}\+Unexpected error\char`\"{}, (ref=\char`\"{}\#/definitions/error500\char`\"{}) ), ( response=404, description=\char`\"{}\+Not Found\char`\"{}, (ref=\char`\"{}\#/definitions/error404\char`\"{}) ) ) 
+\begin{DoxyCode}
+104     \{
+105         \textcolor{keywordflow}{return} parent::show($id);
+106     \}
+\end{DoxyCode}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

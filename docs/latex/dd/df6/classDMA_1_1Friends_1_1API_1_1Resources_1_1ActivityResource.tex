@@ -9,11 +9,13 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_a4eccb55dc505bfc92562fe37db80eda6}{}{\bfseries checkin} (\$user, \$code=null)\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_a4eccb55dc505bfc92562fe37db80eda6}
-
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_a4eccb55dc505bfc92562fe37db80eda6}{checkin} (\$user, \$code=null)
 \item 
-\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_ab69cc3a390f04db714de20bf7d131eac}{}{\bfseries bulk\+Checkins} (\$user, \$codes=null)\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_ab69cc3a390f04db714de20bf7d131eac}
-
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_ab69cc3a390f04db714de20bf7d131eac}{bulk\+Checkins} (\$user, \$codes=null)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_a85a8fe2a6fef1e21e6cb4449f9cf0f27}{index} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_af931d7dc7ee434933464f9fdf4061b38}{show} (\$id)
 \end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -35,6 +37,148 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 
 
 \subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_ab69cc3a390f04db714de20bf7d131eac}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource}!bulk\+Checkins@{bulk\+Checkins}}
+\index{bulk\+Checkins@{bulk\+Checkins}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource}}
+\subsubsection[{bulk\+Checkins}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Activity\+Resource\+::bulk\+Checkins (
+\begin{DoxyParamCaption}
+\item[{}]{\$user, }
+\item[{}]{\$codes = {\ttfamily null}}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_ab69cc3a390f04db714de20bf7d131eac}
+( definition=\char`\"{}request.\+bulk.\+checkin\char`\"{}, type=\char`\"{}object\char`\"{}, required=\{\char`\"{}codes\char`\"{}\}, ( type=\char`\"{}array\char`\"{}, items=(type=\char`\"{}string\char`\"{}), property=\char`\"{}codes\char`\"{}, ) )
+
+( definition=\char`\"{}response.\+bulk.\+checkin\char`\"{}, type=\char`\"{}object\char`\"{}, required=\{\char`\"{}data\char`\"{}\}, ( property=\char`\"{}data\char`\"{}, ref=\char`\"{}\#/definitions/response.\+bulk.\+activity.\+code.\+user\char`\"{} ) )
+
+( definition=\char`\"{}response.\+bulks.\+checkin\char`\"{}, description=\char`\"{}\+Single response checking\char`\"{}, type=\char`\"{}object\char`\"{}, required=\{\char`\"{}data\char`\"{}\}, ( property=\char`\"{}data\char`\"{}, type=\char`\"{}object\char`\"{}, ref=\char`\"{}\#/definitions/response.\+activity.\+code.\+user\char`\"{} ), )
+
+( path=\char`\"{}activities/bulk-\/checkin/\{user\}\char`\"{}, description=\char`\"{}\+Bulk checkin user activities\char`\"{}, summary=\char`\"{}\+Bulk activity checkin\char`\"{}, tags=\{ \char`\"{}activity\char`\"{}\},
+
+( description=\char`\"{}\+I\+D of the user checking the activity\char`\"{}, format=\char`\"{}int64\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}user\char`\"{}, required=true, type=\char`\"{}integer\char`\"{} ),
+
+( description=\char`\"{}\+Activity codes and/or accessioned number\char`\"{}, name=\char`\"{}body\char`\"{}, in=\char`\"{}body\char`\"{}, required=true, schema=(ref=\char`\"{}\#/definitions/request.\+bulk.\+checkin\char`\"{}) ),
+
+( response=200, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/response.\+bulk.\+checkin\char`\"{}, type=\char`\"{}array\char`\"{}) ), ( response=500, description=\char`\"{}\+Unexpected error\char`\"{}, (ref=\char`\"{}\#/definitions/error500\char`\"{}) ), ( response=404, description=\char`\"{}\+User not found\char`\"{}, (ref=\char`\"{}\#/definitions/\+User\+Error404\char`\"{}) ) )
+
+( path=\char`\"{}activities/bulk-\/checkin/\{user\}/\{codes\}\char`\"{}, description=\char`\"{}\+Bulk checkin user activities\char`\"{}, summary=\char`\"{}\+Bulk activity checkin\char`\"{}, tags=\{ \char`\"{}activity\char`\"{}\},
+
+( description=\char`\"{}\+I\+D of the user checking the activity\char`\"{}, format=\char`\"{}int64\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}user\char`\"{}, required=true, type=\char`\"{}integer\char`\"{} ),
+
+( description=\char`\"{}\+Activity codes and/or accessioned numbers\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}codes\char`\"{}, type=\char`\"{}array\char`\"{}, required=true, items=(type=\char`\"{}string\char`\"{}), collection\+Format=\char`\"{}csv\char`\"{}, ),
+
+( response=200, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/response.\+bulk.\+checkin\char`\"{}, type=\char`\"{}array\char`\"{}) ), ( response=500, description=\char`\"{}\+Unexpected error\char`\"{}, (ref=\char`\"{}\#/definitions/error500\char`\"{}) ), ( response=404, description=\char`\"{}\+User not found\char`\"{}, (ref=\char`\"{}\#/definitions/\+User\+Error404\char`\"{}) ) ) 
+\begin{DoxyCode}
+316     \{
+317 
+318         $user = User::find($user);
+319         \textcolor{keywordflow}{if} (!is\_null($user))\{
+320 
+321             \textcolor{comment}{// Check if codes are given in the URL or are part of the body request}
+322             \textcolor{keywordflow}{if} (is\_null($codes))\{
+323                 \textcolor{comment}{// Check if codes are in the body of the request}
+324                 $data = Request::all();
+325                 $codes = array\_get($data, \textcolor{stringliteral}{'codes'});
+326             \}
+327 
+328             \textcolor{keywordflow}{if} ( is\_null($codes) )\{
+329                 $message = \textcolor{stringliteral}{"'codes' argument is required"};
+330                 \textcolor{keywordflow}{return} Response::api()->errorWrongArgs($message);
+331             \}
+332             
+333             
+334             \textcolor{comment}{// Convert into array if necessary}
+335             \textcolor{keywordflow}{if} (is\_string($codes))\{
+336                 $codes = explode(\textcolor{charliteral}{','},$codes);
+337             \}
+338             
+339             
+340             $payload = [];
+341             \textcolor{keywordflow}{foreach} ($codes as $code)\{
+342                 \textcolor{comment}{// Process activity code}
+343                 $code      = trim($code); 
+344                 $response  = $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_a671a3b78b007929728a958a3d1c1973f}{processActivityCode}($user, $code);
+345 
+346                 $httpCode = array\_get($response, \textcolor{stringliteral}{'http\_code'});
+347                 $activity = array\_get($response, \textcolor{stringliteral}{'payload'});
+348                 
+349                 $payload[\textcolor{stringliteral}{'data'}][\textcolor{stringliteral}{'checkins'}][] = array\_merge([\textcolor{stringliteral}{'http\_code'} => $httpCode] , $activity);;
+350             \}        
+351     
+352             \textcolor{comment}{// Get user info}
+353             $payload[\textcolor{stringliteral}{'data'}][\textcolor{stringliteral}{'user'}] = $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_a6e69dac62efaef2226446bcb4a9537d4}{getUserInfo}($user);
+354              
+355             $httpCode = 200;
+356             \textcolor{keywordflow}{return} Response::api()->setStatusCode($httpCode)->withArray($payload);
+357     
+358         \}
+359     
+360         \textcolor{keywordflow}{return} Response::api()->errorNotFound(\textcolor{stringliteral}{'User not found'});
+361        
+362     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_a4eccb55dc505bfc92562fe37db80eda6}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource}!checkin@{checkin}}
+\index{checkin@{checkin}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource}}
+\subsubsection[{checkin}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Activity\+Resource\+::checkin (
+\begin{DoxyParamCaption}
+\item[{}]{\$user, }
+\item[{}]{\$code = {\ttfamily null}}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_a4eccb55dc505bfc92562fe37db80eda6}
+( definition=\char`\"{}request.\+checkin\char`\"{}, type=\char`\"{}object\char`\"{}, required=\{\char`\"{}code\char`\"{}\}, ( property=\char`\"{}code\char`\"{}, type=\char`\"{}string\char`\"{} ) )
+
+( definition=\char`\"{}response.\+ok.\+single.\+checkin\char`\"{}, description=\char`\"{}\+Single response checking\char`\"{}, type=\char`\"{}object\char`\"{}, required=\{\char`\"{}data\char`\"{}\}, ( property=\char`\"{}data\char`\"{}, type=\char`\"{}object\char`\"{}, ref=\char`\"{}\#/definitions/response.\+ok.\+activity.\+code.\+user\char`\"{} ), )
+
+( definition=\char`\"{}response.\+failed.\+single.\+checkin\char`\"{}, description=\char`\"{}\+Single response checking\char`\"{}, type=\char`\"{}object\char`\"{}, required=\{\char`\"{}data\char`\"{}\}, ( property=\char`\"{}data\char`\"{}, type=\char`\"{}object\char`\"{}, ref=\char`\"{}\#/definitions/response.\+failed.\+activity.\+code.\+user\char`\"{} ), )
+
+( path=\char`\"{}activities/checkin/\{user\}\char`\"{}, description=\char`\"{}\+Checkin user activities\char`\"{}, summary=\char`\"{}\+Checkin an activity\char`\"{}, tags=\{ \char`\"{}activity\char`\"{}\},
+
+( description=\char`\"{}\+I\+D of the user checking the activity\char`\"{}, format=\char`\"{}int64\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}user\char`\"{}, required=true, type=\char`\"{}integer\char`\"{} ),
+
+( description=\char`\"{}\+Activity code or accessioned number\char`\"{}, name=\char`\"{}body\char`\"{}, in=\char`\"{}body\char`\"{}, required=true, schema=(ref=\char`\"{}\#/definitions/request.\+checkin\char`\"{}) ),
+
+( response=201, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/response.\+ok.\+single.\+checkin\char`\"{}) ), ( response=200, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/response.\+failed.\+single.\+checkin\char`\"{}) ), ( response=500, description=\char`\"{}\+Unexpected error\char`\"{}, (ref=\char`\"{}\#/definitions/error500\char`\"{}) ), ( response=404, description=\char`\"{}\+User not found\char`\"{}, (ref=\char`\"{}\#/definitions/\+User\+Error404\char`\"{}) ) )
+
+( path=\char`\"{}activities/checkin/\{user\}/\{code\}\char`\"{}, description=\char`\"{}\+Checkin user activities\char`\"{}, summary=\char`\"{}\+Checkin an activity\char`\"{}, tags=\{ \char`\"{}activity\char`\"{}\},
+
+( description=\char`\"{}\+I\+D of the user checking the activity\char`\"{}, format=\char`\"{}int64\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}user\char`\"{}, required=true, type=\char`\"{}integer\char`\"{} ),
+
+( description=\char`\"{}\+Activity code or accessioned number\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}code\char`\"{}, required=true, type=\char`\"{}string\char`\"{} ), ( response=201, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/response.\+ok.\+single.\+checkin\char`\"{}) ), ( response=200, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/response.\+failed.\+single.\+checkin\char`\"{}) ), ( response=500, description=\char`\"{}\+Unexpected error\char`\"{}, (ref=\char`\"{}\#/definitions/error500\char`\"{}) ), ( response=404, description=\char`\"{}\+User not found\char`\"{}, (ref=\char`\"{}\#/definitions/\+User\+Error404\char`\"{}) ) ) 
+\begin{DoxyCode}
+158     \{
+159 
+160         $user = User::find($user);
+161         \textcolor{keywordflow}{if} (!is\_null($user))\{
+162             
+163             \textcolor{comment}{// Check if code is given in the URL  or is part of the body request}
+164             \textcolor{keywordflow}{if} ( is\_null($code) )\{
+165                 \textcolor{comment}{// Check if code is in the body of the request}
+166                 $data = Request::all();
+167                 $code = array\_get($data, \textcolor{stringliteral}{'code'});
+168             \}
+169             
+170             \textcolor{keywordflow}{if} ( is\_null($code) )\{
+171                 $message = \textcolor{stringliteral}{"'code' argument is required"};
+172                 \textcolor{keywordflow}{return} Response::api()->errorWrongArgs($message);
+173             \}
+174             
+175             \textcolor{comment}{// Process activity code}
+176             $response  = $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_a671a3b78b007929728a958a3d1c1973f}{processActivityCode}($user, $code);
+177             $payload = [];
+178             
+179             $httpCode = array\_get($response, \textcolor{stringliteral}{'http\_code'});
+180             $payload[\textcolor{stringliteral}{'data'}] = array\_get($response, \textcolor{stringliteral}{'payload'});
+181             
+182 
+183             \textcolor{comment}{// Get user info}
+184             $payload[\textcolor{stringliteral}{'data'}][\textcolor{stringliteral}{'user'}] = $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_a6e69dac62efaef2226446bcb4a9537d4}{getUserInfo}($user);
+185             
+186             \textcolor{keywordflow}{return} Response::api()->setStatusCode($httpCode)->withArray($payload);
+187 
+188         \}
+189         
+190         \textcolor{keywordflow}{return} Response::api()->errorNotFound(\textcolor{stringliteral}{'User not found'});
+191 
+192     \}
+\end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_a6e69dac62efaef2226446bcb4a9537d4}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource}!get\+User\+Info@{get\+User\+Info}}
 \index{get\+User\+Info@{get\+User\+Info}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource}}
 \subsubsection[{get\+User\+Info}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Activity\+Resource\+::get\+User\+Info (
@@ -52,17 +196,34 @@ array
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-176     \{
-177 
-178         \textcolor{comment}{// Get common user points format via UserProfileTransformer}
-179         $userTransformer = \textcolor{keyword}{new} UserProfileTransformer();
-180         $points = $userTransformer->getUserPoints($user);
-181         
-182         \textcolor{keywordflow}{return} [ 
-183             \textcolor{stringliteral}{'id'}        => $user->getKey(),
-184             \textcolor{stringliteral}{'points'}    => $points
-185         ];
-186     \}
+615     \{
+616 
+617         \textcolor{comment}{// Get common user points format via UserProfileTransformer}
+618         $userTransformer = \textcolor{keyword}{new} UserProfileTransformer();
+619         $points = $userTransformer->getUserPoints($user);
+620         
+621         \textcolor{keywordflow}{return} [ 
+622             \textcolor{stringliteral}{'id'}        => $user->getKey(),
+623             \textcolor{stringliteral}{'points'}    => $points
+624         ];
+625     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_a85a8fe2a6fef1e21e6cb4449f9cf0f27}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource}!index@{index}}
+\index{index@{index}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource}}
+\subsubsection[{index}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Activity\+Resource\+::index (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_a85a8fe2a6fef1e21e6cb4449f9cf0f27}
+( path=\char`\"{}activities\char`\"{}, description=\char`\"{}\+Returns all activities\char`\"{}, summary=\char`\"{}\+Returns all activities\char`\"{}, tags=\{ \char`\"{}activity\char`\"{}\},
+
+( ref=\char`\"{}\#/parameters/per\+\_\+page\char`\"{} ), ( ref=\char`\"{}\#/parameters/page\char`\"{} ), ( ref=\char`\"{}\#/parameters/sort\char`\"{} ),
+
+( response=200, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/activity.\+extended\char`\"{}, type=\char`\"{}array\char`\"{}) ), ( response=500, description=\char`\"{}\+Unexpected error\char`\"{}, (ref=\char`\"{}\#/definitions/error500\char`\"{}) ), ( response=404, description=\char`\"{}\+Not Found\char`\"{}, (ref=\char`\"{}\#/definitions/error404\char`\"{}) ) ) 
+\begin{DoxyCode}
+662     \{
+663         \textcolor{keywordflow}{return} parent::index();
+664     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_a671a3b78b007929728a958a3d1c1973f}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource}!process\+Activity\+Code@{process\+Activity\+Code}}
 \index{process\+Activity\+Code@{process\+Activity\+Code}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource}}
@@ -72,6 +233,20 @@ array
 \item[{}]{\$code}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [protected]}}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_a671a3b78b007929728a958a3d1c1973f}
+( definition=\char`\"{}response.\+ok.\+activity.\+code\char`\"{}, type=\char`\"{}object\char`\"{}, required=\{\char`\"{}success\char`\"{}, \char`\"{}activity\+\_\+code\char`\"{}, \char`\"{}message\char`\"{}, \char`\"{}feedback\+\_\+message\char`\"{}, \char`\"{}complete\+\_\+message\char`\"{}, \char`\"{}data\char`\"{}\}, ( property=\char`\"{}success\char`\"{}, type=\char`\"{}boolean\char`\"{}, default=\char`\"{}true\char`\"{} ), ( property=\char`\"{}http\+\_\+code\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{}, enum=\{200, 201\}, default=201 ),
+
+( property=\char`\"{}activity\+\_\+code\char`\"{}, type=\char`\"{}string\char`\"{} ), ( property=\char`\"{}message\char`\"{}, type=\char`\"{}string\char`\"{} ), ( property=\char`\"{}feedback\+\_\+message\char`\"{}, type=\char`\"{}string\char`\"{} ), ( property=\char`\"{}complete\+\_\+message\char`\"{}, type=\char`\"{}string\char`\"{} ), ( description=\char`\"{}\+Extra activity data send back when the activity is successful\char`\"{}, property=\char`\"{}data\char`\"{}, type=\char`\"{}object\char`\"{} ) ) ( definition=\char`\"{}response.\+failed.\+activity.\+code\char`\"{}, type=\char`\"{}object\char`\"{}, required=\{\char`\"{}success\char`\"{}, \char`\"{}activity\+\_\+code\char`\"{}, \char`\"{}message\char`\"{}, \char`\"{}feedback\+\_\+message\char`\"{}, \char`\"{}complete\+\_\+message\char`\"{}\}, ( property=\char`\"{}success\char`\"{}, type=\char`\"{}boolean\char`\"{} ), ( property=\char`\"{}http\+\_\+code\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{}, enum=\{200, 201\}, default=200 ),
+
+( property=\char`\"{}activity\+\_\+code\char`\"{}, type=\char`\"{}string\char`\"{} ), ( property=\char`\"{}message\char`\"{}, type=\char`\"{}string\char`\"{} ), ( property=\char`\"{}feedback\+\_\+message\char`\"{}, type=\char`\"{}string\char`\"{} ), ( property=\char`\"{}complete\+\_\+message\char`\"{}, type=\char`\"{}string\char`\"{} ) )
+
+( definition=\char`\"{}response.\+failed.\+activity.\+code.\+user\char`\"{}, type=\char`\"{}object\char`\"{}, required=\{\char`\"{}success\char`\"{}, \char`\"{}activity\+\_\+code\char`\"{}, \char`\"{}message\char`\"{}, \char`\"{}feedback\+\_\+message\char`\"{}, \char`\"{}complete\+\_\+message\char`\"{}, \char`\"{}user\char`\"{}\}, ( property=\char`\"{}success\char`\"{}, type=\char`\"{}boolean\char`\"{} ), ( property=\char`\"{}http\+\_\+code\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{}, enum=\{200, 201\}, default=200 ), ( property=\char`\"{}activity\+\_\+code\char`\"{}, type=\char`\"{}string\char`\"{} ), ( property=\char`\"{}message\char`\"{}, type=\char`\"{}string\char`\"{} ), ( property=\char`\"{}feedback\+\_\+message\char`\"{}, type=\char`\"{}string\char`\"{} ), ( property=\char`\"{}complete\+\_\+message\char`\"{}, type=\char`\"{}string\char`\"{} ), ( property=\char`\"{}user\char`\"{}, ref=\char`\"{}\#/definitions/user.\+info.\+points\char`\"{} )
+
+)
+
+( definition=\char`\"{}response.\+ok.\+activity.\+code.\+user\char`\"{}, type=\char`\"{}object\char`\"{}, required=\{\char`\"{}success\char`\"{}, \char`\"{}activity\+\_\+code\char`\"{}, \char`\"{}message\char`\"{}, \char`\"{}feedback\+\_\+message\char`\"{}, \char`\"{}complete\+\_\+message\char`\"{}, \char`\"{}user\char`\"{}, \char`\"{}data\char`\"{}\}, ( property=\char`\"{}success\char`\"{}, type=\char`\"{}boolean\char`\"{} ), ( property=\char`\"{}http\+\_\+code\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{}, enum=\{200, 201\}, default=201 ), ( property=\char`\"{}activity\+\_\+code\char`\"{}, type=\char`\"{}string\char`\"{} ), ( property=\char`\"{}message\char`\"{}, type=\char`\"{}string\char`\"{} ), ( property=\char`\"{}feedback\+\_\+message\char`\"{}, type=\char`\"{}string\char`\"{} ), ( property=\char`\"{}complete\+\_\+message\char`\"{}, type=\char`\"{}string\char`\"{} ), ( property=\char`\"{}user\char`\"{}, ref=\char`\"{}\#/definitions/user.\+info.\+points\char`\"{} ), ( description=\char`\"{}\+Extra activity data send back when the activity is successful\char`\"{}, property=\char`\"{}data\char`\"{}, type=\char`\"{}object\char`\"{} ) ) ( definition=\char`\"{}response.\+bulk.\+activity.\+code.\+user\char`\"{}, type=\char`\"{}object\char`\"{}, required=\{\char`\"{}checkins\char`\"{}, \char`\"{}user\char`\"{}\}, ( type=\char`\"{}array\char`\"{}, property=\char`\"{}checkins\char`\"{}, items=(ref=\char`\"{}\#/definitions/response.\+ok.\+activity.\+code\char`\"{}) ), ( property=\char`\"{}user\char`\"{}, ref=\char`\"{}\#/definitions/user.\+info.\+points\char`\"{} )
+
+)
+
 
 \begin{DoxyParams}[1]{Parameters}
 Rain\+Lab\textbackslash{}\+User\textbackslash{}\+Models\textbackslash{}\+User & {\em \$user} & \\
@@ -84,50 +259,68 @@ Array Return an associative code with a intended H\+T\+T\+P Code and an Array wi
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-125     \{
-126         $params = [];
-127         \textcolor{comment}{// Get code from message}
-128         $params[\textcolor{stringliteral}{'code'}] = $code;
-129         
-130         \textcolor{comment}{// process Activity code first}
-131         \textcolor{keywordflow}{if} (!$activity = \hyperlink{classDMA_1_1Friends_1_1Activities_1_1ActivityCode_a07ea7959f4707fe2228204c5ff3e51ae}{ActivityCode::process}($user, $params)) \{
-132             \textcolor{comment}{// Not found activity with that code.}
-133             \textcolor{comment}{// Trying if is a object assession number}
-134             $activity = \hyperlink{classDMA_1_1Friends_1_1Activities_1_1LikeWorkOfArt_a88d1a454b4389e3116cc1f8a365747cd}{LikeWorkOfArt::process}($user, $params);
-135         \}
-136         
-137         \textcolor{comment}{// Determine the content of the message}
-138         $holder = ( $activity ) ? \textcolor{stringliteral}{'activityMessage'} : \textcolor{stringliteral}{'activityError'};
-139         $message = Session::pull($holder);
-140         
-141         \textcolor{keywordflow}{if} (is\_array($message)) \{
-142             $message = implode(\textcolor{charliteral}{'\(\backslash\)n'}, array\_filter($message));
-143         \}
-144         
-145         $payload = [
-146             \textcolor{stringliteral}{'success'}           => ($activity) ? \textcolor{keyword}{true} : \textcolor{keyword}{false},
-147             \textcolor{stringliteral}{'activity\_code'}     => $code,
-148             \textcolor{stringliteral}{'message'}           => $message,
-149             \textcolor{stringliteral}{'feedback\_message'}  => $activity->feedback\_message,
-150             \textcolor{stringliteral}{'complete\_message'}  => $activity->complete\_message
-151         ];
-152         
-153         $httpCode = 200;
-154         
-155         \textcolor{comment}{// Check if is not a boolean if not is because is an intance of an activity}
-156         \textcolor{keywordflow}{if}( !is\_bool($activity) ) \{
-157             \textcolor{comment}{// Check if and artwork is attached to the activity}
-158             \textcolor{comment}{// if so this activity is a LikeWorkOfArt}
-159             $objectData = (array\_get($activity, \textcolor{stringliteral}{'objectData'}, null));
-160             \textcolor{keywordflow}{if}(!is\_null($objectData)) \{
-161                 $httpCode = 201;
-162                 $payload[\textcolor{stringliteral}{'data'}][\textcolor{stringliteral}{'artwork'}] = $objectData;
-163             \}
-164         \}
-165         
-166         \textcolor{keywordflow}{return} [ \textcolor{stringliteral}{'http\_code'} => $httpCode, \textcolor{stringliteral}{'payload'} => $payload ];
-167         
-168     \}
+562     \{
+563         $params = [];
+564         \textcolor{comment}{// Get code from message}
+565         $params[\textcolor{stringliteral}{'code'}] = $code;
+566         
+567         \textcolor{comment}{// process Activity code first}
+568         \textcolor{keywordflow}{if} (!$activity = \hyperlink{classDMA_1_1Friends_1_1Activities_1_1ActivityCode_a07ea7959f4707fe2228204c5ff3e51ae}{ActivityCode::process}($user, $params)) \{
+569             \textcolor{comment}{// Not found activity with that code.}
+570             \textcolor{comment}{// Trying if is a object assession number}
+571             $activity = \hyperlink{classDMA_1_1Friends_1_1Activities_1_1LikeWorkOfArt_a88d1a454b4389e3116cc1f8a365747cd}{LikeWorkOfArt::process}($user, $params);
+572         \}
+573         
+574         \textcolor{comment}{// Determine the content of the message}
+575         $holder = ( $activity ) ? \textcolor{stringliteral}{'activityMessage'} : \textcolor{stringliteral}{'activityError'};
+576         $message = Session::pull($holder);
+577         
+578         
+579         \textcolor{keywordflow}{if} (is\_array($message)) \{
+580             $message = implode(\textcolor{charliteral}{'\(\backslash\)n'}, array\_filter($message));
+581         \}
+582         
+583         $payload = [
+584             \textcolor{stringliteral}{'success'}           => ($activity) ? \textcolor{keyword}{true} : \textcolor{keyword}{false},
+585             \textcolor{stringliteral}{'activity\_code'}     => $code,
+586             \textcolor{stringliteral}{'message'}           => $message,
+587             \textcolor{stringliteral}{'feedback\_message'}  => ( $activity ) ? $activity->feedback\_message : null,
+588             \textcolor{stringliteral}{'complete\_message'}  => ( $activity ) ? $activity->complete\_message : null
+589         ];
+590         
+591         $httpCode = 200;
+592         
+593         \textcolor{comment}{// Check if is not a boolean if not is because is an intance of an activity}
+594         \textcolor{keywordflow}{if}( !is\_bool($activity) ) \{
+595             \textcolor{comment}{// Check if and artwork is attached to the activity}
+596             \textcolor{comment}{// if so this activity is a LikeWorkOfArt}
+597             $objectData = (array\_get($activity, \textcolor{stringliteral}{'objectData'}, null));
+598             \textcolor{keywordflow}{if}(!is\_null($objectData)) \{
+599                 $httpCode = 201;
+600                 $payload[\textcolor{stringliteral}{'data'}][\textcolor{stringliteral}{'artwork'}] = $objectData;
+601             \}
+602         \}
+603         
+604         \textcolor{keywordflow}{return} [ \textcolor{stringliteral}{'http\_code'} => $httpCode, \textcolor{stringliteral}{'payload'} => $payload ];
+605         
+606     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_af931d7dc7ee434933464f9fdf4061b38}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource}!show@{show}}
+\index{show@{show}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Resource}}
+\subsubsection[{show}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Activity\+Resource\+::show (
+\begin{DoxyParamCaption}
+\item[{}]{\$id}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityResource_af931d7dc7ee434933464f9fdf4061b38}
+( path=\char`\"{}activities/\{id\}\char`\"{}, description=\char`\"{}\+Returns an activity by id\char`\"{}, summary=\char`\"{}\+Find activity by id\char`\"{}, tags=\{ \char`\"{}activity\char`\"{}\},
+
+( description=\char`\"{}\+I\+D of activity to fetch\char`\"{}, format=\char`\"{}int64\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}id\char`\"{}, required=true, type=\char`\"{}integer\char`\"{} ),
+
+( response=200, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/activity.\+extended\char`\"{}) ), ( response=500, description=\char`\"{}\+Unexpected error\char`\"{}, (ref=\char`\"{}\#/definitions/error500\char`\"{}) ), ( response=404, description=\char`\"{}\+Not Found\char`\"{}, (ref=\char`\"{}\#/definitions/error404\char`\"{}) ) ) 
+\begin{DoxyCode}
+700     \{
+701         \textcolor{keywordflow}{return} parent::show($id);
+702     \}
 \end{DoxyCode}
 
 

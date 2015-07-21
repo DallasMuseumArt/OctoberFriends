@@ -6,6 +6,13 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 \includegraphics[height=3.000000cm]{d5/de2/classDMA_1_1Friends_1_1API_1_1Resources_1_1StepResource}
 \end{center}
 \end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1StepResource_acf4d1ad088cbfddf36e178b42968a15c}{index} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1StepResource_af0fbdc63eb208bf6993bd58d73d646d2}{show} (\$id)
+\end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -16,6 +23,43 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1StepResource_acf4d1ad088cbfddf36e178b42968a15c}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Step\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Step\+Resource}!index@{index}}
+\index{index@{index}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Step\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Step\+Resource}}
+\subsubsection[{index}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Step\+Resource\+::index (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1StepResource_acf4d1ad088cbfddf36e178b42968a15c}
+( path=\char`\"{}steps\char`\"{}, description=\char`\"{}\+Returns all activity steps\char`\"{}, summary=\char`\"{}\+Return all steps\char`\"{}, tags=\{ \char`\"{}steps\char`\"{}\},
+
+( ref=\char`\"{}\#/parameters/per\+\_\+page\char`\"{} ), ( ref=\char`\"{}\#/parameters/page\char`\"{} ), ( ref=\char`\"{}\#/parameters/sort\char`\"{} ),
+
+( response=200, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/step\char`\"{}, type=\char`\"{}array\char`\"{}) ), ( response=500, description=\char`\"{}\+Unexpected error\char`\"{}, (ref=\char`\"{}\#/definitions/error500\char`\"{}) ), ( response=404, description=\char`\"{}\+Not Found\char`\"{}, (ref=\char`\"{}\#/definitions/error404\char`\"{}) ) ) 
+\begin{DoxyCode}
+49     \{
+50         \textcolor{keywordflow}{return} parent::index();
+51     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1StepResource_af0fbdc63eb208bf6993bd58d73d646d2}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Step\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Step\+Resource}!show@{show}}
+\index{show@{show}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Step\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Step\+Resource}}
+\subsubsection[{show}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Step\+Resource\+::show (
+\begin{DoxyParamCaption}
+\item[{}]{\$id}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1StepResource_af0fbdc63eb208bf6993bd58d73d646d2}
+( path=\char`\"{}steps/\{id\}\char`\"{}, description=\char`\"{}\+Returns a step by id\char`\"{}, summary=\char`\"{}\+Find a step by id\char`\"{}, tags=\{ \char`\"{}steps\char`\"{}\},
+
+( description=\char`\"{}\+I\+D of step to fetch\char`\"{}, format=\char`\"{}int64\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}id\char`\"{}, required=true, type=\char`\"{}integer\char`\"{} ),
+
+( response=200, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/step\char`\"{}) ), ( response=500, description=\char`\"{}\+Unexpected error\char`\"{}, (ref=\char`\"{}\#/definitions/error500\char`\"{}) ), ( response=404, description=\char`\"{}\+Not Found\char`\"{}, (ref=\char`\"{}\#/definitions/error404\char`\"{}) ) ) 
+\begin{DoxyCode}
+87     \{
+88         \textcolor{keywordflow}{return} parent::show($id);
+89     \}
+\end{DoxyCode}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

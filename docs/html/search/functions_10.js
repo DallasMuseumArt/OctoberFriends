@@ -7,6 +7,8 @@ var searchData=
   ['realtimerestriction',['realTimeRestriction',['../d2/de2/classDMA_1_1Friends_1_1Wordpress_1_1Post.html#a5fbf4b003c2136d8497ddd7d726ad671',1,'DMA::Friends::Wordpress::Post']]],
   ['recalculaterating',['reCalculateRating',['../d5/d4a/classDMA_1_1Friends_1_1Models_1_1Rating.html#a1d30c619da71a91528a7dcee5411304a',1,'DMA::Friends::Models::Rating']]],
   ['redeem',['redeem',['../d2/dfe/classDMA_1_1Friends_1_1Classes_1_1RewardManager.html#a2a1ce1d86e60454954229210c334e2bd',1,'DMA::Friends::Classes::RewardManager']]],
+  ['redeembyget',['redeemByGet',['../da/d5c/classDMA_1_1Friends_1_1API_1_1Resources_1_1RewardResource.html#a65e7225c16bafe1a2ef96e7ccf88e85e',1,'DMA::Friends::API::Resources::RewardResource']]],
+  ['redeembypost',['redeemByPost',['../da/d5c/classDMA_1_1Friends_1_1API_1_1Resources_1_1RewardResource.html#a5979a6696b2dbd4561043a44508f583d',1,'DMA::Friends::API::Resources::RewardResource']]],
   ['register',['register',['../df/d6d/classDMA_1_1Friends_1_1FriendsServiceProvider.html#a6a90d2cdc4c6b153b45764ba66e154ae',1,'DMA\Friends\FriendsServiceProvider\register()'],['../db/d85/classDMA_1_1Friends_1_1Plugin.html#adfd39323d7e2724cdacdb41d590b32e2',1,'DMA\Friends\Plugin\register()']]],
   ['registeractivity',['registerActivity',['../d0/d48/classDMA_1_1Friends_1_1Classes_1_1ActivityManager.html#a59854358f0903314c27c9add5d151221',1,'DMA::Friends::Classes::ActivityManager']]],
   ['registerchannels',['registerChannels',['../d9/d76/classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1ChannelManager.html#a72c7ef4114ad52079a64cab5d1de87d7',1,'DMA::Friends::Classes::Notifications::ChannelManager']]],

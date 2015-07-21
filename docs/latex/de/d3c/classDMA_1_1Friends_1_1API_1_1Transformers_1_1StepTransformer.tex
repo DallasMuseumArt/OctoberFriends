@@ -9,8 +9,7 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1StepTransformer_af598033e757246e05cb07b0e9256ef20}{}{\bfseries get\+Data} (\$instance)\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1StepTransformer_af598033e757246e05cb07b0e9256ef20}
-
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1StepTransformer_af598033e757246e05cb07b0e9256ef20}{get\+Data} (\$instance)
 \item 
 \hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1StepTransformer_aa09dd3be3937396f320a2d7827537818}{get\+Extended\+Data} (\$instance)
 \item 
@@ -21,11 +20,29 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries \$avilable\+Includes}
+{\bfseries \$avilables\+Includes}
 \end{DoxyCompactItemize}
 
 
 \subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1StepTransformer_af598033e757246e05cb07b0e9256ef20}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Step\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Step\+Transformer}!get\+Data@{get\+Data}}
+\index{get\+Data@{get\+Data}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Step\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Step\+Transformer}}
+\subsubsection[{get\+Data}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Step\+Transformer\+::get\+Data (
+\begin{DoxyParamCaption}
+\item[{}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1StepTransformer_af598033e757246e05cb07b0e9256ef20}
+Step definition ( definition=\char`\"{}step\char`\"{}, required=\{\char`\"{}id\char`\"{}, \char`\"{}title\char`\"{}, \char`\"{}count\char`\"{}\}, ( property=\char`\"{}id\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( property=\char`\"{}title\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}count\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( property=\char`\"{}activity\char`\"{}, type=\char`\"{}object\char`\"{}, ref=\char`\"{}\#/definitions/activity\char`\"{} ), ( property=\char`\"{}badge\char`\"{}, type=\char`\"{}object\char`\"{}, ref=\char`\"{}\#/definitions/badge\char`\"{} ) ) 
+\begin{DoxyCode}
+55     \{
+56         \textcolor{keywordflow}{return} [
+57             \textcolor{stringliteral}{'id'}         => (int)$instance->id,
+58             \textcolor{stringliteral}{'title'}      => $instance->title,
+59             \textcolor{stringliteral}{'count'}      => $instance->count
+60         ];
+61     
+62     \}
+\end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1StepTransformer_aa09dd3be3937396f320a2d7827537818}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Step\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Step\+Transformer}!get\+Extended\+Data@{get\+Extended\+Data}}
 \index{get\+Extended\+Data@{get\+Extended\+Data}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Step\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Step\+Transformer}}
 \subsubsection[{get\+Extended\+Data}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Step\+Transformer\+::get\+Extended\+Data (
@@ -38,10 +55,10 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 \end{DoxySeeAlso}
 
 \begin{DoxyCode}
-50     \{
-51         \textcolor{comment}{// Adding steps by the Fractal embeding system}
-52         $this->setDefaultIncludes( array\_merge($this->getDefaultIncludes(), [\textcolor{stringliteral}{'activity'}, \textcolor{stringliteral}{'badge'}]));
-53     \}
+69     \{
+70         \textcolor{comment}{// Adding steps by the Fractal embeding system}
+71         $this->setDefaultIncludes( array\_merge($this->getDefaultIncludes(), [\textcolor{stringliteral}{'activity'}, \textcolor{stringliteral}{'badge'}]));
+72     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1StepTransformer_a8052fad1a0585b225720e12f619e01cf}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Step\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Step\+Transformer}!include\+Activity@{include\+Activity}}
 \index{include\+Activity@{include\+Activity}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Step\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Step\+Transformer}}
@@ -57,13 +74,13 @@ League
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-61     \{
-62         \textcolor{keywordflow}{if}($activity = $instance->activity)\{   
-63             $excludeEmbeds = [\textcolor{stringliteral}{'categories'}];
-64             $resource = $this->item($activity, \textcolor{keyword}{new} ActivityTransformer(\textcolor{keyword}{false}, $excludeEmbeds));
-65             \textcolor{keywordflow}{return} $resource;
-66         \}
-67     \}
+80     \{
+81         \textcolor{keywordflow}{if}($activity = $instance->activity)\{   
+82             $excludeEmbeds = [];\textcolor{comment}{//['categories'];}
+83             $resource = $this->item($activity, \textcolor{keyword}{new} ActivityTransformer(\textcolor{keyword}{false}, $excludeEmbeds));
+84             \textcolor{keywordflow}{return} $resource;
+85         \}
+86     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1StepTransformer_a5658c6eb2bff831cd21c37037b3b4978}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Step\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Step\+Transformer}!include\+Badge@{include\+Badge}}
 \index{include\+Badge@{include\+Badge}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Step\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Step\+Transformer}}
@@ -79,18 +96,18 @@ League
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-75     \{
-76         \textcolor{keywordflow}{if}($badge = $instance->badge)\{
-77             \textcolor{keywordflow}{return} $this->item($badge, \textcolor{keyword}{new} BadgeTransformer(\textcolor{keyword}{false}));
-78         \}
-79     \}
+94     \{
+95         \textcolor{keywordflow}{if}($badge = $instance->badge)\{
+96             \textcolor{keywordflow}{return} $this->item($badge, \textcolor{keyword}{new} BadgeTransformer(\textcolor{keyword}{false}));
+97         \}
+98     \}
 \end{DoxyCode}
 
 
 \subsection{Member Data Documentation}
-\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1StepTransformer_a314810a5358b5eec093a7975e443ec37}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Step\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Step\+Transformer}!\$avilable\+Includes@{\$avilable\+Includes}}
-\index{\$avilable\+Includes@{\$avilable\+Includes}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Step\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Step\+Transformer}}
-\subsubsection[{\$avilable\+Includes}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Step\+Transformer\+::\$avilable\+Includes\hspace{0.3cm}{\ttfamily [protected]}}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1StepTransformer_a314810a5358b5eec093a7975e443ec37}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1StepTransformer_a4ef32b466440209cb24dc381c2b0ae7a}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Step\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Step\+Transformer}!\$avilables\+Includes@{\$avilables\+Includes}}
+\index{\$avilables\+Includes@{\$avilables\+Includes}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Step\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Step\+Transformer}}
+\subsubsection[{\$avilables\+Includes}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Step\+Transformer\+::\$avilables\+Includes\hspace{0.3cm}{\ttfamily [protected]}}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1StepTransformer_a4ef32b466440209cb24dc381c2b0ae7a}
 {\bfseries Initial value\+:}
 \begin{DoxyCode}
 = [

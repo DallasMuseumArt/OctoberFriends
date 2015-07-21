@@ -14,6 +14,8 @@
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1FriendsEventHandler_a480d5807466962402ccc13260cfb0930}{}{\bfseries on\+Auth\+Login} (\$event)\label{classDMA_1_1Friends_1_1Classes_1_1FriendsEventHandler_a480d5807466962402ccc13260cfb0930}
 
 \item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1FriendsEventHandler_af494bf71f7c0eed4f82f4521c15a0ea2}{on\+Auth\+Pre\+Login} (\$data, \$rules)
+\item 
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1FriendsEventHandler_aa1d57544bd13c8acf91a3f4e3bf150a5}{}{\bfseries on\+Auth\+Register} (\$user)\label{classDMA_1_1Friends_1_1Classes_1_1FriendsEventHandler_aa1d57544bd13c8acf91a3f4e3bf150a5}
 
 \item 
@@ -45,6 +47,27 @@ User & {\em \$user} & The user that completed the activity \\
 \begin{DoxyCode}
 40     \{   
 41     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1FriendsEventHandler_af494bf71f7c0eed4f82f4521c15a0ea2}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Event\+Handler@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Event\+Handler}!on\+Auth\+Pre\+Login@{on\+Auth\+Pre\+Login}}
+\index{on\+Auth\+Pre\+Login@{on\+Auth\+Pre\+Login}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Event\+Handler@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Event\+Handler}}
+\subsubsection[{on\+Auth\+Pre\+Login}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Friends\+Event\+Handler\+::on\+Auth\+Pre\+Login (
+\begin{DoxyParamCaption}
+\item[{}]{\$data, }
+\item[{}]{\$rules}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Classes_1_1FriendsEventHandler_af494bf71f7c0eed4f82f4521c15a0ea2}
+Example implementation of auth.\+prelogin event
+
+
+\begin{DoxyParams}[1]{Parameters}
+array & {\em \$data} & An array of data that can be processed\\
+\hline
+array & {\em \$rules} & An array of validation rules see \href{http://laravel.com/docs/5.1/validation}{\tt http\+://laravel.\+com/docs/5.\+1/validation} \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+151 \{\}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1FriendsEventHandler_aa13c2568369d06c2a0ca1c96f099ff09}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Event\+Handler@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Event\+Handler}!on\+Badge\+Completed@{on\+Badge\+Completed}}
 \index{on\+Badge\+Completed@{on\+Badge\+Completed}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Event\+Handler@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Friends\+Event\+Handler}}
@@ -154,9 +177,7 @@ User & {\em \$user} & The user that completed the step \\
 \end{DoxyParams}
 
 \begin{DoxyCode}
-124     \{   
-125         
-126     \}   
+123 \{\}  
 \end{DoxyCode}
 
 

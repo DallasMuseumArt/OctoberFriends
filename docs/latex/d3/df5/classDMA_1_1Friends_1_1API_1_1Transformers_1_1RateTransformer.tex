@@ -28,19 +28,19 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 \item[{}]{\$instance}
 \end{DoxyParamCaption}
 )}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1RateTransformer_a27ed532bf412c45c32615058c9ff80bb}
-\begin{DoxySeeAlso}{See also}
+( definition=\char`\"{}rate\char`\"{}, description=\char`\"{}\+Rate definition\char`\"{}, required=\{\char`\"{}id\char`\"{}, \char`\"{}rate\char`\"{}, \char`\"{}comment\char`\"{}, \char`\"{}create\+\_\+at\char`\"{}\}, ( property=\char`\"{}id\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( property=\char`\"{}rate\char`\"{}, type=\char`\"{}number\char`\"{}, format=\char`\"{}float\char`\"{}, maximum=5, minimum=1 ), ( property=\char`\"{}comment\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}create\+\_\+at\char`\"{}, type=\char`\"{}string\char`\"{}, format=\char`\"{}date-\/time\char`\"{} ), ( property=\char`\"{}user\char`\"{}, type=\char`\"{}object\char`\"{}, ref=\char`\"{}\#/definitions/user\char`\"{} ) )  \begin{DoxySeeAlso}{See also}
 \+::get\+Data() 
 \end{DoxySeeAlso}
 
 \begin{DoxyCode}
-23     \{
-24         \textcolor{keywordflow}{return} [
-25                 \textcolor{stringliteral}{'id'}                => (int)$instance->id,
-26                 \textcolor{stringliteral}{'rate'}              => $instance->rate,
-27                 \textcolor{stringliteral}{'comment'}           => $instance->comment,   
-28                 \textcolor{stringliteral}{'created\_at'}        => $this->carbonToIso($instance->created\_at),
-29         ];
-30     \}  
+57     \{
+58         \textcolor{keywordflow}{return} [
+59                 \textcolor{stringliteral}{'id'}                => (int)$instance->id,
+60                 \textcolor{stringliteral}{'rate'}              => $instance->rate,
+61                 \textcolor{stringliteral}{'comment'}           => $instance->comment,   
+62                 \textcolor{stringliteral}{'created\_at'}        => $this->carbonToIso($instance->created\_at),
+63         ];
+64     \}  
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1RateTransformer_ae7ba3b8c09f2218ac4b771f8940a5921}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Rate\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Rate\+Transformer}!include\+User@{include\+User}}
 \index{include\+User@{include\+User}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Rate\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Rate\+Transformer}}
@@ -56,10 +56,10 @@ League
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-38     \{
-39         $user = $instance->user;
-40         \textcolor{keywordflow}{return} $this->item($user, \textcolor{keyword}{new} UserTransformer);
-41     \}
+72     \{
+73         $user = $instance->user;
+74         \textcolor{keywordflow}{return} $this->item($user, \textcolor{keyword}{new} UserTransformer);
+75     \}
 \end{DoxyCode}
 
 

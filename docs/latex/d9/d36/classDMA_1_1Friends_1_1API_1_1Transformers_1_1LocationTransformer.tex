@@ -9,8 +9,7 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1LocationTransformer_a1c6afa02557796e620042cd23acc4ab5}{}{\bfseries get\+Data} (\$instance)\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1LocationTransformer_a1c6afa02557796e620042cd23acc4ab5}
-
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1LocationTransformer_a1c6afa02557796e620042cd23acc4ab5}{get\+Data} (\$instance)
 \end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -21,6 +20,30 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 
 
 \subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1LocationTransformer_a1c6afa02557796e620042cd23acc4ab5}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Location\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Location\+Transformer}!get\+Data@{get\+Data}}
+\index{get\+Data@{get\+Data}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Location\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Location\+Transformer}}
+\subsubsection[{get\+Data}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Location\+Transformer\+::get\+Data (
+\begin{DoxyParamCaption}
+\item[{}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1LocationTransformer_a1c6afa02557796e620042cd23acc4ab5}
+Location definition ( definition=\char`\"{}location\char`\"{}, required=\{\char`\"{}id\char`\"{}, \char`\"{}title\char`\"{}, \char`\"{}description\char`\"{}, \char`\"{}printer\+\_\+reward\char`\"{}, \char`\"{}printer\+\_\+membership\char`\"{},\char`\"{}uuid\char`\"{}, \char`\"{}boolean\char`\"{}, \char`\"{}image\+\_\+url\char`\"{}\}, ( property=\char`\"{}id\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( property=\char`\"{}title\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}description\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}printer\+\_\+reward\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}printer\+\_\+membership\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}uuid\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}is\+\_\+authorized\char`\"{}, type=\char`\"{}boolean\char`\"{}, ), ( property=\char`\"{}image\+\_\+url\char`\"{}, type=\char`\"{}string\char`\"{}, ) ) 
+\begin{DoxyCode}
+53     \{
+54         $data = [
+55             \textcolor{stringliteral}{'id'}                    => intval($instance->id), 
+56             \textcolor{stringliteral}{'title'}                 => $instance->title, 
+57             \textcolor{stringliteral}{'description'}           => $instance->description, 
+58             \textcolor{stringliteral}{'printer\_reward'}        => $instance->printer\_reward,
+59             \textcolor{stringliteral}{'printer\_membership'}    => $instance->printer\_membership,
+60             \textcolor{stringliteral}{'uuid'}                  => $instance->uuid,
+61             \textcolor{stringliteral}{'is\_authorized'}         => ($instance->is\_authorized)?\textcolor{keyword}{true}:\textcolor{keyword}{false},
+62             \textcolor{stringliteral}{'image\_url'}             => $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1LocationTransformer_a455fe5c1c50b13141cc07410b2e80992}{getImageUrl}($instance),
+63         ];
+64         
+65         \textcolor{keywordflow}{return} $data;
+66     \}
+\end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1LocationTransformer_a455fe5c1c50b13141cc07410b2e80992}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Location\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Location\+Transformer}!get\+Image\+Url@{get\+Image\+Url}}
 \index{get\+Image\+Url@{get\+Image\+Url}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Location\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Location\+Transformer}}
 \subsubsection[{get\+Image\+Url}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Location\+Transformer\+::get\+Image\+Url (
@@ -35,16 +58,16 @@ unknown & {\em \$instance} & \\
 \end{DoxyParams}
 
 \begin{DoxyCode}
-34     \{
-35         \textcolor{keywordflow}{try}\{
-36             \textcolor{keywordflow}{if} (!is\_null($instance->image)) \{
-37                 \textcolor{keywordflow}{return} $instance->image->getPath();
-38             \}
-39         \}\textcolor{keywordflow}{catch}(\(\backslash\)\hyperlink{namespaceException}{Exception} $e)\{
-40             \textcolor{comment}{// Do nothing}
-41         \}
-42         \textcolor{keywordflow}{return} null;
-43     \}
+74     \{
+75         \textcolor{keywordflow}{try}\{
+76             \textcolor{keywordflow}{if} (!is\_null($instance->image)) \{
+77                 \textcolor{keywordflow}{return} $instance->image->getPath();
+78             \}
+79         \}\textcolor{keywordflow}{catch}(\(\backslash\)\hyperlink{namespaceException}{Exception} $e)\{
+80             \textcolor{comment}{// Do nothing}
+81         \}
+82         \textcolor{keywordflow}{return} null;
+83     \}
 \end{DoxyCode}
 
 

@@ -9,10 +9,41 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserMetadataTransformer_ada25608c2463185d6bb056e6d289a16a}{}{\bfseries get\+Data} (\$instance)\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserMetadataTransformer_ada25608c2463185d6bb056e6d289a16a}
-
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserMetadataTransformer_ada25608c2463185d6bb056e6d289a16a}{get\+Data} (\$instance)
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserMetadataTransformer_ada25608c2463185d6bb056e6d289a16a}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Metadata\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Metadata\+Transformer}!get\+Data@{get\+Data}}
+\index{get\+Data@{get\+Data}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Metadata\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Metadata\+Transformer}}
+\subsubsection[{get\+Data}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+User\+Metadata\+Transformer\+::get\+Data (
+\begin{DoxyParamCaption}
+\item[{}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserMetadataTransformer_ada25608c2463185d6bb056e6d289a16a}
+( definition=\char`\"{}user.\+metadata\char`\"{}, description=\char`\"{}\+User profile definition\char`\"{}, required=\{\char`\"{}birth\+\_\+date\char`\"{}, \char`\"{}email\+\_\+optin\char`\"{}, \char`\"{}gender\char`\"{}, \char`\"{}race\char`\"{}, \char`\"{}household\+\_\+income\char`\"{}, \char`\"{}household\+\_\+size\char`\"{}, \char`\"{}education\char`\"{}, \char`\"{}current\+\_\+member\char`\"{}, \char`\"{}current\+\_\+member\+\_\+number\char`\"{}, \char`\"{}facebook\char`\"{}, \char`\"{}twitter\char`\"{}, \char`\"{}instagram\char`\"{}\}, ( property=\char`\"{}birth\+\_\+date\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}email\+\_\+optin\char`\"{}, type=\char`\"{}boolean\char`\"{}, ), ( description=\char`\"{}\+Get an update list from endpoint users/profile-\/options/gender\char`\"{}, property=\char`\"{}gender\char`\"{}, type=\char`\"{}string\char`\"{}, enum=\{\char`\"{}\+Male\char`\"{}, \char`\"{}\+Female\char`\"{}, \char`\"{}\+Non Binary/\+Other\char`\"{}\} ), ( description=\char`\"{}\+Get an update list from endpoint users/profile-\/options/race\char`\"{}, property=\char`\"{}race\char`\"{}, type=\char`\"{}string\char`\"{}, enum=\{\char`\"{}\+White\char`\"{}, \char`\"{}\+Hispanic\char`\"{}, \char`\"{}\+Black or African American\char`\"{}, \char`\"{}\+American Indian or Alaska Native\char`\"{}, \char`\"{}\+Asian\char`\"{}, \char`\"{}\+Native Hawaiian or Other Pacific Islander\char`\"{}, \char`\"{}\+Two or more races\char`\"{}, \char`\"{}\+Other\char`\"{}\} ), ( description=\char`\"{}\+Get an update list from endpoint users/profile-\/options/household\+\_\+income\char`\"{}, property=\char`\"{}household\+\_\+income\char`\"{}, type=\char`\"{}string\char`\"{}, enum=\{\char`\"{}\+Less then \$25,000\char`\"{}, \char`\"{}\$25,000 -\/ \$50,000\char`\"{}, \char`\"{}\$50,000 -\/ \$75,000\char`\"{}, \char`\"{}\$75,000 -\/ \$150,000\char`\"{}, \char`\"{}\$150,000 -\/ \$500,000\char`\"{}, \char`\"{}\$500,000 or more\char`\"{}\} ), ( description=\char`\"{}\+Get an update list from endpoint users/profile-\/options/education\char`\"{}, property=\char`\"{}education\char`\"{}, type=\char`\"{}string\char`\"{}, enum=\{\char`\"{}\+K-\/12\char`\"{}, \char`\"{}\+High School/\+G\+E\+D\char`\"{}, \char`\"{}\+Some College\char`\"{}, \char`\"{}\+Vocational or Trade School\char`\"{}, \char`\"{}\+Bachelors Degree\char`\"{}, \char`\"{}\+Masters Degree\char`\"{}, \char`\"{}\+Ph\+D\char`\"{}\} ), ( property=\char`\"{}current\+\_\+member\char`\"{}, type=\char`\"{}boolean\char`\"{}, ), ( property=\char`\"{}current\+\_\+member\+\_\+number\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}facebook\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}twitter\char`\"{}, type=\char`\"{}string\char`\"{} ), ( property=\char`\"{}instagram\char`\"{}, type=\char`\"{}string\char`\"{} ) )  \begin{DoxySeeAlso}{See also}
+\+::get\+Data() 
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+76     \{
+77         \textcolor{keywordflow}{return} [
+78             \textcolor{stringliteral}{'birth\_date'}            => $instance->birth\_date,      
+79             \textcolor{stringliteral}{'email\_optin'}           => ($instance->email\_optin)?\textcolor{keyword}{true} : \textcolor{keyword}{false},    
+80             \textcolor{stringliteral}{'gender'}                => $instance->gender,
+81             \textcolor{stringliteral}{'race'}                  => $instance->race,
+82             \textcolor{stringliteral}{'household\_income'}      => $instance->household\_income,
+83             \textcolor{stringliteral}{'household\_size'}        => $instance->household\_size,
+84             \textcolor{stringliteral}{'education'}             => $instance->education,    
+85             \textcolor{stringliteral}{'current\_member'}        => ($instance->current\_member)?\textcolor{keyword}{true} : \textcolor{keyword}{false},
+86             \textcolor{stringliteral}{'current\_member\_number'} => $instance->current\_member\_number,
+87             \textcolor{stringliteral}{'facebook'}              => $instance->facebook,
+88             \textcolor{stringliteral}{'twitter'}               => $instance->twitter,
+89             \textcolor{stringliteral}{'instagram'}             => $instance->instagram,
+90         ];
+91     \}    
+\end{DoxyCode}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

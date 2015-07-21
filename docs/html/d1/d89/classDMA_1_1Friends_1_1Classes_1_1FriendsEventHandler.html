@@ -114,6 +114,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a480d5807466962402ccc13260cfb0930"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a480d5807466962402ccc13260cfb0930"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>onAuthLogin</b> ($event)</td></tr>
 <tr class="separator:a480d5807466962402ccc13260cfb0930"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af494bf71f7c0eed4f82f4521c15a0ea2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d89/classDMA_1_1Friends_1_1Classes_1_1FriendsEventHandler.html#af494bf71f7c0eed4f82f4521c15a0ea2">onAuthPreLogin</a> ($data, $rules)</td></tr>
+<tr class="separator:af494bf71f7c0eed4f82f4521c15a0ea2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1d57544bd13c8acf91a3f4e3bf150a5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa1d57544bd13c8acf91a3f4e3bf150a5"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>onAuthRegister</b> ($user)</td></tr>
 <tr class="separator:aa1d57544bd13c8acf91a3f4e3bf150a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -157,6 +159,41 @@ Public Member Functions</h2></td></tr>
 </dl>
 <div class="fragment"><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    {   </div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="af494bf71f7c0eed4f82f4521c15a0ea2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DMA\Friends\Classes\FriendsEventHandler::onAuthPreLogin </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$rules</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Example implementation of auth.prelogin event</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">array</td><td class="paramname">$data</td><td>An array of data that can be processed</td></tr>
+    <tr><td class="paramtype">array</td><td class="paramname">$rules</td><td>An array of validation rules see <a href="http://laravel.com/docs/5.1/validation">http://laravel.com/docs/5.1/validation</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;{}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -311,9 +348,7 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<div class="fragment"><div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    {   </div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        </div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    }   </div>
+<div class="fragment"><div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;{}  </div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -324,7 +359,7 @@ Public Member Functions</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jun 26 2015 13:24:10 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jul 21 2015 14:20:27 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['generateapidocs',['GenerateAPIDocs',['../d3/d2f/classDMA_1_1Friends_1_1Commands_1_1GenerateAPIDocs.html',1,'DMA::Friends::Commands']]],
   ['getrewards',['GetRewards',['../d7/de7/classDMA_1_1Friends_1_1Components_1_1GetRewards.html',1,'DMA::Friends::Components']]],
   ['graphreport',['GraphReport',['../d1/d31/classDMA_1_1Friends_1_1ReportWidgets_1_1GraphReport.html',1,'DMA::Friends::ReportWidgets']]],
   ['groupformcreation',['GroupFormCreation',['../de/dd1/classDMA_1_1Friends_1_1Components_1_1GroupFormCreation.html',1,'DMA::Friends::Components']]],

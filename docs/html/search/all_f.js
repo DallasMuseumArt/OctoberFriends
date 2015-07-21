@@ -4,6 +4,7 @@ var searchData=
   ['onactivitycompleted',['onActivityCompleted',['../d1/d89/classDMA_1_1Friends_1_1Classes_1_1FriendsEventHandler.html#a6467365017b9d494122c8ded41a9a406',1,'DMA::Friends::Classes::FriendsEventHandler']]],
   ['onadd',['onAdd',['../de/dd1/classDMA_1_1Friends_1_1Components_1_1GroupFormCreation.html#a9dd18b90b440803a9026ac790275f804',1,'DMA::Friends::Components::GroupFormCreation']]],
   ['onaddmember',['onAddMember',['../d9/d20/classDMA_1_1Friends_1_1Components_1_1GroupManager.html#ac0784d39e4fe94f792bec571cec1b202',1,'DMA::Friends::Components::GroupManager']]],
+  ['onauthprelogin',['onAuthPreLogin',['../d1/d89/classDMA_1_1Friends_1_1Classes_1_1FriendsEventHandler.html#af494bf71f7c0eed4f82f4521c15a0ea2',1,'DMA::Friends::Classes::FriendsEventHandler']]],
   ['onavailableuser',['onAvailableUser',['../df/d81/classDMA_1_1Friends_1_1Components_1_1UserLogin.html#a49b72261eed4c7750ca24e23ebecc945',1,'DMA::Friends::Components::UserLogin']]],
   ['onavatar',['onAvatar',['../de/dfc/classDMA_1_1Friends_1_1Components_1_1UserProfile.html#a8762bd608981dc640c3fb5d86090649e',1,'DMA::Friends::Components::UserProfile']]],
   ['onbadgecompleted',['onBadgeCompleted',['../d1/d89/classDMA_1_1Friends_1_1Classes_1_1FriendsEventHandler.html#aa13c2568369d06c2a0ca1c96f099ff09',1,'DMA::Friends::Classes::FriendsEventHandler']]],

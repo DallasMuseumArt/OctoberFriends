@@ -13,6 +13,12 @@
 \item 
 \hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager_a03303291e15aa07cb42c99f051a319c5}{load\+Registered\+Resources} ()
 \end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager_adbb2b83cd96ee99eb25462348fd63cb5}{}{\bfseries add\+Route\+Api\+Docs} ()\label{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager_adbb2b83cd96ee99eb25462348fd63cb5}
+
+\end{DoxyCompactItemize}
 
 
 \subsection{Member Function Documentation}
@@ -47,42 +53,61 @@ bool & {\em \$include\+Namespaces} & \\
 \end{DoxyParams}
 
 \begin{DoxyCode}
-63     \{
-64         \textcolor{keywordflow}{foreach}($this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager_aeafe3f85b5ab18331264fb4ce04085c0}{getResources}() as $url => $class)\{
-65             \textcolor{keywordflow}{try}\{
-66                 $resource = App::make($class);
-67                 
-68                 \textcolor{comment}{// Register additional routes first}
-69                 \textcolor{keywordflow}{if}(method\_exists($resource, \textcolor{stringliteral}{'getAdditionalRoutes'}))\{
-70                     $extra = $resource->getAdditionalRoutes();
-71                     \textcolor{keywordflow}{foreach} ($extra as $u => $args) \{
-72                         $verbs = $args[\textcolor{stringliteral}{'verbs'}];
-73                         \textcolor{keywordflow}{foreach}($verbs as $v) \{
-74                             \hyperlink{namespaceRoute}{Route}::\{$v\}($url . \textcolor{charliteral}{'/'} . $u, $class . \textcolor{stringliteral}{"@"} . $args[\textcolor{stringliteral}{'handler'}]);
-75                         \}
-76                     \}
-77                 \}
-78                 
-79                 \textcolor{keywordflow}{if}(is\_subclass\_of($resource, \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Classes\(\backslash\)API\(\backslash\)BaseResource'}))\{
-80                     \textcolor{comment}{// Register resource}
-81                     Route::resource($url, $class);
-82                 \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (is\_subclass\_of($resource, \textcolor{stringliteral}{'\(\backslash\)Controller'})) \{
-83                     \textcolor{comment}{// Register controller}
-84                     Route::controller($url, $class);
-85                 \}
-86 
-87             \}\textcolor{keywordflow}{catch}(\hyperlink{namespaceException}{Exception} $e)\{
-88                Log::error(\textcolor{stringliteral}{"API : Resource endpoint fail to register due to '"} . $e->getMessage() . \textcolor{stringliteral}{"'"});
-89             \}
-90         \}
-91         
-92         \textcolor{comment}{// Catch all}
-93         Route::any(\textcolor{stringliteral}{'\{all?\}'}, \textcolor{keyword}{function}($path) \{ 
-94             \textcolor{keywordflow}{return} Response::api()->errorNotFound(); 
-95         \})->where(\textcolor{stringliteral}{'all'}, \textcolor{stringliteral}{'.+'});
-96         
-97 
-98     \}
+64     \{
+65         \textcolor{comment}{// API Documentation}
+66         \textcolor{comment}{// Document API using Swagger-PHP notation. The following router is for swagger-ui}
+67         $this->addRouteApiDocs();
+68 
+69         \textcolor{keywordflow}{foreach}($this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager_aeafe3f85b5ab18331264fb4ce04085c0}{getResources}() as $url => $class)\{
+70             \textcolor{keywordflow}{try}\{
+71                 $resource = App::make($class);
+72                 
+73                 \textcolor{comment}{// Register additional routes first}
+74                 \textcolor{keywordflow}{if}(method\_exists($resource, \textcolor{stringliteral}{'getAdditionalRoutes'}))\{
+75                     $extra = $resource->getAdditionalRoutes();
+76                     \textcolor{keywordflow}{foreach} ($extra as $u => $args) \{
+77                         $verbs = $args[\textcolor{stringliteral}{'verbs'}];
+78                         \textcolor{keywordflow}{foreach}($verbs as $v) \{
+79                             \textcolor{comment}{//Route::\{$v\}($url . '/' . $u, $class . "@" . $args['handler']);}
+80                             
+81                             
+82                             \textcolor{comment}{// TODO : Find how to get current router group prefix}
+83                             $baseName  = \textcolor{stringliteral}{'friends.api.'} . str\_replace(\textcolor{charliteral}{'/'}, \textcolor{charliteral}{'.'}, strtolower($url));
+84                             \textcolor{keywordflow}{if} (!$routeName = array\_get($args, \textcolor{stringliteral}{'name'}))\{
+85                                 $routeName = strtolower($args[\textcolor{stringliteral}{'handler'}]);
+86                             \}
+87                             
+88                             $routeName = $baseName . \textcolor{charliteral}{'.'} . $routeName;
+89                             
+90                             \hyperlink{namespaceRoute}{Route}::\{$v\}($url . \textcolor{charliteral}{'/'} . $u, [
+91                                     \textcolor{stringliteral}{'as'}   => $routeName,
+92                                     \textcolor{stringliteral}{'uses'} => $class . \textcolor{stringliteral}{"@"} . $args[\textcolor{stringliteral}{'handler'}]
+93                             ]);
+94                             
+95                             
+96                         \}
+97                     \}
+98                 \}
+99                 
+100                 \textcolor{keywordflow}{if}(is\_subclass\_of($resource, \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Classes\(\backslash\)API\(\backslash\)BaseResource'}))\{
+101                     \textcolor{comment}{// Register resource}
+102                     Route::resource($url, $class);
+103                 \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (is\_subclass\_of($resource, \textcolor{stringliteral}{'\(\backslash\)Controller'})) \{
+104                     \textcolor{comment}{// Register controller}
+105                     Route::controller($url, $class);
+106                 \}
+107 
+108             \}\textcolor{keywordflow}{catch}(\hyperlink{namespaceException}{Exception} $e)\{
+109                Log::error(\textcolor{stringliteral}{"API : Resource endpoint fail to register due to '"} . $e->getMessage() . \textcolor{stringliteral}{"'"});
+110             \}
+111         \}
+112         
+113         \textcolor{comment}{// Catch all}
+114         Route::any(\textcolor{stringliteral}{'\{all?\}'}, \textcolor{keyword}{function}($path) \{ 
+115             \textcolor{keywordflow}{return} Response::api()->errorNotFound(); 
+116         \})->where(\textcolor{stringliteral}{'all'}, \textcolor{stringliteral}{'.+'});
+117         
+118     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager_a03303291e15aa07cb42c99f051a319c5}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+A\+P\+I\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+A\+P\+I\+Manager}!load\+Registered\+Resources@{load\+Registered\+Resources}}
 \index{load\+Registered\+Resources@{load\+Registered\+Resources}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+A\+P\+I\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+A\+P\+I\+Manager}}
@@ -96,20 +121,20 @@ void
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-106     \{
-107         $plugins = PluginManager::instance()->getPlugins();
-108         \textcolor{keywordflow}{foreach} ($plugins as $pluginId => $pluginObj) \{
-109             $resources = null;
-110             \textcolor{keywordflow}{if}(method\_exists($pluginObj, \textcolor{stringliteral}{'registerFriendAPIResources'})) \{
-111                 $resources = $pluginObj->registerFriendAPIResources();
-112             \}
-113             \textcolor{keywordflow}{if} (!is\_array($resources)) \{
-114                 \textcolor{keywordflow}{continue};
-115             \}
-116     
-117             $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager_a7f1a8fb5292558288b627ca0d05939ab}{registerResources}($resources);
-118         \}
-119     \}
+137     \{
+138         $plugins = PluginManager::instance()->getPlugins();
+139         \textcolor{keywordflow}{foreach} ($plugins as $pluginId => $pluginObj) \{
+140             $resources = null;
+141             \textcolor{keywordflow}{if}(method\_exists($pluginObj, \textcolor{stringliteral}{'registerFriendAPIResources'})) \{
+142                 $resources = $pluginObj->registerFriendAPIResources();
+143             \}
+144             \textcolor{keywordflow}{if} (!is\_array($resources)) \{
+145                 \textcolor{keywordflow}{continue};
+146             \}
+147     
+148             $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager_a7f1a8fb5292558288b627ca0d05939ab}{registerResources}($resources);
+149         \}
+150     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager_a4840b21b124bdd3640f33d52511defdf}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+A\+P\+I\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+A\+P\+I\+Manager}!register\+Resource@{register\+Resource}}
 \index{register\+Resource@{register\+Resource}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+A\+P\+I\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+A\+P\+I\+Manager}}
@@ -139,7 +164,7 @@ string & {\em \$resource\+Class\+Name} & \\
 \item[{array}]{\$resources}
 \end{DoxyParamCaption}
 )}\label{classDMA_1_1Friends_1_1Classes_1_1API_1_1APIManager_a7f1a8fb5292558288b627ca0d05939ab}
-Regiter multiple A\+P\+I Resources using the following array structure\+:
+Register multiple A\+P\+I Resources using the following array structure\+:
 
 \mbox{[} $<$endpoint\+\_\+url$>$ =$>$ $<$classname\+\_\+resource$>$, $<$endpoint\+\_\+url$>$ =$>$ $<$classname\+\_\+resource$>$, ...\mbox{]}
 

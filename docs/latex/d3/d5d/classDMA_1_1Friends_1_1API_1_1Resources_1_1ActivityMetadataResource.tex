@@ -12,6 +12,10 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 \hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_ae6a01ce9c7882d3c741f471557d5a8f2}{index\+By\+User} (\$user\+Id=null)
 \item 
 \hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_a489377740bd451341a243ba778b65e68}{index\+By\+Type\+And\+User} (\$types=null, \$user\+Id=null)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_adcd1fde2ccc77d6f698cbf63c2b1add8}{index} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_aa87d629932ed257089513010323e6f7e}{show} (\$id)
 \end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -43,18 +47,35 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 \end{DoxySeeAlso}
 
 \begin{DoxyCode}
-80     \{
-81         $query = parent::applyFilters($model);
-82         \textcolor{comment}{// TODO : is better to transpode the data rows to columns}
-83         \textcolor{comment}{// but for now the getMetadata method on ActivityMetadataTransformer}
-84         \textcolor{comment}{// and the following groupBy would work.}
-85          
-86         \textcolor{comment}{// Is necessary group by session\_id, otherwise }
-87         \textcolor{comment}{// the response will include duplicates. }
-88         $query = $query->groupBy(\textcolor{stringliteral}{'session\_id'});
-89 
-90         \textcolor{keywordflow}{return} $query;
-91     \}
+223     \{
+224         $query = parent::applyFilters($model);
+225         \textcolor{comment}{// TODO : is better to transpode the data rows to columns}
+226         \textcolor{comment}{// but for now the getMetadata method on ActivityMetadataTransformer}
+227         \textcolor{comment}{// and the following groupBy would work.}
+228          
+229         \textcolor{comment}{// Is necessary group by session\_id, otherwise }
+230         \textcolor{comment}{// the response will include duplicates. }
+231         $query = $query->groupBy(\textcolor{stringliteral}{'session\_id'});
+232 
+233         \textcolor{keywordflow}{return} $query;
+234     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_adcd1fde2ccc77d6f698cbf63c2b1add8}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Metadata\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Metadata\+Resource}!index@{index}}
+\index{index@{index}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Metadata\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Metadata\+Resource}}
+\subsubsection[{index}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Activity\+Metadata\+Resource\+::index (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_adcd1fde2ccc77d6f698cbf63c2b1add8}
+( path=\char`\"{}activity-\/metadata\char`\"{}, description=\char`\"{}\+Returns all activity medatadata\char`\"{}, summary=\char`\"{}\+Return all activity metadata\char`\"{}, tags=\{ \char`\"{}activity-\/metadata\char`\"{}\},
+
+( ref=\char`\"{}\#/parameters/per\+\_\+page\char`\"{} ), ( ref=\char`\"{}\#/parameters/page\char`\"{} ), ( ref=\char`\"{}\#/parameters/sort\char`\"{} ),
+
+( response=200, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/activity.\+metadata\char`\"{}, type=\char`\"{}array\char`\"{}) ), ( response=500, description=\char`\"{}\+Unexpected error\char`\"{}, (ref=\char`\"{}\#/definitions/error500\char`\"{}) ), ( response=404, description=\char`\"{}\+Not Found\char`\"{}, (ref=\char`\"{}\#/definitions/error404\char`\"{}) ) ) 
+\begin{DoxyCode}
+272     \{
+273         \textcolor{keywordflow}{return} parent::index();
+274     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_a489377740bd451341a243ba778b65e68}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Metadata\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Metadata\+Resource}!index\+By\+Type\+And\+User@{index\+By\+Type\+And\+User}}
 \index{index\+By\+Type\+And\+User@{index\+By\+Type\+And\+User}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Metadata\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Metadata\+Resource}}
@@ -64,7 +85,42 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 \item[{}]{\$user\+Id = {\ttfamily null}}
 \end{DoxyParamCaption}
 )}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_a489377740bd451341a243ba778b65e68}
-Return activity metadata by the given user filtered by activities types 
+( parameter=\char`\"{}activity\+\_\+metadata\+\_\+types\char`\"{}, description=\char`\"{}\+One or Multiple activity types\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}types\char`\"{}, type=\char`\"{}array\char`\"{}, required=true, items=(type=\char`\"{}string\char`\"{}), collection\+Format=\char`\"{}csv\char`\"{}, enum=\{\char`\"{}\+Activity\+Code\char`\"{}, \char`\"{}\+Like\+Work\+Of\+Art\char`\"{}, \char`\"{}\+Points\char`\"{}, \char`\"{}\+Registration\char`\"{}\}, )
+
+( path=\char`\"{}activity-\/metadata/\{types\}\char`\"{}, description=\char`\"{}\+Returns all activity medatadata of activity type\char`\"{}, summary=\char`\"{}\+Return activity metadata by activity type\char`\"{}, tags=\{ \char`\"{}activity-\/metadata\char`\"{}\},
+
+( ref=\char`\"{}\#/parameters/per\+\_\+page\char`\"{} ), ( ref=\char`\"{}\#/parameters/page\char`\"{} ), ( ref=\char`\"{}\#/parameters/sort\char`\"{} ),
+
+\begin{DoxyVerb}@SWG\Parameter(
+    ref="#/parameters/activity_metadata_types"    
+),
+
+@SWG\Response(
+    response=200,
+    description="Successful response",
+    @SWG\Schema(ref="#/definitions/activity.metadata", type="array")
+),
+@SWG\Response(
+    response=500,
+    description="Unexpected error",
+    @SWG\Schema(ref="#/definitions/error500")
+),
+@SWG\Response(
+    response=404,
+    description="Not Found",
+    @SWG\Schema(ref="#/definitions/error404")
+\end{DoxyVerb}
+ ) )
+
+( path=\char`\"{}activity-\/metadata/\{types\}/user/\{user\}\char`\"{}, description=\char`\"{}\+Returns all activity medatadata of a user\char`\"{}, summary=\char`\"{}\+Return activity metadata by activity type and user id\char`\"{}, tags=\{ \char`\"{}activity-\/metadata\char`\"{}\},
+
+( ref=\char`\"{}\#/parameters/per\+\_\+page\char`\"{} ), ( ref=\char`\"{}\#/parameters/page\char`\"{} ), ( ref=\char`\"{}\#/parameters/sort\char`\"{} ),
+
+( ref=\char`\"{}\#/parameters/activity\+\_\+metadata\+\_\+types\char`\"{} ),
+
+( description=\char`\"{}\+I\+D of user activity medatadata to fetch\char`\"{}, format=\char`\"{}int64\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}user\char`\"{}, required=true, type=\char`\"{}integer\char`\"{} ),
+
+( response=200, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/activity.\+metadata\char`\"{}, type=\char`\"{}array\char`\"{}) ), ( response=500, description=\char`\"{}\+Unexpected error\char`\"{}, (ref=\char`\"{}\#/definitions/error500\char`\"{}) ), ( response=404, description=\char`\"{}\+Not Found\char`\"{}, (ref=\char`\"{}\#/definitions/error404\char`\"{}) ) ) Return activity metadata by the given user filtered by activities types 
 \begin{DoxyParams}[1]{Parameters}
 string & {\em \$types} & comma separted strings \\
 \hline
@@ -76,31 +132,31 @@ Response
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-49     \{
-50         \textcolor{comment}{// Apply query filters and sort parameters}
-51         $query = $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_add571e6be47126c2bee474f570c566ab}{applyFilters}();
-52         
-53         \textcolor{keywordflow}{if}(!is\_null($userId))\{
-54             \textcolor{keywordflow}{if}(is\_null($user = User::find($userId)))\{
-55                 \textcolor{keywordflow}{return} Response::api()->errorNotFound(\textcolor{stringliteral}{'User not found'});
-56             \}
-57             
-58             \textcolor{comment}{// Filter query by user}
-59             $query = $query->where(\textcolor{stringliteral}{'user\_id'}, $user->getKey());
-60         \}
-61 
-62     
-63         \textcolor{comment}{// Filter by activity type}
-64         $types = !is\_null($types) ? explode(\textcolor{charliteral}{','}, $types): $types;
-65         \textcolor{keywordflow}{if}(!is\_null($types)) \{
-66             $query = $query->whereHas(\textcolor{stringliteral}{'activity'}, \textcolor{keyword}{function}($q) use ($types) \{
-67                 $q->whereIn(\textcolor{stringliteral}{'activity\_type'}, $types);
-68             \});
-69         \}
-70         
-71         \textcolor{keywordflow}{return} $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseResource_aed3811d426c80763855a43280f822f97}{paginateResult}($query);
-72 
-73     \}
+192     \{
+193         \textcolor{comment}{// Apply query filters and sort parameters}
+194         $query = $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_add571e6be47126c2bee474f570c566ab}{applyFilters}();
+195         
+196         \textcolor{keywordflow}{if}(!is\_null($userId))\{
+197             \textcolor{keywordflow}{if}(is\_null($user = User::find($userId)))\{
+198                 \textcolor{keywordflow}{return} Response::api()->errorNotFound(\textcolor{stringliteral}{'User not found'});
+199             \}
+200             
+201             \textcolor{comment}{// Filter query by user}
+202             $query = $query->where(\textcolor{stringliteral}{'user\_id'}, $user->getKey());
+203         \}
+204 
+205     
+206         \textcolor{comment}{// Filter by activity type}
+207         $types = !is\_null($types) ? explode(\textcolor{charliteral}{','}, $types): $types;
+208         \textcolor{keywordflow}{if}(!is\_null($types)) \{
+209             $query = $query->whereHas(\textcolor{stringliteral}{'activity'}, \textcolor{keyword}{function}($q) use ($types) \{
+210                 $q->whereIn(\textcolor{stringliteral}{'activity\_type'}, $types);
+211             \});
+212         \}
+213         
+214         \textcolor{keywordflow}{return} $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseResource_aed3811d426c80763855a43280f822f97}{paginateResult}($query);
+215 
+216     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_ae6a01ce9c7882d3c741f471557d5a8f2}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Metadata\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Metadata\+Resource}!index\+By\+User@{index\+By\+User}}
 \index{index\+By\+User@{index\+By\+User}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Metadata\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Metadata\+Resource}}
@@ -109,7 +165,13 @@ Response
 \item[{}]{\$user\+Id = {\ttfamily null}}
 \end{DoxyParamCaption}
 )}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_ae6a01ce9c7882d3c741f471557d5a8f2}
-Return activity metadata by the given user 
+( path=\char`\"{}activity-\/metadata/user/\{user\}\char`\"{}, description=\char`\"{}\+Returns all activity medatadata of a user\char`\"{}, summary=\char`\"{}\+Returns all activity medatadata by user id\char`\"{}, tags=\{ \char`\"{}activity-\/metadata\char`\"{}\},
+
+( ref=\char`\"{}\#/parameters/per\+\_\+page\char`\"{} ), ( ref=\char`\"{}\#/parameters/page\char`\"{} ), ( ref=\char`\"{}\#/parameters/sort\char`\"{} ),
+
+( description=\char`\"{}\+I\+D of user activity medatadata to fetch\char`\"{}, format=\char`\"{}int64\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}user\char`\"{}, required=true, type=\char`\"{}integer\char`\"{} ),
+
+( response=200, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/activity.\+metadata\char`\"{}, type=\char`\"{}array\char`\"{}) ), ( response=500, description=\char`\"{}\+Unexpected error\char`\"{}, (ref=\char`\"{}\#/definitions/error500\char`\"{}) ), ( response=404, description=\char`\"{}\+Not Found\char`\"{}, (ref=\char`\"{}\#/definitions/error404\char`\"{}) ) ) Return activity metadata by the given user 
 \begin{DoxyParams}[1]{Parameters}
 string & {\em \$user\+Id} & \\
 \hline
@@ -119,9 +181,26 @@ Response
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-36     \{
-37         \textcolor{keywordflow}{return} $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_a489377740bd451341a243ba778b65e68}{indexByTypeAndUser}(null, $userId);
-38     \}
+80     \{
+81         \textcolor{keywordflow}{return} $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_a489377740bd451341a243ba778b65e68}{indexByTypeAndUser}(null, $userId);
+82     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_aa87d629932ed257089513010323e6f7e}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Metadata\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Metadata\+Resource}!show@{show}}
+\index{show@{show}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Metadata\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Metadata\+Resource}}
+\subsubsection[{show}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Activity\+Metadata\+Resource\+::show (
+\begin{DoxyParamCaption}
+\item[{}]{\$id}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityMetadataResource_aa87d629932ed257089513010323e6f7e}
+( path=\char`\"{}activity-\/metadata/\{id\}\char`\"{}, description=\char`\"{}\+Returns an activity metadata by id\char`\"{}, summary=\char`\"{}\+Find an activity metadata by id\char`\"{}, tags=\{ \char`\"{}activity-\/metadata\char`\"{}\},
+
+( description=\char`\"{}\+I\+D of activity metadata to fetch\char`\"{}, format=\char`\"{}int64\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}id\char`\"{}, required=true, type=\char`\"{}integer\char`\"{} ),
+
+( response=200, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/activity.\+metadata\char`\"{}) ), ( response=500, description=\char`\"{}\+Unexpected error\char`\"{}, (ref=\char`\"{}\#/definitions/error500\char`\"{}) ), ( response=404, description=\char`\"{}\+Not Found\char`\"{}, (ref=\char`\"{}\#/definitions/error404\char`\"{}) ) ) 
+\begin{DoxyCode}
+312     \{
+313         \textcolor{keywordflow}{return} parent::show($id);
+314     \}
 \end{DoxyCode}
 
 

@@ -35,12 +35,12 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInte
 
 
 \begin{DoxyCode}
-19     \{
-20         \textcolor{keywordflow}{return} [
-21             \textcolor{stringliteral}{'name'}          => \textcolor{stringliteral}{'Like a work of art'},
-22             \textcolor{stringliteral}{'description'}   => \textcolor{stringliteral}{'enter an assession id to like a work of art'},
-23         ];
-24     \}
+20     \{
+21         \textcolor{keywordflow}{return} [
+22             \textcolor{stringliteral}{'name'}          => \textcolor{stringliteral}{'Like a work of art'},
+23             \textcolor{stringliteral}{'description'}   => \textcolor{stringliteral}{'enter an assession id to like a work of art'},
+24         ];
+25     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Activities_1_1LikeWorkOfArt_ac18459839d22721c79df721a6f9b7f8b}{}\index{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art}!is\+Assession\+Number@{is\+Assession\+Number}}
 \index{is\+Assession\+Number@{is\+Assession\+Number}!D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art}}
@@ -61,34 +61,33 @@ mixed boolean, array boolean False if code is an assession number array if code 
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-88     \{
-89         \textcolor{comment}{// Brain API request template URL}
-90         $template = \textcolor{stringliteral}{'
-      http://brain.dma.org/api/v1/collection/object/?fields=id,number,title&format=json&number=%s'};
-91         
-92         \textcolor{comment}{// Clean code from spaces in case user miss type it}
-93         $code     = str\_replace(\textcolor{charliteral}{' '}, \textcolor{stringliteral}{''}, $code);
-94         
-95         \textcolor{comment}{// Get URL}
-96         $url      = sprintf($template, urlencode($code));
-97         
-98         \textcolor{comment}{// Call Brain}
-99         $response = Request::get($url)                   
-100                             ->send();
-101         
-102         \textcolor{keywordflow}{if}($obj = @$response->body->results[0])\{
-103             $data = [
-104                 \textcolor{stringliteral}{'object\_id'}     => $obj->id,
-105                 \textcolor{stringliteral}{'object\_number'} => $obj->number,
-106                 \textcolor{stringliteral}{'object\_title'}  => $obj->title
-107             ];
-108             
-109             \textcolor{keywordflow}{return} $data;
-110            
-111         \}
-112         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-113         
-114     \}
+89     \{
+90         \textcolor{comment}{// Brain API request template URL}
+91         $template = FriendsSettings::get(\textcolor{stringliteral}{'artwork\_api\_template'}, \textcolor{keyword}{false});
+92 
+93         \textcolor{comment}{// Clean code from spaces in case user miss type it}
+94         $code     = str\_replace(\textcolor{charliteral}{' '}, \textcolor{stringliteral}{''}, $code);
+95         
+96         \textcolor{comment}{// Get URL}
+97         $url      = sprintf($template, urlencode($code));
+98         
+99         \textcolor{comment}{// Call Brain}
+100         $response = Request::get($url)                   
+101                             ->send();
+102         
+103         \textcolor{keywordflow}{if}($obj = @$response->body->results[0])\{
+104             $data = [
+105                 \textcolor{stringliteral}{'object\_id'}     => $obj->id,
+106                 \textcolor{stringliteral}{'object\_number'} => $obj->number,
+107                 \textcolor{stringliteral}{'object\_title'}  => $obj->title
+108             ];
+109             
+110             \textcolor{keywordflow}{return} $data;
+111            
+112         \}
+113         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+114         
+115     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Activities_1_1LikeWorkOfArt_a88d1a454b4389e3116cc1f8a365747cd}{}\index{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art}!process@{process}}
 \index{process@{process}!D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Like\+Work\+Of\+Art}}
@@ -104,57 +103,57 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInte
 
 
 \begin{DoxyCode}
-30     \{        
-31         \textcolor{keywordflow}{if} (!isset($params[\textcolor{stringliteral}{'code'}]) || empty($params[\textcolor{stringliteral}{'code'}])) \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-32 
-33         \textcolor{keywordflow}{if} ($activity = Activity::findActivityType(\textcolor{stringliteral}{'LikeWorkOfArt'})->first()) \{          
-34             $code = $params[\textcolor{stringliteral}{'code'}];
-35             
-36             \textcolor{keywordflow}{if} ($data = self::isAssessionNumber($code))\{
-37             
-38                 \textcolor{comment}{// Skip activity process if user has already like this work of art}
-39                 $likeCount = ActivityMetadata::hasMetadataValue($user, $activity, \textcolor{stringliteral}{'object\_id'}, $data[\textcolor{stringliteral}{'
+31     \{        
+32         \textcolor{keywordflow}{if} (!isset($params[\textcolor{stringliteral}{'code'}]) || empty($params[\textcolor{stringliteral}{'code'}])) \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+33 
+34         \textcolor{keywordflow}{if} ($activity = Activity::findActivityType(\textcolor{stringliteral}{'LikeWorkOfArt'})->first()) \{          
+35             $code = $params[\textcolor{stringliteral}{'code'}];
+36             
+37             \textcolor{keywordflow}{if} ($data = self::isAssessionNumber($code))\{
+38             
+39                 \textcolor{comment}{// Skip activity process if user has already like this work of art}
+40                 $likeCount = ActivityMetadata::hasMetadataValue($user, $activity, \textcolor{stringliteral}{'object\_id'}, $data[\textcolor{stringliteral}{'
       object\_id'}])->count();
-40      
-41                 \textcolor{keywordflow}{if} ($likeCount == 0) \{
-42                     \textcolor{comment}{// User haven't like this artwork yet}
-43                     \textcolor{keywordflow}{if} ($ret = parent::process($user, [\textcolor{stringliteral}{'activity'} => $activity])) \{
-44                         
-45                         \textcolor{comment}{// TODO: Find a better way to pass this data}
-46                         $activity->objectData = $data;
-47     
-48                         \textcolor{comment}{// Save user metada activity}
-49                         \hyperlink{classDMA_1_1Friends_1_1Models_1_1ActivityMetadata_ae65caa4e45de84ab2518f465d328fc24}{ActivityMetadata::addUserActivity}($user, $activity
+41      
+42                 \textcolor{keywordflow}{if} ($likeCount == 0) \{
+43                     \textcolor{comment}{// User haven't like this artwork yet}
+44                     \textcolor{keywordflow}{if} ($ret = parent::process($user, [\textcolor{stringliteral}{'activity'} => $activity])) \{
+45                         
+46                         \textcolor{comment}{// TODO: Find a better way to pass this data}
+47                         $activity->objectData = $data;
+48     
+49                         \textcolor{comment}{// Save user metada activity}
+50                         \hyperlink{classDMA_1_1Friends_1_1Models_1_1ActivityMetadata_ae65caa4e45de84ab2518f465d328fc24}{ActivityMetadata::addUserActivity}($user, $activity
       , $data, [\textcolor{stringliteral}{'object\_title'}]);
-50     
-51                         \hyperlink{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_aa3c63d0a5b1ffcd9f58c03e443a2dc8f}{FriendsLog::artwork}([
-52                             \textcolor{stringliteral}{'user'}          => $user,
-53                             \textcolor{stringliteral}{'artwork\_id'}    => $params[\textcolor{stringliteral}{'code'}],
-54                         ]);
-55                     \}
-56                 
-57                     \textcolor{keywordflow}{return} $ret;
-58                 \} \textcolor{keywordflow}{else} \{
-59                     Session::put(\textcolor{stringliteral}{'activityError'}, Lang::get(\textcolor{stringliteral}{'
+51     
+52                         \hyperlink{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_aa3c63d0a5b1ffcd9f58c03e443a2dc8f}{FriendsLog::artwork}([
+53                             \textcolor{stringliteral}{'user'}          => $user,
+54                             \textcolor{stringliteral}{'artwork\_id'}    => $params[\textcolor{stringliteral}{'code'}],
+55                         ]);
+56                     \}
+57                 
+58                     \textcolor{keywordflow}{return} $ret;
+59                 \} \textcolor{keywordflow}{else} \{
+60                     Session::put(\textcolor{stringliteral}{'activityError'}, Lang::get(\textcolor{stringliteral}{'
       dma.friends::lang.activities.alreadyLikeWorkArtError'}, [\textcolor{stringliteral}{'code'} => $params[\textcolor{stringliteral}{'code'}]]));
-60                 \}
-61                 
-62             \} \textcolor{keywordflow}{else} \{
-63                 \textcolor{comment}{// Verify if user try to enter an Object number}
-64                 \textcolor{comment}{// Regex expression to match object number format}
-65                 $re = \textcolor{stringliteral}{"/((([a-zA-Z0-9\_\(\backslash\)\(\backslash\)-]+\(\backslash\)\(\backslash\).)\{1,\})([a-zA-Z0-9\_\(\backslash\)\(\backslash\)-]+))/"};
-66                 $isObjectNumber = (preg\_match\_all($re, str\_replace(\textcolor{charliteral}{' '}, \textcolor{stringliteral}{''},$code)) > 0); 
-67                        
-68                 \textcolor{keywordflow}{if} ( $isObjectNumber ) \{
-69                     Session::put(\textcolor{stringliteral}{'activityError'}, Lang::get(\textcolor{stringliteral}{'
+61                 \}
+62                 
+63             \} \textcolor{keywordflow}{else} \{
+64                 \textcolor{comment}{// Verify if user try to enter an Object number}
+65                 \textcolor{comment}{// Regex expression to match object number format}
+66                 $re = \textcolor{stringliteral}{"/((([a-zA-Z0-9\_\(\backslash\)\(\backslash\)-]+\(\backslash\)\(\backslash\).)\{1,\})([a-zA-Z0-9\_\(\backslash\)\(\backslash\)-]+))/"};
+67                 $isObjectNumber = (preg\_match\_all($re, str\_replace(\textcolor{charliteral}{' '}, \textcolor{stringliteral}{''},$code)) > 0); 
+68                        
+69                 \textcolor{keywordflow}{if} ( $isObjectNumber ) \{
+70                     Session::put(\textcolor{stringliteral}{'activityError'}, Lang::get(\textcolor{stringliteral}{'
       dma.friends::lang.activities.likeWorkArtCodeError'}, [\textcolor{stringliteral}{'code'} => $params[\textcolor{stringliteral}{'code'}]]));
-70                 \}
-71             \}     
-72        \}
-73 
-74         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-75 
-76     \}
+71                 \}
+72             \}     
+73        \}
+74 
+75         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+76 
+77     \}
 \end{DoxyCode}
 
 

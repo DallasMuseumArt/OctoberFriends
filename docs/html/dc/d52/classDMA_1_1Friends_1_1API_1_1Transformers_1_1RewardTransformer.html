@@ -166,15 +166,15 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section see"><dt>See also</dt><dd>::getData() </dd></dl>
-<div class="fragment"><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        $data = [</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <span class="stringliteral">&#39;id&#39;</span>            =&gt; $instance-&gt;id,</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <span class="stringliteral">&#39;title&#39;</span>         =&gt; $instance-&gt;title</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        ];</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordflow">return</span> $data;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    }</div>
+<p>( definition="reward", description="Reward definition", type="object", required={"id", "title", "media"}, ( property="id", type="integer", format="int32" ), ( property="title", type="string", ), ( property="media", type="object", ref="#/definitions/media" ) )  </p><dl class="section see"><dt>See also</dt><dd>::getData() </dd></dl>
+<div class="fragment"><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    {</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        $data = [</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <span class="stringliteral">&#39;id&#39;</span>            =&gt; $instance-&gt;id,</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="stringliteral">&#39;title&#39;</span>         =&gt; $instance-&gt;title</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        ];</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordflow">return</span> $data;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -191,32 +191,32 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section see"><dt>See also</dt><dd>::getExtendedData() </dd></dl>
-<div class="fragment"><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordflow">return</span> [</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                <span class="stringliteral">&#39;description&#39;</span>   =&gt; $instance-&gt;description,</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                <span class="stringliteral">&#39;excerpt&#39;</span>       =&gt; $instance-&gt;excerpt,</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                <span class="stringliteral">&#39;is_published&#39;</span>  =&gt; ($instance-&gt;is_published)?<span class="keyword">true</span>:<span class="keyword">false</span>,</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                <span class="stringliteral">&#39;is_archived&#39;</span>   =&gt; ($instance-&gt;is_archived)?<span class="keyword">true</span>:<span class="keyword">false</span>,</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                <span class="stringliteral">&#39;is_hidden&#39;</span>     =&gt; ($instance-&gt;is_hidden)?<span class="keyword">true</span>:<span class="keyword">false</span>,</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                <span class="stringliteral">&#39;points&#39;</span>        =&gt; $instance-&gt;points,</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                <span class="stringliteral">&#39;barcode&#39;</span>       =&gt; $instance-&gt;barcode,</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                <span class="stringliteral">&#39;date_begin&#39;</span>    =&gt; $this-&gt;carbonToIso($instance-&gt;date_begin),</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                <span class="stringliteral">&#39;date_end&#39;</span>      =&gt; $this-&gt;carbonToIso($instance-&gt;date_end),</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                <span class="stringliteral">&#39;days_valid&#39;</span>    =&gt; $instance-&gt;days_valid,</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                <span class="stringliteral">&#39;fine_print&#39;</span>    =&gt; $instance-&gt;fine_print,</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                <span class="stringliteral">&#39;inventory&#39;</span>     =&gt; $this-&gt;<a class="code" href="../../dc/d52/classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer.html#a9bfaced3e5a688c95c5379540bb071c1">getInventory</a>($instance),</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">                #&#39;enable_email&#39;  =&gt; $instance-&gt;enable_email,</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">                #&#39;redemption_email&#39; =&gt; $instance-&gt;redemption_email,</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">                #&#39;enable_admin_email&#39; =&gt; $instance-&gt;enable_admin_email,</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">                #&#39;email_template&#39; =&gt; $instance-&gt;email_template,</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">                #&#39;admin_email_template&#39; =&gt; $instance-&gt;admin_email_template,</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">                #&#39;admin_email_group&#39; =&gt; $instance-&gt;admin_email_group,</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">                #&#39;admin_email_address&#39; =&gt;  $instance-&gt;admin_email_address,</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        ];</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    }    </div>
-<div class="ttc" id="classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer_html_a9bfaced3e5a688c95c5379540bb071c1"><div class="ttname"><a href="../../dc/d52/classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer.html#a9bfaced3e5a688c95c5379540bb071c1">DMA\Friends\API\Transformers\RewardTransformer\getInventory</a></div><div class="ttdeci">getInventory(Model $instance)</div><div class="ttdef"><b>Definition:</b> RewardTransformer.php:73</div></div>
+<p>( definition="reward.extended", description="Full reward definition", type="object", required={"id", "title", "description", "excerpt", "is_published", "is_archived", "is_hidden", "points", "barcode", "date_begin", "date_end", "days_valid", "fine_print", "inventory", "media"}, ( property="id", type="integer", format="int32" ), ( property="title", type="string", ), ( property="description", type="string", ), ( property="excerpt", type="string", ), ( property="is_published", type="boolean", ), ( property="is_published", type="boolean", ), ( property="is_archived", type="boolean", ), ( property="is_hidden", type="boolean", ), ( property="points", type="integer", format="int32" ), ( property="barcode", type="string", ), ( property="date_begin", type="string", format="date-time" ), ( property="date_end", type="string", format="date-time" ), ( property="days_valid", type="integer", format="int32" ), ( property="fine_print", type="string", ), ( property="inventory", type="integer", format="int32" ), ( property="media", type="object", ref="#/definitions/media" ) )  </p><dl class="section see"><dt>See also</dt><dd>::getExtendedData() </dd></dl>
+<div class="fragment"><div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    {</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        <span class="keywordflow">return</span> [</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                <span class="stringliteral">&#39;description&#39;</span>   =&gt; $instance-&gt;description,</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                <span class="stringliteral">&#39;excerpt&#39;</span>       =&gt; $instance-&gt;excerpt,</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                <span class="stringliteral">&#39;is_published&#39;</span>  =&gt; ($instance-&gt;is_published)?<span class="keyword">true</span>:<span class="keyword">false</span>,</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                <span class="stringliteral">&#39;is_archived&#39;</span>   =&gt; ($instance-&gt;is_archived)?<span class="keyword">true</span>:<span class="keyword">false</span>,</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                <span class="stringliteral">&#39;is_hidden&#39;</span>     =&gt; ($instance-&gt;is_hidden)?<span class="keyword">true</span>:<span class="keyword">false</span>,</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                <span class="stringliteral">&#39;points&#39;</span>        =&gt; $instance-&gt;points,</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                <span class="stringliteral">&#39;barcode&#39;</span>       =&gt; $instance-&gt;barcode,</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                <span class="stringliteral">&#39;date_begin&#39;</span>    =&gt; $this-&gt;carbonToIso($instance-&gt;date_begin),</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                <span class="stringliteral">&#39;date_end&#39;</span>      =&gt; $this-&gt;carbonToIso($instance-&gt;date_end),</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                <span class="stringliteral">&#39;days_valid&#39;</span>    =&gt; $instance-&gt;days_valid,</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                <span class="stringliteral">&#39;fine_print&#39;</span>    =&gt; $instance-&gt;fine_print,</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                <span class="stringliteral">&#39;inventory&#39;</span>     =&gt; $this-&gt;<a class="code" href="../../dc/d52/classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer.html#a9bfaced3e5a688c95c5379540bb071c1">getInventory</a>($instance),</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="preprocessor">                #&#39;enable_email&#39;  =&gt; $instance-&gt;enable_email,</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="preprocessor">                #&#39;redemption_email&#39; =&gt; $instance-&gt;redemption_email,</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="preprocessor">                #&#39;enable_admin_email&#39; =&gt; $instance-&gt;enable_admin_email,</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="preprocessor">                #&#39;email_template&#39; =&gt; $instance-&gt;email_template,</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="preprocessor">                #&#39;admin_email_template&#39; =&gt; $instance-&gt;admin_email_template,</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="preprocessor">                #&#39;admin_email_group&#39; =&gt; $instance-&gt;admin_email_group,</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="preprocessor">                #&#39;admin_email_address&#39; =&gt;  $instance-&gt;admin_email_address,</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        ];</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    </div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    }    </div>
+<div class="ttc" id="classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer_html_a9bfaced3e5a688c95c5379540bb071c1"><div class="ttname"><a href="../../dc/d52/classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer.html#a9bfaced3e5a688c95c5379540bb071c1">DMA\Friends\API\Transformers\RewardTransformer\getInventory</a></div><div class="ttdeci">getInventory(Model $instance)</div><div class="ttdef"><b>Definition:</b> RewardTransformer.php:176</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -248,16 +248,16 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
-<div class="fragment"><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    {</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordflow">try</span>{</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            <span class="keywordflow">if</span> (!is_null($instance-&gt;inventory)) {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                <span class="keywordflow">return</span> $instance-&gt;inventory;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            }</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        }<span class="keywordflow">catch</span>(\<a class="code" href="../../d6/d65/namespaceException.html">Exception</a> $e){</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="comment">// Do nothing</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        }</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    {</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        <span class="keywordflow">try</span>{</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;            <span class="keywordflow">if</span> (!is_null($instance-&gt;inventory)) {</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;                <span class="keywordflow">return</span> $instance-&gt;inventory;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;            }</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        }<span class="keywordflow">catch</span>(\<a class="code" href="../../d6/d65/namespaceException.html">Exception</a> $e){</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;            <span class="comment">// Do nothing</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        }</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    }</div>
 <div class="ttc" id="namespaceException_html"><div class="ttname"><a href="../../d6/d65/namespaceException.html">Exception</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -277,9 +277,9 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Include Media</p>
 <dl class="section return"><dt>Returns</dt><dd>League </dd></dl>
-<div class="fragment"><div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    {</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordflow">return</span> $this-&gt;item($instance, <span class="keyword">new</span> MediaTransformer);</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    {</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        <span class="keywordflow">return</span> $this-&gt;item($instance, <span class="keyword">new</span> MediaTransformer);</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -314,7 +314,7 @@ Protected Attributes</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jun 26 2015 13:24:10 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jul 21 2015 14:20:27 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

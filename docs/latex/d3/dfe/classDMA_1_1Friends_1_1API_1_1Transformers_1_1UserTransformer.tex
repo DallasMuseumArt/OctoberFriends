@@ -53,16 +53,16 @@ unknown & {\em \$instance} & \\
 \end{DoxyParams}
 
 \begin{DoxyCode}
-69     \{
-70         \textcolor{keywordflow}{try}\{
-71             \textcolor{keywordflow}{if} (!is\_null($instance->avatar)) \{
-72                 \textcolor{keywordflow}{return} $instance->avatar->getThumb(\textcolor{stringliteral}{'auto'}, \textcolor{stringliteral}{'auto'}, [\textcolor{stringliteral}{'extension'} => \textcolor{stringliteral}{'png'}]);
-73             \}
-74         \}\textcolor{keywordflow}{catch}(\(\backslash\)\hyperlink{namespaceException}{Exception} $e)\{
-75             \textcolor{comment}{// Do nothing}
-76         \}
-77         \textcolor{keywordflow}{return} null;
-78     \}
+158     \{
+159         \textcolor{keywordflow}{try}\{
+160             \textcolor{keywordflow}{if} (!is\_null($instance->avatar)) \{
+161                 \textcolor{keywordflow}{return} $instance->avatar->getThumb(\textcolor{stringliteral}{'auto'}, \textcolor{stringliteral}{'auto'}, [\textcolor{stringliteral}{'extension'} => \textcolor{stringliteral}{'png'}]);
+162             \}
+163         \}\textcolor{keywordflow}{catch}(\(\backslash\)\hyperlink{namespaceException}{Exception} $e)\{
+164             \textcolor{comment}{// Do nothing}
+165         \}
+166         \textcolor{keywordflow}{return} null;
+167     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_a00a7549e59791ab776f1acc1b1da204f}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}!get\+Data@{get\+Data}}
 \index{get\+Data@{get\+Data}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}}
@@ -71,24 +71,24 @@ unknown & {\em \$instance} & \\
 \item[{}]{\$instance}
 \end{DoxyParamCaption}
 )}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_a00a7549e59791ab776f1acc1b1da204f}
-\begin{DoxySeeAlso}{See also}
+( definition=\char`\"{}user\char`\"{}, description=\char`\"{}\+User profile definition\char`\"{}, required=\{\char`\"{}id\char`\"{}, \char`\"{}first\+\_\+name\char`\"{}, \char`\"{}last\+\_\+name\char`\"{}, \char`\"{}username\char`\"{}, \char`\"{}avatar\+\_\+url\char`\"{}\}, ( property=\char`\"{}id\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( property=\char`\"{}first\+\_\+name\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}last\+\_\+name\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}username\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}avatar\+\_\+url\char`\"{}, type=\char`\"{}string\char`\"{}, ) )  \begin{DoxySeeAlso}{See also}
 \+::get\+Data() 
 \end{DoxySeeAlso}
 
 \begin{DoxyCode}
-39     \{
-40         $data = [
-41             \textcolor{stringliteral}{'id'} => (int)$instance->id, 
-42             \textcolor{comment}{// first\_name and last\_name are stored in usermetadata model. }
-43             \textcolor{comment}{// not sure why were are not using name and surname of the User model     }
-44             \textcolor{stringliteral}{'first\_name'} => $this->getMetadataValue($instance, \textcolor{stringliteral}{'first\_name'}),
-45             \textcolor{stringliteral}{'last\_name'} => $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_adfc877db1daa2c1344cb5137862a5be3}{getMetadataValue}($instance, \textcolor{stringliteral}{'last\_name'}),
-46             \textcolor{stringliteral}{'username'} => $instance->username,
-47             \textcolor{stringliteral}{'avatar\_url'} => $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_a94d6de2a7dbec85211fa761d585187e6}{getAvatar}($instance),
-48         ];
-49         
-50         \textcolor{keywordflow}{return} $data;
-51     \}
+66     \{
+67         $data = [
+68             \textcolor{stringliteral}{'id'} => (int)$instance->id, 
+69             \textcolor{comment}{// first\_name and last\_name are stored in usermetadata model. }
+70             \textcolor{comment}{// not sure why were are not using name and surname of the User model     }
+71             \textcolor{stringliteral}{'first\_name'} => $this->getMetadataValue($instance, \textcolor{stringliteral}{'first\_name'}),
+72             \textcolor{stringliteral}{'last\_name'} => $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_adfc877db1daa2c1344cb5137862a5be3}{getMetadataValue}($instance, \textcolor{stringliteral}{'last\_name'}),
+73             \textcolor{stringliteral}{'username'} => $instance->username,
+74             \textcolor{stringliteral}{'avatar\_url'} => $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_a94d6de2a7dbec85211fa761d585187e6}{getAvatar}($instance),
+75         ];
+76         
+77         \textcolor{keywordflow}{return} $data;
+78     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_abb4a5b87721f5caca79874bc98147e69}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}!get\+Extended\+Data@{get\+Extended\+Data}}
 \index{get\+Extended\+Data@{get\+Extended\+Data}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}}
@@ -97,16 +97,30 @@ unknown & {\em \$instance} & \\
 \item[{}]{\$instance}
 \end{DoxyParamCaption}
 )}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_abb4a5b87721f5caca79874bc98147e69}
-\begin{DoxySeeAlso}{See also}
+( definition=\char`\"{}user.\+extended\char`\"{}, description=\char`\"{}\+User extended definition\char`\"{}, required=\{\char`\"{}id\char`\"{}, \char`\"{}first\+\_\+name\char`\"{}, \char`\"{}last\+\_\+name\char`\"{}, \char`\"{}username\char`\"{}, \char`\"{}avatar\+\_\+url\char`\"{}, \char`\"{}profile\char`\"{}\}, ( property=\char`\"{}id\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( property=\char`\"{}first\+\_\+name\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}last\+\_\+name\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}username\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}avatar\+\_\+url\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( property=\char`\"{}num\+\_\+rewards\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( property=\char`\"{}num\+\_\+activities\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( property=\char`\"{}num\+\_\+badges\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( property=\char`\"{}profile\char`\"{}, type=\char`\"{}object\char`\"{}, ref=\char`\"{}\#/definitions/user.\+profile\char`\"{} ) )  \begin{DoxySeeAlso}{See also}
 \+::get\+Extended\+Data() 
 \end{DoxySeeAlso}
 
 \begin{DoxyCode}
-58     \{
-59         \textcolor{comment}{// Adding full user profile by the Fractal embeding system}
-60         $this->setDefaultIncludes([\textcolor{stringliteral}{'profile'}, \textcolor{stringliteral}{'rewards'}, \textcolor{stringliteral}{'activities'}, \textcolor{stringliteral}{'badges'}]);
-61         
-62     \}
+136     \{
+137         \textcolor{comment}{// Adding full user profile by the Fractal embeding system}
+138         $this->setDefaultIncludes([\textcolor{stringliteral}{'profile'}]);
+139         
+140         \textcolor{keywordflow}{return} [
+141 
+142                 \textcolor{stringliteral}{"num\_rewards"}    => $instance->rewards()->count(),            
+143                 \textcolor{stringliteral}{"num\_activities"} => $instance->activities()->count(),
+144                 \textcolor{stringliteral}{"num\_badges"}     => $instance->badges()->count(),
+145                 
+146                 \textcolor{stringliteral}{"rewards\_url"}    => URL::route(\textcolor{stringliteral}{'friends.api.users.userrewards'},    [\textcolor{stringliteral}{'user'} => $instance->
+      getKey()]),
+147                 \textcolor{stringliteral}{"activities\_url"} => URL::route(\textcolor{stringliteral}{'friends.api.users.useractivities'}, [\textcolor{stringliteral}{'user'} => $instance->
+      getKey()]),
+148                 \textcolor{stringliteral}{"badges\_url"}     => URL::route(\textcolor{stringliteral}{'friends.api.users.userbadges'},     [\textcolor{stringliteral}{'user'} => $instance->
+      getKey()]),
+149         ];
+150         
+151     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_adfc877db1daa2c1344cb5137862a5be3}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}!get\+Metadata\+Value@{get\+Metadata\+Value}}
 \index{get\+Metadata\+Value@{get\+Metadata\+Value}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}}
@@ -128,12 +142,12 @@ mixed
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-87     \{
-88         \textcolor{keywordflow}{if} (!is\_null($instance->metadata)) \{
-89             \textcolor{keywordflow}{return} $instance->metadata->\{$fieldname\};
-90         \}
-91         \textcolor{keywordflow}{return} null;
-92     \}
+176     \{
+177         \textcolor{keywordflow}{if} (!is\_null($instance->metadata)) \{
+178             \textcolor{keywordflow}{return} $instance->metadata->\{$fieldname\};
+179         \}
+180         \textcolor{keywordflow}{return} null;
+181     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_a4a7b717ef0fbf0ad65f32f716e7b1ca8}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}!include\+Activities@{include\+Activities}}
 \index{include\+Activities@{include\+Activities}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}}
@@ -149,11 +163,11 @@ League
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-125     \{
-126         $activities = $instance->activities;
-127         $excludeEmbeds = [\textcolor{stringliteral}{'categories'}];
-128         \textcolor{keywordflow}{return} $this->collection($activities, \textcolor{keyword}{new} ActivityTransformer(\textcolor{keyword}{false}, $excludeEmbeds));    
-129     \}
+214     \{
+215         $activities = $instance->activities;
+216         $excludeEmbeds = [];\textcolor{comment}{//['categories'];}
+217         \textcolor{keywordflow}{return} $this->collection($activities, \textcolor{keyword}{new} ActivityTransformer(\textcolor{keyword}{false}, $excludeEmbeds));    
+218     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_aea162dae412a9207f5ccbf217992df4d}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}!include\+Badges@{include\+Badges}}
 \index{include\+Badges@{include\+Badges}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}}
@@ -169,11 +183,11 @@ League
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-138     \{
-139         $badges = $instance->badges;
-140         $excludeEmbeds = [\textcolor{stringliteral}{'categories'}];
-141         \textcolor{keywordflow}{return} $this->collection($badges, \textcolor{keyword}{new} BadgeTransformer(\textcolor{keyword}{false}, $excludeEmbeds));
-142     \}
+227     \{
+228         $badges = $instance->badges;
+229         $excludeEmbeds = [];\textcolor{comment}{//['categories'];}
+230         \textcolor{keywordflow}{return} $this->collection($badges, \textcolor{keyword}{new} BadgeTransformer(\textcolor{keyword}{false}, $excludeEmbeds));
+231     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_a0c0f66cc4dd01370a28522286c1b06cb}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}!include\+Profile@{include\+Profile}}
 \index{include\+Profile@{include\+Profile}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}}
@@ -189,9 +203,9 @@ League
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-101     \{
-102         \textcolor{keywordflow}{return} $this->item($instance, \textcolor{keyword}{new} UserProfileTransformer);
-103     \}
+190     \{
+191         \textcolor{keywordflow}{return} $this->item($instance, \textcolor{keyword}{new} UserProfileTransformer);
+192     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1UserTransformer_ac6526f06acc7cb08fc9818a8c18f3f8c}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}!include\+Rewards@{include\+Rewards}}
 \index{include\+Rewards@{include\+Rewards}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+User\+Transformer}}
@@ -207,13 +221,13 @@ League
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-111     \{
-112     
-113         $rewards = $instance->rewards;
-114         $item = $this->collection($rewards, \textcolor{keyword}{new} RewardTransformer(\textcolor{keyword}{false}));
-115         \textcolor{keywordflow}{return} $item;
-116     
-117     \}
+200     \{
+201     
+202         $rewards = $instance->rewards;
+203         $item = $this->collection($rewards, \textcolor{keyword}{new} RewardTransformer(\textcolor{keyword}{false}));
+204         \textcolor{keywordflow}{return} $item;
+205     
+206     \}
 \end{DoxyCode}
 
 
@@ -224,10 +238,7 @@ League
 {\bfseries Initial value\+:}
 \begin{DoxyCode}
 = [
-            \textcolor{stringliteral}{'profile'},
-            \textcolor{stringliteral}{'rewards'},
-            \textcolor{stringliteral}{'activities'},
-            \textcolor{stringliteral}{'badges'}
+            \textcolor{stringliteral}{'profile'}
     ]
 \end{DoxyCode}
 

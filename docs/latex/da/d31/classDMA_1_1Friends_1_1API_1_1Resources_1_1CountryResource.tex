@@ -6,6 +6,13 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 \includegraphics[height=3.000000cm]{da/d31/classDMA_1_1Friends_1_1API_1_1Resources_1_1CountryResource}
 \end{center}
 \end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1CountryResource_a27853d23b31a060be59f8f3b97b73369}{index} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1CountryResource_a0ab214a2497e38c94654a1dc37d13a5c}{show} (\$id)
+\end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -16,6 +23,58 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1CountryResource_a27853d23b31a060be59f8f3b97b73369}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Country\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Country\+Resource}!index@{index}}
+\index{index@{index}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Country\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Country\+Resource}}
+\subsubsection[{index}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Country\+Resource\+::index (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1CountryResource_a27853d23b31a060be59f8f3b97b73369}
+( path=\char`\"{}countries\char`\"{}, description=\char`\"{}\+Returns all countries\char`\"{}, summary=\char`\"{}\+Return all countries\char`\"{}, tags=\{ \char`\"{}countries\char`\"{}\},
+
+( ref=\char`\"{}\#/parameters/per\+\_\+page\char`\"{} ), ( ref=\char`\"{}\#/parameters/page\char`\"{} ), ( ref=\char`\"{}\#/parameters/sort\char`\"{} ),
+
+\begin{DoxyVerb}@SWG\Response(
+    response=200,
+    description="Successful response",
+    @SWG\Schema(ref="#/definitions/country", type="array")
+),
+@SWG\Response(
+    response=500,
+    description="Unexpected error",
+    @SWG\Schema(ref="#/definitions/error500")
+),
+@SWG\Response(
+    response=404,
+    description="Not Found",
+    @SWG\Schema(ref="#/definitions/error404")
+\end{DoxyVerb}
+ ) ) 
+\begin{DoxyCode}
+48     \{
+49         \textcolor{keywordflow}{return} parent::index();
+50     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1CountryResource_a0ab214a2497e38c94654a1dc37d13a5c}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Country\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Country\+Resource}!show@{show}}
+\index{show@{show}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Country\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Country\+Resource}}
+\subsubsection[{show}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Country\+Resource\+::show (
+\begin{DoxyParamCaption}
+\item[{}]{\$id}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1CountryResource_a0ab214a2497e38c94654a1dc37d13a5c}
+( path=\char`\"{}countries/\{id\}\char`\"{}, description=\char`\"{}\+Returns a country by id\char`\"{}, summary=\char`\"{}\+Find a country by id\char`\"{}, tags=\{ \char`\"{}countries\char`\"{}\},
+
+( description=\char`\"{}\+I\+D of country to fetch\char`\"{}, format=\char`\"{}int64\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}id\char`\"{}, required=true, type=\char`\"{}integer\char`\"{} ),
+
+( response=200, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/country\char`\"{}) ), ( response=500, description=\char`\"{}\+Unexpected error\char`\"{}, (ref=\char`\"{}\#/definitions/error500\char`\"{}) ), ( response=404, description=\char`\"{}\+Not Found\char`\"{}, (ref=\char`\"{}\#/definitions/error404\char`\"{}) ) ) 
+\begin{DoxyCode}
+86     \{
+87         \textcolor{keywordflow}{return} parent::show($id);
+88     \}
+\end{DoxyCode}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

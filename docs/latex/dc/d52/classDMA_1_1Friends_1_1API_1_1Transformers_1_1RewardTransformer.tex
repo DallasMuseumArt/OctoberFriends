@@ -35,19 +35,19 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 \item[{}]{\$instance}
 \end{DoxyParamCaption}
 )}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer_af31e197944fa087eb405f839bbb50434}
-\begin{DoxySeeAlso}{See also}
+( definition=\char`\"{}reward\char`\"{}, description=\char`\"{}\+Reward definition\char`\"{}, type=\char`\"{}object\char`\"{}, required=\{\char`\"{}id\char`\"{}, \char`\"{}title\char`\"{}, \char`\"{}media\char`\"{}\}, ( property=\char`\"{}id\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( property=\char`\"{}title\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}media\char`\"{}, type=\char`\"{}object\char`\"{}, ref=\char`\"{}\#/definitions/media\char`\"{} ) )  \begin{DoxySeeAlso}{See also}
 \+::get\+Data() 
 \end{DoxySeeAlso}
 
 \begin{DoxyCode}
-28     \{
-29         $data = [
-30             \textcolor{stringliteral}{'id'}            => $instance->id,
-31             \textcolor{stringliteral}{'title'}         => $instance->title
-32         ];
-33         
-34         \textcolor{keywordflow}{return} $data;
-35     \}
+51     \{
+52         $data = [
+53             \textcolor{stringliteral}{'id'}            => $instance->id,
+54             \textcolor{stringliteral}{'title'}         => $instance->title
+55         ];
+56         
+57         \textcolor{keywordflow}{return} $data;
+58     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer_a55b0731a2321e60950517e0b23e92ad7}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer}!get\+Extended\+Data@{get\+Extended\+Data}}
 \index{get\+Extended\+Data@{get\+Extended\+Data}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer}}
@@ -56,35 +56,35 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 \item[{}]{\$instance}
 \end{DoxyParamCaption}
 )}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer_a55b0731a2321e60950517e0b23e92ad7}
-\begin{DoxySeeAlso}{See also}
+( definition=\char`\"{}reward.\+extended\char`\"{}, description=\char`\"{}\+Full reward definition\char`\"{}, type=\char`\"{}object\char`\"{}, required=\{\char`\"{}id\char`\"{}, \char`\"{}title\char`\"{}, \char`\"{}description\char`\"{}, \char`\"{}excerpt\char`\"{}, \char`\"{}is\+\_\+published\char`\"{}, \char`\"{}is\+\_\+archived\char`\"{}, \char`\"{}is\+\_\+hidden\char`\"{}, \char`\"{}points\char`\"{}, \char`\"{}barcode\char`\"{}, \char`\"{}date\+\_\+begin\char`\"{}, \char`\"{}date\+\_\+end\char`\"{}, \char`\"{}days\+\_\+valid\char`\"{}, \char`\"{}fine\+\_\+print\char`\"{}, \char`\"{}inventory\char`\"{}, \char`\"{}media\char`\"{}\}, ( property=\char`\"{}id\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( property=\char`\"{}title\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}description\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}excerpt\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}is\+\_\+published\char`\"{}, type=\char`\"{}boolean\char`\"{}, ), ( property=\char`\"{}is\+\_\+published\char`\"{}, type=\char`\"{}boolean\char`\"{}, ), ( property=\char`\"{}is\+\_\+archived\char`\"{}, type=\char`\"{}boolean\char`\"{}, ), ( property=\char`\"{}is\+\_\+hidden\char`\"{}, type=\char`\"{}boolean\char`\"{}, ), ( property=\char`\"{}points\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( property=\char`\"{}barcode\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}date\+\_\+begin\char`\"{}, type=\char`\"{}string\char`\"{}, format=\char`\"{}date-\/time\char`\"{} ), ( property=\char`\"{}date\+\_\+end\char`\"{}, type=\char`\"{}string\char`\"{}, format=\char`\"{}date-\/time\char`\"{} ), ( property=\char`\"{}days\+\_\+valid\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( property=\char`\"{}fine\+\_\+print\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}inventory\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( property=\char`\"{}media\char`\"{}, type=\char`\"{}object\char`\"{}, ref=\char`\"{}\#/definitions/media\char`\"{} ) )  \begin{DoxySeeAlso}{See also}
 \+::get\+Extended\+Data() 
 \end{DoxySeeAlso}
 
 \begin{DoxyCode}
-43     \{
-44         \textcolor{keywordflow}{return} [
-45                 \textcolor{stringliteral}{'description'}   => $instance->description,
-46                 \textcolor{stringliteral}{'excerpt'}       => $instance->excerpt,
-47                 \textcolor{stringliteral}{'is\_published'}  => ($instance->is\_published)?\textcolor{keyword}{true}:\textcolor{keyword}{false},
-48                 \textcolor{stringliteral}{'is\_archived'}   => ($instance->is\_archived)?\textcolor{keyword}{true}:\textcolor{keyword}{false},
-49                 \textcolor{stringliteral}{'is\_hidden'}     => ($instance->is\_hidden)?\textcolor{keyword}{true}:\textcolor{keyword}{false},
-50                 \textcolor{stringliteral}{'points'}        => $instance->points,
-51                 \textcolor{stringliteral}{'barcode'}       => $instance->barcode,
-52                 \textcolor{stringliteral}{'date\_begin'}    => $this->carbonToIso($instance->date\_begin),
-53                 \textcolor{stringliteral}{'date\_end'}      => $this->carbonToIso($instance->date\_end),
-54                 \textcolor{stringliteral}{'days\_valid'}    => $instance->days\_valid,
-55                 \textcolor{stringliteral}{'fine\_print'}    => $instance->fine\_print,
-56                 \textcolor{stringliteral}{'inventory'}     => $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer_a9bfaced3e5a688c95c5379540bb071c1}{getInventory}($instance),
-57 \textcolor{preprocessor}{                #'enable\_email'  => $instance->enable\_email,}
-58 \textcolor{preprocessor}{                #'redemption\_email' => $instance->redemption\_email,}
-59 \textcolor{preprocessor}{                #'enable\_admin\_email' => $instance->enable\_admin\_email,}
-60 \textcolor{preprocessor}{                #'email\_template' => $instance->email\_template,}
-61 \textcolor{preprocessor}{                #'admin\_email\_template' => $instance->admin\_email\_template,}
-62 \textcolor{preprocessor}{                #'admin\_email\_group' => $instance->admin\_email\_group,}
-63 \textcolor{preprocessor}{                #'admin\_email\_address' =>  $instance->admin\_email\_address,}
-64         ];
-65     
-66     \}    
+146     \{
+147         \textcolor{keywordflow}{return} [
+148                 \textcolor{stringliteral}{'description'}   => $instance->description,
+149                 \textcolor{stringliteral}{'excerpt'}       => $instance->excerpt,
+150                 \textcolor{stringliteral}{'is\_published'}  => ($instance->is\_published)?\textcolor{keyword}{true}:\textcolor{keyword}{false},
+151                 \textcolor{stringliteral}{'is\_archived'}   => ($instance->is\_archived)?\textcolor{keyword}{true}:\textcolor{keyword}{false},
+152                 \textcolor{stringliteral}{'is\_hidden'}     => ($instance->is\_hidden)?\textcolor{keyword}{true}:\textcolor{keyword}{false},
+153                 \textcolor{stringliteral}{'points'}        => $instance->points,
+154                 \textcolor{stringliteral}{'barcode'}       => $instance->barcode,
+155                 \textcolor{stringliteral}{'date\_begin'}    => $this->carbonToIso($instance->date\_begin),
+156                 \textcolor{stringliteral}{'date\_end'}      => $this->carbonToIso($instance->date\_end),
+157                 \textcolor{stringliteral}{'days\_valid'}    => $instance->days\_valid,
+158                 \textcolor{stringliteral}{'fine\_print'}    => $instance->fine\_print,
+159                 \textcolor{stringliteral}{'inventory'}     => $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer_a9bfaced3e5a688c95c5379540bb071c1}{getInventory}($instance),
+160 \textcolor{preprocessor}{                #'enable\_email'  => $instance->enable\_email,}
+161 \textcolor{preprocessor}{                #'redemption\_email' => $instance->redemption\_email,}
+162 \textcolor{preprocessor}{                #'enable\_admin\_email' => $instance->enable\_admin\_email,}
+163 \textcolor{preprocessor}{                #'email\_template' => $instance->email\_template,}
+164 \textcolor{preprocessor}{                #'admin\_email\_template' => $instance->admin\_email\_template,}
+165 \textcolor{preprocessor}{                #'admin\_email\_group' => $instance->admin\_email\_group,}
+166 \textcolor{preprocessor}{                #'admin\_email\_address' =>  $instance->admin\_email\_address,}
+167         ];
+168     
+169     \}    
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer_a9bfaced3e5a688c95c5379540bb071c1}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer}!get\+Inventory@{get\+Inventory}}
 \index{get\+Inventory@{get\+Inventory}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer}}
@@ -103,16 +103,16 @@ int
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-74     \{
-75         \textcolor{keywordflow}{try}\{
-76             \textcolor{keywordflow}{if} (!is\_null($instance->inventory)) \{
-77                 \textcolor{keywordflow}{return} $instance->inventory;
-78             \}
-79         \}\textcolor{keywordflow}{catch}(\(\backslash\)\hyperlink{namespaceException}{Exception} $e)\{
-80             \textcolor{comment}{// Do nothing}
-81         \}
-82         \textcolor{keywordflow}{return} 0;
-83     \}
+177     \{
+178         \textcolor{keywordflow}{try}\{
+179             \textcolor{keywordflow}{if} (!is\_null($instance->inventory)) \{
+180                 \textcolor{keywordflow}{return} $instance->inventory;
+181             \}
+182         \}\textcolor{keywordflow}{catch}(\(\backslash\)\hyperlink{namespaceException}{Exception} $e)\{
+183             \textcolor{comment}{// Do nothing}
+184         \}
+185         \textcolor{keywordflow}{return} 0;
+186     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer_a152cedfbf193807324c4aaa64edbae4e}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer}!include\+Media@{include\+Media}}
 \index{include\+Media@{include\+Media}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer}}
@@ -128,9 +128,9 @@ League
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-92     \{
-93         \textcolor{keywordflow}{return} $this->item($instance, \textcolor{keyword}{new} MediaTransformer);
-94     \}
+195     \{
+196         \textcolor{keywordflow}{return} $this->item($instance, \textcolor{keyword}{new} MediaTransformer);
+197     \}
 \end{DoxyCode}
 
 

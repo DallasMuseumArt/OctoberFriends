@@ -85,12 +85,12 @@ string The time since the badge was earned
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-200     \{
-201         \textcolor{keywordflow}{if} (!isset($this->pivot->created\_at)) \textcolor{keywordflow}{return} null;
-202 
-203         $timeAgo = \textcolor{keyword}{new} TimeAgo;
-204         \textcolor{keywordflow}{return} $timeAgo->get($this->pivot->created\_at);
-205     \}
+201     \{
+202         \textcolor{keywordflow}{if} (!isset($this->pivot->created\_at)) \textcolor{keywordflow}{return} null;
+203 
+204         $timeAgo = \textcolor{keyword}{new} TimeAgo;
+205         \textcolor{keywordflow}{return} $timeAgo->get($this->pivot->created\_at);
+206     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Activity_a98a904c739aca30f2a26152a481164b6}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}!get\+Time\+Restriction\+Data\+Attribute@{get\+Time\+Restriction\+Data\+Attribute}}
 \index{get\+Time\+Restriction\+Data\+Attribute@{get\+Time\+Restriction\+Data\+Attribute}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}}
@@ -101,9 +101,9 @@ string The time since the badge was earned
 )}\label{classDMA_1_1Friends_1_1Models_1_1Activity_a98a904c739aca30f2a26152a481164b6}
 Accessor to unserialize time\+\_\+restriction\+\_\+data attribute 
 \begin{DoxyCode}
-98     \{
-99         \textcolor{keywordflow}{return} unserialize($value);
-100     \}
+99     \{
+100         \textcolor{keywordflow}{return} unserialize($value);
+101     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Activity_a0a9c5c7c4e86787534d2cbcbe5b03234}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}!scope\+By\+Category@{scope\+By\+Category}}
 \index{scope\+By\+Category@{scope\+By\+Category}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}}
@@ -120,30 +120,30 @@ string | array & {\em \$categories} & string or array of strings of category nam
 \end{DoxyParams}
 
 \begin{DoxyCode}
-141                                                          \{
-142         \textcolor{keywordflow}{if} (is\_array($categories)) \{
-143             \textcolor{comment}{// Get first category in list to begin query with whereHas}
-144             $firstcategory = array\_shift($categories);
-145             $query = $query->whereHas(\textcolor{stringliteral}{'categories'}, \textcolor{keyword}{function}($q) use ($firstcategory) \{
-146                 $q->where(\textcolor{stringliteral}{'name'}, $firstcategory);
-147             \});
-148 
-149             \textcolor{comment}{// if any categories left in list, iterate over for orWhereHas}
-150             \textcolor{keywordflow}{foreach} ($categories as $category) \{
-151                 $query = $query->orWhereHas(\textcolor{stringliteral}{'categories'}, \textcolor{keyword}{function}($q) use ($category) \{
-152                     $q->where(\textcolor{stringliteral}{'name'}, $category);
-153                 \});
-154             \}
-155             
-156             \textcolor{keywordflow}{return} $query;
-157         \}
-158         \textcolor{keywordflow}{else} \{
-159             \textcolor{comment}{// if $categories is a string, only one category to filter against}
-160             \textcolor{keywordflow}{return} $query->whereHas(\textcolor{stringliteral}{'categories'}, \textcolor{keyword}{function}($q) use ($categories) \{
-161                 $q->where(\textcolor{stringliteral}{'name'}, $categories);
-162             \});
-163         \}
-164     \}
+142                                                          \{
+143         \textcolor{keywordflow}{if} (is\_array($categories)) \{
+144             \textcolor{comment}{// Get first category in list to begin query with whereHas}
+145             $firstcategory = array\_shift($categories);
+146             $query = $query->whereHas(\textcolor{stringliteral}{'categories'}, \textcolor{keyword}{function}($q) use ($firstcategory) \{
+147                 $q->where(\textcolor{stringliteral}{'name'}, $firstcategory);
+148             \});
+149 
+150             \textcolor{comment}{// if any categories left in list, iterate over for orWhereHas}
+151             \textcolor{keywordflow}{foreach} ($categories as $category) \{
+152                 $query = $query->orWhereHas(\textcolor{stringliteral}{'categories'}, \textcolor{keyword}{function}($q) use ($category) \{
+153                     $q->where(\textcolor{stringliteral}{'name'}, $category);
+154                 \});
+155             \}
+156             
+157             \textcolor{keywordflow}{return} $query;
+158         \}
+159         \textcolor{keywordflow}{else} \{
+160             \textcolor{comment}{// if $categories is a string, only one category to filter against}
+161             \textcolor{keywordflow}{return} $query->whereHas(\textcolor{stringliteral}{'categories'}, \textcolor{keyword}{function}($q) use ($categories) \{
+162                 $q->where(\textcolor{stringliteral}{'name'}, $categories);
+163             \});
+164         \}
+165     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Activity_aa17825817b73d3073e37d5e2c0933003}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}!scope\+Find\+Activity\+Type@{scope\+Find\+Activity\+Type}}
 \index{scope\+Find\+Activity\+Type@{scope\+Find\+Activity\+Type}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}}
@@ -155,10 +155,10 @@ string | array & {\em \$categories} & string or array of strings of category nam
 )}\label{classDMA_1_1Friends_1_1Models_1_1Activity_aa17825817b73d3073e37d5e2c0933003}
 Find activities by activity type 
 \begin{DoxyCode}
-124     \{
-125         \textcolor{keywordflow}{return} $query->where(\textcolor{stringliteral}{'activity\_type'}, $type)
-126             ->isActive();
-127     \}
+125     \{
+126         \textcolor{keywordflow}{return} $query->where(\textcolor{stringliteral}{'activity\_type'}, $type)
+127             ->isActive();
+128     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Activity_a9bb36aab36ff22a29b2a594617dd591c}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}!scopefind\+Code@{scopefind\+Code}}
 \index{scopefind\+Code@{scopefind\+Code}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}}
@@ -170,10 +170,10 @@ Find activities by activity type
 )}\label{classDMA_1_1Friends_1_1Models_1_1Activity_a9bb36aab36ff22a29b2a594617dd591c}
 Find an activity by its activity code 
 \begin{DoxyCode}
-115     \{
-116         \textcolor{keywordflow}{return} $query->where(\textcolor{stringliteral}{'activity\_code'}, $code)
-117             ->isActive();
-118     \}
+116     \{
+117         \textcolor{keywordflow}{return} $query->where(\textcolor{stringliteral}{'activity\_code'}, $code)
+118             ->isActive();
+119     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Activity_a5a533a3f638f99d1dd0a8e0550def49e}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}!scopefind\+Wordpress@{scopefind\+Wordpress}}
 \index{scopefind\+Wordpress@{scopefind\+Wordpress}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}}
@@ -185,9 +185,9 @@ Find an activity by its activity code
 )}\label{classDMA_1_1Friends_1_1Models_1_1Activity_a5a533a3f638f99d1dd0a8e0550def49e}
 Find activities by a wordpress id if they where imported 
 \begin{DoxyCode}
-133     \{   
-134         \textcolor{keywordflow}{return} $query->where(\textcolor{stringliteral}{'wordpress\_id'}, $id);
-135     \}  
+134     \{   
+135         \textcolor{keywordflow}{return} $query->where(\textcolor{stringliteral}{'wordpress\_id'}, $id);
+136     \}  
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Activity_acd3f12824d95be07b5221cdc9d64abf7}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}!scope\+Is\+Active@{scope\+Is\+Active}}
 \index{scope\+Is\+Active@{scope\+Is\+Active}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}}
@@ -198,10 +198,10 @@ Find activities by a wordpress id if they where imported
 )}\label{classDMA_1_1Friends_1_1Models_1_1Activity_acd3f12824d95be07b5221cdc9d64abf7}
 Return only activities that are active 
 \begin{DoxyCode}
-106     \{
-107         \textcolor{keywordflow}{return} $query->where(\textcolor{stringliteral}{'is\_published'}, \textcolor{charliteral}{'='}, 1)
-108             ->where(\textcolor{stringliteral}{'is\_archived'}, \textcolor{stringliteral}{'<>'}, 1);
-109     \}
+107     \{
+108         \textcolor{keywordflow}{return} $query->where(\textcolor{stringliteral}{'is\_published'}, \textcolor{charliteral}{'='}, 1)
+109             ->where(\textcolor{stringliteral}{'is\_archived'}, \textcolor{stringliteral}{'<>'}, 1);
+110     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Activity_ac14ca246e8f6d0ab08327750717be982}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}!scope\+Not\+Expired@{scope\+Not\+Expired}}
 \index{scope\+Not\+Expired@{scope\+Not\+Expired}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}}
@@ -212,14 +212,14 @@ Return only activities that are active
 )}\label{classDMA_1_1Friends_1_1Models_1_1Activity_ac14ca246e8f6d0ab08327750717be982}
 Find activities whose end dates have not passed (or which do not have end dates) 
 \begin{DoxyCode}
-169                                             \{
-170         $query = $query->where(\textcolor{keyword}{function}($q) \{
-171             $q->where(\textcolor{stringliteral}{'time\_restriction'}, \textcolor{stringliteral}{'!='}, 2)
-172               ->orWhere(\textcolor{stringliteral}{'date\_end'}, \textcolor{charliteral}{'>'}, date(\textcolor{stringliteral}{'Y-m-d H:i:s'}));
-173         \});
-174 
-175         \textcolor{keywordflow}{return} $query;
-176     \}
+170                                             \{
+171         $query = $query->where(\textcolor{keyword}{function}($q) \{
+172             $q->where(\textcolor{stringliteral}{'time\_restriction'}, \textcolor{stringliteral}{'!='}, 2)
+173               ->orWhere(\textcolor{stringliteral}{'date\_end'}, \textcolor{charliteral}{'>'}, date(\textcolor{stringliteral}{'Y-m-d H:i:s'}));
+174         \});
+175 
+176         \textcolor{keywordflow}{return} $query;
+177     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Activity_a2762d2faaa38b83ca6e79c2a7cb0d14c}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}!scope\+Started\+Not\+Expired@{scope\+Started\+Not\+Expired}}
 \index{scope\+Started\+Not\+Expired@{scope\+Started\+Not\+Expired}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}}
@@ -230,17 +230,17 @@ Find activities whose end dates have not passed (or which do not have end dates)
 )}\label{classDMA_1_1Friends_1_1Models_1_1Activity_a2762d2faaa38b83ca6e79c2a7cb0d14c}
 Find activities whose end dates have not passed, A\+N\+D whose begin dates have passed (or which do not have begin and end dates) 
 \begin{DoxyCode}
-183                                                    \{
-184         $query = $query->where(\textcolor{keyword}{function}($q) \{
-185             $q->where(\textcolor{stringliteral}{'time\_restriction'}, \textcolor{stringliteral}{'!='}, 2)
-186               ->orWhere(\textcolor{keyword}{function}($q) \{
-187                 $q->where(\textcolor{stringliteral}{'date\_end'}, \textcolor{charliteral}{'>'}, date(\textcolor{stringliteral}{'Y-m-d H:i:s'}))
-188                   ->where(\textcolor{stringliteral}{'date\_begin'}, \textcolor{charliteral}{'<'}, date(\textcolor{stringliteral}{'Y-m-d H:i:s'}));
-189               \});
-190         \});
-191 
-192         \textcolor{keywordflow}{return} $query;
-193     \}
+184                                                    \{
+185         $query = $query->where(\textcolor{keyword}{function}($q) \{
+186             $q->where(\textcolor{stringliteral}{'time\_restriction'}, \textcolor{stringliteral}{'!='}, 2)
+187               ->orWhere(\textcolor{keyword}{function}($q) \{
+188                 $q->where(\textcolor{stringliteral}{'date\_end'}, \textcolor{charliteral}{'>'}, date(\textcolor{stringliteral}{'Y-m-d H:i:s'}))
+189                   ->where(\textcolor{stringliteral}{'date\_begin'}, \textcolor{charliteral}{'<'}, date(\textcolor{stringliteral}{'Y-m-d H:i:s'}));
+190               \});
+191         \});
+192 
+193         \textcolor{keywordflow}{return} $query;
+194     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Activity_ade0ffca24448c217def365d104e52866}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}!set\+Time\+Restriction\+Data\+Attribute@{set\+Time\+Restriction\+Data\+Attribute}}
 \index{set\+Time\+Restriction\+Data\+Attribute@{set\+Time\+Restriction\+Data\+Attribute}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}}
@@ -251,13 +251,13 @@ Find activities whose end dates have not passed, A\+N\+D whose begin dates have 
 )}\label{classDMA_1_1Friends_1_1Models_1_1Activity_ade0ffca24448c217def365d104e52866}
 Mutator to ensure time\+\_\+restriction\+\_\+data is serialized 
 \begin{DoxyCode}
-86     \{
-87         \textcolor{keywordflow}{if} (is\_array($value)) \{
-88             $value = serialize($value);
-89         \}
-90 
-91         $this->attributes[\textcolor{stringliteral}{'time\_restriction\_data'}] = $value;
-92     \}
+87     \{
+88         \textcolor{keywordflow}{if} (is\_array($value)) \{
+89             $value = serialize($value);
+90         \}
+91 
+92         $this->attributes[\textcolor{stringliteral}{'time\_restriction\_data'}] = $value;
+93     \}
 \end{DoxyCode}
 
 
@@ -311,7 +311,7 @@ Mutator to ensure time\+\_\+restriction\+\_\+data is serialized
 {\bfseries Initial value\+:}
 \begin{DoxyCode}
 = [ 
-        \textcolor{stringliteral}{'title'}         => \textcolor{stringliteral}{'required'}
+        \textcolor{stringliteral}{'title'}             => \textcolor{stringliteral}{'required'}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Activity_a71b85478f20cda144aeffe010364a0f7}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}!T\+I\+M\+E\+\_\+\+R\+E\+S\+T\+R\+I\+C\+T\+\_\+\+D\+A\+Y\+S@{T\+I\+M\+E\+\_\+\+R\+E\+S\+T\+R\+I\+C\+T\+\_\+\+D\+A\+Y\+S}}
 \index{T\+I\+M\+E\+\_\+\+R\+E\+S\+T\+R\+I\+C\+T\+\_\+\+D\+A\+Y\+S@{T\+I\+M\+E\+\_\+\+R\+E\+S\+T\+R\+I\+C\+T\+\_\+\+D\+A\+Y\+S}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Activity}}

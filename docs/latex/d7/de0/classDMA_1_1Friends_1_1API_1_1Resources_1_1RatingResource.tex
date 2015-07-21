@@ -11,14 +11,14 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 \item 
 \hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a6cb4a4bb619ebf9cf82fda96892de587}{ratings\+By\+Object} (\$object\+Type, \$object\+Id)
 \item 
-\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a5a3342dbcaa4eda48599922fca2dca97}{}{\bfseries add\+Object\+Rating} (\$object\+Type, \$object\+Id, \$user, \$rate\+Value, \$comment=null)\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a5a3342dbcaa4eda48599922fca2dca97}
-
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a5a3342dbcaa4eda48599922fca2dca97}{add\+Object\+Rating} (\$object\+Type, \$object\+Id, \$user, \$rate\+Value, \$comment=null)
 \item 
-\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a5f73df541d7ca7a1fa30b30278e38b67}{}{\bfseries add\+Object\+Rate\+Json} (\$object\+Type)\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a5f73df541d7ca7a1fa30b30278e38b67}
-
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a5f73df541d7ca7a1fa30b30278e38b67}{add\+Object\+Rate\+Json} (\$object\+Type)
 \item 
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a4a39636d2b996936fddfeeb7329ab143}{}{\bfseries index} ()\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a4a39636d2b996936fddfeeb7329ab143}
 
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a5c4a159d0098e19f8b872b0bb73875bf}{show} (\$id)
 \end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -30,11 +30,120 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 \item 
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a62f43e96144be5b5a6a7b423582cc9a1}{}{\bfseries \$model} = \textquotesingle{}\textbackslash{}\hyperlink{classDMA_1_1Friends_1_1Models_1_1Rating}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Models\textbackslash{}\+Rating}\textquotesingle{}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a62f43e96144be5b5a6a7b423582cc9a1}
 
+\item 
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a905140d43f4bd0db5f7b2a1e3cd32256}{}{\bfseries \$transformer} = \textquotesingle{}\textbackslash{}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Rating\+Transformer\textquotesingle{}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a905140d43f4bd0db5f7b2a1e3cd32256}
+
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
 
 \subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a5f73df541d7ca7a1fa30b30278e38b67}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Rating\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Rating\+Resource}!add\+Object\+Rate\+Json@{add\+Object\+Rate\+Json}}
+\index{add\+Object\+Rate\+Json@{add\+Object\+Rate\+Json}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Rating\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Rating\+Resource}}
+\subsubsection[{add\+Object\+Rate\+Json}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Rating\+Resource\+::add\+Object\+Rate\+Json (
+\begin{DoxyParamCaption}
+\item[{}]{\$object\+Type}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a5f73df541d7ca7a1fa30b30278e38b67}
+( definition=\char`\"{}request.\+rate\char`\"{}, required=\{\char`\"{}id\char`\"{}, \char`\"{}rate\char`\"{}, \char`\"{}user\+\_\+id\char`\"{}\}, ( property=\char`\"{}id\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( property=\char`\"{}rate\char`\"{}, type=\char`\"{}number\char`\"{}, format=\char`\"{}float\char`\"{} ), ( property=\char`\"{}user\+\_\+id\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ) )
+
+( path=\char`\"{}ratings/rate/\{object\}/\char`\"{}, description=\char`\"{}\+Rate an object\char`\"{}, summary=\char`\"{}\+Rate an object\char`\"{}, tags=\{ \char`\"{}ratings\char`\"{}\},
+
+( description=\char`\"{}\+Object to rate\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}object\char`\"{}, required=true, type=\char`\"{}string\char`\"{}, enum=\{\char`\"{}activity\char`\"{}, \char`\"{}badge\char`\"{}\} ), ( in=\char`\"{}body\char`\"{}, name=\char`\"{}body\char`\"{}, required=true, type=\char`\"{}object\char`\"{}, schema=(ref=\char`\"{}\#/definitions/request.\+rate\char`\"{}) ), ( response=200, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/response.\+rate\char`\"{}) ), ( response=500, description=\char`\"{}\+Unexpected error\char`\"{}, (ref=\char`\"{}\#/definitions/error500\char`\"{}) ), ( response=404, description=\char`\"{}\+User not found\char`\"{}, (ref=\char`\"{}\#/definitions/\+User\+Error404\char`\"{}) ) ) 
+\begin{DoxyCode}
+364                                                   \{
+365         $data = Request::all();
+366         $rules = [
+367                 \textcolor{stringliteral}{'id'}                    => \textcolor{stringliteral}{"required"},
+368                 \textcolor{stringliteral}{'rate'}                  => \textcolor{stringliteral}{"required"},
+369                 \textcolor{stringliteral}{'user\_id'}               => \textcolor{stringliteral}{"required"}
+370         ];
+371         
+372         $validation = Validator::make($data, $rules);
+373         \textcolor{keywordflow}{if} ($validation->fails())\{
+374             \textcolor{keywordflow}{return} $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseResource_a939517c4026ec51cd9e001c78aa5617d}{errorDataValidation}(\textcolor{stringliteral}{'rate data fails to validated'}, 
+      $validation->errors());
+375         \}
+376         
+377         $comment = array\_get($data, \textcolor{stringliteral}{'comment'}, \textcolor{stringliteral}{''});
+378         \textcolor{keywordflow}{return} $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a5a3342dbcaa4eda48599922fca2dca97}{addObjectRating}($objectType, $data[\textcolor{stringliteral}{'id'}], $data[\textcolor{stringliteral}{'user\_id'}], $data[\textcolor{stringliteral}{'
+      rate'}], $comment);
+379         
+380     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a5a3342dbcaa4eda48599922fca2dca97}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Rating\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Rating\+Resource}!add\+Object\+Rating@{add\+Object\+Rating}}
+\index{add\+Object\+Rating@{add\+Object\+Rating}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Rating\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Rating\+Resource}}
+\subsubsection[{add\+Object\+Rating}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Rating\+Resource\+::add\+Object\+Rating (
+\begin{DoxyParamCaption}
+\item[{}]{\$object\+Type, }
+\item[{}]{\$object\+Id, }
+\item[{}]{\$user, }
+\item[{}]{\$rate\+Value, }
+\item[{}]{\$comment = {\ttfamily null}}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a5a3342dbcaa4eda48599922fca2dca97}
+( definition=\char`\"{}response.\+rate\char`\"{}, required=\{\char`\"{}data\char`\"{}\}, ( property=\char`\"{}data\char`\"{}, type=\char`\"{}object\char`\"{}, ref=\char`\"{}\#/definitions/rate.\+payload\char`\"{} ) )
+
+( definition=\char`\"{}rate.\+payload\char`\"{}, required=\{\char`\"{}success\char`\"{}, \char`\"{}message\char`\"{}, \char`\"{}user\char`\"{}, \char`\"{}rating\char`\"{}\}, ( property=\char`\"{}success\char`\"{}, type=\char`\"{}boolean\char`\"{} ), ( property=\char`\"{}message\char`\"{}, type=\char`\"{}string\char`\"{} ), ( property=\char`\"{}user\char`\"{}, type=\char`\"{}object\char`\"{}, ref=\char`\"{}\#/definitions/user.\+info.\+points\char`\"{} ), ( property=\char`\"{}rating\char`\"{}, type=\char`\"{}object\char`\"{}, ref=\char`\"{}\#/definitions/rating.\+stats\char`\"{} ) )
+
+( definition=\char`\"{}rating.\+stats\char`\"{}, required=\{\char`\"{}total\char`\"{}, \char`\"{}average\char`\"{}, \char`\"{}object\+\_\+type\char`\"{}, \char`\"{}object\+\_\+id\char`\"{}\}, ( property=\char`\"{}total\char`\"{}, type=\char`\"{}number\char`\"{}, format=\char`\"{}float\char`\"{} ), ( property=\char`\"{}average\char`\"{}, type=\char`\"{}number\char`\"{}, format=\char`\"{}float\char`\"{} ), ( property=\char`\"{}object\+\_\+type\char`\"{}, type=\char`\"{}string\char`\"{} ), ( property=\char`\"{}object\+\_\+id\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ) )
+
+( path=\char`\"{}ratings/rate/\{object\}/\{object\+Id\}/user/\{user\}/\{rate\}\char`\"{}, description=\char`\"{}\+Rate an object\char`\"{}, summary=\char`\"{}\+Rate an object\char`\"{}, tags=\{ \char`\"{}ratings\char`\"{}\},
+
+( description=\char`\"{}\+Object to rate\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}object\char`\"{}, required=true, type=\char`\"{}string\char`\"{}, enum=\{\char`\"{}activity\char`\"{}, \char`\"{}badge\char`\"{}\} ), ( description=\char`\"{}\+I\+D of object to rate\char`\"{}, format=\char`\"{}int64\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}object\+Id\char`\"{}, required=true, type=\char`\"{}integer\char`\"{} ), ( description=\char`\"{}\+I\+D of user\char`\"{}, format=\char`\"{}int64\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}user\char`\"{}, required=true, type=\char`\"{}integer\char`\"{} ), ( description=\char`\"{}\+Rate value\char`\"{}, format=\char`\"{}float\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}rate\char`\"{}, required=true, type=\char`\"{}number\char`\"{}, minimum=1, maximum=5 ), ( response=200, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/response.\+rate\char`\"{}) ), ( response=500, description=\char`\"{}\+Unexpected error\char`\"{}, (ref=\char`\"{}\#/definitions/error500\char`\"{}) ), ( response=404, description=\char`\"{}\+User not found\char`\"{}, (ref=\char`\"{}\#/definitions/\+User\+Error404\char`\"{}) ) ) 
+\begin{DoxyCode}
+252     \{
+253 
+254         \textcolor{keywordflow}{if}($user = User::find($user))\{
+255 
+256             \textcolor{keywordflow}{if}($instance = $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_af5e4c42c24fa134bf9de2dd6d0223e92}{getObject}($objectType, $objectId))\{
+257 
+258                 list($success, $rating) = $instance->addRating($user, $rateValue, $comment);
+259                 
+260                 \textcolor{comment}{// Get common user points format via UserProfileTransformer}
+261                 $userTransformer = \textcolor{keyword}{new} UserProfileTransformer();
+262                 $points = $userTransformer->getUserPoints($user);
+263 
+264                 $payload = [
+265                         \textcolor{stringliteral}{'data'} => [
+266                                 \textcolor{stringliteral}{'success'} => $success,
+267                                 \textcolor{stringliteral}{'message'} => \textcolor{stringliteral}{"$objectType has been rate succesfully."},
+268                                 \textcolor{stringliteral}{'user'} => [
+269                                         \textcolor{stringliteral}{'id'}      => $user->getKey(),
+270                                         \textcolor{stringliteral}{'points'}  => $points
+271                                 ],
+272                                 \textcolor{stringliteral}{'rating'} => array\_merge(
+273                                     $instance->getRatingStats(),
+274                                     [
+275                                         \textcolor{stringliteral}{'object\_type'} => $objectType,
+276                                         \textcolor{stringliteral}{'object\_id'}   => intVal($objectId)
+277                                     ]
+278                                  )
+279                         ]
+280                 ];
+281                 
+282                 
+283                 $httpCode = 201;
+284                 
+285                 \textcolor{keywordflow}{if}( !$success ) \{
+286                     $httpCode = 200;
+287                     $payload[\textcolor{stringliteral}{'data'}][\textcolor{stringliteral}{'message'}] = \textcolor{stringliteral}{"User has already rate this $objectType"};
+288                 \}
+289                 
+290                 \textcolor{keywordflow}{return} Response::api()->setStatusCode($httpCode)->withArray($payload);
+291 
+292             \} \textcolor{keywordflow}{else} \{
+293                 \textcolor{keywordflow}{return} Response::api()->errorNotFound(\textcolor{stringliteral}{"$object not found"});
+294             \}
+295 
+296         \}\textcolor{keywordflow}{else}\{
+297             \textcolor{keywordflow}{return} Response::api()->errorNotFound(\textcolor{stringliteral}{'User not found'});
+298         \}
+299 
+300          
+301         
+302     \}
+\end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_af5e4c42c24fa134bf9de2dd6d0223e92}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Rating\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Rating\+Resource}!get\+Object@{get\+Object}}
 \index{get\+Object@{get\+Object}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Rating\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Rating\+Resource}}
 \subsubsection[{get\+Object}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Rating\+Resource\+::get\+Object (
@@ -78,7 +187,13 @@ mixed
 \item[{}]{\$object\+Id}
 \end{DoxyParamCaption}
 )}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a6cb4a4bb619ebf9cf82fda96892de587}
-Get ratings by object 
+( path=\char`\"{}ratings/\{object\}/\{object\+Id\}\char`\"{}, description=\char`\"{}\+Get all object ratings\char`\"{}, summary=\char`\"{}\+Get all ratings by object type\char`\"{}, tags=\{ \char`\"{}ratings\char`\"{}\},
+
+( description=\char`\"{}\+Object\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}object\char`\"{}, required=true, type=\char`\"{}string\char`\"{}, enum=\{\char`\"{}activity\char`\"{}, \char`\"{}badge\char`\"{}\} ),
+
+( ref=\char`\"{}\#/parameters/per\+\_\+page\char`\"{} ), ( ref=\char`\"{}\#/parameters/page\char`\"{} ),
+
+( description=\char`\"{}\+I\+D of object to fetch\char`\"{}, format=\char`\"{}int64\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}object\+Id\char`\"{}, required=true, type=\char`\"{}integer\char`\"{} ), ( response=200, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/rate\char`\"{}) ), ( response=500, description=\char`\"{}\+Unexpected error\char`\"{}, (ref=\char`\"{}\#/definitions/error500\char`\"{}) ), ( response=404, description=\char`\"{}\+User not found\char`\"{}, (ref=\char`\"{}\#/definitions/\+User\+Error404\char`\"{}) ) ) Get ratings by object 
 \begin{DoxyParams}[1]{Parameters}
 string & {\em \$object\+Type} & \\
 \hline
@@ -87,28 +202,45 @@ int & {\em \$object\+Id} & \\
 \end{DoxyParams}
 
 \begin{DoxyCode}
-60     \{
-61          \textcolor{keywordflow}{if}($instance = $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_af5e4c42c24fa134bf9de2dd6d0223e92}{getObject}($objectType, $objectId))\{
-62              
-63              $pageSize  = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseResource_a2df6de75ae3dd493df1434ce3d873d6a}{getPageSize}();
-64              $paginator = $instance->getRates()->paginate($pageSize);
-65              $meta      = [
-66                      \textcolor{stringliteral}{'rating'} => array\_merge(
-67                              $instance->getRatingStats(),
-68                              [
-69                                      \textcolor{stringliteral}{'object\_type'} => $objectType,
-70                                      \textcolor{stringliteral}{'object\_id'}   => intval($objectId)
-71                              ]
-72                      )
-73              ];
-74              
-75              $transformer = new \(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Transformers\(\backslash\)RateTransformer;
-76              \textcolor{keywordflow}{return} Response::api()->withPaginator($paginator, $transformer, null, $meta);
-77              
-78          \} \textcolor{keywordflow}{else} \{
-79             \textcolor{keywordflow}{return} Response::api()->errorNotFound(\textcolor{stringliteral}{"$objectType not found"});
-80          \}
-81     \}
+109     \{
+110          \textcolor{keywordflow}{if}($instance = $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_af5e4c42c24fa134bf9de2dd6d0223e92}{getObject}($objectType, $objectId))\{
+111              
+112              $pageSize  = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseResource_a2df6de75ae3dd493df1434ce3d873d6a}{getPageSize}();
+113              $paginator = $instance->getRates()->paginate($pageSize);
+114              $meta      = [
+115                      \textcolor{stringliteral}{'rating'} => array\_merge(
+116                              $instance->getRatingStats(),
+117                              [
+118                                      \textcolor{stringliteral}{'object\_type'} => $objectType,
+119                                      \textcolor{stringliteral}{'object\_id'}   => intval($objectId)
+120                              ]
+121                      )
+122              ];
+123              
+124              $transformer = new \(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Transformers\(\backslash\)RateTransformer;
+125              \textcolor{keywordflow}{return} Response::api()->withPaginator($paginator, $transformer, null, $meta);
+126              
+127          \} \textcolor{keywordflow}{else} \{
+128             \textcolor{keywordflow}{return} Response::api()->errorNotFound(\textcolor{stringliteral}{"$objectType not found"});
+129          \}
+130     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a5c4a159d0098e19f8b872b0bb73875bf}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Rating\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Rating\+Resource}!show@{show}}
+\index{show@{show}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Rating\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Rating\+Resource}}
+\subsubsection[{show}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Rating\+Resource\+::show (
+\begin{DoxyParamCaption}
+\item[{}]{\$id}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1RatingResource_a5c4a159d0098e19f8b872b0bb73875bf}
+( path=\char`\"{}ratings/\{id\}\char`\"{}, description=\char`\"{}\+Returns an rate by id\char`\"{}, summary=\char`\"{}\+Find a rate by id\char`\"{}, tags=\{ \char`\"{}ratings\char`\"{}\},
+
+( description=\char`\"{}\+I\+D of rating to fetch\char`\"{}, format=\char`\"{}int64\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}id\char`\"{}, required=true, type=\char`\"{}integer\char`\"{} ),
+
+( response=200, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/rate\char`\"{}) ), ( response=500, description=\char`\"{}\+Unexpected error\char`\"{}, (ref=\char`\"{}\#/definitions/error500\char`\"{}) ), ( response=404, description=\char`\"{}\+Not Found\char`\"{}, (ref=\char`\"{}\#/definitions/error404\char`\"{}) ) ) 
+\begin{DoxyCode}
+424     \{
+425         \textcolor{keywordflow}{return} parent::show($id);
+426     \}
 \end{DoxyCode}
 
 

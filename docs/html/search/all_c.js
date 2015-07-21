@@ -13,5 +13,6 @@ var searchData=
   ['locationmanager',['LocationManager',['../df/d89/classDMA_1_1Friends_1_1Classes_1_1LocationManager.html',1,'DMA::Friends::Classes']]],
   ['locationresource',['LocationResource',['../db/dd4/classDMA_1_1Friends_1_1API_1_1Resources_1_1LocationResource.html',1,'DMA::Friends::API::Resources']]],
   ['locations',['Locations',['../d2/d9c/classDMA_1_1Friends_1_1Controllers_1_1Locations.html',1,'DMA::Friends::Controllers']]],
-  ['locationtransformer',['LocationTransformer',['../d9/d36/classDMA_1_1Friends_1_1API_1_1Transformers_1_1LocationTransformer.html',1,'DMA::Friends::API::Transformers']]]
+  ['locationtransformer',['LocationTransformer',['../d9/d36/classDMA_1_1Friends_1_1API_1_1Transformers_1_1LocationTransformer.html',1,'DMA::Friends::API::Transformers']]],
+  ['login',['login',['../dd/d80/classDMA_1_1Friends_1_1API_1_1Resources_1_1UserResource.html#a74eb37fa96dc48f66e645d72299b1ba2',1,'DMA::Friends::API::Resources::UserResource']]]
 ];

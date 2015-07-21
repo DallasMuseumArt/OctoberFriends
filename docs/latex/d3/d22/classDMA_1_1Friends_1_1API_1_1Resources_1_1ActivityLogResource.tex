@@ -12,6 +12,10 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 \hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityLogResource_ab093e778e404042eac0e06e0d8148a49}{index\+By\+User} (\$user=null)
 \item 
 \hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityLogResource_a34b4b73d1baf95a90e7337e32385fe07}{index\+By\+Type\+And\+User} (\$types=null, \$user=null)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityLogResource_af38f991823e103bbc4fb08fca933bec4}{index} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityLogResource_a3bf28501723757f40d2ede0bf3565fbd}{show} (\$id)
 \end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -26,6 +30,23 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 
 
 \subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityLogResource_af38f991823e103bbc4fb08fca933bec4}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Log\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Log\+Resource}!index@{index}}
+\index{index@{index}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Log\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Log\+Resource}}
+\subsubsection[{index}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Activity\+Log\+Resource\+::index (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityLogResource_af38f991823e103bbc4fb08fca933bec4}
+( path=\char`\"{}activity-\/logs\char`\"{}, description=\char`\"{}\+Returns all activity logs\char`\"{}, summary=\char`\"{}\+Return all activity logs\char`\"{}, tags=\{ \char`\"{}activity-\/logs\char`\"{}\},
+
+( ref=\char`\"{}\#/parameters/per\+\_\+page\char`\"{} ), ( ref=\char`\"{}\#/parameters/page\char`\"{} ), ( ref=\char`\"{}\#/parameters/sort\char`\"{} ),
+
+( response=200, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/activity.\+log\char`\"{}, type=\char`\"{}array\char`\"{}) ), ( response=500, description=\char`\"{}\+Unexpected error\char`\"{}, (ref=\char`\"{}\#/definitions/error500\char`\"{}) ), ( response=404, description=\char`\"{}\+Not Found\char`\"{}, (ref=\char`\"{}\#/definitions/error404\char`\"{}) ) ) 
+\begin{DoxyCode}
+269     \{
+270         \textcolor{keywordflow}{return} parent::index();
+271     \}
+\end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityLogResource_a34b4b73d1baf95a90e7337e32385fe07}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Log\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Log\+Resource}!index\+By\+Type\+And\+User@{index\+By\+Type\+And\+User}}
 \index{index\+By\+Type\+And\+User@{index\+By\+Type\+And\+User}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Log\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Log\+Resource}}
 \subsubsection[{index\+By\+Type\+And\+User}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Activity\+Log\+Resource\+::index\+By\+Type\+And\+User (
@@ -34,7 +55,23 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 \item[{}]{\$user = {\ttfamily null}}
 \end{DoxyParamCaption}
 )}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityLogResource_a34b4b73d1baf95a90e7337e32385fe07}
-Provide aliases to object\+\_\+type and user\+\_\+id filters 
+( parameter=\char`\"{}activity\+\_\+log\+\_\+types\char`\"{}, description=\char`\"{}\+One or Multiple activity log object types\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}types\char`\"{}, type=\char`\"{}array\char`\"{}, required=true, items=(type=\char`\"{}string\char`\"{}), collection\+Format=\char`\"{}csv\char`\"{}, enum=\{\char`\"{}reward\char`\"{}, \char`\"{}activity\char`\"{}, \char`\"{}badge\char`\"{}, \char`\"{}step\char`\"{}\}, )
+
+( path=\char`\"{}activity-\/logs/\{types\}\char`\"{}, description=\char`\"{}\+Returns all activity logs by type\char`\"{}, summary=\char`\"{}\+Return activity log by type\char`\"{}, tags=\{ \char`\"{}activity-\/logs\char`\"{}\},
+
+( ref=\char`\"{}\#/parameters/per\+\_\+page\char`\"{} ), ( ref=\char`\"{}\#/parameters/page\char`\"{} ), ( ref=\char`\"{}\#/parameters/sort\char`\"{} ),
+
+( ref=\char`\"{}\#/parameters/activity\+\_\+log\+\_\+types\char`\"{} ),
+
+( response=200, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/activity.\+log\char`\"{}, type=\char`\"{}array\char`\"{}) ), ( response=500, description=\char`\"{}\+Unexpected error\char`\"{}, (ref=\char`\"{}\#/definitions/error500\char`\"{}) ), ( response=404, description=\char`\"{}\+Not Found\char`\"{}, (ref=\char`\"{}\#/definitions/error404\char`\"{}) ) )
+
+( path=\char`\"{}activity-\/logs/\{types\}/user/\{user\}\char`\"{}, description=\char`\"{}\+Returns a single activity type log of a given user\char`\"{}, summary=\char`\"{}\+Return users activity log by type\char`\"{}, tags=\{ \char`\"{}activity-\/logs\char`\"{}\},
+
+( ref=\char`\"{}\#/parameters/per\+\_\+page\char`\"{} ), ( ref=\char`\"{}\#/parameters/page\char`\"{} ), ( ref=\char`\"{}\#/parameters/sort\char`\"{} ), ( ref=\char`\"{}\#/parameters/activity\+\_\+log\+\_\+types\char`\"{} ),
+
+( description=\char`\"{}\+I\+D of user activity medatadata to fetch\char`\"{}, format=\char`\"{}int64\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}user\char`\"{}, required=true, type=\char`\"{}integer\char`\"{} ),
+
+( response=200, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/activity.\+log\char`\"{}, type=\char`\"{}array\char`\"{}) ), ( response=500, description=\char`\"{}\+Unexpected error\char`\"{}, (ref=\char`\"{}\#/definitions/error500\char`\"{}) ), ( response=404, description=\char`\"{}\+Not Found\char`\"{}, (ref=\char`\"{}\#/definitions/error404\char`\"{}) ) ) Provide aliases to object\+\_\+type and user\+\_\+id filters 
 \begin{DoxyParams}[1]{Parameters}
 string & {\em \$types} & comma separted strings \\
 \hline
@@ -46,57 +83,57 @@ Response
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-42     \{
-43         
-44         $filters = [];
-45         \textcolor{keywordflow}{if} (!is\_null($types)) \{
-46             
-47             $relModel = [
-48                     \textcolor{stringliteral}{'reward'}   => \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Reward'},
-49                     \textcolor{stringliteral}{'activity'} => \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Activity'},
-50                     \textcolor{stringliteral}{'badge'}    => \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Badge'},
-51                     \textcolor{stringliteral}{'step'}     => \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Step'},
-52             ];
-53             
-54             $types = !is\_null($types) ? explode(\textcolor{charliteral}{','}, $types): $types;
-55 
-56             \textcolor{keywordflow}{try}\{
-57                 
-58                 $object\_types = array\_map(\textcolor{keyword}{function}($t) use ($relModel) \{
-59                     $t = strtolower(trim($t));
-60                     \textcolor{keywordflow}{return} $relModel[$t];
-61                 \}, $types);
-62                 
-63             \} \textcolor{keywordflow}{catch} (\(\backslash\)\hyperlink{namespaceException}{Exception} $e) \{
-64                 Log::error(\textcolor{stringliteral}{'API endpoint '} . get\_class($this) . \textcolor{stringliteral}{' : '} . $e->getMessage());
-65                 $message = \textcolor{stringliteral}{'One of the given types is not valid. Valid types are [ '} . implode(\textcolor{stringliteral}{', '}, 
+183     \{
+184         
+185         $filters = [];
+186         \textcolor{keywordflow}{if} (!is\_null($types)) \{
+187             
+188             $relModel = [
+189                     \textcolor{stringliteral}{'reward'}   => \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Reward'},
+190                     \textcolor{stringliteral}{'activity'} => \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Activity'},
+191                     \textcolor{stringliteral}{'badge'}    => \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Badge'},
+192                     \textcolor{stringliteral}{'step'}     => \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Step'},
+193             ];
+194             
+195             $types = !is\_null($types) ? explode(\textcolor{charliteral}{','}, $types): $types;
+196 
+197             \textcolor{keywordflow}{try}\{
+198                 
+199                 $object\_types = array\_map(\textcolor{keyword}{function}($t) use ($relModel) \{
+200                     $t = strtolower(trim($t));
+201                     \textcolor{keywordflow}{return} $relModel[$t];
+202                 \}, $types);
+203                 
+204             \} \textcolor{keywordflow}{catch} (\(\backslash\)\hyperlink{namespaceException}{Exception} $e) \{
+205                 Log::error(\textcolor{stringliteral}{'API endpoint '} . get\_class($this) . \textcolor{stringliteral}{' : '} . $e->getMessage());
+206                 $message = \textcolor{stringliteral}{'One of the given types is not valid. Valid types are [ '} . implode(\textcolor{stringliteral}{', '}, 
       array\_keys($relModel)) .\textcolor{stringliteral}{' ]'};
-66                 \textcolor{keywordflow}{return} Response::api()->errorInternalError($message);
-67             \}
-68             
-69             \textcolor{keywordflow}{if}( count($object\_types) > 0 ) \{
-70                 $filters[\textcolor{stringliteral}{'object\_type\_\_in'}] = $object\_types;
-71             \}
-72         \}
-73         
-74 
-75         \textcolor{keywordflow}{if} (!is\_null($user)) \{
-76             \textcolor{comment}{// Find user if exists}
-77             $user = User::find($user);
-78             \textcolor{keywordflow}{if} ($user) \{
-79                 $filters[\textcolor{stringliteral}{'user\_id'}] = $user->getKey();
-80             \} \textcolor{keywordflow}{else} \{
-81                 \textcolor{keywordflow}{return} Response::api()->errorNotFound(\textcolor{stringliteral}{'User not found'});
-82             \}
-83         \}
-84         
-85         
-86         \textcolor{comment}{// Update or inject Input filters}
-87         Input::merge($filters);
-88 
-89         \textcolor{comment}{// Call index and the filters will do the magic}
-90         \textcolor{keywordflow}{return} parent::index();
-91     \}
+207                 \textcolor{keywordflow}{return} Response::api()->errorInternalError($message);
+208             \}
+209             
+210             \textcolor{keywordflow}{if}( count($object\_types) > 0 ) \{
+211                 $filters[\textcolor{stringliteral}{'object\_type\_\_in'}] = $object\_types;
+212             \}
+213         \}
+214         
+215 
+216         \textcolor{keywordflow}{if} (!is\_null($user)) \{
+217             \textcolor{comment}{// Find user if exists}
+218             $user = User::find($user);
+219             \textcolor{keywordflow}{if} ($user) \{
+220                 $filters[\textcolor{stringliteral}{'user\_id'}] = $user->getKey();
+221             \} \textcolor{keywordflow}{else} \{
+222                 \textcolor{keywordflow}{return} Response::api()->errorNotFound(\textcolor{stringliteral}{'User not found'});
+223             \}
+224         \}
+225         
+226         
+227         \textcolor{comment}{// Update or inject Input filters}
+228         Input::merge($filters);
+229 
+230         \textcolor{comment}{// Call index and the filters will do the magic}
+231         \textcolor{keywordflow}{return} parent::index();
+232     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityLogResource_ab093e778e404042eac0e06e0d8148a49}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Log\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Log\+Resource}!index\+By\+User@{index\+By\+User}}
 \index{index\+By\+User@{index\+By\+User}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Log\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Log\+Resource}}
@@ -105,7 +142,13 @@ Response
 \item[{}]{\$user = {\ttfamily null}}
 \end{DoxyParamCaption}
 )}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityLogResource_ab093e778e404042eac0e06e0d8148a49}
-Provide aliases to user\+\_\+id filters 
+( path=\char`\"{}activity-\/logs/user/\{user\}\char`\"{}, description=\char`\"{}\+Returns all activity logs of a user\char`\"{}, summary=\char`\"{}\+Return activity logs by user\char`\"{}, tags=\{\char`\"{}activity-\/logs\char`\"{}\},
+
+( ref=\char`\"{}\#/parameters/per\+\_\+page\char`\"{} ), ( ref=\char`\"{}\#/parameters/page\char`\"{} ), ( ref=\char`\"{}\#/parameters/sort\char`\"{} ),
+
+( description=\char`\"{}\+I\+D of user activity logs to fetch\char`\"{}, format=\char`\"{}int64\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}user\char`\"{}, required=true, type=\char`\"{}integer\char`\"{} ),
+
+( response=200, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/activity.\+log\char`\"{}, type=\char`\"{}array\char`\"{}) ), ( response=500, description=\char`\"{}\+Unexpected error\char`\"{}, (ref=\char`\"{}\#/definitions/error500\char`\"{}) ), ( response=404, description=\char`\"{}\+Not Found\char`\"{}, (ref=\char`\"{}\#/definitions/error404\char`\"{}) ) ) Provide aliases to user\+\_\+id filters 
 \begin{DoxyParams}[1]{Parameters}
 string & {\em \$user} & \\
 \hline
@@ -115,9 +158,26 @@ Response
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-31     \{
-32         \textcolor{keywordflow}{return} $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityLogResource_a34b4b73d1baf95a90e7337e32385fe07}{indexByTypeAndUser}(null, $user);
-33     \}
+75     \{
+76         \textcolor{keywordflow}{return} $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityLogResource_a34b4b73d1baf95a90e7337e32385fe07}{indexByTypeAndUser}(null, $user);
+77     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityLogResource_a3bf28501723757f40d2ede0bf3565fbd}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Log\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Log\+Resource}!show@{show}}
+\index{show@{show}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Log\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Activity\+Log\+Resource}}
+\subsubsection[{show}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Activity\+Log\+Resource\+::show (
+\begin{DoxyParamCaption}
+\item[{}]{\$id}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1ActivityLogResource_a3bf28501723757f40d2ede0bf3565fbd}
+( path=\char`\"{}activity-\/logs/\{id\}\char`\"{}, description=\char`\"{}\+Returns an activity logs by id\char`\"{}, summary=\char`\"{}\+Find an activity logs by id\char`\"{}, tags=\{ \char`\"{}activity-\/logs\char`\"{}\},
+
+( description=\char`\"{}\+I\+D of activity log to fetch\char`\"{}, format=\char`\"{}int64\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}id\char`\"{}, required=true, type=\char`\"{}integer\char`\"{} ),
+
+( response=200, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/activity.\+log\char`\"{}) ), ( response=500, description=\char`\"{}\+Unexpected error\char`\"{}, (ref=\char`\"{}\#/definitions/error500\char`\"{}) ), ( response=404, description=\char`\"{}\+Not Found\char`\"{}, (ref=\char`\"{}\#/definitions/error404\char`\"{}) ) ) 
+\begin{DoxyCode}
+307     \{
+308         \textcolor{keywordflow}{return} parent::show($id);
+309     \}
 \end{DoxyCode}
 
 

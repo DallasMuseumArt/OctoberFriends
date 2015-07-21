@@ -186,9 +186,9 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Cha
 
 
 \begin{DoxyCode}
-147     \{
-148         \textcolor{keywordflow}{return} [];
-149     \}
+151     \{
+152         \textcolor{keywordflow}{return} [];
+153     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_a74d477bcee51e0a8d4c27e482e775eb8}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S}!send@{send}}
 \index{send@{send}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S}}
@@ -218,17 +218,21 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Cha
 127         $data    = $message->getData();
 128         $txt     = strip\_tags($message->getContent());
 129 
-130         \textcolor{comment}{// Clean phone user}
-131         $toPhone = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_aafb8c47b6e382d41069e13c3362b33fd}{cleanPhone}($toUser->phone);
-132         \textcolor{keywordflow}{if}(!empty($toPhone))\{
-133             $sms = $this->client->account->sms\_messages->create(
-134                     $this->fromNumber, \textcolor{comment}{// From a Twilio number in your account}
-135                     $toPhone, \textcolor{comment}{// Text any number}
-136                     $txt
-137             );
-138         \}
-139        
-140     \}
+130         $txt = $this->chunkLongText($txt);
+131 
+132         \textcolor{keywordflow}{foreach}($txt as $t) \{
+133             \textcolor{comment}{// Clean phone user}
+134             $toPhone = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_aafb8c47b6e382d41069e13c3362b33fd}{cleanPhone}($toUser->phone);
+135             \textcolor{keywordflow}{if} (!empty($toPhone)) \{
+136                 $sms = $this->client->account->sms\_messages->create(
+137                     $this->fromNumber, \textcolor{comment}{// From a Twilio number in your account}
+138                     $toPhone, \textcolor{comment}{// Text any number}
+139                     $t
+140                 );
+141             \}
+142         \}
+143        
+144     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_aee4d07da05caa5a14b8c126d6ccf2083}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S}!setting\+Fields@{setting\+Fields}}
 \index{setting\+Fields@{setting\+Fields}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Notifications\+::\+Channels\+::\+Channel\+S\+M\+S}}
@@ -290,31 +294,31 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Cha
 
 
 \begin{DoxyCode}
-156     \{
-157         $httpCode = 200;
-158         \textcolor{keywordflow}{try}
-159         \{
-160             $msg = \textcolor{keyword}{new} IncomingMessage($this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_ae6e3c43b02d2ccbb3fc4bd63ac5d7c9e}{getKey}());
-161             $msg->from($request[\textcolor{stringliteral}{'From'}]);
-162             $msg->setContent($request[\textcolor{stringliteral}{'Body'}]);
-163 
-164             \textcolor{comment}{// TODO : this should be reusable for other channels}
-165             $key = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_ae6e3c43b02d2ccbb3fc4bd63ac5d7c9e}{getKey}();
-166             $event = strtolower(\textcolor{stringliteral}{"dma.channel.$key.incoming.data"});
-167             Event::fire($event, [[$msg]]);
-168             Log::debug(\textcolor{stringliteral}{'Processed Twilio incoming SMS'}, $msg->getData());
-169         \}
-170         \textcolor{keywordflow}{catch}(\(\backslash\)\hyperlink{namespaceException}{Exception} $e)
-171         \{
-172             Log::error(\textcolor{stringliteral}{'Processing Twilio webhook request'}, $request);
-173             Log::error(sprintf(\textcolor{stringliteral}{'Processing Twilio webhook:  %s'}, $e));
-174             $httpCode = 500;
-175         \}
-176 
-177 
-178         \textcolor{comment}{// Response message was read ok}
-179         return \(\backslash\)Response::make(\textcolor{stringliteral}{'<Response></Response>'}, $httpCode);
-180     \}
+160     \{
+161         $httpCode = 200;
+162         \textcolor{keywordflow}{try}
+163         \{
+164             $msg = \textcolor{keyword}{new} IncomingMessage($this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_ae6e3c43b02d2ccbb3fc4bd63ac5d7c9e}{getKey}());
+165             $msg->from($request[\textcolor{stringliteral}{'From'}]);
+166             $msg->setContent($request[\textcolor{stringliteral}{'Body'}]);
+167 
+168             \textcolor{comment}{// TODO : this should be reusable for other channels}
+169             $key = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Channels_1_1ChannelSMS_ae6e3c43b02d2ccbb3fc4bd63ac5d7c9e}{getKey}();
+170             $event = strtolower(\textcolor{stringliteral}{"dma.channel.$key.incoming.data"});
+171             Event::fire($event, [[$msg]]);
+172             Log::debug(\textcolor{stringliteral}{'Processed Twilio incoming SMS'}, $msg->getData());
+173         \}
+174         \textcolor{keywordflow}{catch}(\(\backslash\)\hyperlink{namespaceException}{Exception} $e)
+175         \{
+176             Log::error(\textcolor{stringliteral}{'Processing Twilio webhook request'}, $request);
+177             Log::error(sprintf(\textcolor{stringliteral}{'Processing Twilio webhook:  %s'}, $e));
+178             $httpCode = 500;
+179         \}
+180 
+181 
+182         \textcolor{comment}{// Response message was read ok}
+183         return \(\backslash\)Response::make(\textcolor{stringliteral}{'<Response></Response>'}, $httpCode);
+184     \}
 \end{DoxyCode}
 
 

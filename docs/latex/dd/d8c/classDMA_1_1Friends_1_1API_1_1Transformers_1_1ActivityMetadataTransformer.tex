@@ -32,22 +32,22 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\te
 \item[{}]{\$instance}
 \end{DoxyParamCaption}
 )}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityMetadataTransformer_af1bd0fda73868743295a18510d0b507c}
-\begin{DoxySeeAlso}{See also}
+( definition=\char`\"{}activity.\+metadata\char`\"{}, description=\char`\"{}\+Activity Metadata definition\char`\"{}, required=\{\char`\"{}id\char`\"{}, \char`\"{}user\char`\"{}, \char`\"{}activity\char`\"{}, \char`\"{}metadata\char`\"{}, \char`\"{}created\+\_\+at\char`\"{}\}, ( property=\char`\"{}id\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( property=\char`\"{}user\char`\"{}, type=\char`\"{}object\char`\"{}, ref=\char`\"{}\#/definitions/user\char`\"{} ), ( property=\char`\"{}activity\char`\"{}, type=\char`\"{}object\char`\"{}, ref=\char`\"{}\#/definitions/activity\char`\"{} ), ( property=\char`\"{}metadata\char`\"{}, type=\char`\"{}object\char`\"{}, ), ( property=\char`\"{}created\+\_\+at\char`\"{}, type=\char`\"{}string\char`\"{}, format=\char`\"{}date-\/time\char`\"{} ) )  \begin{DoxySeeAlso}{See also}
 \+::get\+Data() 
 \end{DoxySeeAlso}
 
 \begin{DoxyCode}
-28     \{
-29         \textcolor{keywordflow}{return} [
-30             \textcolor{stringliteral}{'id'}           => (int)$instance->id,
-31             \textcolor{stringliteral}{'user'}         => null,
-32             \textcolor{stringliteral}{'activity'}     => null,
-33             \textcolor{stringliteral}{'metadata'}     => $this->getMetadata($instance),   
-34             \textcolor{stringliteral}{'created\_at'}   => $this->carbonToIso($instance->created\_at)
-35             \textcolor{comment}{//'session\_id'   => $instance->session\_id,}
-36             
-37         ];
-38     \}
+60     \{
+61         \textcolor{keywordflow}{return} [
+62             \textcolor{stringliteral}{'id'}           => (int)$instance->id,
+63             \textcolor{stringliteral}{'user'}         => null,
+64             \textcolor{stringliteral}{'activity'}     => null,
+65             \textcolor{stringliteral}{'metadata'}     => $this->getMetadata($instance),   
+66             \textcolor{stringliteral}{'created\_at'}   => $this->carbonToIso($instance->created\_at)
+67             \textcolor{comment}{//'session\_id'   => $instance->session\_id,}
+68             
+69         ];
+70     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityMetadataTransformer_a699e499e8abef3facc46bb99e4ceacf3}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer}!get\+Metadata@{get\+Metadata}}
 \index{get\+Metadata@{get\+Metadata}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer}}
@@ -61,21 +61,21 @@ array
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-45     \{
-46         \textcolor{comment}{// TODO : this method needs to be improved }
-47         \textcolor{comment}{// This method generates one extra query per row }
-48         \textcolor{comment}{// transformed.}
-49         
-50         $class = get\_class($instance);
-51         $query = $class::where(\textcolor{stringliteral}{'session\_id'}, $instance->session\_id)->get();
-52          
-53         $data = [];
-54         \textcolor{keywordflow}{foreach}($query as $r)\{
-55             $data[$r->key] = $r->value;
-56         \}
-57     
-58         \textcolor{keywordflow}{return} $data;
-59     \}
+77     \{
+78         \textcolor{comment}{// TODO : this method needs to be improved }
+79         \textcolor{comment}{// This method generates one extra query per row }
+80         \textcolor{comment}{// transformed.}
+81         
+82         $class = get\_class($instance);
+83         $query = $class::where(\textcolor{stringliteral}{'session\_id'}, $instance->session\_id)->get();
+84          
+85         $data = [];
+86         \textcolor{keywordflow}{foreach}($query as $r)\{
+87             $data[$r->key] = $r->value;
+88         \}
+89     
+90         \textcolor{keywordflow}{return} $data;
+91     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityMetadataTransformer_a38bfe7aab17cf0599631c2c6c1b3fca7}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer}!include\+Activity@{include\+Activity}}
 \index{include\+Activity@{include\+Activity}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer}}
@@ -91,11 +91,11 @@ League
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-68     \{
-69  
-70         $activity = $instance->activity;
-71         \textcolor{keywordflow}{return} $this->item($activity, \textcolor{keyword}{new} ActivityTransformer(\textcolor{keyword}{false}));
-72     \}
+100     \{
+101  
+102         $activity = $instance->activity;
+103         \textcolor{keywordflow}{return} $this->item($activity, \textcolor{keyword}{new} ActivityTransformer(\textcolor{keyword}{false}));
+104     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityMetadataTransformer_a863325b774ddcfde7616686a3e0527bb}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer}!include\+User@{include\+User}}
 \index{include\+User@{include\+User}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Metadata\+Transformer}}
@@ -111,11 +111,11 @@ League
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-80     \{
-81     
-82         $instance = $instance->user;
-83         \textcolor{keywordflow}{return} $this->item($instance, \textcolor{keyword}{new} UserTransformer(\textcolor{keyword}{false}));
-84     \}
+112     \{
+113     
+114         $instance = $instance->user;
+115         \textcolor{keywordflow}{return} $this->item($instance, \textcolor{keyword}{new} UserTransformer(\textcolor{keyword}{false}));
+116     \}
 \end{DoxyCode}
 
 
