@@ -15,7 +15,9 @@ use SystemException;
 use Cms\Classes\Page;
 use File;
 use Lang;
+use Event;
 use Flash;
+use Auth;
 
 class UserLogin extends ComponentBase
 {

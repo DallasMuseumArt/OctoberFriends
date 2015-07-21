@@ -43,35 +43,33 @@ class AuthManager
             $data['no_password'] = false;
         }
 
-        if (!isset($rules['password'])) {
-            $rules['password'] = 'required|min:4';
-        }
+        if (!$data['no_password']) {
+            if (!isset($rules['password'])) {
+                $rules['password'] = 'required|min:4';
+            }
 
-        if (!isset($rules['login'])) {
-            $rules['login'] = 'required|between:4,64';
-        }
+            if (!isset($rules['login'])) {
+                $rules['login'] = 'required|between:4,64';
+            }
 
-        /*
-         * Validate user credentials
-         */
-        $validation = Validator::make($data, $rules);
-        if ($validation->fails()) {
-            throw new ValidationException($validation);
+            /*
+             * Validate user credentials
+             */
+            $validation = Validator::make($data, $rules);
+            if ($validation->fails()) {
+                throw new ValidationException($validation);
+            }
+
         }
 
         // Attempt to lookup by member_id
         if (!$user) {
             $user = self::isMember($data['login']);
-            // $usermeta = Usermeta::with('user')->where('current_member_number', '=', $data['login'])->first();
-            // if (isset($usermeta->user) && !empty($usermeta->user)) {
-            //     $user = $usermeta->user;
-            // } 
         }
 
         // Attempt to look up barcode
         if (!$user) {
             $user = self::isBarcode($data['login']);
-            //$user = User::where('barcode_id', $data['login'])->first();
         }
    
         if ($user && $data['no_password']) {
