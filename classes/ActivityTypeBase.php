@@ -244,11 +244,11 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
     protected static function convertTime($timeString)
     {
         list($hour, $minutes) = explode(":", $timeString);
+
         $meridiem = substr($minutes, 2, 3);
         $minutes = substr($minutes, 0, 1);
 
-
-        if (strtolower($meridiem) == 'pm' || ($hour == '12' && strtolower($meridiem) == 'am')) {
+        if (strtolower($meridiem) == 'pm' && $hour != 12) {
             $hour += 12;
         }
 
@@ -261,12 +261,14 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
     protected static function convertToHoursMins($time, $format = '%d:%d') 
     {
         settype($time, 'integer');
+        
         if ($time < 1) {
             return;
         }
+        
         $hours = floor($time / 60);
-        //\Debugbar::info($hours);
         $minutes = ($time % 60);
+        
         return sprintf($format, $hours, $minutes);
     }
 
