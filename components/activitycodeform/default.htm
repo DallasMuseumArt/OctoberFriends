@@ -1,3 +1,4 @@
+{% if showForm %}
 <div class="dma-code-input">  
     {{ form_ajax('onSubmit', { class: 'activity-code', success: "$('#activity-code').val('')" } ) }}
         <input id="activity-code" type="text" name="activity_code" placeholder="Enter Activity Code">
@@ -11,3 +12,4 @@
         partial="whatkindofcodes" 
     %}
 </div>
+{% endif %}

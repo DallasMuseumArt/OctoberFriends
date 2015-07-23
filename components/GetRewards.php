@@ -5,6 +5,7 @@ use DMA\Friends\Classes\Notifications\NotificationMessage;
 use DMA\Friends\Models\Reward;
 use DMA\Friends\Models\Bookmark;
 use DMA\Friends\Classes\RewardManager;
+use DMA\Friends\Classes\LocationManager;
 use Auth;
 use View;
 use Session;
@@ -37,8 +38,8 @@ class GetRewards extends ComponentBase
 
         $results = $this->getResults();
 
-        $this->page['rewards']  = $results['rewards'];
-        $this->page['links']    = $results['links'];
+        $this->page['rewards']      = $results['rewards'];
+        $this->page['links']        = $results['links'];
 
     }
 
@@ -103,7 +104,12 @@ class GetRewards extends ComponentBase
 
         foreach($rewards as $reward) {
             $renderedRewards[] = [
-                'rendered' => View::make('dma.friends::rewardPreview', ['reward' => $reward, 'user' => $user])->render(),
+                'rendered' => View::make('dma.friends::rewardPreview', 
+                    [
+                        'reward'        => $reward, 
+                        'user'          => $user,
+                        'allowRedeem'   => LocationManager::enableAction()
+                    ])->render(),
                 'id' => $reward->id,
             ];
         }

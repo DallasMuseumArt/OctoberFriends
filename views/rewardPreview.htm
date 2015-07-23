@@ -36,21 +36,27 @@
             
         </div>
         <div class="claim col-md-4">
-            {% if user.points >= reward.points %}
-            <p>Claim for</p>
-            <button class="btn btn-primary" 
-                data-control="popup" 
-                data-handler="onRedeemModal" 
-                data-request-data="id: {{ reward.id }}"
-            >{{ reward.pointsFormatted }} points</button>
+            {% if allowRedeem %}
+                {% if user.points >= reward.points %}
+                <p>Claim for</p>
+                <button class="btn btn-primary" 
+                    data-control="popup" 
+                    data-handler="onRedeemModal" 
+                    data-request-data="id: {{ reward.id }}"
+                >{{ reward.pointsFormatted }} points</button>
+                {% else %}
+                <button class="btn btn-default redeem"
+                    data-control="popup" 
+                    data-handler="onRedeemModal" 
+                    data-request-data="id: {{ reward.id }}"
+                >You need {{ reward.pointsFormatted }} points</button>
+                {% endif %}
             {% else %}
-            <button class="btn btn-default redeem"
-                data-control="popup" 
-                data-handler="onRedeemModal" 
-                data-request-data="id: {{ reward.id }}"
-            >You need {{ reward.pointsFormatted }} points</button>
+                <button class="btn btn-primary redeem" disabled="disabled">
+                    Redeem onsite with {{ reward.pointsFormatted }} points
+                </button>
             {% endif %}
-            </div>
+        </div>
 
     </div>
 </div>

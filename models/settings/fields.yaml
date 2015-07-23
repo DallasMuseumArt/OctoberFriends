@@ -29,6 +29,15 @@ tabs:
             tab: General
 
         # Kiosk
+        require_location:
+            label: Require a registered location for full functionality
+            comment: When set to true any one accessing friends from a site that is not a registered location, activity and reward redemption will be disabled
+            span: left
+            tab: Kiosk
+            type: dropdown 
+            options:
+                true: Enabled
+                false: Disabled
         send_badge_email:
             label: Send email upon badge completion
             span: left
