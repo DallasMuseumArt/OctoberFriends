@@ -19,7 +19,11 @@
         </thead>
     <?php foreach($users as $user) { ?>
         <tr>
-            <td><?php print $user->metadata->first_name ?> <?php print $user->metadata->last_name ?></td>
+            <td>
+                <?php if (isset($user->metadata->first_name)) { ?>
+                <?php print $user->metadata->first_name ?> <?php print $user->metadata->last_name ?>
+                <?php } ?>
+            </td>
             <td><?php print number_format($user->points_today) ?></td>
             <td><?php print number_format($user->points_this_week) ?></td>
             <td><?php print number_format($user->points) ?></td>
