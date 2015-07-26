@@ -2,6 +2,7 @@
 
 use Backend;
 use Illuminate\Support\Facades\Event;
+use DMA\Friends\Facades\MailChimpIntegration;
 use Rainlab\User\Models\User as User;
 use DMA\Friends\Models\Usermeta as Metadata;
 use DMA\Friends\Models\Settings;
@@ -14,6 +15,7 @@ use DB;
 use Log;
 use Config;
 use Illuminate\Foundation\AliasLoader;
+
 
 /**
  * Friends Plugin Information File
@@ -198,7 +200,10 @@ class Plugin extends PluginBase
         // Register Event Subscribers
         $subscriber = new FriendsEventHandler;
         Event::subscribe($subscriber);
-
+        
+        // Bind user and point events to trigger user synchronization with MailChimp
+        MailChimpIntegration::bindEvents();
+        
         // Generate barcode_id when a user object is created
         // TODO: Migrate when user plugin is forked
         User::creating(function($user)
@@ -460,6 +465,7 @@ class Plugin extends PluginBase
         $this->registerConsoleCommand('friends.read-channels', 'DMA\Friends\Commands\ReadChannels');
         $this->registerConsoleCommand('friends.reset-groups', 'DMA\Friends\Commands\ResetGroups');
         $this->registerConsoleCommand('friends.generate-api-docs', 'DMA\Friends\Commands\GenerateAPIDocs');
+        $this->registerConsoleCommand('friends.sync-friends-mailchimp', 'DMA\Friends\Commands\SyncFriendsToMailChimp');
 
     } 
     
@@ -593,5 +599,6 @@ class Plugin extends PluginBase
         $manager = new LocationManager($uuid);
     }
 
+        
 }
 

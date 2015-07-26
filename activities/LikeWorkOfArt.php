@@ -1,5 +1,6 @@
 <?php namespace DMA\Friends\Activities;
 
+use Log;
 use Lang;
 use Session;
 use Httpful\Request;
@@ -88,27 +89,30 @@ class LikeWorkOfArt extends ActivityTypeBase
     public static function isAssessionNumber($code)
     {
         // Brain API request template URL
-        $template = FriendsSettings::get('artwork_api_template', false);
-
-        // Clean code from spaces in case user miss type it
-        $code     = str_replace(' ', '', $code);
-        
-        // Get URL
-        $url      = sprintf($template, urlencode($code));
-        
-        // Call Brain
-        $response = Request::get($url)                   
-                            ->send();
-        
-        if($obj = @$response->body->results[0]){
-            $data = [
-                'object_id'     => $obj->id,
-                'object_number' => $obj->number,
-                'object_title'  => $obj->title
-            ];
+        if($template = FriendsSettings::get('artwork_api_template', false)){
+    
+            // Clean code from spaces in case user miss type it
+            $code     = str_replace(' ', '', $code);
             
-            return $data;
-           
+            // Get URL
+            $url      = sprintf($template, urlencode($code));
+            
+            // Call Brain
+            $response = Request::get($url)                   
+                                ->send();
+            
+            if($obj = @$response->body->results[0]){
+                $data = [
+                    'object_id'     => $obj->id,
+                    'object_number' => $obj->number,
+                    'object_title'  => $obj->title
+                ];
+                
+                return $data;
+               
+            }
+        }else{
+            Log::error('Friends setting "artwork_api_template" setting is empty. Please configure it in the backend of OctoberCMS.');
         }
         return false;
         
