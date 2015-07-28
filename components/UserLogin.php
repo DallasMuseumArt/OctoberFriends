@@ -85,8 +85,8 @@ class UserLogin extends ComponentBase
 
             // Allow plugins to override the redirect with a session variable
             if (isset($_SESSION['authRedirect'])) {
-                
                 $redirectUrl = $this->pageUrl($_SESSION['authRedirect']);
+
                 unset($_SESSION['authRedirect']); // destroy it
 
             } else {
@@ -95,11 +95,12 @@ class UserLogin extends ComponentBase
                 $redirectUrl = post('redirect', $redirectUrl);
             
             }
-            
+
             return Redirect::intended($redirectUrl);
         
         
         } catch(\Exception $e) {
+
             // Catch all exceptions producced by RainLab User or DMA authentication
             // and update error block message using OctoberCMS Ajax framework
             $message = Lang::get('dma.friends::lang.userLogin.failCredentials');
