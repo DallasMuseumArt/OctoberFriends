@@ -9,9 +9,10 @@ use System\Classes\PluginManager;
 use SystemException;
 
 /**
- * Activity Manager
+ * Manage activity behavior
  *
- * @package dma\friends
+ * @package DMA\Friends\Classes
+ * @author Kristen Arnold, Carlos Arroyo
  */
 class ActivityManager
 {

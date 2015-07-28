@@ -82,11 +82,21 @@ class UserLogin extends ComponentBase
             ];
 
             AuthManager::auth($data);
+
+            // Allow plugins to override the redirect with a session variable
+            if (isset($_SESSION['authRedirect'])) {
+                
+                $redirectUrl = $this->pageUrl($_SESSION['authRedirect']);
+                unset($_SESSION['authRedirect']); // destroy it
+
+            } else {
+                
+                $redirectUrl = $this->pageUrl($this->property('redirect'));
+                $redirectUrl = post('redirect', $redirectUrl);
             
-            $redirectUrl = $this->pageUrl($this->property('redirect'));
-    
-            if ($redirectUrl = post('redirect', $redirectUrl))
-                return Redirect::intended($redirectUrl);
+            }
+            
+            return Redirect::intended($redirectUrl);
         
         
         } catch(\Exception $e) {

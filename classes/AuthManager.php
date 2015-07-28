@@ -3,11 +3,18 @@
 use Auth;
 use Event;
 use Validator;
+use Exception;
 use ValidationException;
 use RainLab\User\Models\Settings as UserSettings;
 use RainLab\User\Models\User;
 use DMA\Friends\Models\Usermeta;
 
+/**
+ * Manage custom authentication for friends
+ *
+ * @package DMA\Friends\Classes
+ * @author Kristen Arnold, Carlos Arroyo
+ */
 class AuthManager
 {
 
@@ -19,9 +26,6 @@ class AuthManager
      * - login
      *      Provide either the email address or username to authenticate.  This 
      *      setting is configured in the administrative backend
-     * or
-     * - member_id
-     *      The member id stored in the usermeta->current_member_number field
      * - password
      *      A password
      * - no_password
@@ -40,7 +44,7 @@ class AuthManager
         $user = false;
 
         // Fire prelogin event before we start processing the user
-        Event::fire('auth.prelogin', $data, $rules);
+        Event::fire('auth.prelogin', [$data, $rules]);
 
         if (!isset($data['no_password'])) {
             $data['no_password'] = false;
@@ -75,10 +79,17 @@ class AuthManager
             $user = self::isBarcode($data['login']);
         }
    
-        if ($user && $data['no_password']) {
-            Auth::login($user);
-        } else {
-            $user = self::loginUser($user, $data);
+        try {        
+
+            if ($user && $data['no_password']) {
+                Auth::login($user);
+            } else {
+                $user = self::loginUser($user, $data);
+            }
+        } catch(Exception $e) {
+            $user = Event::fire('auth.invalidLogin', [$data, $rules]);
+
+            if (!$user) throw new Exception($e);
         }
 
         if ($user) {
