@@ -74,7 +74,7 @@ class PrintManager
             Settings::get('membership_orientation')
         );
 
-        $name = $this->user->metadata->first_name . ' ' . $this->user->metadata->last_name;
+        $name = $this->user->name;
 
         $this->pdf->SetFont('Arial', 'B', 12);
         $this->pdf->setX(1);
