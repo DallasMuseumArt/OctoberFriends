@@ -1,6 +1,7 @@
 <?php namespace DMA\Friends\Components;
 
 use Cms\Classes\ComponentBase;
+use Session;
 use Redirect;
 use Validator;
 use ValidationException;
@@ -83,19 +84,14 @@ class UserLogin extends ComponentBase
 
             AuthManager::auth($data);
 
-            $authRedirect = session('authRedirect');
+            $authRedirect = Session::pull('authRedirect');
 
             // Allow plugins to override the redirect with a session variable
             if (!empty($authRedirect)) {
                 $redirectUrl = $this->pageUrl($authRedirect);
-
-                //unset($_SESSION['authRedirect']); // destroy it
-
             } else {
-                
                 $redirectUrl = $this->pageUrl($this->property('redirect'));
                 $redirectUrl = post('redirect', $redirectUrl);
-            
             }
 
             return Redirect::intended($redirectUrl);
