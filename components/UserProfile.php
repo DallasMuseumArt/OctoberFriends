@@ -140,6 +140,7 @@ class UserProfile extends ComponentBase
         $user = $this->getUser();
 
         $vars = post();
+
         foreach($vars as $key => $val) {
             if ($key == 'metadata') {
                 foreach($val as $metakey => $metaval) {
