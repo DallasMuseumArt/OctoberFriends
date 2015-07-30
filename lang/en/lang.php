@@ -47,7 +47,7 @@ return [
         'noEducation'           => 'No Answer',
     ],
     'userLogin' => [
-        'loginTitle'            => 'Scan Membership Card',
+        'loginTitle'            => 'Login to Friends',
         'registerTitle'         => 'Sign Up for Friends',
         'failCredentials'       => 'The email or password you entered is incorrect',
         'throttleUser'          => 'Invalid login attempts. User ":login" has been temporarily suspended.',

@@ -10,6 +10,7 @@ use RainLab\User\Models\User;
 use DMA\Friends\wordpress\Auth as WordpressAuth;
 use DMA\Friends\Classes\UserExtend;
 use DMA\Friends\Classes\AuthManager;
+use DMA\Friends\Classes\LocationManager;
 use DMA\Friends\Models\Usermeta;
 use Cms\Classes\Theme;
 use SystemException;
@@ -63,7 +64,7 @@ class UserLogin extends ComponentBase
     {        
         return $this->renderPartial('@modalDisplay', [
             'title'     => Lang::get('dma.friends::lang.userLogin.loginTitle'),
-            'content'   => $this->makePartial('login-form'),
+            'content'   => $this->renderPartial('login-form', ['enableAction' =>  LocationManager::enableAction()]),
         ]);
     }
 
