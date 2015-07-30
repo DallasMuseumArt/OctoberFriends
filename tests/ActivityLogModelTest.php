@@ -1,7 +1,7 @@
 <?php namespace DMA\Friends\Tests;
 
 use League\FactoryMuffin\Facade as FactoryMuffin;
-use DMA\Friends\Classes\MuffinTestCase;
+use DMA\Friends\Tests\MuffinCase;
 use DMA\Friends\Models\ActivityLog;
 
 class ActivityLogModelTest extends MuffinTestCase
