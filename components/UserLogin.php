@@ -215,8 +215,8 @@ class UserLogin extends ComponentBase
 
         // Save user metadata
         $usermeta = new Usermeta;
-        $usermeta->first_name       = $data['first_name'];
-        $usermeta->last_name        = $data['last_name'];
+        $usermeta->first_name       = ucwords($data['first_name']);
+        $usermeta->last_name        = ucwords($data['last_name']);
         $usermeta->birth_date       = $birth_date;
         $usermeta->email_optin      = isset($data['email_optin']) ? $data['email_optin'] : false;
 
