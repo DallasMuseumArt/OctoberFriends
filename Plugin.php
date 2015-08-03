@@ -295,6 +295,11 @@ class Plugin extends PluginBase
                 'zip' => [
                     'label' => 'Zip',
                 ],            
+                'current_member_number' => [
+                    'label'     => 'Membership ID',
+                    'relation'      => 'metadata',
+                    'select'        => '@current_member_number',
+                ], 
             ]); 
         });
 
