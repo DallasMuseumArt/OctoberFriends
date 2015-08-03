@@ -35,9 +35,8 @@ class UserBadges extends ComponentBase
 
         $renderedBadges = [];
         $badges = $user->badges()
-            ->take($this->property('limit'))
-            ->groupBy('id')
-            ->get();
+            ->orderBy('created_at')
+            ->paginate($this->property('limit'));
         
         foreach($badges as $badge) {
 
@@ -48,6 +47,7 @@ class UserBadges extends ComponentBase
         }
 
         $this->page['badges'] = $renderedBadges;
+        $this->page['links'] = $badges->render();
         
     }
 
