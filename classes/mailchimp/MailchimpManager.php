@@ -12,7 +12,7 @@ class MailchimpManager
      * @var string Mailchimp list id
      */
     private $listId;
-    
+   
     /**
      * Cached instance of MailChimpClient
      * @var \DMA\Friends\Classes\Mailchimp\MailchimpClient
@@ -26,11 +26,11 @@ class MailchimpManager
     protected function getClient()
     {
         if( !$this->mailchimp ){
-            $api_key = FriendSettings::get('mailchimp_api_key', null);
-            $listId  = FriendSettings::get('mailchimp_list_id', null);
+            $api_key      = FriendSettings::get('mailchimp_api_key', null);
+            $listId       = FriendSettings::get('mailchimp_list_id', null);
             if ($api_key && $listId) {
                 $this->mailchimp =  new MailchimpClient($api_key);
-                $this->listId = $listId;
+                $this->listId  = $listId;
             }else{
                 Log::error('MailChimp API key or List ID are not configured in Friend Settings.');
             }
@@ -98,7 +98,10 @@ class MailchimpManager
         // 2. Call Mailchimp
         // The following method will detect the member doesn't exist in the list and will register it.
         $command = ($update) ? 'updateMember' : 'addMember';
-        $this->doMailchimpCall($command, $memberUID, $firstname, $lastname, $memberStatus, $merge_fields);
+
+        
+        $this->doMailchimpCall($command, $memberUID, $firstname, $lastname, 
+                               $memberStatus, $merge_fields, []);
         
     }
     
@@ -106,12 +109,12 @@ class MailchimpManager
      * Internal use.
      * If promise fails with 404. Automatically doCreateUser is called
      */
-    private function doMailchimpCall($command, $memberUID, $firstname, $lastname, $memberStatus, $merge_fields)
+    private function doMailchimpCall($command, $memberUID, $firstname, $lastname, $memberStatus, $merge_fields, $interests)
     {
 
-        //Log::debug($command);
-        //Log::debug($memberUID);
-        //Log::debug($merge_fields);
+        // Log::debug($command);
+        // Log::debug($memberUID);
+        // Log::debug($merge_fields);
         
         if (!in_array($command, ['updateMember', 'addMember'])){
             throw new Exception('Only updateMember and addMember methods are supported');    
@@ -121,14 +124,15 @@ class MailchimpManager
             $listId = $this->listId;
             
             // Prepare request
-            $promise = $client->{$command}($listId, $memberUID, $firstname, $lastname, $memberStatus, $merge_fields);
+            $promise = $client->{$command}($listId, $memberUID, $firstname, $lastname, $memberStatus, $merge_fields, $interests);
             $promise = $promise->then(
                     function(MailchimpResponse $mailchimpResponse) use ($command, $memberUID){
                         // Succesful call
                         // Do nothing maybe add logging here
                         Log::debug('MailChimp successful command [ ' . $command . ' ] for member ' . $memberUID  );
                     },
-                    function(MailchimpException $e) use ($listId, $command, $memberUID, $firstname, $lastname, $memberStatus, $merge_fields){
+                    function(MailchimpException $e) use ($listId, $command, $memberUID, $firstname, 
+                                                         $lastname, $memberStatus, $merge_fields, $interests){
                         // Unsuccesful call
                         switch ($e->getCode())
                         {
@@ -140,7 +144,18 @@ class MailchimpManager
                                     Log::debug( 'User not found in Mailchimp list' );
                                     //unset($merge_fields['EMAIL']);
                                     //unset($merge_fields['NEW-EMAIL']);
-                                    $this->doMailchimpCall('addMember', $memberUID, $firstname, $lastname, $memberStatus, $merge_fields);
+                                    
+
+                                    // Get interest ids of the configured groups
+                                    $interests = [];
+
+                                    $interesIds = FriendSettings::get('mailchimp_interest_id', []);
+                                    foreach($interesIds as $key => $value ){
+                                        $interests[$value] = true;
+                                    }
+                                    
+                                    $this->doMailchimpCall('addMember', $memberUID, $firstname, $lastname, 
+                                                                        $memberStatus, $merge_fields, $interests);
                                 } else {
                                     Log::critical("List $listId does not exists.");
                                 }
@@ -269,7 +284,35 @@ class MailchimpManager
    
     }
     
+    /**
+     * Get list of groups on the MailChimp list
+     */
+    public function getMailchimpGroupList()
+    {
+        if($client = $this->getClient()){
+            $promise = $client->getMailChimpGroupList($this->listId);
+            $response = $promise->wait();
+            return array_get($response->data, 'categories', []);
+        }
+        return [];
+    }
+    
+    /**
+     * Get list interest ids of a given group
+     */
+    public function getMailchimpInterestList($groupId)
+    {
+        $client = $this->getClient();
+        if($client && $groupId ){
+            $promise = $client->getMailChimpInterestList($this->listId, $groupId);
+            $response = $promise->wait();
+            return array_get($response->data, 'interests', []);
+        }
+        return [];
+    }
+    
 
+    # UTILS
     private function startsWith($haystack, $needle) {
         // search backwards starting from haystack length characters from the end
         return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== FALSE;

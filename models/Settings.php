@@ -1,9 +1,11 @@
 <?php namespace DMA\Friends\Models;
 
 use Model;
+use Postman;
+use Exception;
 use System\Models\MailTemplate;
 use RainLab\User\Models\State;
-use Postman;
+use DMA\Friends\Facades\MailChimpIntegration;
 
 /**
  * Friends Settings model
@@ -131,5 +133,40 @@ class Settings extends Model {
     {
     	return $this->getChannelOptions(true, $description=false); 
     }
+    
+    
+    public function getMailchimpGroupIdOptions()
+    {
+        $options = ['' => 'Select Group'];
+        try{
+            $groups = MailChimpIntegration::getMailchimpGroupList();
+            foreach($groups as $i){
+                $options[$i->id] = $i->title;
+            }
+        }catch(Exception $e)
+        {
+            // Do nothing
+        }
+        return $options;
+    }
+    
+    
+    public function getMailchimpInterestIdOptions()
+    {
+        $options = [];
+        try{    
+            $groupId = $this->mailchimp_group_id;
+            $groups = MailChimpIntegration::getMailchimpInterestList($groupId);
+            foreach($groups as $i){
+                $options[$i->id] = $i->name;
+            }
+        }catch(Exception $e)
+        {
+            // Do nothing
+        }
+        return $options;
+        
+    }
+    
 
 }
