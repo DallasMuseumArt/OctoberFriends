@@ -127,7 +127,7 @@ class ChannelSMS implements Channel, Listenable, Webhook
 	    $data    = $message->getData();
 	    $txt     = strip_tags($message->getContent());
 
-        $txt = $this->chunkLongText($txt);
+        $txt = $this->chunkLongText($txt, 130);
 
         foreach($txt as $t) {
 	        // Clean phone user
