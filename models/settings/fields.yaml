@@ -147,4 +147,34 @@ tabs:
             label: MailChimp List ID where user will be subscribe/unsubscribe
             comment: The list ID can be found under the settings of the MailChimp list.
             span: left
+            tab: MailChimp Integration
+        mailchimp_group_id:
+            commentAbove: Select what MailChimp group new Friends members should be subscribed.
+            label: MailChimp group
+            type: dropdown
+            tab: MailChimp Integration
+            span: left
+        mailchimp_interest_id:
+            commentAbove: Select what interests of the group new Friends members should join. ( Select first a group )
+            label: MailChimp interest
+            type: checkboxlist
+            dependsOn: mailchimp_group_id
+            span: left
             tab: MailChimp Integration            
+
+            
+        # mailchimp_groups:
+        #     prompt: Add MailChimp groups
+        #     label: Subscribe Friends to MailChimp groups
+        #     commentAbove: Select what MailChimp groups new Friends members should be subscribed. Member will be subscribe to all group options.
+        #     tab: MailChimp Integration
+        #     type: repeater
+        #     form:
+        #         fields:
+        #             mailchimp_group_id:
+        #                 label: MailChimp group
+        #                 type: dropdown
+        #             mailchimp_interest_id:
+        #                 label: MailChimp interest
+        #                 dependsOn: mailchimp_group_id
+        #                 type: dropdown

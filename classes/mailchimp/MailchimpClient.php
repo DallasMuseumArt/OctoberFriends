@@ -20,11 +20,14 @@ class MailchimpClient extends BaseClient
      * @param string $lastname
      * @param string $status Options are subscribed, unsubscribed, cleaned, pending
      * @param array $merge_fields See Mailchimp list for available merge_tags
+     * @param array $interests associative array of group interest the member can join.
+     *              format should be [ interest_id => <bool> ]. eg [ '3df5y36' => true ]
+     * @return \Guzzle\Promise
      */    
     public function addMember($listId, $userEmail, $firstname, $lastname,  
-                              $status=BaseClient::MEMBER_STATUS_SUBSCRIBED, $merge_fields=[])
+                              $status=BaseClient::MEMBER_STATUS_SUBSCRIBED, $merge_fields=[], $interests=[])
     {
-           
+        
         $data = [
           'email_address'       => $userEmail,
           'email_type'          => 'html',
@@ -32,9 +35,12 @@ class MailchimpClient extends BaseClient
           'merge_fields'        => array_merge([
                 'FNAME' => $firstname,
                 'LNAME' => $lastname  
-          ], $merge_fields)             
-                
+          ], $merge_fields)
         ];
+        
+        if($interests) {
+            $data['interests']  = $interests;
+        }
         
         $endpoint = '/lists/' . $listId . '/members/';
         
@@ -62,9 +68,12 @@ class MailchimpClient extends BaseClient
       * @param string $lastname
       * @param string $status Options are subscribed, unsubscribed, cleaned, pending
       * @param array $merge_fields See Mailchimp list for available merge_tags
+      * @param array $interests associative array of group interest the member can join.
+      *              format should be [ interest_id => <bool> ]. eg [ '3df5y36' => true ]
       * @return \Guzzle\Promise
       */
-     public function updateMember($listId, $email, $firstname=Null, $lastname=Null, $status=Null, $merge_fields=Null)
+     public function updateMember($listId, $email, $firstname=Null, $lastname=Null, 
+                                  $status=Null, $merge_fields=Null, $interests=Null)
      {
          
          $memberId = $this->getMemberID($email);
@@ -94,8 +103,33 @@ class MailchimpClient extends BaseClient
              $data['merge_fields'] =  array_merge( $data['merge_fields'], $merge_fields);
          }
      
+         if ($interests) {
+             $data['interests'] = $interests;
+         }
+         
          return  $this->patch($endpoint, $data);
  
      }
     
+     
+     /**
+      * Helper method to get MailChimp list of groups
+      * @param string $listId
+      */
+     public function getMailChimpGroupList($listId)
+     {
+        $endpoint = '/lists/' . $listId . '/interest-categories/';
+        return  $this->get($endpoint);
+     }
+     
+     /**
+      * Helper method to get MailChimp group interest ids
+      * @param string $listId
+      */
+     public function getMailChimpInterestList($listId, $groupId)
+     {
+         $endpoint = '/lists/' . $listId . '/interest-categories/' . $groupId . '/interests';
+         return  $this->get($endpoint);
+     }
+     
 }
