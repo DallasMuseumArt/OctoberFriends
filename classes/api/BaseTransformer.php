@@ -58,7 +58,7 @@ class BaseTransformer extends TransformerAbstract
                 
                 $this->setDefaultIncludes( $includes);
                 
-                return $data;
+                return $this->sanitize($data);
             }
             return [];
         }catch( Exception $e){
@@ -70,6 +70,23 @@ class BaseTransformer extends TransformerAbstract
             throw $e;
             
         }
+    }
+    
+    /**
+     * Basic funtion to clean up invisible unicode characters.
+     * @internal
+     * @param array $data
+     */
+    protected function sanitize(array $data){
+        // Regex to find invisible unicode characters
+        $invChar = '/\p{C}+/u';
+        
+        foreach($data as $key => $value){
+            if(is_string($value)) {
+                $data[$key] = preg_replace($invChar, '', $value);
+            }
+        }
+        return $data;
     }
 
     /**
