@@ -4,6 +4,8 @@
 \begin{DoxyCompactItemize}
 \item 
 static \hyperlink{classDMA_1_1Friends_1_1Classes_1_1AuthManager_a22836fc33b7788f7b41bbb253c6f58af}{auth} (\$data, \$rules=\mbox{[}$\,$\mbox{]})
+\item 
+static \hyperlink{classDMA_1_1Friends_1_1Classes_1_1AuthManager_a4e611d8616cb3afb36a4fc497b7afd9c}{register} (\$data, \$rules=\mbox{[}$\,$\mbox{]})
 \end{DoxyCompactItemize}
 
 
@@ -22,8 +24,7 @@ Authenticate a user by either username, email, or member id
 \begin{DoxyParams}[1]{Parameters}
 array & {\em \$data} & An array of attributes to authenticate a user minimially requires the following
 \begin{DoxyItemize}
-\item login Provide either the email address or username to authenticate. This setting is configured in the administrative backend or
-\item member\+\_\+id The member id stored in the usermeta-\/$>$current\+\_\+member\+\_\+number field
+\item login Provide either the email address or username to authenticate. This setting is configured in the administrative backend
 \item password A password
 \item no\+\_\+password If true password authentication will be bypassed. Use with caution as this can be a security breach if used incorrectly.
 \end{DoxyItemize}\\
@@ -36,58 +37,160 @@ boolean returns true if the user is authenticated
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-39     \{
-40         $user = \textcolor{keyword}{false};
-41 
-42         \textcolor{comment}{// Fire prelogin event before we start processing the user}
-43         Event::fire(\textcolor{stringliteral}{'auth.prelogin'}, $data, $rules);
-44 
-45         \textcolor{keywordflow}{if} (!isset($data[\textcolor{stringliteral}{'no\_password'}])) \{
-46             $data[\textcolor{stringliteral}{'no\_password'}] = \textcolor{keyword}{false};
-47         \}
+43     \{
+44         $user = \textcolor{keyword}{false};
+45 
+46         \textcolor{comment}{// Fire prelogin event before we start processing the user}
+47         Event::fire(\textcolor{stringliteral}{'auth.prelogin'}, [$data, $rules]);
 48 
-49         \textcolor{keywordflow}{if} (!$data[\textcolor{stringliteral}{'no\_password'}]) \{
-50             \textcolor{keywordflow}{if} (!isset($rules[\textcolor{stringliteral}{'password'}])) \{
-51                 $rules[\textcolor{stringliteral}{'password'}] = \textcolor{stringliteral}{'required|min:4'};
-52             \}
-53 
-54             \textcolor{keywordflow}{if} (!isset($rules[\textcolor{stringliteral}{'login'}])) \{
-55                 $rules[\textcolor{stringliteral}{'login'}] = \textcolor{stringliteral}{'required|between:4,64'};
+49         \textcolor{keywordflow}{if} (!isset($data[\textcolor{stringliteral}{'no\_password'}])) \{
+50             $data[\textcolor{stringliteral}{'no\_password'}] = \textcolor{keyword}{false};
+51         \}
+52 
+53         \textcolor{keywordflow}{if} (!$data[\textcolor{stringliteral}{'no\_password'}]) \{
+54             \textcolor{keywordflow}{if} (!isset($rules[\textcolor{stringliteral}{'password'}])) \{
+55                 $rules[\textcolor{stringliteral}{'password'}] = \textcolor{stringliteral}{'required|min:4'};
 56             \}
 57 
-58             \textcolor{comment}{/*}
-59 \textcolor{comment}{             * Validate user credentials}
-60 \textcolor{comment}{             */}
-61             $validation = Validator::make($data, $rules);
-62             \textcolor{keywordflow}{if} ($validation->fails()) \{
-63                 \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceValidationException}{ValidationException}($validation);
-64             \}
-65 
-66         \}
-67 
-68         \textcolor{comment}{// Attempt to lookup by member\_id}
-69         \textcolor{keywordflow}{if} (!$user) \{
-70             $user = self::isMember($data[\textcolor{stringliteral}{'login'}]);
-71         \}
-72 
-73         \textcolor{comment}{// Attempt to look up barcode}
-74         \textcolor{keywordflow}{if} (!$user) \{
-75             $user = self::isBarcode($data[\textcolor{stringliteral}{'login'}]);
-76         \}
-77    
-78         \textcolor{keywordflow}{if} ($user && $data[\textcolor{stringliteral}{'no\_password'}]) \{
-79             Auth::login($user);
-80         \} \textcolor{keywordflow}{else} \{
-81             $user = self::loginUser($user, $data);
-82         \}
+58             \textcolor{keywordflow}{if} (!isset($rules[\textcolor{stringliteral}{'login'}])) \{
+59                 $rules[\textcolor{stringliteral}{'login'}] = \textcolor{stringliteral}{'required|between:4,64'};
+60             \}
+61 
+62             \textcolor{comment}{/*}
+63 \textcolor{comment}{             * Validate user credentials}
+64 \textcolor{comment}{             */}
+65             $validation = Validator::make($data, $rules);
+66             \textcolor{keywordflow}{if} ($validation->fails()) \{
+67                 \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceValidationException}{ValidationException}($validation);
+68             \}
+69 
+70         \}
+71 
+72         \textcolor{comment}{// Attempt to lookup by member\_id}
+73         \textcolor{keywordflow}{if} (!$user) \{
+74             $user = self::isMember($data[\textcolor{stringliteral}{'login'}]);
+75         \}
+76 
+77         \textcolor{comment}{// Attempt to look up barcode}
+78         \textcolor{keywordflow}{if} (!$user) \{
+79             $user = self::isBarcode($data[\textcolor{stringliteral}{'login'}]);
+80         \}
+81    
+82         \textcolor{keywordflow}{try} \{        
 83 
-84         \textcolor{keywordflow}{if} ($user) \{
-85             Event::fire(\textcolor{stringliteral}{'auth.login'}, $user);
-86             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-87         \}
-88 
-89         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-90     \}
+84             \textcolor{keywordflow}{if} ($user && $data[\textcolor{stringliteral}{'no\_password'}]) \{
+85                 Auth::login($user);
+86             \} \textcolor{keywordflow}{else} \{
+87                 $user = self::loginUser($user, $data);
+88             \}
+89         \} \textcolor{keywordflow}{catch}(\hyperlink{namespaceException}{Exception} $e) \{
+90             $user = Event::fire(\textcolor{stringliteral}{'auth.invalidLogin'}, [$data, $rules]);
+91 
+92             \textcolor{keywordflow}{if} (!$user) \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceException}{Exception}($e);
+93         \}
+94 
+95         \textcolor{keywordflow}{if} ($user) \{
+96             Event::fire(\textcolor{stringliteral}{'auth.login'}, $user);
+97             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+98         \}
+99 
+100         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+101     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1AuthManager_a4e611d8616cb3afb36a4fc497b7afd9c}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Auth\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Auth\+Manager}!register@{register}}
+\index{register@{register}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Auth\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Auth\+Manager}}
+\subsubsection[{register}]{\setlength{\rightskip}{0pt plus 5cm}static D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Auth\+Manager\+::register (
+\begin{DoxyParamCaption}
+\item[{}]{\$data, }
+\item[{}]{\$rules = {\ttfamily \mbox{[}\mbox{]}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classDMA_1_1Friends_1_1Classes_1_1AuthManager_a4e611d8616cb3afb36a4fc497b7afd9c}
+Register a user
+
+
+\begin{DoxyParams}[1]{Parameters}
+array & {\em \$data} & An array of attributes to register a user. Any fields that are not properties on the user object Will be applied to the Usermeta object\\
+\hline
+array & {\em \$rules} & A set of validation rules to validate against see \href{http://laravel.com/docs/5.1/validation}{\tt http\+://laravel.\+com/docs/5.\+1/validation}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+User \$user return the user object after registration 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+197     \{
+198 
+199         Event::fire(\textcolor{stringliteral}{'auth.preRegister'}, [$data, $rules]);
+200 
+201         $validation = Validator::make($data, $rules);
+202         \textcolor{keywordflow}{if} ($validation->fails())
+203             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceValidationException}{ValidationException}($validation);
+204 
+205         \textcolor{comment}{/*}
+206 \textcolor{comment}{         * Register user}
+207 \textcolor{comment}{         */}
+208         $requireActivation = UserSettings::get(\textcolor{stringliteral}{'require\_activation'}, \textcolor{keyword}{true});
+209         $automaticActivation = UserSettings::get(\textcolor{stringliteral}{'activate\_mode'}) == UserSettings::ACTIVATE\_AUTO;
+210         $userActivation = UserSettings::get(\textcolor{stringliteral}{'activate\_mode'}) == UserSettings::ACTIVATE\_USER;
+211 
+212         \textcolor{comment}{/*}
+213 \textcolor{comment}{         * Data altercations}
+214 \textcolor{comment}{         */}
+215         $data[\textcolor{stringliteral}{'first\_name'}]     = ucwords($data[\textcolor{stringliteral}{'first\_name'}]);
+216         $data[\textcolor{stringliteral}{'last\_name'}]      = ucwords($data[\textcolor{stringliteral}{'last\_name'}]);
+217         $data[\textcolor{stringliteral}{'birth\_date'}]     = UserExtend::parseBirthdate($data[\textcolor{stringliteral}{'birthday'}]);
+218         $data[\textcolor{stringliteral}{'phone'}]          = UserExtend::parsePhone($data[\textcolor{stringliteral}{'phone'}]);
+219         $data[\textcolor{stringliteral}{'email\_optin'}]    = isset($data[\textcolor{stringliteral}{'email\_optin'}]) ? $data[\textcolor{stringliteral}{'email\_optin'}] : \textcolor{keyword}{false};
+220 
+221         \textcolor{comment}{// Split the data into whats required for the user and usermeta models}
+222         $userData = [
+223             \textcolor{stringliteral}{'name'}                  => $data[\textcolor{stringliteral}{'first\_name'}] . \textcolor{charliteral}{' '} . $data[\textcolor{stringliteral}{'last\_name'}],
+224             \textcolor{stringliteral}{'password'}              => $data[\textcolor{stringliteral}{'password'}],
+225             \textcolor{stringliteral}{'password\_confirmation'} => $data[\textcolor{stringliteral}{'password\_confirmation'}],
+226             \textcolor{stringliteral}{'email'}                 => $data[\textcolor{stringliteral}{'email'}],
+227             \textcolor{stringliteral}{'street\_addr'}           => $data[\textcolor{stringliteral}{'street\_addr'}],
+228             \textcolor{stringliteral}{'city'}                  => $data[\textcolor{stringliteral}{'city'}],
+229             \textcolor{stringliteral}{'state'}                 => $data[\textcolor{stringliteral}{'state'}],
+230             \textcolor{stringliteral}{'zip'}                   => $data[\textcolor{stringliteral}{'zip'}],
+231             \textcolor{stringliteral}{'phone'}                 => $data[\textcolor{stringliteral}{'phone'}],
+232         ];
+233 
+234         $user = Auth::register($userData, $automaticActivation);
+235 
+236         \textcolor{comment}{// Save user metadata}
+237         $usermeta = Usermeta::create($data);
+238 
+239         $user->metadata()->save($usermeta);
+240 
+241         \textcolor{keywordflow}{if} (isset($data[\textcolor{stringliteral}{'avatar'}])) \{
+242             UserExtend::uploadAvatar($user, $data[\textcolor{stringliteral}{'avatar'}]);
+243         \}
+244         \textcolor{comment}{/*}
+245 \textcolor{comment}{         * Activation is by the user, send the email}
+246 \textcolor{comment}{         */}
+247         \textcolor{keywordflow}{if} ($userActivation) \{
+248             $this->sendActivationEmail($user);
+249         \}
+250 
+251         \textcolor{comment}{/*}
+252 \textcolor{comment}{         * Automatically activated or not required, log the user in}
+253 \textcolor{comment}{         */}
+254         \textcolor{keywordflow}{if} ($automaticActivation || !$requireActivation) \{
+255             Auth::login($user);
+256         \}
+257 
+258         \textcolor{keywordflow}{if} ($user) \{
+259             \textcolor{comment}{/*}
+260 \textcolor{comment}{             * Fire event that user has registered}
+261 \textcolor{comment}{             */}
+262             Event::fire(\textcolor{stringliteral}{'auth.register'}, [$user]);
+263 
+264             \textcolor{keywordflow}{return} $user;
+265         \}
+266 
+267         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+268     \}
 \end{DoxyCode}
 
 

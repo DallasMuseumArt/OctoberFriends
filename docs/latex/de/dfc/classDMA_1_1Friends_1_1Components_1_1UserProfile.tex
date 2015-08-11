@@ -52,10 +52,10 @@ static \hyperlink{classDMA_1_1Friends_1_1Components_1_1UserProfile_a1100f5a5b66b
 )}\label{classDMA_1_1Friends_1_1Components_1_1UserProfile_a1515663484c8d01a49e4d1824a6e7c1b}
 Add all css/js assets 
 \begin{DoxyCode}
-187     \{
-188         $this->addJs(\textcolor{stringliteral}{'/modules/system/assets/ui/vendor/bootstrap/js/modal.js'});
-189         $this->addJs(\textcolor{stringliteral}{'/modules/system/assets/ui/js/popup.js'});
-190     \}
+188     \{
+189         $this->addJs(\textcolor{stringliteral}{'/modules/system/assets/ui/vendor/bootstrap/js/modal.js'});
+190         $this->addJs(\textcolor{stringliteral}{'/modules/system/assets/ui/js/popup.js'});
+191     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Components_1_1UserProfile_a1100f5a5b66bae37f71c2d4114c47f42}{}\index{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Profile@{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Profile}!get\+Theme\+Partials\+Dir@{get\+Theme\+Partials\+Dir}}
 \index{get\+Theme\+Partials\+Dir@{get\+Theme\+Partials\+Dir}!D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Profile@{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Profile}}
@@ -71,10 +71,10 @@ string \$path
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-236     \{
-237         $theme = Theme::getActiveTheme();
-238         \textcolor{keywordflow}{return} $theme->getPath() . \textcolor{stringliteral}{'/partials/'};
-239     \}
+237     \{
+238         $theme = Theme::getActiveTheme();
+239         \textcolor{keywordflow}{return} $theme->getPath() . \textcolor{stringliteral}{'/partials/'};
+240     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Components_1_1UserProfile_a5ae2f68ad0cfa8793553ff64933a8f59}{}\index{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Profile@{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Profile}!get\+User@{get\+User}}
 \index{get\+User@{get\+User}!D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Profile@{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Profile}}
@@ -88,13 +88,13 @@ User \$user A user object
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-175     \{
-176         $user = Auth::getUser();
-177 
-178         \textcolor{keywordflow}{if} (!$user) \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-179 
-180         \textcolor{keywordflow}{return} $user;
-181     \}
+176     \{
+177         $user = Auth::getUser();
+178 
+179         \textcolor{keywordflow}{if} (!$user) \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+180 
+181         \textcolor{keywordflow}{return} $user;
+182     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Components_1_1UserProfile_a470d38c86107683dfa599a9140ae02a0}{}\index{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Profile@{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Profile}!make\+Partial@{make\+Partial}}
 \index{make\+Partial@{make\+Partial}!D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Profile@{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Profile}}
@@ -121,24 +121,24 @@ string \$content A rendered partial
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-212     \{   
-213         $partialsDir = self::getThemePartialsDir();
-214         $partialPath = $partialsDir . $partial . \textcolor{stringliteral}{'.htm'};
-215 
-216         \textcolor{keywordflow}{if} (!File::isFile($partialPath)) \{
-217             $partialPath = $this->getViewPath($partial) . \textcolor{stringliteral}{'.htm'};
-218         \}
-219 
-220         \textcolor{keywordflow}{if} (!File::isFile($partialPath)) \{
-221             \textcolor{keywordflow}{if} ($throwException)
-222                 \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceSystemException}{SystemException}(Lang::get(\textcolor{stringliteral}{'backend::lang.partial.not\_found'}, [\textcolor{stringliteral}{'
+213     \{   
+214         $partialsDir = self::getThemePartialsDir();
+215         $partialPath = $partialsDir . $partial . \textcolor{stringliteral}{'.htm'};
+216 
+217         \textcolor{keywordflow}{if} (!File::isFile($partialPath)) \{
+218             $partialPath = $this->getViewPath($partial) . \textcolor{stringliteral}{'.htm'};
+219         \}
+220 
+221         \textcolor{keywordflow}{if} (!File::isFile($partialPath)) \{
+222             \textcolor{keywordflow}{if} ($throwException)
+223                 \textcolor{keywordflow}{throw} \textcolor{keyword}{new} \hyperlink{namespaceSystemException}{SystemException}(Lang::get(\textcolor{stringliteral}{'backend::lang.partial.not\_found'}, [\textcolor{stringliteral}{'
       name'} => $partialPath]));
-223             \textcolor{keywordflow}{else}
-224                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-225         \}   
-226 
-227         \textcolor{keywordflow}{return} $this->makeFileContents($partialPath, $params);
-228     \}   
+224             \textcolor{keywordflow}{else}
+225                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+226         \}   
+227 
+228         \textcolor{keywordflow}{return} $this->makeFileContents($partialPath, $params);
+229     \}   
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Components_1_1UserProfile_a8762bd608981dc640c3fb5d86090649e}{}\index{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Profile@{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Profile}!on\+Avatar@{on\+Avatar}}
 \index{on\+Avatar@{on\+Avatar}!D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Profile@{D\+M\+A\+::\+Friends\+::\+Components\+::\+User\+Profile}}
@@ -244,31 +244,32 @@ Save the users profile
 140         $user = $this->\hyperlink{classDMA_1_1Friends_1_1Components_1_1UserProfile_a5ae2f68ad0cfa8793553ff64933a8f59}{getUser}();
 141 
 142         $vars = post();
-143         \textcolor{keywordflow}{foreach}($vars as $key => $val) \{
-144             \textcolor{keywordflow}{if} ($key == \textcolor{stringliteral}{'metadata'}) \{
-145                 \textcolor{keywordflow}{foreach}($val as $metakey => $metaval) \{
-146                     $user->metadata->\{$metakey\} = $metaval;
-147                 \}
-148 
-149             \} \textcolor{keywordflow}{else} \{
-150                 \textcolor{keywordflow}{if} ($key == \textcolor{stringliteral}{"phone"}) \{
-151                     $val = UserExtend::parsePhone($val);
-152                 \}
-153 
-154                 $user->\{$key\} = $val;
-155             \}
-156         \}
-157 
-158         \textcolor{keywordflow}{if} ($user->push()) \{
-159             Flash::info(Lang::get(\textcolor{stringliteral}{'dma.friends::lang.user.save'}));
-160         \} \textcolor{keywordflow}{else} \{
-161             Flash::error(Lang::get(\textcolor{stringliteral}{'dma.friends::lang.user.saveFailed'}));
-162         \}
-163 
-164         \textcolor{keywordflow}{return} [
-165             \textcolor{stringliteral}{'#flashMessages'} => $this->renderPartial(\textcolor{stringliteral}{'@flashMessages'}),
-166         ];
-167     \}
+143 
+144         \textcolor{keywordflow}{foreach}($vars as $key => $val) \{
+145             \textcolor{keywordflow}{if} ($key == \textcolor{stringliteral}{'metadata'}) \{
+146                 \textcolor{keywordflow}{foreach}($val as $metakey => $metaval) \{
+147                     $user->metadata->\{$metakey\} = $metaval;
+148                 \}
+149 
+150             \} \textcolor{keywordflow}{else} \{
+151                 \textcolor{keywordflow}{if} ($key == \textcolor{stringliteral}{"phone"}) \{
+152                     $val = UserExtend::parsePhone($val);
+153                 \}
+154 
+155                 $user->\{$key\} = $val;
+156             \}
+157         \}
+158 
+159         \textcolor{keywordflow}{if} ($user->push()) \{
+160             Flash::info(Lang::get(\textcolor{stringliteral}{'dma.friends::lang.user.save'}));
+161         \} \textcolor{keywordflow}{else} \{
+162             Flash::error(Lang::get(\textcolor{stringliteral}{'dma.friends::lang.user.saveFailed'}));
+163         \}
+164 
+165         \textcolor{keywordflow}{return} [
+166             \textcolor{stringliteral}{'#flashMessages'} => $this->renderPartial(\textcolor{stringliteral}{'@flashMessages'}),
+167         ];
+168     \}
 \end{DoxyCode}
 
 

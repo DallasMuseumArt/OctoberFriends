@@ -1,0 +1,73 @@
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsToMailChimp}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Commands\textbackslash{}Sync\+Friends\+To\+Mail\+Chimp Class Reference}
+\label{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsToMailChimp}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Commands\textbackslash{}\+Sync\+Friends\+To\+Mail\+Chimp@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Commands\textbackslash{}\+Sync\+Friends\+To\+Mail\+Chimp}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Commands\textbackslash{}Sync\+Friends\+To\+Mail\+Chimp\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{de/d27/classDMA_1_1Friends_1_1Commands_1_1SyncFriendsToMailChimp}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsToMailChimp_ac0630eddb584c741c903bf026dd77806}{fire} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsToMailChimp_a46021d59cad8b43c71fe99c6733a823d}{}{\bfseries synchronize\+User} ()\label{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsToMailChimp_a46021d59cad8b43c71fe99c6733a823d}
+
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsToMailChimp_aa60597552570eef1a6c8549e9af86773}{get\+Options} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsToMailChimp_a9675e574bf45fca3210df2b246dbab41}{}{\bfseries \$name} = \textquotesingle{}friends\+:sync-\/friends-\/mailchimp\textquotesingle{}\label{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsToMailChimp_a9675e574bf45fca3210df2b246dbab41}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsToMailChimp_a182bed8874b5d2f872d7338fa03814fe}{}{\bfseries \$description} = \textquotesingle{}Syncronize Friends users data into Mail\+Chimp\textquotesingle{}\label{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsToMailChimp_a182bed8874b5d2f872d7338fa03814fe}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsToMailChimp_ac0630eddb584c741c903bf026dd77806}{}\index{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+To\+Mail\+Chimp@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+To\+Mail\+Chimp}!fire@{fire}}
+\index{fire@{fire}!D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+To\+Mail\+Chimp@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+To\+Mail\+Chimp}}
+\subsubsection[{fire}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Commands\textbackslash{}\+Sync\+Friends\+To\+Mail\+Chimp\+::fire (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsToMailChimp_ac0630eddb584c741c903bf026dd77806}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+32     \{
+33           $this->synchronizeUser();
+34     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsToMailChimp_aa60597552570eef1a6c8549e9af86773}{}\index{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+To\+Mail\+Chimp@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+To\+Mail\+Chimp}!get\+Options@{get\+Options}}
+\index{get\+Options@{get\+Options}!D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+To\+Mail\+Chimp@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Sync\+Friends\+To\+Mail\+Chimp}}
+\subsubsection[{get\+Options}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Commands\textbackslash{}\+Sync\+Friends\+To\+Mail\+Chimp\+::get\+Options (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{classDMA_1_1Friends_1_1Commands_1_1SyncFriendsToMailChimp_aa60597552570eef1a6c8549e9af86773}
+Get the console command options. \begin{DoxyReturn}{Returns}
+array 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+61     \{
+62         \textcolor{keywordflow}{return} [
+63                 [\textcolor{stringliteral}{'force-update'}, \textcolor{charliteral}{'u'}, InputOption::VALUE\_NONE, \textcolor{stringliteral}{'Always update member in the list with
+       Friends member data'}, null],
+64         ];
+65     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+commands/Sync\+Friends\+To\+Mail\+Chimp.\+php\end{DoxyCompactItemize}

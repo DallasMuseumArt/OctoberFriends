@@ -129,6 +129,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8c2bad0fb18f5e501d3318eba7379609"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a140721a33440c666426139d6317bd357"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d8a/classDMA_1_1Friends_1_1Models_1_1Settings.html#a140721a33440c666426139d6317bd357">getActiveListenableChannelsOptions</a> ()</td></tr>
 <tr class="separator:a140721a33440c666426139d6317bd357"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dbe7556eddf92bbf3c05dbd54cc5047"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9dbe7556eddf92bbf3c05dbd54cc5047"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>getMailchimpGroupIdOptions</b> ()</td></tr>
+<tr class="separator:a9dbe7556eddf92bbf3c05dbd54cc5047"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae606222dcac19623a6ba656ccab5568d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae606222dcac19623a6ba656ccab5568d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>getMailchimpInterestIdOptions</b> ()</td></tr>
+<tr class="separator:ae606222dcac19623a6ba656ccab5568d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -157,9 +163,9 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Return Active channels that can trigger actions in the platform.</p>
 <dl class="section return"><dt>Returns</dt><dd>array </dd></dl>
-<div class="fragment"><div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    {</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <span class="keywordflow">return</span> $this-&gt;getChannelOptions(<span class="keyword">true</span>, $description=<span class="keyword">false</span>); </div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    {</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        <span class="keywordflow">return</span> $this-&gt;getChannelOptions(<span class="keyword">true</span>, $description=<span class="keyword">false</span>); </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -177,9 +183,9 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Return Active channels for notification.</p>
 <dl class="section return"><dt>Returns</dt><dd>array </dd></dl>
-<div class="fragment"><div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    {</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <span class="keywordflow">return</span> $this-&gt;getChannelOptions();</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    {</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        <span class="keywordflow">return</span> $this-&gt;getChannelOptions();</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -196,12 +202,12 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Returns available timezones </p><dl class="section return"><dt>Returns</dt><dd>array </dd></dl>
-<div class="fragment"><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    {</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        $timezones = timezone_identifiers_list();</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        $timezones = array_combine($timezones, $timezones);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordflow">return</span> $timezones;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        $timezones = timezone_identifiers_list();</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        $timezones = array_combine($timezones, $timezones);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordflow">return</span> $timezones;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -218,15 +224,15 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Default values to set for this model, override </p>
-<div class="fragment"><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        $this-&gt;maximum_users_per_group          = 5;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        $this-&gt;maximum_user_group_memberships   = 3;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        $this-&gt;maximum_groups_own_per_user      = 3;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        $this-&gt;maximum_points_group = 200;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="comment">//$this-&gt;mail_group_invite_template = &#39;dma.friends::mail.invite&#39;; </span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        $this-&gt;reset_groups_every_day = $this-&gt;days;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        $this-&gt;reset_groups_time = <span class="stringliteral">&#39;00:00&#39;</span>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    }        </div>
+<div class="fragment"><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        $this-&gt;maximum_users_per_group          = 5;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        $this-&gt;maximum_user_group_memberships   = 3;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        $this-&gt;maximum_groups_own_per_user      = 3;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        $this-&gt;maximum_points_group = 200;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="comment">//$this-&gt;mail_group_invite_template = &#39;dma.friends::mail.invite&#39;; </span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        $this-&gt;reset_groups_every_day = $this-&gt;days;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        $this-&gt;reset_groups_time = <span class="stringliteral">&#39;00:00&#39;</span>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    }        </div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -237,7 +243,7 @@ Public Attributes</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jul 21 2015 14:20:28 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Aug 11 2015 18:30:27 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

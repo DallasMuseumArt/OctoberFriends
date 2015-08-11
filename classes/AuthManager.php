@@ -177,6 +177,22 @@ class AuthManager
         return $user;
     }
 
+
+    /**
+     * Register a user
+     *
+     * @param array $data
+     * An array of attributes to register a user.
+     * Any fields that are not properties on the user object
+     * Will be applied to the Usermeta object
+     *
+     * @param array $rules
+     * A set of validation rules to validate against
+     * see http://laravel.com/docs/5.1/validation
+     *
+     * @return User $user
+     * return the user object after registration
+     */
     public static function register($data, $rules = [])
     {
 

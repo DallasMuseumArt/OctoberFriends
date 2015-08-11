@@ -347,7 +347,7 @@ Protected Member Functions</h2></td></tr>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        $data    = $message-&gt;getData();</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        $txt     = strip_tags($message-&gt;getContent());</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        $txt = $this-&gt;chunkLongText($txt);</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        $txt = $this-&gt;chunkLongText($txt, 130);</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <span class="keywordflow">foreach</span>($txt as $t) {</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            <span class="comment">// Clean phone user</span></div>
@@ -456,7 +456,7 @@ Protected Member Functions</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jul 21 2015 14:20:28 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Aug 11 2015 18:30:26 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

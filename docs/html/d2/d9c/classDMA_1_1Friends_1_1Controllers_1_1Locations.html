@@ -154,7 +154,7 @@ Public Attributes</h2></td></tr>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        $barcodeId = <span class="keyword">get</span>(<span class="stringliteral">&#39;barcodeId&#39;</span>);</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        $barcodeId = trim($barcodeId);</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        $location = LocationManager::getLocation();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        $location = <a class="code" href="../../df/d89/classDMA_1_1Friends_1_1Classes_1_1LocationManager.html#a891ca42df61c88580aae3447d15e4bd7">LocationManager::getLocation</a>();</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordflow">if</span> (!$location || empty($barcodeId)) {</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="keywordflow">return</span> Redirect::to(<span class="charliteral">&#39;/&#39;</span>);</div>
@@ -173,7 +173,8 @@ Public Attributes</h2></td></tr>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordflow">return</span> Redirect::to(<span class="charliteral">&#39;/&#39;</span>);</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    }</div>
-<div class="ttc" id="classDMA_1_1Friends_1_1Classes_1_1AuthManager_html_a22836fc33b7788f7b41bbb253c6f58af"><div class="ttname"><a href="../../d6/d81/classDMA_1_1Friends_1_1Classes_1_1AuthManager.html#a22836fc33b7788f7b41bbb253c6f58af">DMA\Friends\Classes\AuthManager\auth</a></div><div class="ttdeci">static auth($data, $rules=[])</div><div class="ttdef"><b>Definition:</b> AuthManager.php:38</div></div>
+<div class="ttc" id="classDMA_1_1Friends_1_1Classes_1_1LocationManager_html_a891ca42df61c88580aae3447d15e4bd7"><div class="ttname"><a href="../../df/d89/classDMA_1_1Friends_1_1Classes_1_1LocationManager.html#a891ca42df61c88580aae3447d15e4bd7">DMA\Friends\Classes\LocationManager\getLocation</a></div><div class="ttdeci">static getLocation()</div><div class="ttdef"><b>Definition:</b> LocationManager.php:32</div></div>
+<div class="ttc" id="classDMA_1_1Friends_1_1Classes_1_1AuthManager_html_a22836fc33b7788f7b41bbb253c6f58af"><div class="ttname"><a href="../../d6/d81/classDMA_1_1Friends_1_1Classes_1_1AuthManager.html#a22836fc33b7788f7b41bbb253c6f58af">DMA\Friends\Classes\AuthManager\auth</a></div><div class="ttdeci">static auth($data, $rules=[])</div><div class="ttdef"><b>Definition:</b> AuthManager.php:42</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -201,7 +202,7 @@ Public Attributes</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jul 21 2015 14:20:28 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Aug 11 2015 18:30:27 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

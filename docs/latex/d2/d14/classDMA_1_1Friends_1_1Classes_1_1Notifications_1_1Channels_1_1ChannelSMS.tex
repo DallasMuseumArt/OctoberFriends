@@ -218,7 +218,7 @@ Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1Notifications_1_1Cha
 127         $data    = $message->getData();
 128         $txt     = strip\_tags($message->getContent());
 129 
-130         $txt = $this->chunkLongText($txt);
+130         $txt = $this->chunkLongText($txt, 130);
 131 
 132         \textcolor{keywordflow}{foreach}($txt as $t) \{
 133             \textcolor{comment}{// Clean phone user}

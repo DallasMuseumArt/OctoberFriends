@@ -157,11 +157,11 @@ array an array of the hour and minutes in military time
 \begin{DoxyCode}
 245     \{
 246         list($hour, $minutes) = explode(\textcolor{stringliteral}{":"}, $timeString);
-247         $meridiem = substr($minutes, 2, 3);
-248         $minutes = substr($minutes, 0, 1);
-249 
+247 
+248         $meridiem = substr($minutes, 2, 3);
+249         $minutes = substr($minutes, 0, 1);
 250 
-251         \textcolor{keywordflow}{if} (strtolower($meridiem) == \textcolor{stringliteral}{'pm'} || ($hour == \textcolor{stringliteral}{'12'} && strtolower($meridiem) == \textcolor{stringliteral}{'am'})) \{
+251         \textcolor{keywordflow}{if} (strtolower($meridiem) == \textcolor{stringliteral}{'pm'} && $hour != 12) \{
 252             $hour += 12;
 253         \}
 254 

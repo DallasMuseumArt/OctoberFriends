@@ -59,11 +59,10 @@ static \hyperlink{classDMA_1_1Friends_1_1Models_1_1Usermeta_a2d958b56be7414a58e8
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Usermeta_a39190deb0a2302c8edab3b5eaa70b78f}{}{\bfseries \$key} = \textquotesingle{}user\+\_\+id\textquotesingle{}\label{classDMA_1_1Friends_1_1Models_1_1Usermeta_a39190deb0a2302c8edab3b5eaa70b78f}
 
 \item 
-\hypertarget{classDMA_1_1Friends_1_1Models_1_1Usermeta_a95d74f02cd302db9566b8da29154e82d}{}{\bfseries \$guarded} = \mbox{[}\textquotesingle{}$\ast$\textquotesingle{}\mbox{]}\label{classDMA_1_1Friends_1_1Models_1_1Usermeta_a95d74f02cd302db9566b8da29154e82d}
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1Usermeta_a95d74f02cd302db9566b8da29154e82d}{}{\bfseries \$guarded} = \mbox{[}\textquotesingle{}user\+\_\+id\textquotesingle{}\mbox{]}\label{classDMA_1_1Friends_1_1Models_1_1Usermeta_a95d74f02cd302db9566b8da29154e82d}
 
 \item 
-\hypertarget{classDMA_1_1Friends_1_1Models_1_1Usermeta_a1dca0217848634cab6e2ad205804e351}{}{\bfseries \$fillable} = \mbox{[}$\,$\mbox{]}\label{classDMA_1_1Friends_1_1Models_1_1Usermeta_a1dca0217848634cab6e2ad205804e351}
-
+{\bfseries \$fillable}
 \end{DoxyCompactItemize}
 
 
@@ -88,20 +87,20 @@ Rain\+Lab\textbackslash{}\+User\textbackslash{}\+Models\textbackslash{}\+User & 
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-111     \{
-112         \textcolor{keywordflow}{if} (!$user)
-113             \textcolor{keywordflow}{return} null;
-114 
-115         \textcolor{keywordflow}{if} (!$user->metadata) \{
-116 
-117             $meta = \textcolor{keyword}{new} \textcolor{keyword}{static};            
-118             User::find($user->getKey())->metadata()->save($meta);
-119             $user = User::find($user->getKey());
-120             
-121         \}
-122 
-123         \textcolor{keywordflow}{return} $user->metadata;
-124     \}
+123     \{
+124         \textcolor{keywordflow}{if} (!$user)
+125             \textcolor{keywordflow}{return} null;
+126 
+127         \textcolor{keywordflow}{if} (!$user->metadata) \{
+128 
+129             $meta = \textcolor{keyword}{new} \textcolor{keyword}{static};            
+130             User::find($user->getKey())->metadata()->save($meta);
+131             $user = User::find($user->getKey());
+132             
+133         \}
+134 
+135         \textcolor{keywordflow}{return} $user->metadata;
+136     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Usermeta_a1acccb846d0ba68fcc9694cc0b1c4006}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta}!get\+Options@{get\+Options}}
 \index{get\+Options@{get\+Options}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta}}
@@ -115,17 +114,17 @@ array Return all demographic options
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-147     \{
-148         $states = State::where(\textcolor{stringliteral}{'country\_id'}, \textcolor{charliteral}{'='}, 1)->get();
-149 
-150         \textcolor{keywordflow}{return} [
-151             \textcolor{stringliteral}{'gender'}            => self::$genderOptions,
-152             \textcolor{stringliteral}{'states'}            => $states,
-153             \textcolor{stringliteral}{'race'}              => self::$raceOptions,
-154             \textcolor{stringliteral}{'household\_income'}  => self::$householdIncomeOptions,
-155             \textcolor{stringliteral}{'education'}         => self::$educationOptions,
-156         ];
-157     \}
+159     \{
+160         $states = State::where(\textcolor{stringliteral}{'country\_id'}, \textcolor{charliteral}{'='}, 1)->get();
+161 
+162         \textcolor{keywordflow}{return} [
+163             \textcolor{stringliteral}{'gender'}            => self::$genderOptions,
+164             \textcolor{stringliteral}{'states'}            => $states,
+165             \textcolor{stringliteral}{'race'}              => self::$raceOptions,
+166             \textcolor{stringliteral}{'household\_income'}  => self::$householdIncomeOptions,
+167             \textcolor{stringliteral}{'education'}         => self::$educationOptions,
+168         ];
+169     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Usermeta_ae00ecaf0d62b1ac7adc77184ae2fcbfa}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta}!scope\+By\+Points@{scope\+By\+Points}}
 \index{scope\+By\+Points@{scope\+By\+Points}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta}}
@@ -136,9 +135,9 @@ array Return all demographic options
 )}\label{classDMA_1_1Friends_1_1Models_1_1Usermeta_ae00ecaf0d62b1ac7adc77184ae2fcbfa}
 Return users that are not staff and order them by points descending 
 \begin{DoxyCode}
-130     \{
-131         \textcolor{keywordflow}{return} $query->excludeStaff()->orderBy(\textcolor{stringliteral}{'points'}, \textcolor{stringliteral}{'desc'});
-132     \}
+142     \{
+143         \textcolor{keywordflow}{return} $query->excludeStaff()->orderBy(\textcolor{stringliteral}{'points'}, \textcolor{stringliteral}{'desc'});
+144     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Usermeta_a9b2ffa9c768ce6346269295d54d5cf4b}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta}!scope\+Exclude\+Staff@{scope\+Exclude\+Staff}}
 \index{scope\+Exclude\+Staff@{scope\+Exclude\+Staff}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta}}
@@ -149,9 +148,9 @@ Return users that are not staff and order them by points descending
 )}\label{classDMA_1_1Friends_1_1Models_1_1Usermeta_a9b2ffa9c768ce6346269295d54d5cf4b}
 Exclude staff members from results 
 \begin{DoxyCode}
-138     \{
-139         \textcolor{keywordflow}{return} $query->where(\textcolor{stringliteral}{'current\_member'}, \textcolor{stringliteral}{'!='}, self::IS\_STAFF);
-140     \}
+150     \{
+151         \textcolor{keywordflow}{return} $query->where(\textcolor{stringliteral}{'current\_member'}, \textcolor{stringliteral}{'!='}, self::IS\_STAFF);
+152     \}
 \end{DoxyCode}
 
 
@@ -180,7 +179,26 @@ Exclude staff members from results
         \textcolor{stringliteral}{'PhD'},
     ]
 \end{DoxyCode}
-Provide a list of education options for the user profile \hypertarget{classDMA_1_1Friends_1_1Models_1_1Usermeta_a85cf8b9b7dd2582d64ac9e130dd0069d}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta}!\$gender\+Options@{\$gender\+Options}}
+Provide a list of education options for the user profile \hypertarget{classDMA_1_1Friends_1_1Models_1_1Usermeta_a1dca0217848634cab6e2ad205804e351}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta}!\$fillable@{\$fillable}}
+\index{\$fillable@{\$fillable}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta}}
+\subsubsection[{\$fillable}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Models\textbackslash{}\+Usermeta\+::\$fillable\hspace{0.3cm}{\ttfamily [protected]}}\label{classDMA_1_1Friends_1_1Models_1_1Usermeta_a1dca0217848634cab6e2ad205804e351}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= [
+        \textcolor{stringliteral}{'first\_name'},
+        \textcolor{stringliteral}{'last\_name'},
+        \textcolor{stringliteral}{'birth\_date'},
+        \textcolor{stringliteral}{'email\_optin'},
+        \textcolor{stringliteral}{'gender'},
+        \textcolor{stringliteral}{'race'},
+        \textcolor{stringliteral}{'household\_income'},
+        \textcolor{stringliteral}{'household\_size'},
+        \textcolor{stringliteral}{'education'},
+        \textcolor{stringliteral}{'current\_member'},
+        \textcolor{stringliteral}{'current\_member\_number'},
+    ]
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1Usermeta_a85cf8b9b7dd2582d64ac9e130dd0069d}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta}!\$gender\+Options@{\$gender\+Options}}
 \index{\$gender\+Options@{\$gender\+Options}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Usermeta}}
 \subsubsection[{\$gender\+Options}]{\setlength{\rightskip}{0pt plus 5cm}array D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Models\textbackslash{}\+Usermeta\+::\$gender\+Options\hspace{0.3cm}{\ttfamily [static]}}\label{classDMA_1_1Friends_1_1Models_1_1Usermeta_a85cf8b9b7dd2582d64ac9e130dd0069d}
 {\bfseries Initial value\+:}

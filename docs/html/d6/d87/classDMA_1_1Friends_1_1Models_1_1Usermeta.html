@@ -166,10 +166,9 @@ Protected Attributes</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>$key</b> = 'user_id'</td></tr>
 <tr class="separator:a39190deb0a2302c8edab3b5eaa70b78f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95d74f02cd302db9566b8da29154e82d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a95d74f02cd302db9566b8da29154e82d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>$guarded</b> = ['*']</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>$guarded</b> = ['user_id']</td></tr>
 <tr class="separator:a95d74f02cd302db9566b8da29154e82d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1dca0217848634cab6e2ad205804e351"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1dca0217848634cab6e2ad205804e351"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>$fillable</b> = []</td></tr>
+<tr class="memitem:a1dca0217848634cab6e2ad205804e351"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><b>$fillable</b></td></tr>
 <tr class="separator:a1dca0217848634cab6e2ad205804e351"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -203,20 +202,20 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="../../d2/d01/namespaceDMA.html">DMA</a> </dd></dl>
-<div class="fragment"><div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    {</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="keywordflow">if</span> (!$user)</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            <span class="keywordflow">return</span> null;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="keywordflow">if</span> (!$user-&gt;metadata) {</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            $meta = <span class="keyword">new</span> <span class="keyword">static</span>;            </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            User::find($user-&gt;getKey())-&gt;metadata()-&gt;save($meta);</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            $user = User::find($user-&gt;getKey());</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        }</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        <span class="keywordflow">return</span> $user-&gt;metadata;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    {</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="keywordflow">if</span> (!$user)</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            <span class="keywordflow">return</span> null;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        <span class="keywordflow">if</span> (!$user-&gt;metadata) {</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;            $meta = <span class="keyword">new</span> <span class="keyword">static</span>;            </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            User::find($user-&gt;getKey())-&gt;metadata()-&gt;save($meta);</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;            $user = User::find($user-&gt;getKey());</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        }</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        <span class="keywordflow">return</span> $user-&gt;metadata;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -241,17 +240,17 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>array Return all demographic options </dd></dl>
-<div class="fragment"><div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    {</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        $states = State::where(<span class="stringliteral">&#39;country_id&#39;</span>, <span class="charliteral">&#39;=&#39;</span>, 1)-&gt;get();</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        <span class="keywordflow">return</span> [</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            <span class="stringliteral">&#39;gender&#39;</span>            =&gt; self::$genderOptions,</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            <span class="stringliteral">&#39;states&#39;</span>            =&gt; $states,</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            <span class="stringliteral">&#39;race&#39;</span>              =&gt; self::$raceOptions,</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            <span class="stringliteral">&#39;household_income&#39;</span>  =&gt; self::$householdIncomeOptions,</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            <span class="stringliteral">&#39;education&#39;</span>         =&gt; self::$educationOptions,</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        ];</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    {</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        $states = State::where(<span class="stringliteral">&#39;country_id&#39;</span>, <span class="charliteral">&#39;=&#39;</span>, 1)-&gt;get();</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        <span class="keywordflow">return</span> [</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;            <span class="stringliteral">&#39;gender&#39;</span>            =&gt; self::$genderOptions,</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;            <span class="stringliteral">&#39;states&#39;</span>            =&gt; $states,</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;            <span class="stringliteral">&#39;race&#39;</span>              =&gt; self::$raceOptions,</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;            <span class="stringliteral">&#39;household_income&#39;</span>  =&gt; self::$householdIncomeOptions,</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;            <span class="stringliteral">&#39;education&#39;</span>         =&gt; self::$educationOptions,</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        ];</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -269,9 +268,9 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Return users that are not staff and order them by points descending </p>
-<div class="fragment"><div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    {</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <span class="keywordflow">return</span> $query-&gt;excludeStaff()-&gt;orderBy(<span class="stringliteral">&#39;points&#39;</span>, <span class="stringliteral">&#39;desc&#39;</span>);</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    {</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        <span class="keywordflow">return</span> $query-&gt;excludeStaff()-&gt;orderBy(<span class="stringliteral">&#39;points&#39;</span>, <span class="stringliteral">&#39;desc&#39;</span>);</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -289,9 +288,9 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Exclude staff members from results </p>
-<div class="fragment"><div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    {</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        <span class="keywordflow">return</span> $query-&gt;where(<span class="stringliteral">&#39;current_member&#39;</span>, <span class="stringliteral">&#39;!=&#39;</span>, self::IS_STAFF);</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    }</div>
+<div class="fragment"><div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    {</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        <span class="keywordflow">return</span> $query-&gt;where(<span class="stringliteral">&#39;current_member&#39;</span>, <span class="stringliteral">&#39;!=&#39;</span>, self::IS_STAFF);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -339,6 +338,39 @@ Protected Attributes</h2></td></tr>
 <div class="line">    ]</div>
 </div><!-- fragment --><p>Provide a list of education options for the user profile </p>
 
+</div>
+</div>
+<a class="anchor" id="a1dca0217848634cab6e2ad205804e351"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DMA\Friends\Models\Usermeta::$fillable</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= [</div>
+<div class="line">        <span class="stringliteral">&#39;first_name&#39;</span>,</div>
+<div class="line">        <span class="stringliteral">&#39;last_name&#39;</span>,</div>
+<div class="line">        <span class="stringliteral">&#39;birth_date&#39;</span>,</div>
+<div class="line">        <span class="stringliteral">&#39;email_optin&#39;</span>,</div>
+<div class="line">        <span class="stringliteral">&#39;gender&#39;</span>,</div>
+<div class="line">        <span class="stringliteral">&#39;race&#39;</span>,</div>
+<div class="line">        <span class="stringliteral">&#39;household_income&#39;</span>,</div>
+<div class="line">        <span class="stringliteral">&#39;household_size&#39;</span>,</div>
+<div class="line">        <span class="stringliteral">&#39;education&#39;</span>,</div>
+<div class="line">        <span class="stringliteral">&#39;current_member&#39;</span>,</div>
+<div class="line">        <span class="stringliteral">&#39;current_member_number&#39;</span>,</div>
+<div class="line">    ]</div>
+</div><!-- fragment -->
 </div>
 </div>
 <a class="anchor" id="a85cf8b9b7dd2582d64ac9e130dd0069d"></a>
@@ -447,7 +479,7 @@ Protected Attributes</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jul 21 2015 14:20:28 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Aug 11 2015 18:30:27 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

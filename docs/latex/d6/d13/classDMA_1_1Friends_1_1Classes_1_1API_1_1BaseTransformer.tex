@@ -22,6 +22,11 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\te
 \item 
 \hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer_ab219fbf7518a5a42d20583206ab454a7}{process\+Included\+Resources} (Scope \$scope, \$data)
 \end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer_a9d2c6c693eba355d57b8335aca1d95fd}{sanitize} (array \$data)
+\end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -72,15 +77,36 @@ Quick hack until Fractal support embeded data without the use of the data-\/key
 \end{DoxySeeAlso}
 
 \begin{DoxyCode}
-104     \{
-105         $embeded = parent::processIncludedResources($scope, $data);
-106         \textcolor{keywordflow}{if} (!is\_null($embeded) && !is\_bool($embeded)) \{
-107             $embeded = array\_map(\textcolor{keyword}{function}($d)\{
-108                 \textcolor{keywordflow}{return} current($d);
-109             \}, $embeded);
-110         \}
-111         \textcolor{keywordflow}{return} $embeded;
-112     \}
+121     \{
+122         $embeded = parent::processIncludedResources($scope, $data);
+123         \textcolor{keywordflow}{if} (!is\_null($embeded) && !is\_bool($embeded)) \{
+124             $embeded = array\_map(\textcolor{keyword}{function}($d)\{
+125                 \textcolor{keywordflow}{return} current($d);
+126             \}, $embeded);
+127         \}
+128         \textcolor{keywordflow}{return} $embeded;
+129     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer_a9d2c6c693eba355d57b8335aca1d95fd}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Transformer@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Transformer}!sanitize@{sanitize}}
+\index{sanitize@{sanitize}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Transformer@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Transformer}}
+\subsubsection[{sanitize}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+A\+P\+I\textbackslash{}\+Base\+Transformer\+::sanitize (
+\begin{DoxyParamCaption}
+\item[{array}]{\$data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer_a9d2c6c693eba355d57b8335aca1d95fd}
+Basic funtion to clean up invisible unicode characters. 
+\begin{DoxyCode}
+80                                             \{
+81         \textcolor{comment}{// Regex to find invisible unicode characters}
+82         $invChar = \textcolor{stringliteral}{'/\(\backslash\)p\{C\}+/u'};
+83         
+84         \textcolor{keywordflow}{foreach}($data as $key => $value)\{
+85             \textcolor{keywordflow}{if}(is\_string($value)) \{
+86                 $data[$key] = preg\_replace($invChar, \textcolor{stringliteral}{''}, $value);
+87             \}
+88         \}
+89         \textcolor{keywordflow}{return} $data;
+90     \}
 \end{DoxyCode}
 
 

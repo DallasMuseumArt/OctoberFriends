@@ -41,7 +41,7 @@ Resource to login user via barcode scanner for authorized kiosks
 44         $barcodeId = \textcolor{keyword}{get}(\textcolor{stringliteral}{'barcodeId'});
 45         $barcodeId = trim($barcodeId);
 46 
-47         $location = LocationManager::getLocation();
+47         $location = \hyperlink{classDMA_1_1Friends_1_1Classes_1_1LocationManager_a891ca42df61c88580aae3447d15e4bd7}{LocationManager::getLocation}();
 48 
 49         \textcolor{keywordflow}{if} (!$location || empty($barcodeId)) \{
 50             \textcolor{keywordflow}{return} Redirect::to(\textcolor{charliteral}{'/'});

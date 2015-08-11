@@ -10,5 +10,6 @@ var searchData=
   ['steptransformer',['StepTransformer',['../de/d3c/classDMA_1_1Friends_1_1API_1_1Transformers_1_1StepTransformer.html',1,'DMA::Friends::API::Transformers']]],
   ['syncfriendsdatacommand',['SyncFriendsDataCommand',['../d1/d1d/classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand.html',1,'DMA::Friends::Commands']]],
   ['syncfriendsimagescommand',['SyncFriendsImagesCommand',['../d0/da8/classDMA_1_1Friends_1_1Commands_1_1SyncFriendsImagesCommand.html',1,'DMA::Friends::Commands']]],
-  ['syncfriendsrelationscommand',['SyncFriendsRelationsCommand',['../d1/dd5/classDMA_1_1Friends_1_1Commands_1_1SyncFriendsRelationsCommand.html',1,'DMA::Friends::Commands']]]
+  ['syncfriendsrelationscommand',['SyncFriendsRelationsCommand',['../d1/dd5/classDMA_1_1Friends_1_1Commands_1_1SyncFriendsRelationsCommand.html',1,'DMA::Friends::Commands']]],
+  ['syncfriendstomailchimp',['SyncFriendsToMailChimp',['../de/d27/classDMA_1_1Friends_1_1Commands_1_1SyncFriendsToMailChimp.html',1,'DMA::Friends::Commands']]]
 ];

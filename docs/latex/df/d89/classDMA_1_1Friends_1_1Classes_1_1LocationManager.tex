@@ -9,9 +9,59 @@
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classDMA_1_1Friends_1_1Classes_1_1LocationManager_a891ca42df61c88580aae3447d15e4bd7}{}static {\bfseries get\+Location} ()\label{classDMA_1_1Friends_1_1Classes_1_1LocationManager_a891ca42df61c88580aae3447d15e4bd7}
-
+static \hyperlink{classDMA_1_1Friends_1_1Classes_1_1LocationManager_a891ca42df61c88580aae3447d15e4bd7}{get\+Location} ()
+\item 
+static \hyperlink{classDMA_1_1Friends_1_1Classes_1_1LocationManager_ac23d41389c93740cc28d2253914bcce5}{enable\+Action} ()
 \end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1LocationManager_ac23d41389c93740cc28d2253914bcce5}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Location\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Location\+Manager}!enable\+Action@{enable\+Action}}
+\index{enable\+Action@{enable\+Action}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Location\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Location\+Manager}}
+\subsubsection[{enable\+Action}]{\setlength{\rightskip}{0pt plus 5cm}static D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Location\+Manager\+::enable\+Action (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classDMA_1_1Friends_1_1Classes_1_1LocationManager_ac23d41389c93740cc28d2253914bcce5}
+Certain functionality can be disabled if it is not a kiosk. If kiosk registration is required then functionality can be disabled
+
+\begin{DoxyReturn}{Returns}
+booelan \$show\+Action if true then kiosk location should be registered to enable functionality 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+47     \{
+48         $require\_location = FriendsSettings::get(\textcolor{stringliteral}{'require\_location'}, \textcolor{keyword}{false});
+49 
+50         \textcolor{keywordflow}{if} ($require\_location) \{
+51             $location = self::getLocation();
+52             $showAction = ($location) ? \textcolor{keyword}{true} : \textcolor{keyword}{false};
+53         \} \textcolor{keywordflow}{else} \{
+54             $showAction = \textcolor{keyword}{true};
+55         \}   
+56 
+57         \textcolor{keywordflow}{return} $showAction;
+58     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1LocationManager_a891ca42df61c88580aae3447d15e4bd7}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Location\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Location\+Manager}!get\+Location@{get\+Location}}
+\index{get\+Location@{get\+Location}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Location\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Location\+Manager}}
+\subsubsection[{get\+Location}]{\setlength{\rightskip}{0pt plus 5cm}static D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Location\+Manager\+::get\+Location (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classDMA_1_1Friends_1_1Classes_1_1LocationManager_a891ca42df61c88580aae3447d15e4bd7}
+Returns the current kiosk location
+
+\begin{DoxyReturn}{Returns}
+Location \$location return the current registered location 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+33     \{
+34         $locationId = Session::get(\textcolor{stringliteral}{'dmafriends.activeLocationId'});
+35         \textcolor{keywordflow}{return} Location::find($locationId);
+36     \}
+\end{DoxyCode}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

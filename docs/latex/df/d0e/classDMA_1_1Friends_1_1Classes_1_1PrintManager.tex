@@ -167,7 +167,7 @@ Print an identification card for a member
 74             Settings::get(\textcolor{stringliteral}{'membership\_orientation'})
 75         );
 76 
-77         $name = $this->user->metadata->first\_name . \textcolor{charliteral}{' '} . $this->user->metadata->last\_name;
+77         $name = $this->user->name;
 78 
 79         $this->pdf->SetFont(\textcolor{stringliteral}{'Arial'}, \textcolor{charliteral}{'B'}, 12);
 80         $this->pdf->setX(1);

@@ -25,6 +25,12 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Models\tex
 \hyperlink{classDMA_1_1Friends_1_1Models_1_1Settings_a8c2bad0fb18f5e501d3318eba7379609}{get\+Active\+Notification\+Channels\+Options} ()
 \item 
 \hyperlink{classDMA_1_1Friends_1_1Models_1_1Settings_a140721a33440c666426139d6317bd357}{get\+Active\+Listenable\+Channels\+Options} ()
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1Settings_a9dbe7556eddf92bbf3c05dbd54cc5047}{}{\bfseries get\+Mailchimp\+Group\+Id\+Options} ()\label{classDMA_1_1Friends_1_1Models_1_1Settings_a9dbe7556eddf92bbf3c05dbd54cc5047}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Models_1_1Settings_ae606222dcac19623a6ba656ccab5568d}{}{\bfseries get\+Mailchimp\+Interest\+Id\+Options} ()\label{classDMA_1_1Friends_1_1Models_1_1Settings_ae606222dcac19623a6ba656ccab5568d}
+
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -55,9 +61,9 @@ array
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-131     \{
-132         \textcolor{keywordflow}{return} $this->getChannelOptions(\textcolor{keyword}{true}, $description=\textcolor{keyword}{false}); 
-133     \}
+133     \{
+134         \textcolor{keywordflow}{return} $this->getChannelOptions(\textcolor{keyword}{true}, $description=\textcolor{keyword}{false}); 
+135     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Settings_a8c2bad0fb18f5e501d3318eba7379609}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Settings@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Settings}!get\+Active\+Notification\+Channels\+Options@{get\+Active\+Notification\+Channels\+Options}}
 \index{get\+Active\+Notification\+Channels\+Options@{get\+Active\+Notification\+Channels\+Options}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Settings@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Settings}}
@@ -73,9 +79,9 @@ array
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-120     \{
-121         \textcolor{keywordflow}{return} $this->getChannelOptions();
-122     \}
+122     \{
+123         \textcolor{keywordflow}{return} $this->getChannelOptions();
+124     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Settings_a347eae65e8aeb114767d5e4fc8542fea}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Settings@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Settings}!get\+Timezone\+Options@{get\+Timezone\+Options}}
 \index{get\+Timezone\+Options@{get\+Timezone\+Options}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Settings@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Settings}}
@@ -89,12 +95,12 @@ array
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-47     \{
-48         $timezones = timezone\_identifiers\_list();
-49         $timezones = array\_combine($timezones, $timezones);
-50 
-51         \textcolor{keywordflow}{return} $timezones;
-52     \}
+49     \{
+50         $timezones = timezone\_identifiers\_list();
+51         $timezones = array\_combine($timezones, $timezones);
+52 
+53         \textcolor{keywordflow}{return} $timezones;
+54     \}
 \end{DoxyCode}
 \hypertarget{classDMA_1_1Friends_1_1Models_1_1Settings_a182b5e2b83cfc057c1cd31499ad9e244}{}\index{D\+M\+A\+::\+Friends\+::\+Models\+::\+Settings@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Settings}!init\+Settings\+Data@{init\+Settings\+Data}}
 \index{init\+Settings\+Data@{init\+Settings\+Data}!D\+M\+A\+::\+Friends\+::\+Models\+::\+Settings@{D\+M\+A\+::\+Friends\+::\+Models\+::\+Settings}}
@@ -105,15 +111,15 @@ array
 )}\label{classDMA_1_1Friends_1_1Models_1_1Settings_a182b5e2b83cfc057c1cd31499ad9e244}
 Default values to set for this model, override 
 \begin{DoxyCode}
-31     \{
-32         $this->maximum\_users\_per\_group          = 5;
-33         $this->maximum\_user\_group\_memberships   = 3;
-34         $this->maximum\_groups\_own\_per\_user      = 3;
-35         $this->maximum\_points\_group = 200;
-36         \textcolor{comment}{//$this->mail\_group\_invite\_template = 'dma.friends::mail.invite'; }
-37         $this->reset\_groups\_every\_day = $this->days;
-38         $this->reset\_groups\_time = \textcolor{stringliteral}{'00:00'};
-39     \}        
+33     \{
+34         $this->maximum\_users\_per\_group          = 5;
+35         $this->maximum\_user\_group\_memberships   = 3;
+36         $this->maximum\_groups\_own\_per\_user      = 3;
+37         $this->maximum\_points\_group = 200;
+38         \textcolor{comment}{//$this->mail\_group\_invite\_template = 'dma.friends::mail.invite'; }
+39         $this->reset\_groups\_every\_day = $this->days;
+40         $this->reset\_groups\_time = \textcolor{stringliteral}{'00:00'};
+41     \}        
 \end{DoxyCode}
 
 

@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['sanitize',['sanitize',['../d6/d13/classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer.html#a9d2c6c693eba355d57b8335aca1d95fd',1,'DMA::Friends::Classes::API::BaseTransformer']]],
   ['save',['save',['../de/d7f/classDMA_1_1Friends_1_1Models_1_1Notification.html#a221608de6df08ac2cab3b145410bc012',1,'DMA::Friends::Models::Notification']]],
   ['savedata',['saveData',['../d0/d48/classDMA_1_1Friends_1_1Classes_1_1ActivityManager.html#aab92d7f0071021fdfef61d81ccc4224e',1,'DMA\Friends\Classes\ActivityManager\saveData()'],['../d3/d35/classDMA_1_1Friends_1_1Classes_1_1ActivityTypeBase.html#a69d28814a4cc0c3798d1ab7a95e14ef3',1,'DMA\Friends\Classes\ActivityTypeBase\saveData()']]],
   ['scopebycategory',['scopeByCategory',['../dc/d8c/classDMA_1_1Friends_1_1Models_1_1Activity.html#a0a9c5c7c4e86787534d2cbcbe5b03234',1,'DMA::Friends::Models::Activity']]],
@@ -40,7 +41,9 @@ var searchData=
   ['syncfriendsdatacommand',['SyncFriendsDataCommand',['../d1/d1d/classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand.html',1,'DMA::Friends::Commands']]],
   ['syncfriendsimagescommand',['SyncFriendsImagesCommand',['../d0/da8/classDMA_1_1Friends_1_1Commands_1_1SyncFriendsImagesCommand.html',1,'DMA::Friends::Commands']]],
   ['syncfriendsrelationscommand',['SyncFriendsRelationsCommand',['../d1/dd5/classDMA_1_1Friends_1_1Commands_1_1SyncFriendsRelationsCommand.html',1,'DMA::Friends::Commands']]],
+  ['syncfriendstomailchimp',['SyncFriendsToMailChimp',['../de/d27/classDMA_1_1Friends_1_1Commands_1_1SyncFriendsToMailChimp.html',1,'DMA::Friends::Commands']]],
   ['synclocations',['syncLocations',['../d1/d1d/classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand.html#a7d77ccaab1c7ef8e5aae89025406a2b3',1,'DMA::Friends::Commands::SyncFriendsDataCommand']]],
+  ['syncmembertomailchimp',['syncMemberToMailChimp',['../dc/d5f/classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpManager.html#a7da9074bab17f451e618538d7b60277f',1,'DMA::Friends::Classes::Mailchimp::MailchimpManager']]],
   ['syncrewards',['syncRewards',['../d1/d1d/classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand.html#a512183378589b9608c10601dd23e4579',1,'DMA::Friends::Commands::SyncFriendsDataCommand']]],
   ['syncsteps',['syncSteps',['../d1/d1d/classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand.html#af58323945e0c8312d74aa70c8c40882a',1,'DMA::Friends::Commands::SyncFriendsDataCommand']]],
   ['synctaxonomy',['syncTaxonomy',['../d1/d1d/classDMA_1_1Friends_1_1Commands_1_1SyncFriendsDataCommand.html#ace374da6bd25c4783d4763af685bdf39',1,'DMA::Friends::Commands::SyncFriendsDataCommand']]],

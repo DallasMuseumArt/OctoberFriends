@@ -297,11 +297,11 @@ Protected Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>array an array of the hour and minutes in military time </dd></dl>
 <div class="fragment"><div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    {</div>
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        list($hour, $minutes) = explode(<span class="stringliteral">&quot;:&quot;</span>, $timeString);</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        $meridiem = substr($minutes, 2, 3);</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        $minutes = substr($minutes, 0, 1);</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        $meridiem = substr($minutes, 2, 3);</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        $minutes = substr($minutes, 0, 1);</div>
 <div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        <span class="keywordflow">if</span> (strtolower($meridiem) == <span class="stringliteral">&#39;pm&#39;</span> || ($hour == <span class="stringliteral">&#39;12&#39;</span> &amp;&amp; strtolower($meridiem) == <span class="stringliteral">&#39;am&#39;</span>)) {</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        <span class="keywordflow">if</span> (strtolower($meridiem) == <span class="stringliteral">&#39;pm&#39;</span> &amp;&amp; $hour != 12) {</div>
 <div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            $hour += 12;</div>
 <div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        }</div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;</div>
@@ -524,7 +524,7 @@ Protected Attributes</h2></td></tr>
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jul 21 2015 14:20:27 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Aug 11 2015 18:30:26 for DMA Friends by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

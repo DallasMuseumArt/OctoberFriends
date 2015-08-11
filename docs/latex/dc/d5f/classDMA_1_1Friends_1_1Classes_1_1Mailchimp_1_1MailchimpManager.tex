@@ -1,0 +1,282 @@
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpManager}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}Mailchimp\textbackslash{}Mailchimp\+Manager Class Reference}
+\label{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpManager}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Mailchimp\textbackslash{}\+Mailchimp\+Manager@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Mailchimp\textbackslash{}\+Mailchimp\+Manager}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpManager_a7da9074bab17f451e618538d7b60277f}{sync\+Member\+To\+Mail\+Chimp} (\$member\+U\+I\+D, \$user, \$update=true)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpManager_abc393ca42bfef769d0ec6b1bb54badd7}{bind\+Events} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpManager_a1eaae431fd147ab7c9d0b68d17494426}{get\+Mailchimp\+Group\+List} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpManager_adcc182bfef6124cd39fe1dd85dd108e2}{get\+Mailchimp\+Interest\+List} (\$group\+Id)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpManager_aea9e3ea5fe337ae33a9dd97b4c27cd38}{get\+Client} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpManager_abc393ca42bfef769d0ec6b1bb54badd7}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Manager}!bind\+Events@{bind\+Events}}
+\index{bind\+Events@{bind\+Events}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Manager}}
+\subsubsection[{bind\+Events}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Mailchimp\textbackslash{}\+Mailchimp\+Manager\+::bind\+Events (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpManager_abc393ca42bfef769d0ec6b1bb54badd7}
+Register events in the the platform that should trigger and Update or creation a member in the configured Mailchimp list 
+\begin{DoxyCode}
+186     \{
+187         \textcolor{keywordflow}{if} (!FriendSettings::get(\textcolor{stringliteral}{'mailchimp\_integration'}, \textcolor{keyword}{false}))\{
+188             \textcolor{keywordflow}{return};
+189         \}
+190         
+191         \textcolor{comment}{// Friends platform events}
+192         $events = [
+193             \textcolor{stringliteral}{'dma.friends.user.pointsEarned'},
+194             \textcolor{stringliteral}{'dma.friends.user.pointsRemoved'},
+195         ];
+196         
+197         \textcolor{comment}{// Bind update or create events for the following models}
+198         $models = [
+199             \textcolor{stringliteral}{'RainLab\(\backslash\)User\(\backslash\)Models\(\backslash\)User'}    => [],
+200             \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Usermeta'} => [ \textcolor{stringliteral}{'relUser'} => \textcolor{stringliteral}{'user'}]
+201         ];
+202         
+203         \textcolor{keywordflow}{foreach}($models as $model => $options)\{
+204         
+205             $events[] = \textcolor{stringliteral}{'eloquent.created: '} . $model;
+206             $events[] = \textcolor{stringliteral}{'eloquent.updated: '} . $model;
+207         \}
+208         
+209 
+210         $context = $this;        
+211         \textcolor{keywordflow}{foreach}($events as $evt)\{
+212         
+213             $fn = \textcolor{keyword}{function}() use ($context, $models, $evt)\{
+214                 \textcolor{comment}{// TODO : How to detect multiple events of the same user}
+215                 \textcolor{comment}{// within an transaction. eg. Register a user fires 10 events}
+216                 \textcolor{comment}{// This causes 10 individual calls to Mailchimp}
+217                 
+218                 $args = func\_get\_args();
+219                 
+220                 \textcolor{comment}{// First parameter should a model instance}
+221                 \textcolor{comment}{// but just in case we validated it exists}
+222                 \textcolor{keywordflow}{if}( $instance = @$args[0] )\{
+223 
+224                     Log::debug(\textcolor{stringliteral}{'called '} .  $evt);
+225                     Log::debug(get\_class($instance));
+226                     
+227                     $instanceClass = get\_class($instance);
+228                     
+229                     $user = $instance;
+230                     \textcolor{keywordflow}{if} ( $instanceClass != \textcolor{stringliteral}{'RainLab\(\backslash\)User\(\backslash\)Models\(\backslash\)User'} ) \{
+231                         \textcolor{comment}{// Get user relation field from the model}
+232                         \textcolor{keywordflow}{if}( $relUser = @$models[$instanceClass][\textcolor{stringliteral}{'relUser'}] ) \{
+233                             $user = $instance->\{$relUser\};
+234                         \}
+235                     \}
+236 
+237                     \textcolor{keywordflow}{if} ($user) \{
+238                         $mailchimpMemberUID = $user->email;
+239                         
+240                         \textcolor{keywordflow}{if} ($context->startsWith($evt, \textcolor{stringliteral}{'eloquent.updated'}))\{
+241                             \textcolor{comment}{// Detect if user change email}
+242                             \textcolor{keywordflow}{if} ($newEmail = array\_get($user->getDirty(), \textcolor{stringliteral}{'email'}, Null))\{
+243                                 $mailchimpMemberUID = $instance->getOriginal(\textcolor{stringliteral}{'email'});
+244                             \}
+245                         \}
+246                         
+247                         \textcolor{comment}{// This events should call Mailchimp only if the $user model has a metadata model}
+248                         \textcolor{comment}{// because the metadata model contains the email\_optin status}
+249                         \textcolor{comment}{// and name of the user. }
+250                         \textcolor{comment}{// In some cases is possible that the user has already data in the metadata table}
+251                         \textcolor{comment}{// but the user reference in memory is not updated yet. So the following if stament}
+252                         \textcolor{comment}{// tries to address the issue.  }
+253                         
+254                         \textcolor{keywordflow}{if} (!$user->metadata) \{
+255                             \textcolor{comment}{// Try to reload the user model from the database}
+256                             \textcolor{comment}{// only if is not an user eloquent model event}
+257                             \textcolor{comment}{// this is because we could be too earlier in the creation of the user}
+258                             \textcolor{comment}{// but if a not eloquent event is trigger is because the user }
+259                             \textcolor{comment}{// is fully created but the reference in memory is outdated }
+260                             \textcolor{comment}{//if (!$context->startsWith($evt, 'eloquent'))\{}
+261                             $user = $user->fresh();
+262                             \textcolor{comment}{//\}}
+263                            
+264                         \}
+265                                 
+266                         \textcolor{keywordflow}{if} ($user->metadata) \{
+267                             \textcolor{comment}{// Updated or create a member in mailchimp list}
+268                             $context->syncMemberToMailChimp($mailchimpMemberUID, $user);
+269                             
+270                         \}
+271                         
+272                     \}
+273    
+274       
+275          
+276                 \}
+277                 
+278             \};
+279            
+280             \textcolor{comment}{// Start listening this event}
+281             Event::listen($evt, $fn);
+282         \}
+283         
+284    
+285     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpManager_aea9e3ea5fe337ae33a9dd97b4c27cd38}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Manager}!get\+Client@{get\+Client}}
+\index{get\+Client@{get\+Client}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Manager}}
+\subsubsection[{get\+Client}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Mailchimp\textbackslash{}\+Mailchimp\+Manager\+::get\+Client (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpManager_aea9e3ea5fe337ae33a9dd97b4c27cd38}
+Get Instance of Mail\+Chimp R\+E\+S\+T Client \begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+27     \{
+28         \textcolor{keywordflow}{if}( !$this->mailchimp )\{
+29             $api\_key      = FriendSettings::get(\textcolor{stringliteral}{'mailchimp\_api\_key'}, null);
+30             $listId       = FriendSettings::get(\textcolor{stringliteral}{'mailchimp\_list\_id'}, null);
+31             \textcolor{keywordflow}{if} ($api\_key && $listId) \{
+32                 $this->mailchimp =  \textcolor{keyword}{new} MailchimpClient($api\_key);
+33                 $this->listId  = $listId;
+34             \}\textcolor{keywordflow}{else}\{
+35                 Log::error(\textcolor{stringliteral}{'MailChimp API key or List ID are not configured in Friend Settings.'});
+36             \}
+37         \}
+38         \textcolor{keywordflow}{return} $this->mailchimp;
+39     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpManager_a1eaae431fd147ab7c9d0b68d17494426}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Manager}!get\+Mailchimp\+Group\+List@{get\+Mailchimp\+Group\+List}}
+\index{get\+Mailchimp\+Group\+List@{get\+Mailchimp\+Group\+List}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Manager}}
+\subsubsection[{get\+Mailchimp\+Group\+List}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Mailchimp\textbackslash{}\+Mailchimp\+Manager\+::get\+Mailchimp\+Group\+List (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpManager_a1eaae431fd147ab7c9d0b68d17494426}
+Get list of groups on the Mail\+Chimp list 
+\begin{DoxyCode}
+291     \{
+292         \textcolor{keywordflow}{if}($client = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpManager_aea9e3ea5fe337ae33a9dd97b4c27cd38}{getClient}())\{
+293             $promise = $client->getMailChimpGroupList($this->listId);
+294             $response = $promise->wait();
+295             \textcolor{keywordflow}{return} array\_get($response->data, \textcolor{stringliteral}{'categories'}, []);
+296         \}
+297         \textcolor{keywordflow}{return} [];
+298     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpManager_adcc182bfef6124cd39fe1dd85dd108e2}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Manager}!get\+Mailchimp\+Interest\+List@{get\+Mailchimp\+Interest\+List}}
+\index{get\+Mailchimp\+Interest\+List@{get\+Mailchimp\+Interest\+List}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Manager}}
+\subsubsection[{get\+Mailchimp\+Interest\+List}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Mailchimp\textbackslash{}\+Mailchimp\+Manager\+::get\+Mailchimp\+Interest\+List (
+\begin{DoxyParamCaption}
+\item[{}]{\$group\+Id}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpManager_adcc182bfef6124cd39fe1dd85dd108e2}
+Get list interest ids of a given group 
+\begin{DoxyCode}
+304     \{
+305         $client = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpManager_aea9e3ea5fe337ae33a9dd97b4c27cd38}{getClient}();
+306         \textcolor{keywordflow}{if}($client && $groupId )\{
+307             $promise = $client->getMailChimpInterestList($this->listId, $groupId);
+308             $response = $promise->wait();
+309             \textcolor{keywordflow}{return} array\_get($response->data, \textcolor{stringliteral}{'interests'}, []);
+310         \}
+311         \textcolor{keywordflow}{return} [];
+312     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpManager_a7da9074bab17f451e618538d7b60277f}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Manager}!sync\+Member\+To\+Mail\+Chimp@{sync\+Member\+To\+Mail\+Chimp}}
+\index{sync\+Member\+To\+Mail\+Chimp@{sync\+Member\+To\+Mail\+Chimp}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Manager}}
+\subsubsection[{sync\+Member\+To\+Mail\+Chimp}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Mailchimp\textbackslash{}\+Mailchimp\+Manager\+::sync\+Member\+To\+Mail\+Chimp (
+\begin{DoxyParamCaption}
+\item[{}]{\$member\+U\+I\+D, }
+\item[{}]{\$user, }
+\item[{}]{\$update = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpManager_a7da9074bab17f451e618538d7b60277f}
+Create or Updated a member in the configure Mailchimp list,
+\begin{DoxyItemize}
+\item If the member D\+O\+N\textquotesingle{}T E\+X\+I\+S\+T\+S in the list it will be added to it.
+\item If the member E\+X\+I\+T\+S in the list and \$update is T\+R\+U\+E. Member in the list will be updated with data in the D\+B
+\item I\+F the member E\+X\+I\+T\+S in the list and \$update is F\+A\+L\+S\+E. No data will be send to Mail\+Chimp
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$member\+U\+I\+D} & User email address \\
+\hline
+Rain\+Lab\textbackslash{}\+User\textbackslash{}\+Model\textbackslash{}\+User & {\em \$user} & \\
+\hline
+boolean & {\em \$update} & Default value is true \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+54     \{
+55              
+56 \textcolor{preprocessor}{        # 1. Preparing data}
+57 \textcolor{preprocessor}{        # 1.1. Get User mail, first name and last name}
+58         $email      = $user->email;
+59         $firstname  = $user->metadata->first\_name;
+60         $lastname   = $user->metadata->last\_name;
+61         $emailOptIn = $user->metadata->email\_optin;
+62        
+63 \textcolor{preprocessor}{        # 1.2. Extract merge fields ( extra fields usually points, membership, etc )}
+64         \textcolor{comment}{// Consult merge\_tags settings in the Mailchimp target list}
+65         
+66         \textcolor{comment}{/* Mailchimp merge\_tags*/}
+67 \textcolor{preprocessor}{        # RESTATUS   // Partner Status}
+68 \textcolor{preprocessor}{        # RENUMBER   // RE Constituent ID}
+69 \textcolor{preprocessor}{        # FRNUMBER   // Friends Number}
+70 \textcolor{preprocessor}{        # FRPOINTS   // Friends Points}
+71 \textcolor{preprocessor}{        # FRVISITS}
+72 \textcolor{preprocessor}{        # REEXPIRES  // Partner Expiration Date}
+73 \textcolor{preprocessor}{        # ZIP}
+74 \textcolor{preprocessor}{        # RELEVEL    // Partner Level}
+75 \textcolor{preprocessor}{        # FRJOINDATE // Friends Join Date MM/DD/YYYY}
+76        
+77         $joinDate = $user->created\_at;
+78         $joinDate = ($joinDate) ? $joinDate->format(\textcolor{stringliteral}{'m/d/Y'}) : \textcolor{stringliteral}{''};
+79         
+80         \textcolor{comment}{// TODO : Find a generic way to configure this fields from the backend}
+81         \textcolor{comment}{// At the moment this are DMA specific configurations in Mailchimp List}
+82         $merge\_fields = [
+83             \textcolor{stringliteral}{'FRPOINTS'}   => $user->points,
+84             \textcolor{stringliteral}{'FRJOINDATE'} => $joinDate, 
+85             \textcolor{stringliteral}{'FRNUMBER'}   => $user->barcode\_id, 
+86         ];
+87 
+88         \textcolor{comment}{// 1.3. Member status in the list base on }
+89         $memberStatus = ($emailOptIn) ? 
+      \hyperlink{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1BaseMailchimpClient_ab8ce8a5ff60b428f9af63c4a7ff9bbcf}{MailchimpClient::MEMBER\_STATUS\_SUBSCRIBED} : 
+      MailchimpClient::MEMBER\_STATUS\_UNSUBSCRIBED;
+90 
+91         \textcolor{comment}{// 1.4 Detect if is required to update email address in Mailchmip}
+92         \textcolor{keywordflow}{if} ($memberUID != $email)\{
+93             $merge\_fields[\textcolor{stringliteral}{'EMAIL'}] = $memberUID;
+94             $merge\_fields[\textcolor{stringliteral}{'NEW-EMAIL'}] = $email;
+95         \}
+96         
+97                
+98         \textcolor{comment}{// 2. Call Mailchimp}
+99         \textcolor{comment}{// The following method will detect the member doesn't exist in the list and will register it.}
+100         $command = ($update) ? \textcolor{stringliteral}{'updateMember'} : \textcolor{stringliteral}{'addMember'};
+101 
+102         
+103         $this->doMailchimpCall($command, $memberUID, $firstname, $lastname, 
+104                                $memberStatus, $merge\_fields, []);
+105         
+106     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+classes/mailchimp/Mailchimp\+Manager.\+php\end{DoxyCompactItemize}
