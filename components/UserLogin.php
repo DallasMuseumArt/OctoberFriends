@@ -3,8 +3,6 @@
 use Cms\Classes\ComponentBase;
 use Session;
 use Redirect;
-use Validator;
-use ValidationException;
 use RainLab\User\Models\Settings as UserSettings;
 use RainLab\User\Models\User;
 use DMA\Friends\wordpress\Auth as WordpressAuth;
@@ -182,74 +180,7 @@ class UserLogin extends ComponentBase
             'password_confirmation' => 'required|min:6',
         ];
 
-        $validation = Validator::make($data, $rules);
-        if ($validation->fails())
-            throw new ValidationException($validation);
-
-        /*
-         * Register user
-         */
-        $requireActivation = UserSettings::get('require_activation', true);
-        $automaticActivation = UserSettings::get('activate_mode') == UserSettings::ACTIVATE_AUTO;
-        $userActivation = UserSettings::get('activate_mode') == UserSettings::ACTIVATE_USER;
-
-        // Split the data into whats required for the user and usermeta models
-        $userData = [
-            'name'                  => ucwords($data['first_name'] . ' ' . $data['last_name']),
-            'password'              => $data['password'],
-            'password_confirmation' => $data['password_confirmation'],
-            'email'                 => $data['email'],
-            'street_addr'           => $data['street_addr'],
-            'city'                  => $data['city'],
-            'state'                 => $data['state'],
-            'zip'                   => $data['zip'],
-            'phone'                 => UserExtend::parsePhone($data['phone']),
-        ];
-
-        $user = Auth::register($userData, $automaticActivation);
-
-        $birth_date = $data['birthday']['year'] 
-            . '-' .  sprintf("%02s", $data['birthday']['month']) 
-            . '-' .  sprintf("%02s", $data['birthday']['day'])
-            . ' 00:00:00';
-
-        // Save user metadata
-        $usermeta = new Usermeta;
-        $usermeta->first_name       = ucwords($data['first_name']);
-        $usermeta->last_name        = ucwords($data['last_name']);
-        $usermeta->birth_date       = $birth_date;
-        $usermeta->email_optin      = isset($data['email_optin']) ? $data['email_optin'] : false;
-
-        // Uncomment to enable demographics in registration form;
-        // $usermeta->gender           = $data['gender'];
-        // $usermeta->race             = $data['race'];
-        // $usermeta->household_income = $data['household_income'];
-        // $usermeta->household_size   = $data['household_size'];
-        // $usermeta->education        = $data['education'];
-
-        $user->metadata()->save($usermeta);
-
-        if (isset($data['avatar'])) {
-            UserExtend::uploadAvatar($user, $data['avatar']);
-        }
-        /*
-         * Activation is by the user, send the email
-         */
-        if ($userActivation) {
-            $this->sendActivationEmail($user);
-        }
-
-        /*
-         * Automatically activated or not required, log the user in
-         */
-        if ($automaticActivation || !$requireActivation) {
-            Auth::login($user);
-        }
-
-        /*
-         * Fire event that user has registered
-         */
-        Event::fire('auth.register', [$user]);
+        AuthManager::register($data, $rules);
 
         /*
          * Redirect to the intended page after successful sign in

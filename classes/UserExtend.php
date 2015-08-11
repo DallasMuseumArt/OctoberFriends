@@ -219,4 +219,12 @@ class UserExtend
 
         return false;
     }
+
+    public static function parseBirthdate($birthday)
+    {
+        return $birthday['year'] 
+            . '-' .  sprintf("%02s", $birthday['month']) 
+            . '-' .  sprintf("%02s", $birthday['day'])
+            . ' 00:00:00';
+    }
 }

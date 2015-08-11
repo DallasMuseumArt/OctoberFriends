@@ -86,12 +86,24 @@ class Usermeta extends Model
     /**
      * @var array Guarded fields
      */
-    protected $guarded = ['*'];
+    protected $guarded = ['user_id'];
 
     /**
      * @var array Fillable fields
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'birth_date',
+        'email_optin',
+        'gender',
+        'race',
+        'household_income',
+        'household_size',
+        'education',
+        'current_member',
+        'current_member_number',
+    ];
 
     /**
      * @var array Relations

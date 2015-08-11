@@ -176,4 +176,78 @@ class AuthManager
  
         return $user;
     }
+
+    public static function register($data, $rules = [])
+    {
+
+        Event::fire('auth.preRegister', [$data, $rules]);
+
+        $validation = Validator::make($data, $rules);
+        if ($validation->fails())
+            throw new ValidationException($validation);
+
+        /*
+         * Register user
+         */
+        $requireActivation = UserSettings::get('require_activation', true);
+        $automaticActivation = UserSettings::get('activate_mode') == UserSettings::ACTIVATE_AUTO;
+        $userActivation = UserSettings::get('activate_mode') == UserSettings::ACTIVATE_USER;
+
+        /*
+         * Data altercations
+         */
+        $data['first_name']     = ucwords($data['first_name']);
+        $data['last_name']      = ucwords($data['last_name']);
+        $data['birth_date']     = UserExtend::parseBirthdate($data['birthday']);
+        $data['phone']          = UserExtend::parsePhone($data['phone']);
+        $data['email_optin']    = isset($data['email_optin']) ? $data['email_optin'] : false;
+
+        // Split the data into whats required for the user and usermeta models
+        $userData = [
+            'name'                  => $data['first_name'] . ' ' . $data['last_name'],
+            'password'              => $data['password'],
+            'password_confirmation' => $data['password_confirmation'],
+            'email'                 => $data['email'],
+            'street_addr'           => $data['street_addr'],
+            'city'                  => $data['city'],
+            'state'                 => $data['state'],
+            'zip'                   => $data['zip'],
+            'phone'                 => $data['phone'],
+        ];
+
+        $user = Auth::register($userData, $automaticActivation);
+
+        // Save user metadata
+        $usermeta = Usermeta::create($data);
+
+        $user->metadata()->save($usermeta);
+
+        if (isset($data['avatar'])) {
+            UserExtend::uploadAvatar($user, $data['avatar']);
+        }
+        /*
+         * Activation is by the user, send the email
+         */
+        if ($userActivation) {
+            $this->sendActivationEmail($user);
+        }
+
+        /*
+         * Automatically activated or not required, log the user in
+         */
+        if ($automaticActivation || !$requireActivation) {
+            Auth::login($user);
+        }
+
+        if ($user) {
+            /*
+             * Fire event that user has registered
+             */
+            Event::fire('auth.register', [$user]);
+
+            return $user;
+        }
+
+        return false;
+    }
 }

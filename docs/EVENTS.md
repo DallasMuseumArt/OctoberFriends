@@ -6,6 +6,8 @@ to extend functionality of the Friends platform in your own plugin
 * auth.prelogin
 * auth.invalidLogin
 * auth.login
+* auth.preRegister
+* auth.register
 * dma.friends.activity.completed
 * dma.friends.badge.completed
 * dma.friends.reward.redeemed
