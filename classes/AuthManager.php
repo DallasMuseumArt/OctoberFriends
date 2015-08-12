@@ -45,11 +45,8 @@ class AuthManager
 
         // Provide default rules
         $rules += [
-            'first_name'            => 'required|min:2',
-            'last_name'             => 'required|min:2',
-            'email'                 => 'required|email|between:2,64',
-            'password'              => 'required|min:6',
-            'password_confirmation' => 'required|min:6',
+            'login'     => 'required|between:4,64',
+            'password'  => 'required|min:4',
         ];
 
         // Fire prelogin event before we start processing the user
@@ -60,19 +57,13 @@ class AuthManager
         }
 
         if (!$data['no_password']) {
-            if (!isset($rules['password'])) {
-                $rules['password'] = 'required|min:4';
-            }
-
-            if (!isset($rules['login'])) {
-                $rules['login'] = 'required|between:4,64';
-            }
 
             /*
              * Validate user credentials
              */
             $validation = Validator::make($data, $rules);
             if ($validation->fails()) {
+
                 throw new ValidationException($validation);
             }
 
@@ -97,7 +88,6 @@ class AuthManager
             }
         } catch(Exception $e) {
             $user = Event::fire('auth.invalidLogin', [$data, $rules]);
-
             if (!$user) throw new Exception($e);
         }
 
@@ -204,6 +194,14 @@ class AuthManager
      */
     public static function register($data, $rules = [])
     {
+
+        $rules += [
+            'first_name'            => 'required|min:2',
+            'last_name'             => 'required|min:2',
+            'email'                 => 'required|email|between:2,64',
+            'password'              => 'required|min:6',
+            'password_confirmation' => 'required|min:6',
+        ];
 
         Event::fire('auth.preRegister', [$data, $rules]);
 
