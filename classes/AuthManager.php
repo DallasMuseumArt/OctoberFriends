@@ -36,8 +36,8 @@ class AuthManager
      * A set of validation rules to validate against
      * see http://laravel.com/docs/5.1/validation
      *
-     * @return boolean
-     * returns true if the user is authenticated
+     * @return User $user
+     * returns the authenticated user object
      */
     public static function auth($data, $rules = [])
     {
@@ -93,7 +93,7 @@ class AuthManager
 
         if ($user) {
             Event::fire('auth.login', $user);
-            return true;
+            return $user;
         }
 
         return false;
