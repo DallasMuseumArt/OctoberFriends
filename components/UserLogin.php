@@ -110,9 +110,6 @@ class UserLogin extends ComponentBase
                 $message = $message = Lang::get('dma.friends::lang.userLogin.throttleUser', $data);
             }
             
-            // Send to log the authentication exception.
-            \Log::debug($e);
-            
             return [
                '.modal-content #errorBlock' => $message
             ];
@@ -171,16 +168,7 @@ class UserLogin extends ComponentBase
     {
         $data = post();
 
-        $rules = [
-            'first_name'            => 'required|min:2',
-            'last_name'             => 'required|min:2',
-            //'username'              => 'required|min:6',
-            'email'                 => 'required|email|between:2,64',
-            'password'              => 'required|min:6',
-            'password_confirmation' => 'required|min:6',
-        ];
-
-        AuthManager::register($data, $rules);
+        AuthManager::register($data);
 
         /*
          * Redirect to the intended page after successful sign in

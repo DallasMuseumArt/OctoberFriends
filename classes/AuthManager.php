@@ -43,6 +43,15 @@ class AuthManager
     {
         $user = false;
 
+        // Provide default rules
+        $rules += [
+            'first_name'            => 'required|min:2',
+            'last_name'             => 'required|min:2',
+            'email'                 => 'required|email|between:2,64',
+            'password'              => 'required|min:6',
+            'password_confirmation' => 'required|min:6',
+        ];
+
         // Fire prelogin event before we start processing the user
         Event::fire('auth.prelogin', [$data, $rules]);
 
