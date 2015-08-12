@@ -88,7 +88,8 @@ class AuthManager
             }
         } catch(Exception $e) {
             $user = Event::fire('auth.invalidLogin', [$data, $rules]);
-            if (!$user) throw new Exception($e);
+            // Re-throw same exception if user is not defined
+            if (!$user) throw $e;
         }
 
         if ($user) {

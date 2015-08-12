@@ -6,6 +6,9 @@ use Request;
 use Response;
 use Exception;
 use Validator;
+use ValidationException;
+
+use DMA\Friends\Classes\AuthManager;
 
 use DMA\Friends\Models\Usermeta;
 use DMA\Friends\Classes\UserExtend;
@@ -100,59 +103,43 @@ class UserResource extends BaseResource
      * )
      */
     
-    
-    
     public function login()
     {
-
-        $data = Request::all();
+        try {
+            $data = Request::all();
         
-        // TODO : I think this logic should be centralized 
-        // Base on loginUser component
-        // Update wordpress passwords if necessary
-        WordpressAuth::verifyFromEmail(array_get($data, 'email'), array_get($data, 'password'));
+            // Update wordpress passwords if necessary
+            WordpressAuth::verifyFromEmail(array_get($data, 'email', ''), array_get($data, 'password'));
+    
+            $data = [
+                'login'     => array_get($data, 'username', array_get($data, 'email')),
+                'password'  => array_get($data, 'password')
+            ];
+    
+            $user = AuthManager::auth($data);
+            
         
-        /*
-         * Validate input
-        */
-        $rules = [
-                'password' => 'required|min:2'
-        ];
+            if ($user) {
+                return $this->show($user->id);
+            } else {
+                return Response::api()->errorNotFound('User not found');
+            }
+    
+        } catch(Exception $e) {
+            var_dump($e);
+            if ($e instanceof ValidationException) {
+                return $this->errorDataValidation('User credentials fail to validated', $e->getErrors());
+            } else {
+                // Lets the API resource deal with the exception
+                throw $e;
+            }
         
-        $loginAttribute = UserSettings::get('login_attribute', UserSettings::LOGIN_EMAIL);
-        
-        if ($loginAttribute == UserSettings::LOGIN_USERNAME)
-            $rules['username'] = 'required|between:2,64';
-        else
-            $rules['username'] = 'required|email|between:2,64';
-        
-        if (!in_array('username', $data))
-            $data['username'] = array_get($data, 'username', array_get($data, 'email'));
-        
-        /*
-         * Validate user credentials
-        */
-        $validation = Validator::make($data, $rules);
-        if ($validation->fails()){
-            return $this->errorDataValidation('User credentials fail to validate', $validation->errors());
-        }
-        
-        /*
-         * Authenticate user
-        */
-        
-        $user = Auth::authenticate([
-                'login' => array_get($data, 'username'),
-                'password' => array_get($data, 'password')
-        ], true);
-        
-        if ($user) {
-            return $this->show($user->id);
-        } else {
-            return Response::api()->errorNotFound('User not found');
         }
         
     }
+    
+    
+
     
     /**
      * @SWG\Get(
@@ -346,97 +333,30 @@ class UserResource extends BaseResource
      *     )
      * )
      */
+    
     public function store()
     {
-        // TODO : This logic may need to be in the Extend User model
         try{
             $data = Request::all();
-            $rules = [
-                    //'first_name'            => 'required|min:2',
-                    //'last_name'             => 'required|min:2',
-                    //'username'              => 'required|min:6',
-                    'email'                 => 'required|email|between:2,64',
-                    'password'              => 'required|confirmed|min:6',
-                    'password_confirmation' => 'required|min:6',
-            ];
-            
-            $validation = Validator::make($data, $rules);
-            if ($validation->fails()){
-                return $this->errorDataValidation('User data fails to validated', $validation->errors());
-            }
-            /*
-             * Register user
-            */
-            $requireActivation = UserSettings::get('require_activation', true);
-            $automaticActivation = UserSettings::get('activate_mode') == UserSettings::ACTIVATE_AUTO;
-            $userActivation = UserSettings::get('activate_mode') == UserSettings::ACTIVATE_USER;
-            
-            // Split the data into whats required for the user and usermeta models
-            $userData = [
-                    'name'                  => array_get($data, 'email', ''),
-                    'password'              => array_get($data, 'password', null),
-                    'password_confirmation' => array_get($data, 'password_confirmation', null),
-                    'email'                 => array_get($data, 'email', null),
-                    'street_addr'           => array_get($data, 'address', ''),
-                    'city'                  => array_get($data, 'city', ''),
-                    'state'                 => array_get($data, 'state', ''),
-                    'zip'                   => array_get($data, 'zip', ''),
-                    'phone'                 => array_get($data, 'phone', ''),
-            ];
-            
-            // Create and register user
-            $user = Auth::register($userData, $automaticActivation);
-            
-            $bd_year = array_get($data, 'birthday_year', null); 
-            $bd_month = array_get($data, 'birthday_month', null); 
-            $bd_day = array_get($data, 'birthday_day', null); 
-
-            $birth_date = null; 
-            
-            if ( $bd_year && $bd_month && $bd_day ) {
-                $birth_date = $bd_year
-                . '-' .  sprintf("%02s", $bd_month)
-                . '-' .  sprintf("%02s", $bd_day)
-                . ' 00:00:00';
-            }
-            
-            // Save user metadata
-            $usermeta = new Usermeta;
-            $usermeta->first_name       = array_get($data,'first_name', '');
-            $usermeta->last_name        = array_get($data,'last_name', '');
-            $usermeta->birth_date       = $birth_date;
-            $usermeta->email_optin      = array_get($data,'email_optin', false);
-            
-            // Uncomment to enable demographics in registration form;
-            $usermeta->gender           = array_get($data,'gender', null);
-            $usermeta->race             = array_get($data,'race', null);
-            $usermeta->household_income = array_get($data,'household_income', null);
-            $usermeta->household_size   = array_get($data,'household_size',  null);
-            $usermeta->education        = array_get($data,'education', null);
-            
-            $user->metadata()->save($usermeta);
-            
-            /*
-            $avatar = array_get($data,'avatar', null);
-            if (!is_null($avatar)) {
-                UserExtend::uploadAvatar($user, $avatar);
-            }
-            */
-            
+            // Register new user
+            $user = AuthManager::register($data);
             return $this->show($user->id);
-                               
+             
         } catch(Exception $e) {
             if ($e instanceof ModelException) {
                 return $this->errorDataValidation($e->getMessage());
+            } else if ($e instanceof ValidationException) {
+                return $this->errorDataValidation('User data fails to validated', $e->getErrors());
             } else {
-                // Let the API resource deal with the exception
+                // Lets the API resource deal with the exception
                 throw $e;
             }
-
+    
         }
-        
+    
     }
     
+   
     /**
      * @SWG\Put(
      *     path="users/{id}",
