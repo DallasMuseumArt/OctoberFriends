@@ -337,8 +337,40 @@ class UserResource extends BaseResource
     {
         try{
             $data = Request::all();
+            
+            // Rules 
+            $rules = [
+                    'first_name'            => 'min:2',
+                    'last_name'             => 'min:2',
+                    'birthday_year'         => 'required_with:birthday_month,birthday_day|alpha_num|min:4',
+                    'birthday_month'        => 'required_with:birthday_year,birthday_day|alpha_num|min:2',
+                    'birthday_day'          => 'required_with:birthday_year,birthday_month|alpha_num|min:2'
+            ];
+            
+            // Reformat birthday data structure
+            $bd_year  = array_get($data, 'birthday_year', null);
+            $bd_month = array_get($data, 'birthday_month', null);
+            $bd_day   = array_get($data, 'birthday_day', null);
+            
+            $data['birthday'] = [
+                  'year'    => $bd_year,
+                  'month'   => $bd_month,
+                  'day'     => $bd_day
+            ];
+            
+            // COMPLETE NEW USER DATA STRUCTURE
+            // The API allows to register users with only email and password.
+            // so it is necessary to complete the data structure with empty strings
+            // when the data is not present. In that way the AuthManager don't complain
+            // for missing fields.
+            $defaultFields = ['first_name', 'last_name', 'phone', 'street_addr', 'city', 'state', 'zip'];
+            foreach($defaultFields as $field){
+                $data[$field] = array_get($data, $field, '');
+            }
+            
+            
             // Register new user
-            $user = AuthManager::register($data);
+            $user = AuthManager::register($data, $rules);
             return $this->show($user->id);
              
         } catch(Exception $e) {
