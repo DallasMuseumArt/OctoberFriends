@@ -126,7 +126,6 @@ class UserResource extends BaseResource
             }
     
         } catch(Exception $e) {
-            var_dump($e);
             if ($e instanceof ValidationException) {
                 return $this->errorDataValidation('User credentials fail to validated', $e->getErrors());
             } else {
@@ -355,8 +354,7 @@ class UserResource extends BaseResource
         }
     
     }
-    
-   
+       
     /**
      * @SWG\Put(
      *     path="users/{id}",

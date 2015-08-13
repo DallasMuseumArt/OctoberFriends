@@ -4,6 +4,7 @@ use Log;
 use App;
 use Route;
 use Response;
+use Redirect;
 use Exception;
 use System\Classes\PluginManager;
 use DMA\Friends\Classes\API\BaseResource;
@@ -109,6 +110,12 @@ class APIManager
                Log::error("API : Resource endpoint fail to register due to '" . $e->getMessage() . "'");
             }
         }
+
+        // Catch all
+        Route::any('/', function() {
+            return Redirect::route('friends.api.docs.index');
+            return Response::api()->errorNotFound();
+        });
         
         // Catch all
         Route::any('{all?}', function($path) { 
