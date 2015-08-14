@@ -33,7 +33,7 @@ class LocationManager
     {
         $locationId = Session::get('dmafriends.activeLocationId');
 
-        if (!$locationId) {
+        if (!$locationId && isset($_SERVER['HTTP_X_DEVICE_UUID'])) {
             $uuid = $_SERVER['HTTP_X_DEVICE_UUID'];
  
             return Location::findByUUID($uuid)->first();
