@@ -32,6 +32,13 @@ class LocationManager
     public static function getLocation()
     {
         $locationId = Session::get('dmafriends.activeLocationId');
+
+        if (!$locationId && isset($_SERVER['HTTP_X_DEVICE_UUID'])) {
+            $uuid = $_SERVER['HTTP_X_DEVICE_UUID'];
+ 
+            return Location::findByUUID($uuid)->first();
+        }
+
         return Location::find($locationId);
     }
 
