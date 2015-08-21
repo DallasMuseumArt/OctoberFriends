@@ -23,10 +23,32 @@ tabs:
             label: Cache report data for X minutes
             span: left
             tab: General
-        artwork_api_template:
-            label: The REST end point for looking up artwork information
+            
+        # Artwork API
+        artwork_api_baseurl:
+            label: Base URL to access collection REST API 
+            commentAbove: Eg. http://api.museum.com/v1
             span: left
-            tab: General
+            tab: Artwork API
+        artwork_api_endpoint:
+            label: The REST endpoint for looking up artwork information
+            commentAbove: Eg. collection/object/?fields=id,number,title&format=json&number=%s          
+            span: left
+            tab: Artwork API            
+        artwork_api_headers:
+            prompt: Add REST endpoint headers here  
+            label: Add headers to send on each artwork REST endpoint request
+            tab: Artwork API
+            type: repeater
+            form:
+                fields:
+                    artwork_api_header:
+                        label: Header
+                        span: left
+                    artwork_api_header_value:
+                        label: Value     
+                        span: right
+            
 
         # Kiosk
         require_location:
@@ -162,19 +184,27 @@ tabs:
             span: left
             tab: MailChimp Integration            
 
-            
-        # mailchimp_groups:
-        #     prompt: Add MailChimp groups
-        #     label: Subscribe Friends to MailChimp groups
-        #     commentAbove: Select what MailChimp groups new Friends members should be subscribed. Member will be subscribe to all group options.
-        #     tab: MailChimp Integration
-        #     type: repeater
-        #     form:
-        #         fields:
-        #             mailchimp_group_id:
-        #                 label: MailChimp group
-        #                 type: dropdown
-        #             mailchimp_interest_id:
-        #                 label: MailChimp interest
-        #                 dependsOn: mailchimp_group_id
-        #                 type: dropdown
+
+        # REST API EXTRA KEY VALUES          
+        rest_api_extra_settings:
+            prompt: Add a key/value pair group
+            label: Add extra key/pair values.
+            commentAbove: Key/Values configured here are expose via the REST API settings endpoint.
+            tab: REST API
+            type: repeater
+            form:
+                fields:
+                    rest_api_group_settings:
+                        label: Settings group
+                    rest_api_group_values:
+                        prompt: Add a key/value pair
+                        label: Settings values
+                        type: repeater
+                        form:
+                            fields:
+                                rest_api_group_key:
+                                    label: Key
+                                    span: left
+                                rest_api_group_value:
+                                    label: Value
+                                    span: right

@@ -1470,6 +1470,35 @@
                 }
             }
         },
+        "settings": {
+            "get": {
+                "tags": [
+                    "settings"
+                ],
+                "summary": "Return all public settings",
+                "description": "Returns public settings",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/settings"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
         "countries/{id}/states": {
             "get": {
                 "tags": [
@@ -2566,6 +2595,40 @@
                     "format": "int32"
                 }
             }
+        },
+        "settings.artwork_api.headers": {
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "settings.artwork_api": {
+            "properties": {
+                "url": {
+                    "type": "string"
+                },
+                "headers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/settings.artwork_api.headers"
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "settings": {
+            "properties": {
+                "artwork_api": {
+                    "type": "object",
+                    "$ref": "#/definitions/settings.artwork_api"
+                }
+            },
+            "type": "object"
         },
         "request.user.credentials": {
             "required": [
