@@ -246,10 +246,12 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
         list($hour, $minutes) = explode(":", $timeString);
 
         $meridiem = substr($minutes, 2, 3);
-        $minutes = substr($minutes, 0, 1);
+        $minutes = substr($minutes, 0, 2);
 
         if (strtolower($meridiem) == 'pm' && $hour != 12) {
             $hour += 12;
+        } else if (strtolower($meridiem) == 'am' && $hour == 12) {
+            $hour = 0;
         }
 
         return [
