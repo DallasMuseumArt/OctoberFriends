@@ -97,7 +97,10 @@ class BadgeManager
         }
 
         // If count is evenly divisable by the required step count then return true
-        return !($count->count % $step->count);
+        //return !($count->count % $step->count);
+
+        // return true if the user has completed the activity more then the required step count
+        return ($count->count >= $step->count);
     }
 
     /**
