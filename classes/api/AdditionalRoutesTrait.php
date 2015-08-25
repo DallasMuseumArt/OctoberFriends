@@ -36,7 +36,7 @@ trait AdditionalRoutesTrait
             $this->additionalRoutes[$url] = [
                 'handler' => $handler,
                 'verbs' => $verbs,
-                'nane'  => $name    
+                'name'  => $name    
             ];
         }
     }

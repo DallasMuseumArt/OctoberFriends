@@ -494,6 +494,7 @@ class Plugin extends PluginBase
             'countries'             => 'DMA\Friends\API\Resources\CountryResource',   
             'countries.states'      => 'DMA\Friends\API\Resources\StateResource',
             'ratings'               => 'DMA\Friends\API\Resources\RatingResource',
+            'settings'              => 'DMA\Friends\API\Resources\SettingsResource',
         ];
     }
     

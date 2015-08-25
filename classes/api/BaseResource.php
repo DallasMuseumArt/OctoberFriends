@@ -1,6 +1,7 @@
 <?php namespace DMA\Friends\Classes\API;
 
 
+use Log;
 use Model;
 use Input;
 use Response;

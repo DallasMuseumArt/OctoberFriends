@@ -88,19 +88,45 @@ class LikeWorkOfArt extends ActivityTypeBase
      */
     public static function isAssessionNumber($code)
     {
-        // Brain API request template URL
-        if($template = FriendsSettings::get('artwork_api_template', false)){
-    
+        // Artwork API request template URL
+        $baseUrl = FriendsSettings::get('artwork_api_baseurl',  false);
+        $query   = FriendsSettings::get('artwork_api_endpoint',  false);
+        
+        if( $baseUrl && $query ) {
+                
+            // Build collection REST API URL 
+            $template = rtrim($baseUrl, '/') . '/' . ltrim($query, '/'); 
+                
+            // Get Artwork API headers
+            $headers = [];
+            $headerSettings = FriendsSettings::get('artwork_api_headers', []);
+            foreach ( $headerSettings as $h ){
+                $key   = array_get($h, 'artwork_api_header', Null);
+                $value = array_get($h, 'artwork_api_header_value', Null);
+                
+                if (!is_null($key) && !is_null($value) ){
+                    $headers[$key] = $value;
+                }
+                
+            }
+            
             // Clean code from spaces in case user miss type it
             $code     = str_replace(' ', '', $code);
+
             
             // Get URL
             $url      = sprintf($template, urlencode($code));
             
-            // Call Brain
-            $response = Request::get($url)                   
+            \Log::info($url);
+            
+            // Call REST API
+            $response = Request::get($url) 
+                                ->addHeaders($headers)
                                 ->send();
             
+            // TODO: find a way to abstract this into the settings pluging
+            // so is not tide to a specific business logic. For now
+            // this relay on DMA Brain API structure
             if($obj = @$response->body->results[0]){
                 $data = [
                     'object_id'     => $obj->id,
@@ -112,7 +138,7 @@ class LikeWorkOfArt extends ActivityTypeBase
                
             }
         }else{
-            Log::error('Friends setting "artwork_api_template" setting is empty. Please configure it in the backend of OctoberCMS.');
+            Log::error('Friends setting "artwork_api_baseurl and artwork_api_endpoint" settings are empty. Please configure them in the backend of OctoberCMS.');
         }
         return false;
         

@@ -99,6 +99,7 @@ secondaryTabs:
         # ===================================
         time_restriction: 
             label: Time Restriction
+            commentAbove: Select restrictions on when this activity is available
             tab: Publishing Options 
             span: left 
             type: dropdown
@@ -109,10 +110,10 @@ secondaryTabs:
         time_restriction_data:
             type: timerestrictions
             tab: Publishing Options
-            containerAttributes:
-                data-trigger-action: display
-                data-trigger: 'select[name="Activity[time_restriction]"]'
-                data-trigger-condition: value[1]
+            trigger:
+                action: show
+                field: time_restriction
+                condition: value[1]
         date_begin:
             label: Beginning Date
             commentAbove: If set, Reward can only be redeemed after this date.
@@ -121,10 +122,10 @@ secondaryTabs:
             span: left
             type: datepicker
             mode: datetime
-            containerAttributes:
-                data-trigger-action: display
-                data-trigger: 'select[name="Activity[time_restriction]"]'
-                data-trigger-condition: value[2]
+            trigger:
+                action: show
+                field: time_restriction
+                condition: value[2]
         date_end:
             label: Ending Date
             commentAbove: If set, Reward can only be redeemed before this date.
@@ -133,10 +134,10 @@ secondaryTabs:
             span: right 
             type: datepicker
             mode: datetime
-            containerAttributes:
-                data-trigger-action: display
-                data-trigger: 'select[name="Activity[time_restriction]"]'
-                data-trigger-condition: value[2]
+            trigger:
+                action: show
+                field: time_restriction
+                condition: value[2]
         is_published:
             label: Published
             tab: Publishing Options 
