@@ -2096,6 +2096,125 @@
                 }
             }
         },
+        "razors-edge": {
+            "get": {
+                "tags": [
+                    "razors edge"
+                ],
+                "summary": "Return all Razors Edge that match a Friends user",
+                "description": "Returns all Razor Edge data",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/parameters/page"
+                    },
+                    {
+                        "$ref": "#/parameters/sort"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "array",
+                            "$ref": "#/definitions/razor_edge.membership"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "razors-edge/{id}": {
+            "get": {
+                "tags": [
+                    "razors edge"
+                ],
+                "summary": "Find a Razors Edge membership  by sync ID",
+                "description": "Returns a Razors Edge membership by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Razor Edge Sync ID to fetch",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/razor_edge.membership"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "razors-edge/user/{id}": {
+            "get": {
+                "tags": [
+                    "razors edge"
+                ],
+                "summary": "Find a Razors Edge membership  by friends user ID",
+                "description": "Returns a Razors Edge membership by friends user id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of friends user  to fetch",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/razor_edge.membership"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
         "recommendations/suggest/{item}/{user}": {
             "get": {
                 "tags": [
@@ -3645,6 +3764,54 @@
                 "profile": {
                     "type": "object",
                     "$ref": "#/definitions/user.profile"
+                }
+            }
+        },
+        "razor_edge.membership": {
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "user_id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "razor_edge_id": {
+                    "type": "string"
+                },
+                "member_id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "expires_on": {
+                    "type": "string"
+                },
+                "first_name": {
+                    "type": "string"
+                },
+                "last_name": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "zip": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "member_level": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "email": {
+                    "type": "string"
                 }
             }
         }
