@@ -79,8 +79,6 @@ class ActivityTransformer extends BaseTransformer {
                 'title'             => $instance->title,
                 'activity_code'     => $instance->activity_code,
                 'activity_type'     => $instance->activity_type,
-                //'feedback_message'  => $instance->feedback_message,
-                //'complete_message'  => $instance->complete_message
         ];
     }
 
@@ -152,9 +150,12 @@ class ActivityTransformer extends BaseTransformer {
         $this->setDefaultIncludes( array_merge($this->getDefaultIncludes(), ['steps']));
     
         return [
-            'is_published'      => ($instance->is_published)?true:false,
-            'is_archived'       => ($instance->is_archived)?true:false,
-            'time_restrictions' => $this->getTimeRestrictions($instance),
+                'excerpt'           => $instance->excerpt ? $instance->excerpt : '',
+                'feedback_message'  => $instance->feedback_message ? $instance->feedback_message : '',
+                'complete_message'  => $instance->complete_message ? $instance->complete_message : '',
+                'is_published'      => ($instance->is_published)?true:false,
+                'is_archived'       => ($instance->is_archived)?true:false,
+                'time_restrictions' => $this->getTimeRestrictions($instance),
         ];
     }
     
