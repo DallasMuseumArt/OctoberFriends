@@ -120,6 +120,18 @@ class ActivityTransformer extends BaseTransformer {
      *         items="#/definitions/category",
      *    ),
      *    @SWG\Property(
+     *         property="excerpt",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="feedback_message",
+     *         type="string",
+     *    ),
+     *    @SWG\Property(
+     *         property="complete_message",
+     *         type="string",
+     *    ),    
+     *    @SWG\Property(
      *         property="is_published",
      *         type="boolean",
      *    ),

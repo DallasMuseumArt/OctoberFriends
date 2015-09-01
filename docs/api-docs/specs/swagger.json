@@ -2962,6 +2962,18 @@
                     "type": "array",
                     "items": "#/definitions/category"
                 },
+                "excerpt": {
+                    "description": "Activity definition",
+                    "type": "string"
+                },
+                "feedback_message": {
+                    "description": "Activity definition",
+                    "type": "string"
+                },
+                "complete_message": {
+                    "description": "Activity definition",
+                    "type": "string"
+                },
                 "is_published": {
                     "description": "Activity definition",
                     "type": "boolean"
