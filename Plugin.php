@@ -2,6 +2,7 @@
 
 use Backend;
 use Illuminate\Support\Facades\Event;
+use DMA\Friends\Facades\MailChimpIntegration;
 use Rainlab\User\Models\User as User;
 use DMA\Friends\Models\Usermeta as Metadata;
 use DMA\Friends\Models\Settings;
@@ -10,8 +11,11 @@ use DMA\Friends\Classes\ActivityManager;
 use System\Classes\PluginBase;
 use DMA\Friends\Classes\FriendsEventHandler;
 use App;
+use DB;
+use Log;
 use Config;
 use Illuminate\Foundation\AliasLoader;
+
 
 /**
  * Friends Plugin Information File
@@ -44,6 +48,9 @@ class Plugin extends PluginBase
         ];
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function registerPermissions()
     {
         return [
@@ -51,6 +58,9 @@ class Plugin extends PluginBase
         ];
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function registerSettings()
     {
         return [
@@ -61,11 +71,15 @@ class Plugin extends PluginBase
                 'icon'        => 'icon-cog',
                 'class'       => 'DMA\Friends\Models\Settings',
                 'order'       => 500,
-                'keywords'    => 'friends system settings'
+                'keywords'    => 'friends system settings',
+                'permissions' => ['dma.friends.*'],
             ],
         ];
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function registerNavigation()
     {
         return [
@@ -123,13 +137,19 @@ class Plugin extends PluginBase
         ];
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function registerComponents()
     {
         return [
+            'DMA\Friends\Components\ActivityCatalog'            => 'ActivityCatalog',
             'DMA\Friends\Components\ActivityCodeForm'           => 'ActivityCodeForm',
+            'DMA\Friends\Components\ActivityFilters'            => 'ActivityFilters',
             'DMA\Friends\Components\ActivityStream'             => 'ActivityStream',
             'DMA\Friends\Components\GetRewards'                 => 'GetRewards',
             'DMA\Friends\Components\Modal'                      => 'Modal',
+            'DMA\Friends\Components\Leaderboard'                => 'Leaderboard',
             'DMA\Friends\Components\UserBadges'                 => 'UserBadges',
             'DMA\Friends\Components\UserMostRecentBadge'        => 'UserMostRecentBadge',
             'DMA\Friends\Components\NotificationCounter'        => 'NotificationCounter',
@@ -151,12 +171,18 @@ class Plugin extends PluginBase
         return [
             'DMA\Friends\Activities\ActivityCode'   => 'ActivityCode',
             'DMA\Friends\Activities\LikeWorkOfArt'  => 'LikeWorkOfArt',
+            'DMA\Friends\Activities\Registration'   => 'Registration',
+            'DMA\Friends\Activities\Points'         => 'Points',
         ];
     }
 
+    
+    /**
+     * {@inheritDoc}
+     */
     public function boot()
     {
-
+        
         // Handle locations upon login
         $this->registerLocation();
 
@@ -164,13 +190,20 @@ class Plugin extends PluginBase
         date_default_timezone_set( Settings::get('timezone', Config::get('app.timezone')) );
 
         // Register ServiceProviders
-        App::register('\EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider');
         App::register('DMA\Friends\FriendsServiceProvider');
+        App::register('Maatwebsite\Excel\ExcelServiceProvider');
+
+        // Register aliases
+        $alias = AliasLoader::getInstance();
+        $alias->alias('Excel', 'Maatwebsite\Excel\Facades\Excel');
         
         // Register Event Subscribers
         $subscriber = new FriendsEventHandler;
         Event::subscribe($subscriber);
-
+        
+        // Bind user and point events to trigger user synchronization with MailChimp
+        MailChimpIntegration::bindEvents();
+        
         // Generate barcode_id when a user object is created
         // TODO: Migrate when user plugin is forked
         User::creating(function($user)
@@ -182,15 +215,45 @@ class Plugin extends PluginBase
         
         // Extend the user model to support our custom metadata        
         User::extend(function($model) {        
-            $model->hasOne['metadata']          = ['DMA\Friends\Models\Usermeta'];     
+            $model->hasOne['metadata']          = ['DMA\Friends\Models\Usermeta', 'key' => 'user_id'];     
             $model->hasMany['activityLogs']     = ['DMA\Friends\Models\ActivityLog'];
             $model->hasMany['bookmarks']        = ['DMA\Friends\Models\Bookmark'];
             $model->hasMany['notifications']    = ['DMA\Friends\Models\Notification'];
-            $model->belongsToMany['activities'] = ['DMA\Friends\Models\Activity',   'table' => 'dma_friends_activity_user', 'user_id', 'activity_id',   'timestamps' => true, 'order' => 'dma_friends_activity_user.created_at desc'];     
-            $model->belongsToMany['steps']      = ['DMA\Friends\Models\Step',       'table' => 'dma_friends_step_user',     'user_id', 'step_id',       'timestamps' => true, 'order' => 'dma_friends_step_user.created_at desc'];     
-            $model->belongsToMany['badges']     = ['DMA\Friends\Models\Badge',      'table' => 'dma_friends_badge_user',    'user_id', 'badge_id',      'timestamps' => true, 'order' => 'dma_friends_badge_user.created_at desc'];        
-            $model->belongsToMany['rewards']    = ['DMA\Friends\Models\Reward',     'table' => 'dma_friends_reward_user',   'user_id', 'reward_id',     'timestamps' => true, 'order' => 'dma_friends_reward_user.created_at desc'];       
-            $model->belongsToMany['groups']     = ['DMA\Friends\Models\UserGroup',  'table' => 'dma_friends_users_groups',  'primaryKey' => 'user_id',  'foreignKey' => 'group_id', 'pivot' => ['membership_status']];        
+            $model->hasMany['rates']            = ['DMA\Friends\Models\UserRate'];
+            $model->belongsToMany['activities'] = ['DMA\Friends\Models\Activity',
+                'table' => 'dma_friends_activity_user', 
+                'user_id', 
+                'activity_id',   
+                'timestamps' => true, 
+                'order' => 'dma_friends_activity_user.created_at desc'
+            ];     
+            $model->belongsToMany['steps']      = ['DMA\Friends\Models\Step',
+                'table' => 'dma_friends_step_user',     
+                'user_id', 
+                'step_id',       
+                'timestamps' => true, 
+                'order' => 'dma_friends_step_user.created_at desc'
+            ];     
+            $model->belongsToMany['badges']     = ['DMA\Friends\Models\Badge',      
+                'table' => 'dma_friends_badge_user',    
+                'user_id', 
+                'badge_id',      
+                'timestamps' => true, 
+                'order' => 'dma_friends_badge_user.created_at desc'
+            ];        
+            $model->belongsToMany['rewards']    = ['DMA\Friends\Models\Reward',     
+                'table' => 'dma_friends_reward_user',   
+                'user_id', 
+                'reward_id',     
+                'timestamps' => true, 
+                'order' => 'dma_friends_reward_user.created_at desc'
+            ];       
+            $model->belongsToMany['groups']     = ['DMA\Friends\Models\UserGroup',  
+                'table' => 'dma_friends_users_groups',  
+                'key' => 'user_id',  
+                'foreignKey' => 'group_id', 
+                'pivot' => ['membership_status']
+            ];        
         });
         
         // Extend User fields
@@ -232,6 +295,11 @@ class Plugin extends PluginBase
                 'zip' => [
                     'label' => 'Zip',
                 ],            
+                'current_member_number' => [
+                    'label'     => 'Membership ID',
+                    'relation'      => 'metadata',
+                    'select'        => '@current_member_number',
+                ], 
             ]); 
         });
 
@@ -267,7 +335,13 @@ class Plugin extends PluginBase
         	],
         	'metadata[current_member]' => [
         		'label' => 'Current member?',
-        		'type'  => 'checkbox',
+        		'type'  => 'dropdown',
+                'span'  => 'left',
+                'options'   => [
+                    'Non Member',
+                    'Member',
+                    'Staff',
+                ],
         		'tab'   => 'Metadata',
         	],
         	'metadata[current_member_number]' => [
@@ -331,62 +405,172 @@ class Plugin extends PluginBase
         
         $form->addFields(\Postman::getChannelSettingFields(), 'primary');        
     }
-    
-    
+        
+    /**
+     * {@inheritDoc}
+     */
     public function registerFormWidgets()
     {
         return [
             'DMA\Friends\FormWidgets\ActivityType' => [
                 'label' => 'ActivityType',
-                'alias' => 'activitytype',
+                'code'  => 'activitytype',
             ],
             'DMA\Friends\FormWidgets\TimeRestrictions' => [
                 'label' => 'Time Restrictions',
-                'alias' => 'timerestrictions',
+                'code'  => 'timerestrictions',
             ],
             'DMA\Friends\FormWidgets\UserPoints' => [
                 'label' => 'Points',
-                'alias' => 'points',
+                'code'  => 'points',
             ],
             'DMA\Friends\FormWidgets\PrintMembershipCard' => [
                 'label' => 'Print Membership Card',
-                'alias' => 'printmembershipcard',
+                'code'  => 'printmembershipcard',
             ],
         ];   
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function registerSchedule($schedule)
+    {
+
+        $schedule->command("friends:points-weekly")->weekly();
+        $schedule->command("friends:points-daily")->daily();
+        $schedule->command("friends:read-channels")->everyFiveMinutes();
+        $schedule->command("friends:reset-groups")->everyFiveMinutes();
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function register()
     {
-        // Commands for syncing wordpress data
-        $this->registerConsoleCommand('friends.sync-data', 'DMA\Friends\Commands\SyncFriendsDataCommand');
-        $this->registerConsoleCommand('friends.sync-relations', 'DMA\Friends\Commands\SyncFriendsRelationsCommand');
-        $this->registerConsoleCommand('friends.sync-images', 'DMA\Friends\Commands\SyncFriendsImagesCommand');
+        $db = false;
 
-        // Commands for clean up data
+        try {
+            $db = DB::connection('friends_wordpress');
+        } catch (\InvalidArgumentException $e) {
+            //Log::info('Missing configuration for wordpress migration');
+        }
+
+        if ($db) {
+            // Commands for syncing wordpress data
+            $this->registerConsoleCommand('friends.sync-data', 'DMA\Friends\Commands\SyncFriendsDataCommand');
+            $this->registerConsoleCommand('friends.sync-relations', 'DMA\Friends\Commands\SyncFriendsRelationsCommand');
+            $this->registerConsoleCommand('friends.sync-images', 'DMA\Friends\Commands\SyncFriendsImagesCommand');
+        }
+
         $this->registerConsoleCommand('friends.normalize-users', 'DMA\Friends\Commands\NormalizeUserData');
-        
-        // Crontasks
         $this->registerConsoleCommand('friends.points-weekly', 'DMA\Friends\Commands\WeeklyPoints');
         $this->registerConsoleCommand('friends.points-daily', 'DMA\Friends\Commands\DailyPoints');
         $this->registerConsoleCommand('friends.read-channels', 'DMA\Friends\Commands\ReadChannels');
         $this->registerConsoleCommand('friends.reset-groups', 'DMA\Friends\Commands\ResetGroups');
+        $this->registerConsoleCommand('friends.generate-api-docs', 'DMA\Friends\Commands\GenerateAPIDocs');
+        $this->registerConsoleCommand('friends.sync-friends-mailchimp', 'DMA\Friends\Commands\SyncFriendsToMailChimp');
 
     } 
+    
+    /**
+     * Register Friends API resource endpoints 
+     * 
+     * @return array
+     */
+    public function registerFriendAPIResources()
+    {
+        return [
+            'activities'            => 'DMA\Friends\API\Resources\ActivityResource',
+            'activity-logs'         => 'DMA\Friends\API\Resources\ActivityLogResource',
+            'activity-metadata'     => 'DMA\Friends\API\Resources\ActivityMetadataResource',
+            'badges'                => 'DMA\Friends\API\Resources\BadgeResource',
+            'steps'                 => 'DMA\Friends\API\Resources\StepResource',
+            'categories'            => 'DMA\Friends\API\Resources\CategoryResource',
+            'locations'             => 'DMA\Friends\API\Resources\LocationResource',
+            'rewards'               => 'DMA\Friends\API\Resources\RewardResource',
+            'users'                 => 'DMA\Friends\API\Resources\UserResource',
+            'countries'             => 'DMA\Friends\API\Resources\CountryResource',   
+            'countries.states'      => 'DMA\Friends\API\Resources\StateResource',
+            'ratings'               => 'DMA\Friends\API\Resources\RatingResource',
+            'settings'              => 'DMA\Friends\API\Resources\SettingsResource',
+        ];
+    }
+    
 
+    /**
+     * {@inheritDoc}
+     */
     public function registerReportWidgets()
     {   
         return [
             'DMA\Friends\ReportWidgets\FriendsToolbar' => [
                 'label'     => 'Friends Toolbar',
                 'context'   => 'dashboard'
-            ],  
+            ],
+            // 'DMA\Friends\ReportWidgets\DatePicker' => [
+            //     'label'     => 'Friends Date Picker',
+            //     'context'   => 'dashboard',
+            // ],
             'DMA\Friends\ReportWidgets\FriendsLeaderboard' => [
-                'label'     => 'Friends Leaderboard',
+                'label'     => 'Table - Friends Leaderboard',
+                'context'   => 'dashboard',
+            ],
+            'DMA\Friends\ReportWidgets\UserReport' => [
+                'label'     => 'Graph - # Users by day',
+                'context'   => 'dashboard',
+            ],
+            'DMA\Friends\ReportWidgets\RewardReport' => [
+                'label'     => 'Graph - # Rewards redeemed by day',
+                'context'   => 'dashboard',
+            ],
+            'DMA\Friends\ReportWidgets\TopRewards' => [
+                'label'     => 'Table - Top Rewards',
+                'context'   => 'dashboard',
+            ],
+            'DMA\Friends\ReportWidgets\TopActivities' => [
+                'label'     => 'Table - Top Activities',
+                'context'   => 'dashboard',
+            ],
+            'DMA\Friends\ReportWidgets\TopBadges' => [
+                'label'     => 'Table - Top Badges',
+                'context'   => 'dashboard',
+            ],
+            'DMA\Friends\ReportWidgets\ActivitiesByDay' => [
+                'label'     => 'Graph - Activities By Day',
+                'context'   => 'dashboard',
+            ],
+            'DMA\Friends\ReportWidgets\EmailOptin' => [
+                'label'     => 'Chart - % Users with email optin',
+                'context'   => 'dashboard',
+            ],
+            'DMA\Friends\ReportWidgets\FriendsMembers'=>[
+                'label'   => 'Chart - % of Users with partnership',
+                'context' => 'dashboard'
+            ],
+            'DMA\Friends\ReportWidgets\DemographicGender' => [
+                'label'     => 'Chart - Gender Breakdown',
+                'context'   => 'dashboard',
+            ],
+            'DMA\Friends\ReportWidgets\DemographicRace' => [
+                'label'     => 'Chart - Race Breakdown',
+                'context'   => 'dashboard',
+            ],
+            'DMA\Friends\ReportWidgets\DemographicIncome' => [
+                'label'     => 'Chart - Income Breakdown',
+                'context'   => 'dashboard',
+            ],
+            'DMA\Friends\ReportWidgets\DemographicEducation' => [
+                'label'     => 'Chart - Education Breakdown',
                 'context'   => 'dashboard',
             ],
         ];  
     } 
-    
+   
+    /**
+     * {@inheritDoc}
+     */ 
     public function registerMarkupTags()
     {   
         return [
@@ -395,7 +579,10 @@ class Plugin extends PluginBase
              ]
         ];
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     public function registerMailTemplates()
     {
         return [
@@ -418,5 +605,6 @@ class Plugin extends PluginBase
         $manager = new LocationManager($uuid);
     }
 
+        
 }
 

@@ -4,6 +4,11 @@ namespace DMA\Friends\ReportWidgets;
 
 use Backend\Classes\ReportWidgetBase;
 use Rainlab\User\Models\User;
+use DMA\Friends\Models\Usermeta;
+use DMA\Friends\ReportWidgets\GraphReport;
+use DMA\Friends\Models\Settings as FriendsSettings;
+use DB;
+use Cache;
 
 class FriendsToolbar extends ReportWidgetBase
 {
@@ -30,10 +35,49 @@ class FriendsToolbar extends ReportWidgetBase
 
         $this->addCss('css/friendstoolbar.css');
 
-        $this->vars['numFriends'] = number_format(User::count());
-        $this->vars['todayFriends'] = number_format(User::where('created_at', '>=', $today)->count());
-        $this->vars['weekFriends'] = number_format(User::where('created_at', '>=', $thisWeek)->count());
+        $meta = new Usermeta;
+        $meta_table = $meta->getTable();
+
+        $this->vars['numFriends']       = Usermeta::where('current_member', '!=', Usermeta::IS_STAFF)->count();
+        $this->vars['todayFriends']     = User::join($meta_table, 'users.id', '=', $meta_table . '.user_id')
+            ->where('current_member', '!=', Usermeta::IS_STAFF) 
+            ->where('created_at', '>=', $today)->count();
+
+        $this->vars['weekFriends']      = User::join($meta_table, 'users.id', '=', $meta_table . '.user_id') 
+            ->where('current_member', '!=', Usermeta::IS_STAFF)
+            ->where('created_at', '>=', $thisWeek)->count();
+
+        $this->vars['averageFriends']   = $this->getAverageFriends();
 
         return $this->makePartial('widget');
+    }
+
+    public function getAverageFriends()
+    {
+        
+        $average = Cache::remember('friends.reports.toolbar', GraphReport::getCacheTime(), function() {
+            return DB::select(
+                DB::raw("
+                    SELECT 
+                        AVG(numFriends) as avgNum
+                    FROM
+                        (
+                            SELECT 
+                                DAYOFWEEK(created_at) AS dow,
+                                DATE(created_at) AS d,
+                                COUNT(*) AS numFriends
+                            FROM users
+                            GROUP BY d
+                        ) AS countFriends
+                    WHERE dow = DAYOFWEEK(NOW())
+                    GROUP BY dow
+                ")
+            );
+        });
+
+        if (!empty($average)) {
+            return $average[0]->avgNum;
+        }
+        return 0;
     }
 }

@@ -6,7 +6,7 @@ use DMA\Friends\Models\Reward;
 use DMA\Friends\Models\Settings;
 use Lang;
 use Cms\Classes\Theme;
-use System\Classes\SystemException;
+use SystemException;
 
 require_once('fpdf17/code39.php');
 
@@ -74,7 +74,7 @@ class PrintManager
             Settings::get('membership_orientation')
         );
 
-        $name = $this->user->metadata->first_name . ' ' . $this->user->metadata->last_name;
+        $name = $this->user->name;
 
         $this->pdf->SetFont('Arial', 'B', 12);
         $this->pdf->setX(1);

@@ -1,4 +1,4 @@
-<?php
+<?php namespace DMA\Friends\Tests;
 
 use League\FactoryMuffin\Facade as FactoryMuffin;
 use DMA\Friends\Classes\UserExtend;

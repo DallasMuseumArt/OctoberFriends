@@ -3,8 +3,8 @@
 # ===================================
 
 # Model List Column configuration
-list: @/plugins/dma/friends/models/reward/columns.yaml
-filter: @/plugins/dma/friends/models/reward/config_filter.yaml
+list: ~/plugins/dma/friends/models/reward/columns.yaml
+filter: ~/plugins/dma/friends/models/reward/config_filter.yaml
 
 # Model Class name
 modelClass: DMA\Friends\Models\Reward

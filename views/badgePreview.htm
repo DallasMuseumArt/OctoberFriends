@@ -15,7 +15,7 @@
         </div>
         {% endif %}
 
-        {% if model.image.getPath() %}
+        {% if model.image.getThumb(300, 300) %}
         <a href="#" data-control="popup" data-handler="onRenderBadge" data-request-data="id: {{ model.id }}">
             {% if model.userProgress and model.userProgress != 100 %}
             <div class="progress-wrap">
@@ -24,7 +24,8 @@
                 </div>
             </div>
             {% endif %}
-            <img src="{{ model.image.getPath() }}"/>
+
+            <img src="{{ model.image.getThumb(300, 300, {'extension': 'png'}) }}"/>
         </a>
         {% endif %}
 

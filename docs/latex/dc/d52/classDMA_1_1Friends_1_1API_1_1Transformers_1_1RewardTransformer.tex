@@ -1,0 +1,151 @@
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\textbackslash{}Transformers\textbackslash{}Reward\+Transformer Class Reference}
+\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Reward\+Transformer@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Reward\+Transformer}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\textbackslash{}Transformers\textbackslash{}Reward\+Transformer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{dc/d52/classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer_af31e197944fa087eb405f839bbb50434}{get\+Data} (\$instance)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer_a55b0731a2321e60950517e0b23e92ad7}{get\+Extended\+Data} (\$instance)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer_a152cedfbf193807324c4aaa64edbae4e}{include\+Media} (Model \$instance)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer_a9bfaced3e5a688c95c5379540bb071c1}{get\+Inventory} (Model \$instance)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries \$default\+Includes}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer_af31e197944fa087eb405f839bbb50434}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer}!get\+Data@{get\+Data}}
+\index{get\+Data@{get\+Data}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer}}
+\subsubsection[{get\+Data}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Reward\+Transformer\+::get\+Data (
+\begin{DoxyParamCaption}
+\item[{}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer_af31e197944fa087eb405f839bbb50434}
+( definition=\char`\"{}reward\char`\"{}, description=\char`\"{}\+Reward definition\char`\"{}, type=\char`\"{}object\char`\"{}, required=\{\char`\"{}id\char`\"{}, \char`\"{}title\char`\"{}, \char`\"{}media\char`\"{}\}, ( property=\char`\"{}id\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( property=\char`\"{}title\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}media\char`\"{}, type=\char`\"{}object\char`\"{}, ref=\char`\"{}\#/definitions/media\char`\"{} ) )  \begin{DoxySeeAlso}{See also}
+\+::get\+Data() 
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+51     \{
+52         $data = [
+53             \textcolor{stringliteral}{'id'}            => $instance->id,
+54             \textcolor{stringliteral}{'title'}         => $instance->title
+55         ];
+56         
+57         \textcolor{keywordflow}{return} $data;
+58     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer_a55b0731a2321e60950517e0b23e92ad7}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer}!get\+Extended\+Data@{get\+Extended\+Data}}
+\index{get\+Extended\+Data@{get\+Extended\+Data}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer}}
+\subsubsection[{get\+Extended\+Data}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Reward\+Transformer\+::get\+Extended\+Data (
+\begin{DoxyParamCaption}
+\item[{}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer_a55b0731a2321e60950517e0b23e92ad7}
+( definition=\char`\"{}reward.\+extended\char`\"{}, description=\char`\"{}\+Full reward definition\char`\"{}, type=\char`\"{}object\char`\"{}, required=\{\char`\"{}id\char`\"{}, \char`\"{}title\char`\"{}, \char`\"{}description\char`\"{}, \char`\"{}excerpt\char`\"{}, \char`\"{}is\+\_\+published\char`\"{}, \char`\"{}is\+\_\+archived\char`\"{}, \char`\"{}is\+\_\+hidden\char`\"{}, \char`\"{}points\char`\"{}, \char`\"{}barcode\char`\"{}, \char`\"{}date\+\_\+begin\char`\"{}, \char`\"{}date\+\_\+end\char`\"{}, \char`\"{}days\+\_\+valid\char`\"{}, \char`\"{}fine\+\_\+print\char`\"{}, \char`\"{}inventory\char`\"{}, \char`\"{}media\char`\"{}\}, ( property=\char`\"{}id\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( property=\char`\"{}title\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}description\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}excerpt\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}is\+\_\+published\char`\"{}, type=\char`\"{}boolean\char`\"{}, ), ( property=\char`\"{}is\+\_\+published\char`\"{}, type=\char`\"{}boolean\char`\"{}, ), ( property=\char`\"{}is\+\_\+archived\char`\"{}, type=\char`\"{}boolean\char`\"{}, ), ( property=\char`\"{}is\+\_\+hidden\char`\"{}, type=\char`\"{}boolean\char`\"{}, ), ( property=\char`\"{}points\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( property=\char`\"{}barcode\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}date\+\_\+begin\char`\"{}, type=\char`\"{}string\char`\"{}, format=\char`\"{}date-\/time\char`\"{} ), ( property=\char`\"{}date\+\_\+end\char`\"{}, type=\char`\"{}string\char`\"{}, format=\char`\"{}date-\/time\char`\"{} ), ( property=\char`\"{}days\+\_\+valid\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( property=\char`\"{}fine\+\_\+print\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}inventory\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( property=\char`\"{}media\char`\"{}, type=\char`\"{}object\char`\"{}, ref=\char`\"{}\#/definitions/media\char`\"{} ) )  \begin{DoxySeeAlso}{See also}
+\+::get\+Extended\+Data() 
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+146     \{
+147         \textcolor{keywordflow}{return} [
+148                 \textcolor{stringliteral}{'description'}   => $instance->description,
+149                 \textcolor{stringliteral}{'excerpt'}       => $instance->excerpt,
+150                 \textcolor{stringliteral}{'is\_published'}  => ($instance->is\_published)?\textcolor{keyword}{true}:\textcolor{keyword}{false},
+151                 \textcolor{stringliteral}{'is\_archived'}   => ($instance->is\_archived)?\textcolor{keyword}{true}:\textcolor{keyword}{false},
+152                 \textcolor{stringliteral}{'is\_hidden'}     => ($instance->is\_hidden)?\textcolor{keyword}{true}:\textcolor{keyword}{false},
+153                 \textcolor{stringliteral}{'points'}        => $instance->points,
+154                 \textcolor{stringliteral}{'barcode'}       => $instance->barcode,
+155                 \textcolor{stringliteral}{'date\_begin'}    => $this->carbonToIso($instance->date\_begin),
+156                 \textcolor{stringliteral}{'date\_end'}      => $this->carbonToIso($instance->date\_end),
+157                 \textcolor{stringliteral}{'days\_valid'}    => $instance->days\_valid,
+158                 \textcolor{stringliteral}{'fine\_print'}    => $instance->fine\_print,
+159                 \textcolor{stringliteral}{'inventory'}     => $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer_a9bfaced3e5a688c95c5379540bb071c1}{getInventory}($instance),
+160 \textcolor{preprocessor}{                #'enable\_email'  => $instance->enable\_email,}
+161 \textcolor{preprocessor}{                #'redemption\_email' => $instance->redemption\_email,}
+162 \textcolor{preprocessor}{                #'enable\_admin\_email' => $instance->enable\_admin\_email,}
+163 \textcolor{preprocessor}{                #'email\_template' => $instance->email\_template,}
+164 \textcolor{preprocessor}{                #'admin\_email\_template' => $instance->admin\_email\_template,}
+165 \textcolor{preprocessor}{                #'admin\_email\_group' => $instance->admin\_email\_group,}
+166 \textcolor{preprocessor}{                #'admin\_email\_address' =>  $instance->admin\_email\_address,}
+167         ];
+168     
+169     \}    
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer_a9bfaced3e5a688c95c5379540bb071c1}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer}!get\+Inventory@{get\+Inventory}}
+\index{get\+Inventory@{get\+Inventory}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer}}
+\subsubsection[{get\+Inventory}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Reward\+Transformer\+::get\+Inventory (
+\begin{DoxyParamCaption}
+\item[{Model}]{\$instance}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer_a9bfaced3e5a688c95c5379540bb071c1}
+Normalize inventory value 
+\begin{DoxyParams}[1]{Parameters}
+Model & {\em \$instance} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+177     \{
+178         \textcolor{keywordflow}{try}\{
+179             \textcolor{keywordflow}{if} (!is\_null($instance->inventory)) \{
+180                 \textcolor{keywordflow}{return} $instance->inventory;
+181             \}
+182         \}\textcolor{keywordflow}{catch}(\(\backslash\)\hyperlink{namespaceException}{Exception} $e)\{
+183             \textcolor{comment}{// Do nothing}
+184         \}
+185         \textcolor{keywordflow}{return} 0;
+186     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer_a152cedfbf193807324c4aaa64edbae4e}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer}!include\+Media@{include\+Media}}
+\index{include\+Media@{include\+Media}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer}}
+\subsubsection[{include\+Media}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Reward\+Transformer\+::include\+Media (
+\begin{DoxyParamCaption}
+\item[{Model}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer_a152cedfbf193807324c4aaa64edbae4e}
+Include Media
+
+\begin{DoxyReturn}{Returns}
+League 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+195     \{
+196         \textcolor{keywordflow}{return} $this->item($instance, \textcolor{keyword}{new} MediaTransformer);
+197     \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer_a303f3145936aae98cbdc990fa104be71}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer}!\$default\+Includes@{\$default\+Includes}}
+\index{\$default\+Includes@{\$default\+Includes}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Reward\+Transformer}}
+\subsubsection[{\$default\+Includes}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Reward\+Transformer\+::\$default\+Includes\hspace{0.3cm}{\ttfamily [protected]}}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer_a303f3145936aae98cbdc990fa104be71}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= [
+            \textcolor{stringliteral}{'media'}
+    ]
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+api/transformers/Reward\+Transformer.\+php\end{DoxyCompactItemize}

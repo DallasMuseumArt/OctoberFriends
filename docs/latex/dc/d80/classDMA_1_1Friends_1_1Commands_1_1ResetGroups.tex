@@ -1,6 +1,5 @@
-\hypertarget{classDMA_1_1Friends_1_1Commands_1_1ResetGroups}{\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Commands\textbackslash{}Reset\+Groups Class Reference}
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1ResetGroups}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Commands\textbackslash{}Reset\+Groups Class Reference}
 \label{classDMA_1_1Friends_1_1Commands_1_1ResetGroups}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Commands\textbackslash{}\+Reset\+Groups@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Commands\textbackslash{}\+Reset\+Groups}}
-}
 Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Commands\textbackslash{}Reset\+Groups\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -10,82 +9,58 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Commands\t
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classDMA_1_1Friends_1_1Commands_1_1ResetGroups_a39d5f7e4bd63574e523fb41a392b529e}{schedule} (Schedulable \$scheduler)
-\item 
 \hyperlink{classDMA_1_1Friends_1_1Commands_1_1ResetGroups_a1671243f4b929d299357d08490661732}{fire} ()
 \end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classDMA_1_1Friends_1_1Commands_1_1ResetGroups_a713919df694ce18df9c2527e833dc858}{{\bfseries \$name} = 'friends\+:reset-\/groups'}\label{classDMA_1_1Friends_1_1Commands_1_1ResetGroups_a713919df694ce18df9c2527e833dc858}
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1ResetGroups_a713919df694ce18df9c2527e833dc858}{}{\bfseries \$name} = \textquotesingle{}friends\+:reset-\/groups\textquotesingle{}\label{classDMA_1_1Friends_1_1Commands_1_1ResetGroups_a713919df694ce18df9c2527e833dc858}
 
 \end{DoxyCompactItemize}
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classDMA_1_1Friends_1_1Commands_1_1ResetGroups_a1671243f4b929d299357d08490661732}{\index{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Reset\+Groups@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Reset\+Groups}!fire@{fire}}
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1ResetGroups_a1671243f4b929d299357d08490661732}{}\index{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Reset\+Groups@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Reset\+Groups}!fire@{fire}}
 \index{fire@{fire}!D\+M\+A\+::\+Friends\+::\+Commands\+::\+Reset\+Groups@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Reset\+Groups}}
 \subsubsection[{fire}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Commands\textbackslash{}\+Reset\+Groups\+::fire (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classDMA_1_1Friends_1_1Commands_1_1ResetGroups_a1671243f4b929d299357d08490661732}
+)}\label{classDMA_1_1Friends_1_1Commands_1_1ResetGroups_a1671243f4b929d299357d08490661732}
 Read and process incomming data from listenable channels \begin{DoxyReturn}{Returns}
 void 
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-41     \{
-42         
-43         $today = Carbon::today();
-44         
-45         $lastRun = Settings::get(\textcolor{stringliteral}{'reset\_group\_last\_run'});
-46         \textcolor{keywordflow}{if} ($lastRun != $today->toDateTimeString()) \{
-47             
-48             $day = strtolower($today->format(\textcolor{charliteral}{'l'}));
-49             $reset\_groups\_every\_day = Settings::get(\textcolor{stringliteral}{'reset\_groups\_every\_day'});
-50             $reset\_groups\_time = Settings::get(\textcolor{stringliteral}{'reset\_groups\_time'});
+29     \{
+30         
+31         $today = Carbon::today();
+32         
+33         $lastRun = Settings::get(\textcolor{stringliteral}{'reset\_group\_last\_run'});
+34         \textcolor{keywordflow}{if} ($lastRun != $today->toDateTimeString()) \{
+35             
+36             $day = strtolower($today->format(\textcolor{charliteral}{'l'}));
+37             $reset\_groups\_every\_day = Settings::get(\textcolor{stringliteral}{'reset\_groups\_every\_day'});
+38             $reset\_groups\_time = Settings::get(\textcolor{stringliteral}{'reset\_groups\_time'});
+39             
+40             \textcolor{keywordflow}{if} (in\_array($day, $reset\_groups\_every\_day)) \{
+41                 $reset\_at = Carbon::parse($reset\_groups\_time);
+42 
+43                 \textcolor{keywordflow}{if} ( $reset\_at->lte(Carbon::now()) ) \{
+44                     
+45                     \hyperlink{classDMA_1_1Friends_1_1Models_1_1UserGroup_aab4ef6fdd0f8d9d18ca905250c7e00c5}{UserGroup::markInactiveGroups}();
+46                     Settings::set(\textcolor{stringliteral}{'reset\_group\_last\_run'}, $today->toDateTimeString());
+47 
+48                 \}
+49                 
+50             \}
 51             
-52             \textcolor{keywordflow}{if} (in\_array($day, $reset\_groups\_every\_day)) \{
-53                 $reset\_at = Carbon::parse($reset\_groups\_time);
-54 
-55                 \textcolor{keywordflow}{if} ( $reset\_at->lte(Carbon::now()) ) \{
-56                     
-57                     \hyperlink{classDMA_1_1Friends_1_1Models_1_1UserGroup_aab4ef6fdd0f8d9d18ca905250c7e00c5}{UserGroup::markInactiveGroups}();
-58                     Settings::set(\textcolor{stringliteral}{'reset\_group\_last\_run'}, $today->toDateTimeString());
-59 
-60                 \}
-61                 
-62             \}
-63             
-64             
-65         \}\textcolor{keywordflow}{else}\{
-66            \textcolor{comment}{// \(\backslash\)Log::info('Has already run');}
-67         \}
-68 
-69     \}
-\end{DoxyCode}
-\hypertarget{classDMA_1_1Friends_1_1Commands_1_1ResetGroups_a39d5f7e4bd63574e523fb41a392b529e}{\index{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Reset\+Groups@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Reset\+Groups}!schedule@{schedule}}
-\index{schedule@{schedule}!D\+M\+A\+::\+Friends\+::\+Commands\+::\+Reset\+Groups@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Reset\+Groups}}
-\subsubsection[{schedule}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Commands\textbackslash{}\+Reset\+Groups\+::schedule (
-\begin{DoxyParamCaption}
-\item[{Schedulable}]{\$scheduler}
-\end{DoxyParamCaption}
-)}}\label{classDMA_1_1Friends_1_1Commands_1_1ResetGroups_a39d5f7e4bd63574e523fb41a392b529e}
-When a command should run 
-\begin{DoxyParams}[1]{Parameters}
-Scheduler & {\em \$scheduler} & \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-
-\end{DoxyReturn}
-
-\begin{DoxyCode}
-31     \{
-32         \textcolor{comment}{// Run every 5 minutes}
-33         \textcolor{keywordflow}{return} $scheduler->everyMinutes(5);
-34     \}
+52             
+53         \}\textcolor{keywordflow}{else}\{
+54            \textcolor{comment}{// \(\backslash\)Log::info('Has already run');}
+55         \}
+56 
+57     \}
 \end{DoxyCode}
 
 

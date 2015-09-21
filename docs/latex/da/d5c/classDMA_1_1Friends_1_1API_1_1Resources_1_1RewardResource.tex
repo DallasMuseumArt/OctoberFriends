@@ -1,0 +1,166 @@
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1RewardResource}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\textbackslash{}Resources\textbackslash{}Reward\+Resource Class Reference}
+\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1RewardResource}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Reward\+Resource@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Reward\+Resource}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\textbackslash{}Resources\textbackslash{}Reward\+Resource\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{da/d5c/classDMA_1_1Friends_1_1API_1_1Resources_1_1RewardResource}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1RewardResource_a65e7225c16bafe1a2ef96e7ccf88e85e}{redeem\+By\+Get} (\$reward\+Id, \$user\+Id)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1RewardResource_a5979a6696b2dbd4561043a44508f583d}{redeem\+By\+Post} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1RewardResource_abe59a1aef1f97484fa48a8d4b9ec9777}{index} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1RewardResource_af029b99cc507bb3cd5cfb29804ed2071}{show} (\$id)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1RewardResource_a85d20b82f07c9523aecf7bcc357549d1}{}{\bfseries \$model} = \textquotesingle{}\textbackslash{}\hyperlink{classDMA_1_1Friends_1_1Models_1_1Reward}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Models\textbackslash{}\+Reward}\textquotesingle{}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1RewardResource_a85d20b82f07c9523aecf7bcc357549d1}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1RewardResource_ac8acd84863c51e75de4f855c0590a767}{}{\bfseries \$transformer} = \textquotesingle{}\textbackslash{}\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1RewardTransformer}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Reward\+Transformer}\textquotesingle{}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1RewardResource_ac8acd84863c51e75de4f855c0590a767}
+
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1RewardResource_abe59a1aef1f97484fa48a8d4b9ec9777}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Reward\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Reward\+Resource}!index@{index}}
+\index{index@{index}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Reward\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Reward\+Resource}}
+\subsubsection[{index}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Reward\+Resource\+::index (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1RewardResource_abe59a1aef1f97484fa48a8d4b9ec9777}
+( path=\char`\"{}rewards\char`\"{}, description=\char`\"{}\+Returns all rewards\char`\"{}, summary=\char`\"{}\+Returns all rewards\char`\"{}, tags=\{ \char`\"{}rewards\char`\"{}\},
+
+( ref=\char`\"{}\#/parameters/per\+\_\+page\char`\"{} ), ( ref=\char`\"{}\#/parameters/page\char`\"{} ), ( ref=\char`\"{}\#/parameters/sort\char`\"{} ),
+
+( response=200, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/reward.\+extended\char`\"{}, type=\char`\"{}array\char`\"{}) ), ( response=500, description=\char`\"{}\+Unexpected error\char`\"{}, (ref=\char`\"{}\#/definitions/error500\char`\"{}) ), ( response=404, description=\char`\"{}\+Not Found\char`\"{}, (ref=\char`\"{}\#/definitions/error404\char`\"{}) ) ) 
+\begin{DoxyCode}
+258     \{
+259         \textcolor{keywordflow}{return} parent::index();
+260     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1RewardResource_a65e7225c16bafe1a2ef96e7ccf88e85e}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Reward\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Reward\+Resource}!redeem\+By\+Get@{redeem\+By\+Get}}
+\index{redeem\+By\+Get@{redeem\+By\+Get}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Reward\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Reward\+Resource}}
+\subsubsection[{redeem\+By\+Get}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Reward\+Resource\+::redeem\+By\+Get (
+\begin{DoxyParamCaption}
+\item[{}]{\$reward\+Id, }
+\item[{}]{\$user\+Id}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1RewardResource_a65e7225c16bafe1a2ef96e7ccf88e85e}
+( definition=\char`\"{}response.\+redeem\char`\"{}, required=\{\char`\"{}data\char`\"{}\}, ( property=\char`\"{}data\char`\"{}, type=\char`\"{}object\char`\"{}, ref=\char`\"{}\#/definitions/redeem.\+payload\char`\"{} ) )
+
+( definition=\char`\"{}redeem.\+payload\char`\"{}, required=\{\char`\"{}success\char`\"{}, \char`\"{}message\char`\"{}, \char`\"{}user\char`\"{}\}, ( property=\char`\"{}success\char`\"{}, type=\char`\"{}boolean\char`\"{} ), ( property=\char`\"{}message\char`\"{}, type=\char`\"{}string\char`\"{} ), ( property=\char`\"{}user\char`\"{}, type=\char`\"{}object\char`\"{}, ref=\char`\"{}\#/definitions/user.\+info.\+points\char`\"{} ) )
+
+( path=\char`\"{}rewards/redeem/\{reward\}/user/\{user\}\char`\"{}, description=\char`\"{}\+Redeem user points for rewards\char`\"{}, summary=\char`\"{}\+Redeem a reward\char`\"{}, tags=\{ \char`\"{}rewards\char`\"{}\},
+
+( description=\char`\"{}\+I\+D of reward to redeem\char`\"{}, format=\char`\"{}int64\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}reward\char`\"{}, required=true, type=\char`\"{}integer\char`\"{} ), ( description=\char`\"{}\+I\+D of user\char`\"{}, format=\char`\"{}int64\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}user\char`\"{}, required=true, type=\char`\"{}integer\char`\"{} ), ( response=200, description=\char`\"{}\+Unsuccessful response\char`\"{}, (ref=\char`\"{}\#/definitions/response.\+redeem\char`\"{}) ), ( response=201, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/response.\+redeem\char`\"{}) ), ( response=500, description=\char`\"{}\+Unexpected error\char`\"{}, (ref=\char`\"{}\#/definitions/error500\char`\"{}) ), ( response=404, description=\char`\"{}\+User not found\char`\"{}, (ref=\char`\"{}\#/definitions/\+User\+Error404\char`\"{}) ) ) 
+\begin{DoxyCode}
+104     \{
+105 
+106         \textcolor{keywordflow}{if}(is\_null($user = User::find($userId)))\{
+107             \textcolor{keywordflow}{return} Response::api()->errorNotFound(\textcolor{stringliteral}{'User not found'});
+108         \}
+109         
+110         \textcolor{keywordflow}{if}(is\_null($reward = Reward::find($rewardId)))\{
+111             \textcolor{keywordflow}{return} Response::api()->errorNotFound(\textcolor{stringliteral}{'Reward not found'});
+112         \}
+113         
+114         \hyperlink{classDMA_1_1Friends_1_1Classes_1_1RewardManager_a2a1ce1d86e60454954229210c334e2bd}{RewardManager::redeem}($rewardId, $user);
+115         
+116         \textcolor{comment}{// Check if redeem was successful }
+117         $message = Session::pull(\textcolor{stringliteral}{'rewardMessage'});
+118         $type    = ($message) ? \textcolor{stringliteral}{'info'} : \textcolor{stringliteral}{'error'}; 
+119         
+120         $success = \textcolor{keyword}{true};
+121         $httpCode = 201;
+122         
+123         
+124         \textcolor{keywordflow}{if}($type == \textcolor{stringliteral}{'error'})\{
+125             $success = \textcolor{keyword}{false};
+126             $httpCode = 200;
+127             $message = Session::pull(\textcolor{stringliteral}{'rewardError'});
+128         \}
+129         
+130         
+131         \textcolor{comment}{// Get common user points format via UserProfileTransformer}
+132         $userTransformer = \textcolor{keyword}{new} UserProfileTransformer();
+133         $points = $userTransformer->getUserPoints($user);
+134 
+135         $payload = [
+136                 \textcolor{stringliteral}{'data'} => [
+137                         \textcolor{stringliteral}{'success'} => $success,
+138                         \textcolor{stringliteral}{'message'} => $message,
+139                         \textcolor{stringliteral}{'user'} => [
+140                             \textcolor{stringliteral}{'id'}      => $user->getKey(),
+141                             \textcolor{stringliteral}{'points'}  => $points
+142                         ]
+143                 ]
+144         ];
+145         
+146         \textcolor{keywordflow}{return} Response::api()->setStatusCode($httpCode)->withArray($payload);
+147 
+148     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1RewardResource_a5979a6696b2dbd4561043a44508f583d}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Reward\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Reward\+Resource}!redeem\+By\+Post@{redeem\+By\+Post}}
+\index{redeem\+By\+Post@{redeem\+By\+Post}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Reward\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Reward\+Resource}}
+\subsubsection[{redeem\+By\+Post}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Reward\+Resource\+::redeem\+By\+Post (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1RewardResource_a5979a6696b2dbd4561043a44508f583d}
+( definition=\char`\"{}request.\+redeem\char`\"{}, required=\{\char`\"{}reward\+\_\+id\char`\"{}, \char`\"{}user\+\_\+id\char`\"{}\}, ( property=\char`\"{}reward\+\_\+id\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( property=\char`\"{}user\+\_\+id\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ) )
+
+( path=\char`\"{}rewards/redeem\char`\"{}, description=\char`\"{}\+Redeem user points for rewards\char`\"{}, summary=\char`\"{}\+Redeem a reward\char`\"{}, tags=\{ \char`\"{}rewards\char`\"{}\},
+
+( in=\char`\"{}body\char`\"{}, name=\char`\"{}body\char`\"{}, required=true, type=\char`\"{}object\char`\"{}, schema=(ref=\char`\"{}\#/definitions/request.\+redeem\char`\"{}) ),
+
+( response=200, description=\char`\"{}\+Unsuccessful response\char`\"{}, (ref=\char`\"{}\#/definitions/response.\+redeem\char`\"{}) ), ( response=201, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/response.\+redeem\char`\"{}) ), ( response=500, description=\char`\"{}\+Unexpected error\char`\"{}, (ref=\char`\"{}\#/definitions/error500\char`\"{}) ), ( response=404, description=\char`\"{}\+User not found\char`\"{}, (ref=\char`\"{}\#/definitions/\+User\+Error404\char`\"{}) ) ) 
+\begin{DoxyCode}
+204     \{
+205     
+206         $data = Request::all();
+207         $rules = [
+208                 \textcolor{stringliteral}{'reward\_id'}             => \textcolor{stringliteral}{"required"},
+209                 \textcolor{stringliteral}{'user\_id'}               => \textcolor{stringliteral}{"required"}
+210         ];
+211         
+212         $validation = Validator::make($data, $rules);
+213         \textcolor{keywordflow}{if} ($validation->fails())\{
+214             \textcolor{keywordflow}{return} $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseResource_a939517c4026ec51cd9e001c78aa5617d}{errorDataValidation}(\textcolor{stringliteral}{'Redeem data fails to validated'}, 
+      $validation->errors());
+215         \}
+216         
+217         \textcolor{keywordflow}{return} $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Resources_1_1RewardResource_a65e7225c16bafe1a2ef96e7ccf88e85e}{redeemByGet}($data[\textcolor{stringliteral}{'reward\_id'}], $data[\textcolor{stringliteral}{'user\_id'}]);
+218     
+219     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Resources_1_1RewardResource_af029b99cc507bb3cd5cfb29804ed2071}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Reward\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Reward\+Resource}!show@{show}}
+\index{show@{show}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Reward\+Resource@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Resources\+::\+Reward\+Resource}}
+\subsubsection[{show}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Resources\textbackslash{}\+Reward\+Resource\+::show (
+\begin{DoxyParamCaption}
+\item[{}]{\$id}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Resources_1_1RewardResource_af029b99cc507bb3cd5cfb29804ed2071}
+( path=\char`\"{}rewards/\{id\}\char`\"{}, description=\char`\"{}\+Returns a reward by id\char`\"{}, summary=\char`\"{}\+Find a reward by id\char`\"{}, tags=\{ \char`\"{}rewards\char`\"{}\},
+
+( description=\char`\"{}\+I\+D of reward to fetch\char`\"{}, format=\char`\"{}int64\char`\"{}, in=\char`\"{}path\char`\"{}, name=\char`\"{}id\char`\"{}, required=true, type=\char`\"{}integer\char`\"{} ),
+
+( response=200, description=\char`\"{}\+Successful response\char`\"{}, (ref=\char`\"{}\#/definitions/reward.\+extended\char`\"{}) ), ( response=500, description=\char`\"{}\+Unexpected error\char`\"{}, (ref=\char`\"{}\#/definitions/error500\char`\"{}) ), ( response=404, description=\char`\"{}\+Not Found\char`\"{}, (ref=\char`\"{}\#/definitions/error404\char`\"{}) ) ) 
+\begin{DoxyCode}
+296     \{
+297         \textcolor{keywordflow}{return} parent::show($id);
+298     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+api/resources/Reward\+Resource.\+php\end{DoxyCompactItemize}

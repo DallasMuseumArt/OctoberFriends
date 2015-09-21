@@ -1,0 +1,113 @@
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1GenerateAPIDocs}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Commands\textbackslash{}Generate\+A\+P\+I\+Docs Class Reference}
+\label{classDMA_1_1Friends_1_1Commands_1_1GenerateAPIDocs}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Commands\textbackslash{}\+Generate\+A\+P\+I\+Docs@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Commands\textbackslash{}\+Generate\+A\+P\+I\+Docs}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Commands\textbackslash{}Generate\+A\+P\+I\+Docs\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d3/d2f/classDMA_1_1Friends_1_1Commands_1_1GenerateAPIDocs}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Commands_1_1GenerateAPIDocs_aedce176f0424d4ae2ac76a3ffec7f846}{fire} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Commands_1_1GenerateAPIDocs_a04f5ba96f15f950cd1b1e80f670e4b09}{get\+Scan\+Folders} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1GenerateAPIDocs_aaa5239299e6c056219f8edbab31de040}{}{\bfseries prepare\+Swagger} ()\label{classDMA_1_1Friends_1_1Commands_1_1GenerateAPIDocs_aaa5239299e6c056219f8edbab31de040}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1GenerateAPIDocs_a5f2cb4358aa15bcca050f58d5a4061d5}{}{\bfseries \$name} = \textquotesingle{}friends\+:generate-\/api-\/docs\textquotesingle{}\label{classDMA_1_1Friends_1_1Commands_1_1GenerateAPIDocs_a5f2cb4358aa15bcca050f58d5a4061d5}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1GenerateAPIDocs_aedce176f0424d4ae2ac76a3ffec7f846}{}\index{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Generate\+A\+P\+I\+Docs@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Generate\+A\+P\+I\+Docs}!fire@{fire}}
+\index{fire@{fire}!D\+M\+A\+::\+Friends\+::\+Commands\+::\+Generate\+A\+P\+I\+Docs@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Generate\+A\+P\+I\+Docs}}
+\subsubsection[{fire}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Commands\textbackslash{}\+Generate\+A\+P\+I\+Docs\+::fire (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Commands_1_1GenerateAPIDocs_aedce176f0424d4ae2ac76a3ffec7f846}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+31     \{
+32 
+33         $output = dirname(\_\_DIR\_\_) . \textcolor{stringliteral}{'/docs/api-docs/specs/swagger.json'};
+34         
+35         $paths = $this->\hyperlink{classDMA_1_1Friends_1_1Commands_1_1GenerateAPIDocs_a04f5ba96f15f950cd1b1e80f670e4b09}{getScanFolders}();
+36         $exclude = array\_map(\textcolor{keyword}{function}($p)\{
+37            \textcolor{keywordflow}{return}  $p . DIRECTORY\_SEPARATOR . \textcolor{stringliteral}{'vendor'};
+38         \}, $paths);
+39         
+40         $this->prepareSwagger();
+41         $swagger = Swagger\(\backslash\)scan($paths, [\textcolor{stringliteral}{'exclude'}=> $exclude ]);
+42 
+43         $methods = [\textcolor{stringliteral}{'get'}, \textcolor{stringliteral}{'put'}, \textcolor{stringliteral}{'post'}, \textcolor{stringliteral}{'delete'}, \textcolor{stringliteral}{'options'}, \textcolor{stringliteral}{'head'}, \textcolor{stringliteral}{'patch'}];
+44         $counter = 0;
+45         \textcolor{comment}{// Output report}
+46         \textcolor{keywordflow}{foreach} ($swagger->paths as $path) \{
+47             \textcolor{keywordflow}{foreach} ($path as $method => $operation) \{
+48                 \textcolor{keywordflow}{if} ($operation !== null && in\_array($method, $methods)) \{
+49                     error\_log(str\_pad($method, 7, \textcolor{charliteral}{' '}, STR\_PAD\_LEFT) . \textcolor{charliteral}{' '} . $path->path);
+50                     $counter++;
+51                 \}
+52             \}
+53         \}
+54         error\_log(\textcolor{stringliteral}{'----------------------'}.  str\_repeat(\textcolor{charliteral}{'-'}, strlen($counter)));
+55         error\_log($counter.\textcolor{stringliteral}{' operations documented'});
+56         error\_log(\textcolor{stringliteral}{'----------------------'}.  str\_repeat(\textcolor{charliteral}{'-'}, strlen($counter)));
+57         
+58      
+59         $swagger->saveAs($output);
+60         error\_log(\textcolor{stringliteral}{'Written to '}.realpath($output));
+61     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Commands_1_1GenerateAPIDocs_a04f5ba96f15f950cd1b1e80f670e4b09}{}\index{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Generate\+A\+P\+I\+Docs@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Generate\+A\+P\+I\+Docs}!get\+Scan\+Folders@{get\+Scan\+Folders}}
+\index{get\+Scan\+Folders@{get\+Scan\+Folders}!D\+M\+A\+::\+Friends\+::\+Commands\+::\+Generate\+A\+P\+I\+Docs@{D\+M\+A\+::\+Friends\+::\+Commands\+::\+Generate\+A\+P\+I\+Docs}}
+\subsubsection[{get\+Scan\+Folders}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Commands\textbackslash{}\+Generate\+A\+P\+I\+Docs\+::get\+Scan\+Folders (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Commands_1_1GenerateAPIDocs_a04f5ba96f15f950cd1b1e80f670e4b09}
+Get list of plugin folders Swagger needs to scan 
+\begin{DoxyCode}
+114     \{
+115         $pluginsClassNames = [];
+116         \textcolor{comment}{// Get plugins folders that register endpoints in Friends API}
+117         \textcolor{keywordflow}{foreach}(FriendsAPI::getResources() as $url => $class)\{
+118             \textcolor{keywordflow}{try}\{
+119                 $bits = explode(\textcolor{charliteral}{'\(\backslash\)\(\backslash\)'}, $class);
+120                 $pluginClassname = implode(\textcolor{charliteral}{'\(\backslash\)\(\backslash\)'}, array\_merge(array\_slice($bits, 0, 2), [\textcolor{stringliteral}{'Plugin'}]));
+121                 $pluginsClassNames[] = $pluginClassname;
+122         
+123             \}\textcolor{keywordflow}{catch}(\hyperlink{namespaceException}{Exception} $e)\{
+124                 Log::error(\textcolor{stringliteral}{"API : Resource endpoint fail to register due to '"} . $e->getMessage() . \textcolor{stringliteral}{"'"});
+125             \}
+126         \}
+127         
+128         $scanFolders = [];
+129         \textcolor{comment}{// Get folder paths}
+130         \textcolor{keywordflow}{foreach}(array\_unique($pluginsClassNames) as $plugin)\{
+131             $reflector = \textcolor{keyword}{new} \hyperlink{namespaceReflectionClass}{ReflectionClass}($plugin);
+132             $fn = $reflector->getFileName();
+133             $scanFolders[] = dirname($fn);
+134         \}
+135         
+136         \textcolor{keywordflow}{return} $scanFolders;
+137     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+commands/Generate\+A\+P\+I\+Docs.\+php\end{DoxyCompactItemize}

@@ -6,7 +6,7 @@
 name: Badge
 
 # Model Form Field configuration
-form: @/plugins/dma/friends/models/badge/fields.yaml
+form: ~/plugins/dma/friends/models/badge/fields.yaml
 
 # Model Class name
 modelClass: DMA\Friends\Models\Badge

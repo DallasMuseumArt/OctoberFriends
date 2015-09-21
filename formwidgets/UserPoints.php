@@ -67,7 +67,7 @@ class UserPoints extends FormWidgetBase
         if (!is_numeric($points)) return;
 
         $userExtend = new UserExtend($this->model);
-        $userExtend->removePoints($points);
+        $userExtend->removePoints($points, false);
 
         return [
             'span.points'       => $userExtend->user->points,

@@ -68,6 +68,12 @@ class BadgeManager
     private static function checkUserActivities(User $user, Activity $activity, Step $step)
     {
         static $cache;
+
+        // Relationship isnt instantiated until we use it
+        $badge = $step->badge;
+
+        if (!isset($badge)) return;
+
         $key = $user->id . '_' . $activity->id;
 
         if (!isset($cache[$key])) {
@@ -85,12 +91,16 @@ class BadgeManager
         if ($step->badge->maximum_earnings) {
             $timesEarned = floor($count->count / $step->count);
 
-            if ($timesEarned >= $step->badge->maximum_earnings) 
+            if ($timesEarned > $step->badge->maximum_earnings) {
                 return false;
+            }
         }
 
         // If count is evenly divisable by the required step count then return true
-        return !($count->count % $step->count);
+        //return !($count->count % $step->count);
+
+        // return true if the user has completed the activity more then the required step count
+        return ($count->count >= $step->count);
     }
 
     /**
@@ -105,6 +115,13 @@ class BadgeManager
     {
         $badge = $step->badge;
 
+        // Check badge global limit
+        if ($badge->maximum_earnings_global > 0
+            && count($badge->users) > $badge->maximum_earnings_global) {
+
+            return false;
+        }
+
         // Complete step
         try {
             $user->steps()->save($step);
@@ -115,6 +132,7 @@ class BadgeManager
 
         // See if the user has completed all steps for a badge
         foreach($badge->steps as $step) {
+
             if (!$user->steps->contains($step->id)) {
                 //user did not complete a step in badge so we cannot complete the badge
                 return;

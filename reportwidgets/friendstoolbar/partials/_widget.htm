@@ -1,17 +1,22 @@
 <div class="report-widget">
     <div class="scoreboard-item title-value">
         <h4>Total Friends</h4>
-        <p><?php print $numFriends ?></p>
+        <p><?php print number_format($numFriends) ?></p>
     </div>
 
     <div class="scoreboard-item title-value">
         <h4>Today</h4>
-        <p><?php print $todayFriends ?></p>
+        <p><?php print number_format($todayFriends) ?></p>
+    </div>
+
+    <div class="scoreboard-item title-value">
+        <h4>Average Per Day</h4>
+        <p><?php print number_format($averageFriends) ?></p>
     </div>
 
     <div class="scoreboard-item title-value">
         <h4>This week</h4>
-        <p><?php print $weekFriends ?></p>
+        <p><?php print number_format($weekFriends) ?></p>
     </div>
 
     <div class="clearfix"></div>

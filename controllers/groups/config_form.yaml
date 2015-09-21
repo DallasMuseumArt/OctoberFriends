@@ -6,7 +6,7 @@
 name: UserGroup
 
 # Model Form Field configuration
-form: @/plugins/dma/friends/models/usergroup/fields.yaml
+form: $/dma/friends/models/usergroup/fields.yaml
 
 # Model Class name
 modelClass: DMA\Friends\Models\UserGroup

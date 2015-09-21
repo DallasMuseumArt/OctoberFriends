@@ -1,0 +1,115 @@
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}A\+P\+I\textbackslash{}Base\+Transformer Class Reference}
+\label{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+A\+P\+I\textbackslash{}\+Base\+Transformer@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+A\+P\+I\textbackslash{}\+Base\+Transformer}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}A\+P\+I\textbackslash{}Base\+Transformer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=12.000000cm]{d6/d13/classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer_a7a7324551796970ba6285f8aaef675b7}{\+\_\+\+\_\+construct} (\$use\+Extended\+Data=null, \$exclude\+Embededs=\mbox{[}$\,$\mbox{]})
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer_aafe7c10cfc1517b7892ec5656b7d713e}{}{\bfseries transform} (\$instance)\label{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer_aafe7c10cfc1517b7892ec5656b7d713e}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer_ab9ee38df16a958e807f656536d6a52ac}{}{\bfseries get\+Data} (\$instance)\label{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer_ab9ee38df16a958e807f656536d6a52ac}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer_a65405b67e5ba720a70a5447563df4ef9}{}{\bfseries get\+Extended\+Data} (\$instance)\label{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer_a65405b67e5ba720a70a5447563df4ef9}
+
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer_ab219fbf7518a5a42d20583206ab454a7}{process\+Included\+Resources} (Scope \$scope, \$data)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer_a9d2c6c693eba355d57b8335aca1d95fd}{sanitize} (array \$data)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer_a389965bafe633dc8548b16a2e303e895}{}{\bfseries \$use\+Extended\+Data} = true\label{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer_a389965bafe633dc8548b16a2e303e895}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer_a664c0f4bbb62bfb386c9e7b8d736e259}{}{\bfseries \$exclude\+Embededs} = \mbox{[}$\,$\mbox{]}\label{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer_a664c0f4bbb62bfb386c9e7b8d736e259}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer_a7a7324551796970ba6285f8aaef675b7}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Transformer@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Transformer}!\+\_\+\+\_\+construct@{\+\_\+\+\_\+construct}}
+\index{\+\_\+\+\_\+construct@{\+\_\+\+\_\+construct}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Transformer@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Transformer}}
+\subsubsection[{\+\_\+\+\_\+construct}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+A\+P\+I\textbackslash{}\+Base\+Transformer\+::\+\_\+\+\_\+construct (
+\begin{DoxyParamCaption}
+\item[{}]{\$use\+Extended\+Data = {\ttfamily null}, }
+\item[{}]{\$exclude\+Embededs = {\ttfamily \mbox{[}\mbox{]}}}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer_a7a7324551796970ba6285f8aaef675b7}
+
+\begin{DoxyParams}[1]{Parameters}
+boolean & {\em \$use\+Extended\+Data} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+33     \{
+34         $this->useExtendedData = (is\_null($useExtendedData)) ? $this->useExtendedData : $useExtendedData;
+35         $this->excludeEmbededs = $excludeEmbededs;
+36     \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer_ab219fbf7518a5a42d20583206ab454a7}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Transformer@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Transformer}!process\+Included\+Resources@{process\+Included\+Resources}}
+\index{process\+Included\+Resources@{process\+Included\+Resources}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Transformer@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Transformer}}
+\subsubsection[{process\+Included\+Resources}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+A\+P\+I\textbackslash{}\+Base\+Transformer\+::process\+Included\+Resources (
+\begin{DoxyParamCaption}
+\item[{Scope}]{\$scope, }
+\item[{}]{\$data}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer_ab219fbf7518a5a42d20583206ab454a7}
+Quick hack until Fractal support embeded data without the use of the data-\/key
+
+\begin{DoxySeeAlso}{See also}
+\href{https://github.com/thephpleague/fractal/issues/37}{\tt https\+://github.\+com/thephpleague/fractal/issues/37}
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+121     \{
+122         $embeded = parent::processIncludedResources($scope, $data);
+123         \textcolor{keywordflow}{if} (!is\_null($embeded) && !is\_bool($embeded)) \{
+124             $embeded = array\_map(\textcolor{keyword}{function}($d)\{
+125                 \textcolor{keywordflow}{return} current($d);
+126             \}, $embeded);
+127         \}
+128         \textcolor{keywordflow}{return} $embeded;
+129     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer_a9d2c6c693eba355d57b8335aca1d95fd}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Transformer@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Transformer}!sanitize@{sanitize}}
+\index{sanitize@{sanitize}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Transformer@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+A\+P\+I\+::\+Base\+Transformer}}
+\subsubsection[{sanitize}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+A\+P\+I\textbackslash{}\+Base\+Transformer\+::sanitize (
+\begin{DoxyParamCaption}
+\item[{array}]{\$data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{classDMA_1_1Friends_1_1Classes_1_1API_1_1BaseTransformer_a9d2c6c693eba355d57b8335aca1d95fd}
+Basic funtion to clean up invisible unicode characters. 
+\begin{DoxyCode}
+80                                             \{
+81         \textcolor{comment}{// Regex to find invisible unicode characters}
+82         $invChar = \textcolor{stringliteral}{'/\(\backslash\)p\{C\}+/u'};
+83         
+84         \textcolor{keywordflow}{foreach}($data as $key => $value)\{
+85             \textcolor{keywordflow}{if}(is\_string($value)) \{
+86                 $data[$key] = preg\_replace($invChar, \textcolor{stringliteral}{''}, $value);
+87             \}
+88         \}
+89         \textcolor{keywordflow}{return} $data;
+90     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+classes/api/Base\+Transformer.\+php\end{DoxyCompactItemize}

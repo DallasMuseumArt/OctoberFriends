@@ -125,17 +125,21 @@ class ChannelSMS implements Channel, Listenable, Webhook
 	    // TODO : add validation to control the size of the message.
 	    $toUser  = $message->getTo();
 	    $data    = $message->getData();
-	    $txt     = $message->getContent();
+	    $txt     = strip_tags($message->getContent());
 
-	    // Clean phone user
-	    $toPhone = $this->cleanPhone($toUser->phone);
-	    if(!empty($toPhone)){
-    	    $sms = $this->client->account->sms_messages->create(
+        $txt = $this->chunkLongText($txt, 130);
+
+        foreach($txt as $t) {
+	        // Clean phone user
+	        $toPhone = $this->cleanPhone($toUser->phone);
+	        if (!empty($toPhone)) {
+    	        $sms = $this->client->account->sms_messages->create(
     	    		$this->fromNumber, // From a Twilio number in your account
     	    		$toPhone, // Text any number
-    	    		$txt
-    	    );
-	    }
+    	    		$t
+    	        );
+	        }
+        }
 	   
 	}
 
@@ -178,5 +182,49 @@ class ChannelSMS implements Channel, Listenable, Webhook
 	    // Response message was read ok
 	    return \Response::make('<Response></Response>', $httpCode);
 	}
+
+    private function chunkLongText($longString, $maxLineLength = 60)
+    {
+        if (strlen($longString) <= $maxLineLength) {
+            return [$longString];
+        }
+        
+        $arrayOutput = [];
+        $arrayWords = explode(' ', $longString);
+
+        // Auxiliar counters, foreach will use them
+        $currentLength = 0;
+        $index = 0;
+
+        foreach($arrayWords as $word)
+        {
+            // +1 because the word will receive back the space in the end that it loses in explode()
+            $wordLength = strlen($word) + 1;
+            $string = $word . ' ';
+
+            if( ( $currentLength + $wordLength ) <= $maxLineLength )
+            {
+
+                if (isset($arrayOutput[$index])) {
+                    $arrayOutput[$index] .= $string;
+                } else {
+                    $arrayOutput[$index] = $string;
+                }
+
+                $currentLength += $wordLength;
+            }
+            else
+            {
+                $index += 1;
+
+                $currentLength = $wordLength;
+
+                $arrayOutput[$index] = $string;
+            }
+        }
+
+        return $arrayOutput;
+
+    }
 
 }

@@ -20,7 +20,7 @@ interface ActivityTypeBaseInterface {
     public function getConfig();
     public function getFormDefaultValues($model);
     public function saveData($model, $values);
-    public static function process(User $user, $params);
+    public static function process(User $user, $params = []);
     public static function canComplete(Activity $activity, User $user);
 }
 
@@ -69,7 +69,7 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
      */
     public function getConfig()
     {
-        return $this->dirName . '/' . $this->fieldConfig;
+        return '@/plugins/' . $this->dirName . '/' . $this->fieldConfig;
     }
 
     /**
@@ -115,13 +115,11 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
      * @return boolean
      * returns true if the process was successful
      */
-    public static function process(User $user, $params)
+    public static function process(User $user, $params = [])
     {
         $activity = $params['activity'];
 
         if (self::canComplete($activity, $user)) {
-            $userExtend = new UserExtend($user);
-            $userExtend->addPoints($activity->points);
 
             if ($user->activities()->save($activity)) {
 
@@ -133,10 +131,27 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
                     'object'        => $activity,
                 ]); 
 
+                // Award points
+                $userExtend = new UserExtend($user);
+                $userExtend->addPoints($activity->points);
+
                 // Hand everything off to the badges
                 BadgeManager::applyActivityToBadges($user, $activity);
 
-                Session::put('activityMessage', Lang::get('dma.friends::lang.activities.codeSuccess', ['title' => $activity->title]));
+                $messages = Session::get('activityMessage');
+
+                if (!is_array($messages) && $messages) {
+                    $messages = [$messages];
+                }
+
+                $message = (!empty(trim(strip_tags($activity->complete_message)))) ? 
+                    $activity->complete_message :
+                    Lang::get('dma.friends::lang.activities.codeSuccess', 
+                        ['title' => $activity->title]
+                    );
+                $messages[] = $message;
+
+                Session::put('activityMessage', $messages);
 
                 return $activity;
             }
@@ -162,11 +177,13 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
         if ($activity->activity_lockout && $pivot = $user->activities()->where('activity_id', $activity->id)->first()) {
             $time       = Carbon::now();
             $lastTime   = $pivot->pivot->created_at;
-            $lastTime->addMinutes($activity->activity_lockout);
 
-            if ($time->diffInMinutes($lastTime) && $time->diffInMinutes($lastTime) < $activity->activity_lockout) {
-                $x = $time->diffInMinutes($lastTime);
-                Session::put('activityError', Lang::get('dma.friends::lang.activities.lockout', ['x' => $x]));
+            if ($time->diffInMinutes($lastTime) < $activity->activity_lockout) {
+                $x = $time->diffInMinutes($lastTime->addMinutes($activity->activity_lockout));
+
+                $message = self::convertToHoursMins($x, '%d hours and %02d minutes');
+
+                Session::put('activityError', Lang::get('dma.friends::lang.activities.lockout', ['x' => $message]));
                 return false;
             }
         }
@@ -187,7 +204,10 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
                     $end_time->setTime($end['hour'], $start['minutes']);
                     $day        = date('w');
 
-                    if ($activity->time_restriction_date['days'][$day] !== false
+                    // Sunday is on the end of the week and date sets sunday as 0
+                    if ($day == 0) $day = 7;
+
+                    if ($activity->time_restriction_data['days'][$day] !== false
                         && $now->gte($start_time) && $now->lte($end_time)) {
 
                         return true;
@@ -224,12 +244,14 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
     protected static function convertTime($timeString)
     {
         list($hour, $minutes) = explode(":", $timeString);
+
         $meridiem = substr($minutes, 2, 3);
-        $minutes = substr($minutes, 0, 1);
+        $minutes = substr($minutes, 0, 2);
 
-
-        if (strtolower($meridiem) == 'pm' || ($hour == '12' && strtolower($meridiem) == 'am')) {
+        if (strtolower($meridiem) == 'pm' && $hour != 12) {
             $hour += 12;
+        } else if (strtolower($meridiem) == 'am' && $hour == 12) {
+            $hour = 0;
         }
 
         return [
@@ -237,5 +259,20 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
             'minutes'   => $minutes,
         ];
     }
+
+    protected static function convertToHoursMins($time, $format = '%d:%d') 
+    {
+        settype($time, 'integer');
+        
+        if ($time < 1) {
+            return;
+        }
+        
+        $hours = floor($time / 60);
+        $minutes = ($time % 60);
+        
+        return sprintf($format, $hours, $minutes);
+    }
+
 
 }

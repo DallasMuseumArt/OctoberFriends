@@ -18,22 +18,13 @@ class AddActivityUserIndex extends Migration {
             $table->index('user_id');
         });
 
-    }   
-
+    }
 
     /** 
      * Reverse the migrations.
      *
      * @return void
      */
-    public function down()
-    {   
-        Schema::table('dma_friends_activity_user', function($table)
-        {
-            $table->dropIndex('activity_id');
-            $table->dropIndex('user_id');
-        });
-
-    }   
+    public function down() {}    
 
 }

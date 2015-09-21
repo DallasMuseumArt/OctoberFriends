@@ -24,13 +24,7 @@ class AddLocationUUID extends Migration {
      *
      * @return void
      */
-    public function down()
-    {   
-        Schema::table('dma_friends_locations', function($table)
-        {
-            $table->dropColumn('uuid');
-        });
-    }   
+    public function down() {}    
 
 }
 

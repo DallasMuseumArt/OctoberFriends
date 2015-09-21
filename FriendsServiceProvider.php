@@ -7,6 +7,9 @@ use DMA\Friends\Classes\ActivityCode;
 use DMA\Friends\Classes\BadgeProcessor;
 use DMA\Friends\Classes\FriendsLog;
 use DMA\Friends\Classes\Notifications\ChannelManager;
+use DMA\Friends\Classes\API\APIManager;
+use DMA\Friends\Classes\Mailchimp\MailchimpManager;
+
 
 /**
  * Register service providers for Friends
@@ -25,6 +28,8 @@ class FriendsServiceProvider extends ServiceProvider
     {
         $this->registerFriendsLog();
         $this->registerNotifications();
+        $this->registerAPI();
+        $this->registerMailChimpIntegration();
     }
 
     /**
@@ -73,6 +78,29 @@ class FriendsServiceProvider extends ServiceProvider
         $this->createAlias('Postman', 'DMA\Friends\Facades\Postman');        
     }
     
+    public function registerAPI()
+    {
+        $this->app['FriendsAPI'] = $this->app->share(function($app) {
+            \App::register('\EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider');            
+            $api = new APIManager;
+            return $api;            
+        });
+        
+        $this->createAlias('FriendsAPI', 'DMA\Friends\Classes\API\APIManager');
+        
+    }
+
+    
+    public function registerMailChimpIntegration()
+    {
+        $this->app['mailchimpintegration'] = $this->app->share(function($app) {
+            $mailchimp = new MailchimpManager();
+            return $mailchimp;
+        });
+    
+        $this->createAlias('MailChimpIntegration', 'DMA\Friends\Classes\Mailchimp\MailchimpManager');
+    
+    }
     
     /**
      * Helper method to quickly setup class aliases for a service
@@ -81,10 +109,20 @@ class FriendsServiceProvider extends ServiceProvider
      */
     protected function createAlias($alias, $class)
     {
-        $this->app->booting(function() use ($alias, $class)
-        {   
-            $loader = \Illuminate\Foundation\AliasLoader::getInstance();
-            $loader->alias($alias, $class);
-        }); 
+        $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+        $loader->alias($alias, $class);
+
     }
+    
+    /**
+     * Get the services provided by the provider.
+     * @return array
+     */
+    public function provides()
+    {
+        return ['FriendsLog', 'postman', 'FriendsAPI', 'mailchimpintegration'];
+    
+    }
+    
+    
 }

@@ -6,7 +6,7 @@
 name: Category
 
 # Model Form Field configuration
-form: $/dma/friends/models/category/fields.yaml
+form: ~/plugins/dma/friends/models/category/fields.yaml
 
 # Model Class name
 modelClass: DMA\Friends\Models\Category

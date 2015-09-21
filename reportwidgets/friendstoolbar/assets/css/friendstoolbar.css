@@ -3,3 +3,7 @@
     float: left;
     margin-right: 20px;
 }
+
+.report-container .title-value p {
+    font-size: 2.4em;
+}

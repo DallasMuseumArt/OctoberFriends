@@ -24,8 +24,5 @@ columns:
     created_at:
         label: rainlab.user::lang.user.created_at
 
-    membership_status:
+    pivot[membership_status]:
         label: Membership status
-        searchable: false
-        relation: groups
-        select: membership_status

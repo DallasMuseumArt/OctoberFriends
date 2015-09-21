@@ -1,0 +1,94 @@
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1GraphReport}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Report\+Widgets\textbackslash{}Graph\+Report Class Reference}
+\label{classDMA_1_1Friends_1_1ReportWidgets_1_1GraphReport}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Graph\+Report@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Graph\+Report}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Report\+Widgets\textbackslash{}Graph\+Report\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.043796cm]{d1/d31/classDMA_1_1Friends_1_1ReportWidgets_1_1GraphReport}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1ReportWidgets_1_1GraphReport_a750a6e7451bc98f22bdb38e3ad091bb7}{add\+Assets} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1ReportWidgets_1_1GraphReport_aa4842f4491c6ea5b784b99a58fbc9b42}{render} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1GraphReport_a8158cf12d275e22339d81d206198c83f}{}static {\bfseries process\+Query} (\$query, \$timestamp, \$limit, \$cache\+Key, \$reset=false)\label{classDMA_1_1Friends_1_1ReportWidgets_1_1GraphReport_a8158cf12d275e22339d81d206198c83f}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1GraphReport_a962b22135548ef899e10abd936d5f0ba}{}static {\bfseries get\+Cache\+Time} ()\label{classDMA_1_1Friends_1_1ReportWidgets_1_1GraphReport_a962b22135548ef899e10abd936d5f0ba}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1GraphReport_ac68b6e08f9826d30c2aa23aa3cc54854}{}{\bfseries get\+Ajax\+Path} ()\label{classDMA_1_1Friends_1_1ReportWidgets_1_1GraphReport_ac68b6e08f9826d30c2aa23aa3cc54854}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1GraphReport_ae3d93edd42d9e767b4489f3df2ff6173}{}{\bfseries \$partial\+Path} = \textquotesingle{}/plugins/dma/friends/reportwidgets/graphreport/partials/\textquotesingle{}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1GraphReport_ae3d93edd42d9e767b4489f3df2ff6173}
+
+\item 
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1GraphReport_a0da3cb0b678025e674295784c6129772}{}{\bfseries \$ajax\+Path} = \textquotesingle{}/friends/reports/ajax/\textquotesingle{}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1GraphReport_a0da3cb0b678025e674295784c6129772}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Helper class to instantiate assets for all report widgets that use c3 
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1GraphReport_a750a6e7451bc98f22bdb38e3ad091bb7}{}\index{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Graph\+Report@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Graph\+Report}!add\+Assets@{add\+Assets}}
+\index{add\+Assets@{add\+Assets}!D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Graph\+Report@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Graph\+Report}}
+\subsubsection[{add\+Assets}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Graph\+Report\+::add\+Assets (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1GraphReport_a750a6e7451bc98f22bdb38e3ad091bb7}
+Add C3 javascript assets 
+\begin{DoxyCode}
+21     \{
+22         global $primaryAssetsLoaded;
+23 
+24         \textcolor{keywordflow}{if} (!$primaryAssetsLoaded) \{
+25             $this->addJs(\textcolor{stringliteral}{'../../graphreport/assets/d3.js'});
+26             $this->addJs(\textcolor{stringliteral}{'../../graphreport/assets/c3.js'});
+27             $this->addJs(\textcolor{stringliteral}{'../../graphreport/assets/graphreport.js'});
+28             $this->addCss(\textcolor{stringliteral}{'../../graphreport/assets/c3.css'}); 
+29             $this->addCss(\textcolor{stringliteral}{'../../graphreport/assets/graphreport.css'}); 
+30             
+31             \textcolor{comment}{// Only load these assets the first time}
+32             $primaryAssetsLoaded = \textcolor{keyword}{true};
+33         \}
+34 
+35         $this->addJs(\textcolor{stringliteral}{'graph.js'});
+36     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1GraphReport_aa4842f4491c6ea5b784b99a58fbc9b42}{}\index{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Graph\+Report@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Graph\+Report}!render@{render}}
+\index{render@{render}!D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Graph\+Report@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Graph\+Report}}
+\subsubsection[{render}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Graph\+Report\+::render (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1GraphReport_aa4842f4491c6ea5b784b99a58fbc9b42}
+Render a graph 
+\begin{DoxyCode}
+42     \{
+43         $this->\hyperlink{classDMA_1_1Friends_1_1ReportWidgets_1_1GraphReport_a750a6e7451bc98f22bdb38e3ad091bb7}{addAssets}();
+44         \textcolor{keywordflow}{return} $this->makePartial(\textcolor{charliteral}{'@'} . $this->partialPath . \textcolor{stringliteral}{'\_widget.htm'}, [
+45             \textcolor{stringliteral}{'title'}         => $this->widgetTitle,
+46             \textcolor{stringliteral}{'id'}            => $this->defaultAlias,
+47             \textcolor{stringliteral}{'ajaxPath'}      => $this->getAjaxPath(),
+48         ]);
+49     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+reportwidgets/Graph\+Report.\+php\end{DoxyCompactItemize}

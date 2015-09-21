@@ -1,0 +1,20 @@
+<div class="report-widget graph <?= $id ?>" data-graphid="<?= $id ?>">
+    <h3><?= $title ?></h3>
+
+    <div class="controls">
+        <a href="#" class="graph-type active" data-type="bar"><span class="icon-bar-chart"></span></a>
+        <a href="#" class="graph-type" data-type="line"><span class="icon-line-chart"></span></a>
+        <a href="#" class="graph-type" data-type="area"><span class="icon-area-chart"></span></a>
+    </div>
+
+    <div id="<?= $id ?>" class="graphreport">
+        <img class="graphreport-loading" src="/plugins/dma/friends/reportwidgets/graphreport/assets/images/loading.gif"/>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <script type="text/javascript">
+        friendsReports.graphs.<?= $id ?>.ajaxPath = "<?= $ajaxPath ?>";
+    </script>
+
+</div>

@@ -1,14 +1,11 @@
-<?php
-
-namespace DMA\Friends\Tests;
-
-require_once(__DIR__ . '/../vendor/autoload.php');
+<?php namespace DMA\Friends\Tests;
 
 use League\FactoryMuffin\Facade as FactoryMuffin;
 use DMA\Friends\Plugin as DMAPlugin;
 use App;
+use TestCase;
 
-class MuffinCase extends \TestCase
+class MuffinCase extends TestCase
 {
     public static function setupBeforeClass()
     {   

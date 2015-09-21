@@ -1,7 +1,5 @@
 (function($) {
     $(document).ready(function() {
-        $('input.time-restriction').timeEntry({
-            timeSteps: [1, 15, 0]
-        });
+        $('input.time-restriction').timeEntry();
     });
 })(jQuery);

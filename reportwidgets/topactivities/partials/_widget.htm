@@ -1,0 +1,22 @@
+<div class="report-widget top-activities">
+    <h3>Top Activities</h3>
+    <table class="table data">
+        <thead>
+            <tr>
+                <th class="sort-desc active list-cell-name-title">
+                    Name
+                </th>
+                <th>
+                    Completed
+                </th>
+
+            </tr>
+        </thead>
+    <?php foreach($activities as $activity) { ?>
+        <tr>
+            <td><?php print $activity->title ?></td>
+            <td><?php print number_format($activity->count) ?></td>
+        </tr>
+    <?php } ?>
+    </table>
+</div>

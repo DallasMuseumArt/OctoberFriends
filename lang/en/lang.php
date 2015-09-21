@@ -9,7 +9,7 @@ return [
     'activities' => [
         'codeSuccess'               => 'Congratulations, you have completed ":title"',
         'codeError'                 => 'Sorry the code :code could not be found',
-        'lockout'                   => 'You cannot use this code for :x minutes',
+        'lockout'                   => 'You cannot use this code for :x',
         'notAvailable'              => 'Sorry this activity is currently not available',
         'likeWorkArtCodeError'      => 'Sorry the artwork :code could not be found',
         'alreadyLikeWorkArtError'   => 'You have already liked the artwork ":code"'
@@ -19,9 +19,11 @@ return [
         'noBadges'      => 'You have no badges',
     ],
     'rewards' => [
-        'redeemed'      => 'Congratulations, you have redeemed the reward ":title"',
-        'noPoints'      => 'Sorry you do not have enough points to redeem this reward',
-        'couponText'    => 'Thank you for being a DMA Friend!',
+        'redeemed'          => 'Congratulations, you have redeemed the reward ":title"',
+        'noPoints'          => 'Sorry you do not have enough points to redeem this reward',
+        'noInventory'       => 'Sorry this reward is no longer available',
+        'alreadyRedeemed'   => 'You have already redeemed this reward',
+        'couponText'        => 'Thank you for being a DMA Friend!',
     ],
     'log' => [
         'activity'  => ':name just completed the activity of ":title"',
@@ -38,10 +40,14 @@ return [
         'passwordFail'          => 'The password you entered is incorrect',
         'memberCard'            => 'The card has been sent to the designated membership printer for ":title"',
         'memberCardLocation'    => 'Select a location to print the membership card',
-        'memberPhoneNotFound'   => 'Phone not found. Please update your Friends profile',
+        'memberPhoneNotFound'   => 'Phone not found. Please visit a DMAFriends Kiosk to update your profile or register', #'Phone not found.  Please visit Friends.DMA.org to update your profile or register',
+        'noGender'              => 'No Answer',
+        'noRace'                => 'No Answer',
+        'noIncome'              => 'No Answer',
+        'noEducation'           => 'No Answer',
     ],
     'userLogin' => [
-        'loginTitle'            => 'Scan Membership Card',
+        'loginTitle'            => 'Login to Friends',
         'registerTitle'         => 'Sign Up for Friends',
         'failCredentials'       => 'The email or password you entered is incorrect',
         'throttleUser'          => 'Invalid login attempts. User ":login" has been temporarily suspended.',

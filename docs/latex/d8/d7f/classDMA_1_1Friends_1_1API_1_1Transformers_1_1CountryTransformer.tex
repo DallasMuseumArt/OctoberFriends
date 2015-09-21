@@ -1,0 +1,47 @@
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1CountryTransformer}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\textbackslash{}Transformers\textbackslash{}Country\+Transformer Class Reference}
+\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1CountryTransformer}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Country\+Transformer@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Country\+Transformer}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\textbackslash{}Transformers\textbackslash{}Country\+Transformer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{d8/d7f/classDMA_1_1Friends_1_1API_1_1Transformers_1_1CountryTransformer}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1CountryTransformer_aea4d5bbd11286a998dbb6ea7b6879a58}{get\+Data} (\$instance)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1CountryTransformer_aea4d5bbd11286a998dbb6ea7b6879a58}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Country\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Country\+Transformer}!get\+Data@{get\+Data}}
+\index{get\+Data@{get\+Data}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Country\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Country\+Transformer}}
+\subsubsection[{get\+Data}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Country\+Transformer\+::get\+Data (
+\begin{DoxyParamCaption}
+\item[{}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1CountryTransformer_aea4d5bbd11286a998dbb6ea7b6879a58}
+( definition=\char`\"{}country\char`\"{}, required=\{\char`\"{}id\char`\"{}, \char`\"{}name\char`\"{}, \char`\"{}code\char`\"{}, \char`\"{}is\+\_\+enabled\char`\"{}\}, ( property=\char`\"{}id\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( property=\char`\"{}name\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}code\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}is\+\_\+enabled\char`\"{}, type=\char`\"{}boolean\char`\"{}, ),
+
+)  \begin{DoxySeeAlso}{See also}
+\+::get\+Data() 
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+43     \{
+44         $data = [
+45             \textcolor{stringliteral}{'id'}         => $instance->id, 
+46             \textcolor{stringliteral}{'name'}       => $instance->name, 
+47             \textcolor{stringliteral}{'code'}       => $instance->code, 
+48             \textcolor{stringliteral}{'is\_enabled'} => ($instance->is\_enabled)?\textcolor{keyword}{true}:\textcolor{keyword}{false}, 
+49         ];
+50         
+51         \textcolor{keywordflow}{return} $data;
+52     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+api/transformers/Country\+Transformer.\+php\end{DoxyCompactItemize}

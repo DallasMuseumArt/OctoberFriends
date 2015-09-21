@@ -94,7 +94,7 @@ class UserProfile extends ComponentBase
      */
     public function onPassword()
     {
-        return $this->makePartial('changepassword');
+        return $this->renderPartial('@changepassword');
     }
 
     /**
@@ -140,16 +140,18 @@ class UserProfile extends ComponentBase
         $user = $this->getUser();
 
         $vars = post();
+
         foreach($vars as $key => $val) {
             if ($key == 'metadata') {
-                $metadata = $user->metadata;
                 foreach($val as $metakey => $metaval) {
-                    $metadata->{$metakey} = $metaval;
+                    $user->metadata->{$metakey} = $metaval;
                 }
 
-                $user->metadata()->save($metadata);
-
             } else {
+                if ($key == "phone") {
+                    $val = UserExtend::parsePhone($val);
+                }
+
                 $user->{$key} = $val;
             }
         }
@@ -157,7 +159,7 @@ class UserProfile extends ComponentBase
         if ($user->push()) {
             Flash::info(Lang::get('dma.friends::lang.user.save'));
         } else {
-            Flash::info(Lang::get('dma.friends::lang.user.saveFailed'));
+            Flash::error(Lang::get('dma.friends::lang.user.saveFailed'));
         }
 
         return [
@@ -184,8 +186,8 @@ class UserProfile extends ComponentBase
      */
     public function addAssets()
     {
-        $this->addJs('/modules/system/assets/vendor/bootstrap/js/modal.js');
-        $this->addJs('/modules/backend/assets/js/october.popup.js');
+        $this->addJs('/modules/system/assets/ui/vendor/bootstrap/js/modal.js');
+        $this->addJs('/modules/system/assets/ui/js/popup.js');
     }
 
     /**

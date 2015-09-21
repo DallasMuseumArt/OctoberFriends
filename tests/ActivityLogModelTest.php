@@ -1,10 +1,10 @@
-<?php
+<?php namespace DMA\Friends\Tests;
 
 use League\FactoryMuffin\Facade as FactoryMuffin;
 use DMA\Friends\Tests\MuffinCase;
 use DMA\Friends\Models\ActivityLog;
 
-class ActivityLogModelTest extends MuffinCase
+class ActivityLogModelTest extends MuffinTestCase
 {
     public function testCreateModelInstance()
     {

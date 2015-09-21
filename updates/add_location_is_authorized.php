@@ -18,19 +18,12 @@ class AddLocationIsAuthorized extends Migration {
         });
     }   
 
-
     /** 
      * Reverse the migrations.
      *
      * @return void
      */
-    public function down()
-    {   
-        Schema::table('dma_friends_locations', function($table)
-        {
-            $table->dropColumn('is_authorized');
-        });
-    }   
+    public function down() {}   
 
 }
 

@@ -1,25 +1,24 @@
-\hypertarget{classDMA_1_1Friends_1_1Classes_1_1RewardManager}{\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}Reward\+Manager Class Reference}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1RewardManager}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}Reward\+Manager Class Reference}
 \label{classDMA_1_1Friends_1_1Classes_1_1RewardManager}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Reward\+Manager@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Reward\+Manager}}
-}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 static \hyperlink{classDMA_1_1Friends_1_1Classes_1_1RewardManager_a2a1ce1d86e60454954229210c334e2bd}{redeem} (\$id, \$user)
 \item 
-\hypertarget{classDMA_1_1Friends_1_1Classes_1_1RewardManager_adcccc658650e15639fc36ee0f0e1cc16}{static {\bfseries render} (\$controller, \$reward)}\label{classDMA_1_1Friends_1_1Classes_1_1RewardManager_adcccc658650e15639fc36ee0f0e1cc16}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1RewardManager_adcccc658650e15639fc36ee0f0e1cc16}{}static {\bfseries render} (\$controller, \$reward)\label{classDMA_1_1Friends_1_1Classes_1_1RewardManager_adcccc658650e15639fc36ee0f0e1cc16}
 
 \end{DoxyCompactItemize}
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classDMA_1_1Friends_1_1Classes_1_1RewardManager_a2a1ce1d86e60454954229210c334e2bd}{\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Reward\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Reward\+Manager}!redeem@{redeem}}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1RewardManager_a2a1ce1d86e60454954229210c334e2bd}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Reward\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Reward\+Manager}!redeem@{redeem}}
 \index{redeem@{redeem}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Reward\+Manager@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Reward\+Manager}}
 \subsubsection[{redeem}]{\setlength{\rightskip}{0pt plus 5cm}static D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Reward\+Manager\+::redeem (
 \begin{DoxyParamCaption}
 \item[{}]{\$id, }
 \item[{}]{\$user}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [static]}}}\label{classDMA_1_1Friends_1_1Classes_1_1RewardManager_a2a1ce1d86e60454954229210c334e2bd}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classDMA_1_1Friends_1_1Classes_1_1RewardManager_a2a1ce1d86e60454954229210c334e2bd}
 Redeem a reward for a user 
 \begin{DoxyParams}[1]{Parameters}
 int & {\em \$id} & The id of the reward to redeem \\
@@ -38,31 +37,54 @@ User & {\em \$user} & The user model to redeem the reward for \\
 30         \}
 31 
 32         \textcolor{keywordflow}{try} \{
-33             $userExtend = \textcolor{keyword}{new} UserExtend($user);
-34 
-35             \textcolor{keywordflow}{if} ($userExtend->removePoints($reward->points, \textcolor{keyword}{false})) \{
-36                 
-37                 $user->rewards()->save($reward);
-38                 
-39                 Event::fire(\textcolor{stringliteral}{'dma.friends.reward.redeemed'}, [$reward, $user]);
-40 
-41                 $params = [
-42                     \textcolor{stringliteral}{'user'}      => $user,
-43                     \textcolor{stringliteral}{'object'}    => $reward,
-44                 ];
+33 
+34             \textcolor{comment}{// Check overall inventory}
+35             \textcolor{keywordflow}{if} ($reward->inventory !== null && $reward->inventory == 0) \{
+36                 Session::put(\textcolor{stringliteral}{'rewardError'}, Lang::get(\textcolor{stringliteral}{'dma.friends::lang.rewards.noInventory'}));
+37                 \textcolor{keywordflow}{return};
+38             \}
+39 
+40             \textcolor{comment}{// Check a users individual inventory}
+41             $count = $user
+42                 ->rewards()
+43                 ->where(\textcolor{stringliteral}{'reward\_id'}, $reward->id)
+44                 ->count();
 45 
-46                 \hyperlink{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_a9f38b9c2e3b1c9d36bc7a1247b2571eb}{FriendsLog::reward}($params);
-47                 \textcolor{comment}{// TODO handle printing of reward coupon}
-48 
-49                 Session::put(\textcolor{stringliteral}{'rewardMessage'}, Lang::get(\textcolor{stringliteral}{'dma.friends::lang.rewards.redeemed'}, [\textcolor{stringliteral}{'title'} => 
+46             \textcolor{keywordflow}{if} (!empty($reward->user\_redeem\_limit) && $count >= $reward->user\_redeem\_limit) \{
+47                 Session::put(\textcolor{stringliteral}{'rewardError'}, Lang::get(\textcolor{stringliteral}{'dma.friends::lang.rewards.alreadyRedeemed'}));
+48                 \textcolor{keywordflow}{return};
+49             \}
+50 
+51             $userExtend = \textcolor{keyword}{new} UserExtend($user);
+52 
+53             \textcolor{keywordflow}{if} ($userExtend->removePoints($reward->points, \textcolor{keyword}{false})) \{
+54 
+55                 \textcolor{keywordflow}{if} ($reward->inventory > 0) \{
+56                     $reward->inventory--;
+57                     $reward->save();
+58                 \}
+59                 
+60                 $user->rewards()->save($reward);
+61                 
+62                 Event::fire(\textcolor{stringliteral}{'dma.friends.reward.redeemed'}, [$reward, $user]);
+63 
+64                 $params = [
+65                     \textcolor{stringliteral}{'user'}      => $user,
+66                     \textcolor{stringliteral}{'object'}    => $reward,
+67                 ];
+68 
+69                 \hyperlink{classDMA_1_1Friends_1_1Classes_1_1FriendsLog_a9f38b9c2e3b1c9d36bc7a1247b2571eb}{FriendsLog::reward}($params);
+70                 \textcolor{comment}{// TODO handle printing of reward coupon}
+71 
+72                 Session::put(\textcolor{stringliteral}{'rewardMessage'}, Lang::get(\textcolor{stringliteral}{'dma.friends::lang.rewards.redeemed'}, [\textcolor{stringliteral}{'title'} => 
       $reward->title]));
-50             \} \textcolor{keywordflow}{else} \{
-51                 Session::put(\textcolor{stringliteral}{'rewardError'}, Lang::get(\textcolor{stringliteral}{'dma.friends::lang.rewards.noPoints'}));
-52             \}
-53         \} \textcolor{keywordflow}{catch} (\hyperlink{namespaceException}{Exception} $e) \{
-54             \textcolor{keywordflow}{throw} \hyperlink{namespaceSystemException}{SystemException}(Lang::get(\textcolor{stringliteral}{'dma.friends.exceptions.rewardFailed'}));
-55         \}
-56     \}
+73             \} \textcolor{keywordflow}{else} \{
+74                 Session::put(\textcolor{stringliteral}{'rewardError'}, Lang::get(\textcolor{stringliteral}{'dma.friends::lang.rewards.noPoints'}));
+75             \}
+76         \} \textcolor{keywordflow}{catch} (\hyperlink{namespaceException}{Exception} $e) \{
+77             \textcolor{keywordflow}{throw} \hyperlink{namespaceSystemException}{SystemException}(Lang::get(\textcolor{stringliteral}{'dma.friends.exceptions.rewardFailed'}));
+78         \}
+79     \}
 \end{DoxyCode}
 
 

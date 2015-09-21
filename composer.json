@@ -20,14 +20,17 @@
         }
     ],
     "require": {
-        "ellipsesynergie/api-response": "0.5.*",
-        "league/factory-muffin": "~2.1",
+        "ellipsesynergie/api-response": "0.9.*",
+        "league/factory-muffin": "^2.1",
         "twilio/sdk": "3.12.6",
         "j7mbo/twitter-api-php": "dev-master",
         "smirik/php-datetime-ago": "~1.0",
         "nategood/httpful": "*",
         "mandrill/mandrill": "1.0.*",
         "hashids/hashids": "1.0.5",
-        "giggsey/libphonenumber-for-php": "~7.0"       
+        "giggsey/libphonenumber-for-php": "~7.0",
+        "maatwebsite/excel": "~2.0",
+        "zircote/swagger-php": "2.*",
+        "guzzlehttp/guzzle": "~6.0"       
     }
 }

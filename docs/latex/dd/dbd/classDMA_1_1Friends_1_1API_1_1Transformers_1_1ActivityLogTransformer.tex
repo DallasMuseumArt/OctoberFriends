@@ -1,0 +1,136 @@
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityLogTransformer}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\textbackslash{}Transformers\textbackslash{}Activity\+Log\+Transformer Class Reference}
+\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityLogTransformer}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Activity\+Log\+Transformer@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Activity\+Log\+Transformer}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\textbackslash{}Transformers\textbackslash{}Activity\+Log\+Transformer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{dd/dbd/classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityLogTransformer}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityLogTransformer_ac409b7881bcd7d479b2876ea5fbaa6ed}{get\+Data} (\$instance)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityLogTransformer_a700ebac47dfef9c1327212c904b7bdd4}{include\+Object} (Model \$instance)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityLogTransformer_abe5575182af5af066506991b5e2ab693}{include\+User} (Model \$instance)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries \$default\+Includes}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityLogTransformer_ac409b7881bcd7d479b2876ea5fbaa6ed}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Log\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Log\+Transformer}!get\+Data@{get\+Data}}
+\index{get\+Data@{get\+Data}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Log\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Log\+Transformer}}
+\subsubsection[{get\+Data}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Activity\+Log\+Transformer\+::get\+Data (
+\begin{DoxyParamCaption}
+\item[{}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityLogTransformer_ac409b7881bcd7d479b2876ea5fbaa6ed}
+( definition=\char`\"{}activity.\+log\char`\"{}, description=\char`\"{}\+Activity Log definition\char`\"{}, required=\{\char`\"{}id\char`\"{}, \char`\"{}action\char`\"{}, \char`\"{}message\char`\"{}, \char`\"{}points\+\_\+earned\char`\"{}, \char`\"{}total\+\_\+points\char`\"{}, \char`\"{}object\+\_\+type\char`\"{}, \char`\"{}timestamp\char`\"{}\}, ( property=\char`\"{}id\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( property=\char`\"{}action\char`\"{}, type=\char`\"{}string\char`\"{}, enum=\{\char`\"{}activity\char`\"{},\char`\"{}artwork\char`\"{},\char`\"{}checkin\char`\"{},\char`\"{}points\char`\"{},\char`\"{}reward\char`\"{},\char`\"{}unlocked\char`\"{}\} ), ( property=\char`\"{}message\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}user\char`\"{}, type=\char`\"{}object\char`\"{}, ref=\char`\"{}\#/definitions/user\char`\"{} ), ( description=\char`\"{}\+User earned points\char`\"{}, property=\char`\"{}points\+\_\+earned\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( description=\char`\"{}\+User total points\char`\"{}, property=\char`\"{}total\+\_\+points\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( description=\char`\"{}\+Classname and Namespace of the generic polymorphic relationship\char`\"{}, property=\char`\"{}object\+\_\+type\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}timestamp\char`\"{}, type=\char`\"{}string\char`\"{}, format=\char`\"{}date-\/time\char`\"{} ), ( property=\char`\"{}user\char`\"{}, type=\char`\"{}object\char`\"{}, ref=\char`\"{}\#/definitions/user\char`\"{} ), )  \begin{DoxySeeAlso}{See also}
+\+::get\+Data() 
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+81     \{
+82         \textcolor{keywordflow}{return} [
+83             \textcolor{stringliteral}{'id'}    => (int)$instance->id,
+84             \textcolor{stringliteral}{'action'} => $instance->action,
+85             \textcolor{stringliteral}{'message'} => $instance->message,
+86             \textcolor{stringliteral}{'points\_earned'} => $instance->points\_earned,
+87             \textcolor{stringliteral}{'total\_points'} => $instance->total\_points,   
+88             \textcolor{stringliteral}{'object\_type'}  => $instance->object\_type,  
+89             \textcolor{stringliteral}{'timestamp'} => $this->carbonToIso($instance->timestamp),    
+90         ];
+91     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityLogTransformer_a700ebac47dfef9c1327212c904b7bdd4}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Log\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Log\+Transformer}!include\+Object@{include\+Object}}
+\index{include\+Object@{include\+Object}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Log\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Log\+Transformer}}
+\subsubsection[{include\+Object}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Activity\+Log\+Transformer\+::include\+Object (
+\begin{DoxyParamCaption}
+\item[{Model}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityLogTransformer_a700ebac47dfef9c1327212c904b7bdd4}
+Include Steps
+
+\begin{DoxyReturn}{Returns}
+League 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+99     \{
+100    
+101         $class  = $instance->object\_type;
+102         \textcolor{comment}{// There are logs without object}
+103         \textcolor{keywordflow}{if} ($class) \{
+104             $obj\_id = $instance->object\_id;
+105             $relObj = $instance->object;
+106             
+107             
+108             $transformer = null;
+109             
+110             \textcolor{keywordflow}{switch} ($class) \{
+111                 \textcolor{keywordflow}{case} \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Reward'}:
+112                     $transformer = \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Transformers\(\backslash\)RewardTransformer'};
+113                     \textcolor{keywordflow}{break};
+114                 \textcolor{keywordflow}{case} \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Activity'}:
+115                     $transformer = \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Transformers\(\backslash\)ActivityTransformer'};
+116                     \textcolor{keywordflow}{break};
+117                 \textcolor{keywordflow}{case} \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Step'}:
+118                     $transformer = \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Transformers\(\backslash\)StepTransformer'};
+119                     \textcolor{keywordflow}{break};
+120                 \textcolor{keywordflow}{case} \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Models\(\backslash\)Badge'}:
+121                     $transformer = \textcolor{stringliteral}{'\(\backslash\)DMA\(\backslash\)Friends\(\backslash\)API\(\backslash\)Transformers\(\backslash\)BadgeTransformer'};
+122                     \textcolor{keywordflow}{break};
+123                 \textcolor{keywordflow}{default}:
+124                     $transformer = \textcolor{stringliteral}{'DMA\(\backslash\)Friends\(\backslash\)Classes\(\backslash\)API\(\backslash\)BaseTransformer'};
+125                     \textcolor{keywordflow}{break};
+126             \}
+127            
+128             \textcolor{keywordflow}{return} $this->item($relObj, \textcolor{keyword}{new} $transformer(\textcolor{keyword}{false}));
+129         \}
+130         \textcolor{keywordflow}{return} null;
+131     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityLogTransformer_abe5575182af5af066506991b5e2ab693}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Log\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Log\+Transformer}!include\+User@{include\+User}}
+\index{include\+User@{include\+User}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Log\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Log\+Transformer}}
+\subsubsection[{include\+User}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Activity\+Log\+Transformer\+::include\+User (
+\begin{DoxyParamCaption}
+\item[{Model}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityLogTransformer_abe5575182af5af066506991b5e2ab693}
+Include Steps
+
+\begin{DoxyReturn}{Returns}
+League 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+139     \{
+140  
+141         $user = $instance->user;
+142         \textcolor{keywordflow}{return} $this->item($user, \textcolor{keyword}{new} UserTransformer);
+143     \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityLogTransformer_acbfe36694e7b32bdfb1e2dcc11cbb067}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Log\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Log\+Transformer}!\$default\+Includes@{\$default\+Includes}}
+\index{\$default\+Includes@{\$default\+Includes}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Log\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Activity\+Log\+Transformer}}
+\subsubsection[{\$default\+Includes}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Activity\+Log\+Transformer\+::\$default\+Includes\hspace{0.3cm}{\ttfamily [protected]}}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1ActivityLogTransformer_acbfe36694e7b32bdfb1e2dcc11cbb067}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= [
+            \textcolor{stringliteral}{'user'},
+            \textcolor{stringliteral}{'object'}
+    ]
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+api/transformers/Activity\+Log\+Transformer.\+php\end{DoxyCompactItemize}

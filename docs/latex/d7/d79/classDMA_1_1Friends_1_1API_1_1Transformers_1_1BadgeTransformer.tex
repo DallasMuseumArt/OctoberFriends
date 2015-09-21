@@ -1,0 +1,208 @@
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\textbackslash{}Transformers\textbackslash{}Badge\+Transformer Class Reference}
+\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Badge\+Transformer@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Badge\+Transformer}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\textbackslash{}Transformers\textbackslash{}Badge\+Transformer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{d7/d79/classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_a08baf63a97cf8ce2e377162bcf6c00a5}{get\+Data} (\$instance)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_a8687692fddb3b0c6b47bb1a2f4ac45ce}{get\+Extended\+Data} (\$instance)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_af14a3d805e9bdd81d5c9e5e334ab3617}{include\+Steps} (Model \$instance)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_aa3b6235d12b9c07bf3e3126b493a9885}{include\+Media} (Model \$instance)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_aa4d31e1a597aa42ef473882961c7c149}{include\+Categories} (Model \$instance)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_aeacba533330faa46396ce280e27f0fee}{get\+Time\+Restrictions} (Model \$instance)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries \$default\+Includes}
+\item 
+{\bfseries \$available\+Includes}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_a08baf63a97cf8ce2e377162bcf6c00a5}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer}!get\+Data@{get\+Data}}
+\index{get\+Data@{get\+Data}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer}}
+\subsubsection[{get\+Data}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Badge\+Transformer\+::get\+Data (
+\begin{DoxyParamCaption}
+\item[{}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_a08baf63a97cf8ce2e377162bcf6c00a5}
+Badge definition ( definition=\char`\"{}badge\char`\"{}, required=\{\char`\"{}id\char`\"{}, \char`\"{}title\char`\"{}, \char`\"{}steps\char`\"{}\}, ( property=\char`\"{}id\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( property=\char`\"{}title\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}steps\char`\"{}, type=\char`\"{}array\char`\"{}, items=(ref=\char`\"{}\#/definitions/step\char`\"{}) ) )  \begin{DoxySeeAlso}{See also}
+\+::get\+Data() 
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+61     \{
+62         \textcolor{keywordflow}{return} [
+63             \textcolor{stringliteral}{'id'}                        => (int)$instance->id,
+64             \textcolor{stringliteral}{'title'}                     => $instance->title, 
+65         ];
+66     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_a8687692fddb3b0c6b47bb1a2f4ac45ce}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer}!get\+Extended\+Data@{get\+Extended\+Data}}
+\index{get\+Extended\+Data@{get\+Extended\+Data}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer}}
+\subsubsection[{get\+Extended\+Data}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Badge\+Transformer\+::get\+Extended\+Data (
+\begin{DoxyParamCaption}
+\item[{}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_a8687692fddb3b0c6b47bb1a2f4ac45ce}
+\begin{DoxySeeAlso}{See also}
+\+::get\+Extended\+Data() 
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+74     \{
+75         \textcolor{comment}{// Adding steps by the Fractal embeding system}
+76         $this->setDefaultIncludes( array\_merge($this->getDefaultIncludes(), [\textcolor{stringliteral}{'steps'}]));
+77     
+78         \textcolor{keywordflow}{return} [
+79                 \textcolor{stringliteral}{'description'}               => $instance->description,
+80                 \textcolor{stringliteral}{'excerpt'}                   => $instance->excerpt,
+81                 \textcolor{stringliteral}{'congratulations\_text'}      => $instance->congratulations\_text,
+82                 \textcolor{stringliteral}{'maximum\_earnings'}          => $instance->maximum\_earnings,
+83                 \textcolor{stringliteral}{'points'}                    => $instance->points,
+84                 \textcolor{stringliteral}{'is\_published'}              => ($instance->is\_published)?\textcolor{keyword}{true}:\textcolor{keyword}{false},
+85                 \textcolor{stringliteral}{'is\_archived'}               => ($instance->is\_archived)?\textcolor{keyword}{true}:\textcolor{keyword}{false},
+86                 \textcolor{stringliteral}{'is\_sequential'}             => ($instance->is\_sequential)?\textcolor{keyword}{true}:\textcolor{keyword}{false},
+87                 \textcolor{stringliteral}{'show\_earners'}              => ($instance->show\_earners)?\textcolor{keyword}{true}:\textcolor{keyword}{false},
+88                 \textcolor{stringliteral}{'is\_hidden'}                 => ($instance->is\_hidden)?\textcolor{keyword}{true}:\textcolor{keyword}{false},
+89                 \textcolor{stringliteral}{'time\_between\_steps\_min'}    => $instance->time\_between\_steps\_min,
+90                 \textcolor{stringliteral}{'time\_between\_steps\_max'}    => $instance->time\_between\_steps\_max,
+91                 \textcolor{stringliteral}{'maximium\_time'}             => $instance->maximium\_time,
+92                 \textcolor{stringliteral}{'special'}                   => ($instance->special)?\textcolor{keyword}{true}:\textcolor{keyword}{false},
+93                 \textcolor{stringliteral}{'time\_restrictions'}         => $this->\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_aeacba533330faa46396ce280e27f0fee}{getTimeRestrictions}($instance),
+94         ];
+95     
+96     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_aeacba533330faa46396ce280e27f0fee}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer}!get\+Time\+Restrictions@{get\+Time\+Restrictions}}
+\index{get\+Time\+Restrictions@{get\+Time\+Restrictions}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer}}
+\subsubsection[{get\+Time\+Restrictions}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Badge\+Transformer\+::get\+Time\+Restrictions (
+\begin{DoxyParamCaption}
+\item[{Model}]{\$instance}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_aeacba533330faa46396ce280e27f0fee}
+Helper method to deserialize time\+\_\+restiction data 
+\begin{DoxyParams}[1]{Parameters}
+Model & {\em \$instance} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+104     \{
+105     
+106         $restrictions = [];
+107         $keys         = [\textcolor{stringliteral}{'date\_begin'}, \textcolor{stringliteral}{'date\_end'}];
+108     
+109         \textcolor{comment}{// Reset values}
+110         \textcolor{keywordflow}{foreach}($keys as $key)\{
+111             $restrictions[$key] = null;
+112         \}
+113     
+114         $restrictions[\textcolor{stringliteral}{'date\_begin'}] = $this->carbonToIso($instance->date\_begin);
+115         $restrictions[\textcolor{stringliteral}{'date\_end'}]   = $this->carbonToIso($instance->date\_end);
+116     
+117         \textcolor{keywordflow}{return} $restrictions;
+118     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_aa4d31e1a597aa42ef473882961c7c149}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer}!include\+Categories@{include\+Categories}}
+\index{include\+Categories@{include\+Categories}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer}}
+\subsubsection[{include\+Categories}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Badge\+Transformer\+::include\+Categories (
+\begin{DoxyParamCaption}
+\item[{Model}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_aa4d31e1a597aa42ef473882961c7c149}
+Include Media
+
+\begin{DoxyReturn}{Returns}
+League 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+151     \{
+152         \textcolor{keywordflow}{return} $this->collection($instance->categories, \textcolor{keyword}{new} CategoryTransformer);
+153     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_aa3b6235d12b9c07bf3e3126b493a9885}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer}!include\+Media@{include\+Media}}
+\index{include\+Media@{include\+Media}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer}}
+\subsubsection[{include\+Media}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Badge\+Transformer\+::include\+Media (
+\begin{DoxyParamCaption}
+\item[{Model}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_aa3b6235d12b9c07bf3e3126b493a9885}
+Include Media
+
+\begin{DoxyReturn}{Returns}
+League 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+141     \{
+142         \textcolor{keywordflow}{return} $this->item($instance, \textcolor{keyword}{new} MediaTransformer);
+143     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_af14a3d805e9bdd81d5c9e5e334ab3617}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer}!include\+Steps@{include\+Steps}}
+\index{include\+Steps@{include\+Steps}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer}}
+\subsubsection[{include\+Steps}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Badge\+Transformer\+::include\+Steps (
+\begin{DoxyParamCaption}
+\item[{Model}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_af14a3d805e9bdd81d5c9e5e334ab3617}
+Include Steps
+
+\begin{DoxyReturn}{Returns}
+League 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+127     \{
+128         $steps = $instance->steps;
+129         \textcolor{comment}{// No necessary to show steps activities given that the parent is an activity}
+130         $exclude = [\textcolor{stringliteral}{'badge'}];
+131         \textcolor{keywordflow}{return} $this->collection($steps, \textcolor{keyword}{new} StepTransformer(\textcolor{keyword}{true}, $exclude));
+132     \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_aa5844dd12d509abc5bbbde77a5050e0f}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer}!\$available\+Includes@{\$available\+Includes}}
+\index{\$available\+Includes@{\$available\+Includes}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer}}
+\subsubsection[{\$available\+Includes}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Badge\+Transformer\+::\$available\+Includes\hspace{0.3cm}{\ttfamily [protected]}}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_aa5844dd12d509abc5bbbde77a5050e0f}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= [
+            \textcolor{stringliteral}{'steps'}
+    ]
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_a82e69be5fd5e311fb322efa0a9a5958c}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer}!\$default\+Includes@{\$default\+Includes}}
+\index{\$default\+Includes@{\$default\+Includes}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Badge\+Transformer}}
+\subsubsection[{\$default\+Includes}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Badge\+Transformer\+::\$default\+Includes\hspace{0.3cm}{\ttfamily [protected]}}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1BadgeTransformer_a82e69be5fd5e311fb322efa0a9a5958c}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= [
+             \textcolor{stringliteral}{'media'},
+             \textcolor{stringliteral}{'categories'}
+     ]
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+api/transformers/Badge\+Transformer.\+php\end{DoxyCompactItemize}

@@ -1,0 +1,14 @@
+<div class="leaderboard">
+    <ol class="list-group">
+    {% for user in users %}
+        <li class="list-group-item">
+            <img src="{{ user.avatar.getThumb(50, 50) }}"/>
+            {{ user.metadata.first_name }} {{ user.metadata.last_name|first|upper }}.
+
+            <span class="badge">
+                {{ user.points_today|number_format }}
+            </span>
+        </li>
+    {% endfor %}
+    </ol>
+</div>

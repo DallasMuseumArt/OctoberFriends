@@ -1,10 +1,12 @@
 {% if viaSMS %}
-<h4>Activity code send by SMS</h4>
+<h4>Activity code sent by SMS</h4>
 {% else %}
 <h4>Activity code</h4>
 {% endif %}
+
 <p>
-{{ message|raw }}
+{{ message|raw }}<br/>
+{% if activity.points %} You've been awarded {{ activity.points }} points.{% endif %}
 </p>
 
 {% if activity.objectData %}

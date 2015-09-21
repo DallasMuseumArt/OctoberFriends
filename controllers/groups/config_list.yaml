@@ -3,8 +3,8 @@
 # ===================================
 
 # Model List Column configuration
-list: @/plugins/dma/friends/models/usergroup/columns.yaml
-filter: @/plugins/dma/friends/models/usergroup/config_filter.yaml
+list: $/dma/friends/models/usergroup/columns.yaml
+filter: $/dma/friends/models/usergroup/config_filter.yaml
 
 # Model Class name
 modelClass: DMA\Friends\Models\UserGroup

@@ -1,0 +1,34 @@
+<div class="report-widget date-picker">
+    <h3>Choose a date range</h3>
+
+    <ul>
+        <li><a href="#" 
+                class="date-range week" 
+                data-from="<?= $week ?>"
+                data-to="<?= $current ?>"
+            >Week</a></li>
+        <li><a href="#" 
+                class="date-range month" 
+                data-from="<?= $month ?>"
+                data-to="<?= $current ?>"
+            >Month</a></li>
+        <li><a href="#" 
+                class="date-range year" 
+                data-from="<?= $year ?>"
+                data-to="<?= $current ?>"
+            >Year</a></li>
+        <li>
+            <div id="date-picker">
+                Custom:<br/>
+                <label for="datepicker-from">From:</label>
+                <input type="text" id="datepicker-from"></input>
+
+                <label for="datepicker-from">To:</label>
+                <input type="text" id="datepicker-to"></input>
+
+                <button class="btn btn-default apply-dates">Apply</button>
+            </div>
+    </ul>
+
+    <div class="clearfix"></div>
+</div>

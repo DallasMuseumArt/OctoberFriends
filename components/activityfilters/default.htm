@@ -1,0 +1,18 @@
+<div class="friends-activity-filters">
+    <ul
+        class="friends-activity-filters-list"
+        data-filter-component="{{ component }}"
+    >
+        <li class="friends-activity-filters-item">
+            <a href="#" class="friends-activity-filter-all">Check/Uncheck All</a>
+        </li>
+        {% for category in categories %}
+            <li class="friends-activity-filters-item">
+                <a href="#"
+                    class="friends-activity-filter active"
+                    data-filter-name="{{ category.name }}"
+                >{{ category.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

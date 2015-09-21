@@ -1,0 +1,4 @@
+fields:
+    points_to_complete:
+        label: Points To Complete
+        description: The number of points to complete this activity

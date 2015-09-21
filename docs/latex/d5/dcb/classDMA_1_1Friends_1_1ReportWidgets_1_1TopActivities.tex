@@ -1,0 +1,94 @@
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1TopActivities}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Report\+Widgets\textbackslash{}Top\+Activities Class Reference}
+\label{classDMA_1_1Friends_1_1ReportWidgets_1_1TopActivities}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Top\+Activities@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Top\+Activities}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Report\+Widgets\textbackslash{}Top\+Activities\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d5/dcb/classDMA_1_1Friends_1_1ReportWidgets_1_1TopActivities}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1ReportWidgets_1_1TopActivities_a204e8b1ecdea15985b11a958e59d5081}{widget\+Details} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1ReportWidgets_1_1TopActivities_a845be283e9d23ec6dfc14a9c26ec044a}{define\+Properties} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1ReportWidgets_1_1TopActivities_a853a2bead38468c9daaedfe55bdffecb}{render} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1TopActivities_ac7fc14733142af81776f6b54c8e55918}{}{\bfseries \$default\+Alias} = \textquotesingle{}\hyperlink{classDMA_1_1Friends_1_1ReportWidgets_1_1TopActivities}{Top\+Activities}\textquotesingle{}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1TopActivities_ac7fc14733142af81776f6b54c8e55918}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1TopActivities_a845be283e9d23ec6dfc14a9c26ec044a}{}\index{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Activities@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Activities}!define\+Properties@{define\+Properties}}
+\index{define\+Properties@{define\+Properties}!D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Activities@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Activities}}
+\subsubsection[{define\+Properties}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Top\+Activities\+::define\+Properties (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1TopActivities_a845be283e9d23ec6dfc14a9c26ec044a}
+
+\begin{DoxyCode}
+28     \{
+29         \textcolor{keywordflow}{return} [
+30             \textcolor{stringliteral}{'limit'} => [
+31                 \textcolor{stringliteral}{'title'}             => \textcolor{stringliteral}{'Number of results'},
+32                 \textcolor{stringliteral}{'default'}           => 10,
+33                 \textcolor{stringliteral}{'type'}              => \textcolor{stringliteral}{'string'},
+34                 \textcolor{stringliteral}{'validationPattern'} => \textcolor{stringliteral}{'^[0-9]+$'}
+35             ],
+36         ];
+37     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1TopActivities_a853a2bead38468c9daaedfe55bdffecb}{}\index{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Activities@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Activities}!render@{render}}
+\index{render@{render}!D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Activities@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Activities}}
+\subsubsection[{render}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Top\+Activities\+::render (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1TopActivities_a853a2bead38468c9daaedfe55bdffecb}
+
+\begin{DoxyCode}
+43     \{   
+44         $limit = $this->property(\textcolor{stringliteral}{'limit'});
+45 
+46         $query = DB::table(\textcolor{stringliteral}{'dma\_friends\_activities'})
+47                 ->select(\textcolor{stringliteral}{"title"}, DB::raw(\textcolor{stringliteral}{"count(dma\_friends\_activity\_user.user\_id) as count"}))
+48                 ->join(\textcolor{stringliteral}{"dma\_friends\_activity\_user"}, \textcolor{stringliteral}{'dma\_friends\_activities.id'}, \textcolor{charliteral}{'='}, \textcolor{stringliteral}{'
+      dma\_friends\_activity\_user.activity\_id'})
+49                 ->groupBy(\textcolor{stringliteral}{"dma\_friends\_activity\_user.activity\_id"})
+50                 ->orderBy(\textcolor{stringliteral}{'count'}, \textcolor{stringliteral}{'DESC'});
+51 
+52         $activities = GraphReport::processQuery($query, \textcolor{stringliteral}{'dma\_friends\_activity\_user.created\_at'}, $limit, \textcolor{stringliteral}{'
+      friends.reports.topActivities'});
+53 
+54         $this->vars[\textcolor{stringliteral}{'activities'}] = $activities;
+55 
+56         \textcolor{keywordflow}{return} $this->makePartial(\textcolor{stringliteral}{'widget'});
+57     \}  
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1TopActivities_a204e8b1ecdea15985b11a958e59d5081}{}\index{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Activities@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Activities}!widget\+Details@{widget\+Details}}
+\index{widget\+Details@{widget\+Details}!D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Activities@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Top\+Activities}}
+\subsubsection[{widget\+Details}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Top\+Activities\+::widget\+Details (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1TopActivities_a204e8b1ecdea15985b11a958e59d5081}
+
+\begin{DoxyCode}
+17     \{   
+18         \textcolor{keywordflow}{return} [
+19             \textcolor{stringliteral}{'name'}        => \textcolor{stringliteral}{'Top Activities'},
+20             \textcolor{stringliteral}{'description'} => \textcolor{stringliteral}{'Show highest ranking activities'}
+21         ];  
+22     \}   
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+reportwidgets/Top\+Activities.\+php\end{DoxyCompactItemize}

@@ -50,7 +50,7 @@
                 {% if user.metadata.email_optin %}
                     checked="checked"
                 {% endif %}
-                /> Email Opt-in
+                /> RECEIVE EMAIL UPDATES
             </label>
         </div>
 
@@ -108,6 +108,16 @@
     </div>
 
     <div class="col-md-6 col-sm-6">
+
+        {% if user.metadata.current_member %}
+        <h3>Membership Information</h3>
+
+        <div class="form-group">
+            <label>Membership Number</label>
+            <div>{{ user.metadata.current_member_number }}</div>
+        </div>
+
+        {% endif %}
 
         <h3>Demographic Information</h3>
 

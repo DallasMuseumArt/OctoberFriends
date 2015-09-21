@@ -80,6 +80,7 @@ class ActivityType extends FormWidgetBase
         }
 
         $this->vars['defaultValue']     = $this->getLoadValue();
+        //\Debugbar::info($this->prepareFormFields($this->model));
         $this->vars['additionalFields'] = ($this->vars['defaultValue']) ? $this->prepareFormFields($this->model) : null;
         $this->vars['options']          = $options;
         $this->vars['options']          = $options;
@@ -105,7 +106,7 @@ class ActivityType extends FormWidgetBase
      * @param $value The existing value for this widget.
      * @return string The new value for this widget.
      */
-    public function getSaveData($value)
+    public function getSaveValue($value)
     {
         if ($value['activity_type'])
             $this->manager->saveData($this->model, $value);

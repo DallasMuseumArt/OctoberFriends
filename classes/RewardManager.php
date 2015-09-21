@@ -30,9 +30,32 @@ class RewardManager
         }
 
         try {
+
+            // Check overall inventory
+            if ($reward->inventory !== null && $reward->inventory == 0) {
+                Session::put('rewardError', Lang::get('dma.friends::lang.rewards.noInventory'));
+                return;
+            }
+
+            // Check a users individual inventory
+            $count = $user
+                ->rewards()
+                ->where('reward_id', $reward->id)
+                ->count();
+
+            if (!empty($reward->user_redeem_limit) && $count >= $reward->user_redeem_limit) {
+                Session::put('rewardError', Lang::get('dma.friends::lang.rewards.alreadyRedeemed'));
+                return;
+            }
+
             $userExtend = new UserExtend($user);
 
             if ($userExtend->removePoints($reward->points, false)) {
+
+                if ($reward->inventory > 0) {
+                    $reward->inventory--;
+                    $reward->save();
+                }
                 
                 $user->rewards()->save($reward);
                 

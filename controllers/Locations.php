@@ -5,8 +5,12 @@ use Backend\Classes\Controller;
 use DMA\Friends\Classes\LocationManager;
 use RainLab\User\Models\User;
 use DMA\Friends\Models\Usermeta;
+use DMA\Friends\Classes\AuthManager;
+use DMA\Friends\Classes\Notifications\NotificationMessage;
+use SystemException;
 use Auth;
 use App;
+use Log;
 use Flash;
 use Lang;
 use Redirect;
@@ -37,31 +41,23 @@ class Locations extends Controller
      */
     public static function barcodeLogin()
     {
-        $barcodeId = post('barcodeId');
+        $barcodeId = get('barcodeId');
+        $barcodeId = trim($barcodeId);
+
         $location = LocationManager::getLocation();
 
         if (!$location || empty($barcodeId)) {
-            App::abort(403, 'Unauthorized access');
-            return;
+            return Redirect::to('/');
         }
-        
+
         if ($location->is_authorized) {
-            $user = User::where('barcode_id', $barcodeId)->first();
 
-            // Attempt to lookup membership if a user isnt present
-            if (!$user) {
-                $usermeta = Usermeta::where('current_member_number', $barcodeId)->first();
-                $user = $usermeta->user;
-            }
+            $data = [
+                'login'         => $barcodeId,
+                'no_password'   => true,
+            ];
 
-            if (!$user) {
-                // The user does not exist, so flash an error
-                Flash::error(Lang::get('dma.friends::lang.app.loginFailed'));
-            } else {
-                //The user exists so log them in
-                Auth::login($user);
-                Event::fire('auth.login', [$user]);
-            }
+            AuthManager::auth($data);
 
         }
 

@@ -1,5 +1,6 @@
 <?php namespace DMA\Friends\Activities;
 
+use Log;
 use Lang;
 use Session;
 use Httpful\Request;
@@ -8,6 +9,7 @@ use DMA\Friends\Models\Activity;
 use DMA\Friends\Models\ActivityMetadata;
 use DMA\Friends\Classes\ActivityTypeBase;
 use DMA\Friends\Classes\FriendsLog;
+use DMA\Friends\Models\Settings as FriendsSettings;
 
 class LikeWorkOfArt extends ActivityTypeBase
 {
@@ -26,7 +28,7 @@ class LikeWorkOfArt extends ActivityTypeBase
     /**
      * {%inheritDoc}
      */
-    public static function process(User $user, $params)
+    public static function process(User $user, $params = [])
     {        
         if (!isset($params['code']) || empty($params['code'])) return false;
 
@@ -86,28 +88,57 @@ class LikeWorkOfArt extends ActivityTypeBase
      */
     public static function isAssessionNumber($code)
     {
-        // Brain API request template URL
-        $template = 'http://brain.dma.org/api/v1/collection/object/?fields=id,number,title&format=json&number=%s';
+        // Artwork API request template URL
+        $baseUrl = FriendsSettings::get('artwork_api_baseurl',  false);
+        $query   = FriendsSettings::get('artwork_api_endpoint',  false);
         
-        // Clean code from spaces in case user miss type it
-        $code     = str_replace(' ', '', $code);
-        
-        // Get URL
-        $url      = sprintf($template, urlencode($code));
-        
-        // Call Brain
-        $response = Request::get($url)                   
-                            ->send();
-        
-        if($obj = @$response->body->results[0]){
-            $data = [
-                'object_id'     => $obj->id,
-                'object_number' => $obj->number,
-                'object_title'  => $obj->title
-            ];
+        if( $baseUrl && $query ) {
+                
+            // Build collection REST API URL 
+            $template = rtrim($baseUrl, '/') . '/' . ltrim($query, '/'); 
+                
+            // Get Artwork API headers
+            $headers = [];
+            $headerSettings = FriendsSettings::get('artwork_api_headers', []);
+            foreach ( $headerSettings as $h ){
+                $key   = array_get($h, 'artwork_api_header', Null);
+                $value = array_get($h, 'artwork_api_header_value', Null);
+                
+                if (!is_null($key) && !is_null($value) ){
+                    $headers[$key] = $value;
+                }
+                
+            }
             
-            return $data;
-           
+            // Clean code from spaces in case user miss type it
+            $code     = str_replace(' ', '', $code);
+
+            
+            // Get URL
+            $url      = sprintf($template, urlencode($code));
+            
+            \Log::info($url);
+            
+            // Call REST API
+            $response = Request::get($url) 
+                                ->addHeaders($headers)
+                                ->send();
+            
+            // TODO: find a way to abstract this into the settings pluging
+            // so is not tide to a specific business logic. For now
+            // this relay on DMA Brain API structure
+            if($obj = @$response->body->results[0]){
+                $data = [
+                    'object_id'     => $obj->id,
+                    'object_number' => $obj->number,
+                    'object_title'  => $obj->title
+                ];
+                
+                return $data;
+               
+            }
+        }else{
+            Log::error('Friends setting "artwork_api_baseurl and artwork_api_endpoint" settings are empty. Please configure them in the backend of OctoberCMS.');
         }
         return false;
         

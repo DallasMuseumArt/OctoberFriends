@@ -1,6 +1,5 @@
-\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar}{\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Report\+Widgets\textbackslash{}Friends\+Toolbar Class Reference}
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Report\+Widgets\textbackslash{}Friends\+Toolbar Class Reference}
 \label{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Friends\+Toolbar@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Friends\+Toolbar}}
-}
 Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Report\+Widgets\textbackslash{}Friends\+Toolbar\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -13,53 +12,69 @@ Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Report\+Wi
 \hyperlink{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a56951946e166c46353910da4a5c399a1}{widget\+Details} ()
 \item 
 \hyperlink{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a5fb3de1ff5dd5186e068dcf8c5e8d154}{render} ()
+\item 
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a6f0b603938f9468c37716f2aab808e62}{}{\bfseries get\+Average\+Friends} ()\label{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a6f0b603938f9468c37716f2aab808e62}
+
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_aabef17c5a99fc5f66554a91dd2cde59d}{{\bfseries \$default\+Alias} = 'friends\+Toolbar'}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_aabef17c5a99fc5f66554a91dd2cde59d}
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_aabef17c5a99fc5f66554a91dd2cde59d}{}{\bfseries \$default\+Alias} = \textquotesingle{}friends\+Toolbar\textquotesingle{}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_aabef17c5a99fc5f66554a91dd2cde59d}
 
 \end{DoxyCompactItemize}
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a5fb3de1ff5dd5186e068dcf8c5e8d154}{\index{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Toolbar@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Toolbar}!render@{render}}
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a5fb3de1ff5dd5186e068dcf8c5e8d154}{}\index{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Toolbar@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Toolbar}!render@{render}}
 \index{render@{render}!D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Toolbar@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Toolbar}}
 \subsubsection[{render}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Friends\+Toolbar\+::render (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a5fb3de1ff5dd5186e068dcf8c5e8d154}
+)}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a5fb3de1ff5dd5186e068dcf8c5e8d154}
 
 \begin{DoxyCode}
-27     \{
-28         $today = date(\textcolor{stringliteral}{'Y-m-d'});
-29         $thisWeek = date(\textcolor{stringliteral}{'Y-m-d'}, strtotime(\textcolor{stringliteral}{'last monday'}));
-30 
-31         $this->addCss(\textcolor{stringliteral}{'css/friendstoolbar.css'});
-32 
-33         $this->vars[\textcolor{stringliteral}{'numFriends'}] = number\_format(User::count());
-34         $this->vars[\textcolor{stringliteral}{'todayFriends'}] = number\_format(User::where(\textcolor{stringliteral}{'created\_at'}, \textcolor{stringliteral}{'>='}, $today)->count());
-35         $this->vars[\textcolor{stringliteral}{'weekFriends'}] = number\_format(User::where(\textcolor{stringliteral}{'created\_at'}, \textcolor{stringliteral}{'>='}, $thisWeek)->count());
-36 
-37         \textcolor{keywordflow}{return} $this->makePartial(\textcolor{stringliteral}{'widget'});
-38     \}
+32     \{
+33         $today = date(\textcolor{stringliteral}{'Y-m-d'});
+34         $thisWeek = date(\textcolor{stringliteral}{'Y-m-d'}, strtotime(\textcolor{stringliteral}{'last monday'}));
+35 
+36         $this->addCss(\textcolor{stringliteral}{'css/friendstoolbar.css'});
+37 
+38         $meta = \textcolor{keyword}{new} Usermeta;
+39         $meta\_table = $meta->getTable();
+40 
+41         $this->vars[\textcolor{stringliteral}{'numFriends'}]       = Usermeta::where(\textcolor{stringliteral}{'current\_member'}, \textcolor{stringliteral}{'!='}, Usermeta::IS\_STAFF)->
+      count();
+42         $this->vars[\textcolor{stringliteral}{'todayFriends'}]     = User::join($meta\_table, \textcolor{stringliteral}{'users.id'}, \textcolor{charliteral}{'='}, $meta\_table . \textcolor{stringliteral}{'.user\_id'}
+      )
+43             ->where(\textcolor{stringliteral}{'current\_member'}, \textcolor{stringliteral}{'!='}, Usermeta::IS\_STAFF) 
+44             ->where(\textcolor{stringliteral}{'created\_at'}, \textcolor{stringliteral}{'>='}, $today)->count();
+45 
+46         $this->vars[\textcolor{stringliteral}{'weekFriends'}]      = User::join($meta\_table, \textcolor{stringliteral}{'users.id'}, \textcolor{charliteral}{'='}, $meta\_table . \textcolor{stringliteral}{'.user\_id'}
+      ) 
+47             ->where(\textcolor{stringliteral}{'current\_member'}, \textcolor{stringliteral}{'!='}, Usermeta::IS\_STAFF)
+48             ->where(\textcolor{stringliteral}{'created\_at'}, \textcolor{stringliteral}{'>='}, $thisWeek)->count();
+49 
+50         $this->vars[\textcolor{stringliteral}{'averageFriends'}]   = $this->getAverageFriends();
+51 
+52         \textcolor{keywordflow}{return} $this->makePartial(\textcolor{stringliteral}{'widget'});
+53     \}
 \end{DoxyCode}
-\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a56951946e166c46353910da4a5c399a1}{\index{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Toolbar@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Toolbar}!widget\+Details@{widget\+Details}}
+\hypertarget{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a56951946e166c46353910da4a5c399a1}{}\index{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Toolbar@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Toolbar}!widget\+Details@{widget\+Details}}
 \index{widget\+Details@{widget\+Details}!D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Toolbar@{D\+M\+A\+::\+Friends\+::\+Report\+Widgets\+::\+Friends\+Toolbar}}
 \subsubsection[{widget\+Details}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Report\+Widgets\textbackslash{}\+Friends\+Toolbar\+::widget\+Details (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a56951946e166c46353910da4a5c399a1}
+)}\label{classDMA_1_1Friends_1_1ReportWidgets_1_1FriendsToolbar_a56951946e166c46353910da4a5c399a1}
 
 \begin{DoxyCode}
-16     \{
-17         \textcolor{keywordflow}{return} [
-18             \textcolor{stringliteral}{'name'}        => \textcolor{stringliteral}{'Friends Toolbar'},
-19             \textcolor{stringliteral}{'description'} => \textcolor{stringliteral}{'Show some basic statistics on friends'}
-20         ];
-21     \}
+21     \{
+22         \textcolor{keywordflow}{return} [
+23             \textcolor{stringliteral}{'name'}        => \textcolor{stringliteral}{'Friends Toolbar'},
+24             \textcolor{stringliteral}{'description'} => \textcolor{stringliteral}{'Show some basic statistics on friends'}
+25         ];
+26     \}
 \end{DoxyCode}
 
 

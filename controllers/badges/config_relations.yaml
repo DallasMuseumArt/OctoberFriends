@@ -1,6 +1,6 @@
 steps:
     label: Steps
-    list: @/plugins/dma/friends/models/step/columns.yaml
-    form: @/plugins/dma/friends/models/step/fields.yaml
+    list: ~/plugins/dma/friends/models/step/columns.yaml
+    form: ~/plugins/dma/friends/models/step/fields.yaml
     defaultSort: title
     showSorting: false

@@ -5,6 +5,7 @@ use DMA\Friends\Classes\Notifications\NotificationMessage;
 use DMA\Friends\Models\Reward;
 use DMA\Friends\Models\Bookmark;
 use DMA\Friends\Classes\RewardManager;
+use DMA\Friends\Classes\LocationManager;
 use Auth;
 use View;
 use Session;
@@ -37,8 +38,8 @@ class GetRewards extends ComponentBase
 
         $results = $this->getResults();
 
-        $this->page['rewards'] = $results['rewards'];
-        $this->page['links']   = $results['links'];
+        $this->page['rewards']      = $results['rewards'];
+        $this->page['links']        = $results['links'];
 
     }
 
@@ -71,15 +72,31 @@ class GetRewards extends ComponentBase
                 $rewards->whereNotNull('date_end');
                 break;
             case 'bookmarked':
-                $user = \Auth::getUser();
                 $rewards->whereHas('bookmarks', function($query) use ($user) {
                     $query->where('user_id', '=', $user->id);
                 });
                 break;
             case 'all':
             default:
-                #$rewards->whereNull('inventory');
-                #$rewards->orWhere('inventory', '>', 0);
+                $rewards->whereIn('id', function($query) {
+                    $query->select('id')
+                        ->from(with(new Reward)->getTable())
+                        ->whereNull('inventory')
+                        ->orWhere('inventory', '>', 0);
+                })->whereIn('id', function($query) {
+                    $query->select('id')
+                        ->from(with(new Reward)->getTable())
+                        ->whereNull('date_begin')
+                        ->whereNull('date_end');
+                })->whereIn('id', function($query) {
+                    $query->select('id')
+                        ->from(with(new Reward)->getTable())
+                        ->where('date_begin', '<=', date('c'))
+                        ->where('date_end', '>=', date('c'))
+                        ->where('is_published', '>', 0)
+                        ->where('inventory', '>', 0);
+                }, 'or');
+
                 break;
         }
 
@@ -87,14 +104,19 @@ class GetRewards extends ComponentBase
 
         foreach($rewards as $reward) {
             $renderedRewards[] = [
-                'rendered' => View::make('dma.friends::rewardPreview', ['reward' => $reward, 'user' => $user])->render(),
+                'rendered' => View::make('dma.friends::rewardPreview', 
+                    [
+                        'reward'        => $reward, 
+                        'user'          => $user,
+                        'allowRedeem'   => LocationManager::enableAction()
+                    ])->render(),
                 'id' => $reward->id,
             ];
         }
 
         return [
-            'links' => $rewards->links(),
-            'rewards' => $renderedRewards,
+            'links'     => $rewards->render(),
+            'rewards'   => $renderedRewards,
         ];
     }
 

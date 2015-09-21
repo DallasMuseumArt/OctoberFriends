@@ -7,6 +7,7 @@ use Lang;
 use Mail;
 use Session;
 use Auth;
+use Event;
 use RainLab\User\Models\User;
 use DMA\Friends\Facades\Postman;    
 use DMA\Friends\Classes\FriendsLog;
@@ -15,7 +16,9 @@ use DMA\Friends\Classes\PrintManager;
 use DMA\Friends\Classes\Notifications\IncomingMessage;
 use DMA\Friends\Activities\ActivityCode;
 use DMA\Friends\Activities\LikeWorkOfArt;
+use DMA\Friends\Activities\Registration;
 use DMA\Friends\Classes\Notifications\NotificationMessage;
+use DMA\Friends\Models\Settings;
 use Backend\Models\UserGroup;
 
 /**
@@ -46,15 +49,17 @@ class FriendsEventHandler {
      */
     public function onBadgeCompleted($badge, $user)
     {
-        $data = [
-            'badge' => $badge,
-            'user'  => $user,
-        ];
+        if (Settings::get('send_badge_email')) {
+            $data = [
+                'badge' => $badge,
+                'user'  => $user,
+            ];
 
-        Mail::send('dma.friends::mail.badge', $data, function($message) use ($user)
-        {
-            $message->to($user->email, $user->full_name);
-        });
+            Mail::send('dma.friends::mail.badge', $data, function($message) use ($user)
+            {
+                $message->to($user->email, $user->full_name);
+            });
+        }
     }
 
     /**
@@ -115,10 +120,7 @@ class FriendsEventHandler {
      * @param User $user
      * The user that completed the step
      */
-    public function onStepCompleted($step, $user)
-    {   
-        
-    }   
+    public function onStepCompleted($step, $user) {}  
 
     public function onAuthLogin($event)
     {   
@@ -136,6 +138,18 @@ class FriendsEventHandler {
         }
     }
 
+    /**
+     * Example implementation of auth.prelogin event
+     *
+     * @param array $data
+     * An array of data that can be processed
+     *
+     * @param array $rules
+     * An array of validation rules
+     * see http://laravel.com/docs/5.1/validation
+     */
+    public function onAuthPreLogin($data, $rules) {}
+
     public function onAuthRegister($user)
     {
 
@@ -145,6 +159,9 @@ class FriendsEventHandler {
             $printManager = new PrintManager($location, $user);
             $printManager->printIdCard();
         }
+
+        // Process Activity for registration
+        Registration::process($user);
     }
 
     public function onNotificationsReady()
@@ -188,13 +205,19 @@ class FriendsEventHandler {
                      // Determine the content of the message
                      $holder = ( $activity ) ? 'activityMessage' : 'activityError';
                      $message = Session::pull($holder);
-                                          
-                     $notification->message($message);
+
+                    if (is_array($message)) {
+                        foreach($message as $m) {
+                            $notification->message($m);
+                        }
+                    } else {
+                        $notification->message($message);
+                    }
                      
                 }, ['sms', 'kiosk']);
                 
                 Log::debug('Incoming SMS', ['user' => $user, 'code' => $code, 'activity' => $activity]);
-            }else{
+            } else {
                 Postman::send('simple', function(NotificationMessage $notification) use ( $phoneUser ) {
                 
                     $user = new User();
@@ -215,6 +238,7 @@ class FriendsEventHandler {
         $events->listen('dma.friends.badge.completed', 'DMA\Friends\Classes\FriendsEventHandler@onBadgeCompleted');
         $events->listen('dma.friends.reward.redeemed', 'DMA\Friends\Classes\FriendsEventHandler@onRewardRedeemed');
         $events->listen('dma.friends.step.completed', 'DMA\Friends\Classes\FriendsEventHandler@onStepCompleted');
+        $events->listen('auth.prelogin', 'DMA\Friends\Classes\FriendsEventHandler@onAuthPreLogin');
         $events->listen('auth.login', 'DMA\Friends\Classes\FriendsEventHandler@onAuthLogin');
         $events->listen('auth.register', 'DMA\Friends\Classes\FriendsEventHandler@onAuthRegister');
         

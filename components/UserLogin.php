@@ -1,22 +1,23 @@
 <?php namespace DMA\Friends\Components;
 
 use Cms\Classes\ComponentBase;
+use Session;
 use Redirect;
-use Validator;
-use October\Rain\Support\ValidationException;
 use RainLab\User\Models\Settings as UserSettings;
 use RainLab\User\Models\User;
+use DMA\Friends\wordpress\Auth as WordpressAuth;
 use DMA\Friends\Classes\UserExtend;
+use DMA\Friends\Classes\AuthManager;
+use DMA\Friends\Classes\LocationManager;
 use DMA\Friends\Models\Usermeta;
-use DMA\Friends\Wordpress\Auth as WordpressAuth;
 use Cms\Classes\Theme;
-use System\Classes\SystemException;
+use SystemException;
 use Cms\Classes\Page;
 use File;
 use Lang;
-use Auth;
-use Flash;
 use Event;
+use Flash;
+use Auth;
 
 class UserLogin extends ComponentBase
 {
@@ -61,7 +62,7 @@ class UserLogin extends ComponentBase
     {        
         return $this->renderPartial('@modalDisplay', [
             'title'     => Lang::get('dma.friends::lang.userLogin.loginTitle'),
-            'content'   => $this->makePartial('login-form'),
+            'content'   => $this->renderPartial('login-form', ['enableAction' =>  LocationManager::enableAction()]),
         ]);
     }
 
@@ -70,60 +71,33 @@ class UserLogin extends ComponentBase
      */
     public function onUserLogin()
     {
-        try{
-            
+        try {
+
             // Update wordpress passwords if necessary
             WordpressAuth::verifyFromEmail(post('email'), post('password'));
-      
-            /*  
-             * Validate input
-             */
-            $data = post();
-            $rules = [ 
-                'password' => 'required|min:2'
-            ];  
-    
-            $loginAttribute = UserSettings::get('login_attribute', UserSettings::LOGIN_EMAIL);
-    
-            if ($loginAttribute == UserSettings::LOGIN_USERNAME)
-                $rules['login'] = 'required|between:2,64';
-            else
-                $rules['login'] = 'required|email|between:2,64';
-    
-            if (!in_array('login', $data))
-                $data['login'] = post('username', post('email'));
 
-            /*
-             * Validate user credentials
-             */
-            $validation = Validator::make($data, $rules);
-            if ($validation->fails())
-                throw new ValidationException($validation);
+            $data = [
+                'login'     => post('login'),
+                'password'  => post('password'),
+            ];
 
-        
-            /*  
-             * Authenticate user
-             */
-            $user = Auth::authenticate([
-                'login' => array_get($data, 'login'),
-                'password' => array_get($data, 'password')
-            ], true);
-    
-            /*
-             * Fire event that user has logged in
-             */
-            Event::fire('auth.login', $user);
-    
-            /*  
-             * Redirect to the intended page after successful sign in
-             */
-            $redirectUrl = $this->pageUrl($this->property('redirect'));
-    
-            if ($redirectUrl = post('redirect', $redirectUrl))
-                return Redirect::intended($redirectUrl);
+            AuthManager::auth($data);
+
+            $authRedirect = Session::pull('authRedirect');
+
+            // Allow plugins to override the redirect with a session variable
+            if (!empty($authRedirect)) {
+                $redirectUrl = $this->pageUrl($authRedirect);
+            } else {
+                $redirectUrl = $this->pageUrl($this->property('redirect'));
+                $redirectUrl = post('redirect', $redirectUrl);
+            }
+
+            return Redirect::intended($redirectUrl);
         
         
         } catch(\Exception $e) {
+
             // Catch all exceptions producced by RainLab User or DMA authentication
             // and update error block message using OctoberCMS Ajax framework
             $message = Lang::get('dma.friends::lang.userLogin.failCredentials');
@@ -135,9 +109,6 @@ class UserLogin extends ComponentBase
             if(preg_match("/\[" . $data['login'] . "\]/", $e->getMessage())){ 
                 $message = $message = Lang::get('dma.friends::lang.userLogin.throttleUser', $data);
             }
-            
-            // Send to log the authentication exception.
-            \Log::debug($e);
             
             return [
                '.modal-content #errorBlock' => $message
@@ -169,7 +140,11 @@ class UserLogin extends ComponentBase
 
         return $this->renderPartial('@modalDisplay', [
             'title'     => Lang::get('dma.friends::lang.userLogin.registerTitle'),
-            'content'   => $this->makePartial('register-form', [ 'options' => $options ]),
+            'content'   => $this->renderPartial('register-form', [ 
+                'options'   => $options, 
+                'avatars'   => $this->getAvatars(),
+                'terms'     => $this->renderPartial('terms-and-conditions.htm'),
+            ]),
         ]);
     }
     
@@ -193,80 +168,7 @@ class UserLogin extends ComponentBase
     {
         $data = post();
 
-        $rules = [
-            'first_name'            => 'required|min:2',
-            'last_name'             => 'required|min:2',
-            //'username'              => 'required|min:6',
-            'email'                 => 'required|email|between:2,64',
-            'password'              => 'required|min:6',
-            'password_confirmation' => 'required|min:6',
-        ];
-
-        $validation = Validator::make($data, $rules);
-        if ($validation->fails())
-            throw new ValidationException($validation);
-
-        /*
-         * Register user
-         */
-        $requireActivation = UserSettings::get('require_activation', true);
-        $automaticActivation = UserSettings::get('activate_mode') == UserSettings::ACTIVATE_AUTO;
-        $userActivation = UserSettings::get('activate_mode') == UserSettings::ACTIVATE_USER;
-
-        // Split the data into whats required for the user and usermeta models
-        $userData = [
-            'name'                  => $data['email'],
-            'password'              => $data['password'],
-            'password_confirmation' => $data['password_confirmation'],
-            'email'                 => $data['email'],
-            'street_addr'           => $data['street_addr'],
-            'city'                  => $data['city'],
-            'state'                 => $data['state'],
-            'zip'                   => $data['zip'],
-            'phone'                 => $data['phone'],
-        ];
-
-        $user = Auth::register($userData, $automaticActivation);
-
-        $birth_date = $data['birthday']['year'] 
-            . '-' .  sprintf("%02s", $data['birthday']['month']) 
-            . '-' .  sprintf("%02s", $data['birthday']['day'])
-            . ' 00:00:00';
-
-        // Save user metadata
-        $usermeta = new Usermeta;
-        $usermeta->first_name       = $data['first_name'];
-        $usermeta->last_name        = $data['last_name'];
-        $usermeta->gender           = $data['gender'];
-        $usermeta->birth_date       = $birth_date;
-        $usermeta->race             = $data['race'];
-        $usermeta->household_income = $data['household_income'];
-        $usermeta->household_size   = $data['household_size'];
-        $usermeta->education        = $data['education'];
-        $usermeta->email_optin      = isset($data['email_optin']) ? $data['email_optin'] : false;
-
-        $user->metadata()->save($usermeta);
-
-        UserExtend::uploadAvatar($user, $data['avatar']);
-
-        /*
-         * Activation is by the user, send the email
-         */
-        if ($userActivation) {
-            $this->sendActivationEmail($user);
-        }
-
-        /*
-         * Automatically activated or not required, log the user in
-         */
-        if ($automaticActivation || !$requireActivation) {
-            Auth::login($user);
-        }
-
-        /*
-         * Fire event that user has registered
-         */
-        Event::fire('auth.register', [$user]);
+        AuthManager::register($data);
 
         /*
          * Redirect to the intended page after successful sign in

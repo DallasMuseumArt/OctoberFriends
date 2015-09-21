@@ -1,0 +1,30 @@
+.report-widget.date-picker ul,
+.report-widget.date-picker ul li {
+    display: inline;
+}
+
+.report-widget.date-picker ul {
+    margin-top: -18px;
+    margin-left: -50px;
+    float: left;
+    width: 100%;
+}
+
+.report-widget.date-picker ul li {
+    padding: 0 10px;
+}
+
+#date-picker {
+    display: inline;
+    float: right;
+    margin-top: -30px;
+}
+#date-picker input {
+    width: 90px;
+    height: 37px;
+    padding-left: 6px;
+}
+
+.date-range.active {
+    color: #7e8c8d;
+}

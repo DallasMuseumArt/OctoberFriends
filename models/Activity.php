@@ -2,8 +2,8 @@
 
 use Model;
 use DateTime;
+use DB;
 use Smirik\PHPDateTimeAgo\DateTimeAgo as TimeAgo;
-
 
 /**
  * Activity Model
@@ -15,6 +15,7 @@ class Activity extends Model
 {
 
     use \October\Rain\Database\Traits\Validation;
+    use \DMA\Friends\Traits\Rateable;
 
     /**
      * @const No time restriction set
@@ -47,8 +48,9 @@ class Activity extends Model
     protected $dates = ['date_begin', 'date_end'];
 
     public $rules = [ 
-        'title'         => 'required',
-        'activity_code' => 'unique:dma_friends_activities',
+        'title'             => 'required',
+        'activity_code'     => 'unique:dma_friends_activities',
+        'complete_message'  => 'max:159'
     ]; 
 
     /**
@@ -71,7 +73,11 @@ class Activity extends Model
     ];
     
     public $morphToMany = [
-        'categories'    => ['DMA\Friends\Models\Category', 'name' => 'object', 'table' => 'dma_friends_object_categories'],
+        'categories'    => ['DMA\Friends\Models\Category', 
+            'name'  => 'object', 
+            'table' => 'dma_friends_object_categories',
+            'order' => 'name',
+        ],
     ];
 
     /**
@@ -129,7 +135,65 @@ class Activity extends Model
         return $query->where('wordpress_id', $id);
     }  
 
-        /**
+    /**
+     * Find activities by category
+     * @param  string|array $categories string or array of strings of category name(s)
+     */
+    public function scopeByCategory($query, $categories) {
+        if (is_array($categories)) {
+            // Get first category in list to begin query with whereHas
+            $firstcategory = array_shift($categories);
+            $query = $query->whereHas('categories', function($q) use ($firstcategory) {
+                $q->where('name', $firstcategory);
+            });
+
+            // if any categories left in list, iterate over for orWhereHas
+            foreach ($categories as $category) {
+                $query = $query->orWhereHas('categories', function($q) use ($category) {
+                    $q->where('name', $category);
+                });
+            }
+            
+            return $query;
+        }
+        else {
+            // if $categories is a string, only one category to filter against
+            return $query->whereHas('categories', function($q) use ($categories) {
+                $q->where('name', $categories);
+            });
+        }
+    }
+
+    /**
+     * Find activities whose end dates have not passed (or which do not have end dates)
+     */
+    public function scopeNotExpired($query) {
+        $query = $query->where(function($q) {
+            $q->where('time_restriction', '!=', 2)
+              ->orWhere('date_end', '>', date('Y-m-d H:i:s'));
+        });
+
+        return $query;
+    }
+
+    /**
+     * Find activities whose end dates have not passed,
+     * AND whose begin dates have passed 
+     * (or which do not have begin and end dates)
+     */
+    public function scopeStartedNotExpired($query) {
+        $query = $query->where(function($q) {
+            $q->where('time_restriction', '!=', 2)
+              ->orWhere(function($q) {
+                $q->where('date_end', '>', date('Y-m-d H:i:s'))
+                  ->where('date_begin', '<', date('Y-m-d H:i:s'));
+              });
+        });
+
+        return $query;
+    }
+
+    /**
      * Mutator function to return the pivot timestamp as time ago
      * @return string The time since the badge was earned
      */

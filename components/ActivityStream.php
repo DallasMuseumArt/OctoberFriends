@@ -23,7 +23,8 @@ class ActivityStream extends ComponentBase
         $results = $this->getResults();
 
         $this->page['results'] = $results;
-        $this->page['links'] = $results->links();
+        $this->page['links']   = $results['links'];
+
     }
 
     public function onUpdate()
@@ -32,7 +33,6 @@ class ActivityStream extends ComponentBase
         $results = $this->getResults($filter);
 
         $this->page['results'] = $results;
-        $this->page['links'] = $results->links();
 
         return [
             '#activity-stream'  => $this->renderPartial('@default'),

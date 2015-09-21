@@ -1,0 +1,120 @@
+\hypertarget{classDMA_1_1Friends_1_1Activities_1_1Points}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Activities\textbackslash{}Points Class Reference}
+\label{classDMA_1_1Friends_1_1Activities_1_1Points}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Activities\textbackslash{}\+Points@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Activities\textbackslash{}\+Points}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Activities\textbackslash{}Points\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{d4/d26/classDMA_1_1Friends_1_1Activities_1_1Points}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Activities_1_1Points_a4e7b1a57e908b49374b05567d6469186}{details} ()
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Activities_1_1Points_aee8b900cbd3e02a623e6661d021944d4}{get\+Form\+Default\+Values} (\$model)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classDMA_1_1Friends_1_1Activities_1_1Points_a5822192344843b5a1948a8cbc737223d}{process} (User \$user, \$params=\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Activities_1_1Points_a4e7b1a57e908b49374b05567d6469186}{}\index{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Points@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Points}!details@{details}}
+\index{details@{details}!D\+M\+A\+::\+Friends\+::\+Activities\+::\+Points@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Points}}
+\subsubsection[{details}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Activities\textbackslash{}\+Points\+::details (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Activities_1_1Points_a4e7b1a57e908b49374b05567d6469186}
+
+
+Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInterface}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Type\+Base\+Interface}.
+
+
+\begin{DoxyCode}
+15     \{
+16         \textcolor{keywordflow}{return} [
+17             \textcolor{stringliteral}{'name'}          => \textcolor{stringliteral}{'Points'},
+18             \textcolor{stringliteral}{'description'}   => \textcolor{stringliteral}{'Complete activities by earning points'},
+19         ];
+20     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Activities_1_1Points_aee8b900cbd3e02a623e6661d021944d4}{}\index{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Points@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Points}!get\+Form\+Default\+Values@{get\+Form\+Default\+Values}}
+\index{get\+Form\+Default\+Values@{get\+Form\+Default\+Values}!D\+M\+A\+::\+Friends\+::\+Activities\+::\+Points@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Points}}
+\subsubsection[{get\+Form\+Default\+Values}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Activities\textbackslash{}\+Points\+::get\+Form\+Default\+Values (
+\begin{DoxyParamCaption}
+\item[{}]{\$model}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Activities_1_1Points_aee8b900cbd3e02a623e6661d021944d4}
+
+
+Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInterface}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Type\+Base\+Interface}.
+
+
+\begin{DoxyCode}
+26     \{
+27         \textcolor{keywordflow}{return} [
+28             \textcolor{stringliteral}{'points\_to\_complete'} => (isset($model->points\_to\_complete)) ? $model->points\_to\_complete : null
+      ,
+29         ];
+30     \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Activities_1_1Points_a5822192344843b5a1948a8cbc737223d}{}\index{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Points@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Points}!process@{process}}
+\index{process@{process}!D\+M\+A\+::\+Friends\+::\+Activities\+::\+Points@{D\+M\+A\+::\+Friends\+::\+Activities\+::\+Points}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}static D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Activities\textbackslash{}\+Points\+::process (
+\begin{DoxyParamCaption}
+\item[{User}]{\$user, }
+\item[{}]{\$params = {\ttfamily \mbox{[}\mbox{]}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classDMA_1_1Friends_1_1Activities_1_1Points_a5822192344843b5a1948a8cbc737223d}
+\begin{DoxySeeAlso}{See also}
+
+\end{DoxySeeAlso}
+Process and determine if an award can be isued based on a provided activity code
+
+
+\begin{DoxyParams}[1]{Parameters}
+User & {\em \$user} & A user model for which the activity should act upon\\
+\hline
+array & {\em \$params} & An array of parameters for validating activities\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean returns true if the process was successful 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interfaceDMA_1_1Friends_1_1Classes_1_1ActivityTypeBaseInterface}{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Activity\+Type\+Base\+Interface}.
+
+
+\begin{DoxyCode}
+48     \{
+49         \textcolor{keyword}{static} $is\_running = \textcolor{keyword}{false};
+50 
+51         \textcolor{keywordflow}{if} (!$is\_running) \{
+52             $is\_running = \textcolor{keyword}{true};
+53 
+54             $activities = Activity::findActivityType(\textcolor{stringliteral}{'Points'})->get();
+55 
+56             \textcolor{keywordflow}{foreach} ($activities as $activity) \{
+57                 \textcolor{keywordflow}{if} ($user->activities->contains($activity->id)) \textcolor{keywordflow}{continue};
+58 
+59                 \textcolor{keywordflow}{if} ($user->points >= $activity->points) \{
+60                     parent::process($user, [\textcolor{stringliteral}{'activity'} => $activity]);
+61                 \}
+62             \}
+63 
+64             $is\_running = \textcolor{keyword}{false};
+65         \}
+66         
+67         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+68     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+activities/Points.\+php\end{DoxyCompactItemize}

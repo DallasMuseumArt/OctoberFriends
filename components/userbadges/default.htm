@@ -2,4 +2,16 @@
     {% for badge in badges %}
         {{ badge|raw }}
     {% endfor %}
+
+    {% if badges is empty %}
+        <div class="col-xs-12 col-md-12 col-lg-12">
+            <h3>You haven't earned any badges yet</h3>
+        </div>
+    {% endif %}
+
+    <div class="clearfix"></div>
+    
+    <div class="links">
+        {{ links|raw }}
+    </div>
 </div>

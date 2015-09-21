@@ -1,0 +1,45 @@
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1CategoryTransformer}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\textbackslash{}Transformers\textbackslash{}Category\+Transformer Class Reference}
+\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1CategoryTransformer}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Category\+Transformer@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Category\+Transformer}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}A\+P\+I\textbackslash{}Transformers\textbackslash{}Category\+Transformer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{dd/d14/classDMA_1_1Friends_1_1API_1_1Transformers_1_1CategoryTransformer}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1API_1_1Transformers_1_1CategoryTransformer_a67f413e3b721931ff37c26a51b108e61}{get\+Data} (\$instance)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1API_1_1Transformers_1_1CategoryTransformer_a67f413e3b721931ff37c26a51b108e61}{}\index{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Category\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Category\+Transformer}!get\+Data@{get\+Data}}
+\index{get\+Data@{get\+Data}!D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Category\+Transformer@{D\+M\+A\+::\+Friends\+::\+A\+P\+I\+::\+Transformers\+::\+Category\+Transformer}}
+\subsubsection[{get\+Data}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+A\+P\+I\textbackslash{}\+Transformers\textbackslash{}\+Category\+Transformer\+::get\+Data (
+\begin{DoxyParamCaption}
+\item[{}]{\$instance}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1API_1_1Transformers_1_1CategoryTransformer_a67f413e3b721931ff37c26a51b108e61}
+Category definition ( definition=\char`\"{}category\char`\"{}, required=\{\char`\"{}id\char`\"{}, \char`\"{}name\char`\"{}, \char`\"{}description\char`\"{}, \char`\"{}slug\char`\"{}\}, ( property=\char`\"{}id\char`\"{}, type=\char`\"{}integer\char`\"{}, format=\char`\"{}int32\char`\"{} ), ( property=\char`\"{}name\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}description\char`\"{}, type=\char`\"{}string\char`\"{}, ), ( property=\char`\"{}slug\char`\"{}, type=\char`\"{}string\char`\"{}, ) )  \begin{DoxySeeAlso}{See also}
+\+::get\+Data() 
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}
+43     \{
+44         $data = [
+45             \textcolor{stringliteral}{'id'}            => intval($instance->id), 
+46             \textcolor{stringliteral}{'name'}          => $instance->name, 
+47             \textcolor{stringliteral}{'description'}   => $instance->description, 
+48             \textcolor{stringliteral}{'slug'}          => $instance->slug
+49         ];
+50         
+51         \textcolor{keywordflow}{return} $data;
+52     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+api/transformers/Category\+Transformer.\+php\end{DoxyCompactItemize}

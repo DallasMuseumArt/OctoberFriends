@@ -19,13 +19,52 @@ tabs:
             span: left
             type: dropdown
             tab: General
+        report_cache:
+            label: Cache report data for X minutes
+            span: left
+            tab: General
+            
+        # Artwork API
+        artwork_api_baseurl:
+            label: Base URL to access collection REST API 
+            commentAbove: Eg. http://api.museum.com/v1
+            span: left
+            tab: Artwork API
+        artwork_api_endpoint:
+            label: The REST endpoint for looking up artwork information
+            commentAbove: Eg. collection/object/?fields=id,number,title&format=json&number=%s          
+            span: left
+            tab: Artwork API            
+        artwork_api_headers:
+            prompt: Add REST endpoint headers here  
+            label: Add headers to send on each artwork REST endpoint request
+            tab: Artwork API
+            type: repeater
+            form:
+                fields:
+                    artwork_api_header:
+                        label: Header
+                        span: left
+                    artwork_api_header_value:
+                        label: Value     
+                        span: right
+            
 
         # Kiosk
-        kiosk_idle_time:
-            label: Kiosk Idle Logout Time (in seconds)
+        require_location:
+            label: Require a registered location for full functionality
+            comment: When set to true any one accessing friends from a site that is not a registered location, activity and reward redemption will be disabled
             span: left
             tab: Kiosk
-
+            type: dropdown 
+            options:
+                true: Enabled
+                false: Disabled
+        send_badge_email:
+            label: Send email upon badge completion
+            span: left
+            tab: Kiosk
+            type: checkbox
         # Groups
         maximum_users_per_group:
             span: auto
@@ -112,3 +151,60 @@ tabs:
                 P: Portrait
                 L: Landscape
             tab: Printer
+
+        # Mailchimp settings
+        mailchimp_integration:
+            label: Enable MailChip integration
+            comment: When enable the plugin will keep synchronized Friends members with a MailChimp list.
+            span: left
+            tab: MailChimp Integration
+            type: checkbox    
+            default: false    
+        mailchimp_api_key:
+            label: API key to access MailChimp
+            comment: Information on how to generate an API key can be found   here http://kb.mailchimp.com/accounts/management/about-api-keys
+            span: left
+            tab: MailChimp Integration
+        mailchimp_list_id:
+            label: MailChimp List ID where user will be subscribe/unsubscribe
+            comment: The list ID can be found under the settings of the MailChimp list.
+            span: left
+            tab: MailChimp Integration
+        mailchimp_group_id:
+            commentAbove: Select what MailChimp group new Friends members should be subscribed.
+            label: MailChimp group
+            type: dropdown
+            tab: MailChimp Integration
+            span: left
+        mailchimp_interest_id:
+            commentAbove: Select what interests of the group new Friends members should join. ( Select first a group )
+            label: MailChimp interest
+            type: checkboxlist
+            dependsOn: mailchimp_group_id
+            span: left
+            tab: MailChimp Integration            
+
+
+        # REST API EXTRA KEY VALUES          
+        rest_api_extra_settings:
+            prompt: Add a key/value pair group
+            label: Add extra key/pair values.
+            commentAbove: Key/Values configured here are expose via the REST API settings endpoint.
+            tab: REST API
+            type: repeater
+            form:
+                fields:
+                    rest_api_group_settings:
+                        label: Settings group
+                    rest_api_group_values:
+                        prompt: Add a key/value pair
+                        label: Settings values
+                        type: repeater
+                        form:
+                            fields:
+                                rest_api_group_key:
+                                    label: Key
+                                    span: left
+                                rest_api_group_value:
+                                    label: Value
+                                    span: right

@@ -1,0 +1,205 @@
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpClient}{}\section{D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}Mailchimp\textbackslash{}Mailchimp\+Client Class Reference}
+\label{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpClient}\index{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Mailchimp\textbackslash{}\+Mailchimp\+Client@{D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Mailchimp\textbackslash{}\+Mailchimp\+Client}}
+Inheritance diagram for D\+M\+A\textbackslash{}Friends\textbackslash{}Classes\textbackslash{}Mailchimp\textbackslash{}Mailchimp\+Client\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{dd/d57/classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpClient}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpClient_a35c83f2795213a432c56477e417db249}{add\+Member} (\$list\+Id, \$user\+Email, \$firstname, \$lastname, \$status=Base\+Client\+::\+M\+E\+M\+B\+E\+R\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+S\+U\+B\+S\+C\+R\+I\+B\+E\+D, \$merge\+\_\+fields=\mbox{[}$\,$\mbox{]}, \$interests=\mbox{[}$\,$\mbox{]})
+\item 
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpClient_a41a2ca3b8a4bb416abe957ea7192506b}{}{\bfseries change\+Member\+Email} (\$list\+Id, \$current\+Email, \$new\+Email)\label{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpClient_a41a2ca3b8a4bb416abe957ea7192506b}
+
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpClient_a0a24afcd805c9ce1ebe35ac1700d5703}{update\+Member} (\$list\+Id, \$email, \$firstname=Null, \$lastname=Null, \$status=Null, \$merge\+\_\+fields=Null, \$interests=Null)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpClient_a746d820706553de9e10f8206f88a5192}{get\+Mail\+Chimp\+Group\+List} (\$list\+Id)
+\item 
+\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpClient_a3ba438601e1007893b4ef5ba34de82b6}{get\+Mail\+Chimp\+Interest\+List} (\$list\+Id, \$group\+Id)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Helper class to deal with mailchimp friends business logic \begin{DoxyAuthor}{Author}
+Kristen Arnold, Carlos Arroyo 
+\end{DoxyAuthor}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpClient_a35c83f2795213a432c56477e417db249}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Client@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Client}!add\+Member@{add\+Member}}
+\index{add\+Member@{add\+Member}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Client@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Client}}
+\subsubsection[{add\+Member}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Mailchimp\textbackslash{}\+Mailchimp\+Client\+::add\+Member (
+\begin{DoxyParamCaption}
+\item[{}]{\$list\+Id, }
+\item[{}]{\$user\+Email, }
+\item[{}]{\$firstname, }
+\item[{}]{\$lastname, }
+\item[{}]{\$status = {\ttfamily BaseClient\+:\+:MEMBER\+\_\+STATUS\+\_\+SUBSCRIBED}, }
+\item[{}]{\$merge\+\_\+fields = {\ttfamily \mbox{[}\mbox{]}}, }
+\item[{}]{\$interests = {\ttfamily \mbox{[}\mbox{]}}}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpClient_a35c83f2795213a432c56477e417db249}
+Helper method to add a new member to a list 
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$list\+Id} & \\
+\hline
+string & {\em \$email} & \\
+\hline
+string & {\em \$firstname} & \\
+\hline
+string & {\em \$lastname} & \\
+\hline
+string & {\em \$status} & Options are subscribed, unsubscribed, cleaned, pending \\
+\hline
+array & {\em \$merge\+\_\+fields} & See Mailchimp list for available merge\+\_\+tags \\
+\hline
+array & {\em \$interests} & associative array of group interest the member can join. format should be \mbox{[} interest\+\_\+id =$>$ $<$bool$>$ \mbox{]}. eg \mbox{[} \textquotesingle{}3df5y36\textquotesingle{} =$>$ true \mbox{]} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+29     \{
+30         
+31         $data = [
+32           \textcolor{stringliteral}{'email\_address'}       => $userEmail,
+33           \textcolor{stringliteral}{'email\_type'}          => \textcolor{stringliteral}{'html'},
+34           \textcolor{stringliteral}{'status'}              => ($status) ? $status : BaseClient::MEMBER\_STATUS\_UNSUBSCRIBED,
+35           \textcolor{stringliteral}{'merge\_fields'}        => array\_merge([
+36                 \textcolor{stringliteral}{'FNAME'} => $firstname,
+37                 \textcolor{stringliteral}{'LNAME'} => $lastname  
+38           ], $merge\_fields)
+39         ];
+40         
+41         \textcolor{keywordflow}{if}($interests) \{
+42             $data[\textcolor{stringliteral}{'interests'}]  = $interests;
+43         \}
+44         
+45         $endpoint = \textcolor{stringliteral}{'/lists/'} . $listId . \textcolor{stringliteral}{'/members/'};
+46         
+47         \textcolor{keywordflow}{return} $this->post($endpoint, $data);
+48        
+49      \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpClient_a746d820706553de9e10f8206f88a5192}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Client@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Client}!get\+Mail\+Chimp\+Group\+List@{get\+Mail\+Chimp\+Group\+List}}
+\index{get\+Mail\+Chimp\+Group\+List@{get\+Mail\+Chimp\+Group\+List}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Client@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Client}}
+\subsubsection[{get\+Mail\+Chimp\+Group\+List}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Mailchimp\textbackslash{}\+Mailchimp\+Client\+::get\+Mail\+Chimp\+Group\+List (
+\begin{DoxyParamCaption}
+\item[{}]{\$list\+Id}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpClient_a746d820706553de9e10f8206f88a5192}
+Helper method to get Mail\+Chimp list of groups 
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$list\+Id} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+120      \{
+121         $endpoint = \textcolor{stringliteral}{'/lists/'} . $listId . \textcolor{stringliteral}{'/interest-categories/'};
+122         \textcolor{keywordflow}{return}  $this->\textcolor{keyword}{get}($endpoint);
+123      \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpClient_a3ba438601e1007893b4ef5ba34de82b6}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Client@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Client}!get\+Mail\+Chimp\+Interest\+List@{get\+Mail\+Chimp\+Interest\+List}}
+\index{get\+Mail\+Chimp\+Interest\+List@{get\+Mail\+Chimp\+Interest\+List}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Client@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Client}}
+\subsubsection[{get\+Mail\+Chimp\+Interest\+List}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Mailchimp\textbackslash{}\+Mailchimp\+Client\+::get\+Mail\+Chimp\+Interest\+List (
+\begin{DoxyParamCaption}
+\item[{}]{\$list\+Id, }
+\item[{}]{\$group\+Id}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpClient_a3ba438601e1007893b4ef5ba34de82b6}
+Helper method to get Mail\+Chimp group interest ids 
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$list\+Id} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+130      \{
+131          $endpoint = \textcolor{stringliteral}{'/lists/'} . $listId . \textcolor{stringliteral}{'/interest-categories/'} . $groupId . \textcolor{stringliteral}{'/interests'};
+132          \textcolor{keywordflow}{return}  $this->\textcolor{keyword}{get}($endpoint);
+133      \}
+\end{DoxyCode}
+\hypertarget{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpClient_a0a24afcd805c9ce1ebe35ac1700d5703}{}\index{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Client@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Client}!update\+Member@{update\+Member}}
+\index{update\+Member@{update\+Member}!D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Client@{D\+M\+A\+::\+Friends\+::\+Classes\+::\+Mailchimp\+::\+Mailchimp\+Client}}
+\subsubsection[{update\+Member}]{\setlength{\rightskip}{0pt plus 5cm}D\+M\+A\textbackslash{}\+Friends\textbackslash{}\+Classes\textbackslash{}\+Mailchimp\textbackslash{}\+Mailchimp\+Client\+::update\+Member (
+\begin{DoxyParamCaption}
+\item[{}]{\$list\+Id, }
+\item[{}]{\$email, }
+\item[{}]{\$firstname = {\ttfamily Null}, }
+\item[{}]{\$lastname = {\ttfamily Null}, }
+\item[{}]{\$status = {\ttfamily Null}, }
+\item[{}]{\$merge\+\_\+fields = {\ttfamily Null}, }
+\item[{}]{\$interests = {\ttfamily Null}}
+\end{DoxyParamCaption}
+)}\label{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1MailchimpClient_a0a24afcd805c9ce1ebe35ac1700d5703}
+Helper method to add a new member to a list 
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$list\+Id} & \\
+\hline
+string & {\em \$email} & \\
+\hline
+string & {\em \$firstname} & \\
+\hline
+string & {\em \$lastname} & \\
+\hline
+string & {\em \$status} & Options are subscribed, unsubscribed, cleaned, pending \\
+\hline
+array & {\em \$merge\+\_\+fields} & See Mailchimp list for available merge\+\_\+tags \\
+\hline
+array & {\em \$interests} & associative array of group interest the member can join. format should be \mbox{[} interest\+\_\+id =$>$ $<$bool$>$ \mbox{]}. eg \mbox{[} \textquotesingle{}3df5y36\textquotesingle{} =$>$ true \mbox{]} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+77      \{
+78          
+79          $memberId = $this->\hyperlink{classDMA_1_1Friends_1_1Classes_1_1Mailchimp_1_1BaseMailchimpClient_a66c564aa4d03977776de6a16ea2c4a8b}{getMemberID}($email);
+80          $endpoint = \textcolor{stringliteral}{'/lists/'} . $listId . \textcolor{stringliteral}{'/members/'} . $memberId;
+81          
+82          \textcolor{comment}{// Payload}
+83          $data                  = [];
+84          $data[\textcolor{stringliteral}{'merge\_fields'}]  = [];
+85          
+86          \textcolor{comment}{// Please note that Mailchimp API will not update the email address}
+87          \textcolor{comment}{// To updated }
+88          $data[\textcolor{stringliteral}{'email\_address'}] = $email; 
+89          
+90          \textcolor{keywordflow}{if} ($status) \{
+91              $data[\textcolor{stringliteral}{'status'}] = $status;
+92          \}
+93          
+94          \textcolor{keywordflow}{if} ($firstname) \{
+95              $data[\textcolor{stringliteral}{'merge\_fields'}][\textcolor{stringliteral}{'FNAME'}] = $firstname;
+96          \}
+97          
+98          \textcolor{keywordflow}{if} ($lastname) \{
+99              $data[\textcolor{stringliteral}{'merge\_fields'}][\textcolor{stringliteral}{'LNAME'}] = $lastname;
+100          \}
+101          
+102          \textcolor{keywordflow}{if} (is\_array($merge\_fields)) \{
+103              $data[\textcolor{stringliteral}{'merge\_fields'}] =  array\_merge( $data[\textcolor{stringliteral}{'merge\_fields'}], $merge\_fields);
+104          \}
+105      
+106          \textcolor{keywordflow}{if} ($interests) \{
+107              $data[\textcolor{stringliteral}{'interests'}] = $interests;
+108          \}
+109          
+110          \textcolor{keywordflow}{return}  $this->patch($endpoint, $data);
+111  
+112      \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+classes/mailchimp/Mailchimp\+Client.\+php\end{DoxyCompactItemize}

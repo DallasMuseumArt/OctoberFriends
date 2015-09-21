@@ -7,9 +7,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Illuminate\Console\Command;
 use RainLab\User\Models\User;
-use libphonenumber\PhoneNumberUtil;
-use libphonenumber\PhoneNumberFormat;
-use Carbon\Carbon;
+use DMA\Friends\Classes\UserExtend;
 
 /**
  * Normalize user data ( clean phone numbers, .. )
@@ -92,20 +90,10 @@ class NormalizeUserData extends Command
         $cleanPhone = null;
         $key = 'valid_phone';
         
-        $phoneUtil = PhoneNumberUtil::getInstance();
         try {
-            // Get country code using configure timezone
-            $tz = Carbon::now()->getTimezone();
-            $country_code = array_get($tz->getLocation(), 'country_code', 'US');
-            
-            // Parse phone number
-            $numberProto = $phoneUtil->parse($user->phone, $country_code);
-            
-            if ($phoneUtil->isValidNumber($numberProto)){
-                $cleanPhone = $phoneUtil->format($numberProto, PhoneNumberFormat::E164);
-                
-            }else{
-                               
+
+            if (!$cleanPhone = UserExtend::parsePhone($user->phone)) {
+                         
                 // Emails that contain numbers can be mistaken as a vanity number ( 800 GODMA )
                 // so just for reporting purpose I check if the phone containts '@' is more likely it is an email 
                 $isEmail = preg_match('/@/', $user->phone);

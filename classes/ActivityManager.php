@@ -6,12 +6,13 @@ use Config;
 use File;
 use Illuminate\Container\Container;
 use System\Classes\PluginManager;
-use System\Classes\SystemException;
+use SystemException;
 
 /**
- * Activity Manager
+ * Manage activity behavior
  *
- * @package dma\friends
+ * @package DMA\Friends\Classes
+ * @author Kristen Arnold, Carlos Arroyo
  */
 class ActivityManager
 {
@@ -50,7 +51,7 @@ class ActivityManager
 
     public function __construct()
     {
-        $this->configPath = base_path() . Config::get('cms.pluginsDir');
+        $this->configPath = base_path() . Config::get('cms.pluginsPath');
     }
 
     /**
@@ -168,9 +169,10 @@ class ActivityManager
     {
         $this->loadActivity($alias);
 
+        if (!$this->activityType) return false;
+
         $formConfig = $this->activityType->getConfig();
         $formConfig = $this->getConfigPath($formConfig);
-        
         if (File::isFile($formConfig)) {
             return $this->makeConfig($formConfig);
         } else {
