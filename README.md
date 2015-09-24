@@ -31,7 +31,7 @@ Type rainlab.user and click Install Plugin on this page.
 
 [Using custom events](docs/EVENTS.md) 
 
-PHP API Documentation is available at [http://developer.dma.org/friends/](http://developer.dma.org/friends/)
+PHP API Documentation is available at [http://developer.dma.org/](http://developer.dma.org)
 
 OctoberCMS Documentation is available at [https://octobercms.com/docs/](https://octobercms.com/docs/)
 
