@@ -201,7 +201,7 @@ class ActivityTypeBase implements ActivityTypeBaseInterface
                     $start_time = Carbon::now();
                     $start_time->setTime($start['hour'], $start['minutes']);
                     $end_time   = Carbon::now();
-                    $end_time->setTime($end['hour'], $start['minutes']);
+                    $end_time->setTime($end['hour'], $end['minutes']);
                     $day        = date('w');
 
                     // Sunday is on the end of the week and date sets sunday as 0
