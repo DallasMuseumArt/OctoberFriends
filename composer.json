@@ -31,6 +31,7 @@
         "giggsey/libphonenumber-for-php": "~7.0",
         "maatwebsite/excel": "~2.0",
         "zircote/swagger-php": "2.*",
-        "guzzlehttp/guzzle": "~6.0"       
+        "guzzlehttp/guzzle": "~6.0",
+        "namshi/jose": "^6.0"       
     }
 }

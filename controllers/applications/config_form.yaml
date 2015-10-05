@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Application
+
+# Model Form Field configuration
+form: ~/plugins/dma/friends/models/application/fields.yaml
+
+# Model Class name
+modelClass: DMA\Friends\Models\Application
+
+# Default redirect location
+defaultRedirect: dma/friends/applications
+
+# Create page
+create:
+    title: Create Applications
+    redirect: dma/friends/applications/update/:id
+    redirectClose: dma/friends/applications
+
+# Update page
+update:
+    title: Edit Applications
+    redirect: dma/friends/applications
+    redirectClose: dma/friends/applications
+
+# Preview page
+preview:
+    title: Preview Applications

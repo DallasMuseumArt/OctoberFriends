@@ -111,3 +111,6 @@
 2.5.5:
     - Add user redemption limit
     - add_reward_user_limit.php
+2.5.6:
+    - Add API application table
+    - create_applicaitons_table.php

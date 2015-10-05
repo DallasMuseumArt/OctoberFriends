@@ -10,13 +10,24 @@ use DMA\Friends\Classes\API\ModelRepository;
 use DMA\Friends\Activities\ActivityCode;
 use DMA\Friends\Activities\LikeWorkOfArt;
 use DMA\Friends\Models\ActivityMetadata;
+use DMA\Friends\Classes\API\Auth\UserAccessLevelTrait;
 
 class ActivityMetadataResource extends BaseResource {
+    
+    use UserAccessLevelTrait;
 
     protected $model        = '\DMA\Friends\Models\ActivityMetadata';
-
     protected $transformer  = '\DMA\Friends\API\Transformers\ActivityMetadataTransformer';
 
+    /**
+     * The listed actions check first if the
+     * user can perform the action
+     * @var array
+     */
+    public $checkAccessLevelActions= [
+            'index', 'indexByUser', 'indexByTypeAndUser'
+    ];
+    
 
     public function __construct()
     {
@@ -34,6 +45,9 @@ class ActivityMetadataResource extends BaseResource {
      *     summary="Returns all activity medatadata by user id",
      *     tags={ "activity-metadata"},
      *
+     *     @SWG\Parameter(
+     *         ref="#/parameters/authentication"
+     *     ),
      *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
      *     ),
@@ -103,6 +117,9 @@ class ActivityMetadataResource extends BaseResource {
      *     tags={ "activity-metadata"},
      *
      *     @SWG\Parameter(
+     *         ref="#/parameters/authentication"
+     *     ),
+     *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
      *     ),
      *     @SWG\Parameter(
@@ -140,6 +157,9 @@ class ActivityMetadataResource extends BaseResource {
      *     summary="Return activity metadata by activity type and user id",
      *     tags={ "activity-metadata"},
      *
+     *     @SWG\Parameter(
+     *         ref="#/parameters/authentication"
+     *     ),
      *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
      *     ),
@@ -241,6 +261,9 @@ class ActivityMetadataResource extends BaseResource {
      *     summary="Return all activity metadata",
      *     tags={ "activity-metadata"},
      *     
+     *     @SWG\Parameter(
+     *         ref="#/parameters/authentication"
+     *     ),
      *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
      *     ),

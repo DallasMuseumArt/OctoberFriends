@@ -8,14 +8,25 @@ use DMA\Friends\Classes\API\BaseResource;
 use DMA\Friends\Activities\ActivityCode;
 use DMA\Friends\Activities\LikeWorkOfArt;
 use DMA\Friends\API\Transformers\UserProfileTransformer;
+use DMA\Friends\Classes\API\Auth\UserAccessLevelTrait;
 
 
 class ActivityResource extends BaseResource {
 
+    use UserAccessLevelTrait;
+    
     protected $model        = '\DMA\Friends\Models\Activity';
-
     protected $transformer  = '\DMA\Friends\API\Transformers\ActivityTransformer';
 
+    /**
+     * The listed actions check first if the
+     * user can perform the action
+     * @var array
+     */
+    public $checkAccessLevelActions= [
+            'checkin', 'bulkCheckins'
+    ];
+    
 
     public function __construct()
     {
@@ -631,6 +642,9 @@ class ActivityResource extends BaseResource {
      *     summary="Returns all activities",
      *     tags={ "activity"},
      *     
+     *     @SWG\Parameter(
+     *         ref="#/parameters/authentication"
+     *     ),
      *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
      *     ),

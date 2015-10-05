@@ -8,6 +8,7 @@ use DMA\Friends\Classes\BadgeProcessor;
 use DMA\Friends\Classes\FriendsLog;
 use DMA\Friends\Classes\Notifications\ChannelManager;
 use DMA\Friends\Classes\API\APIManager;
+use DMA\Friends\Classes\API\Auth\APIAuthManager;
 use DMA\Friends\Classes\Mailchimp\MailchimpManager;
 
 
@@ -80,13 +81,25 @@ class FriendsServiceProvider extends ServiceProvider
     
     public function registerAPI()
     {
+        // API
         $this->app['FriendsAPI'] = $this->app->share(function($app) {
-            \App::register('\EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider');            
+            \App::register('\EllipseSynergie\ApiResponse\Laravel\ResponseServiceProvider');     
             $api = new APIManager;
             return $api;            
         });
         
-        $this->createAlias('FriendsAPI', 'DMA\Friends\Classes\API\APIManager');
+        $this->createAlias('FriendsAPI', 'DMA\Friends\Facades\FriendsAPI');
+        
+        // API Authentication
+        $this->app['FriendsAPIAuth'] = $this->app->share(function($app){
+            $auth = new APIAuthManager;            
+            return $auth;
+        });
+        
+        $this->createAlias('FriendsAPIAuth', 'DMA\Friends\Facades\FriendsAPIAuth');
+        // Register middleware to validated API Auth tokens
+        $this->registerMiddleware('friends-api-auth',
+                '\DMA\Friends\Classes\API\Auth\Middleware\FriendsApiAuthMiddleware');
         
     }
 
@@ -94,12 +107,13 @@ class FriendsServiceProvider extends ServiceProvider
     public function registerMailChimpIntegration()
     {
         $this->app['mailchimpintegration'] = $this->app->share(function($app) {
-            $mailchimp = new MailchimpManager();
+            $mailchimp = new MailchimpManager;
             return $mailchimp;
         });
     
-        $this->createAlias('MailChimpIntegration', 'DMA\Friends\Classes\Mailchimp\MailchimpManager');
-    
+        $this->createAlias('MailChimpIntegration', 'DMA\Friends\Facades\MailchimpIntegration');
+        
+
     }
     
     /**
@@ -115,12 +129,28 @@ class FriendsServiceProvider extends ServiceProvider
     }
     
     /**
+     * Helper method to quickly setup middleware
+     * 
+     * @param string $alias
+     * @param string $class
+     */
+    protected function registerMiddleware($alias, $class)
+    {
+        $this->app['router']->middleware($alias, $class);
+    }
+    
+    
+    /**
      * Get the services provided by the provider.
      * @return array
      */
     public function provides()
     {
-        return ['FriendsLog', 'postman', 'FriendsAPI', 'mailchimpintegration'];
+        return ['FriendsLog', 
+                'postman', 
+                'FriendsAPI', 
+                'FriendsAPIAuth', 
+                'mailchimpintegration'];
     
     }
     

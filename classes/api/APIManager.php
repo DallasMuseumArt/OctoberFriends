@@ -19,7 +19,14 @@ class APIManager
      */
     private $resources = [];
     
-        
+    /**
+     * Internal use. Keep record of all endpoints excepted of the 
+     * API authentication.
+     * @var array
+     */
+    private $exceptAuthentication = [];
+    
+    
     /**
      * Register multiple API Resources using the following array 
      * structure:
@@ -56,6 +63,19 @@ class APIManager
         return $this->resources;
     }
     
+    /**
+     * Check if the Endpoint is excepted of API authentication
+     * 
+     * @param string $controllerAction. 
+     * Should be expressed in the format {controllerClass}@{action} 
+     * 
+     * @return boolean
+     */
+    public function isAuthenticationExcepted($controllerAction)
+    {
+        return in_array($controllerAction, $this->exceptAuthentication);
+    }
+    
     
     /**
      * Register Laravel routes of each registered resources
@@ -70,15 +90,20 @@ class APIManager
         foreach($this->getResources() as $url => $class){
             try{
                 $resource = App::make($class);
+                $publicActions = $resource->publicActions ?:[];
+                
+                // Register public actions
+                foreach($publicActions as $action){
+                    $this->exceptAuthentication[] = $class . "@" . $action;
+                }
                 
                 // Register additional routes first
                 if(method_exists($resource, 'getAdditionalRoutes')){
                     $extra = $resource->getAdditionalRoutes();
                     foreach ($extra as $u => $args) {
                         $verbs = $args['verbs'];
-                        foreach($verbs as $v) {
-                            //Route::{$v}($url . '/' . $u, $class . "@" . $args['handler']);
-                            
+                        
+                        foreach($verbs as $v) {                          
                             
                             // TODO : Find how to get current router group prefix
                             $baseName  = 'friends.api.' . str_replace('/', '.', strtolower($url));
@@ -89,8 +114,8 @@ class APIManager
                             $routeName = $baseName . '.' . $routeName;
                             
                             Route::{$v}($url . '/' . $u, [
-                                    'as'   => $routeName,
-                                    'uses' => $class . "@" . $args['handler']
+                                    'as'            => $routeName,
+                                    'uses'          => $class . "@" . $args['handler']
                             ]);
                             
                             
@@ -114,7 +139,6 @@ class APIManager
         // Catch all
         Route::any('/', function() {
             return Redirect::route('friends.api.docs.index');
-            return Response::api()->errorNotFound();
         });
         
         // Catch all
@@ -125,13 +149,16 @@ class APIManager
     }
     
     protected function addRouteApiDocs(){
-
+        $handler = 'DMA\Friends\Classes\API\APIDocsController@index';
+        
         // API Docs
         Route::get('docs', [
             'as'   => 'friends.api.docs.index',
-            'uses' => 'DMA\Friends\Classes\API\APIDocsController@index'
+            'uses' => $handler
         ]);
-
+        
+        $this->exceptAuthentication[] = $handler;
+    
     }
     
       

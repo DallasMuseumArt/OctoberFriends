@@ -5,13 +5,24 @@ use Input;
 use Response;
 use RainLab\User\Models\User;
 use DMA\Friends\Classes\API\BaseResource;
+use DMA\Friends\Classes\API\Auth\UserAccessLevelTrait;
 
 class ActivityLogResource extends BaseResource {
 
+    use UserAccessLevelTrait;
+    
     protected $model        = '\DMA\Friends\Models\ActivityLog';
-
     protected $transformer  = '\DMA\Friends\API\Transformers\ActivityLogTransformer';
 
+    /**
+     * The listed actions check first if the
+     * user can perform the action
+     * @var array
+     */
+    public $checkAccessLevelActions= [
+            'index','indexByUser', 'indexByTypeAndUser'
+    ];
+    
 
     public function __construct()
     {
@@ -28,7 +39,10 @@ class ActivityLogResource extends BaseResource {
      *     description="Returns all activity logs of a user",
      *     summary="Return activity logs by user",
      *     tags={"activity-logs"},
-     *
+     *     
+     *     @SWG\Parameter(
+     *         ref="#/parameters/authorization"
+     *     ),
      *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
      *     ),
@@ -97,6 +111,9 @@ class ActivityLogResource extends BaseResource {
      *     tags={ "activity-logs"},
      *
      *     @SWG\Parameter(
+     *         ref="#/parameters/authorization"
+     *     ),
+     *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
      *     ),
      *     @SWG\Parameter(
@@ -133,6 +150,9 @@ class ActivityLogResource extends BaseResource {
      *     summary="Return users activity log by type",
      *     tags={ "activity-logs"},
      *    
+     *     @SWG\Parameter(
+     *         ref="#/parameters/authorization"
+     *     ),
      *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
      *     ),
@@ -238,6 +258,9 @@ class ActivityLogResource extends BaseResource {
      *     summary="Return all activity logs",
      *     tags={ "activity-logs"}, 
      *     
+     *     @SWG\Parameter(
+     *         ref="#/parameters/authorization"
+     *     ),
      *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
      *     ),

@@ -9,16 +9,28 @@ use DMA\Friends\Models\Reward;
 use DMA\Friends\Classes\RewardManager;
 use DMA\Friends\Classes\API\BaseResource;
 use DMA\Friends\API\Transformers\UserProfileTransformer;
+use DMA\Friends\Classes\API\Auth\UserAccessLevelTrait;
 
 use RainLab\User\Models\User;
 
 
 class RewardResource extends BaseResource {
 
+    use UserAccessLevelTrait;
+    
     protected $model        = '\DMA\Friends\Models\Reward';
-
     protected $transformer  = '\DMA\Friends\API\Transformers\RewardTransformer';
 
+    /**
+     * The listed actions check first if the
+     * user can perform the action
+     * @var array
+     */
+    public $checkAccessLevelActions= [
+            'redeemByGet'
+    ];
+    
+    
     public function __construct()
     {
         // Add additional routes to Activity resource
@@ -227,6 +239,9 @@ class RewardResource extends BaseResource {
      *     summary="Returns all rewards",
      *     tags={ "rewards"},
      *     
+     *     @SWG\Parameter(
+     *         ref="#/parameters/authentication"
+     *     ),
      *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
      *     ),

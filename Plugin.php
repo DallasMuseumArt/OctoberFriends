@@ -55,6 +55,7 @@ class Plugin extends PluginBase
     {
         return [
             'dma.friends.access_admin'  => ['label' => 'Manage Friends'],
+            'dma.friends.manage_apps'  => ['label'  => 'Manage Friends API applications'],
         ];
     }
 
@@ -131,7 +132,13 @@ class Plugin extends PluginBase
                         'icon'          => 'icon-location-arrow',
                         'url'           => Backend::url('dma/friends/locations'),
                         'permissions'   => ['dma.friends.access_admin'],
-                    ],                
+                    ],
+                    'applications' => [
+                        'label'         => 'Applications',
+                        'icon'          => 'icon-plug',
+                        'url'           => Backend::url('dma/friends/applications'),
+                        'permissions'   => ['dma.friends.access_admin', 'dma.friends.manage_apps'],
+                    ],                        
                 ]
             ]
         ];

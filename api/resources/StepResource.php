@@ -19,6 +19,9 @@ class StepResource extends BaseResource {
      *     tags={ "steps"},
      *         
      *     @SWG\Parameter(
+     *         ref="#/parameters/authentication"
+     *     ),
+     *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
      *     ),
      *     @SWG\Parameter(

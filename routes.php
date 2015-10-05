@@ -10,7 +10,7 @@
 // Register API routers after Pluging is booted and Laravel is ready
 App::before(function($request, $response){
        
-    Route::group(['prefix' => 'friends/api'], function() {
+    Route::group(['prefix' => 'friends/api', 'middleware' => 'friends-api-auth'], function() {
         // Register API Routes
         // History : 
         // 04/08/2015 : Adding Try Catch statement to prevent a fatal exception when acessing 

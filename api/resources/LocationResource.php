@@ -16,6 +16,9 @@ class LocationResource extends BaseResource {
      *     tags={ "locations"},
      *
      *     @SWG\Parameter(
+     *         ref="#/parameters/authentication"
+     *     ),
+     *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
      *     ),
      *     @SWG\Parameter(

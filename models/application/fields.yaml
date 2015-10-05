@@ -1,0 +1,48 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    id:
+        label: ID
+        disabled: true
+        span: auto
+    is_active:
+        label: Active
+        span: auto
+        type: checkbox
+        default: True   
+    
+    name: 
+        label: Application Name 
+        comment: Use for reference only
+        span: auto
+        
+    app_key:
+        label: Application Key.
+        comment: Use this key to authenticate users or register new users via REST API.
+        disabled: true
+        span: auto
+
+    access_level:
+        label: Application access level data
+        comment: > 
+            Define an access level of this Application. 
+            When set as 'User only data' It means the authenticated user can not access other user's data. 
+            The recommended access level is 'User only data' if the application don't requires access
+            other users data. 
+                    
+        span: auto
+        type: dropdown
+
+    token_ttl:
+        label: Token time to live. Given in minutes.
+        comment: Default value is 2 weeks.
+        span: auto
+        default: 20160
+
+    notes:
+        label: Notes
+        type: textarea
+        size: medium
+        span: auto

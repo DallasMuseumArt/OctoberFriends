@@ -68,6 +68,9 @@ class RatingResource extends BaseResource {
      *     ),
      *      
      *     @SWG\Parameter(
+     *         ref="#/parameters/authentication"
+     *     ),
+     *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
      *     ),
      *     @SWG\Parameter(

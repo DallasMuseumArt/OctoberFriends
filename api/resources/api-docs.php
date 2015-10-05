@@ -17,6 +17,16 @@
  * )
  */
 
+
+/**
+ * @SWG\SecurityScheme(
+ *   securityDefinition="bearer",
+ *   type="apiKey",
+ *   in="header",
+ *   name="token"
+ * )
+ */
+
  
 /**
  *     @SWG\Definition(
@@ -118,5 +128,14 @@
  *      items=@SWG\Schema(type="string"),
  *      collectionFormat="csv"
  * ) 
+ * 
+ * @SWG\Parameter(
+ *      description="Authentication token returned by User/Login endpoint",
+ *      name="authorizations",
+ *      in="header",
+ *      type="string",
+ *      required=true,
+ * ) 
+ *
  *
  */

@@ -1,13 +1,14 @@
 <?php namespace DMA\Friends\API\Resources;
 
-use Auth;
 use Input;
 use Request;
 use Response;
 use Exception;
 use Validator;
 use ValidationException;
+use FriendsAPIAuth;
 
+use DMA\Friends\Classes\API\Auth\UserAccessLevelTrait;
 use DMA\Friends\Classes\AuthManager;
 
 use DMA\Friends\Models\Usermeta;
@@ -23,9 +24,29 @@ use Cms\Classes\Theme;
 
 class UserResource extends BaseResource
 {
-    protected $model        = '\RainLab\User\Models\User';
+    use UserAccessLevelTrait;
     
+    protected $model        = '\RainLab\User\Models\User';
     protected $transformer  = '\DMA\Friends\API\Transformers\UserTransformer';
+    
+    /**
+     * The following API actions in the UserResource are public.
+     * It means API Authentication will not be enforce.
+     * @var array
+     */
+    public $publicActions = ['login', 'store'];
+    
+    
+    /**
+     * The listed actions check first if the 
+     * user can perform the action
+     * @var array
+     */
+    public $checkAccessLevelActions= [
+            'index', 'show', 'update', 'uploadAvatar',
+            'userActivities', 'userRewards', 'userBadges'
+    ];
+    
     
     /**
      * Hacky variable to include user profile only when 
@@ -106,21 +127,26 @@ class UserResource extends BaseResource
     public function login()
     {
         try {
-            $data = Request::all();
-        
+            $data    = Request::all();
+            $appKey  = array_get($data, 'app_key', NULL);
+           
             // Update wordpress passwords if necessary
             WordpressAuth::verifyFromEmail(array_get($data, 'email', ''), array_get($data, 'password'));
     
-            $data = [
+            $credentials = [
                 'login'     => array_get($data, 'username', array_get($data, 'email')),
-                'password'  => array_get($data, 'password')
+                'password'  => array_get($data, 'password'),
+                'app_key'   => $appKey    
             ];
     
-            $user = AuthManager::auth($data);
+            $authData = FriendsAPIAuth::attemp($credentials);
+            $user  =  array_get($authData, 'user',   Null);
+            $token =  array_get($authData, 'token',  Null);
             
-        
             if ($user) {
-                return $this->show($user->id);
+                $this->include_profile = true; 
+                return Response::api()->withItem($user, $this->getTransformer(), null, ['token' => $token]);
+                
             } else {
                 return Response::api()->errorNotFound('User not found');
             }
@@ -136,7 +162,6 @@ class UserResource extends BaseResource
         }
         
     }
-    
     
 
     
@@ -189,6 +214,9 @@ class UserResource extends BaseResource
      *     description="Returns all users",
      *     tags={ "user"},
      *     
+     *     @SWG\Parameter(
+     *         ref="#/parameters/authentication"
+     *     ),
      *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
      *     ),
@@ -344,8 +372,16 @@ class UserResource extends BaseResource
                     'last_name'             => 'min:2',
                     'birthday_year'         => 'required_with:birthday_month,birthday_day|alpha_num|min:4',
                     'birthday_month'        => 'required_with:birthday_year,birthday_day|alpha_num|min:2',
-                    'birthday_day'          => 'required_with:birthday_year,birthday_month|alpha_num|min:2'
+                    'birthday_day'          => 'required_with:birthday_year,birthday_month|alpha_num|min:2',
+                    'app_key'               => 'required',
             ];
+            
+            // Check if the application key is valid
+            // If Application key is invalid or inactive 
+            // an exception will raise
+            $appKey  = array_get($data, 'app_key', NULL);
+            FriendsAPIAuth::isApplicationKeyValid($appKey);
+            
             
             // Reformat birthday data structure
             $bd_year  = array_get($data, 'birthday_year', null);
@@ -435,6 +471,7 @@ class UserResource extends BaseResource
     public function update($id)
     {
         try{
+            
             if(is_null($user = User::find($id))){
                 return Response::api()->errorNotFound('User not found'); 
             }
@@ -717,6 +754,9 @@ class UserResource extends BaseResource
      *     tags={ "user"},
      *     
      *     @SWG\Parameter(
+     *         ref="#/parameters/authentication"
+     *     ),
+     *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
      *     ),
      *     @SWG\Parameter(
@@ -763,6 +803,9 @@ class UserResource extends BaseResource
      *     summary="Find user redeem rewards",
      *     tags={ "user"},
      *     
+     *     @SWG\Parameter(
+     *         ref="#/parameters/authentication"
+     *     ),
      *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
      *     ),
@@ -811,6 +854,9 @@ class UserResource extends BaseResource
      *     tags={ "user"},
      *     
      *     @SWG\Parameter(
+     *         ref="#/parameters/authentication"
+     *     ),
+     *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
      *     ),
      *     @SWG\Parameter(
@@ -851,7 +897,7 @@ class UserResource extends BaseResource
     }
     
     private function genericUserRelationResource($userId, $attrRelation, $transformer)
-    {
+    {        
         if(is_null($user = User::find($userId))){
             return Response::api()->errorNotFound('User not found');
         }

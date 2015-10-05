@@ -56,6 +56,12 @@ class BaseResource extends Controller {
 
 
     /**
+     * List of actions that don't requiered API Authentication
+     * @var array
+     */
+    public $publicActions = [];
+    
+    /**
      * Create and return an instance of a ModelRepository or the configure model
 
      * @return GenericModelRepository

@@ -27,6 +27,9 @@ class StateResource extends BaseResource
      *     tags={ "countries"},
      *      
      *     @SWG\Parameter(
+     *         ref="#/parameters/authentication"
+     *     ),
+     *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
      *     ),
      *     @SWG\Parameter(
