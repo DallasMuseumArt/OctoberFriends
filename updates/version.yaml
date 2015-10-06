@@ -111,3 +111,5 @@
 2.5.5:
     - Add user redemption limit
     - add_reward_user_limit.php
+2.6.0:
+    - Minor bug fixes
