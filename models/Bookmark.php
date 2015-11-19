@@ -57,9 +57,13 @@ class Bookmark extends Model
 
     public static function saveBookmark(User $user, $object)
     {        
-        $bookmark = new Bookmark();
-        $object->bookmarks()->save($bookmark);
-        $user->bookmarks()->save($bookmark);
+        if(is_null($bookmark = static::findBookmark($user, $object)))
+        {
+            $bookmark = new Bookmark();
+            $object->bookmarks()->save($bookmark);
+            $user->bookmarks()->save($bookmark);
+        }
+        return $bookmark;
     }
 
     public static function removeBookmark(User $user, $object)

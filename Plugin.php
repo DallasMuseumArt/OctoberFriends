@@ -502,6 +502,8 @@ class Plugin extends PluginBase
             'countries.states'      => 'DMA\Friends\API\Resources\StateResource',
             'ratings'               => 'DMA\Friends\API\Resources\RatingResource',
             'settings'              => 'DMA\Friends\API\Resources\SettingsResource',
+            'print'                 => 'DMA\Friends\API\Resources\PrintResource',
+            'bookmarks'             => 'DMA\Friends\API\Resources\BookmarkResource',
         ];
     }
     

@@ -44,7 +44,7 @@ class UserResource extends BaseResource
      */
     public $checkAccessLevelActions= [
             'index', 'show', 'update', 'uploadAvatar',
-            'userActivities', 'userRewards', 'userBadges'
+            'userActivities', 'userRewards', 'userBadges', 'userBookmarks'
     ];
     
     
@@ -65,6 +65,7 @@ class UserResource extends BaseResource
         $this->addAdditionalRoute('userActivities', '{user}/activities',        ['GET']);
         $this->addAdditionalRoute('userRewards',    '{user}/rewards',           ['GET']);
         $this->addAdditionalRoute('userBadges',     '{user}/badges',            ['GET']);
+        $this->addAdditionalRoute('userBookmarks',  '{user}/bookmarks',         ['GET']);
         
     }
     
@@ -407,7 +408,23 @@ class UserResource extends BaseResource
             
             // Register new user
             $user = AuthManager::register($data, $rules);
-            return $this->show($user->id);
+            
+            
+            $credentials = [
+                'login'     => array_get($data, 'username', array_get($data, 'email')),
+                'password'  => array_get($data, 'password'),
+                'app_key'   => $appKey    
+            ];
+    
+            # Generated authentication token for the newly created user
+            $authData = FriendsAPIAuth::attemp($credentials);
+            $user  =  array_get($authData, 'user',   Null);
+            $token =  array_get($authData, 'token',  Null);
+            
+            # Return new user and token
+            $this->include_profile = true; 
+            return Response::api()->withItem($user, $this->getTransformer(), null, ['token' => $token]);
+    
              
         } catch(Exception $e) {
             if ($e instanceof ModelException) {
@@ -894,6 +911,14 @@ class UserResource extends BaseResource
         $transformer  = '\DMA\Friends\API\Transformers\BadgeTransformer';
         $attrRelation = 'badges';
         return $this->genericUserRelationResource($userId, $attrRelation, $transformer);
+    }
+    
+    
+    public function userBookmarks($userId)
+    {
+        $transformer  = '\DMA\Friends\API\Transformers\BookmarkTransformer';
+        $attrRelation = 'bookmarks';
+        return $this->genericUserRelationResource($userId, $attrRelation, $transformer);        
     }
     
     private function genericUserRelationResource($userId, $attrRelation, $transformer)

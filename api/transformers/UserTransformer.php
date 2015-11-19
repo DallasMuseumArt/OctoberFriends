@@ -142,10 +142,12 @@ class UserTransformer extends BaseTransformer {
                 "num_rewards"    => $instance->rewards()->count(),            
                 "num_activities" => $instance->activities()->count(),
                 "num_badges"     => $instance->badges()->count(),
+                "num_bookmarks"  => $instance->bookmarks()->count(),
                 
                 "rewards_url"    => URL::route('friends.api.users.userrewards',    ['user' => $instance->getKey()]),
                 "activities_url" => URL::route('friends.api.users.useractivities', ['user' => $instance->getKey()]),
                 "badges_url"     => URL::route('friends.api.users.userbadges',     ['user' => $instance->getKey()]),
+                "bookmarks_url"  => URL::route('friends.api.users.userbookmarks',  ['user' => $instance->getKey()])
         ];
         
     }
