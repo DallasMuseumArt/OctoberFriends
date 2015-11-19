@@ -3,7 +3,7 @@
     - create_activities_table.php
     - create_activity_logs_table.php
     - create_badges_table.php
-    - create_locations_table.php 
+    - create_locations_table.php
     - create_rewards_table.php
     - create_steps_table.php
     - create_usermetas_table.php
@@ -11,13 +11,13 @@
     - Create relations between content types
     - create_user_badges_table.php
     - create_user_steps_table.php
-    - create_user_rewards_table.php 
+    - create_user_rewards_table.php
 1.0.3:
     - NA
 1.0.4:
     - NA
 1.0.5:
-    - Create user table 
+    - Create user table
     - create_users_table.php
 1.0.6:
     - Create categories table
@@ -36,15 +36,15 @@
     - update_activities_table.php
 1.0.11:
     - First version of Notifications
-    - create_notifications_table.php    
+    - create_notifications_table.php
 1.0.12:
     - Add priority field to badges/activities
-    - add_priority.php    
+    - add_priority.php
 1.0.13:
     - Create Activity Metadata table
     - create_activity_metadata_table.php
 1.0.15:
-    - Add user groups     
+    - Add user groups
     - create_user_group_table.php
     - create_users_groups_table.php
 1.0.16:
@@ -60,17 +60,17 @@
     - Add demographic info to usermeta table
     - add_demographic_metadata.php
 1.0.20:
-    - Fix time restriction settings on imported data 
+    - Fix time restriction settings on imported data
     - fix_time_restrictions.php
 1.0.21:
     - Add user group code
-    - add_user_group_code.php    
+    - add_user_group_code.php
 1.0.23:
     - Add bookmarks table
-    - create_bookmarks_table.php      
+    - create_bookmarks_table.php
 1.0.24:
-    - Add new email options for rewards 
-    - add_reward_email_options.php   
+    - Add new email options for rewards
+    - add_reward_email_options.php
 1.0.25:
     - Add activity metadata session id
     - add_activity_metadata_session_id.php
@@ -111,6 +111,8 @@
 2.5.5:
     - Add user redemption limit
     - add_reward_user_limit.php
-2.5.6:
+2.6.0:
+    - Minor bug fixes
+2.6.1:
     - Add API application table
     - create_applicaitons_table.php
