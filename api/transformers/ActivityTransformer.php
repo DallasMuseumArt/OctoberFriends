@@ -163,6 +163,7 @@ class ActivityTransformer extends BaseTransformer {
     
         return [
                 'excerpt'           => $instance->excerpt ? $instance->excerpt : '',
+                'description'       => $instance->description ? $instance->description : '',
                 'feedback_message'  => $instance->feedback_message ? $instance->feedback_message : '',
                 'complete_message'  => $instance->complete_message ? $instance->complete_message : '',
                 'is_published'      => ($instance->is_published)?true:false,
