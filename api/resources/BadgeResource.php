@@ -5,9 +5,17 @@ use DMA\Friends\Classes\API\BaseResource;
 class BadgeResource extends BaseResource {
 
     protected $model        = '\DMA\Friends\Models\Badge';
-
     protected $transformer  = '\DMA\Friends\API\Transformers\BadgeTransformer';
 
+    /**
+     * The listed actions check first if the
+     * user can perform the action
+     * @var array
+     */
+    public $skipUserPermissionValidation = [
+            'index', 'show'
+    ];
+    
     /**
      * @SWG\Get(
      *     path="badges",

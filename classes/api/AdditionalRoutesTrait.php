@@ -52,24 +52,6 @@ trait AdditionalRoutesTrait
     
     
     /**
-     * (non-PHPdoc)
-     * @see \Illuminate\Routing\Controller::callAction()
-     */
-    public function callAction($method, $parameters)
-    {
-        try{
-            return parent::callAction($method, $parameters);
-        } catch(Exception $e) {
-            // Send exception to log 
-            Log::error($e->getMessage());
-            Log::error($e->getTraceAsString());
-            
-            $message = $e->getMessage();
-            return Response::api()->errorInternalError($message);
-        }
-    }
-    
-    /**
      * Catch all missing HTTP verbs
      * @see \Illuminate\Routing\Controller::missingMethod()
      */

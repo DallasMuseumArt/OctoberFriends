@@ -7,25 +7,10 @@ use RainLab\User\Models\User;
 use DMA\Friends\Models\Location;
 use DMA\Friends\Models\Reward;
 
+
+
 class PrintResource extends BaseResource {
 
-    /**
-     * The following API actions in the UserResource are public.
-     * It means API Authentication will not be enforce.
-     * @var array
-     */
-    public $publicActions = ['card', 'reward'];
-    
-    /**
-     * The listed actions check first if the
-     * user can perform the action
-     * @var array
-     */
-    public $checkAccessLevelActions= [
-            'index', 'show', 'update', 'uploadAvatar',
-            'userActivities', 'userRewards', 'userBadges'
-    ];
-    
     
     public function __construct()
     {

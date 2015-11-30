@@ -10,25 +10,14 @@ use DMA\Friends\Classes\API\ModelRepository;
 use DMA\Friends\Activities\ActivityCode;
 use DMA\Friends\Activities\LikeWorkOfArt;
 use DMA\Friends\Models\ActivityMetadata;
-use DMA\Friends\Classes\API\Auth\UserAccessLevelTrait;
 
 class ActivityMetadataResource extends BaseResource {
-    
-    use UserAccessLevelTrait;
+
 
     protected $model        = '\DMA\Friends\Models\ActivityMetadata';
     protected $transformer  = '\DMA\Friends\API\Transformers\ActivityMetadataTransformer';
 
-    /**
-     * The listed actions check first if the
-     * user can perform the action
-     * @var array
-     */
-    public $checkAccessLevelActions= [
-            'index', 'indexByUser', 'indexByTypeAndUser'
-    ];
     
-
     public function __construct()
     {
         // Add additional routes to Activity resource

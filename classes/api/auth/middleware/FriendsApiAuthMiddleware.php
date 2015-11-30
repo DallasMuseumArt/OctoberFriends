@@ -17,6 +17,7 @@ class FriendsApiAuthMiddleware
 
             // Check if route can skip authentication
             $skip = FriendsAPI::isAuthenticationExcepted($controllerAction);
+            
             if (!$skip){
                 $token = $this->getToken();
                 // Authenticated request using token.

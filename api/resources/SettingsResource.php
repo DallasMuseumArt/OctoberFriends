@@ -7,6 +7,15 @@ use DMA\Friends\Models\Settings as FriendsSettings;
 class SettingsResource extends BaseResource {
 
     /**
+     * The listed actions check first if the
+     * user can perform the action
+     * @var array
+     */
+    public $skipUserPermissionValidation = [
+            'index', 'show'
+    ];
+    
+    /**
      * @SWG\Definition(
      *     definition="settings.artwork_api.headers",
      *     type="object",

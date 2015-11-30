@@ -8,9 +8,7 @@ use Validator;
 use ValidationException;
 use FriendsAPIAuth;
 
-use DMA\Friends\Classes\API\Auth\UserAccessLevelTrait;
 use DMA\Friends\Classes\AuthManager;
-
 use DMA\Friends\Models\Usermeta;
 use DMA\Friends\Classes\UserExtend;
 use DMA\Friends\Classes\API\BaseResource;
@@ -24,7 +22,6 @@ use Cms\Classes\Theme;
 
 class UserResource extends BaseResource
 {
-    use UserAccessLevelTrait;
     
     protected $model        = '\RainLab\User\Models\User';
     protected $transformer  = '\DMA\Friends\API\Transformers\UserTransformer';
@@ -35,19 +32,7 @@ class UserResource extends BaseResource
      * @var array
      */
     public $publicActions = ['login', 'store'];
-    
-    
-    /**
-     * The listed actions check first if the 
-     * user can perform the action
-     * @var array
-     */
-    public $checkAccessLevelActions= [
-            'index', 'show', 'update', 'uploadAvatar',
-            'userActivities', 'userRewards', 'userBadges', 'userBookmarks'
-    ];
-    
-    
+        
     /**
      * Hacky variable to include user profile only when 
      * showing a single user

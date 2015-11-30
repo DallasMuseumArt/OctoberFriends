@@ -5,24 +5,12 @@ use Input;
 use Response;
 use RainLab\User\Models\User;
 use DMA\Friends\Classes\API\BaseResource;
-use DMA\Friends\Classes\API\Auth\UserAccessLevelTrait;
 
 class ActivityLogResource extends BaseResource {
-
-    use UserAccessLevelTrait;
     
     protected $model        = '\DMA\Friends\Models\ActivityLog';
     protected $transformer  = '\DMA\Friends\API\Transformers\ActivityLogTransformer';
 
-    /**
-     * The listed actions check first if the
-     * user can perform the action
-     * @var array
-     */
-    public $checkAccessLevelActions= [
-            'index','indexByUser', 'indexByTypeAndUser'
-    ];
-    
 
     public function __construct()
     {

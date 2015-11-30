@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use DMA\Friends\Classes\AuthManager;
 use DMA\Friends\Classes\API\Auth\JWTAuthentication;
 use DMA\Friends\Classes\API\Auth\Exceptions\TokenExpiredException;
+use DMA\Friends\Classes\API\Auth\Exceptions\UserAccessDenied;
 use DMA\Friends\Models\Application;
 use RainLab\User\Models\User;
 
@@ -33,7 +34,11 @@ class APIAuthManager
     {
         $secret = Config::get('dma.friends::secret', null);
         $algo   = Config::get('dma.friends::algo',   null);
-        $this->auth = new JWTAuthentication($secret, $algo);
+        if (!is_null($secret) && !is_null($algo)){
+            $this->auth = new JWTAuthentication($secret, $algo);
+        }else{
+            throw new Exception('API application key secret improperly configured');
+        }
 
     }
     
@@ -87,15 +92,21 @@ class APIAuthManager
         return (!$app);
     }
     
-    public function validateUserAccess($requestUser=Null)
+    /**
+     * 
+     * 
+     * @param string $requestUser
+     * @throws Exception
+     */
+    public function validatedUserAccess($requestUser=null)
     {
         $msg = '';
         $tokenData = Request::get('tokenData', []);
-        $tokenUser = array_get($tokenData, 'user', Null);
-        $tokenApp  = array_get($tokenData, 'app', Null);
-        
+        $tokenUser = array_get($tokenData, 'user', null);
+        $tokenApp  = array_get($tokenData, 'app', null);
+
         if ($tokenApp->access_level != Application::ACCESS_ALL_DATA){
-             $denied = True;
+             $denied = true;
              
              if ($tokenUser && $requestUser){
                 if ($requestUser instanceof Model){
@@ -108,7 +119,7 @@ class APIAuthManager
             }
                 
             if($denied){
-                throw new Exception('Access denied', 403);
+                throw new UserAccessDenied();
             }
         }
 

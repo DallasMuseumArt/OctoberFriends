@@ -8,12 +8,9 @@ use DMA\Friends\Classes\API\BaseResource;
 use DMA\Friends\Activities\ActivityCode;
 use DMA\Friends\Activities\LikeWorkOfArt;
 use DMA\Friends\API\Transformers\UserProfileTransformer;
-use DMA\Friends\Classes\API\Auth\UserAccessLevelTrait;
 
 
 class ActivityResource extends BaseResource {
-
-    use UserAccessLevelTrait;
     
     protected $model        = '\DMA\Friends\Models\Activity';
     protected $transformer  = '\DMA\Friends\API\Transformers\ActivityTransformer';
@@ -23,11 +20,10 @@ class ActivityResource extends BaseResource {
      * user can perform the action
      * @var array
      */
-    public $checkAccessLevelActions= [
-            'checkin', 'bulkCheckins'
+    public $skipUserPermissionValidation = [
+            'index', 'show' 
     ];
     
-
     public function __construct()
     {
         // Add additional routes to Activity resource
