@@ -60,7 +60,7 @@ class PrintResource extends BaseResource {
             return Response::api()->errorNotFound('Reward not found');
         }
         
-        return $this->doPrint('card', $userId, $locationId, [
+        return $this->doPrint('reward', $userId, $locationId, [
                 'reward' => $reward,
         ]);
     }
