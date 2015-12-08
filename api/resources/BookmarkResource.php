@@ -34,7 +34,7 @@ class BookmarkResource extends BaseResource {
     {
         # TODO : Allow to bookmark Activities 
         $registry = [
-            # 'activity' => '\DMA\Friends\Models\Activity',        
+            'activity' => '\DMA\Friends\Models\Activity',        
             'badge'    => '\DMA\Friends\Models\Badge',
             'reward'   => '\DMA\Friends\Models\Reward',
         ];

@@ -2,6 +2,7 @@
 
 use Input;
 use Request;
+use Closure;
 use Response;
 use Exception;
 use Validator;
@@ -50,7 +51,7 @@ class UserResource extends BaseResource
         $this->addAdditionalRoute('userActivities', '{user}/activities',        ['GET']);
         $this->addAdditionalRoute('userRewards',    '{user}/rewards',           ['GET']);
         $this->addAdditionalRoute('userBadges',     '{user}/badges',            ['GET']);
-        $this->addAdditionalRoute('userBookmarks',  '{user}/bookmarks',         ['GET']);
+        $this->addAdditionalRoute('userBookmarks',  '{user}/bookmarks/{type}',  ['GET']);
         
     }
     
@@ -899,14 +900,32 @@ class UserResource extends BaseResource
     }
     
     
-    public function userBookmarks($userId)
+    public function userBookmarks($userId, $type)
     {
         $transformer  = '\DMA\Friends\API\Transformers\BookmarkTransformer';
-        $attrRelation = 'bookmarks';
-        return $this->genericUserRelationResource($userId, $attrRelation, $transformer);        
+        //$attrRelation = 'bookmarks';
+        $relation = function($user) use ($type){
+            $objectTypes = [
+                    'rewards'       => 'DMA\Friends\Models\Reward',
+                    'badges'        => 'DMA\Friends\Models\Badge',
+                    'activities'    => 'DMA\Friends\Models\Activity'
+            ];
+            
+            $model = array_get($objectTypes, $type);
+            if (!$model){
+                $options = implode(', ', array_keys($objectTypes));
+                throw new \Exception("$type is not a valid option. Options are $options");
+            }
+            
+            $query = $user->bookmarks()
+                          ->where('object_type', '=' , $model);
+            return $query;
+        };
+        
+        return $this->genericUserRelationResource($userId, $relation, $transformer);        
     }
     
-    private function genericUserRelationResource($userId, $attrRelation, $transformer)
+    private function genericUserRelationResource($userId, $relation, $transformer)
     {        
         if(is_null($user = User::find($userId))){
             return Response::api()->errorNotFound('User not found');
@@ -914,7 +933,12 @@ class UserResource extends BaseResource
     
         $pageSize   = $this->getPageSize();
         $sortBy     = $this->getSortBy();
-        $query      = $user->{$attrRelation}();       
+        
+        if(is_string($relation)){
+            $query = $user->{$attrRelation}();       
+        }else if( is_object($relation) && ($relation instanceof Closure) ){
+            $query = $relation($user);
+        }
         
         $transformer = new $transformer;
     
