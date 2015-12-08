@@ -232,7 +232,7 @@ class BookmarkResource extends BaseResource {
                         $httpCode = 201;
                         $message = "$objectType has been bookmark succesfully.";
                     }else{
-                        $httpCode = 200;
+                        $httpCode = 409;
                         $success = false;
                         $message = "The user has already bookmark this '$objectType'.";
                     }
