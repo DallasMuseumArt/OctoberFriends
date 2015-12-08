@@ -32,7 +32,9 @@ trait AdditionalRoutesTrait
     public function addAdditionalRoute($handler, $url=Null, array $verbs=['GET'], $name=Null)
     {
         if( method_exists( $this, $handler ) ) {
-            $url = ($url) ? $url : $handler;
+            // 2015-12-07 : Fixed wrong assignation of URL suffix
+            // whe $url is empty
+            $url = ($url) ? $url : '';//$handler;
             $this->additionalRoutes[$url] = [
                 'handler' => $handler,
                 'verbs' => $verbs,

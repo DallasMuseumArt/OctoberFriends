@@ -103,8 +103,8 @@ class APIAuthManager
         $msg = '';
         $tokenData = Request::get('tokenData', []);
         $tokenUser = array_get($tokenData, 'user', null);
-        $tokenApp  = array_get($tokenData, 'app', null);
-
+        $tokenApp = array_get($tokenData, 'app', null);
+        
         if ($tokenApp->access_level != Application::ACCESS_ALL_DATA){
              $denied = true;
              
@@ -122,7 +122,7 @@ class APIAuthManager
                 throw new UserAccessDenied();
             }
         }
-
+    
         
     }
     

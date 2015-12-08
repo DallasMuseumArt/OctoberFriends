@@ -362,6 +362,7 @@ class BaseResource extends Controller {
             // validateUserAccess will throw an exection
             $this->validatedUserAccess($method, $parameters);
 
+            
             // call menthod an return response the user has 
             // permission access
             return parent::callAction($method, $parameters);

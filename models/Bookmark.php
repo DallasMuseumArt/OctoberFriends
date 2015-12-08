@@ -62,15 +62,21 @@ class Bookmark extends Model
             $bookmark = new Bookmark();
             $object->bookmarks()->save($bookmark);
             $user->bookmarks()->save($bookmark);
+            // Silly hack to tell if is a new bookmark 
+            $bookmark->isNew = true;
+        }else{
+            // Mark as old bookmark
+            $bookmark->isNew = false;
         }
         return $bookmark;
     }
 
     public static function removeBookmark(User $user, $object)
     {        
-        self::where('user_id', '=', $user->id)
+        $affectedRows = self::where('user_id', '=', $user->id)
             ->where('object_id', '=', $object->id)
             ->where('object_type', '=', get_class($object))
             ->delete();
+        return $affectedRows > 0;
     }
 }

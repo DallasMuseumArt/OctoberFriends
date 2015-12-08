@@ -12,15 +12,15 @@ class BookmarkResource extends BaseResource {
     protected $model        = '\DMA\Friends\Models\Bookmark';
     protected $transformer  = '\DMA\Friends\API\Transformers\BookmarkTransformer';
     
-   
-    
     
     public function __construct()
     {
         // Add additional routes to Bookmark resource
-        $this->addAdditionalRoute('removeObjectBookmark',   'remove/{object}/{objectId}/user/{user}',  ['GET']);
-        $this->addAdditionalRoute('addObjectBookmark',      'add/{object}/{objectId}/user/{user}',     ['GET']);
-
+        //$this->addAdditionalRoute('removeObjectBookmark',         'remove/{object}/{objectId}/user/{user}',  ['GET']);
+        //$this->addAdditionalRoute('addObjectBookmark',            'add/{object}/{objectId}/user/{user}',     ['GET']);        
+        //$this->addAdditionalRoute('removeObjectBookmarkByDelete', 'remove',  ['POST']);
+        //$this->addAdditionalRoute('addObjectBookmarkByPost',      'add',     ['POST']);
+        $this->addAdditionalRoute('removeObjectBookmarkByDelete', '',        ['DELETE']);
     }
     
     
@@ -167,15 +167,53 @@ class BookmarkResource extends BaseResource {
      * )
      */
 
+    /**
+     * (non-PHPdoc)
+     * @see \DMA\Friends\Classes\API\BaseResource::store()
+     */
+    public function store()
+    {
+        return $this->addObjectBookmarkByPost();
+    }
+    
     public function addObjectBookmark($objectType, $objectId, $user)
     {
         return $this->doObjectBookmark('add', $objectType, $objectId, $user);
     }
 
+    public function addObjectBookmarkByPost()
+    {
+        return $this->doObjectBookmarkByPost('add');
+    }
     
     public function removeObjectBookmark($objectType, $objectId, $user)
     {
         return $this->doObjectBookmark('remove', $objectType, $objectId, $user);
+    }
+    
+    
+    public function removeObjectBookmarkByDelete()
+    {
+        return $this->doObjectBookmarkByPost('remove');
+    }
+     
+    
+    protected function doObjectBookmarkByPost($action)
+    {
+        $data = Request::all();
+        $rules = [
+                'object_type'             => "required",
+                'object_id'               => "required",
+                'user_id'                 => "required"
+        ];
+        
+        $validation = Validator::make($data, $rules);
+        if ($validation->fails()){
+            return $this->errorDataValidation('Bookmark data fails to validated', $validation->errors());
+        }
+         
+        
+        return $this->doObjectBookmark($action, $data['object_type'], $data['object_id'], $data['user_id']);
     }
     
     
@@ -186,13 +224,30 @@ class BookmarkResource extends BaseResource {
 
             if($instance = $this->getObject($objectType, $objectId)){
                 $success = true;
+                $httpCode = 200;
                 
                 if ($action == 'add'){
-                    Bookmark::saveBookmark($user, $instance);
-                    $message = "$objectType has been bookmark succesfully.";
+                    $bookmark = Bookmark::saveBookmark($user, $instance);
+                    if ($bookmark->isNew){
+                        $httpCode = 201;
+                        $message = "$objectType has been bookmark succesfully.";
+                    }else{
+                        $httpCode = 200;
+                        $success = false;
+                        $message = "The user has already bookmark this '$objectType'.";
+                    }
                 }else if($action == 'remove'){
-                    Bookmark::removeBookmark($user, $instance);
-                    $message = "Bookmark has been remove succesfully.";
+                    $success = Bookmark::removeBookmark($user, $instance);
+                    if($success){
+                        //$httpCode = 204;
+                        $httpCode = 200;
+                        $message = 'Bookmark has been removed successfully.';
+                        
+                    }else{
+                        $httpCode = 404;
+                        $message = "User don't have the given Bookmark.";
+                    }
+
                 }
 
                 $payload = [
@@ -201,15 +256,7 @@ class BookmarkResource extends BaseResource {
                                 'message' => $message,
                          ]
                 ];
-                
-                
-                $httpCode = 201;
-                
-                if( !$success ) {
-                    $httpCode = 200;
-                    $payload['data']['message'] = "User has already bookmark this $objectType";
-                }
-                
+                 
                 return Response::api()->setStatusCode($httpCode)->withArray($payload);
 
             } else {

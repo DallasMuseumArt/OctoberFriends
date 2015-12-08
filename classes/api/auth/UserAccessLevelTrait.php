@@ -1,6 +1,7 @@
 <?php namespace DMA\Friends\Classes\API\Auth;
 
 use Response;
+use Request;
 use Exception;
 use FriendsAPIAuth;
 use Log;
@@ -36,17 +37,23 @@ trait UserAccessLevelTrait
         $skip = $this->getUnRestrictivedActions() + $this->publicActions;
         
         if (!in_array($method, $skip)){
-            // TODO : find a way to declare the name of the user variable in the
-            // router in the declaration of checkAccessLevelActions
-            // or a better solution
-    
-            // Asumming the 'user' parameter exits in the method
-            $user = array_get($parameters, 'user', Null);
-            if(!$user){
-                // not user found lets try first paramter
-                $user = array_get($parameters, @array_keys($parameters)[0], Null);
-            }
+
+            // Search for variables in URL and/or Body that match any of the possible
+            // variables that contains the user id.
             
+            // Please note that variables comming by the URL parameter override variables
+            // with the same name in the Body request. eg. A router with the following URL
+            // foo/user/{user}/bar via POST with a body request { user: 2, var: 234 } the
+            // user variable { user } will be the value set by the router.
+            
+            // TODO: Find a way to declare the name of the user variable. A possible
+            // solution is to declare it when declaring the route in the method
+            // addAdditionalRoute of the BaseResource Class
+            $userVars = ['user', 'user_id'];
+            
+            $data = array_merge(Request::all(), $parameters);
+            $user = $this->extractUserId($data, $userVars);
+           
             // Validate if user has access to this resource
             // If the validateUserAccess throws and execption when
             // user don't have access
@@ -56,7 +63,30 @@ trait UserAccessLevelTrait
         
     }
     
-    
+    /**
+     * Try to find user id in the given data. This method 
+     * will return the first variable found.
+     * 
+     * @param array $data Parameters and Request data combined
+     * @param array $userVars 
+     * Array of names of possible variables that
+     * contain the user id in the given data. Priority is base on 
+     * the order of this list.
+     */
+    protected function extractUserId($data, $userVars)
+    {        
+        // Check if any of the given user variable names
+        // is declared either in the parameters or body of the request
+        foreach($userVars as $name){
+           
+            $user = array_get($data, $name, null);
+            if ($user){
+                return $user;
+            }
+        }
+        // not user found lets try first paramter
+        return array_get($data, @array_keys($data)[0], null); 
+    }
  
 
 }
