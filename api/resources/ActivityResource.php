@@ -16,11 +16,11 @@ class ActivityResource extends BaseResource {
     protected $transformer  = '\DMA\Friends\API\Transformers\ActivityTransformer';
 
     /**
-     * The listed actions check first if the
+     * The listed actions that don't required check if 
      * user can perform the action
      * @var array
      */
-    public $skipUserPermissionValidation = [
+    protected $skipUserPermissionValidation = [
             'index', 'show' 
     ];
     

@@ -28,6 +28,13 @@ class UserResource extends BaseResource
     protected $transformer  = '\DMA\Friends\API\Transformers\UserTransformer';
     
     /**
+     * The listed actions that don't required check if
+     * user can perform the action
+     * @var array
+     */
+    protected $skipUserPermissionValidation = [ 'profileOptions' ];
+    
+    /**
      * The following API actions in the UserResource are public.
      * It means API Authentication will not be enforce.
      * @var array
@@ -935,7 +942,7 @@ class UserResource extends BaseResource
         $sortBy     = $this->getSortBy();
         
         if(is_string($relation)){
-            $query = $user->{$attrRelation}();       
+            $query = $user->{$relation}();       
         }else if( is_object($relation) && ($relation instanceof Closure) ){
             $query = $relation($user);
         }
