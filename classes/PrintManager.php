@@ -9,6 +9,7 @@ use Cms\Classes\Theme;
 use SystemException;
 
 require_once('fpdf17/code39.php');
+require_once('fpdf17/qrcode/qrcode.class.php');
 
 /**
  * Class for managing the printing of membership cards and coupons
@@ -59,6 +60,7 @@ class PrintManager
         $fn = "/tmp/" . md5(date("Y-m-d-h-i-s-u")) . ".pdf";
         $this->pdf->Output($fn, "F");
 
+        var_dump($fn);
         exec("lp -d " . $printer . " " . $fn);
         @unlink($fn);
     }
@@ -74,14 +76,32 @@ class PrintManager
             Settings::get('membership_orientation')
         );
 
+        $barcodeType = Settings::get('membership_barcode_type', 'code39');
+        
         $name = $this->user->name;
 
-        $this->pdf->SetFont('Arial', 'B', 12);
-        $this->pdf->setX(1);
-        $this->pdf->Write(21, $name);
+        switch ($barcodeType){
+            case 'code39':
+                $this->pdf->SetFont('Arial', 'B', 12);
+                $this->pdf->setX(2);
+                $this->pdf->Write(21, $name);
+                
+                $this->pdf->Ln(17);
+                $this->pdf->Code39(2, $this->pdf->getY(), $this->user->barcode_id);   //Bar Code
+                break;
+             
+            case 'qrcode':
+                $this->pdf->SetFont('Arial', 'B', 12);
+                $this->pdf->setX(22);
+                $this->pdf->Write(21, $name);
+                $this->pdf->Ln(8);
+                
+                $qrcode = new \QRcode($this->user->barcode_id, 'M'); //The string you want to encode
+                $qrcode->disableBorder();
+                $qrcode->displayFPDF($this->pdf, 2, $this->pdf->getY(), 18); //PDF object, X pos, Y pos, Size of the QR code
+                break;
+        }
         
-        $this->pdf->Ln(17);     
-        $this->pdf->Code39(2, $this->pdf->getY(), $this->user->barcode_id);   //Bar Code
         $this->doPrint($this->location->printer_membership);
     }
 

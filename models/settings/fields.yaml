@@ -151,6 +151,13 @@ tabs:
                 P: Portrait
                 L: Landscape
             tab: Printer
+        membership_barcode_type:
+            label: Membership barcode type
+            type: dropdown
+            options:
+                code39: code39
+                qrcode: qrcode
+            tab: Printer
 
         # Mailchimp settings
         mailchimp_integration:
