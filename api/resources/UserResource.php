@@ -27,19 +27,13 @@ class UserResource extends BaseResource
     protected $model        = '\RainLab\User\Models\User';
     protected $transformer  = '\DMA\Friends\API\Transformers\UserTransformer';
     
-    /**
-     * The listed actions that don't required check if
-     * user can perform the action
-     * @var array
-     */
-    protected $skipUserPermissionValidation = [ 'profileOptions' ];
     
     /**
      * The following API actions in the UserResource are public.
      * It means API Authentication will not be enforce.
      * @var array
      */
-    public $publicActions = ['login', 'store'];
+    public $publicActions = ['login', 'store', 'profileOptions' ];
         
     /**
      * Hacky variable to include user profile only when 
