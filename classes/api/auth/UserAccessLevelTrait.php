@@ -34,8 +34,7 @@ trait UserAccessLevelTrait
     public function validatedUserAccess($method, $parameters){
         // Skip user validation if action is under the unrestricted list 
         // or is a public action that don't required user level validation
-        $skip = $this->getUnRestrictivedActions() + $this->publicActions;
-        
+        $skip = array_merge($this->getUnRestrictivedActions(), $this->publicActions);
         if (!in_array($method, $skip)){
 
             // Search for variables in URL and/or Body that match any of the possible
