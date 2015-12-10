@@ -59,8 +59,6 @@ class PrintManager
     {
         $fn = "/tmp/" . md5(date("Y-m-d-h-i-s-u")) . ".pdf";
         $this->pdf->Output($fn, "F");
-
-        var_dump($fn);
         exec("lp -d " . $printer . " " . $fn);
         @unlink($fn);
     }
