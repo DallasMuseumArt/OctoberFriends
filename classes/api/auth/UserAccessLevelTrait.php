@@ -48,7 +48,11 @@ trait UserAccessLevelTrait
             // TODO: Find a way to declare the name of the user variable. A possible
             // solution is to declare it when declaring the route in the method
             // addAdditionalRoute of the BaseResource Class
-            $userVars = ['user', 'user_id', 'id'];
+            
+            // TODO: 'users' is an alternative in the list as consequense on how Laravel
+            // defined the user variable name on the REST method for update, instead of send
+            // the variable as 'id' it sends it as the name of the router 
+            $userVars = ['user', 'user_id', 'users'];
             
             $data = array_merge(Request::all(), $parameters);
             $user = $this->extractUserId($data, $userVars);
