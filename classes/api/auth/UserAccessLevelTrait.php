@@ -48,7 +48,7 @@ trait UserAccessLevelTrait
             // TODO: Find a way to declare the name of the user variable. A possible
             // solution is to declare it when declaring the route in the method
             // addAdditionalRoute of the BaseResource Class
-            $userVars = ['user', 'user_id'];
+            $userVars = ['user', 'user_id', 'id'];
             
             $data = array_merge(Request::all(), $parameters);
             $user = $this->extractUserId($data, $userVars);
