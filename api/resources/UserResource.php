@@ -395,8 +395,7 @@ class UserResource extends BaseResource
             
             // Register new user
             $user = AuthManager::register($data, $rules);
-            
-            
+
             $credentials = [
                 'login'     => array_get($data, 'username', array_get($data, 'email')),
                 'password'  => array_get($data, 'password'),
@@ -481,15 +480,20 @@ class UserResource extends BaseResource
             }
             
             $data =  Request::all();
-            if(Request::isJson() && $data == ''){
+            if(Request::isJson() && ($data == '' || !$data)){
                 // Is JSON and data is empty, By default PHP
                 // blocks PUT/PATCH methods. So as workaround 
-                // get get the content and decode it manually
+                // get the content and decode it manually
                 // if required
                 $data = Request::getContent();
                 if (!is_array($data)){
                     $data = json_decode($data);
                 }
+
+            }
+            
+            if(!is_array($data)){
+                return $this->errorDataValidation('Invalid JSON body');
             }
 
             $rules = [
@@ -511,13 +515,22 @@ class UserResource extends BaseResource
                 unset($data['password_confirmation']);
             }
                         
+            // Force to update name field if first_name or last_name present
+            $first_name = array_get($data, 'first_name', null);
+            $last_name  = array_get($data, 'last_name', null);
+            if ( $first_name || $last_name ){
+                $first_name = (is_null($first_name)) ? $user->metadata->first_name : $first_name;
+                $last_name = (is_null($last_name)) ? $user->metadata->last_name : $last_name;
+                
+                $data['name'] = $first_name . ' ' . $last_name;
+            }
+            
             // Update user data
             $userAttrs = ['name' , 'password', 'password_confirmation', 'email',
                           'street_addr', 'city', 'state', 'zip', 'phone'];
 
             $user = $this->updateModelData($user, $data, $userAttrs);
-            
-            \Log::debug($data);
+           
 
             if($user->save()) {
                 // If user save ok them we update usermetadata
