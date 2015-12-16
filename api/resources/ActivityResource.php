@@ -574,7 +574,7 @@ class ActivityResource extends BaseResource {
         // process Activity code first
         if (!$activity = ActivityCode::process($user, $params)) {
             // Not found activity with that code.
-            // Trying if is a object assession number
+            // Trying if is an object  number
             $activity = LikeWorkOfArt::process($user, $params);
         }
         
@@ -590,6 +590,7 @@ class ActivityResource extends BaseResource {
         $payload = [
             'success'           => ($activity) ? true : false,
             'activity_code'     => $code,
+            'activity_points'   => ( $activity ) ? $activity->points : null,
             'message'           => $message,
             'feedback_message'  => ( $activity ) ? $activity->feedback_message : null,
             'complete_message'  => ( $activity ) ? $activity->complete_message : null
