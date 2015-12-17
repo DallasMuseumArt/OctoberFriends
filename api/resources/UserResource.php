@@ -33,7 +33,7 @@ class UserResource extends BaseResource
      * It means API Authentication will not be enforce.
      * @var array
      */
-    public $publicActions = ['login', 'store', 'profileOptions' ];
+    public $publicActions = ['login', 'loginByCard', 'store', 'profileOptions' ];
         
     /**
      * Hacky variable to include user profile only when 
@@ -46,6 +46,7 @@ class UserResource extends BaseResource
     {
         // Add additional routes to Activity resource
         $this->addAdditionalRoute('login',          'login',                    ['POST']);
+        $this->addAdditionalRoute('loginByCard',    'login/card',               ['POST']);
         $this->addAdditionalRoute('uploadAvatar',   '{user}/upload-avatar',     ['POST', 'PUT']);
         $this->addAdditionalRoute('profileOptions', 'profile-options/{field}',  ['GET']);
         $this->addAdditionalRoute('profileOptions', 'profile-options',          ['GET']);
@@ -151,6 +152,38 @@ class UserResource extends BaseResource
         
     }
     
+    
+    public function loginByCard()
+    {
+        try {
+            $data     = Request::all();
+            $appKey   = array_get($data, 'app_key', null);
+            $barcode  = array_get($data, 'barcode', null);
+            
+            // Attempt to look user using barcode
+            $user = User::where('barcode_id', $barcode)->first();
+            
+            if ($user) {
+                $app = FriendsAPIAuth::getAPIApplication($appKey);
+                $token = FriendsAPIAuth::createToken($user, $app);
+  
+                $this->include_profile = true;
+                return Response::api()->withItem($user, $this->getTransformer(), null, ['token' => $token]);
+        
+            } else {
+                return Response::api()->errorNotFound('Barcode invalid');
+            }
+        
+        } catch(Exception $e) {
+            if ($e instanceof ValidationException) {
+                return $this->errorDataValidation('User credentials fail to validated', $e->getErrors());
+            } else {
+                // Lets the API resource deal with the exception
+                throw $e;
+            }
+        
+        }
+    }
 
     
     /**

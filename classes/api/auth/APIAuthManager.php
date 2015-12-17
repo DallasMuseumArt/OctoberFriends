@@ -75,7 +75,7 @@ class APIAuthManager
     }
     
     
-    protected function getAPIApplication($appKey)
+    public function getAPIApplication($appKey)
     {
         $app = Application::where('app_key', $appKey)->isActive()->first();
         $invalid = (!$app);
