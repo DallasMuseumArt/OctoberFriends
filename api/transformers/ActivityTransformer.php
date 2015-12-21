@@ -5,11 +5,13 @@ use DMA\Friends\Classes\API\BaseTransformer;
 use DMA\Friends\API\Transformers\MediaTransformer;
 use DMA\Friends\API\Transformers\CategoryTransformer;
 use DMA\Friends\API\Transformers\DateTimeTransformerTrait;
+use DMA\Friends\API\Transformers\UserTransformerTrait;
 
 
 class ActivityTransformer extends BaseTransformer {
     
     use DateTimeTransformerTrait;
+    use UserTransformerTrait;
     
     
     /**
@@ -326,7 +328,7 @@ class ActivityTransformer extends BaseTransformer {
         $steps = $instance->steps;
         // No necessary to show steps activities given that the parent is an activity
         $exclude = ['activity']; 
-        return $this->collection($steps, new StepTransformer(true, $exclude));
+        return $this->collection($steps, new StepTransformer(true, $exclude, $this->getUser()));
     }
 
     /**
@@ -348,6 +350,5 @@ class ActivityTransformer extends BaseTransformer {
     {
         return $this->collection($instance->categories, new CategoryTransformer(false));
     }
-    
-    
+
 }

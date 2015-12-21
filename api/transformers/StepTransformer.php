@@ -20,6 +20,18 @@ class StepTransformer extends BaseTransformer {
     ];
     
     /**
+     * @param boolean $useExtendedData 
+     */
+    public function __construct($useExtendedData=null, $excludeEmbededs=[], $user=null)
+    {
+        // If User is giving the transformer will check
+        // if the user has completed the current step
+        $this->user = $user;
+        parent::__construct($useExtendedData, $excludeEmbededs);
+    }
+    
+    
+    /**
      * Step definition
      * @SWG\Definition(
      *    definition="step",
@@ -68,7 +80,21 @@ class StepTransformer extends BaseTransformer {
     public function getExtendedData($instance)
     {
         // Adding steps by the Fractal embeding system
-        $this->setDefaultIncludes( array_merge($this->getDefaultIncludes(), ['activity', 'badge']));
+        $this->setDefaultIncludes( array_merge($this->getDefaultIncludes(), ['activity', 'badge']));   
+        
+        if($this->user){
+            $completed = \DMA\Friends\Models\Step::whereHas('users', 
+                function($q) use ($instance)
+                {
+                    $q->where('user_id', $this->user->getKey());
+                    $q->where('step_id', $instance->getKey());
+                
+                })->count() > 0;
+            
+            return [
+                    'completed' => $completed
+            ];
+        }
     }
     
     /**

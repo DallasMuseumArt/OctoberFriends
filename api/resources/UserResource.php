@@ -1117,6 +1117,9 @@ class UserResource extends BaseResource
         }
         
         $transformer = new $transformer;
+        if(method_exists($transformer, 'setUser')){
+            $transformer->setUser($user);
+        }
     
         if ($pageSize > 0){
             $paginator = $query->paginate($pageSize);
