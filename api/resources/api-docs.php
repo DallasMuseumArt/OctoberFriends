@@ -6,7 +6,7 @@
  *     produces={"application/json"},
  *     consumes={"application/json", "application/x-www-form-urlencoded"},
  *     @SWG\Info(
- *         version="2.5.1",
+ *         version="2.6.1",
  *         title="DMA Friends",
  *         description="A platform for users to earn badges and redeem rewards",
  *         @SWG\License(
@@ -131,10 +131,10 @@
  * 
  * @SWG\Parameter(
  *      description="Authentication token returned by User/Login endpoint",
- *      name="authorizations",
+ *      name="authorization",
  *      in="header",
  *      type="string",
- *      required=true,
+ *      required=true
  * ) 
  *
  *

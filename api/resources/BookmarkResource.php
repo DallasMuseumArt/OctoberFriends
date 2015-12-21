@@ -16,11 +16,7 @@ class BookmarkResource extends BaseResource {
     public function __construct()
     {
         // Add additional routes to Bookmark resource
-        //$this->addAdditionalRoute('removeObjectBookmark',         'remove/{object}/{objectId}/user/{user}',  ['GET']);
-        //$this->addAdditionalRoute('addObjectBookmark',            'add/{object}/{objectId}/user/{user}',     ['GET']);        
-        //$this->addAdditionalRoute('removeObjectBookmarkByDelete', 'remove',  ['POST']);
-        //$this->addAdditionalRoute('addObjectBookmarkByPost',      'add',     ['POST']);
-        $this->addAdditionalRoute('removeObjectBookmarkByDelete', '',        ['DELETE']);
+        $this->addAdditionalRoute('removeObjectBookmark', '',        ['DELETE']);
     }
     
     
@@ -52,18 +48,38 @@ class BookmarkResource extends BaseResource {
 
     /**
      * @SWG\Definition(
-     *      definition="response.rate",
+     *      definition="request.bookmark",
+     *      required={"object_type", "object_id", "user_id"},
+     *      @SWG\Property(
+     *          property="object_type",
+     *          type="string",
+     *          enum={"activity","badge", "reward"}
+     *      ),
+     *      @SWG\Property(
+     *          property="object_id",
+     *          type="integer",
+     *          format="int32"
+     *      ),
+     *      @SWG\Property(
+     *          property="user_id",
+     *          type="integer",
+     *          format="int32"
+     *      )  
+     * ) 
+     * 
+     * @SWG\Definition(
+     *      definition="response.bookmark",
      *      required={"data"},
      *      @SWG\Property(
      *          property="data",
      *          type="object",
-     *          ref="#/definitions/rate.payload"
+     *          ref="#/definitions/bookmark.payload"
      *      )
      * )
      * 
      * @SWG\Definition(
-     *      definition="rate.payload",
-     *      required={"success", "message", "user", "rating"},
+     *      definition="bookmark.payload",
+     *      required={"success", "message"},
      *      @SWG\Property(
      *          property="success",
      *          type="boolean"
@@ -71,88 +87,30 @@ class BookmarkResource extends BaseResource {
      *      @SWG\Property(
      *          property="message",
      *          type="string"
-     *      ),
-     *      @SWG\Property(
-     *          property="user",
-     *          type="object",
-     *          ref="#/definitions/user.info.points"
-     *      ),
-     *      @SWG\Property(
-     *          property="rating",
-     *          type="object",
-     *          ref="#/definitions/rating.stats"
-     *      )   
-     * )
-     * 
-     * @SWG\Definition(
-     *      definition="rating.stats",
-     *      required={"total", "average", "object_type", "object_id"},
-     *      @SWG\Property(
-     *          property="total",
-     *          type="number",
-     *          format="float"
-     *      ),
-     *      @SWG\Property(
-     *          property="average",
-     *          type="number",
-     *          format="float"
-     *      ),
-     *      @SWG\Property(
-     *          property="object_type",
-     *          type="string"
-     *      ),
-     *      @SWG\Property(
-     *          property="object_id",
-     *          type="integer",
-     *          format="int32"
-     *      )  
+     *      ) 
      * )
      * 
      * 
-     * @SWG\GET(
-     *     path="ratings/rate/{object}/{objectId}/user/{user}/{rate}",
-     *     description="Rate an object",
-     *     summary="Rate an object",
-     *     tags={ "ratings"},
+     * @SWG\POST(
+     *     path="bookmark/",
+     *     description="Add Object to User's  bookmark list",
+     *     summary="Create an bookmark",
+     *     tags={ "bookmarks"},
      *
      *     @SWG\Parameter(
-     *         description="Object to rate",
-     *         in="path",
-     *         name="object",
-     *         required=true,
-     *         type="string",
-     *         enum={"activity", "badge"}
+     *         ref="#/parameters/authorization"
      *     ),
      *     @SWG\Parameter(
-     *         description="ID of object to rate",
-     *         format="int64",
-     *         in="path",
-     *         name="objectId",
+     *         in="body",
+     *         name="body",
      *         required=true,
-     *         type="integer"
-     *     ),
-     *     @SWG\Parameter(
-     *         description="ID of user",
-     *         format="int64",
-     *         in="path",
-     *         name="user",
-     *         required=true,
-     *         type="integer"
-     *     ),     
-     *     @SWG\Parameter(
-     *         description="Rate value",
-     *         format="float",
-     *         in="path",
-     *         name="rate",
-     *         required=true,
-     *         type="number",
-     *         minimum=1,
-     *         maximum=5
-     *     ),  
+     *         type="object",
+     *         schema=@SWG\Schema(ref="#/definitions/request.bookmark")
+     *     ), 
      *     @SWG\Response(
      *         response=200,
      *         description="Successful response",
-     *         @SWG\Schema(ref="#/definitions/response.rate")
+     *         @SWG\Schema(ref="#/definitions/response.bookmark")
      *     ),
      *     @SWG\Response(
      *         response=500,
@@ -168,37 +126,61 @@ class BookmarkResource extends BaseResource {
      */
 
     /**
-     * (non-PHPdoc)
+     * {@inheritDoc}
      * @see \DMA\Friends\Classes\API\BaseResource::store()
      */
     public function store()
     {
-        return $this->addObjectBookmarkByPost();
+        return $this->prepareBookmardata('add');
     }
     
-    public function addObjectBookmark($objectType, $objectId, $user)
+     /**
+     * 
+     * 
+     * @SWG\DELETE(
+     *     path="bookmark/",
+     *     description="Remove Object from User's bookmark list",
+     *     summary="Remove an bookmark",
+     *     tags={ "bookmarks"},
+     *
+     *     @SWG\Parameter(
+     *         ref="#/parameters/authorization"
+     *     ),
+     *     @SWG\Parameter(
+     *         in="body",
+     *         name="body",
+     *         required=true,
+     *         type="object",
+     *         schema=@SWG\Schema(ref="#/definitions/request.bookmark")
+     *     ), 
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/response.bookmark")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="User not found",
+     *         @SWG\Schema(ref="#/definitions/UserError404")
+     *     )
+     * )
+     */
+     
+    /**
+     * Remove Bookmark
+     */
+    public function removeObjectBookmark()
     {
-        return $this->doObjectBookmark('add', $objectType, $objectId, $user);
-    }
-
-    public function addObjectBookmarkByPost()
-    {
-        return $this->doObjectBookmarkByPost('add');
-    }
-    
-    public function removeObjectBookmark($objectType, $objectId, $user)
-    {
-        return $this->doObjectBookmark('remove', $objectType, $objectId, $user);
-    }
-    
-    
-    public function removeObjectBookmarkByDelete()
-    {
-        return $this->doObjectBookmarkByPost('remove');
+        return $this->prepareBookmardata('remove');
     }
      
     
-    protected function doObjectBookmarkByPost($action)
+    protected function prepareBookmardata($action)
     {
         $data = Request::all();
         $rules = [
@@ -216,7 +198,14 @@ class BookmarkResource extends BaseResource {
         return $this->doObjectBookmark($action, $data['object_type'], $data['object_id'], $data['user_id']);
     }
     
-    
+    /**
+     * Add or Remove bookmarks in the platform
+     * 
+     * @param sting $action Options are 'add' and 'remove'
+     * @param string $objectType Options are 'badge', 'activity', 'reward'
+     * @param integer $objectId Id of the bookmarked objetct 
+     * @param integer $user Id of the user bookmaring the object
+     */
     protected function doObjectBookmark($action, $objectType, $objectId, $user)
     {
 
@@ -260,7 +249,7 @@ class BookmarkResource extends BaseResource {
                 return Response::api()->setStatusCode($httpCode)->withArray($payload);
 
             } else {
-                return Response::api()->errorNotFound("$object not found");
+                return Response::api()->errorNotFound("$objectType not found");
             }
 
         }else{
@@ -272,47 +261,18 @@ class BookmarkResource extends BaseResource {
     }
     
  
-   
+   /**
+    * {@inheritDoc}
+    * @see \DMA\Friends\Classes\API\BaseResource::index()
+    */
     public function index()
     {
-        # TODO : stop default behaviour of the base resource and 
-        # return and error
         return Response::api()->errorForbidden();
-        #return parent::index();
     }
-    
+   
     /**
-     * @SWG\Get(
-     *     path="ratings/{id}",
-     *     description="Returns an rate by id",
-     *     summary="Find a rate by id",
-     *     tags={ "ratings"},
-     *
-     *     @SWG\Parameter(
-     *         description="ID of rating to fetch",
-     *         format="int64",
-     *         in="path",
-     *         name="id",
-     *         required=true,
-     *         type="integer"
-     *     ),
-     *
-     *     @SWG\Response(
-     *         response=200,
-     *         description="Successful response",
-     *         @SWG\Schema(ref="#/definitions/rate")
-     *     ),
-     *     @SWG\Response(
-     *         response=500,
-     *         description="Unexpected error",
-     *         @SWG\Schema(ref="#/definitions/error500")
-     *     ),
-     *     @SWG\Response(
-     *         response=404,
-     *         description="Not Found",
-     *         @SWG\Schema(ref="#/definitions/error404")
-     *     )
-     * )
+     * {@inheritDoc}
+     * @see \DMA\Friends\Classes\API\BaseResource::show()
      */
     public function show($id)
     {

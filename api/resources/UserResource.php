@@ -71,7 +71,7 @@ class UserResource extends BaseResource
      * 
      * @SWG\Definition(
      *      definition="request.user.credentials",
-     *      required={"username", "password"},
+     *      required={"username", "password", "app_key"},
      *      @SWG\Property(
      *         property="username",
      *         type="string"
@@ -79,7 +79,12 @@ class UserResource extends BaseResource
      *      @SWG\Property(
      *         property="password",
      *         type="string"
-     *      )     
+     *      ),
+     *      @SWG\Property(
+     *         property="app_key",
+     *         type="string",
+     *         format="password"
+     *      )        
      * )
      * 
      * @SWG\Post(
@@ -153,15 +158,73 @@ class UserResource extends BaseResource
     }
     
     
+    /**
+     *
+     * @SWG\Definition(
+     *      definition="request.user.credentials.card",
+     *      required={"barcode", "app_key"},
+     *      @SWG\Property(
+     *         property="barcode",
+     *         type="string"
+     *      ),
+     *      @SWG\Property(
+     *         property="app_key",
+     *         type="string",
+     *         format="password"
+     *      )
+     * )
+     *
+     * @SWG\Post(
+     *     path="users/login/card",
+     *     description="Authenticate user using username and password",
+     *     summary="User authentication",
+     *     tags={ "user"},
+     *
+     *     @SWG\Parameter(
+     *         description="User credentials payload",
+     *         name="body",
+     *         in="body",
+     *         required=true,
+     *         schema=@SWG\Schema(ref="#/definitions/request.user.credentials.card")
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/user.extended")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="User not found",
+     *         @SWG\Schema(ref="#/definitions/UserError404")
+     *     )
+     * )
+     */
+    
     public function loginByCard()
     {
         try {
             $data     = Request::all();
+            $rules = [
+                    'app_key'    => 'required',
+                    'barcode'    => 'required'
+            ];
+            
+            $validation = Validator::make($data, $rules);
+            if ($validation->fails()){
+                return $this->errorDataValidation('Invalidated credential details', $validation->errors());
+            }
+            
             $appKey   = array_get($data, 'app_key', null);
             $barcode  = array_get($data, 'barcode', null);
             
             // Attempt to look user using barcode
             $user = User::where('barcode_id', $barcode)->first();
+            
             
             if ($user) {
                 $app = FriendsAPIAuth::getAPIApplication($appKey);
@@ -193,6 +256,9 @@ class UserResource extends BaseResource
      *     summary="Find user by id",
      *     tags={ "user"},
      *
+     *     @SWG\Parameter(
+     *         ref="#/parameters/authorization"
+     *     ),
      *     @SWG\Parameter(
      *         description="ID of user to fetch",
      *         format="int64",
@@ -236,7 +302,7 @@ class UserResource extends BaseResource
      *     tags={ "user"},
      *     
      *     @SWG\Parameter(
-     *         ref="#/parameters/authentication"
+     *         ref="#/parameters/authorization"
      *     ),
      *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
@@ -275,7 +341,12 @@ class UserResource extends BaseResource
      * @SWG\Definition(
      *     definition="request.user",
      *     type="object",
-     *     required={"email", "password", "password_confirm"},
+     *     required={"app_key", "email", "password", "password_confirm"},
+     *     
+     *     @SWG\Property(
+     *         property="app_key",
+     *         type="string"
+     *     ),      
      *     @SWG\Property(
      *         property="first_name",
      *         type="string"
@@ -466,6 +537,9 @@ class UserResource extends BaseResource
      *     summary="Update an existing user",
      *     tags={ "user"},
      *     @SWG\Parameter(
+     *         ref="#/parameters/authorization"
+     *     ),     
+     *     @SWG\Parameter(
      *         description="ID of user to fetch",
      *         format="int64",
      *         in="path",
@@ -626,6 +700,9 @@ class UserResource extends BaseResource
      *     description="Change user avatar. Avatar must be a valid JPG, GIF or PNG. And not bigger that 400x400 pixels.",
      *     tags={ "user"},
      *
+     *     @SWG\Parameter(
+     *         ref="#/parameters/authorization"
+     *     ),
      *     @SWG\Parameter(
      *         description="ID of user to fetch",
      *         format="int64",
@@ -804,7 +881,7 @@ class UserResource extends BaseResource
      *     tags={ "user"},
      *     
      *     @SWG\Parameter(
-     *         ref="#/parameters/authentication"
+     *         ref="#/parameters/authorization"
      *     ),
      *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
@@ -854,7 +931,7 @@ class UserResource extends BaseResource
      *     tags={ "user"},
      *     
      *     @SWG\Parameter(
-     *         ref="#/parameters/authentication"
+     *         ref="#/parameters/authorization"
      *     ),
      *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
@@ -904,7 +981,7 @@ class UserResource extends BaseResource
      *     tags={ "user"},
      *     
      *     @SWG\Parameter(
-     *         ref="#/parameters/authentication"
+     *         ref="#/parameters/authorization"
      *     ),
      *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
@@ -946,6 +1023,58 @@ class UserResource extends BaseResource
         return $this->genericUserRelationResource($userId, $attrRelation, $transformer);
     }
     
+    
+    /**
+     * @SWG\Get(
+     *     path="users/{id}/bookmarks/{type}",
+     *     description="Returns user bookmarks",
+     *     summary="Find user bookmarks",
+     *     tags={ "user"},
+     *
+     *     @SWG\Parameter(
+     *         ref="#/parameters/authorization"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/per_page"
+     *     ),
+     *     @SWG\Parameter(
+     *         ref="#/parameters/page"
+     *     ),
+     *
+     *     @SWG\Parameter(
+     *         description="ID of user to fetch",
+     *         format="int64",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         description="Object type of bookmarks to retrive",
+     *         in="path",
+     *         name="type",
+     *         required=true,
+     *         type="string",
+     *         enum={"rewards", "badges", "activities"}
+     *     ),
+     *
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/bookmark")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Not Found",
+     *         @SWG\Schema(ref="#/definitions/error404")
+     *     )
+     * )
+     */
     
     public function userBookmarks($userId, $type)
     {

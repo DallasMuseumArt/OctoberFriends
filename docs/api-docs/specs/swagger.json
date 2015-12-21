@@ -7,7 +7,7 @@
             "name": "Apache 2.0",
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         },
-        "version": "2.5.1"
+        "version": "2.6.1"
     },
     "basePath": "/friends/api/",
     "schemes": [
@@ -228,6 +228,9 @@
                 "description": "Returns an activity logs by id",
                 "parameters": [
                     {
+                        "$ref": "#/parameters/authorization"
+                    },
+                    {
                         "name": "id",
                         "in": "path",
                         "description": "ID of activity log to fetch",
@@ -267,7 +270,7 @@
                 "description": "Returns all activity medatadata of a user",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/authentication"
+                        "$ref": "#/parameters/authorization"
                     },
                     {
                         "$ref": "#/parameters/per_page"
@@ -319,7 +322,7 @@
                 "description": "Returns all activity medatadata of activity type",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/authentication"
+                        "$ref": "#/parameters/authorization"
                     },
                     {
                         "$ref": "#/parameters/per_page"
@@ -366,7 +369,7 @@
                 "description": "Returns all activity medatadata of a user",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/authentication"
+                        "$ref": "#/parameters/authorization"
                     },
                     {
                         "$ref": "#/parameters/per_page"
@@ -421,7 +424,7 @@
                 "description": "Returns all activity medatadata",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/authentication"
+                        "$ref": "#/parameters/authorization"
                     },
                     {
                         "$ref": "#/parameters/per_page"
@@ -465,6 +468,9 @@
                 "description": "Returns an activity metadata by id",
                 "parameters": [
                     {
+                        "$ref": "#/parameters/authorization"
+                    },
+                    {
                         "name": "id",
                         "in": "path",
                         "description": "ID of activity metadata to fetch",
@@ -503,6 +509,9 @@
                 "summary": "Checkin an activity",
                 "description": "Checkin user activities",
                 "parameters": [
+                    {
+                        "$ref": "#/parameters/authorization"
+                    },
                     {
                         "name": "user",
                         "in": "path",
@@ -558,6 +567,9 @@
                 "description": "Checkin user activities",
                 "parameters": [
                     {
+                        "$ref": "#/parameters/authorization"
+                    },
+                    {
                         "name": "user",
                         "in": "path",
                         "description": "ID of the user checking the activity",
@@ -610,6 +622,9 @@
                 "description": "Bulk checkin user activities",
                 "parameters": [
                     {
+                        "$ref": "#/parameters/authorization"
+                    },
+                    {
                         "name": "user",
                         "in": "path",
                         "description": "ID of the user checking the activity",
@@ -658,6 +673,9 @@
                 "summary": "Bulk activity checkin",
                 "description": "Bulk checkin user activities",
                 "parameters": [
+                    {
+                        "$ref": "#/parameters/authorization"
+                    },
                     {
                         "name": "user",
                         "in": "path",
@@ -710,7 +728,7 @@
                 "description": "Returns all activities",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/authentication"
+                        "$ref": "#/parameters/authorization"
                     },
                     {
                         "$ref": "#/parameters/per_page"
@@ -754,6 +772,9 @@
                 "description": "Returns an activity by id",
                 "parameters": [
                     {
+                        "$ref": "#/parameters/authorization"
+                    },
+                    {
                         "name": "id",
                         "in": "path",
                         "description": "ID of activity to fetch",
@@ -793,7 +814,7 @@
                 "description": "Returns all badges",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/authentication"
+                        "$ref": "#/parameters/authorization"
                     },
                     {
                         "$ref": "#/parameters/per_page"
@@ -837,6 +858,9 @@
                 "description": "Returns a badge by id",
                 "parameters": [
                     {
+                        "$ref": "#/parameters/authorization"
+                    },
+                    {
                         "name": "id",
                         "in": "path",
                         "description": "ID of badge to fetch",
@@ -867,6 +891,90 @@
                 }
             }
         },
+        "bookmark/": {
+            "post": {
+                "tags": [
+                    "bookmarks"
+                ],
+                "summary": "Create an bookmark",
+                "description": "Add Object to User's  bookmark list",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorization"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.bookmark"
+                        },
+                        "type": "object"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/response.bookmark"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "$ref": "#/definitions/UserError404"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "bookmarks"
+                ],
+                "summary": "Remove an bookmark",
+                "description": "Remove Object from User's bookmark list",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorization"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.bookmark"
+                        },
+                        "type": "object"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/response.bookmark"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "$ref": "#/definitions/UserError404"
+                        }
+                    }
+                }
+            }
+        },
         "categories": {
             "get": {
                 "tags": [
@@ -876,7 +984,7 @@
                 "description": "Returns all categories",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/authentication"
+                        "$ref": "#/parameters/authorization"
                     },
                     {
                         "$ref": "#/parameters/per_page"
@@ -920,6 +1028,9 @@
                 "description": "Returns a category by id",
                 "parameters": [
                     {
+                        "$ref": "#/parameters/authorization"
+                    },
+                    {
                         "name": "id",
                         "in": "path",
                         "description": "ID of category to fetch",
@@ -958,9 +1069,6 @@
                 "summary": "Return all countries",
                 "description": "Returns all countries",
                 "parameters": [
-                    {
-                        "$ref": "#/parameters/authentication"
-                    },
                     {
                         "$ref": "#/parameters/per_page"
                     },
@@ -1042,7 +1150,7 @@
                 "description": "Returns all locations",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/authentication"
+                        "$ref": "#/parameters/authorization"
                     },
                     {
                         "$ref": "#/parameters/per_page"
@@ -1086,6 +1194,9 @@
                 "description": "Returns a location by id",
                 "parameters": [
                     {
+                        "$ref": "#/parameters/authorization"
+                    },
+                    {
                         "name": "id",
                         "in": "path",
                         "description": "ID of location to fetch",
@@ -1100,6 +1211,106 @@
                         "schema": {
                             "$ref": "#/definitions/location"
                         }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "print/card/{user}/{location}": {
+            "get": {
+                "tags": [
+                    "print"
+                ],
+                "summary": "Print member card",
+                "description": "Send to location printer a member card",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorization"
+                    },
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID of the user checking the activity",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "location",
+                        "in": "path",
+                        "description": "ID of the location requesting print",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
+        "print/reward/{user}/{location}/{reward}": {
+            "get": {
+                "tags": [
+                    "print"
+                ],
+                "summary": "Print a reward",
+                "description": "Send to location printer a reward",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorization"
+                    },
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID of the user checking the activity",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "location",
+                        "in": "path",
+                        "description": "ID of the location requesting print",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "reward",
+                        "in": "path",
+                        "description": "ID of the reward to print",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
                     },
                     "500": {
                         "description": "Unexpected error",
@@ -1136,7 +1347,7 @@
                         ]
                     },
                     {
-                        "$ref": "#/parameters/authentication"
+                        "$ref": "#/parameters/authorization"
                     },
                     {
                         "$ref": "#/parameters/per_page"
@@ -1183,6 +1394,9 @@
                 "summary": "Rate an object",
                 "description": "Rate an object",
                 "parameters": [
+                    {
+                        "$ref": "#/parameters/authorization"
+                    },
                     {
                         "name": "object",
                         "in": "path",
@@ -1252,6 +1466,9 @@
                 "description": "Rate an object",
                 "parameters": [
                     {
+                        "$ref": "#/parameters/authorization"
+                    },
+                    {
                         "name": "object",
                         "in": "path",
                         "description": "Object to rate",
@@ -1303,6 +1520,9 @@
                 "description": "Returns an rate by id",
                 "parameters": [
                     {
+                        "$ref": "#/parameters/authorization"
+                    },
+                    {
                         "name": "id",
                         "in": "path",
                         "description": "ID of rating to fetch",
@@ -1341,6 +1561,9 @@
                 "summary": "Redeem a reward",
                 "description": "Redeem user points for rewards",
                 "parameters": [
+                    {
+                        "$ref": "#/parameters/authorization"
+                    },
                     {
                         "name": "reward",
                         "in": "path",
@@ -1395,6 +1618,9 @@
                 "description": "Redeem user points for rewards",
                 "parameters": [
                     {
+                        "$ref": "#/parameters/authorization"
+                    },
+                    {
                         "name": "body",
                         "in": "body",
                         "required": true,
@@ -1441,7 +1667,7 @@
                 "description": "Returns all rewards",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/authentication"
+                        "$ref": "#/parameters/authorization"
                     },
                     {
                         "$ref": "#/parameters/per_page"
@@ -1485,6 +1711,9 @@
                 "description": "Returns a reward by id",
                 "parameters": [
                     {
+                        "$ref": "#/parameters/authorization"
+                    },
+                    {
                         "name": "id",
                         "in": "path",
                         "description": "ID of reward to fetch",
@@ -1522,6 +1751,11 @@
                 ],
                 "summary": "Return all public settings",
                 "description": "Returns public settings",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorization"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -1552,9 +1786,6 @@
                 "summary": "Return all states by country",
                 "description": "Returns all states of given country",
                 "parameters": [
-                    {
-                        "$ref": "#/parameters/authentication"
-                    },
                     {
                         "$ref": "#/parameters/per_page"
                     },
@@ -1642,7 +1873,7 @@
                 "description": "Returns all activity steps",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/authentication"
+                        "$ref": "#/parameters/authorization"
                     },
                     {
                         "$ref": "#/parameters/per_page"
@@ -1685,6 +1916,9 @@
                 "summary": "Find a step by id",
                 "description": "Returns a step by id",
                 "parameters": [
+                    {
+                        "$ref": "#/parameters/authorization"
+                    },
                     {
                         "name": "id",
                         "in": "path",
@@ -1756,6 +1990,46 @@
                 }
             }
         },
+        "users/login/card": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "User authentication",
+                "description": "Authenticate user using username and password",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "User credentials payload",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.user.credentials.card"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/user.extended"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "$ref": "#/definitions/UserError404"
+                        }
+                    }
+                }
+            }
+        },
         "users/{id}": {
             "get": {
                 "tags": [
@@ -1764,6 +2038,9 @@
                 "summary": "Find user by id",
                 "description": "Returns an user by id",
                 "parameters": [
+                    {
+                        "$ref": "#/parameters/authorization"
+                    },
                     {
                         "name": "id",
                         "in": "path",
@@ -1801,6 +2078,9 @@
                 "summary": "Update an existing user",
                 "description": "Update an existing user",
                 "parameters": [
+                    {
+                        "$ref": "#/parameters/authorization"
+                    },
                     {
                         "name": "id",
                         "in": "path",
@@ -1850,7 +2130,7 @@
                 "description": "Returns all users",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/authentication"
+                        "$ref": "#/parameters/authorization"
                     },
                     {
                         "$ref": "#/parameters/per_page"
@@ -1925,6 +2205,9 @@
                 "summary": "Change user avatar",
                 "description": "Change user avatar. Avatar must be a valid JPG, GIF or PNG. And not bigger that 400x400 pixels.",
                 "parameters": [
+                    {
+                        "$ref": "#/parameters/authorization"
+                    },
                     {
                         "name": "id",
                         "in": "path",
@@ -2024,7 +2307,7 @@
                 "description": "Returns an user activities",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/authentication"
+                        "$ref": "#/parameters/authorization"
                     },
                     {
                         "$ref": "#/parameters/per_page"
@@ -2072,7 +2355,7 @@
                 "description": "Returns user rewards",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/authentication"
+                        "$ref": "#/parameters/authorization"
                     },
                     {
                         "$ref": "#/parameters/per_page"
@@ -2120,7 +2403,7 @@
                 "description": "Returns user badges",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/authentication"
+                        "$ref": "#/parameters/authorization"
                     },
                     {
                         "$ref": "#/parameters/per_page"
@@ -2159,6 +2442,66 @@
                 }
             }
         },
+        "users/{id}/bookmarks/{type}": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Find user bookmarks",
+                "description": "Returns user bookmarks",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorization"
+                    },
+                    {
+                        "$ref": "#/parameters/per_page"
+                    },
+                    {
+                        "$ref": "#/parameters/page"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of user to fetch",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "description": "Object type of bookmarks to retrive",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "rewards",
+                            "badges",
+                            "activities"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/bookmark"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/error404"
+                        }
+                    }
+                }
+            }
+        },
         "razors-edge": {
             "get": {
                 "tags": [
@@ -2167,6 +2510,9 @@
                 "summary": "Return all Razors Edge that match a Friends user",
                 "description": "Returns all Razor Edge data",
                 "parameters": [
+                    {
+                        "$ref": "#/parameters/authorization"
+                    },
                     {
                         "$ref": "#/parameters/per_page"
                     },
@@ -2209,6 +2555,9 @@
                 "description": "Returns a Razors Edge membership by id",
                 "parameters": [
                     {
+                        "$ref": "#/parameters/authorization"
+                    },
+                    {
                         "name": "id",
                         "in": "path",
                         "description": "ID of Razor Edge Sync ID to fetch",
@@ -2247,6 +2596,9 @@
                 "summary": "Find a Razors Edge membership  by friends user ID",
                 "description": "Returns a Razors Edge membership by friends user id",
                 "parameters": [
+                    {
+                        "$ref": "#/parameters/authorization"
+                    },
                     {
                         "name": "id",
                         "in": "path",
@@ -2287,6 +2639,9 @@
                 "description": "Returns user recomendations",
                 "parameters": [
                     {
+                        "$ref": "#/parameters/authorization"
+                    },
+                    {
                         "name": "item",
                         "in": "path",
                         "description": "Items to recommend",
@@ -2304,6 +2659,18 @@
                         "required": true,
                         "type": "integer",
                         "format": "int64"
+                    },
+                    {
+                        "name": "if-empty",
+                        "in": "query",
+                        "description": "If not recommendation are returned Recommendation Items sort by one of the given options",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "nothing",
+                            "popular",
+                            "weight"
+                        ]
                     }
                 ],
                 "responses": {
@@ -2409,6 +2776,7 @@
             "required": [
                 "success",
                 "activity_code",
+                "activity_points",
                 "message",
                 "feedback_message",
                 "complete_message",
@@ -2431,6 +2799,10 @@
                 "activity_code": {
                     "type": "string"
                 },
+                "activity_points": {
+                    "type": "integer",
+                    "format": "int32"
+                },
                 "message": {
                     "type": "string"
                 },
@@ -2451,6 +2823,7 @@
             "required": [
                 "success",
                 "activity_code",
+                "activity_points",
                 "message",
                 "feedback_message",
                 "complete_message"
@@ -2470,6 +2843,10 @@
                 },
                 "activity_code": {
                     "type": "string"
+                },
+                "activity_points": {
+                    "type": "integer",
+                    "format": "int32"
                 },
                 "message": {
                     "type": "string"
@@ -2508,6 +2885,10 @@
                 "activity_code": {
                     "type": "string"
                 },
+                "activity_points": {
+                    "type": "integer",
+                    "format": "int32"
+                },
                 "message": {
                     "type": "string"
                 },
@@ -2527,6 +2908,7 @@
             "required": [
                 "success",
                 "activity_code",
+                "activity_points",
                 "message",
                 "feedback_message",
                 "complete_message",
@@ -2548,6 +2930,10 @@
                 },
                 "activity_code": {
                     "type": "string"
+                },
+                "activity_points": {
+                    "type": "integer",
+                    "format": "int32"
                 },
                 "message": {
                     "type": "string"
@@ -2645,6 +3031,56 @@
                     "type": "integer",
                     "format": "int32",
                     "default": 500
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "request.bookmark": {
+            "required": [
+                "object_type",
+                "object_id",
+                "user_id"
+            ],
+            "properties": {
+                "object_type": {
+                    "type": "string",
+                    "enum": [
+                        "activity",
+                        "badge",
+                        "reward"
+                    ]
+                },
+                "object_id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "user_id": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "response.bookmark": {
+            "required": [
+                "data"
+            ],
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/bookmark.payload"
+                }
+            }
+        },
+        "bookmark.payload": {
+            "required": [
+                "success",
+                "message"
+            ],
+            "properties": {
+                "success": {
+                    "type": "boolean"
                 },
                 "message": {
                     "type": "string"
@@ -2815,7 +3251,8 @@
         "request.user.credentials": {
             "required": [
                 "username",
-                "password"
+                "password",
+                "app_key"
             ],
             "properties": {
                 "username": {
@@ -2823,16 +3260,39 @@
                 },
                 "password": {
                     "type": "string"
+                },
+                "app_key": {
+                    "type": "string",
+                    "format": "password"
+                }
+            }
+        },
+        "request.user.credentials.card": {
+            "required": [
+                "barcode",
+                "app_key"
+            ],
+            "properties": {
+                "barcode": {
+                    "type": "string"
+                },
+                "app_key": {
+                    "type": "string",
+                    "format": "password"
                 }
             }
         },
         "request.user": {
             "required": [
+                "app_key",
                 "email",
                 "password",
                 "password_confirm"
             ],
             "properties": {
+                "app_key": {
+                    "type": "string"
+                },
                 "first_name": {
                     "type": "string"
                 },
@@ -3272,6 +3732,33 @@
                     "items": {
                         "$ref": "#/definitions/step"
                     }
+                }
+            }
+        },
+        "bookmark": {
+            "required": [
+                "id",
+                "title",
+                "steps"
+            ],
+            "properties": {
+                "id": {
+                    "description": "Badge definition",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "created_at": {
+                    "description": "Badge definition",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "object_type": {
+                    "description": "Badge definition",
+                    "type": "string"
+                },
+                "object": {
+                    "description": "Badge definition",
+                    "type": "object"
                 }
             }
         },
@@ -3943,8 +4430,8 @@
             },
             "collectionFormat": "csv"
         },
-        "authorizations": {
-            "name": "authorizations",
+        "authorization": {
+            "name": "authorization",
             "in": "header",
             "description": "Authentication token returned by User/Login endpoint",
             "required": true,

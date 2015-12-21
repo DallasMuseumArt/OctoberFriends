@@ -35,7 +35,7 @@ class ActivityMetadataResource extends BaseResource {
      *     tags={ "activity-metadata"},
      *
      *     @SWG\Parameter(
-     *         ref="#/parameters/authentication"
+     *         ref="#/parameters/authorization"
      *     ),
      *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
@@ -106,7 +106,7 @@ class ActivityMetadataResource extends BaseResource {
      *     tags={ "activity-metadata"},
      *
      *     @SWG\Parameter(
-     *         ref="#/parameters/authentication"
+     *         ref="#/parameters/authorization"
      *     ),
      *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
@@ -147,7 +147,7 @@ class ActivityMetadataResource extends BaseResource {
      *     tags={ "activity-metadata"},
      *
      *     @SWG\Parameter(
-     *         ref="#/parameters/authentication"
+     *         ref="#/parameters/authorization"
      *     ),
      *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
@@ -251,7 +251,7 @@ class ActivityMetadataResource extends BaseResource {
      *     tags={ "activity-metadata"},
      *     
      *     @SWG\Parameter(
-     *         ref="#/parameters/authentication"
+     *         ref="#/parameters/authorization"
      *     ),
      *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
@@ -293,6 +293,9 @@ class ActivityMetadataResource extends BaseResource {
      *     summary="Find an activity metadata by id",
      *     tags={ "activity-metadata"},
      *      
+     *     @SWG\Parameter(
+     *         ref="#/parameters/authorization"
+     *     ),      
      *     @SWG\Parameter(
      *         description="ID of activity metadata to fetch",
      *         format="int64",

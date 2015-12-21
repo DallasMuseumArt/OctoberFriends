@@ -62,7 +62,9 @@ class SettingsResource extends BaseResource {
      *     summary="Return all public settings",
      *     tags={ "settings"},
      *        
-     *     
+     *     @SWG\Parameter(
+     *         ref="#/parameters/authorization"
+     *     ),
      *     @SWG\Response(
      *         response=200,
      *         description="Successful response",

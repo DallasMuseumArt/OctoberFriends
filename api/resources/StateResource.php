@@ -35,9 +35,6 @@ class StateResource extends BaseResource
      *     tags={ "countries"},
      *      
      *     @SWG\Parameter(
-     *         ref="#/parameters/authentication"
-     *     ),
-     *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
      *     ),
      *     @SWG\Parameter(
@@ -84,7 +81,6 @@ class StateResource extends BaseResource
      *     @SWG\Parameter(
      *         ref="#/parameters/country_id"
      *     ),
-     *     
      *     @SWG\Parameter(
      *         description="ID of state to fetch",
      *         format="int64",

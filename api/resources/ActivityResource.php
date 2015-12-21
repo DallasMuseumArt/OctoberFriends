@@ -76,6 +76,9 @@ class ActivityResource extends BaseResource {
      *     tags={ "activity"},
      *
      *     @SWG\Parameter(
+     *         ref="#/parameters/authorization"
+     *     ),
+     *     @SWG\Parameter(
      *         description="ID of the user checking the activity",
      *         format="int64",
      *         in="path",
@@ -120,7 +123,10 @@ class ActivityResource extends BaseResource {
      *     description="Checkin user activities",
      *     summary="Checkin an activity",
      *     tags={ "activity"},
-     *
+     *     
+     *     @SWG\Parameter(
+     *         ref="#/parameters/authorization"
+     *     ),
      *     @SWG\Parameter(
      *         description="ID of the user checking the activity",
      *         format="int64",
@@ -241,6 +247,9 @@ class ActivityResource extends BaseResource {
      *     tags={ "activity"},
      *
      *     @SWG\Parameter(
+     *         ref="#/parameters/authorization"
+     *     ),
+     *     @SWG\Parameter(
      *         description="ID of the user checking the activity",
      *         format="int64",
      *         in="path",
@@ -281,6 +290,9 @@ class ActivityResource extends BaseResource {
      *     summary="Bulk activity checkin",
      *     tags={ "activity"},
      *
+     *     @SWG\Parameter(
+     *         ref="#/parameters/authorization"
+     *     ),
      *     @SWG\Parameter(
      *         description="ID of the user checking the activity",
      *         format="int64",
@@ -372,7 +384,7 @@ class ActivityResource extends BaseResource {
      * @SWG\Definition(
      *     definition="response.ok.activity.code",
      *     type="object",
-     *     required={"success", "activity_code", "message", "feedback_message", "complete_message", "data"},
+     *     required={"success", "activity_code", "activity_points", "message", "feedback_message", "complete_message", "data"},
      *     @SWG\Property(
      *         property="success",
      *         type="boolean",
@@ -389,7 +401,12 @@ class ActivityResource extends BaseResource {
      *     @SWG\Property(
      *         property="activity_code",
      *         type="string"
-     *     ),  
+     *     ),
+     *     @SWG\Property(
+     *         property="activity_points",
+     *         type="integer",
+     *         format="int32"
+     *     ),      
      *     @SWG\Property(
      *         property="message",
      *         type="string"
@@ -415,7 +432,7 @@ class ActivityResource extends BaseResource {
      * @SWG\Definition(
      *     definition="response.failed.activity.code",
      *     type="object",
-     *     required={"success", "activity_code", "message", "feedback_message", "complete_message"},
+     *     required={"success", "activity_code", "activity_points", "message", "feedback_message", "complete_message"},
      *     @SWG\Property(
      *         property="success",
      *         type="boolean"
@@ -432,6 +449,11 @@ class ActivityResource extends BaseResource {
      *         property="activity_code",
      *         type="string"
      *     ),
+     *     @SWG\Property(
+     *         property="activity_points",
+     *         type="integer",
+     *         format="int32"
+     *     ),      
      *     @SWG\Property(
      *         property="message",
      *         type="string"
@@ -470,7 +492,12 @@ class ActivityResource extends BaseResource {
      *     @SWG\Property(
      *         property="activity_code",
      *         type="string"
-     *     ),  
+     *     ), 
+     *     @SWG\Property(
+     *         property="activity_points",
+     *         type="integer",
+     *         format="int32"
+     *     ), 
      *     @SWG\Property(
      *         property="message",
      *         type="string"
@@ -497,7 +524,7 @@ class ActivityResource extends BaseResource {
      * @SWG\Definition(
      *     definition="response.ok.activity.code.user",
      *     type="object",
-     *     required={"success", "activity_code", "message", "feedback_message", "complete_message", "user", "data"},
+     *     required={"success", "activity_code", "activity_points", "message", "feedback_message", "complete_message", "user", "data"},
      *     @SWG\Property(
      *         property="success",
      *         type="boolean"
@@ -512,6 +539,11 @@ class ActivityResource extends BaseResource {
      *     @SWG\Property(
      *         property="activity_code",
      *         type="string"
+     *     ),
+     *     @SWG\Property(
+     *         property="activity_points",
+     *         type="integer",
+     *         format="int32"
      *     ),
      *     @SWG\Property(
      *         property="message",
@@ -640,7 +672,7 @@ class ActivityResource extends BaseResource {
      *     tags={ "activity"},
      *     
      *     @SWG\Parameter(
-     *         ref="#/parameters/authentication"
+     *         ref="#/parameters/authorization"
      *     ),
      *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
@@ -681,6 +713,9 @@ class ActivityResource extends BaseResource {
      *     summary="Find activity by id",
      *     tags={ "activity"},
      *
+     *     @SWG\Parameter(
+     *         ref="#/parameters/authorization"
+     *     ),
      *     @SWG\Parameter(
      *         description="ID of activity to fetch",
      *         format="int64",

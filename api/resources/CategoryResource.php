@@ -8,6 +8,16 @@ class CategoryResource extends BaseResource {
     protected $transformer  = '\DMA\Friends\API\Transformers\CategoryTransformer';
 
     /**
+     * The listed actions that don't required check if
+     * user can perform the action
+     * @var array
+     */
+    protected $skipUserPermissionValidation = [
+            'index', 'show'
+    ];
+    
+    
+    /**
      * @SWG\Get(
      *     path="categories",
      *     description="Returns all categories",
@@ -15,7 +25,7 @@ class CategoryResource extends BaseResource {
      *     tags={ "categories"},
      *        
      *     @SWG\Parameter(
-     *         ref="#/parameters/authentication"
+     *         ref="#/parameters/authorization"
      *     ),
      *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
@@ -56,6 +66,9 @@ class CategoryResource extends BaseResource {
      *     summary="Find a category by id",
      *     tags={ "categories"},
      *     
+     *     @SWG\Parameter(
+     *         ref="#/parameters/authorization"
+     *     ),
      *     @SWG\Parameter(
      *         description="ID of category to fetch",
      *         format="int64",

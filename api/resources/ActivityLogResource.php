@@ -287,7 +287,10 @@ class ActivityLogResource extends BaseResource {
      *     description="Returns an activity logs by id",
      *     summary="Find an activity logs by id",
      *     tags={ "activity-logs"},
-     *      
+     *     
+     *     @SWG\Parameter(
+     *         ref="#/parameters/authorization"
+     *     ),
      *     @SWG\Parameter(
      *         description="ID of activity log to fetch",
      *         format="int64",

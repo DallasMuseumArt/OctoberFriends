@@ -24,7 +24,7 @@ class BadgeResource extends BaseResource {
      *     tags={ "badges"},
      *     
      *     @SWG\Parameter(
-     *         ref="#/parameters/authentication"
+     *         ref="#/parameters/authorization"
      *     ),
      *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
@@ -65,6 +65,9 @@ class BadgeResource extends BaseResource {
      *     summary="Find a badge by id",
      *     tags={ "badges"},
      *
+     *     @SWG\Parameter(
+     *         ref="#/parameters/authorization"
+     *     ),
      *     @SWG\Parameter(
      *         description="ID of badge to fetch",
      *         format="int64",

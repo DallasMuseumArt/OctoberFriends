@@ -72,6 +72,9 @@ class RewardResource extends BaseResource {
      *     tags={ "rewards"},
      *
      *     @SWG\Parameter(
+     *         ref="#/parameters/authorization"
+     *     ),
+     *     @SWG\Parameter(
      *         description="ID of reward to redeem",
      *         format="int64",
      *         in="path",
@@ -180,6 +183,9 @@ class RewardResource extends BaseResource {
      *     tags={ "rewards"},
      *
      *     @SWG\Parameter(
+     *         ref="#/parameters/authorization"
+     *     ),
+     *     @SWG\Parameter(
      *         in="body",
      *         name="body",
      *         required=true,
@@ -237,7 +243,7 @@ class RewardResource extends BaseResource {
      *     tags={ "rewards"},
      *     
      *     @SWG\Parameter(
-     *         ref="#/parameters/authentication"
+     *         ref="#/parameters/authorization"
      *     ),
      *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
@@ -278,6 +284,9 @@ class RewardResource extends BaseResource {
      *     summary="Find a reward by id",
      *     tags={ "rewards"},
      *
+     *     @SWG\Parameter(
+     *         ref="#/parameters/authorization"
+     *     ),
      *     @SWG\Parameter(
      *         description="ID of reward to fetch",
      *         format="int64",

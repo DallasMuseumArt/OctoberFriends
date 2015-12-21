@@ -33,7 +33,7 @@ class BookmarkTransformer extends BaseTransformer {
     /**
      * Badge definition
      * @SWG\Definition(
-     *    definition="badge",
+     *    definition="bookmark",
      *    required={"id", "title", "steps"},
      *    @SWG\Property(
      *         property="id",
@@ -41,14 +41,18 @@ class BookmarkTransformer extends BaseTransformer {
      *         format="int32"
      *    ),
      *    @SWG\Property(
-     *         property="title",
+     *         property="created_at",
      *         type="string",
+     *         format="date-time"
      *    ),
      *    @SWG\Property(
-     *         property="steps",
-     *         type="array",
-     *         items=@SWG\Schema(ref="#/definitions/step")
-     *    )   
+     *         property="object_type",
+     *         type="string"
+     *    ),
+     *    @SWG\Property(
+     *         property="object",
+     *         type="object"
+     *    )     
      * )
      */
     

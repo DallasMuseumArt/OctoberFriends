@@ -22,10 +22,7 @@ class CountryResource extends BaseResource
      *     description="Returns all countries",
      *     summary="Return all countries",
      *     tags={ "countries"},
-     *  
-     *     @SWG\Parameter(
-     *         ref="#/parameters/authentication"
-     *     ),
+     *     
      *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
      *     ),

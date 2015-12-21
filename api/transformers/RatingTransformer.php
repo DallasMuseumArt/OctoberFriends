@@ -6,7 +6,7 @@ use DMA\Friends\API\Transformers\DateTimeTransformerTrait;
 use DMA\Friends\API\Transformers\UserTransformer;
 
 
-class RateTransformer extends BaseTransformer {
+class RatingTransformer extends BaseTransformer {
     
     use DateTimeTransformerTrait;
        
