@@ -24,6 +24,33 @@ Type rainlab.user and click Install Plugin on this page.
 * Uncomment and set the lines for your Github username and the OctoberCMS database details.
 * Run `make install` in your chosen install directory.
 
+# REST API
+
+The DMA Friends pluging also provide a REST API to allow build custom applications that can interact with the platform, for futher information about all available endpoints can be found at *plugins/dma/friends/docs/api-docs* folder.
+
+### Enable REST API
+
+Since version 2.6.1	 the REST API requires pass an autentication token in almost all available endpoints of the API. For that reason it is required to follow the below steps to configure the REST API.
+
+* Create a config.php file for the Friends pluging at `<octobercms root>/config/dma/friends/`.  
+  *Note: If folder structure don't exist create is manually*
+
+* Add to the config.php file a secret key that is used to sign and authenticated all calls to the API. The config.php file show look like the below example.
+
+```
+<?php
+
+return [
+    'secret' => 'PLACE-HERE-A-NICE-LONG-SECRET-KEY'
+];
+
+```
+
+* Log into the OctoberCMS backend.
+* Create an Application API at http://your.domain/backend/dma/friends/applications/
+* Configure the level of access your custom Application require.
+* Use the Application Key to authenticate or register users in the platform.
+ 
 
 # Documentation
 
