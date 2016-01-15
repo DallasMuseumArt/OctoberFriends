@@ -222,8 +222,8 @@ class AuthManager
          */
         $data['first_name']     = ucwords($data['first_name']);
         $data['last_name']      = ucwords($data['last_name']);
-        $data['birth_date']     = UserExtend::parseBirthdate($data['birthday']);
-        $data['phone']          = UserExtend::parsePhone($data['phone']);
+        $data['birth_date']     = isset($data['birthday']) ? UserExtend::parseBirthdate($data['birthday']) : "";
+        $data['phone']          = isset($data['phone']) ? UserExtend::parsePhone($data['phone']) : "";
         $data['email_optin']    = isset($data['email_optin']) ? $data['email_optin'] : false;
 
         // Split the data into whats required for the user and usermeta models
@@ -232,11 +232,11 @@ class AuthManager
             'password'              => $data['password'],
             'password_confirmation' => $data['password_confirmation'],
             'email'                 => $data['email'],
-            'street_addr'           => $data['street_addr'],
-            'city'                  => $data['city'],
-            'state'                 => $data['state'],
-            'zip'                   => $data['zip'],
-            'phone'                 => $data['phone'],
+            'street_addr'           => isset($data['street_addr']) ? $data['street_addr'] : "",
+            'city'                  => isset($data['city']) ? $data['city'] : "",
+            'state'                 => isset($data['state']) ? $data['state'] : "",
+            'zip'                   => isset($data['zip']) ? $data['zip'] : "",
+            'phone'                 => isset($data['phone']) ? $data['phone'] : "",
         ];
 
         $user = Auth::register($userData, $automaticActivation);
