@@ -8,9 +8,12 @@ use DMA\Friends\Classes\API\BaseResource;
 use DMA\Friends\Activities\ActivityCode;
 use DMA\Friends\Activities\LikeWorkOfArt;
 use DMA\Friends\API\Transformers\UserProfileTransformer;
+use DMA\Friends\API\Resources\UserTransformerInjectionTrait;
 
 
 class ActivityResource extends BaseResource {
+    
+    use UserTransformerInjectionTrait;
     
     protected $model        = '\DMA\Friends\Models\Activity';
     protected $transformer  = '\DMA\Friends\API\Transformers\ActivityTransformer';
@@ -684,6 +687,15 @@ class ActivityResource extends BaseResource {
      *         ref="#/parameters/sort"
      *     ),
      *     
+     *     @SWG\Parameter(
+     *         description="Include a completed steps for a given user on each activity",
+     *         format="int64",
+     *         name="user",
+     *         in="query",
+     *         type="integer",
+     *         required=false
+     *     ), 
+     *          
      *     @SWG\Response(
      *         response=200,
      *         description="Successful response",
@@ -725,6 +737,15 @@ class ActivityResource extends BaseResource {
      *         type="integer"
      *     ),
      *
+     *     @SWG\Parameter(
+     *         description="Include a completed steps for a given user on each activity",
+     *         format="int64",
+     *         name="user",
+     *         in="query",
+     *         type="integer",
+     *         required=false
+     *     ), 
+     * 
      *     @SWG\Response(
      *         response=200,
      *         description="Successful response",
