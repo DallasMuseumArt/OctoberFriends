@@ -1,9 +1,12 @@
 <?php namespace DMA\Friends\API\Resources;
 
 use DMA\Friends\Classes\API\BaseResource;
+use DMA\Friends\API\Resources\UserTransformerInjectionTrait;
 
 class BadgeResource extends BaseResource {
 
+    use UserTransformerInjectionTrait;
+    
     protected $model        = '\DMA\Friends\Models\Badge';
     protected $transformer  = '\DMA\Friends\API\Transformers\BadgeTransformer';
 
@@ -16,6 +19,7 @@ class BadgeResource extends BaseResource {
             'index', 'show'
     ];
     
+     
     /**
      * @SWG\Get(
      *     path="badges",
@@ -35,7 +39,16 @@ class BadgeResource extends BaseResource {
      *     @SWG\Parameter(
      *         ref="#/parameters/sort"
      *     ),
-     *          
+     *     
+     *     @SWG\Parameter(
+     *         description="Include a completed steps for a given user on each badge",
+     *         format="int64",
+     *         name="user",
+     *         in="query",
+     *         type="integer",
+     *         required=false
+     *     ), 
+     *            
      *     @SWG\Response(
      *         response=200,
      *         description="Successful response",
@@ -77,6 +90,15 @@ class BadgeResource extends BaseResource {
      *         type="integer"
      *     ),
      *
+     *     @SWG\Parameter(
+     *         description="Include a completed steps for a given user on each badge",
+     *         format="int64",
+     *         name="user",
+     *         in="query",
+     *         type="integer",
+     *         required=false
+     *     ), 
+     *           
      *     @SWG\Response(
      *         response=200,
      *         description="Successful response",

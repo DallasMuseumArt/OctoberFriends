@@ -738,6 +738,14 @@
                     },
                     {
                         "$ref": "#/parameters/sort"
+                    },
+                    {
+                        "name": "user",
+                        "in": "query",
+                        "description": "Include a completed steps for a given user on each activity",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
                     }
                 ],
                 "responses": {
@@ -779,6 +787,14 @@
                         "in": "path",
                         "description": "ID of activity to fetch",
                         "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "user",
+                        "in": "query",
+                        "description": "Include a completed steps for a given user on each activity",
+                        "required": false,
                         "type": "integer",
                         "format": "int64"
                     }
@@ -824,6 +840,14 @@
                     },
                     {
                         "$ref": "#/parameters/sort"
+                    },
+                    {
+                        "name": "user",
+                        "in": "query",
+                        "description": "Include a completed steps for a given user on each badge",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
                     }
                 ],
                 "responses": {
@@ -865,6 +889,14 @@
                         "in": "path",
                         "description": "ID of badge to fetch",
                         "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "user",
+                        "in": "query",
+                        "description": "Include a completed steps for a given user on each badge",
+                        "required": false,
                         "type": "integer",
                         "format": "int64"
                     }

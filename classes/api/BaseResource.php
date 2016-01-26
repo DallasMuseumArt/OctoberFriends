@@ -65,6 +65,12 @@ class BaseResource extends Controller {
      */
     public $publicActions = [];
     
+    
+    /**
+     * Exclude filters 
+     */
+    public $excludeFilters = [];
+    
     /**
      * Create and return an instance of a ModelRepository or the configure model
 
@@ -113,6 +119,20 @@ class BaseResource extends Controller {
         return $sortBy;
     }
     
+    
+    /**
+     * Return list of URL parameters that should be 
+     * exclude of the list of filters to apply to the 
+     * queryset.
+     * 
+     * @return array
+     */
+    protected function getExcludedFiltersList()
+    {
+        return $this->excludeFilters;
+    }
+    
+    
     /**
      * Get filters to apply to this resource
      * @return array of \DMA\Friends\Classes\API\FilterSpec
@@ -120,18 +140,18 @@ class BaseResource extends Controller {
     protected function getFilters()
     {
         $filters=[];
-        $ignoreParameter = ['per_page','page', 'sort'];
+        $ignoreParameters = array_unique(array_merge(['per_page','page', 'sort'], $this->getExcludedFiltersList()));
         
         // Adding the URL path to the $ignoreParameter helps to
         // manage an issue that only happens when using Nginx to server
         // OctooberCMS. The problem is that depending on how is configured
         // Nginx causes that sometimes to include the URL path of 
         // the response of Input:all()
-        $ignoreParameter[] = Request::path();
-        $ignoreParameter[] = '/' . Request::path();
+        $ignoreParameters[] = Request::path();
+        $ignoreParameters[] = '/' . Request::path();
 
         foreach(Input::all() as $key => $value) {
-            if (!in_array($key, $ignoreParameter)) {
+            if (!in_array($key, $ignoreParameters)) {
                 // Separate operator and filter name
                 $bits = explode('__', $key);
                 
@@ -147,7 +167,6 @@ class BaseResource extends Controller {
                 $filters[] = $filterSpec;
             }
         }
-        
         return $filters;
     }
     
