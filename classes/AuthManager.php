@@ -222,7 +222,7 @@ class AuthManager
          */
         $data['first_name']     = ucwords($data['first_name']);
         $data['last_name']      = ucwords($data['last_name']);
-        $data['birth_date']     = isset($data['birthday']) ? UserExtend::parseBirthdate($data['birthday']) : "";
+        $data['birth_date']     = isset($data['birthday']) ? UserExtend::parseBirthdate($data['birthday']) : "0000-00-00";
         $data['phone']          = isset($data['phone']) ? UserExtend::parsePhone($data['phone']) : "";
         $data['email_optin']    = isset($data['email_optin']) ? $data['email_optin'] : false;
 
