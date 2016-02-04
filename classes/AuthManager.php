@@ -8,6 +8,8 @@ use ValidationException;
 use RainLab\User\Models\Settings as UserSettings;
 use RainLab\User\Models\User;
 use DMA\Friends\Models\Usermeta;
+use System\Classes\PluginManager;
+use DMA\Friends\Classes\FriendsMembershipInterface;
 
 /**
  * Manage custom authentication for friends
@@ -17,6 +19,8 @@ use DMA\Friends\Models\Usermeta;
  */
 class AuthManager
 {
+    
+    protected static $membershipDrivers;
 
     /**
      * Authenticate a user by either username, email, or member id
@@ -79,22 +83,60 @@ class AuthManager
             $user = self::isBarcode($data['login']);
         }
    
-        try {        
-
-            if ($user && $data['no_password']) {
-                Auth::login($user);
-            } else {
-                $user = self::loginUser($user, $data);
+        $membership = null;
+        $skipInvalidLogin = false;
+        // Authentication cases:
+        // This cases are a re-factory of the previous AuthManager implementation
+        
+        \Log::info($user);
+        \Log::info($data['no_password']);
+        
+        if ($user && $data['no_password'] ) {
+            // 1. User exists and the login done via a card (OK)
+            Auth::login($user);
+            
+        } else if (!$user && $data['no_password'] ) {
+            // 2. Not user found and the login done via a card (OK)
+            // Throw invalid login if unsuccesful
+            $membership = self::lookupMembershipInfo($data);
+            
+        } else if ($user && !$data['no_password'] ) {
+            // 3. Login is not done via a card and user exists in friends  (OK)
+            // Throw invalid login if unsuccesful 
+            $user = self::loginUser($user, $data);
+            
+        }  else if (!$user && !$data['no_password'] ) {
+            // 4. User don't exists in friends (OK)
+            // Throw invalid login if unsuccesful
+            $membership = self::lookupMembershipInfo($data);
+            if (!$membership) {
+                try {
+                     $user = self::loginUser($user, $data);
+                }  catch(Exception $e) {
+                    $skipInvalidLogin = true;
+                    // Keep for backwards compatibilty with previous implementation of 
+                    // AuthManager where membership lookup dependent on auth.invalidLogin event
+                    $throw = Event::fire('auth.invalidLogin', [$data, $rules]);
+                    // Re-throw same exception if user is not defined
+                    if (!$throw) throw $e;
+                }
             }
-        } catch(Exception $e) {
-            $user = Event::fire('auth.invalidLogin', [$data, $rules]);
-            // Re-throw same exception if user is not defined
-            if (!$user) throw $e;
         }
+        
 
+        if ($membership) {
+            Event::fire('auth.request.verify', $membership);
+            return $membership;
+        }
+        
         if ($user) {
             Event::fire('auth.login', $user);
             return $user;
+        }
+        
+        if (!$user && !$membership && !$skipInvalidLogin) {
+            Event::fire('auth.invalidLogin', [$data, $rules]);
+            return false;
         }
 
         return false;
@@ -273,5 +315,102 @@ class AuthManager
         }
 
         return false;
+    }
+    
+    private static function lookupMembershipInfo($data)
+    {
+        // Before raise an exception try to find user via
+        // registered plugins that have implemented a friends
+        // membership interface
+        $membership = null;
+        foreach (self::getMembershipDrivers() as $pluginId => $interface){
+            $membership =  $interface->retriveByCredentials($data);
+            if ($membership) {
+                // Get plugin hints
+                $hintAttrs = $interface->getMembershipHintsAttributes();
+                $hintAttrs = (is_array($hintAttrs))?$hintAttrs:[];
+                 
+                $hints = [];
+                $re = "/(?P<initials>^.{2}|\\s.{2})|@(?P<domain>.{2})/i";
+                foreach ($hintAttrs as $attr ){
+                    $value = array_get($membership, $attr, $membership->{$attr});
+                    $value = trim(strtolower($value));
+                     
+                    // Extract intial characters
+                    preg_match_all($re, $value, $matches);
+        
+                    $hint = '';
+                    foreach(@$matches['initials'] as $initial){
+                        $initial = ucfirst(strtolower(trim($initial)));
+                        if($initial){
+                            $hint = $hint . $initial . str_repeat ( '*' , 8 ) . ' ';
+                        }
+                    }
+                     
+                    $hint = trim($hint);
+                     
+                    $domain   = @$matches['domain'][1];
+                     
+                    if( $domain ) {
+                        $hint = $hint . '@' . $domain . str_repeat ( '*' , 5 ) . '.**' ;
+                    }
+                     
+                    $hints[$attr] = $hint;
+        
+                }
+                
+                // Found membership information 
+                return [
+                        "membership" => $membership,
+                        "pluginId"   => $pluginId,
+                        "hints"      => $hints
+                ];
+                
+                // Matching membership found
+                break;
+            }
+        }
+        return $membership;
+    }
+    
+    /**
+     * Loads registered FriendAPI resources from modules and plugins
+     * @return void
+     */
+    private static function getMembershipDrivers()
+    {
+        
+        $membershipDrivers = static::$membershipDrivers;
+        if ($membershipDrivers === null) {
+            $membershipDrivers = [];
+            
+            $plugins = PluginManager::instance()->getPlugins();
+            foreach ($plugins as $pluginId => $pluginObj) {
+                $interface = null;
+                if(method_exists($pluginObj, 'registerFriendsMembershipInterface')) {
+                    $interface = $pluginObj->registerFriendsMembershipInterface();
+                    if ($interface !== null) {
+                        $obj =  new $interface;
+                        if ( $obj instanceof FriendsMembershipInterface ) {
+                            $membershipDrivers[$pluginId] = new $interface;
+                        }
+                    }
+                }
+            }
+            
+            static::$membershipDrivers = $membershipDrivers;
+        }
+        
+        return $membershipDrivers;
+    }
+    
+    
+    public static function verifyMembership($pluginId, $membershipData, $inputData)
+    {        
+        if ($instance = array_get(static::getMembershipDrivers(), $pluginId, null)) {
+            return $instance->verifyMembership($membershipData, $inputData);
+        }
+        return false;
+        
     }
 }

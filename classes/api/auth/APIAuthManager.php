@@ -51,19 +51,25 @@ class APIAuthManager
         $appKey = array_get($credentials, 'app_key');
         $app = $this->getAPIApplication($appKey);
         
-        $user = AuthManager::auth($credentials);
-        if ($user){
-            $token = $this->createToken($user, $app);
-        }   
+        $data = AuthManager::auth($credentials);
         
-        return ['user' => $user, 'token' => $token];
+        if ($data instanceof Model ){
+            $token = $this->createToken($data, $app);
+            return ['user' => $data, 'token' => $token];
+        } else if (is_array($data)) {
+            $token = $this->mebershipVerifyToken($data, $app);
+            return ['membership' => $data, 'token' => $token];
+        }
+        
+        
+        return null;
 
     }
     
     
     public function authenticate($token)
     {
-        $payload = $this->auth->decode($token);        
+        $payload = $this->decodeToken($token);        
         $appKey  = array_get($payload, 'aud', Null);
         $context = array_get($payload, 'context', []);
         $userId  = array_get($context, 'user_id', Null);
@@ -147,5 +153,25 @@ class APIAuthManager
         return $token;
     }
     
+
+    public function mebershipVerifyToken(array $data, $app)
+    {
+        $date    = new Carbon();
+        $payload = [
+                'sub' => 'friends|verify|' .  rand(),
+                'aud' => $app->app_key,
+                'iat' => $date->format('U'),
+                'context' => $data,
+                'exp' => $date->copy()->addMinutes(1200)->format('U') // Token valid only 5 Minutes
+        ];
+    
+        $token = $this->auth->encode($payload);
+        return $token;
+    }
+    
+    public function decodeToken($token)
+    {
+        return $this->auth->decode($token);
+    }
         
 }
