@@ -270,11 +270,11 @@ class UserResource extends BaseResource
                 'email.required_without_all' => 'The :attribute field is required when first_name or last_name is not present.',
         ];
         $rules = [
-                'app_key'           => 'required',
-                'confirm_token'     => 'required',
-                'first_name'        => 'required_with:last_name|min:2',
-                'last_name'         => 'required_with:first_name|min:2',
-                'email'             => 'required_without_all:first_name,last_name|email|between:2,64',
+                'app_key'            => 'required',
+                'verification_token' => 'required',
+                'first_name'         => 'required_with:last_name|min:2',
+                'last_name'          => 'required_with:first_name|min:2',
+                'email'              => 'required_without_all:first_name,last_name|email|between:2,64',
         ];
     
         $validation = Validator::make($data, $rules, $messages);
@@ -282,15 +282,13 @@ class UserResource extends BaseResource
             return $this->errorDataValidation('Invalid payload', $validation->errors());
         }
 
-        // Decode token an extract razors-edge user data
-        $token   = array_get($data, 'confirm_token', null);
-        $tokenData = FriendsAPIAuth::decodeToken($token);
-   
-        // Validate onwership matching existing Razors Edge profile first_name and last_name
+        // Decode token an extract membership data
+        $token   = array_get($data, 'verification_token', null);
+        $tokenData = FriendsAPIAuth::decodeToken($token, 'verify');
         $tokenAppKey = array_get($tokenData, 'aud', null);
         $context     = array_get($tokenData, 'context', []);
 
-        // 1. Validated application key match and application is active
+        // 1. Validated application key in token match and application that is active
         $appKey   = array_get($data, 'app_key', null);
         if ($appKey  === $tokenAppKey ) {
             $app = FriendsAPIAuth::getAPIApplication($appKey);
@@ -302,12 +300,16 @@ class UserResource extends BaseResource
            $verify = AuthManager::verifyMembership($pluginId, $membership, $data);
        }
        
-        
-        if ($verify){
+       // Clone membershipdata
+       $output = (array)$membership;
+       // Remove classname if present
+       unset($output['classname']);
+       
+       if ($verify){
             $payload = [
-                    'data' => $membership,  
+                    'data' => $output,  
                     'meta' => [
-                            'membership_token' => $token
+                            'membership_token' => FriendsAPIAuth::createToken($app, 'membership', $context)
                     ]
             ];
             
@@ -567,11 +569,35 @@ class UserResource extends BaseResource
             foreach($defaultFields as $field){
                 $data[$field] = array_get($data, $field, '');
             }
+  
+            // Validate membership token
+            $tokenData = null;
+            if( $token = array_get($data, 'membership_token', null)) {
+                // Decode membership token an verify that are produced
+                // by the same application key the user requesting to use
+                $rules = [ 'aud' => "/$appKey/" ];
+                $tokenData = FriendsAPIAuth::decodeToken($token, 'membership', $rules);
+            }
             
             
             // Register new user
             $user = AuthManager::register($data, $rules);
 
+            // Save membership
+            if( $tokenData ) {
+                $context     = array_get($tokenData, 'context', []);
+
+                // 2. Save  membership calling the given plugin in the token
+                if ($pluginId = array_get($context, 'pluginId', null)) {
+                    $membership = array_get($context, 'membership', []);
+                    $verify = AuthManager::saveMembership($pluginId, $user, $membership);
+                }
+
+            }
+            
+            
+            
+            // Authenticate user
             $credentials = [
                 'login'     => array_get($data, 'username', array_get($data, 'email')),
                 'password'  => array_get($data, 'password'),

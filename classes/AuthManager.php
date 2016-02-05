@@ -1,6 +1,7 @@
 <?php namespace DMA\Friends\Classes;
 
 use Auth;
+use Model;
 use Event;
 use Validator;
 use Exception;
@@ -85,12 +86,9 @@ class AuthManager
    
         $membership = null;
         $skipInvalidLogin = false;
+        
         // Authentication cases:
         // This cases are a re-factory of the previous AuthManager implementation
-        
-        \Log::info($user);
-        \Log::info($data['no_password']);
-        
         if ($user && $data['no_password'] ) {
             // 1. User exists and the login done via a card (OK)
             Auth::login($user);
@@ -125,7 +123,7 @@ class AuthManager
         
 
         if ($membership) {
-            Event::fire('auth.request.verify', $membership);
+            Event::fire('auth.verify.request', $membership);
             return $membership;
         }
         
@@ -359,6 +357,12 @@ class AuthManager
         
                 }
                 
+                // Inject membership model classname 
+                // if membership is a Eloquent Model
+                if( $membership instanceof Model ){
+                    $membership->classname = get_class($membership);
+                }
+                
                 // Found membership information 
                 return [
                         "membership" => $membership,
@@ -408,9 +412,36 @@ class AuthManager
     public static function verifyMembership($pluginId, $membershipData, $inputData)
     {        
         if ($instance = array_get(static::getMembershipDrivers(), $pluginId, null)) {
-            return $instance->verifyMembership($membershipData, $inputData);
+            $membership = static::loadMembership($membershipData);
+            return $instance->verifyMembership($membership, $inputData);
         }
         return false;
         
     }
+    
+    public static function saveMembership($pluginId, $user, $membershipData)
+    {
+        if ($instance = array_get(static::getMembershipDrivers(), $pluginId, null)) {
+            $membership = static::loadMembership($membershipData);
+            return $instance->saveMembership($user, $membership);
+        }
+        return false;
+    
+    }
+    
+    private static function loadMembership($membershipData)
+    {
+        $instance = null;
+        if($classname = $membershipData['classname']) {
+            $model = new $classname;
+            $keyName = $model->getKeyName();
+            if( $id = array_get($membershipData, $keyName, null)) {
+                $instance = $classname::where($keyName, $id)->first();
+            }
+            
+        }
+        
+        return ($instance)?$instance : $membershipData;
+    }
+    
 }
