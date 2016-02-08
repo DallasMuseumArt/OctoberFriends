@@ -55,7 +55,7 @@ class APIAuthManager
         
         if ($data instanceof Model ){
             $tokenData = [ 'user_id' => $data->getKey() ];
-            $token = $this->createToken($app, 'auth', $tokenData, $app->ttl);
+            $token = $this->createToken($app, 'auth', $tokenData, $app->token_ttl);
             return ['user' => $data, 'token' => $token];
         } else if (is_array($data)) {
             $token = $this->createToken($app, 'verify', $data);
@@ -111,7 +111,7 @@ class APIAuthManager
         $tokenData = Request::get('tokenData', []);
         $tokenUser = array_get($tokenData, 'user', null);
         $tokenApp = array_get($tokenData, 'app', null);
-        
+                
         if ($tokenApp->access_level != Application::ACCESS_ALL_DATA){
              $denied = true;
              

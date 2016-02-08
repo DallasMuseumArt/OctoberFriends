@@ -89,6 +89,99 @@ class UserResource extends BaseResource
      *      )        
      * )
      * 
+     * @SWG\Definition(
+     *      definition="meta.user.login",
+     *      
+     *      @SWG\Property(
+     *         property="token",
+     *         type="string"
+     *      )
+     * )
+     *
+     * @SWG\Definition(
+     *      definition="user.hints.membership",
+     *      required={"first_name", "last_name", "email"},
+     *      @SWG\Property(
+     *         property="first_name",
+     *         type="string"
+     *      ),
+     *      @SWG\Property(
+     *         property="last_name",
+     *         type="string"
+     *      ),
+     *      @SWG\Property(
+     *         property="email",
+     *         type="string"
+     *      )            
+     * )
+     *
+     * @SWG\Definition(
+     *      definition="user.verify.membership",
+     *      required={"message", "hints"},
+     *      @SWG\Property(
+     *         property="hints",
+     *         type="object",
+     *         ref="#/definitions/user.hints.membership"
+     *      )
+     * )
+     *
+     * @SWG\Definition(
+     *      definition="meta.user.verify.membership",
+     *      
+     *      @SWG\Property(
+     *         property="verification_token",
+     *         type="string"
+     *      )
+     * )
+     *
+     * @SWG\Definition(
+     *      definition="response.user.verify.membership",
+     *      required={"data"},
+     *      @SWG\Property(
+     *          property="data",
+     *          type="object",
+     *          ref="#/definitions/user.verify.membership"
+     *      ),
+     *      @SWG\Property(
+     *          property="meta",
+     *          type="object",
+     *          ref="#/definitions/meta.user.verify.membership"
+     *      )      
+     * )
+     *
+     *
+     *
+     * @SWG\Definition(
+     *      definition="response.user.login",
+     *      required={"data"},
+     *      @SWG\Property(
+     *          property="data",
+     *          type="object",
+     *          ref="#/definitions/user.extended"
+     *      ),
+     *      @SWG\Property(
+     *          property="meta",
+     *          type="object",
+     *          ref="#/definitions/meta.user.login"
+     *      )      
+     * )
+     * 
+     * @SWG\Definition(
+     *      definition="response.user.verify.membership",
+     *      required={"data"},
+     *      @SWG\Property(
+     *          property="data",
+     *          type="object",
+     *          ref="#/definitions/user.extended"
+     *      ),
+     *      @SWG\Property(
+     *          property="meta",
+     *          type="object",
+     *          ref="#/definitions/meta.user.login"
+     *      )      
+     * ) 
+     * 
+     * 
      * @SWG\Post(
      *     path="users/login",
      *     description="Authenticate user using username and password",
@@ -105,8 +198,13 @@ class UserResource extends BaseResource
      *     @SWG\Response(
      *         response=200,
      *         description="Successful response",
-     *         @SWG\Schema(ref="#/definitions/user.extended")
+     *         @SWG\Schema(ref="#/definitions/response.user.login")
      *     ),
+     *     @SWG\Response(
+     *         response=202,
+     *         description="User needs to verify membership",
+     *         @SWG\Schema(ref="#/definitions/response.user.verify.membership")
+     *     ),     
      *     @SWG\Response(
      *         response=500,
      *         description="Unexpected error",
@@ -166,8 +264,13 @@ class UserResource extends BaseResource
      *     @SWG\Response(
      *         response=200,
      *         description="Successful response",
-     *         @SWG\Schema(ref="#/definitions/user.extended")
+     *         @SWG\Schema(ref="#/definitions/response.user.login")
      *     ),
+     *     @SWG\Response(
+     *         response=202,
+     *         description="User needs to verify membership response",
+     *         @SWG\Schema(ref="#/definitions/response.user.verify.membership")
+     *     ),    
      *     @SWG\Response(
      *         response=500,
      *         description="Unexpected error",
@@ -261,6 +364,105 @@ class UserResource extends BaseResource
     }
     
     
+    /**
+     *
+     * @SWG\Definition(
+     *      definition="request.user.verify.membership",
+     *      required={"app_key", "verification_token"},
+     *      
+     *      @SWG\Property(
+     *         property="app_key",
+     *         type="string",
+     *         format="password"
+     *      ),          
+     *      @SWG\Property(
+     *         property="verification_token",
+     *         type="string"
+     *      ),
+     *      @SWG\Property(
+     *         property="last_name",
+     *         type="string"
+     *      ),
+     *      @SWG\Property(
+     *         property="first_name",
+     *         type="string"
+     *      ),
+     *      @SWG\Property(
+     *         property="email",
+     *         type="string"
+     *      )  
+     * )
+     *
+     *  @SWG\Definition(
+     *      definition="user.verified.membership",
+     *      
+     *      @SWG\Property(
+     *         property="membership",
+     *         type="object"
+     *      )
+     * )
+     * 
+     * @SWG\Definition(
+     *      definition="meta.verified.membership",
+     *      
+     *      @SWG\Property(
+     *         property="membership_token",
+     *         type="string"
+     *      )
+     * )
+     *
+     *
+     * @SWG\Definition(
+     *      definition="response.user.verified.membership",
+     *      required={"data"},
+     *      @SWG\Property(
+     *          property="data",
+     *          type="object",
+     *          ref="#/definitions/user.verified.membership"
+     *      ),
+     *      @SWG\Property(
+     *          property="meta",
+     *          type="object",
+     *          ref="#/definitions/meta.verified.membership"
+     *      )      
+     * )
+     *
+     * @SWG\Post(
+     *     path="users/verify-membership",
+     *     description="Verify user membership",
+     *     summary="User membership verification",
+     *     tags={ "user"},
+     *
+     *     @SWG\Parameter(
+     *         description="User ownership membership payload",
+     *         name="body",
+     *         in="body",
+     *         required=true,
+     *         schema=@SWG\Schema(ref="#/definitions/request.user.verify.membership")
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/response.user.verified.membership")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="User not found",
+     *         @SWG\Schema(ref="#/definitions/UserError404")
+     *     ),
+     *     @SWG\Response(
+     *         response=401,
+     *         description="User not found",
+     *         @SWG\Schema(ref="#/definitions/error401")
+     *     ) 
+     * )
+     */
+    
     public function verifyMembership()
     {
         //try {
@@ -307,7 +509,9 @@ class UserResource extends BaseResource
        
        if ($verify){
             $payload = [
-                    'data' => $output,  
+                    'data' => [
+                            "membership" => $output
+                     ],  
                     'meta' => [
                             'membership_token' => FriendsAPIAuth::createToken($app, 'membership', $context)
                     ]
@@ -498,6 +702,11 @@ class UserResource extends BaseResource
      *         property="education",
      *         type="string",
      *         enum={"K-12", "High School/GED", "Some College", "Vocational or Trade School", "Bachelors Degree", "Masters Degree", "PhD"}
+     *    ),
+     *    @SWG\Property(
+     *         description="Membership token returned by users/verify-membership", 
+     *         property="membership_token",
+     *         type="string"
      *    )
      * )
      * 

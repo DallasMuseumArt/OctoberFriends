@@ -7,6 +7,7 @@ use Response;
 use FriendsAPI;
 use FriendsAPIAuth;
 use DMA\Friends\Classes\API\Auth\Exceptions\TokenInvalidException;
+use DMA\Friends\Classes\API\Auth\Exceptions\TokenExpiredException;
 
 class FriendsApiAuthMiddleware
 {
@@ -35,6 +36,8 @@ class FriendsApiAuthMiddleware
         }catch(Exception $e){
             if($e instanceof TokenInvalidException){
                 $errorResponse = 'errorUnauthorized';
+            } else if($e instanceof TokenExpiredException){
+                $errorResponse = 'errorUnauthorized';                
             }else{
                 $errorResponse = 'errorInternalError';
             }

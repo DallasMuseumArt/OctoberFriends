@@ -91,6 +91,28 @@
  *             type="string"
  *         )
  *     )
+ *     
+ *     @SWG\Definition(
+ *         definition="error401",
+ *         required={"code", "http_code", "message"},
+ *         @SWG\Property(
+ *             property="code",
+ *             type="string",
+ *             default="GEN-UNAUTHORIZED"
+ *         ),
+ *         @SWG\Property(
+ *             property="http_code",
+ *             type="integer",
+ *             format="int32",
+ *             default=401
+ *         ),
+ *         @SWG\Property(
+ *             property="message",
+ *             type="string",
+ *             default="Token has expired."
+ *         )
+ *     )     
+ *     
  */
  
 // TODO : Swagger don't support yet dynamic query parameters
