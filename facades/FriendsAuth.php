@@ -9,7 +9,7 @@ class FriendsAuth extends Facade
      * Get the registered name of the component.
      *
      * Resolves to:
-     * - DMA\Friends\Classes\AuthManager
+     * - DMA\Friends\Classes\FriendsAuthManager
      *
      * @return string
      */
