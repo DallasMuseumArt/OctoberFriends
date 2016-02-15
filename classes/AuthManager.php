@@ -204,7 +204,7 @@ class AuthManager
             'password_confirmation' => 'required|min:6',
         ];
 
-        Event::fire('auth.preRegister', [$data, $rules]);
+        list($data) = Event::fire('auth.preRegister', [$data, $rules]);
 
         $validation = Validator::make($data, $rules);
         if ($validation->fails())
