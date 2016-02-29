@@ -13,7 +13,6 @@ use DMA\Friends\Classes\UserExtend;
 
 class UserProfile extends ComponentBase
 {
-
     use \System\Traits\ViewMaker;
 
     public function componentDetails()
@@ -48,8 +47,8 @@ class UserProfile extends ComponentBase
 
         $avatars = [];
 
-        $themePath = UserLogin::getThemeDir();
-        $avatarPath = $themePath . '/assets/images/avatars/*.jpg';
+        $themePath = UserProfile::getThemeDir();
+        $avatarPath = $themePath . '/assets/images/avatars/*';
 
         // loop through all the files in the plugin's avatars directory and parse the file names
         foreach ( glob($avatarPath ) as $file ) { 
@@ -227,6 +226,17 @@ class UserProfile extends ComponentBase
 
         return $this->makeFileContents($partialPath, $params);
     }   
+
+    /**
+     * Get the path to the theme's partials
+     *
+     * @return string $path
+     */      
+    protected static function getThemeDir()
+    {
+        $theme = Theme::getActiveTheme();
+        return $theme->getPath();
+    }
 
     /**
      * Get the path to the theme's partials
