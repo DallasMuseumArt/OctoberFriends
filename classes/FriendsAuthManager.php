@@ -290,7 +290,8 @@ class FriendsAuthManager
         $user = Auth::register($userData, $automaticActivation);
 
         // Save user metadata
-        $usermeta = Usermeta::create($data);
+        $usermeta = new Usermeta;
+        $usermeta->fill($data);        
 
         $user->metadata()->save($usermeta);
 
