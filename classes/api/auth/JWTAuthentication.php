@@ -1,6 +1,7 @@
 <?php namespace DMA\Friends\Classes\API\Auth;
 
 use Exception;
+use ArrayObject;
 use Namshi\JOSE\JWS;
 use DMA\Friends\Classes\API\Auth\Exceptions\TokenInvalidException;
 use DMA\Friends\Classes\API\Auth\Exceptions\TokenExpiredException;
@@ -68,12 +69,16 @@ class JWTAuthentication
      * Decode a JSON Web Token
      *
      * @param  string  $token
+     * @param  array   $claimRules 
+     *         Associative array where the key is the claim name and
+     *         the value is a regex expression. e.g
+     *         [ 'sub' => '/^friends\\|\\d+$/' ]
      *
      * @throws \DMA\Friends\Classes\API\Auth\Exceptions\JWTException
      *
      * @return array
      */
-    public function decode($token)
+    public function decode($token, array $claimRules=null)
     {
         try {
             // let's never allow unsecure tokens
@@ -87,12 +92,37 @@ class JWTAuthentication
         }
         
         if ($this->isExpired($jws)){
-            throw new TokenExpiredException('Token has expired. You need to re-authenticate again.');
+            throw new TokenExpiredException('Token has expired.');
         }
         
-        return (array) $jws->getPayload();
+        if (! $this->validatedClaims($jws, $claimRules)){
+           throw new TokenInvalidException('Token claims failed validation.');
+        }
+        
+        $payload = (array) $jws->getPayload();
+        
+        if ($context = $payload['context']){
+            $context = $this->toArrayObject($context);
+            $payload['context'] = $context;
+        }
+        return $payload;
     }
     
+    /**
+     * Helper method to allow arrays to be access
+     * like objects
+     * @param mixed $data
+     */
+    protected function toArrayObject($data){
+        if(is_array($data)) {
+            $data = new ArrayObject($data);
+            $data->setFlags(ArrayObject::ARRAY_AS_PROPS);
+            foreach($data as $key => $value) {
+                $data[$key] = $this->toArrayObject($value);
+            }
+        }
+        return $data;
+    }
     
     /**
      * Checks whether the token is expired based on the 'exp' value.
@@ -109,8 +139,36 @@ class JWTAuthentication
         return false;
     }
     
-
-    
-    
-    
+    /**
+     * Validdate claims that match a regular expression
+     *
+     * @param $jws
+     * @param  array   $claimRules 
+     *         Associative array where the key is the claim name and
+     *         the value is a regex expression. e.g
+     *         [ 'sub' => '/^friends\\|\\d+$/' ]
+     * @return bool
+     */
+    protected function validatedClaims($jws, array $claimRules = null)
+    {
+        $payload = $jws->getPayload();
+        $claimRules = is_array($claimRules)?$claimRules:[];
+        
+        foreach ($claimRules as $key => $re){
+            if(isset($payload[$key])) {
+                $value = $payload[$key];
+                if (!preg_match($re, $value)) {
+                    // Claim daesn't match regex
+                    return false;
+                }
+            }else{
+                // Claim in not defined for that
+                // reason validation should fail
+                return false;
+            }
+            
+        }
+        
+        return true;
+    }
 }

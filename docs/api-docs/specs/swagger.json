@@ -2004,7 +2004,13 @@
                     "200": {
                         "description": "Successful response",
                         "schema": {
-                            "$ref": "#/definitions/user.extended"
+                            "$ref": "#/definitions/response.user.login"
+                        }
+                    },
+                    "202": {
+                        "description": "User needs to verify membership",
+                        "schema": {
+                            "$ref": "#/definitions/response.user.verify.membership"
                         }
                     },
                     "500": {
@@ -2044,7 +2050,13 @@
                     "200": {
                         "description": "Successful response",
                         "schema": {
-                            "$ref": "#/definitions/user.extended"
+                            "$ref": "#/definitions/response.user.login"
+                        }
+                    },
+                    "202": {
+                        "description": "User needs to verify membership response",
+                        "schema": {
+                            "$ref": "#/definitions/response.user.verify.membership"
                         }
                     },
                     "500": {
@@ -2057,6 +2069,52 @@
                         "description": "User not found",
                         "schema": {
                             "$ref": "#/definitions/UserError404"
+                        }
+                    }
+                }
+            }
+        },
+        "users/verify-membership": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "User membership verification",
+                "description": "Verify user membership",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "User ownership membership payload",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.user.verify.membership"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "$ref": "#/definitions/response.user.verified.membership"
+                        }
+                    },
+                    "500": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error500"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "$ref": "#/definitions/UserError404"
+                        }
+                    },
+                    "401": {
+                        "description": "User not found",
+                        "schema": {
+                            "$ref": "#/definitions/error401"
                         }
                     }
                 }
@@ -3069,6 +3127,28 @@
                 }
             }
         },
+        "error401": {
+            "required": [
+                "code",
+                "http_code",
+                "message"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "default": "GEN-UNAUTHORIZED"
+                },
+                "http_code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "default": 401
+                },
+                "message": {
+                    "type": "string",
+                    "default": "Token has expired."
+                }
+            }
+        },
         "request.bookmark": {
             "required": [
                 "object_type",
@@ -3299,6 +3379,80 @@
                 }
             }
         },
+        "meta.user.login": {
+            "properties": {
+                "token": {
+                    "type": "string"
+                }
+            }
+        },
+        "user.hints.membership": {
+            "required": [
+                "first_name",
+                "last_name",
+                "email"
+            ],
+            "properties": {
+                "first_name": {
+                    "type": "string"
+                },
+                "last_name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "user.verify.membership": {
+            "required": [
+                "message",
+                "hints"
+            ],
+            "properties": {
+                "hints": {
+                    "type": "object",
+                    "$ref": "#/definitions/user.hints.membership"
+                }
+            }
+        },
+        "meta.user.verify.membership": {
+            "properties": {
+                "verification_token": {
+                    "type": "string"
+                }
+            }
+        },
+        "response.user.verify.membership": {
+            "required": [
+                "data"
+            ],
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/user.verify.membership"
+                },
+                "meta": {
+                    "type": "object",
+                    "$ref": "#/definitions/meta.user.verify.membership"
+                }
+            }
+        },
+        "response.user.login": {
+            "required": [
+                "data"
+            ],
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/user.extended"
+                },
+                "meta": {
+                    "type": "object",
+                    "$ref": "#/definitions/meta.user.login"
+                }
+            }
+        },
         "request.user.credentials.card": {
             "required": [
                 "barcode",
@@ -3311,6 +3465,59 @@
                 "app_key": {
                     "type": "string",
                     "format": "password"
+                }
+            }
+        },
+        "request.user.verify.membership": {
+            "required": [
+                "app_key",
+                "verification_token"
+            ],
+            "properties": {
+                "app_key": {
+                    "type": "string",
+                    "format": "password"
+                },
+                "verification_token": {
+                    "type": "string"
+                },
+                "last_name": {
+                    "type": "string"
+                },
+                "first_name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "user.verified.membership": {
+            "properties": {
+                "membership": {
+                    "type": "object"
+                }
+            }
+        },
+        "meta.verified.membership": {
+            "properties": {
+                "membership_token": {
+                    "type": "string"
+                }
+            }
+        },
+        "response.user.verified.membership": {
+            "required": [
+                "data"
+            ],
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "$ref": "#/definitions/user.verified.membership"
+                },
+                "meta": {
+                    "type": "object",
+                    "$ref": "#/definitions/meta.verified.membership"
                 }
             }
         },
@@ -3413,6 +3620,10 @@
                         "Masters Degree",
                         "PhD"
                     ]
+                },
+                "membership_token": {
+                    "description": "Membership token returned by users/verify-membership",
+                    "type": "string"
                 }
             },
             "type": "object"

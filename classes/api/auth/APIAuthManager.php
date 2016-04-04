@@ -51,19 +51,26 @@ class APIAuthManager
         $appKey = array_get($credentials, 'app_key');
         $app = $this->getAPIApplication($appKey);
         
-        $user = AuthManager::auth($credentials);
-        if ($user){
-            $token = $this->createToken($user, $app);
-        }   
+        $data = AuthManager::auth($credentials);
         
-        return ['user' => $user, 'token' => $token];
+        if ($data instanceof Model ){
+            $tokenData = [ 'user_id' => $data->getKey() ];
+            $token = $this->createToken($app, 'auth', $tokenData, $app->token_ttl);
+            return ['user' => $data, 'token' => $token];
+        } else if (is_array($data)) {
+            $token = $this->createToken($app, 'verify', $data);
+            return ['membership' => $data, 'token' => $token];
+        }
+        
+        
+        return null;
 
     }
     
     
     public function authenticate($token)
     {
-        $payload = $this->auth->decode($token);        
+        $payload = $this->decodeToken($token, 'auth');        
         $appKey  = array_get($payload, 'aud', Null);
         $context = array_get($payload, 'context', []);
         $userId  = array_get($context, 'user_id', Null);
@@ -104,7 +111,7 @@ class APIAuthManager
         $tokenData = Request::get('tokenData', []);
         $tokenUser = array_get($tokenData, 'user', null);
         $tokenApp = array_get($tokenData, 'app', null);
-        
+                
         if ($tokenApp->access_level != Application::ACCESS_ALL_DATA){
              $denied = true;
              
@@ -126,26 +133,49 @@ class APIAuthManager
         
     }
     
-    public function createToken($user, $app)
+    /**
+     * 
+     * @param unknown $app
+     * @param unknown $sub
+     * @param number $expMinutes
+     * @param array $context
+     * @return unknown
+     */
+    public function createToken($app, $tokenType, $tokenData=[], $expMinutes=null)
     {
-        $date    = new Carbon();
-        $payload = [
-            'sub' => 'friends|' . $user->getKey(), 
-            'aud' => $app->app_key,
-            'iat' => $date->format('U'), 
-            'context' => [
-                'user_id' => $user->getKey()     
-            ]
-        ];
-        
-        if ( $app->ttl ){
-            $payload['exp'] = $date->copy()->addMinutes($app->token_ttl)->format('U');
+        if (is_null($tokenType)) {
+            throw new Exception('Token type is required.')  ; 
         }
         
+        $date    = new Carbon();
+        $payload = [
+                'sub' => "friends|$tokenType|" . rand(),
+                'aud' => $app->app_key,
+                'iat' => $date->format('U'),
+                'context' => $tokenData
+        ];
+    
+        $exp = ($expMinutes)?$expMinutes:15; 
         
+        if ( $exp ){
+            $payload['exp'] = $date->copy()->addMinutes($exp)->format('U');
+        }
+    
+    
         $token = $this->auth->encode($payload);
         return $token;
     }
     
+
+    public function decodeToken($token, $tokenType, array $claimRules = [])
+    {   
+        $rules = array_merge([
+                'sub' => "/^friends\\|$tokenType\\|\\d+$/"
+        ], $claimRules);
+        
+        return $this->auth->decode($token, $rules);        
+    }
+        
+
         
 }
