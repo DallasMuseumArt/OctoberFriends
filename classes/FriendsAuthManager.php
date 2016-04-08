@@ -252,8 +252,17 @@ class FriendsAuthManager
             'password_confirmation' => 'required|min:6',
         ];
 
-        list($data) = Event::fire('auth.preRegister', [$data, $rules]);
-
+        $authPreRegisterResponse = Event::fire('auth.preRegister', [$data, $rules]);
+        
+        // This allow variables passed in auth.preRegister to be altered 
+        // but if auth.preRegister don't return a response or the auth.preRegister
+        // event is not implemented it cause an index Undefined offset:0 error
+        if (count($authPreRegisterResponse) > 0){
+           list($data) = $authPreRegisterResponse;
+        }
+        
+        
+        
         $validation = Validator::make($data, $rules);
         if ($validation->fails())
             throw new ValidationException($validation);
