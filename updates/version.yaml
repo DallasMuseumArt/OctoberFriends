@@ -116,3 +116,7 @@
 2.6.1:
     - Add API application table
     - create_applicaitons_table.php
+2.7.0:
+    - Release v2.7
+    - Add new User memership plugin structure and a API endpoints to manage user membership.
+    - Minor bug fixing

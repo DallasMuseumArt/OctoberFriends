@@ -393,7 +393,13 @@ class BaseResource extends Controller {
     
             $message = $e->getMessage();
             $responseMethod  = array_get([
-                403 => 'errorForbidden'        
+                    400 => 'errorWrongArgs',
+                    401 => 'errorUnauthorized',
+                    403 => 'errorForbidden',
+                    404 => 'errorNotFound',
+                    405 => 'errorMethodNotAllowed',
+                    410 =>  'errorGone'
+                 
             ], $e->getCode(), 'errorInternalError');
             
             return Response::api()->{$responseMethod}($message);

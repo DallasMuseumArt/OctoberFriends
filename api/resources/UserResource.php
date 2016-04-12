@@ -19,6 +19,7 @@ use RainLab\User\Models\User;
 use RainLab\User\Models\Settings as UserSettings;
 
 use October\Rain\Database\ModelException;
+use October\Rain\Auth\AuthException;
 use Cms\Classes\Theme;
 
 class UserResource extends BaseResource
@@ -33,7 +34,7 @@ class UserResource extends BaseResource
      * It means API Authentication will not be enforce.
      * @var array
      */
-    public $publicActions = ['login', 'loginByCard', 'store', 'profileOptions' ];
+    public $publicActions = ['login', 'loginByCard', 'verifyMembership', 'store', 'profileOptions'];
         
     /**
      * Hacky variable to include user profile only when 
@@ -45,15 +46,16 @@ class UserResource extends BaseResource
     public function __construct()
     {
         // Add additional routes to Activity resource
-        $this->addAdditionalRoute('login',          'login',                    ['POST']);
-        $this->addAdditionalRoute('loginByCard',    'login/card',               ['POST']);
-        $this->addAdditionalRoute('uploadAvatar',   '{user}/upload-avatar',     ['POST', 'PUT']);
-        $this->addAdditionalRoute('profileOptions', 'profile-options/{field}',  ['GET']);
-        $this->addAdditionalRoute('profileOptions', 'profile-options',          ['GET']);
-        $this->addAdditionalRoute('userActivities', '{user}/activities',        ['GET']);
-        $this->addAdditionalRoute('userRewards',    '{user}/rewards',           ['GET']);
-        $this->addAdditionalRoute('userBadges',     '{user}/badges',            ['GET']);
-        $this->addAdditionalRoute('userBookmarks',  '{user}/bookmarks/{type}',  ['GET']);
+        $this->addAdditionalRoute('login',           'login',                    ['POST']);
+        $this->addAdditionalRoute('loginByCard',     'login/card',               ['POST']);
+        $this->addAdditionalRoute('verifyMembership','verify-membership',        ['POST']);
+        $this->addAdditionalRoute('uploadAvatar',    '{user}/upload-avatar',     ['POST', 'PUT']);
+        $this->addAdditionalRoute('profileOptions',  'profile-options/{field}',  ['GET']);
+        $this->addAdditionalRoute('profileOptions',  'profile-options',          ['GET']);
+        $this->addAdditionalRoute('userActivities',  '{user}/activities',        ['GET']);
+        $this->addAdditionalRoute('userRewards',     '{user}/rewards',           ['GET']);
+        $this->addAdditionalRoute('userBadges',      '{user}/badges',            ['GET']);
+        $this->addAdditionalRoute('userBookmarks',   '{user}/bookmarks/{type}',  ['GET']);
         
     }
     
@@ -87,6 +89,99 @@ class UserResource extends BaseResource
      *      )        
      * )
      * 
+     * @SWG\Definition(
+     *      definition="meta.user.login",
+     *      
+     *      @SWG\Property(
+     *         property="token",
+     *         type="string"
+     *      )
+     * )
+     *
+     * @SWG\Definition(
+     *      definition="user.hints.membership",
+     *      required={"first_name", "last_name", "email"},
+     *      @SWG\Property(
+     *         property="first_name",
+     *         type="string"
+     *      ),
+     *      @SWG\Property(
+     *         property="last_name",
+     *         type="string"
+     *      ),
+     *      @SWG\Property(
+     *         property="email",
+     *         type="string"
+     *      )            
+     * )
+     *
+     * @SWG\Definition(
+     *      definition="user.verify.membership",
+     *      required={"message", "hints"},
+     *      @SWG\Property(
+     *         property="hints",
+     *         type="object",
+     *         ref="#/definitions/user.hints.membership"
+     *      )
+     * )
+     *
+     * @SWG\Definition(
+     *      definition="meta.user.verify.membership",
+     *      
+     *      @SWG\Property(
+     *         property="verification_token",
+     *         type="string"
+     *      )
+     * )
+     *
+     * @SWG\Definition(
+     *      definition="response.user.verify.membership",
+     *      required={"data"},
+     *      @SWG\Property(
+     *          property="data",
+     *          type="object",
+     *          ref="#/definitions/user.verify.membership"
+     *      ),
+     *      @SWG\Property(
+     *          property="meta",
+     *          type="object",
+     *          ref="#/definitions/meta.user.verify.membership"
+     *      )      
+     * )
+     *
+     *
+     *
+     * @SWG\Definition(
+     *      definition="response.user.login",
+     *      required={"data"},
+     *      @SWG\Property(
+     *          property="data",
+     *          type="object",
+     *          ref="#/definitions/user.extended"
+     *      ),
+     *      @SWG\Property(
+     *          property="meta",
+     *          type="object",
+     *          ref="#/definitions/meta.user.login"
+     *      )      
+     * )
+     * 
+     * @SWG\Definition(
+     *      definition="response.user.verify.membership",
+     *      required={"data"},
+     *      @SWG\Property(
+     *          property="data",
+     *          type="object",
+     *          ref="#/definitions/user.extended"
+     *      ),
+     *      @SWG\Property(
+     *          property="meta",
+     *          type="object",
+     *          ref="#/definitions/meta.user.login"
+     *      )      
+     * ) 
+     * 
+     * 
      * @SWG\Post(
      *     path="users/login",
      *     description="Authenticate user using username and password",
@@ -103,8 +198,13 @@ class UserResource extends BaseResource
      *     @SWG\Response(
      *         response=200,
      *         description="Successful response",
-     *         @SWG\Schema(ref="#/definitions/user.extended")
+     *         @SWG\Schema(ref="#/definitions/response.user.login")
      *     ),
+     *     @SWG\Response(
+     *         response=202,
+     *         description="User needs to verify membership",
+     *         @SWG\Schema(ref="#/definitions/response.user.verify.membership")
+     *     ),     
      *     @SWG\Response(
      *         response=500,
      *         description="Unexpected error",
@@ -120,43 +220,17 @@ class UserResource extends BaseResource
     
     public function login()
     {
-        try {
-            $data    = Request::all();
-            $appKey  = array_get($data, 'app_key', NULL);
-           
-            // Update wordpress passwords if necessary
-            WordpressAuth::verifyFromEmail(array_get($data, 'email', ''), array_get($data, 'password'));
-    
-            $credentials = [
-                'login'     => array_get($data, 'username', array_get($data, 'email')),
-                'password'  => array_get($data, 'password'),
-                'app_key'   => $appKey    
-            ];
-    
-            $authData = FriendsAPIAuth::attemp($credentials);
-            $user  =  array_get($authData, 'user',   Null);
-            $token =  array_get($authData, 'token',  Null);
-            
-            if ($user) {
-                $this->include_profile = true; 
-                return Response::api()->withItem($user, $this->getTransformer(), null, ['token' => $token]);
-                
-            } else {
-                return Response::api()->errorNotFound('User not found');
-            }
-    
-        } catch(Exception $e) {
-            if ($e instanceof ValidationException) {
-                return $this->errorDataValidation('User credentials fail to validated', $e->getErrors());
-            } else {
-                // Lets the API resource deal with the exception
-                throw $e;
-            }
+        $data     = Request::all();
+        $credentials = [
+            'login'     => array_get($data, 'login', array_get($data, 'username', array_get($data, 'email'))),
+            'password'  => array_get($data, 'password'),
+            'app_key'   => array_get($data, 'app_key', null)
+        ];
         
-        }
-        
+        return $this->authenticate($credentials);
     }
     
+     
     
     /**
      *
@@ -190,8 +264,13 @@ class UserResource extends BaseResource
      *     @SWG\Response(
      *         response=200,
      *         description="Successful response",
-     *         @SWG\Schema(ref="#/definitions/user.extended")
+     *         @SWG\Schema(ref="#/definitions/response.user.login")
      *     ),
+     *     @SWG\Response(
+     *         response=202,
+     *         description="User needs to verify membership response",
+     *         @SWG\Schema(ref="#/definitions/response.user.verify.membership")
+     *     ),    
      *     @SWG\Response(
      *         response=500,
      *         description="Unexpected error",
@@ -204,49 +283,248 @@ class UserResource extends BaseResource
      *     )
      * )
      */
+
     
     public function loginByCard()
     {
+        $data     = Request::all();
+        $rules = [
+                'app_key'    => 'required',
+                'barcode'    => 'required'
+        ];
+
+        $validation = Validator::make($data, $rules);
+        if ($validation->fails()){
+            return $this->errorDataValidation('Invalidated credential details', $validation->errors());
+        }
+                
+        $credentials = [
+                'login'         => array_get($data, 'barcode', null),
+                'app_key'       => array_get($data, 'app_key', null),
+                'no_password'   => true,
+        ];
+        
+        return $this->authenticate($credentials);
+
+           
+    }
+
+    /**
+     * Helper method to handler login with password and login via a card
+     * @private
+     * @param array $credentials
+     * @throws \October\Rain\Auth\AuthException
+     */
+    protected function authenticate($credentials)
+    {
         try {
-            $data     = Request::all();
-            $rules = [
-                    'app_key'    => 'required',
-                    'barcode'    => 'required'
-            ];
-            
-            $validation = Validator::make($data, $rules);
-            if ($validation->fails()){
-                return $this->errorDataValidation('Invalidated credential details', $validation->errors());
-            }
-            
-            $appKey   = array_get($data, 'app_key', null);
-            $barcode  = array_get($data, 'barcode', null);
-            
-            // Attempt to look user using barcode
-            $user = User::where('barcode_id', $barcode)->first();
-            
-            
-            if ($user) {
-                $app = FriendsAPIAuth::getAPIApplication($appKey);
-                $token = FriendsAPIAuth::createToken($user, $app);
-  
+             
+            // Update wordpress passwords if necessary
+            WordpressAuth::verifyFromEmail(array_get($credentials, 'email', ''), array_get($credentials, 'password'));
+           
+            $authData = FriendsAPIAuth::attemp($credentials);            
+            $token =  array_get($authData, 'token',  null);
+    
+            if ($user = array_get($authData, 'user',   null)) {
                 $this->include_profile = true;
                 return Response::api()->withItem($user, $this->getTransformer(), null, ['token' => $token]);
-        
+    
+            } else if ($membershipData = array_get($authData, 'membership',   null)) {
+                // Return a request to confirm membership
+                $payload = [
+                        'data' => [
+                                'message' => 'This user has a membership outside of the Friends platform. Please verify this user in other to create a Friends profile.',
+                                'hints' => array_get($membershipData, 'hints', [])
+                        ],
+                        'meta' => [
+                                'verification_token' => $token
+                        ]
+                ];
+    
+                return Response::api()->setStatusCode(202)->withArray($payload);
+    
             } else {
-                return Response::api()->errorNotFound('Barcode invalid');
+                return Response::api()->errorNotFound('User not found');
             }
-        
+    
         } catch(Exception $e) {
             if ($e instanceof ValidationException) {
                 return $this->errorDataValidation('User credentials fail to validated', $e->getErrors());
+    
+            } if($e instanceof AuthException ) {
+                return Response::api()->errorUnauthorized($e->getMessage());
             } else {
+    
                 // Lets the API resource deal with the exception
                 throw $e;
             }
-        
+    
         }
+    
     }
+    
+    
+    /**
+     *
+     * @SWG\Definition(
+     *      definition="request.user.verify.membership",
+     *      required={"app_key", "verification_token"},
+     *      
+     *      @SWG\Property(
+     *         property="app_key",
+     *         type="string",
+     *         format="password"
+     *      ),          
+     *      @SWG\Property(
+     *         property="verification_token",
+     *         type="string"
+     *      ),
+     *      @SWG\Property(
+     *         property="last_name",
+     *         type="string"
+     *      ),
+     *      @SWG\Property(
+     *         property="first_name",
+     *         type="string"
+     *      ),
+     *      @SWG\Property(
+     *         property="email",
+     *         type="string"
+     *      )  
+     * )
+     *
+     *  @SWG\Definition(
+     *      definition="user.verified.membership",
+     *      
+     *      @SWG\Property(
+     *         property="membership",
+     *         type="object"
+     *      )
+     * )
+     * 
+     * @SWG\Definition(
+     *      definition="meta.verified.membership",
+     *      
+     *      @SWG\Property(
+     *         property="membership_token",
+     *         type="string"
+     *      )
+     * )
+     *
+     *
+     * @SWG\Definition(
+     *      definition="response.user.verified.membership",
+     *      required={"data"},
+     *      @SWG\Property(
+     *          property="data",
+     *          type="object",
+     *          ref="#/definitions/user.verified.membership"
+     *      ),
+     *      @SWG\Property(
+     *          property="meta",
+     *          type="object",
+     *          ref="#/definitions/meta.verified.membership"
+     *      )      
+     * )
+     *
+     * @SWG\Post(
+     *     path="users/verify-membership",
+     *     description="Verify user membership",
+     *     summary="User membership verification",
+     *     tags={ "user"},
+     *
+     *     @SWG\Parameter(
+     *         description="User ownership membership payload",
+     *         name="body",
+     *         in="body",
+     *         required=true,
+     *         schema=@SWG\Schema(ref="#/definitions/request.user.verify.membership")
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @SWG\Schema(ref="#/definitions/response.user.verified.membership")
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Unexpected error",
+     *         @SWG\Schema(ref="#/definitions/error500")
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="User not found",
+     *         @SWG\Schema(ref="#/definitions/UserError404")
+     *     ),
+     *     @SWG\Response(
+     *         response=401,
+     *         description="User not found",
+     *         @SWG\Schema(ref="#/definitions/error401")
+     *     ) 
+     * )
+     */
+    
+    public function verifyMembership()
+    {
+        //try {
+        $verify   = false;
+        $data     = Request::all();
+        $messages = [
+                'email.required_without_all' => 'The :attribute field is required when first_name or last_name is not present.',
+        ];
+        $rules = [
+                'app_key'            => 'required',
+                'verification_token' => 'required',
+                'first_name'         => 'required_with:last_name|min:2',
+                'last_name'          => 'required_with:first_name|min:2',
+                'email'              => 'required_without_all:first_name,last_name|email|between:2,64',
+        ];
+    
+        $validation = Validator::make($data, $rules, $messages);
+        if ($validation->fails()){
+            return $this->errorDataValidation('Invalid payload', $validation->errors());
+        }
+
+        // Decode token an extract membership data
+        $token   = array_get($data, 'verification_token', null);
+        $tokenData = FriendsAPIAuth::decodeToken($token, 'verify');
+        $tokenAppKey = array_get($tokenData, 'aud', null);
+        $context     = array_get($tokenData, 'context', []);
+
+        // 1. Validated application key in token match and application that is active
+        $appKey   = array_get($data, 'app_key', null);
+        if ($appKey  === $tokenAppKey ) {
+            $app = FriendsAPIAuth::getAPIApplication($appKey);
+        }
+
+       // 2. Verify membership calling the given plugin in the token
+       if ($pluginId = array_get($context, 'pluginId', null)) {
+           $membership = array_get($context, 'membership', []);
+           $verify = AuthManager::verifyMembership($pluginId, $membership, $data);
+       }
+       
+       // Clone membershipdata
+       $output = (array)$membership;
+       // Remove classname if present
+       unset($output['classname']);
+       
+       if ($verify){
+            $payload = [
+                    'data' => [
+                            "membership" => $output
+                     ],  
+                    'meta' => [
+                            'membership_token' => FriendsAPIAuth::createToken($app, 'membership', $context)
+                    ]
+            ];
+            
+            $response = Response::api()->withArray($payload);
+        } else {
+            $response = Response::api()->errorUnauthorized('Membership verification failed');
+        }
+    
+        return $response;
+    }
+    
 
     
     /**
@@ -424,6 +702,11 @@ class UserResource extends BaseResource
      *         property="education",
      *         type="string",
      *         enum={"K-12", "High School/GED", "Some College", "Vocational or Trade School", "Bachelors Degree", "Masters Degree", "PhD"}
+     *    ),
+     *    @SWG\Property(
+     *         description="Membership token returned by users/verify-membership", 
+     *         property="membership_token",
+     *         type="string"
      *    )
      * )
      * 
@@ -495,11 +778,35 @@ class UserResource extends BaseResource
             foreach($defaultFields as $field){
                 $data[$field] = array_get($data, $field, '');
             }
+  
+            // Validate membership token
+            $tokenData = null;
+            if( $token = array_get($data, 'membership_token', null)) {
+                // Decode membership token an verify that are produced
+                // by the same application key the user requesting to use
+                $rules = [ 'aud' => "/$appKey/" ];
+                $tokenData = FriendsAPIAuth::decodeToken($token, 'membership', $rules);
+            }
             
             
             // Register new user
             $user = AuthManager::register($data, $rules);
 
+            // Save membership
+            if( $tokenData ) {
+                $context     = array_get($tokenData, 'context', []);
+
+                // 2. Save  membership calling the given plugin in the token
+                if ($pluginId = array_get($context, 'pluginId', null)) {
+                    $membership = array_get($context, 'membership', []);
+                    $verify = AuthManager::saveMembership($pluginId, $user, $membership);
+                }
+
+            }
+            
+            
+            
+            // Authenticate user
             $credentials = [
                 'login'     => array_get($data, 'username', array_get($data, 'email')),
                 'password'  => array_get($data, 'password'),

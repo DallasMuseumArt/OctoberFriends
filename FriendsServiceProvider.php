@@ -10,7 +10,7 @@ use DMA\Friends\Classes\Notifications\ChannelManager;
 use DMA\Friends\Classes\API\APIManager;
 use DMA\Friends\Classes\API\Auth\APIAuthManager;
 use DMA\Friends\Classes\Mailchimp\MailchimpManager;
-
+use DMA\Friends\Classes\FriendsAuthManager;
 
 /**
  * Register service providers for Friends
@@ -27,6 +27,7 @@ class FriendsServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->registerFriendsAuthentication();
         $this->registerFriendsLog();
         $this->registerNotifications();
         $this->registerAPI();
@@ -115,6 +116,16 @@ class FriendsServiceProvider extends ServiceProvider
         
 
     }
+
+    public function registerFriendsAuthentication()
+    {
+        $this->app['FriendsAuth'] = $this->app->share(function($app) {
+           $auth = new FriendsAuthManager;
+           return $auth;
+        });
+        
+        $this->createAlias('FriendsAuth', 'DMA\Friends\Facades\FriendsAuth');
+    }
     
     /**
      * Helper method to quickly setup class aliases for a service
@@ -149,6 +160,7 @@ class FriendsServiceProvider extends ServiceProvider
         return ['FriendsLog', 
                 'postman', 
                 'FriendsAPI', 
+                'FriendsAuth',
                 'FriendsAPIAuth', 
                 'mailchimpintegration'];
     
