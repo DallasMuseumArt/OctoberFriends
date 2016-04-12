@@ -136,7 +136,9 @@ class FriendsLog
      */
     public static function points($params)
     {
-        if (empty($params['user']) || empty($params['points_earned']))
+        if (empty($params['point_earned'])) $params['point_earned'] = 0;
+
+        if (empty($params['user']) || $params['point_earned'] === false)
             throw new InvalidArgumentException('Invalid Parameters');
 
         $params['message'] = Lang::get('dma.friends::lang.log.points', [
