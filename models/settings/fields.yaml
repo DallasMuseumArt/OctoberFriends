@@ -15,7 +15,7 @@ tabs:
             type: dropdown
             tab: General
         default_state:
-            label: Default State 
+            label: Default State
             span: left
             type: dropdown
             tab: General
@@ -23,20 +23,20 @@ tabs:
             label: Cache report data for X minutes
             span: left
             tab: General
-            
+
         # Artwork API
         artwork_api_baseurl:
-            label: Base URL to access collection REST API 
+            label: Base URL to access collection REST API
             commentAbove: Eg. http://api.museum.com/v1
             span: left
             tab: Artwork API
         artwork_api_endpoint:
             label: The REST endpoint for looking up artwork information
-            commentAbove: Eg. collection/object/?fields=id,number,title&format=json&number=%s          
+            commentAbove: Eg. collection/object/?fields=id,number,title&format=json&number=%s
             span: left
-            tab: Artwork API            
+            tab: Artwork API
         artwork_api_headers:
-            prompt: Add REST endpoint headers here  
+            prompt: Add REST endpoint headers here
             label: Add headers to send on each artwork REST endpoint request
             tab: Artwork API
             type: repeater
@@ -46,9 +46,9 @@ tabs:
                         label: Header
                         span: left
                     artwork_api_header_value:
-                        label: Value     
+                        label: Value
                         span: right
-            
+
 
         # Kiosk
         require_location:
@@ -56,7 +56,7 @@ tabs:
             comment: When set to true any one accessing friends from a site that is not a registered location, activity and reward redemption will be disabled
             span: left
             tab: Kiosk
-            type: dropdown 
+            type: dropdown
             options:
                 true: Enabled
                 false: Disabled
@@ -69,26 +69,26 @@ tabs:
         maximum_users_per_group:
             span: auto
             label: Maximum number of users per group
-            description: Limit of users that can be join or invite to a group.
+            commentAbove: Limit of users that can be join or invite to a group.
             tab: Groups
         maximum_points_per_group:
             span: auto
             label: Maximum points per group
-            description: Limit of point and user can earn by the group.
+            commentAbove: Limit of point and user can earn by the group.
             tab: Groups
         maximum_user_group_memberships:
             span: auto
             label: Maximum number of groups a user can join
-            description: Limit of groups a user can join.
+            commentAbove: Limit of groups a user can join.
             default: 1
-            tab: Groups  
+            tab: Groups
         maximum_groups_own_per_user:
             span: auto
             label: Maximum number of groups a user can own
-            description: Limit of groups a user can own.
+            commentAbove: Limit of groups a user can own.
             default: 1
-            tab: Groups                                                 
-        reset_groups_time:            
+            tab: Groups
+        reset_groups_time:
             span: left
             label: Reset groups at
             tab: Groups
@@ -98,8 +98,14 @@ tabs:
             type: checkboxlist
             span: auto
             label: Day to reset groups
-            tab: Groups           
-            
+            tab: Groups
+        use_group_name_as_code:
+            type: checkbox
+            span: auto
+            label: Allow users to join groups using group name.
+            commentAbove: Group must be active
+            tab: Groups
+
         # Notifications
         active_notification_channels:
             type: checkboxlist
@@ -123,12 +129,12 @@ tabs:
             span: left
             tab: Printer
         coupon_height:
-            label: Coupon Height 
+            label: Coupon Height
             type: number
             span: right
             tab: Printer
         coupon_orientation:
-            label: Coupon Orientation 
+            label: Coupon Orientation
             type: dropdown
             options:
                 P: Portrait
@@ -165,8 +171,8 @@ tabs:
             comment: When enable the plugin will keep synchronized Friends members with a MailChimp list.
             span: left
             tab: MailChimp Integration
-            type: checkbox    
-            default: false    
+            type: checkbox
+            default: false
         mailchimp_api_key:
             label: API key to access MailChimp
             comment: Information on how to generate an API key can be found   here http://kb.mailchimp.com/accounts/management/about-api-keys
@@ -189,10 +195,10 @@ tabs:
             type: checkboxlist
             dependsOn: mailchimp_group_id
             span: left
-            tab: MailChimp Integration            
+            tab: MailChimp Integration
 
 
-        # REST API EXTRA KEY VALUES          
+        # REST API EXTRA KEY VALUES
         rest_api_extra_settings:
             prompt: Add a key/value pair group
             label: Add extra key/pair values.

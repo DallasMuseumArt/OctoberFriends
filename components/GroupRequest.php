@@ -8,6 +8,7 @@ use Cms\Classes\ComponentBase;
 use DMA\Friends\Models\Settings;
 use DMA\Friends\Models\UserGroup;
 use RainLab\User\Models\Settings as UserSettings;
+use RainLab\User\Models\User;
 use Illuminate\Support\Collection;
 
 class GroupRequest extends ComponentBase
@@ -45,11 +46,8 @@ class GroupRequest extends ComponentBase
     {
         $user = $this->getuser();
         if(!is_null($user)){
-            
-            // 27/010/2014  : I know this is kind of ugly $user::find instead of User::find but 
-            // at this stage I don't have idea what user model we are going to use RainLab\User or DMA\Friends
-            // TODO : this logic should go to in to User model
-            $groups = $user->groups()
+            $groups = User::find($user->getKey())
+                           ->groups()
                            ->where('is_active', true)
                            ->where(function($query) use ($user){
                                 $status = [ UserGroup::MEMBERSHIP_PENDING, 

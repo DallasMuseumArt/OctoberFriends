@@ -257,8 +257,8 @@ class Plugin extends PluginBase
             ];       
             $model->belongsToMany['groups']     = ['DMA\Friends\Models\UserGroup',  
                 'table' => 'dma_friends_users_groups',  
-                'key' => 'user_id',  
-                'foreignKey' => 'group_id', 
+                'key'           => 'user_id',
+                'otherKey'      => 'group_id',
                 'pivot' => ['membership_status']
             ];        
         });

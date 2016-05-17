@@ -1,4 +1,4 @@
-{{ form_ajax('onSubmit', { class : 'form-horizontal', update: { '@flashMessages': '#flashMessages', 'GroupManager::groups-list': '#result' } } ) }} 
+{{ form_ajax('onGroupAction', { class : 'form-horizontal', update: { '@flashMessages': '#flashMessages', 'GroupManager::groups-list': '#owner_group_result' } } ) }} 
 
       <div class="input-group">
       	  <input type="hidden" name="step" value="{{ step }}" />

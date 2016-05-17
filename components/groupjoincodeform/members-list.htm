@@ -1,0 +1,30 @@
+		<a 	href="#" class="btn btn-default" 
+		data-request="onGoToView"
+	 	data-request-data="view: '@groups-list'">
+	 	Back</a>
+	 	
+<table class="table table-hover table-striped table-result">
+{% if group_members.count > 0 %}
+	<thead>
+		<tr>
+			<th>Username</th>
+			<th>Name</th>
+		</tr>
+	</thead>
+	<tbody>
+
+	    <tr>
+	    	<td class="owner">{{ group.owner[loginAttr] }}</td>
+			<td>{{ group.owner.metadata.first_name }} {{ group.owner.metadata.last_name }} </td>
+	    </tr>
+	
+	{% for member in group_members %}
+	    <tr>
+	    	<td>{{ member[loginAttr] }}</td>
+			<td>{{ member.metadata.first_name }} {{ member.metadata.last_name }} </td>
+	    </tr>
+	{% endfor %}
+	
+	</tbody>
+{% endif %}
+</table>

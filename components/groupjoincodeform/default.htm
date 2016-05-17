@@ -1,23 +1,16 @@
-<form
-	data-request="{{ __SELF__ }}::onSubmit"
-	data-request-update="'{{ __SELF__ }}::list': '#result'"	    
-    data-request-success="$('#input-user').val('')"
-    id="add-users">
-	<div class="panel panel-default">
-		<div class="panel-heading">
-		    <h3 class="panel-title">{{ user.name }} join to your group by code.</h3>
-		</div>
-		<div class="panel-body" id="user-search">
-            <div class="input-group">
-		                <input type="text" id="input-code" class="form-control" value="" name="code"     
-		                placeholder="Type group code"> 
-		                <span class="input-group-btn">
-		                    <button type="submit" class="btn btn-primary">join</button>
-		                </span>
-		            </div>
-		    </div>
-		 <ul class="list-group hidden" id="autocomplete">
-		 </ul>	            
-		</div>
-	</div>
-</form>
+{{ form_ajax('onJoinGroup', { class : 'form-horizontal', update: { '@flashMessages': '#flashMessages', 'GroupJoinCodeForm::groups-list': '#join_group_result' } } ) }} 
+
+    <div class="input-group">
+          <input type="text" id="input-code" class="form-control" value="" name="code"     
+          placeholder="Type group {{ using_code }}"> 
+          <span class="input-group-btn">
+              <button type="submit" class="btn btn-primary">join</button>
+          </span>
+    </div>
+
+{{ form_close() }}
+
+<div id="view"> 
+	{% partial '@groups-list' %}
+</div>
+

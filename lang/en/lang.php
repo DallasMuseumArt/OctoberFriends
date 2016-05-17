@@ -65,10 +65,13 @@ return [
         'limitGroupUsers'           => 'Maximum users limit reached', 
         'groupNotFound'             => 'Group not found',   
         'userNotFound'              => 'User not found',
+        'alreadyGroupMember'        => 'You are already member of this group',
+        'groupNameAlreadyTaken'     => 'Group name is already taken'
     ],
     'groups' => [
         'groupCanceled'             => 'Group was cancelled succesfully',
         'ownerCanBeMember'          => 'The owner of the group is already part of the group',
-        'memberRemoved'             => 'Member was succesfully removed',        
+        'memberRemoved'             => 'Member was succesfully removed',    
+        'welcomeToGroup'            => 'You have successfully updated join the group',
     ],
 ];

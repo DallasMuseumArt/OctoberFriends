@@ -12,9 +12,12 @@ use Rainlab\User\Models\User;
 use RainLab\User\Models\Settings as UserSettings;
 use October\Rain\Support\Facades\Flash;
 use Illuminate\Support\Collection;
+use DMA\Friends\Traits\MultipleComponents;
 
 class GroupManager extends ComponentBase
 {
+ 
+    use MultipleComponents;
     
     const STEP_GROUPS  = '@groups-manager';
     const STEP_MEMBERS = '@members-manager';
@@ -53,8 +56,19 @@ class GroupManager extends ComponentBase
     public function defineProperties()
     {
         return [
-
+                'autoAcceptNewUsers' => [
+                        'title'     => 'Auto accept group invitations',
+                        'type'      => 'checkbox',
+                        'default'   =>  false
+                ],
         ];
+    }
+    
+    /**
+     * @return bool
+     */
+    protected function using_code(){
+        return !Settings::get('use_group_name_as_code', false);
     }
     
     /**
@@ -110,11 +124,15 @@ class GroupManager extends ComponentBase
     {
         
         $this->currentStep = (is_null($this->currentStep)) ? self::STEP_GROUPS : $this->currentStep;
-                
+
+        // Show code ?
+        $this->page['use_code'] = $this->using_code();
+        
         switch($this->currentStep) {
             case self::STEP_GROUPS:
                 // Refresh List of groups
                 $this->page['groups'] = $this->getGroups();
+                
                 break;
                 
             case self::STEP_MEMBERS:
@@ -164,7 +182,7 @@ class GroupManager extends ComponentBase
     /**
      * Common Ajax handler for forms using form_ajax tag.
      */
-    public function onSubmit(){
+    public function onGroupAction(){
         if( !empty( $step = post('step'))){
             $this->currentStep = $step;
             
@@ -249,7 +267,11 @@ class GroupManager extends ComponentBase
                     \Log::info(UserGroup::getActiveMembershipsCount($user));
                     try{
                         $added = $group->addUser($user);
-                        if(!$added){
+                        if($added){
+                            if ($this->property('autoAcceptNewUsers')){
+                                $group->acceptMembership($user);
+                            }
+                        }else{
                             if($user->getKey() == $group->owner->getKey()) {
                                 $message = Lang::get('dma.friends::lang.groups.ownerCanBeMember');
                                 Flash::error($message);

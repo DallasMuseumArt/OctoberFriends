@@ -1,9 +1,11 @@
-<table id="result" class="table table-hover table-striped table-result">
+<table id="owner_group_result" class="table table-hover table-striped table-result">
 {% if groups.count > 0 %}
 	<thead>
 		<tr>
-			<th>Name</th>
+			<th>Owner of</th>
+			{% if use_code %}
 			<th>Code</th>
+			{% endif %}
 			<!--<th>Active members</th>-->
 			<th></th>
 		</tr>
@@ -13,7 +15,9 @@
 	{% for group in groups %}
 	    <tr>
 	    	<td> {{ group.name }} </td>
+	    	{% if use_code %}
 			<td> {{ group.code }} </td>
+			{% endif %}
 			<!-- <td> {{ group.getUsers.count }}</td> -->
 			<td>
 				<div class="btn-group pull-right" role="group">
@@ -27,7 +31,7 @@
 				  <button type="button" class="btn btn-default"  
 				  	data-request="onCancelGroup"
 				  	data-request-data="groupId: {{ group.id }}"
-				  	data-request-update="'@flashMessages': '#flashMessages', '@groups-list': '#result'"	>
+				  	data-request-update="'@flashMessages': '#flashMessages', '@groups-list': '#owner_group_result'"	>
 				  	Close
 				  </button>
 				

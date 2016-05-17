@@ -1,21 +1,21 @@
-<a 	href="#" class="btn btn-default" 
-	data-request="onGoToStep"
- 	data-request-data="step: '@groups-manager'">
- 	Go back groups</a>
-
 <div class="col-xs-12 col-md-12">
-	<h1 class="lead pull-left">
-		Group<br/>
-		{{ group.name }}
-	</h1>
-	
-	<h1 class="lead pull-right">
-		Code<br/>
-		{{ group.code }}
-	</h1>
+	<div class="pull-left">
+			<h3> 
+		<a 	href="#" class="btn btn-default" 
+		data-request="onGoToStep"
+	 	data-request-data="step: '@groups-manager'">
+	 	Back</a>
+	 	 	
+Group: {{ group.name }}</h3>
+	</div>
+	{% if use_code %}
+	<h3 class="lead pull-right">
+		Code: {{ group.code }}
+	</h3>
+	{% endif %}
 </div>
 
-{{ form_ajax('onSubmit', { class : 'form-horizontal', update: { '@flashMessages': '#flashMessages', 'GroupManager::members-list': '#result' } } ) }} 
+{{ form_ajax('onGroupAction', { class : 'form-horizontal', update: { '@flashMessages': '#flashMessages', 'GroupManager::members-list': '#result' } } ) }} 
 
       <div class="input-group">
       	  <input type="hidden" name="step"    value="{{ step }}" />

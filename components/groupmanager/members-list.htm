@@ -4,7 +4,7 @@
 		<tr>
 			<th>Username</th>
 			<th>Name</th>
-			<th>Has join the group?</th>
+			<th>Status</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -13,7 +13,7 @@
 	    <tr>
 	    	<td>{{ member[loginAttr] }}</td>
 			<td>{{ member.metadata.first_name }} {{ member.metadata.last_name }} </td>
-	        <td>{{ ( member.pivot.membership_status == 'PENDING') ? 'NO' : 'YES' }}</td>
+	        <td>{{ member.pivot.membership_status  }}</td>
 			<td>
 				<div class="btn-group pull-right" role="group">
 

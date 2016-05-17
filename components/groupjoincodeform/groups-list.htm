@@ -1,0 +1,39 @@
+<table id="join_group_result" class="table table-hover table-striped table-result">
+{% if member_of.count > 0 %}
+	<thead>
+		<tr>
+			<th>Member of</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+	
+	{% for group in member_of %}
+	    <tr>
+	    	<td> {{ group.name }} </td>
+			<td>
+				<div class="btn-group pull-right" role="group">
+				
+				  <button type="button" class="btn btn-default"  
+				  	data-request="onGoToView"
+				  	data-request-data="groupId: {{ group.id }}, view: '@members-list'">
+				  	Members
+				  </button>
+				  
+				  <button type="button" class="btn btn-default"  
+				  	data-request="onLeaveGroup"
+				  	data-request-data="groupId: {{ group.id }}"
+				  	data-request-confirm="Are you sure?"
+				  	data-request-update="'@flashMessages': '#flashMessages', '@groups-list': '#join_group_result'"	>
+				  	Leave
+				  </button>
+				
+			
+				</div>
+		    </td>
+	    </tr>
+	{% endfor %}
+	
+	</tbody>
+{% endif %}
+</table>

@@ -2,6 +2,7 @@
 
 use Event;
 use Lang;
+use Exception;
 use Hashids\Hashids;
 use DMA\Friends\Models\Settings;
 use Illuminate\Database\QueryException;
@@ -135,13 +136,14 @@ class UserGroup extends GroupBase{
      * 
      * @return array
      */
-    public function getUsers()
+    public function getUsers($withinStatus=[])
     {
         if (!$this->groupUsers){
-            $this->groupUsers = $this->users()->where(function($query){
-                   $status = [ UserGroup::MEMBERSHIP_PENDING,
-                               UserGroup::MEMBERSHIP_ACCEPTED
-                        	];
+            $this->groupUsers = $this->users()->where(function($query) use ($withinStatus){
+                   $status = (count($withinStatus) == 0) ?
+                              [ UserGroup::MEMBERSHIP_PENDING,
+                                UserGroup::MEMBERSHIP_ACCEPTED
+                        	   ] : $withinStatus;
                     $query->whereIn('membership_status', $status);
             })->get();  
         }          
@@ -158,6 +160,16 @@ class UserGroup extends GroupBase{
      */
     public static function createGroup($user, $name)
     {
+        // Check if group name is available 
+        // If taken an exception is raise
+        $name = trim($name);
+        if ( static::where('name', '=', $name)
+                ->isActive()
+                ->count() > 0){
+            $message = Lang::get('dma.friends::lang.exceptions.groupNameAlreadyTaken');
+            throw new \Exception($message);
+        }
+        
         $activeGroups = self::where('owner_id', $user->getKey())
                                 ->isActive()->count();
                
@@ -182,7 +194,8 @@ class UserGroup extends GroupBase{
             throw new \Exception($message);
         }
     }
-    
+   
+
     
     /**
      * Generate a unique code for this group.
@@ -208,11 +221,32 @@ class UserGroup extends GroupBase{
     
     public static function joinByCode($code, $user)
     {
+        $code  = trim($code);
         $group = static::where('code', $code)->firstOrFail();
+        
         $group->addUser($user);
         $group->acceptMembership($user);
         return $group;
     }
+    
+    /**
+     * Join user to a given group using group name
+     * @param sting $groupName Group name
+     * @param RainLab\User\Models\User $user
+     *
+     * @return DMA\Friends\Models\UserGroup
+     */
+    
+    public static function joinByGroupName($groupName, $user)
+    {
+        $groupName  = trim($groupName);
+        $group = static::where('name', $groupName)
+                        ->firstOrFail();
+        $group->addUser($user);
+        $group->acceptMembership($user);
+        return $group;
+    }
+    
     
     /**
      * Adds the user to the group.
@@ -251,6 +285,9 @@ class UserGroup extends GroupBase{
                 $this->fireGroupEvent('user.added', array($this, $user));
                 
                 return true;
+            }else{
+                $message = Lang::get('dma.friends::lang.exceptions.alreadyGroupMember');
+                throw new \Exception($message);
             }
         }else{
             $message = Lang::get('dma.friends::lang.exceptions.limitGroupUsers');
@@ -473,6 +510,7 @@ class UserGroup extends GroupBase{
         return $query->where('is_active', true);
     }
 
+    
 }
 
 
