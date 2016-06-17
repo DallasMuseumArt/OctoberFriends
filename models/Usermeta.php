@@ -2,7 +2,6 @@
 
 use Model;
 use RainLab\User\Models\User;
-use RainLab\User\Models\State;
 
 /**
  * Usermeta Model
@@ -110,7 +109,7 @@ class Usermeta extends Model
      */
     public $belongsTo = [
         'user' => ['RainLab\User\Models\User',
-            'key' => 'user_id',        
+            'key' => 'user_id',
         ],
     ];
 
@@ -126,15 +125,15 @@ class Usermeta extends Model
 
         if (!$user->metadata) {
 
-            $meta = new static;            
+            $meta = new static;
             User::find($user->getKey())->metadata()->save($meta);
             $user = User::find($user->getKey());
-            
+
         }
 
         return $user->metadata;
     }
-    
+
     /**
      * Return users that are not staff and order them by points descending
      */
@@ -153,11 +152,15 @@ class Usermeta extends Model
 
     /**
      * @return array
-     * Return all demographic options 
+     * Return all demographic options
      */
     public static function getOptions()
     {
-        $states = State::where('country_id', '=', 1)->get();
+        $StateClass = '\RainLab\User\Models\State';
+        // Test if using all RainLab User pluging that used to contains a State model
+        $StateClass = (!class_exists($StateClass)) ? '\RainLab\Location\Models\State' : $StateClass;
+
+        $states = $StateClass::where('country_id', '=', 1)->get();
 
         return [
             'gender'            => self::$genderOptions,

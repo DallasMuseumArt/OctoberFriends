@@ -4,8 +4,6 @@ use \Str as Str;
 use League\FactoryMuffin\Facade as FactoryMuffin;
 use DMA\Friends\Models\ActivityLog;
 use DMA\Friends\Models\Settings;
-use RainLab\User\Models\Country;
-use RainLab\User\Models\State;
 
 FactoryMuffin::define('DMA\Friends\Models\Activity', [
     'title'             => 'sentence',
@@ -97,7 +95,7 @@ FactoryMuffin::define('DMA\Friends\Models\Reward', [
     'is_archived'       => 'boolean',
     'hidden'            => 'boolean',
     'created_at'        => 'dateTime|now',
- 
+
 ]);
 
 FactoryMuffin::define('DMA\Friends\Models\Step', [
@@ -116,10 +114,16 @@ FactoryMuffin::define('RainLab\User\Models\User', [
     'activated_at'  => 'dateTime',
     'last_login'    => 'dateTime',
     'country'       => function($object, $saved) {
-        return Country::orderByRaw('RAND()')->first();
+        // Test if using all RainLab User pluging that used to contains a Country model
+        $CountryClass = '\RainLab\User\Models\Country';
+        $CountryClass = (!class_exists($CountryClass)) ? '\RainLab\Location\Models\Country' : $CountryClass;
+        return $CountryClass::orderByRaw('RAND()')->first();
     },
     'state'         => function($object, $saved) {
-        return State::orderByRaw('RAND()')->first();
+        // Test if using all RainLab User pluging that used to contains a State model
+        $StateClass   = '\RainLab\User\Models\State';
+        $StateClass = (!class_exists($StateClass)) ? '\RainLab\Location\Models\State' : $StateClass;
+        return $StateClass::orderByRaw('RAND()')->first();
     },
     'created_at'    => 'dateTime|now',
     'updated_at'    => 'dateTime|now',
@@ -161,6 +165,6 @@ FactoryMuffin::define('filled:DMA\Friends\Models\UserGroup', [
     $object->users()->attach($members_ids);
     /*
     forEach($members as $user){
-        $object->addUser($user);    
+        $object->addUser($user);
     }*/
 });

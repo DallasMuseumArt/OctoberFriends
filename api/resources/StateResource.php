@@ -5,7 +5,7 @@ use DMA\Friends\Classes\API\BaseResource;
 
 class StateResource extends BaseResource
 {
-    protected $model        = '\RainLab\User\Models\State';    
+    protected $model        = '\RainLab\User\Models\State';
     protected $transformer  = '\DMA\Friends\API\Transformers\StateTransformer';
 
     /**
@@ -14,9 +14,14 @@ class StateResource extends BaseResource
      * @var array
      */
     public $publicActions = ['show', 'index'];
-    
-    
-    
+
+
+    public function __construct(){
+        // Test if using all RainLab User pluging that used to contains a State model
+        $this->model = (!class_exists($this->model)) ? '\RainLab\Location\Models\State' : $this->model;
+    }
+
+
     /**
      *  @SWG\Parameter(
      *    parameter="country_id",
@@ -27,13 +32,13 @@ class StateResource extends BaseResource
      *    required=true,
      *    type="integer"
      * ),
-     * 
+     *
      * @SWG\Get(
      *     path="countries/{id}/states",
      *     description="Returns all states of given country",
      *     summary="Return all states by country",
      *     tags={ "countries"},
-     *      
+     *
      *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
      *     ),
@@ -43,8 +48,8 @@ class StateResource extends BaseResource
      *     @SWG\Parameter(
      *         ref="#/parameters/sort"
      *     ),
-     *     
-     *    
+     *
+     *
      *    @SWG\Parameter(
      *         ref="#/parameters/country_id"
      *    ),
@@ -70,14 +75,14 @@ class StateResource extends BaseResource
     {
         return parent::index();
     }
-    
+
     /**
      * @SWG\Get(
      *     path="countires/{id}/states/{state_id}",
      *     description="Returns a state by id",
-     *     summary="Find a state id", 
+     *     summary="Find a state id",
      *     tags={ "countries"},
-     *     
+     *
      *     @SWG\Parameter(
      *         ref="#/parameters/country_id"
      *     ),
@@ -111,6 +116,6 @@ class StateResource extends BaseResource
     {
         return parent::show($id);
     }
-    
-    
+
+
 }

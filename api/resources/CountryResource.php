@@ -14,15 +14,20 @@ class CountryResource extends BaseResource
      * @var array
      */
     public $publicActions = ['show', 'index'];
-    
-    
+
+
+    public function __construct(){
+        // Test if using all RainLab User pluging that used to contains a Country model
+        $this->model = (!class_exists($this->model)) ? '\RainLab\Location\Models\Country' : $this->model;
+    }
+
     /**
      * @SWG\Get(
      *     path="countries",
      *     description="Returns all countries",
      *     summary="Return all countries",
      *     tags={ "countries"},
-     *     
+     *
      *     @SWG\Parameter(
      *         ref="#/parameters/per_page"
      *     ),
@@ -32,7 +37,7 @@ class CountryResource extends BaseResource
      *     @SWG\Parameter(
      *         ref="#/parameters/sort"
      *     ),
-     *     
+     *
      *
      *     @SWG\Response(
      *         response=200,
@@ -55,12 +60,12 @@ class CountryResource extends BaseResource
     {
         return parent::index();
     }
-    
+
     /**
      * @SWG\Get(
      *     path="countries/{id}",
      *     description="Returns a country by id",
-     *     summary="Find a country by id",  
+     *     summary="Find a country by id",
      *     tags={ "countries"},
      *
      *     @SWG\Parameter(
@@ -93,5 +98,5 @@ class CountryResource extends BaseResource
     {
         return parent::show($id);
     }
-    
+
 }

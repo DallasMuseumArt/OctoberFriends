@@ -7,7 +7,6 @@ use Lang;
 use File;
 use Hash;
 use Cms\Classes\Theme;
-use RainLab\User\Models\State;
 use DMA\Friends\Models\Usermeta;
 use DMA\Friends\Classes\UserExtend;
 
@@ -51,7 +50,7 @@ class UserProfile extends ComponentBase
         $avatarPath = $themePath . '/assets/images/avatars/*';
 
         // loop through all the files in the plugin's avatars directory and parse the file names
-        foreach ( glob($avatarPath ) as $file ) { 
+        foreach ( glob($avatarPath ) as $file ) {
             $path = str_replace(base_path(), '', $file);
 
             $avatars[] = [
@@ -78,7 +77,7 @@ class UserProfile extends ComponentBase
 
         $avatar = post('avatar');
 
-        if ($avatar) 
+        if ($avatar)
             UserExtend::uploadAvatar($user, $avatar);
 
         return [
@@ -107,7 +106,7 @@ class UserProfile extends ComponentBase
         if (Hash::check($data['old_password'], $user->password)) {
             $user->password = $data['password'];
             $user->password_confirmation = $data['password_confirm'];
-            
+
             if ($user->save()) {
 
                 // Re-authenticate the user
@@ -198,7 +197,7 @@ class UserProfile extends ComponentBase
      * theme's "partials" directory
      *
      * @param array $params
-     * An array of parameters to be passed to makePartial.  See Backend\Traits\ViewMaker 
+     * An array of parameters to be passed to makePartial.  See Backend\Traits\ViewMaker
      * for details
      *
      * @param boolean $throwException
@@ -207,9 +206,9 @@ class UserProfile extends ComponentBase
      * @return string $content
      * A rendered partial
      */
-   
+
     public function makePartial($partial, $params = [], $throwException = true)
-    {   
+    {
         $partialsDir = self::getThemePartialsDir();
         $partialPath = $partialsDir . $partial . '.htm';
 
@@ -222,16 +221,16 @@ class UserProfile extends ComponentBase
                 throw new SystemException(Lang::get('backend::lang.partial.not_found', ['name' => $partialPath]));
             else
                 return false;
-        }   
+        }
 
         return $this->makeFileContents($partialPath, $params);
-    }   
+    }
 
     /**
      * Get the path to the theme's partials
      *
      * @return string $path
-     */      
+     */
     protected static function getThemeDir()
     {
         $theme = Theme::getActiveTheme();
@@ -242,7 +241,7 @@ class UserProfile extends ComponentBase
      * Get the path to the theme's partials
      *
      * @return string $path
-     */ 
+     */
     protected static function getThemePartialsDir()
     {
         $theme = Theme::getActiveTheme();

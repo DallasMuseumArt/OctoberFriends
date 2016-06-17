@@ -5,8 +5,6 @@ namespace DMA\Friends\Wordpress;
 use Illuminate\Support\Facades\DB;
 use DMA\Friends\Models\Usermeta;
 use RainLab\User\Models\User as OctoberUser;
-use Rainlab\User\Models\Country;
-use Rainlab\User\Models\State;
 
 class User extends Post
 {
@@ -73,7 +71,7 @@ class User extends Post
     {
 
         OctoberUser::chunk(500, function($users) {
-        
+
             foreach($users as $user) {
                 $id = $this->db
                     ->table('wp_users')
@@ -82,7 +80,7 @@ class User extends Post
                     ->first();
 
                 if (!$id) continue;
-                
+
                 $this->updateMetadata($user, $id->ID);
             }
         });
@@ -130,14 +128,22 @@ class User extends Post
 
         // Populate state and country objects
         if (!empty($data['state'])) {
-            $state = State::where('code', strtoupper($data['state']))->first();
+
+            // Test if using all RainLab User pluging that used to contains a State or Country model
+            $StateClass   = '\RainLab\User\Models\State';
+            $CountryClass = '\RainLab\User\Models\Country';
+            $StateClass = (!class_exists($StateClass)) ? '\RainLab\Location\Models\State' : $StateClass;
+            $CountryClass = (!class_exists($CountryClass)) ? '\RainLab\Location\Models\Country' : $CountryClass;
+
+
+            $state = $StateClass::where('code', strtoupper($data['state']))->first();
             if (!$state) {
-                $state = State::where('name', $data['state'])->first();
+                $state = $StateClass::where('name', $data['state'])->first();
             }
 
             if ($state) {
                 $user->state()->associate($state);
-                $user->country()->associate(Country::find($state->country_id));
+                $user->country()->associate($CountryClass::find($state->country_id));
             }
         }
 
