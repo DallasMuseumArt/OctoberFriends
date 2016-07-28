@@ -16,10 +16,10 @@ secondaryTabs:
     stretch: true
     fields:
         # ===================================
-        #  Content tab 
+        #  Content tab
         # ===================================
         description:
-            label: Description 
+            label: Description
             span: left
             tab: Content
             type: richeditor
@@ -47,12 +47,12 @@ secondaryTabs:
             type: richeditor
             size: huge
         # ===================================
-        #  Categories tab 
+        #  Categories tab
         # ===================================
         categories:
             label: Select as many that apply
             type: relation
-            mode: dropdown 
+            mode: dropdown
             options:
                 nameColumn: name
             tab: Categories
@@ -64,12 +64,12 @@ secondaryTabs:
                 1: Low
                 5: Medium
                 10: High
-                11: Always Display 
+                11: Always Display
             default: 5
             tab: Categories
             span: left
         # ===================================
-        #  Configuration tab 
+        #  Configuration tab
         # ===================================
         points:
             label: Points
@@ -83,7 +83,7 @@ secondaryTabs:
             label: Special Badge
             commentAbove: Provide a label if the badge is special
             span: right
-            tab: Configuration 
+            tab: Configuration
             type: dropdown
             options:
                 no: None
@@ -110,46 +110,49 @@ secondaryTabs:
         # show_earners:
         #     label: Show earners
         #     commentAbove: If checked, people who have earned this badge will be displayed publicly
-        #     span: left 
+        #     span: left
         #     tab: Configuration
         #     type: checkbox
         # time_between_steps_min:
         #     label: Minimum Time Between Steps (minutes)
         #     commentAbove: The minimum number of minutes that must pass before earning a step.
         #     span: left
-        #     tab: Configuration 
+        #     tab: Configuration
         #     type: number
         # time_between_steps_max:
         #     label: Maximum Time Between Steps (minutes)
         #     commentAbove: The maximum number of minutes that must pass before failing the badge.
         #     span: right
-        #     tab: Configuration 
+        #     tab: Configuration
         #     type: number
         # maximium_time:
         #     label: Maximum Time to Complete Badge (days)
         #     commentAbove: The maximum amount of time to complete all steps after the first has been awarded
-        #     tab: Configuration 
+        #     tab: Configuration
         #     type: number
         # ===================================
-        #  Publishing Options tab 
+        #  Publishing Options tab
         # ===================================
         date_begin:
             label: Beginning Date
-            commentAbove: The first day this badge can be earned (if blank: no limit).
+            commentAbove: >
+                The first day this badge can be earned (if blank: no limit).
             span: left
             tab: Publishing Options
             type: datepicker
             mode: datetime
         date_end:
             label: Ending Date
-            commentAbove: The last day this badge may be earned (if blank: no limit).
+            commentAbove: >
+                The last day this badge may be earned (if blank: no limit).
             span: right
             tab: Publishing Options
             type: datepicker
             mode: datetime
             is_hidden:
                 label: Hide
-                commentAbove: If checked, a user will not see that they have earned this badge in their listings
+                commentAbove: >
+                    If checked, a user will not see that they have earned this badge in their listings
                 tab: Publishing Options
                 type: checkbox
         is_published:
@@ -168,10 +171,10 @@ secondaryTabs:
         #     mode: datetime
 
         # ===================================
-        #  Steps tab 
+        #  Steps tab
         # ===================================
         steps:
-            tab: Steps 
+            tab: Steps
             context: update
             type: partial
             path: ~/plugins/dma/friends/controllers/badges/_form_steps.htm

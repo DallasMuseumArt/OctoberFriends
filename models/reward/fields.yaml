@@ -14,12 +14,12 @@ secondaryTabs:
     stretch: true
     fields:
         # ===================================
-        #  Content tab 
+        #  Content tab
         # ===================================
         description:
-            label: Description 
+            label: Description
             tab: Content
-            span: left 
+            span: left
             type: richeditor
             size: huge
         image:
@@ -37,7 +37,7 @@ secondaryTabs:
             type: richeditor
             size: huge
             span: left
-        fine_print: 
+        fine_print:
             label: The Fine Print
             commentAbove: This is displayed on the Reward detail view and on the printed coupon.
             tab: Content
@@ -45,7 +45,7 @@ secondaryTabs:
             span: right
 
         # ===================================
-        #  Configuration tab 
+        #  Configuration tab
         # ===================================
         points:
             label: Points to redeem
@@ -67,7 +67,7 @@ secondaryTabs:
             span: left
             type: number
         user_redeem_limit:
-            label: User Redemption Limit 
+            label: User Redemption Limit
             commentAbove: The number of times a user can redeem this reward
             tab: Configuration
             span: right
@@ -78,7 +78,7 @@ secondaryTabs:
             tab: Configuration
             type: checkbox
         email_template:
-            label: Email Template 
+            label: Email Template
             tab: Configuration
             span: left
             type: dropdown
@@ -93,21 +93,22 @@ secondaryTabs:
             span: left
             type: dropdown
         admin_email_group:
-            label: Send admin email to a user group 
+            label: Send admin email to a user group
             tab: Configuration
             span: left
             type: dropdown
         admin_email_address:
-            label: Send admin email to an individual email address 
+            label: Send admin email to an individual email address
             tab: Configuration
             span: right
         redemption_email:
-            label: Redemption Email (NOTE: This field is legacy and will be removed in a future version)
+            label: >
+              Redemption Email (NOTE: This field is legacy and will be removed in a future version)
             commentAbove: If not blank, send an email to the recipient upon redemption with the specified text.
             tab: Configuration
             type: textarea
         # ===================================
-        #  Publishing Options tab 
+        #  Publishing Options tab
         # ===================================
         date_begin:
             label: Beginning Date

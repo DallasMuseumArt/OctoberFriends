@@ -11,7 +11,7 @@ use DMA\Friends\Models\Settings as FriendsSettings;
  */
 class GraphReport extends ReportWidgetBase {
 
-    protected $partialPath = '/plugins/dma/friends/reportwidgets/graphreport/partials/';
+    protected $partialPath = '/dma/friends/reportwidgets/graphreport/partials/';
     protected $ajaxPath = '/friends/reports/ajax/';
 
     /**
@@ -41,11 +41,12 @@ class GraphReport extends ReportWidgetBase {
     public function render()
     {
         $this->addAssets();
-        return $this->makePartial('@' . $this->partialPath . '_widget.htm', [
+        return $this->makePartial( '$' . $this->partialPath . '_widget.htm', [
             'title'         => $this->widgetTitle,
             'id'            => $this->defaultAlias,
             'ajaxPath'      => $this->getAjaxPath(),
         ]);
+
     }
 
     static public function processQuery($query, $timestamp, $limit, $cacheKey, $reset = false)

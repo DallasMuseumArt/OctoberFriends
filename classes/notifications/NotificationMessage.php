@@ -155,8 +155,13 @@ class NotificationMessage
 	    $templateInfo = $this->getTemplateInfo();
 	    $template = array_get($templateInfo, $template, '');
 	    
-	    $twig = App::make('twig.string');
-	    return $twig->render($template, $data);
+	    
+	    // $twig = App::make('twig.string');
+	    // return $twig->render($template, $data);
+	    
+	    $twig = App::make('twig.environment');
+	    $twingTemplate = $twig->createTemplate($template);
+	    return $twingTemplate->render($data);
 	}
 
 	/**

@@ -19,16 +19,18 @@ class ActivityType extends FormWidgetBase
 {
     public $previewMode = false;
 
-        /**
+    /**
      * @var string If the field element names should be contained in an array.
      * Eg: <input name="nameArray[fieldName]" />
      */
     public $arrayName = true;
+    
+    public $manager = null;
+    
 
     public function __construct($controller, $model, $formField, $configuration = [])
     {
         $this->manager = ActivityManager::instance();
-
         parent::__construct($controller, $model, $formField, $configuration);
     }
 

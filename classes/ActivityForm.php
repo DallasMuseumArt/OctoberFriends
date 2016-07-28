@@ -132,7 +132,7 @@ class ActivityForm extends Form
     /**
      * Creates a form field object from name and configuration.
      */
-    protected function makeFormField($name, $config)
+    protected function makeFormField($name, $config = Array())
     {
         $label = (isset($config['label'])) ? $config['label'] : null;
         list($fieldName, $fieldContext) = $this->getFieldName($name);

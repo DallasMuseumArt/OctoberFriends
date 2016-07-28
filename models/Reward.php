@@ -5,7 +5,6 @@ use Auth;
 use DMA\Friends\Models\Bookmark;
 use Smirik\PHPDateTimeAgo\DateTimeAgo as TimeAgo;
 use System\Models\MailTemplate;
-use Backend\Models\UserGroup;
 
 /**
  * Reward Model
@@ -112,7 +111,7 @@ class Reward extends Model
     public function getAdminEmailGroupOptions()
     {
         $options[] = 'None';
-        $groups = UserGroup::all();
+        $groups = \Backend\Models\UserGroup\UserGroup::all();
         foreach($groups as $group) {
             $options[$group->id] = $group->name;
         }

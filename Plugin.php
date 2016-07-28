@@ -382,17 +382,17 @@ class Plugin extends PluginBase
             'activities[activities]' => [
                 'tab'   => 'Activities',
                 'type'  => 'partial',
-                'path'  => '@/plugins/dma/friends/models/activity/users.htm',
+                'path'  => '$/dma/friends/models/activity/users.htm',
             ],
             'badges[badges]' => [
                 'tab'   => 'Badges',
                 'type'  => 'partial',
-                'path'  => '@/plugins/dma/friends/models/badge/users.htm',
+                'path'  => '$/dma/friends/models/badge/users.htm',
             ],
             'rewards[rewards]' => [
                 'tab'   => 'Rewards',
                 'type'  => 'partial',
-                'path'  => '@/plugins/dma/friends/models/reward/users.htm',
+                'path'  => '$/dma/friends/models/reward/users.htm',
             ],
             'print' => [
                 'tab'   => 'Membership Card',
