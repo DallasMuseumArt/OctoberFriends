@@ -111,7 +111,7 @@ class Reward extends Model
     public function getAdminEmailGroupOptions()
     {
         $options[] = 'None';
-        $groups = \Backend\Models\UserGroup\UserGroup::all();
+        $groups = \Backend\Models\UserGroup::all();
         foreach($groups as $group) {
             $options[$group->id] = $group->name;
         }
